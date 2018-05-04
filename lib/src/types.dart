@@ -15,6 +15,21 @@ class Update {
 
 }
 
+class WebhookInfo {
+  String url;
+  bool has_custom_certificate;
+  int pending_update_count;
+  int last_error_date;
+  String last_error_message;
+  int max_connections;
+  List<String> allowed_updates;
+
+  WebhookInfo(this.url, this.has_custom_certificate, this.pending_update_count,
+      {this.last_error_date, this.last_error_message, this.max_connections,
+        this.allowed_updates});
+
+}
+
 class User {
   int id;
   bool is_bot;
@@ -389,4 +404,374 @@ class InputMediaVideo extends InputMedia {
       {this.width, this.height, this.duration, this.supports_streaming})
       : super(type, media, caption, parse_mode);
 
+}
+
+class Sticker {
+  String file_id;
+  int width;
+  int height;
+  PhotoSize thumb;
+  String emoji;
+  String set_name;
+  MaskPosition mask_position;
+  int file_size;
+
+  Sticker(this.file_id, this.width, this.height,
+      {this.thumb, this.emoji, this.set_name,
+        this.mask_position, this.file_size});
+
+}
+
+class StickerSet {
+  String name;
+  String title;
+  bool contains_masks;
+  List<Sticker> stickers;
+
+  StickerSet(this.name, this.title, this.contains_masks, this.stickers);
+
+}
+
+class MaskPosition {
+  Sticker point;
+  double x_shift;
+  double y_shift;
+  double scale;
+
+  MaskPosition(this.point, this.x_shift, this.y_shift, this.scale);
+
+}
+
+class InlineQuery {
+  String id;
+  User from;
+  Location location;
+  String query;
+  String offset;
+
+  InlineQuery(this.id, this.from, this.location, this.query, this.offset);
+
+}
+
+abstract class InlineQueryResult {
+  String type;
+  String id;
+
+  InlineQueryResult(this.type, this.id);
+
+}
+
+class InlineQueryResultArticle extends InlineQueryResult {
+  String title;
+  InputMessageContent input_message_content;
+  InlineKeyboardMarkup reply_markup;
+  String url;
+  bool hide_url;
+  String description;
+  String thumb_url;
+  String thumb_width;
+  String thumb_height;
+
+  InlineQueryResultArticle(String id, this.title, this.input_message_content,
+      {this.reply_markup, this.url, this.hide_url, this.description,
+        this.thumb_url, this.thumb_width, this.thumb_height})
+      : super('article', id);
+
+}
+
+class InlineQueryResultPhoto extends InlineQueryResult {
+  String photo_url;
+  String thumb_url;
+  int photo_width;
+  int photo_height;
+  String title;
+  String description;
+  String caption;
+  String parse_mode;
+  InlineKeyboardMarkup reply_markup;
+  InputMessageContent input_message_content;
+
+  InlineQueryResultPhoto(String id, this.photo_url, this.thumb_url,
+      {this.photo_width, this.photo_height, this.title, this.description,
+        this.caption, this.parse_mode, this.reply_markup,
+        this.input_message_content})
+      : super('photo', id);
+
+}
+
+class InlineQueryResultGif extends InlineQueryResult {
+  String gif_url;
+  int gif_width;
+  int gif_height;
+  int gif_duration;
+  String thumb_url;
+  String caption;
+  String parse_mode;
+  InlineKeyboardMarkup reply_markup;
+  InputMessageContent input_message_content;
+
+  InlineQueryResultGif(String id, this.gif_url,
+      {this.gif_width, this.gif_height, this.gif_duration, this.thumb_url,
+        this.caption, this.parse_mode, this.reply_markup,
+        this.input_message_content})
+      : super('gif', id);
+
+}
+
+class InlineQueryResultMpeg4Gif extends InlineQueryResult {
+  String mpeg4_url;
+  int mpeg4_width;
+  int mpeg4_height;
+  int mpeg4_duration;
+  String thumb_url;
+  String title;
+  String caption;
+  String parse_mode;
+  InlineKeyboardMarkup reply_markup;
+  InputMessageContent input_message_content;
+
+  InlineQueryResultMpeg4Gif(String id, this.mpeg4_url,
+      {this.mpeg4_width, this.mpeg4_height, this.mpeg4_duration, this.thumb_url,
+        this.title, this.caption, this.parse_mode, this.reply_markup,
+        this.input_message_content})
+      : super('mpeg4_gif', id);
+
+}
+
+class InlineQueryResultVideo extends InlineQueryResult {
+  String video_url;
+  String mime_type;
+  String thumb_url;
+  String title;
+  String caption;
+  String parse_mode;
+  int video_width;
+  int video_height;
+  int video_duration;
+  String description;
+  InlineKeyboardMarkup reply_markup;
+  InputMessageContent input_message_content;
+
+  InlineQueryResultVideo(String id, this.video_url, this.mime_type,
+      this.thumb_url, this.title,
+      {this.caption, this.parse_mode, this.video_width,
+        this.video_height, this.video_duration, this.description,
+        this.reply_markup, this.input_message_content})
+      : super('video', id);
+
+}
+
+class InlineQueryResultAudio extends InlineQueryResult {
+  String audio_url;
+  String title;
+  String caption;
+  String parse_mode;
+  String performer;
+  int audio_duration;
+  InlineKeyboardMarkup reply_markup;
+  InputMessageContent input_message_content;
+
+  InlineQueryResultAudio(String id, this.audio_url, this.title, this.caption,
+      {this.parse_mode, this.performer, this.audio_duration, this.reply_markup,
+        this.input_message_content})
+      : super('audio', id);
+
+}
+
+class InlineQueryResultDocument extends InlineQueryResult {
+  String title;
+  String caption;
+  String parse_mode;
+  String document_url;
+  String mime_type;
+  String description;
+  InlineKeyboardMarkup reply_markup;
+  InputMessageContent input_message_content;
+  String thumb_url;
+  int thumb_width;
+  int thumb_height;
+
+  InlineQueryResultDocument(String id, this.title, this.caption, this.parse_mode,
+      this.document_url, this.mime_type,
+      {this.description, this.reply_markup, this.input_message_content,
+        this.thumb_url, this.thumb_width, this.thumb_height})
+      : super('document', id);
+
+}
+
+class InlineQueryResultLocation extends InlineQueryResult {
+  double latitude;
+  double longitude;
+  String title;
+  int live_period;
+  InlineKeyboardMarkup reply_markup;
+  InputMessageContent input_message_content;
+  String thumb_url;
+  int thumb_width;
+  int thumb_height;
+
+  InlineQueryResultLocation(String id, this.latitude, this.longitude, this.title,
+      {this.live_period, this.reply_markup, this.input_message_content,
+        this.thumb_url, this.thumb_width, this.thumb_height})
+      : super('location', id);
+
+}
+
+class InlineQueryResultVenue extends InlineQueryResult {
+  double latitude;
+  double longitude;
+  String title;
+  String address;
+  String foursquare_id;
+  InlineKeyboardMarkup reply_markup;
+  InputMessageContent input_message_content;
+  String thumb_url;
+  int thumb_width;
+  int thumb_height;
+
+  InlineQueryResultVenue(String id, this.latitude, this.longitude, this.title,
+      this.address,
+      {this.foursquare_id, this.reply_markup, this.input_message_content,
+        this.thumb_url, this.thumb_width, this.thumb_height})
+      : super('venue', id);
+
+}
+
+class InlineQueryResultContact extends InlineQueryResult {
+  String phone_number;
+  String first_name;
+  String last_name;
+  InlineKeyboardMarkup reply_markup;
+  InputMessageContent input_message_content;
+  String thumb_url;
+  int thumb_width;
+  int thumb_height;
+
+  InlineQueryResultContact(String id, this.phone_number, this.first_name,
+      {this.last_name, this.reply_markup, this.input_message_content,
+        this.thumb_url, this.thumb_width, this.thumb_height})
+      : super('contact', id);
+
+}
+
+class InlineQueryResultGame extends InlineQueryResult {
+  String game_short_name;
+  InlineKeyboardMarkup reply_markup;
+
+  InlineQueryResultGame(String id, this.game_short_name, this.reply_markup)
+      : super('game', id);
+
+}
+
+class InlineQueryResultCachedPhoto extends InlineQueryResult {
+  String photo_file_id;
+  String title;
+  String description;
+  String caption;
+  String parse_mode;
+  InlineKeyboardMarkup reply_markup;
+  InputMessageContent input_message_content;
+
+  InlineQueryResultCachedPhoto(String id, this.photo_file_id,
+      {this.title, this.description, this.caption, this.parse_mode,
+        this.reply_markup, this.input_message_content})
+      : super('photo', id);
+
+}
+
+class InlineQueryResultCachedGif extends InlineQueryResult {
+  String gif_file_id;
+  String title;
+  String caption;
+  String parse_mode;
+  InlineKeyboardMarkup reply_markup;
+  InputMessageContent input_message_content;
+
+  InlineQueryResultCachedGif(String id, this.gif_file_id,
+      {this.title, this.caption, this.parse_mode, this.reply_markup,
+        this.input_message_content})
+      : super('gif', id);
+
+}
+
+class InlineQueryResultCachedMpeg4Gif extends InlineQueryResult {
+  String mpeg4_file_id;
+  String title;
+  String caption;
+  String parse_mode;
+  InlineKeyboardMarkup reply_markup;
+  InputMessageContent input_message_content;
+
+  InlineQueryResultCachedMpeg4Gif(String id, this.mpeg4_file_id, this.title,
+      this.caption, this.parse_mode, this.reply_markup, this.input_message_content)
+      : super('mpeg4_gif', id);
+
+}
+
+class InlineQueryResultCachedSticker extends InlineQueryResult {
+  String sticker_file_id;
+  InlineKeyboardMarkup reply_markup;
+  InputMessageContent input_message_content;
+
+  InlineQueryResultCachedSticker(String id, this.sticker_file_id,
+      {this.reply_markup, this.input_message_content})
+      : super('sticker', id);
+
+}
+
+class InlineQueryResultCachedDocument extends InlineQueryResult {
+  String document_file_id;
+  String description;
+  String caption;
+  String parse_mode;
+  InlineKeyboardMarkup reply_markup;
+  InputMessageContent input_message_content;
+
+  InlineQueryResultCachedDocument(String id, this.document_file_id,
+      {this.description, this.caption, this.parse_mode, this.reply_markup,
+        this.input_message_content})
+      : super('document', id);
+
+}
+
+class InlineQueryResultCachedVideo extends InlineQueryResult {
+  String video_file_id;
+  String title;
+  String description;
+  String caption;
+  String parse_mode;
+  InlineKeyboardMarkup reply_markup;
+  InputMessageContent input_message_content;
+
+  InlineQueryResultCachedPhoto(String id, this.video_file_id,
+      {this.title, this.description, this.caption, this.parse_mode,
+        this.reply_markup, this.input_message_content})
+      : super('video', id);
+}
+
+class InlineQueryResultCachedVoice extends InlineQueryResult {
+  String voice_file_id;
+  String title;
+  String caption;
+  String parse_mode;
+  InlineKeyboardMarkup reply_markup;
+  InputMessageContent input_message_content;
+
+  InlineQueryResultCachedPhoto(String id, this.voice_file_id,
+      {this.title, this.caption, this.parse_mode, this.reply_markup,
+        this.input_message_content})
+      : super('voice', id);
+}
+
+class InlineQueryResultCachedAudio extends InlineQueryResult {
+  String audio_file_id;
+  String caption;
+  String parse_mode;
+  InlineKeyboardMarkup reply_markup;
+  InputMessageContent input_message_content;
+
+  InlineQueryResultCachedPhoto(String id, this.audio_file_id,
+      {this.caption, this.parse_mode, this.reply_markup,
+        this.input_message_content})
+      : super('audio', id);
 }
