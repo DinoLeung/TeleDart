@@ -743,7 +743,7 @@ class InlineQueryResultCachedVideo extends InlineQueryResult {
   InlineKeyboardMarkup reply_markup;
   InputMessageContent input_message_content;
 
-  InlineQueryResultCachedPhoto(String id, this.video_file_id,
+  InlineQueryResultCachedVideo(String id, this.video_file_id,
       {this.title, this.description, this.caption, this.parse_mode,
         this.reply_markup, this.input_message_content})
       : super('video', id);
@@ -757,7 +757,7 @@ class InlineQueryResultCachedVoice extends InlineQueryResult {
   InlineKeyboardMarkup reply_markup;
   InputMessageContent input_message_content;
 
-  InlineQueryResultCachedPhoto(String id, this.voice_file_id,
+  InlineQueryResultCachedVoice(String id, this.voice_file_id,
       {this.title, this.caption, this.parse_mode, this.reply_markup,
         this.input_message_content})
       : super('voice', id);
@@ -770,8 +770,194 @@ class InlineQueryResultCachedAudio extends InlineQueryResult {
   InlineKeyboardMarkup reply_markup;
   InputMessageContent input_message_content;
 
-  InlineQueryResultCachedPhoto(String id, this.audio_file_id,
+  InlineQueryResultCachedAudio(String id, this.audio_file_id,
       {this.caption, this.parse_mode, this.reply_markup,
         this.input_message_content})
       : super('audio', id);
+}
+
+class InputMessageContent {}
+
+class InputTextMessageContent extends InputMessageContent {
+  String message_text;
+  String parse_mode;
+  bool disable_web_page_preview;
+
+  InputTextMessageContent(this.message_text,
+      {this.parse_mode, this.disable_web_page_preview});
+
+}
+
+class InputLocationMessageContent extends InputMessageContent {
+  double latitude;
+  double longitude;
+  int live_period;
+
+  InputLocationMessageContent(this.latitude, this.longitude,
+      {this.live_period});
+
+}
+
+class InputVenueMessageContent extends InputMessageContent {
+  double latitude;
+  double longitude;
+  String title;
+  String address;
+  String foursquare_id;
+
+  InputVenueMessageContent(this.latitude, this.longitude, this.title,
+      this.address,
+      {this.foursquare_id});
+
+}
+
+class InputContactMessageContent extends InputMessageContent {
+  String phone_number;
+  String first_name;
+  String last_name;
+
+  InputContactMessageContent(this.phone_number, this.first_name,
+      {this.last_name});
+
+}
+
+class ChosenInlineResult {
+  String result_id;
+  User from;
+  Location location;
+  String inline_message_id;
+  String query;
+
+  ChosenInlineResult(this.result_id, this.from, this.query,
+    {this.location, this.inline_message_id});
+
+}
+
+class LabeledPrice {
+  String label;
+  int amount;
+
+  LabeledPrice(this.label, this.amount);
+
+}
+
+class Invoice {
+  String title;
+  String description;
+  String start_parameter;
+  String currency;
+  int total_amount;
+
+  Invoice(this.title, this.description, this.start_parameter, this.currency,
+      this.total_amount);
+
+}
+
+class ShippingAddress {
+  String country_code;
+  String state;
+  String city;
+  String street_line1;
+  String street_line2;
+  String post_code;
+
+  ShippingAddress(this.country_code, this.state, this.city, this.street_line1,
+      this.street_line2, this.post_code);
+
+}
+
+class OrderInfo {
+  String name;
+  String phone_number;
+  String email;
+  ShippingAddress shippingAddress;
+
+  OrderInfo({this.name, this.phone_number, this.email, this.shippingAddress});
+
+}
+
+class ShippingOption {
+  String id;
+  String title;
+  List<LabeledPrice> prices;
+
+  ShippingOption(this.id, this.title, this.prices);
+
+}
+
+class SuccessfulPayment {
+  String currency;
+  int total_amount;
+  String invoice_payload;
+  String shipping_option_id;
+  OrderInfo order_info;
+  String telegram_payment_charge_id;
+  String provider_payment_charge_id;
+
+  SuccessfulPayment(this.currency, this.total_amount, this.invoice_payload,
+  this.telegram_payment_charge_id, this.provider_payment_charge_id,
+    {this.shipping_option_id, this.order_info});
+
+}
+
+class ShippingQuery {
+  String id;
+  User from;
+  String invoice_payload;
+  ShippingAddress shipping_address;
+
+  ShippingQuery(this.id, this.from, this.invoice_payload,
+      this.shipping_address);
+
+}
+
+class PreCheckoutQuery {
+  String id;
+  User from;
+  String currency;
+  int total_amount;
+  String invoice_payload;
+  String shipping_option_id;
+  OrderInfo order_info;
+
+  PreCheckoutQuery(this.id, this.from, this.currency, this.total_amount,
+      this.invoice_payload,
+      {this.shipping_option_id, this.order_info});
+
+}
+
+class Game {
+  String title;
+  String description;
+  List<PhotoSize> photo;
+  String text;
+  List<MessageEntity> text_entities;
+  Animation animation;
+
+  Game(this.title, this.description, this.photo,
+      {this.text, this.text_entities, this.animation});
+
+}
+
+class Animation {
+  String file_id;
+  PhotoSize thumb;
+  String file_name;
+  String mime_type;
+  int file_size;
+
+  Animation(this.file_id,
+      {this.thumb, this.file_name, this.mime_type, this.file_size});
+
+}
+
+class CallbackGame{}
+
+class GameHeightScore {
+  int position;
+  User user;
+  int score;
+
+  GameHeightScore(this.position, this.user, this.score);
+
 }
