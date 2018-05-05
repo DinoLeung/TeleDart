@@ -1,3 +1,6 @@
+import 'package:dartson/dartson_static.dart';
+
+@Entity()
 class Update {
   int update_id;
   Message message;
@@ -15,6 +18,7 @@ class Update {
 
 }
 
+@Entity()
 class WebhookInfo {
   String url;
   bool has_custom_certificate;
@@ -30,6 +34,7 @@ class WebhookInfo {
 
 }
 
+@Entity()
 class User {
   int id;
   bool is_bot;
@@ -43,6 +48,7 @@ class User {
 
 }
 
+@Entity()
 class Chat {
   int id;
   String type;
@@ -66,6 +72,7 @@ class Chat {
 
 }
 
+@Entity()
 class Message {
   int message_id;
   User from;
@@ -125,6 +132,7 @@ class Message {
 
 }
 
+@Entity()
 class MessageEntity {
   String type;
   int offset;
@@ -137,6 +145,7 @@ class MessageEntity {
 
 }
 
+@Entity()
 class PhotoSize {
   String file_id;
   int width;
@@ -148,6 +157,7 @@ class PhotoSize {
 
 }
 
+@Entity()
 class Audio {
   String file_id;
   int duration;
@@ -161,6 +171,7 @@ class Audio {
 
 }
 
+@Entity()
 class Document {
   String file_id;
   PhotoSize thumb;
@@ -173,6 +184,7 @@ class Document {
 
 }
 
+@Entity()
 class Video {
   String file_id;
   int width;
@@ -187,6 +199,7 @@ class Video {
 
 }
 
+@Entity()
 class Voice {
   String file_id;
   int duration;
@@ -198,6 +211,7 @@ class Voice {
 
 }
 
+@Entity()
 class VideoNote {
   String file_id;
   int length;
@@ -210,6 +224,7 @@ class VideoNote {
 
 }
 
+@Entity()
 class Contact {
   String phone_number;
   String first_name;
@@ -221,6 +236,7 @@ class Contact {
 
 }
 
+@Entity()
 class Location {
   double longitude;
   double latitude;
@@ -229,6 +245,7 @@ class Location {
 
 }
 
+@Entity()
 class Venue {
   Location location;
   String title;
@@ -240,6 +257,7 @@ class Venue {
 
 }
 
+@Entity()
 class UserProfilePhotos {
   int total_count;
   List<PhotoSize> photos;
@@ -248,6 +266,7 @@ class UserProfilePhotos {
 
 }
 
+@Entity()
 class File {
   String file_id;
   int file_size;
@@ -257,6 +276,7 @@ class File {
 
 }
 
+@Entity()
 class ReplyKeyboardMarkup {
   List<KeyboardButton> keyboard;
   bool resize_keyboard;
@@ -268,6 +288,7 @@ class ReplyKeyboardMarkup {
 
 }
 
+@Entity()
 class KeyboardButton {
   String text;
   bool request_contact;
@@ -278,6 +299,7 @@ class KeyboardButton {
 
 }
 
+@Entity()
 class ReplyKeyboardRemove {
   bool remove_keyboard;
   bool selective;
@@ -287,6 +309,7 @@ class ReplyKeyboardRemove {
 
 }
 
+@Entity()
 class InlineKeyboardMarkup {
   List<InlineKeyboardButton> inline_keyboard;
 
@@ -294,6 +317,7 @@ class InlineKeyboardMarkup {
 
 }
 
+@Entity()
 class InlineKeyboardButton {
   String text;
   String url;
@@ -309,6 +333,7 @@ class InlineKeyboardButton {
 
 }
 
+@Entity()
 class CallbackQuery {
   String id;
   User from;
@@ -324,6 +349,7 @@ class CallbackQuery {
 
 }
 
+@Entity()
 class ForceReply {
   bool forceReply;
   bool selective;
@@ -333,6 +359,7 @@ class ForceReply {
 
 }
 
+@Entity()
 class ChatPhoto {
   String small_file_id;
   String big_file_id;
@@ -341,6 +368,7 @@ class ChatPhoto {
 
 }
 
+@Entity()
 class ChatMember {
   User user;
   String status;
@@ -370,6 +398,7 @@ class ChatMember {
 
 }
 
+@Entity()
 class ResponseParameters {
   int migrate_to_chat_id;
   int retry_after;
@@ -379,6 +408,7 @@ class ResponseParameters {
 
 }
 
+@Entity()
 abstract class InputMedia {
   String type;
   String media;
@@ -389,11 +419,13 @@ abstract class InputMedia {
 
 }
 
+@Entity()
 class InputMediaPhoto extends InputMedia {
   InputMediaPhoto(String type, String media, String caption, String parse_mode)
       : super(type, media, caption, parse_mode);
 }
 
+@Entity()
 class InputMediaVideo extends InputMedia {
   int width;
   int height;
@@ -406,6 +438,7 @@ class InputMediaVideo extends InputMedia {
 
 }
 
+@Entity()
 class Sticker {
   String file_id;
   int width;
@@ -422,6 +455,7 @@ class Sticker {
 
 }
 
+@Entity()
 class StickerSet {
   String name;
   String title;
@@ -432,6 +466,7 @@ class StickerSet {
 
 }
 
+@Entity()
 class MaskPosition {
   Sticker point;
   double x_shift;
@@ -442,6 +477,7 @@ class MaskPosition {
 
 }
 
+@Entity()
 class InlineQuery {
   String id;
   User from;
@@ -453,6 +489,7 @@ class InlineQuery {
 
 }
 
+@Entity()
 abstract class InlineQueryResult {
   String type;
   String id;
@@ -461,6 +498,7 @@ abstract class InlineQueryResult {
 
 }
 
+@Entity()
 class InlineQueryResultArticle extends InlineQueryResult {
   String title;
   InputMessageContent input_message_content;
@@ -479,6 +517,7 @@ class InlineQueryResultArticle extends InlineQueryResult {
 
 }
 
+@Entity()
 class InlineQueryResultPhoto extends InlineQueryResult {
   String photo_url;
   String thumb_url;
@@ -499,6 +538,7 @@ class InlineQueryResultPhoto extends InlineQueryResult {
 
 }
 
+@Entity()
 class InlineQueryResultGif extends InlineQueryResult {
   String gif_url;
   int gif_width;
@@ -518,6 +558,7 @@ class InlineQueryResultGif extends InlineQueryResult {
 
 }
 
+@Entity()
 class InlineQueryResultMpeg4Gif extends InlineQueryResult {
   String mpeg4_url;
   int mpeg4_width;
@@ -538,6 +579,7 @@ class InlineQueryResultMpeg4Gif extends InlineQueryResult {
 
 }
 
+@Entity()
 class InlineQueryResultVideo extends InlineQueryResult {
   String video_url;
   String mime_type;
@@ -561,6 +603,7 @@ class InlineQueryResultVideo extends InlineQueryResult {
 
 }
 
+@Entity()
 class InlineQueryResultAudio extends InlineQueryResult {
   String audio_url;
   String title;
@@ -578,6 +621,7 @@ class InlineQueryResultAudio extends InlineQueryResult {
 
 }
 
+@Entity()
 class InlineQueryResultDocument extends InlineQueryResult {
   String title;
   String caption;
@@ -599,6 +643,7 @@ class InlineQueryResultDocument extends InlineQueryResult {
 
 }
 
+@Entity()
 class InlineQueryResultLocation extends InlineQueryResult {
   double latitude;
   double longitude;
@@ -617,6 +662,7 @@ class InlineQueryResultLocation extends InlineQueryResult {
 
 }
 
+@Entity()
 class InlineQueryResultVenue extends InlineQueryResult {
   double latitude;
   double longitude;
@@ -637,6 +683,7 @@ class InlineQueryResultVenue extends InlineQueryResult {
 
 }
 
+@Entity()
 class InlineQueryResultContact extends InlineQueryResult {
   String phone_number;
   String first_name;
@@ -654,6 +701,7 @@ class InlineQueryResultContact extends InlineQueryResult {
 
 }
 
+@Entity()
 class InlineQueryResultGame extends InlineQueryResult {
   String game_short_name;
   InlineKeyboardMarkup reply_markup;
@@ -663,6 +711,7 @@ class InlineQueryResultGame extends InlineQueryResult {
 
 }
 
+@Entity()
 class InlineQueryResultCachedPhoto extends InlineQueryResult {
   String photo_file_id;
   String title;
@@ -679,6 +728,7 @@ class InlineQueryResultCachedPhoto extends InlineQueryResult {
 
 }
 
+@Entity()
 class InlineQueryResultCachedGif extends InlineQueryResult {
   String gif_file_id;
   String title;
@@ -694,6 +744,7 @@ class InlineQueryResultCachedGif extends InlineQueryResult {
 
 }
 
+@Entity()
 class InlineQueryResultCachedMpeg4Gif extends InlineQueryResult {
   String mpeg4_file_id;
   String title;
@@ -708,6 +759,7 @@ class InlineQueryResultCachedMpeg4Gif extends InlineQueryResult {
 
 }
 
+@Entity()
 class InlineQueryResultCachedSticker extends InlineQueryResult {
   String sticker_file_id;
   InlineKeyboardMarkup reply_markup;
@@ -719,6 +771,7 @@ class InlineQueryResultCachedSticker extends InlineQueryResult {
 
 }
 
+@Entity()
 class InlineQueryResultCachedDocument extends InlineQueryResult {
   String document_file_id;
   String description;
@@ -734,6 +787,7 @@ class InlineQueryResultCachedDocument extends InlineQueryResult {
 
 }
 
+@Entity()
 class InlineQueryResultCachedVideo extends InlineQueryResult {
   String video_file_id;
   String title;
@@ -749,6 +803,7 @@ class InlineQueryResultCachedVideo extends InlineQueryResult {
       : super('video', id);
 }
 
+@Entity()
 class InlineQueryResultCachedVoice extends InlineQueryResult {
   String voice_file_id;
   String title;
@@ -763,6 +818,7 @@ class InlineQueryResultCachedVoice extends InlineQueryResult {
       : super('voice', id);
 }
 
+@Entity()
 class InlineQueryResultCachedAudio extends InlineQueryResult {
   String audio_file_id;
   String caption;
@@ -776,8 +832,10 @@ class InlineQueryResultCachedAudio extends InlineQueryResult {
       : super('audio', id);
 }
 
+@Entity()
 class InputMessageContent {}
 
+@Entity()
 class InputTextMessageContent extends InputMessageContent {
   String message_text;
   String parse_mode;
@@ -788,6 +846,7 @@ class InputTextMessageContent extends InputMessageContent {
 
 }
 
+@Entity()
 class InputLocationMessageContent extends InputMessageContent {
   double latitude;
   double longitude;
@@ -798,6 +857,7 @@ class InputLocationMessageContent extends InputMessageContent {
 
 }
 
+@Entity()
 class InputVenueMessageContent extends InputMessageContent {
   double latitude;
   double longitude;
@@ -811,6 +871,7 @@ class InputVenueMessageContent extends InputMessageContent {
 
 }
 
+@Entity()
 class InputContactMessageContent extends InputMessageContent {
   String phone_number;
   String first_name;
@@ -821,6 +882,7 @@ class InputContactMessageContent extends InputMessageContent {
 
 }
 
+@Entity()
 class ChosenInlineResult {
   String result_id;
   User from;
@@ -833,6 +895,7 @@ class ChosenInlineResult {
 
 }
 
+@Entity()
 class LabeledPrice {
   String label;
   int amount;
@@ -841,6 +904,7 @@ class LabeledPrice {
 
 }
 
+@Entity()
 class Invoice {
   String title;
   String description;
@@ -853,6 +917,7 @@ class Invoice {
 
 }
 
+@Entity()
 class ShippingAddress {
   String country_code;
   String state;
@@ -866,6 +931,7 @@ class ShippingAddress {
 
 }
 
+@Entity()
 class OrderInfo {
   String name;
   String phone_number;
@@ -876,6 +942,7 @@ class OrderInfo {
 
 }
 
+@Entity()
 class ShippingOption {
   String id;
   String title;
@@ -885,6 +952,7 @@ class ShippingOption {
 
 }
 
+@Entity()
 class SuccessfulPayment {
   String currency;
   int total_amount;
@@ -900,6 +968,7 @@ class SuccessfulPayment {
 
 }
 
+@Entity()
 class ShippingQuery {
   String id;
   User from;
@@ -911,6 +980,7 @@ class ShippingQuery {
 
 }
 
+@Entity()
 class PreCheckoutQuery {
   String id;
   User from;
@@ -926,6 +996,7 @@ class PreCheckoutQuery {
 
 }
 
+@Entity()
 class Game {
   String title;
   String description;
@@ -939,6 +1010,7 @@ class Game {
 
 }
 
+@Entity()
 class Animation {
   String file_id;
   PhotoSize thumb;
@@ -951,8 +1023,10 @@ class Animation {
 
 }
 
+@Entity()
 class CallbackGame{}
 
+@Entity()
 class GameHeightScore {
   int position;
   User user;
