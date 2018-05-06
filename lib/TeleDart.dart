@@ -5,4 +5,6 @@ library TeleDart;
 
 export 'src/TeleDart_base.dart';
 
+export 'src/TeleDart.dart';
+
 // TODO: Export any libraries intended for clients of this package.

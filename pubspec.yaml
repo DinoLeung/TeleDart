@@ -9,10 +9,11 @@ environment:
 
 dependencies:
   dartson: ">=0.2.0 <0.3.0"
+  http: "^0.11.3+16"
 #  path: ^1.4.1
 
-transformers:
-- dartson
+#transformers:
+#- dartson
 
 dev_dependencies:
   test: ^0.12.0
