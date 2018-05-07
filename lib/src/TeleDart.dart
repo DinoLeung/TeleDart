@@ -1,35 +1,27 @@
 import 'dart:async';
-import 'dart:convert';
-import 'package:dartson/dartson.dart';
-import 'package:http/http.dart' as http;
+import './Telegram.dart';
+import './Model.dart';
 
-import 'package:TeleDart/src/Model.dart';
+class TeleDart{
+  Telegram _tg;
 
-class TeleDart {
-
-  final String _baseUrl = 'https://api.telegram.org/bot';
-  String _token;
-  TeleDart(this._token);
-
-  var dson = new Dartson.JSON();
-
-  Future<List<Update>> getUpdates() async {
-
-    Future<List<Update>> updates = http.get(_baseUrl + _token + '/getUpdates')
-      .then((response) {
-        return dson.map
-          (JSON.decode(response.body)['result'], new Update(), true);
-      });
-
-    return await updates;
+  TeleDart(String token){
+    _tg = new Telegram(token);
   }
 
   void startPolling() {
-    Future<List<Update>> updates = getUpdates();
+    // TODO: set interval for long polling
+    // TODO: research long polling basics and pseudocode
+    // TODO: find the right way to handle errors
+    Future<List<Update>> updates = _tg.getUpdates();
+
     updates.then((updates) {
-      for (Update update in updates){
+      for (Update update in updates) {
         print(update.update_id);
+        print(update.message.text);
       }
+    }).catchError((error) {
+      print(error.toString());
     });
   }
 
