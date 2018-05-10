@@ -277,7 +277,10 @@ class File {
 }
 
 @Entity()
-class ReplyKeyboardMarkup {
+class ReplyMarkup {}
+
+@Entity()
+class ReplyKeyboardMarkup extends ReplyMarkup {
   List<KeyboardButton> keyboard;
   bool resize_keyboard;
   bool one_time_keyboard;
@@ -300,7 +303,7 @@ class KeyboardButton {
 }
 
 @Entity()
-class ReplyKeyboardRemove {
+class ReplyKeyboardRemove extends ReplyMarkup {
   bool remove_keyboard;
   bool selective;
 
@@ -310,7 +313,7 @@ class ReplyKeyboardRemove {
 }
 
 @Entity()
-class InlineKeyboardMarkup {
+class InlineKeyboardMarkup extends ReplyMarkup {
   List<InlineKeyboardButton> inline_keyboard;
 
 //  InlineKeyboardMarkup(this.inline_keyboard);
@@ -350,7 +353,7 @@ class CallbackQuery {
 }
 
 @Entity()
-class ForceReply {
+class ForceReply extends ReplyMarkup {
   bool forceReply;
   bool selective;
 
