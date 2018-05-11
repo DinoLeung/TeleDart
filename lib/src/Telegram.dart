@@ -533,7 +533,7 @@ class Telegram {
     String requestUrl = '${_baseUrl}${_token}/setChatStickerSet';
     Map body = {
       'chat_id': '${chat_id}',
-      'sticker_set_name': sticker_set_name,
+      'sticker_set_name': sticker_set_name
     };
     return _client.httpPost(requestUrl, body: body);
   }
@@ -554,6 +554,187 @@ class Telegram {
       'url': (url == null ? '' : url),
       'cache_time': (cache_time == null ? '' : '${cache_time}')
     };
+    return _client.httpPost(requestUrl, body: body);
+  }
+
+  Future<Message> editMessageText(String text,
+      {chat_id, int message_id, String inline_message_id, String parse_mode,
+        bool disable_web_page_preview, InlineKeyboardMarkup reply_markup}) async {
+    if (chat_id == null && message_id == null && inline_message_id == null)
+      return new Future.error('Telegram Error: Require either \'chat_id\', \'message_id\', or \'inline_message_id\'');
+    String requestUrl = '${_baseUrl}${_token}/editMessageText';
+    Map body = {
+      'chat_id': (chat_id == null ? '' : '${chat_id}'),
+      'message_id': (message_id == null ? '' : '${message_id}'),
+      'inline_message_id': (inline_message_id == null ? '' : inline_message_id),
+      'text': text,
+      'parse_mode': (parse_mode == null ? '' : parse_mode),
+      'disable_web_page_preview': (disable_web_page_preview == null ? '' : '${disable_web_page_preview}'),
+      'reply_markup': (reply_markup == null ? '' : _dson.encode(reply_markup))
+    };
+    var res = await _client.httpPost(requestUrl, body: body);
+    if(res == true)
+      return new Future.error('Telegram Error: Edited message is NOT sent by the bot');
+    else
+      return _dson.decode(res, new Message());
+  }
+
+  Future<Message> editMessageCaption(
+      {chat_id, int message_id, String inline_message_id, String caption,
+        String parse_mode, InlineKeyboardMarkup reply_markup}) async {
+    if (chat_id == null && message_id == null && inline_message_id == null)
+      return new Future.error('Telegram Error: Require either \'chat_id\', \'message_id\', or \'inline_message_id\'');
+    String requestUrl = '${_baseUrl}${_token}/editMessageCaption';
+    Map body = {
+      'chat_id': (chat_id == null ? '' : '${chat_id}'),
+      'message_id': (message_id == null ? '' : '${message_id}'),
+      'inline_message_id': (inline_message_id == null ? '' : inline_message_id),
+      'caption': (caption == null ? '' : caption),
+      'parse_mode': (parse_mode == null ? '' : parse_mode),
+      'reply_markup': (reply_markup == null ? '' : _dson.encode(reply_markup))
+    };
+    var res = await _client.httpPost(requestUrl, body: body);
+    if(res == true)
+      return new Future.error('Telegram Error: Edited message is NOT sent by the bot');
+    else
+      return _dson.decode(res, new Message());
+  }
+
+  Future<Message> editMessageReplyMarkup(
+      {chat_id, int message_id, String inline_message_id,
+        InlineKeyboardMarkup reply_markup}) async {
+    if (chat_id == null && message_id == null && inline_message_id == null)
+      return new Future.error('Telegram Error: Require either \'chat_id\', \'message_id\', or \'inline_message_id\'');
+    String requestUrl = '${_baseUrl}${_token}/editMessageReplyMarkup';
+    Map body = {
+      'chat_id': (chat_id == null ? '' : '${chat_id}'),
+      'message_id': (message_id == null ? '' : '${message_id}'),
+      'inline_message_id': (inline_message_id == null ? '' : inline_message_id),
+      'reply_markup': (reply_markup == null ? '' : _dson.encode(reply_markup))
+    };
+    var res = await _client.httpPost(requestUrl, body: body);
+    if(res == true)
+      return new Future.error('Telegram Error: Edited message is NOT sent by the bot');
+    else
+      return _dson.decode(res, new Message());
+  }
+
+  Future<bool> deleteMessage(chat_id, int message_id) async {
+    String requestUrl = '${_baseUrl}${_token}/deleteMessage';
+    Map body = {
+      'chat_id': '${chat_id}',
+      'message_id': '${message_id}'
+    };
+    return _client.httpPost(requestUrl, body: body);
+  }
+
+  Future<Message> sendSticker(chat_id, sticker,
+      {bool disable_notification, int reply_to_message_id,
+        ReplyMarkup reply_markup}) async {
+    String requestUrl = '${_baseUrl}${_token}/sendSticker';
+    Map body = {
+      'chat_id': '${chat_id}',
+      'disable_notification': (disable_notification == null ? '' : '${disable_notification}'),
+      'reply_to_message_id': (reply_to_message_id == null ? '' : '${reply_to_message_id}'),
+      'reply_markup': (reply_markup == null ? '' : _dson.encode(reply_markup))
+    };
+
+    if(sticker is List<int>) {
+      // filename cannot be empty to post to Telegram server
+      http.MultipartFile file = new http.MultipartFile.fromBytes('sticker', sticker,
+          filename: '${sticker.length}');
+      return _client.httpMultipartPost(requestUrl, file, body: body, returnType: new Message());
+    }
+    else if(sticker is String) {
+      body.addAll({'sticker': sticker});
+      return _client.httpPost(requestUrl, body: body, returnType: new Message());
+    }
+    else {
+      return new Future.error('Telegram Error: Attribute \'sticker\' can only be either List<int> (file in bytes) or String (Telegram file_id or image url)');
+    }
+  }
+
+  Future<StickerSet> getStickerSet(String name) async {
+    String requestUrl = '${_baseUrl}${_token}/getStickerSet';
+    Map body = { 'name': name };
+    return _client.httpPost(requestUrl, body: body, returnType: new StickerSet(), isList: true);
+  }
+
+  Future<File> uploadStickerFile(int user_id, List<int> png_sticker) async {
+    String requestUrl = '${_baseUrl}${_token}/uploadStickerFile';
+    Map body = { 'user_id': '${user_id}' };
+    http.MultipartFile file = new http.MultipartFile.fromBytes('png_sticker', png_sticker,
+        filename: '${png_sticker.length}');
+    return _client.httpMultipartPost(requestUrl, file, body: body, returnType: new File());
+  }
+
+  Future<bool> createNewStickerSet(int user_id, String name, String title,
+      png_sticker, String emojis,
+      {bool contains_masks, MaskPosition mask_position}) async {
+    String requestUrl = '${_baseUrl}${_token}/createNewStickerSet';
+    User botInfo = await getMe();
+    Map body = {
+      'user_id': '${user_id}',
+      'name': '${name}_by_${botInfo.username}',
+      'title': title,
+      'emojis': emojis,
+      'contains_masks': (contains_masks == null ? '' : '${contains_masks}'),
+      'mask_position': (mask_position == null ? '' : _dson.encode(mask_position))
+    };
+
+    if(png_sticker is List<int>) {
+      // filename cannot be empty to post to Telegram server
+      http.MultipartFile file = new http.MultipartFile.fromBytes('png_sticker', png_sticker,
+          filename: '${png_sticker.length}');
+      return _client.httpMultipartPost(requestUrl, file, body: body);
+    }
+    else if(png_sticker is String) {
+      body.addAll({'png_sticker': png_sticker});
+      return _client.httpPost(requestUrl, body: body);
+    }
+    else {
+      return new Future.error('Telegram Error: Attribute \'png_sticker\' can only be either List<int> (file in bytes) or String (Telegram file_id or image url)');
+    }
+  }
+
+  Future<bool> addStickerToSet(int user_id, String name, List<int> png_sticker,
+      String emojis,
+      {MaskPosition mask_position}) async {
+    String requestUrl = '${_baseUrl}${_token}/addStickerToSet';
+    Map body = {
+      'user_id': '${user_id}',
+      'name': name,
+      'emojis': emojis,
+      'mask_position': (mask_position == null ? '' : _dson.encode(mask_position))
+    };
+
+    if(png_sticker is List<int>) {
+      // filename cannot be empty to post to Telegram server
+      http.MultipartFile file = new http.MultipartFile.fromBytes('png_sticker', png_sticker,
+          filename: '${png_sticker.length}');
+      return _client.httpMultipartPost(requestUrl, file, body: body);
+    }
+    else if(png_sticker is String) {
+      body.addAll({'png_sticker': png_sticker});
+      return _client.httpPost(requestUrl, body: body);
+    }
+    else {
+      return new Future.error('Telegram Error: Attribute \'png_sticker\' can only be either List<int> (file in bytes) or String (Telegram file_id or image url)');
+    }
+  }
+
+  Future<bool> setStickerPositionInSet(String sticker, int position) async {
+    String requestUrl = '${_baseUrl}${_token}/setStickerPositionInSet';
+    Map body = {
+      'sticker': sticker,
+      'position': '${position}'
+    };
+    return _client.httpPost(requestUrl, body: body);
+  }
+
+  Future<bool> deleteStickerFromSet(String sticker) async {
+    String requestUrl = '${_baseUrl}${_token}/deleteStickerFromSet';
+    Map body = { 'sticker': sticker };
     return _client.httpPost(requestUrl, body: body);
   }
 }
