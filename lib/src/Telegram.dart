@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:convert';
 import 'package:dartson/dartson.dart';
 import 'package:http/http.dart' as http;
 
@@ -12,8 +11,8 @@ class Telegram {
   String _token;
   Telegram(this._token);
 
-  var dson = new Dartson.JSON();
-  var client = new HttpClient();
+  final _dson = new Dartson.JSON();
+  final _client = new HttpClient();
 
   Future<List<Update>> getUpdates({int offset, int limit, int timeout}) async {
 
@@ -22,42 +21,39 @@ class Telegram {
       + (limit == null ? '' : 'limit=${limit}&')
       + (timeout == null ? '' : 'timeout=${timeout}');
 
-    return client.httpGet(url, new Update(), true);
+    return _client.httpGet(url, new Update(), true);
   }
 
-  // TODO: need to be tested
   Future<bool> setWebhook(String url,
       {List<int> certificate, int max_connections,
         List<String> allowed_updates}) async {
-    http.MultipartRequest request = new http.MultipartRequest('post', Uri.parse('${_baseUrl}${_token}/setWebhook'));
-    request.fields.addAll({'url': url,
-      'max_connections': max_connections.toString(),
-      'allowed_updates': allowed_updates.toString()});
-    request.files
-        .add(new http.MultipartFile.fromBytes('certification', certificate));
-    Future<String> res = await request.send().then((response) {
-      if (response.statusCode == 200 || response.statusCode == 0)
-        return response.stream.bytesToString();
-      else
-        return new Future.error('Telegram error: HTTP status code ' + response.statusCode.toString());
-    })
-        .catchError((error) {
-      return new Future.error(error);
-    });
-    return JSON.decode(await res)['result'];
+    String url = '${_baseUrl}${_token}/setWebhook';
+    Map body = {
+      'url': url,
+      'max_connections': max_connections == null ? '' : '${max_connections}',
+      'allowed_updates': allowed_updates == null ? '' : '${allowed_updates}'
+    };
+    if(certificate.length > 0){
+      http.MultipartFile file = new http.MultipartFile.fromBytes('certificate',
+          certificate, filename: '${certificate.length}');
+      return _client.httpMultipartPost(url, file, body);
+    }
+    else {
+      return _client.httpPost(url, body);
+    }
   }
 
   Future<bool> deleteWebhook() async {
-    return client.httpGet('${_baseUrl}${_token}/deleteWebhook');
+    return _client.httpGet('${_baseUrl}${_token}/deleteWebhook');
 
   }
 
   Future<WebhookInfo> getWebhookInfo() async {
-    return client.httpGet('${_baseUrl}${_token}/getWebhookInfo', new WebhookInfo());
+    return _client.httpGet('${_baseUrl}${_token}/getWebhookInfo', new WebhookInfo());
   }
 
   Future<User> getMe() async {
-    return client.httpGet('${_baseUrl}${_token}/getMe', new User());
+    return _client.httpGet('${_baseUrl}${_token}/getMe', new User());
   }
 
   Future<Message> sendMessage(int chat_id, String text,
@@ -70,9 +66,9 @@ class Telegram {
       'disable_web_page_preview': (disable_web_page_preview == null ? '' : '${disable_web_page_preview}'),
       'disable_notification': (disable_notification == null ? '' : '${disable_notification}'),
       'reply_to_message_id': (reply_to_message_id == null ? '' : '${reply_to_message_id}'),
-      'reply_markup': (reply_markup == null ? '' : dson.encode(reply_markup))
+      'reply_markup': (reply_markup == null ? '' : _dson.encode(reply_markup))
     };
-    return client.httpPost('${_baseUrl}${_token}/sendMessage', body, new Message());
+    return _client.httpPost('${_baseUrl}${_token}/sendMessage', body, new Message());
   }
 
   Future<Message> forwardMessage(int chat_id, int from_char_id, int message_id,
@@ -83,7 +79,95 @@ class Telegram {
       'message_id': '${message_id}',
       'disable_notification': (disable_notification == null ? '' : '${disable_notification}')
     };
-    return client.httpPost('${_baseUrl}${_token}/forwardMessage', body, new Message());
+    return _client.httpPost('${_baseUrl}${_token}/forwardMessage', body, new Message());
+  }
+
+  Future<Message> sendPhoto(int chat_id, photo,
+      {String caption, String parse_mode, bool disable_notification,
+        int reply_to_message_id, ReplyMarkup reply_markup}) async {
+    String url = '${_baseUrl}${_token}/sendPhoto';
+    Map body = {
+      'chat_id': '${chat_id}',
+      'caption': (parse_mode == null ? '' : '${caption}'),
+      'parse_mode': (parse_mode == null ? '' : '${parse_mode}'),
+      'disable_notification': (disable_notification == null ? '' : '${disable_notification}'),
+      'reply_to_message_id': (reply_to_message_id == null ? '' : '${reply_to_message_id}'),
+      'reply_markup': (reply_markup == null ? '' : _dson.encode(reply_markup))
+    };
+
+    if(photo is List<int>) {
+      // filename cannot be empty to post to Telegram server
+      http.MultipartFile file = new http.MultipartFile.fromBytes('photo', photo,
+          filename: '${photo.length}');
+      return _client.httpMultipartPost(url, file, body, new Message());
+    }
+    else if(photo is String) {
+      body.addAll({'photo': photo});
+      return _client.httpPost(url, body, new Message());
+    }
+    else {
+      return new Future.error('Telegram Error: Attribute \'photo\' can only be either List<int> (file in bytes) or String (Telegram file_id or image url)');
+    }
+  }
+
+  Future<Message> sendAudio(int chat_id, audio,
+      {String caption, String parse_mode, int duration,
+        String performer, String title, bool disable_notification,
+        int reply_to_message_id, ReplyMarkup reply_markup}) async {
+    String url = '${_baseUrl}${_token}/sendAudio';
+    Map body = {
+      'chat_id': '${chat_id}',
+      'caption': (parse_mode == null ? '' : '${caption}'),
+      'parse_mode': (parse_mode == null ? '' : '${parse_mode}'),
+      'duration': (duration == null ? '' : '${duration}'),
+      'performer': (performer == null ? '' : performer),
+      'title': (title == null ? '' : title),
+      'disable_notification': (disable_notification == null ? '' : '${disable_notification}'),
+      'reply_to_message_id': (reply_to_message_id == null ? '' : '${reply_to_message_id}'),
+      'reply_markup': (reply_markup == null ? '' : _dson.encode(reply_markup))
+    };
+
+    if(audio is List<int>) {
+      // filename cannot be empty to post to Telegram server
+      http.MultipartFile file = new http.MultipartFile.fromBytes('audio', audio,
+          filename: '${audio.length}');
+      return _client.httpMultipartPost(url, file, body, new Message());
+    }
+    else if(audio is String) {
+      body.addAll({'audio': audio});
+      return _client.httpPost(url, body, new Message());
+    }
+    else {
+      return new Future.error('Telegram Error: Attribute \'audio\' can only be either List<int> (file in bytes) or String (Telegram file_id or image url)');
+    }
+  }
+
+  Future<Message> sendDocument(int chat_id, document,
+      {String caption, String parse_mode, bool disable_notification,
+        int reply_to_message_id, ReplyMarkup reply_markup}) async {
+    String url = '${_baseUrl}${_token}/sendDocument';
+    Map body = {
+      'chat_id': '${chat_id}',
+      'caption': (parse_mode == null ? '' : '${caption}'),
+      'parse_mode': (parse_mode == null ? '' : '${parse_mode}'),
+      'disable_notification': (disable_notification == null ? '' : '${disable_notification}'),
+      'reply_to_message_id': (reply_to_message_id == null ? '' : '${reply_to_message_id}'),
+      'reply_markup': (reply_markup == null ? '' : _dson.encode(reply_markup))
+    };
+
+    if(document is List<int>) {
+      // filename cannot be empty to post to Telegram server
+      http.MultipartFile file = new http.MultipartFile.fromBytes('document', document,
+          filename: '${document.length}');
+      return _client.httpMultipartPost(url, file, body, new Message());
+    }
+    else if(document is String) {
+      body.addAll({'document': document});
+      return _client.httpPost(url, body, new Message());
+    }
+    else {
+      return new Future.error('Telegram Error: Attribute \'document\' can only be either List<int> (file in bytes) or String (Telegram file_id or image url)');
+    }
   }
 
 }
