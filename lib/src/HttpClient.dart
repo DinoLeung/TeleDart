@@ -7,7 +7,7 @@ class HttpClient {
 
   final _dson = new Dartson.JSON();
 
-  Future httpGet(String url, [Object returnType, bool isList]) async {
+  Future httpGet(String url, {Object returnType, bool isList}) async {
     return http.get(url)
         .then((response) {
       if (response.statusCode == 200 || response.statusCode == 0)
@@ -22,14 +22,18 @@ class HttpClient {
     });
   }
 
-  Future httpPost(String url, [Map body, Object returnType, bool isList]) async {
+  Future httpPost(String url, {Map body, Object returnType, bool isList, String jsonItem}) async {
     return http.post(url,
         body: body)
         .then((response) {
-      if (response.statusCode == 200 || response.statusCode == 0)
+      if (response.statusCode == 200 || response.statusCode == 0) {
+        dynamic json = (jsonItem == null ?
+            JSON.decode(response.body)['result'] :
+            JSON.decode(response.body)['result'][jsonItem]);
         return returnType != null ?
-            _dson.map(JSON.decode(response.body)['result'], returnType, isList) :
-            JSON.decode(response.body)['result'];
+            _dson.map(json, returnType, isList) :
+            json;
+      }
       else
         return new Future.error('HttpClient Error: ${response.statusCode} ${response.reasonPhrase}');
     })
@@ -39,7 +43,7 @@ class HttpClient {
   }
 
   Future httpMultipartPost(String url, http.MultipartFile file,
-      [Map body, Object returnType, bool isList]) async {
+      {Map body, Object returnType, bool isList, String jsonItem}) async {
     http.MultipartRequest request = new http.MultipartRequest('POST', Uri.parse(url))
       ..headers.addAll({'Content-Type': 'multipart/form-data'})
       ..fields.addAll(body)
@@ -48,10 +52,14 @@ class HttpClient {
         .then((response) =>
             http.Response.fromStream(response))
         .then((response) {
-          if (response.statusCode == 200 || response.statusCode == 0)
+          if (response.statusCode == 200 || response.statusCode == 0) {
+            dynamic json = (jsonItem == null ?
+                JSON.decode(response.body)['result'] :
+                JSON.decode(response.body)['result'][jsonItem]);
             return returnType != null ?
-                _dson.map(JSON.decode(response.body)['result'], returnType, isList) :
-                JSON.decode(response.body)['result'];
+                _dson.map(json, returnType, isList) :
+                json;
+          }
           else
             return new Future.error('HttpClient Error: ${response.statusCode} ${response.reasonPhrase}');
         })
