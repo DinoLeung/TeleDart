@@ -16,18 +16,18 @@ class Telegram {
 
   Future<List<Update>> getUpdates({int offset, int limit, int timeout}) async {
 
-    String url = '${_baseUrl}${_token}/getUpdates?'
+    String requestUrl = '${_baseUrl}${_token}/getUpdates?'
       + (offset == null ? '' : 'offset=${offset}&')
       + (limit == null ? '' : 'limit=${limit}&')
       + (timeout == null ? '' : 'timeout=${timeout}');
 
-    return _client.httpGet(url, returnType: new Update(), isList: true);
+    return _client.httpGet(requestUrl, returnType: new Update(), isList: true);
   }
 
   Future<bool> setWebhook(String url,
       {List<int> certificate, int max_connections,
         List<String> allowed_updates}) async {
-    String url = '${_baseUrl}${_token}/setWebhook';
+    String requestUrl = '${_baseUrl}${_token}/setWebhook';
     Map body = {
       'url': url,
       'max_connections': max_connections == null ? '' : '${max_connections}',
@@ -36,10 +36,10 @@ class Telegram {
     if(certificate.length > 0){
       http.MultipartFile file = new http.MultipartFile.fromBytes('certificate',
           certificate, filename: '${certificate.length}');
-      return _client.httpMultipartPost(url, file, body: body);
+      return _client.httpMultipartPost(requestUrl, file, body: body);
     }
     else {
-      return _client.httpPost(url, body: body);
+      return _client.httpPost(requestUrl, body: body);
     }
   }
 
@@ -59,7 +59,7 @@ class Telegram {
   Future<Message> sendMessage(chat_id, String text,
       {String parse_mode, bool disable_web_page_preview, bool disable_notification,
         int reply_to_message_id, ReplyMarkup reply_markup}) async {
-    String url = '${_baseUrl}${_token}/sendMessage';
+    String requestUrl = '${_baseUrl}${_token}/sendMessage';
     Map body = {
       'chat_id': '${chat_id}',
       'text': text,
@@ -69,25 +69,25 @@ class Telegram {
       'reply_to_message_id': (reply_to_message_id == null ? '' : '${reply_to_message_id}'),
       'reply_markup': (reply_markup == null ? '' : _dson.encode(reply_markup))
     };
-    return _client.httpPost(url, body: body, returnType: new Message());
+    return _client.httpPost(requestUrl, body: body, returnType: new Message());
   }
 
   Future<Message> forwardMessage(chat_id, int from_char_id, int message_id,
       {bool disable_notification}) async {
-    String url = '${_baseUrl}${_token}/forwardMessage';
+    String requestUrl = '${_baseUrl}${_token}/forwardMessage';
     Map body = {
       'chat_id': '${chat_id}',
       'from_char_id': '${from_char_id}',
       'message_id': '${message_id}',
       'disable_notification': (disable_notification == null ? '' : '${disable_notification}')
     };
-    return _client.httpPost(url, body: body, returnType: new Message());
+    return _client.httpPost(requestUrl, body: body, returnType: new Message());
   }
 
   Future<Message> sendPhoto(chat_id, photo,
       {String caption, String parse_mode, bool disable_notification,
         int reply_to_message_id, ReplyMarkup reply_markup}) async {
-    String url = '${_baseUrl}${_token}/sendPhoto';
+    String requestUrl = '${_baseUrl}${_token}/sendPhoto';
     Map body = {
       'chat_id': '${chat_id}',
       'caption': (caption == null ? '' : '${caption}'),
@@ -101,11 +101,11 @@ class Telegram {
       // filename cannot be empty to post to Telegram server
       http.MultipartFile file = new http.MultipartFile.fromBytes('photo', photo,
           filename: '${photo.length}');
-      return _client.httpMultipartPost(url, file, body: body, returnType: new Message());
+      return _client.httpMultipartPost(requestUrl, file, body: body, returnType: new Message());
     }
     else if(photo is String) {
       body.addAll({'photo': photo});
-      return _client.httpPost(url, body: body, returnType: new Message());
+      return _client.httpPost(requestUrl, body: body, returnType: new Message());
     }
     else {
       return new Future.error('Telegram Error: Attribute \'photo\' can only be either List<int> (file in bytes) or String (Telegram file_id or image url)');
@@ -116,7 +116,7 @@ class Telegram {
       {String caption, String parse_mode, int duration,
         String performer, String title, bool disable_notification,
         int reply_to_message_id, ReplyMarkup reply_markup}) async {
-    String url = '${_baseUrl}${_token}/sendAudio';
+    String requestUrl = '${_baseUrl}${_token}/sendAudio';
     Map body = {
       'chat_id': '${chat_id}',
       'caption': (caption == null ? '' : '${caption}'),
@@ -133,11 +133,11 @@ class Telegram {
       // filename cannot be empty to post to Telegram server
       http.MultipartFile file = new http.MultipartFile.fromBytes('audio', audio,
           filename: '${audio.length}');
-      return _client.httpMultipartPost(url, file, body: body, returnType: new Message());
+      return _client.httpMultipartPost(requestUrl, file, body: body, returnType: new Message());
     }
     else if(audio is String) {
       body.addAll({'audio': audio});
-      return _client.httpPost(url, body: body, returnType: new Message());
+      return _client.httpPost(requestUrl, body: body, returnType: new Message());
     }
     else {
       return new Future.error('Telegram Error: Attribute \'audio\' can only be either List<int> (file in bytes) or String (Telegram file_id or image url)');
@@ -147,7 +147,7 @@ class Telegram {
   Future<Message> sendDocument(chat_id, document,
       {String caption, String parse_mode, bool disable_notification,
         int reply_to_message_id, ReplyMarkup reply_markup}) async {
-    String url = '${_baseUrl}${_token}/sendDocument';
+    String requestUrl = '${_baseUrl}${_token}/sendDocument';
     Map body = {
       'chat_id': '${chat_id}',
       'caption': (caption == null ? '' : '${caption}'),
@@ -161,11 +161,11 @@ class Telegram {
       // filename cannot be empty to post to Telegram server
       http.MultipartFile file = new http.MultipartFile.fromBytes('document', document,
           filename: '${document.length}');
-      return _client.httpMultipartPost(url, file, body: body, returnType: new Message());
+      return _client.httpMultipartPost(requestUrl, file, body: body, returnType: new Message());
     }
     else if(document is String) {
       body.addAll({'document': document});
-      return _client.httpPost(url, body: body, returnType: new Message());
+      return _client.httpPost(requestUrl, body: body, returnType: new Message());
     }
     else {
       return new Future.error('Telegram Error: Attribute \'document\' can only be either List<int> (file in bytes) or String (Telegram file_id or image url)');
@@ -176,7 +176,7 @@ class Telegram {
       {int duration, int width, int height, String caption, String parse_mode,
         bool supports_streaming, bool disable_notification,
         int reply_to_message_id, ReplyMarkup reply_markup}) async {
-    String url = '${_baseUrl}${_token}/sendVideo';
+    String requestUrl = '${_baseUrl}${_token}/sendVideo';
     Map body = {
       'chat_id': '${chat_id}',
       'duration': (duration == null ? '' : '${duration}'),
@@ -194,11 +194,11 @@ class Telegram {
       // filename cannot be empty to post to Telegram server
       http.MultipartFile file = new http.MultipartFile.fromBytes('video', video,
           filename: '${video.length}');
-      return _client.httpMultipartPost(url, file, body: body, returnType: new Message());
+      return _client.httpMultipartPost(requestUrl, file, body: body, returnType: new Message());
     }
     else if(video is String) {
       body.addAll({'video': video});
-      return _client.httpPost(url, body: body, returnType: new Message());
+      return _client.httpPost(requestUrl, body: body, returnType: new Message());
     }
     else {
       return new Future.error('Telegram Error: Attribute \'video\' can only be either List<int> (file in bytes) or String (Telegram file_id or image url)');
@@ -209,7 +209,7 @@ class Telegram {
       {String caption, String parse_mode, int duration,
         bool disable_notification, int reply_to_message_id,
         ReplyMarkup reply_markup}) async {
-    String url = '${_baseUrl}${_token}/sendVoice';
+    String requestUrl = '${_baseUrl}${_token}/sendVoice';
     Map body = {
       'chat_id': '${chat_id}',
       'caption': (caption == null ? '' : '${caption}'),
@@ -224,11 +224,11 @@ class Telegram {
       // filename cannot be empty to post to Telegram server
       http.MultipartFile file = new http.MultipartFile.fromBytes('voice', voice,
           filename: '${voice.length}');
-      return _client.httpMultipartPost(url, file, body: body, returnType: new Message());
+      return _client.httpMultipartPost(requestUrl, file, body: body, returnType: new Message());
     }
     else if(voice is String) {
       body.addAll({'voice': voice});
-      return _client.httpPost(url, body: body, returnType: new Message());
+      return _client.httpPost(requestUrl, body: body, returnType: new Message());
     }
     else {
       return new Future.error('Telegram Error: Attribute \'voice\' can only be either List<int> (file in bytes) or String (Telegram file_id or image url)');
@@ -238,7 +238,7 @@ class Telegram {
   Future<Message> sendVideoNote(chat_id, video_note,
       {int duration, int length, bool disable_notification,
         int reply_to_message_id, ReplyMarkup reply_markup}) async {
-    String url = '${_baseUrl}${_token}/sendVideoNote';
+    String requestUrl = '${_baseUrl}${_token}/sendVideoNote';
     Map body = {
       'chat_id': '${chat_id}',
       'duration': (duration == null ? '' : '${duration}'),
@@ -252,11 +252,11 @@ class Telegram {
       // filename cannot be empty to post to Telegram server
       http.MultipartFile file = new http.MultipartFile.fromBytes('video_note', video_note,
           filename: '${video_note.length}');
-      return _client.httpMultipartPost(url, file, body: body, returnType: new Message());
+      return _client.httpMultipartPost(requestUrl, file, body: body, returnType: new Message());
     }
     else if(video_note is String) {
       body.addAll({'video_note': video_note});
-      return _client.httpPost(url, body: body, returnType: new Message());
+      return _client.httpPost(requestUrl, body: body, returnType: new Message());
     }
     else {
       return new Future.error('Telegram Error: Attribute \'video_note\' can only be either List<int> (file in bytes) or String (Telegram file_id or image url)');
@@ -265,20 +265,20 @@ class Telegram {
 
   Future<Message> sendMediaGroup(chat_id, List<InputMedia> media,
       {bool disable_notification, int reply_to_message_id}) async {
-    String url = '${_baseUrl}${_token}/sendMediaGroup';
+    String requestUrl = '${_baseUrl}${_token}/sendMediaGroup';
     Map body = {
       'chat_id': '${chat_id}',
       'media': _dson.encode(media),
       'disable_notification': (disable_notification == null ? '' : '${disable_notification}'),
       'reply_to_message_id': (reply_to_message_id == null ? '' : '${reply_to_message_id}')
     };
-    return _client.httpPost(url, body: body, returnType: new Message());
+    return _client.httpPost(requestUrl, body: body, returnType: new Message());
   }
 
   Future<Message> sendLocation(chat_id, double latitude, double longitude,
       {int live_period, bool disable_notification, int reply_to_message_id,
         ReplyMarkup reply_markup}) async {
-    String url = '${_baseUrl}${_token}/sendLocation';
+    String requestUrl = '${_baseUrl}${_token}/sendLocation';
     Map body = {
       'chat_id': '${chat_id}',
       'latitude': '${latitude}',
@@ -287,7 +287,7 @@ class Telegram {
       'reply_to_message_id': (reply_to_message_id == null ? '' : '${reply_to_message_id}'),
       'reply_markup': (reply_markup == null ? '' : _dson.encode(reply_markup))
     };
-    return _client.httpPost(url, body: body, returnType: new Message());
+    return _client.httpPost(requestUrl, body: body, returnType: new Message());
   }
 
   Future<Message> editMessageLiveLocation(double latitude, double longitude,
@@ -295,7 +295,7 @@ class Telegram {
         ReplyMarkup reply_markup}) async {
     if (chat_id == null && message_id == null && inline_message_id == null)
       return new Future.error('Telegram Error: Require either \'chat_id\', \'message_id\', or \'inline_message_id\'');
-    String url = '${_baseUrl}${_token}/editMessageLiveLocation';
+    String requestUrl = '${_baseUrl}${_token}/editMessageLiveLocation';
     Map body = {
       'latitude': '${latitude}',
       'longitude': '${longitude}',
@@ -304,7 +304,7 @@ class Telegram {
       'inline_message_id': (inline_message_id == null ? '' : inline_message_id),
       'reply_markup': (reply_markup == null ? '' : _dson.encode(reply_markup))
     };
-    return _client.httpPost(url, body: body, returnType: new Message());
+    return _client.httpPost(requestUrl, body: body, returnType: new Message());
   }
 
   Future<Message> stopMessageLiveLocation(
@@ -312,21 +312,21 @@ class Telegram {
         ReplyMarkup reply_markup}) async {
     if (chat_id == null && message_id == null && inline_message_id == null)
       return new Future.error('Telegram Error: Require either \'chat_id\', \'message_id\', or \'inline_message_id\'');
-    String url = '${_baseUrl}${_token}/stopMessageLiveLocation';
+    String requestUrl = '${_baseUrl}${_token}/stopMessageLiveLocation';
     Map body = {
       'chat_id': (chat_id == null ? '' : '${chat_id}'),
       'message_id': (message_id == null ? '' : '${message_id}'),
       'inline_message_id': (inline_message_id == null ? '' : inline_message_id),
       'reply_markup': (reply_markup == null ? '' : _dson.encode(reply_markup))
     };
-    return _client.httpPost(url, body: body, returnType: new Message());
+    return _client.httpPost(requestUrl, body: body, returnType: new Message());
   }
 
   Future<Message> sendVenue(chat_id, double latitude, double longitude,
       String title, String address,
       {String foursquare_id, bool disable_notification, int reply_to_message_id,
         ReplyMarkup reply_markup}) async {
-    String url = '${_baseUrl}${_token}/sendVenue';
+    String requestUrl = '${_baseUrl}${_token}/sendVenue';
     Map body = {
       'chat_id': '${chat_id}',
       'latitude': '${latitude}',
@@ -338,13 +338,13 @@ class Telegram {
       'reply_to_message_id': (reply_to_message_id == null ? '' : '${reply_to_message_id}'),
       'reply_markup': (reply_markup == null ? '' : _dson.encode(reply_markup))
     };
-    return _client.httpPost(url, body: body, returnType: new Message());
+    return _client.httpPost(requestUrl, body: body, returnType: new Message());
   }
 
   Future<Message> sendContact(chat_id, String phone_number, String first_name,
       {String last_name, bool disable_notification, int reply_to_message_id,
         ReplyMarkup reply_markup}) async {
-    String url = '${_baseUrl}${_token}/sendContact';
+    String requestUrl = '${_baseUrl}${_token}/sendContact';
     Map body = {
       'chat_id': '${chat_id}',
       'phone_number': phone_number,
@@ -354,60 +354,60 @@ class Telegram {
       'reply_to_message_id': (reply_to_message_id == null ? '' : '${reply_to_message_id}'),
       'reply_markup': (reply_markup == null ? '' : _dson.encode(reply_markup))
     };
-    return _client.httpPost(url, body: body, returnType: new Message());
+    return _client.httpPost(requestUrl, body: body, returnType: new Message());
   }
 
   Future<bool> sendChatAction(chat_id, String action) async {
-    String url = '${_baseUrl}${_token}/sendChatAction';
+    String requestUrl = '${_baseUrl}${_token}/sendChatAction';
     Map body = {
       'chat_id': '${chat_id}',
       'action': action
     };
-    return _client.httpPost(url, body: body);
+    return _client.httpPost(requestUrl, body: body);
   }
 
   Future<List<UserProfilePhotos>> getUserProfilePhotos(user_id,
       {int offset, int limit}) async {
-    String url = '${_baseUrl}${_token}/getUserProfilePhotos';
+    String requestUrl = '${_baseUrl}${_token}/getUserProfilePhotos';
     Map body = {
       'user_id': '${user_id}',
       'offset': (offset == null ? '' : '${offset}'),
       'limit': (limit == null ? '' : '${limit}')
     };
-    return _client.httpPost(url, body: body,  returnType: new UserProfilePhotos(),
+    return _client.httpPost(requestUrl, body: body,  returnType: new UserProfilePhotos(),
         isList: true, jsonItem: 'photos');
   }
 
   Future<File> getFile(String file_id) async {
-    String url = '${_baseUrl}${_token}/getFile';
+    String requestUrl = '${_baseUrl}${_token}/getFile';
     Map body = { 'file_id': file_id };
-    return _client.httpPost(url, body: body, returnType: new File());
+    return _client.httpPost(requestUrl, body: body, returnType: new File());
   }
 
   Future<bool> kickChatMember(chat_id, int user_id,
       {int until_date}) async {
-    String url = '${_baseUrl}${_token}/kickChatMember';
+    String requestUrl = '${_baseUrl}${_token}/kickChatMember';
     Map body = {
       'chat_id': '${chat_id}',
       'user_id': '${user_id}',
       'until_date': (until_date == null ? '' : '${until_date}')
     };
-    return _client.httpPost(url, body: body);
+    return _client.httpPost(requestUrl, body: body);
   }
 
   Future<bool> unbanChatMember(chat_id, int user_id) async {
-    String url = '${_baseUrl}${_token}/unbanChatMember';
+    String requestUrl = '${_baseUrl}${_token}/unbanChatMember';
     Map body = {
       'chat_id': '${chat_id}',
       'user_id': '${user_id}'
     };
-    return _client.httpPost(url, body: body);
+    return _client.httpPost(requestUrl, body: body);
   }
 
   Future<bool> restrictChatMember(chat_id, int user_id,
       {int until_date, bool can_send_messages, bool can_send_media_messages,
         bool can_send_other_messages, bool can_add_web_page_previews}) async {
-    String url = '${_baseUrl}${_token}/unbanChatMember';
+    String requestUrl = '${_baseUrl}${_token}/unbanChatMember';
     Map body = {
       'chat_id': '${chat_id}',
       'user_id': '${user_id}',
@@ -417,14 +417,14 @@ class Telegram {
       'can_send_other_messages': (can_send_other_messages == null ? '' : '${can_send_other_messages}'),
       'can_add_web_page_previews': (can_add_web_page_previews == null ? '' : '${can_add_web_page_previews}')
     };
-    return _client.httpPost(url, body: body);
+    return _client.httpPost(requestUrl, body: body);
   }
 
   Future<bool> promoteChatMember(chat_id, int user_id,
       {bool can_change_info, bool can_post_messages, bool can_edit_messages,
         bool can_delete_messages, bool can_invite_users, bool can_restrict_members,
         bool can_pin_messages, bool can_promote_members}) async {
-    String url = '${_baseUrl}${_token}/promoteChatMember';
+    String requestUrl = '${_baseUrl}${_token}/promoteChatMember';
     Map body = {
       'chat_id': '${chat_id}',
       'user_id': '${user_id}',
@@ -437,110 +437,123 @@ class Telegram {
       'can_pin_messages': (can_pin_messages == null ? '' : '${can_pin_messages}'),
       'can_promote_members': (can_promote_members == null ? '' : '${can_promote_members}')
     };
-    return _client.httpPost(url, body: body);
+    return _client.httpPost(requestUrl, body: body);
   }
 
   Future<String> exportChatInviteLink(chat_id) async {
-    String url = '${_baseUrl}${_token}/exportChatInviteLink';
+    String requestUrl = '${_baseUrl}${_token}/exportChatInviteLink';
     Map body = { 'chat_id': '${chat_id}' };
-    return _client.httpPost(url, body: body);
+    return _client.httpPost(requestUrl, body: body);
   }
 
   Future<bool> setChatPhoto(chat_id, List<int> photo) async {
-    String url = '${_baseUrl}${_token}/setChatPhoto';
+    String requestUrl = '${_baseUrl}${_token}/setChatPhoto';
     Map body = { 'chat_id': '${chat_id}' };
     http.MultipartFile file = new http.MultipartFile.fromBytes('photo', photo,
         filename: '${photo.length}');
-    return _client.httpMultipartPost(url, file, body: body);
+    return _client.httpMultipartPost(requestUrl, file, body: body);
   }
 
   Future<bool> deleteChatPhoto(chat_id) async {
-    String url = '${_baseUrl}${_token}/deleteChatPhoto';
+    String requestUrl = '${_baseUrl}${_token}/deleteChatPhoto';
     Map body = { 'chat_id': '${chat_id}' };
-    return _client.httpPost(url, body: body);
+    return _client.httpPost(requestUrl, body: body);
   }
 
   Future<bool> setChatTitle(chat_id, String title) async {
-    String url = '${_baseUrl}${_token}/setChatTitle';
+    String requestUrl = '${_baseUrl}${_token}/setChatTitle';
     Map body = {
       'chat_id': '${chat_id}',
       'title': title
     };
-    return _client.httpPost(url, body: body);
+    return _client.httpPost(requestUrl, body: body);
   }
 
   Future<bool> setChatDescription(chat_id,
       {String description}) async {
-    String url = '${_baseUrl}${_token}/setChatDescription';
+    String requestUrl = '${_baseUrl}${_token}/setChatDescription';
     Map body = {
       'chat_id': '${chat_id}',
       'description': (description == null ? '' : description)
     };
-    return _client.httpPost(url, body: body);
+    return _client.httpPost(requestUrl, body: body);
   }
 
   Future<bool> pinChatMessage(chat_id, int message_id,
       {bool disable_notification}) async {
-    String url = '${_baseUrl}${_token}/pinChatMessage';
+    String requestUrl = '${_baseUrl}${_token}/pinChatMessage';
     Map body = {
       'chat_id': '${chat_id}',
       'message_id': '${message_id}',
       'disable_notification': (disable_notification == null ? '' : disable_notification)
     };
-    return _client.httpPost(url, body: body);
+    return _client.httpPost(requestUrl, body: body);
   }
 
   Future<bool> unpinChatMessage(chat_id) async {
-    String url = '${_baseUrl}${_token}/unpinChatMessage';
+    String requestUrl = '${_baseUrl}${_token}/unpinChatMessage';
     Map body = { 'chat_id': '${chat_id}' };
-    return _client.httpPost(url, body: body);
+    return _client.httpPost(requestUrl, body: body);
   }
 
   Future<bool> leaveChat(chat_id) async {
-    String url = '${_baseUrl}${_token}/leaveChat';
+    String requestUrl = '${_baseUrl}${_token}/leaveChat';
     Map body = { 'chat_id': '${chat_id}' };
-    return _client.httpPost(url, body: body);
+    return _client.httpPost(requestUrl, body: body);
   }
 
   Future<Chat> getChat(chat_id) async {
-    String url = '${_baseUrl}${_token}/getChat';
+    String requestUrl = '${_baseUrl}${_token}/getChat';
     Map body = { 'chat_id': '${chat_id}' };
-    return _client.httpPost(url, body: body, returnType: new Chat());
+    return _client.httpPost(requestUrl, body: body, returnType: new Chat());
   }
 
   Future<List<ChatMember>> getChatAdministrators(chat_id) async {
-    String url = '${_baseUrl}${_token}/getChatAdministrators';
+    String requestUrl = '${_baseUrl}${_token}/getChatAdministrators';
     Map body = { 'chat_id': '${chat_id}' };
-    return _client.httpPost(url, body: body, returnType: new ChatMember(), isList: true);
+    return _client.httpPost(requestUrl, body: body, returnType: new ChatMember(), isList: true);
   }
 
   Future<int> getChatMembersCount(chat_id) async {
-    String url = '${_baseUrl}${_token}/getChatMembersCount';
+    String requestUrl = '${_baseUrl}${_token}/getChatMembersCount';
     Map body = { 'chat_id': '${chat_id}' };
-    return _client.httpPost(url, body: body);
+    return _client.httpPost(requestUrl, body: body);
   }
 
   Future<ChatMember> getChatMember(chat_id, int user_id) async {
-    String url = '${_baseUrl}${_token}/getChatMember';
+    String requestUrl = '${_baseUrl}${_token}/getChatMember';
     Map body = {
       'chat_id': '${chat_id}',
       'user_id': '${user_id}'
     };
-    return _client.httpPost(url, body: body, returnType: new ChatMember());
+    return _client.httpPost(requestUrl, body: body, returnType: new ChatMember());
   }
 
   Future<bool> setChatStickerSet(chat_id, String sticker_set_name) async {
-    String url = '${_baseUrl}${_token}/setChatStickerSet';
+    String requestUrl = '${_baseUrl}${_token}/setChatStickerSet';
     Map body = {
       'chat_id': '${chat_id}',
       'sticker_set_name': sticker_set_name,
     };
-    return _client.httpPost(url, body: body);
+    return _client.httpPost(requestUrl, body: body);
   }
 
   Future<bool> deleteChatStickerSet(chat_id) async {
-    String url = '${_baseUrl}${_token}/deleteChatStickerSet';
+    String requestUrl = '${_baseUrl}${_token}/deleteChatStickerSet';
     Map body = { 'chat_id': '${chat_id}' };
-    return _client.httpPost(url, body: body);
+    return _client.httpPost(requestUrl, body: body);
+  }
+
+  Future<bool> answerCallbackQuery(String callback_query_id,
+      {String text, bool show_alert, String url, int cache_time}) async {
+    String requestUrl = '${_baseUrl}${_token}/answerCallbackQuery';
+    Map body = {
+      'callback_query_id': callback_query_id,
+      'text': (text == null ? '' : text),
+      'show_alert': (show_alert == null ? '' : '${show_alert}'),
+      'url': (url == null ? '' : url),
+      'cache_time': (cache_time == null ? '' : '${cache_time}')
+    };
+    return _client.httpPost(requestUrl, body: body);
   }
 }
