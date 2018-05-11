@@ -440,4 +440,107 @@ class Telegram {
     return _client.httpPost(url, body: body);
   }
 
+  Future<String> exportChatInviteLink(chat_id) async {
+    String url = '${_baseUrl}${_token}/exportChatInviteLink';
+    Map body = { 'chat_id': '${chat_id}' };
+    return _client.httpPost(url, body: body);
+  }
+
+  Future<bool> setChatPhoto(chat_id, List<int> photo) async {
+    String url = '${_baseUrl}${_token}/setChatPhoto';
+    Map body = { 'chat_id': '${chat_id}' };
+    http.MultipartFile file = new http.MultipartFile.fromBytes('photo', photo,
+        filename: '${photo.length}');
+    return _client.httpMultipartPost(url, file, body: body);
+  }
+
+  Future<bool> deleteChatPhoto(chat_id) async {
+    String url = '${_baseUrl}${_token}/deleteChatPhoto';
+    Map body = { 'chat_id': '${chat_id}' };
+    return _client.httpPost(url, body: body);
+  }
+
+  Future<bool> setChatTitle(chat_id, String title) async {
+    String url = '${_baseUrl}${_token}/setChatTitle';
+    Map body = {
+      'chat_id': '${chat_id}',
+      'title': title
+    };
+    return _client.httpPost(url, body: body);
+  }
+
+  Future<bool> setChatDescription(chat_id,
+      {String description}) async {
+    String url = '${_baseUrl}${_token}/setChatDescription';
+    Map body = {
+      'chat_id': '${chat_id}',
+      'description': (description == null ? '' : description)
+    };
+    return _client.httpPost(url, body: body);
+  }
+
+  Future<bool> pinChatMessage(chat_id, int message_id,
+      {bool disable_notification}) async {
+    String url = '${_baseUrl}${_token}/pinChatMessage';
+    Map body = {
+      'chat_id': '${chat_id}',
+      'message_id': '${message_id}',
+      'disable_notification': (disable_notification == null ? '' : disable_notification)
+    };
+    return _client.httpPost(url, body: body);
+  }
+
+  Future<bool> unpinChatMessage(chat_id) async {
+    String url = '${_baseUrl}${_token}/unpinChatMessage';
+    Map body = { 'chat_id': '${chat_id}' };
+    return _client.httpPost(url, body: body);
+  }
+
+  Future<bool> leaveChat(chat_id) async {
+    String url = '${_baseUrl}${_token}/leaveChat';
+    Map body = { 'chat_id': '${chat_id}' };
+    return _client.httpPost(url, body: body);
+  }
+
+  Future<Chat> getChat(chat_id) async {
+    String url = '${_baseUrl}${_token}/getChat';
+    Map body = { 'chat_id': '${chat_id}' };
+    return _client.httpPost(url, body: body, returnType: new Chat());
+  }
+
+  Future<List<ChatMember>> getChatAdministrators(chat_id) async {
+    String url = '${_baseUrl}${_token}/getChatAdministrators';
+    Map body = { 'chat_id': '${chat_id}' };
+    return _client.httpPost(url, body: body, returnType: new ChatMember(), isList: true);
+  }
+
+  Future<int> getChatMembersCount(chat_id) async {
+    String url = '${_baseUrl}${_token}/getChatMembersCount';
+    Map body = { 'chat_id': '${chat_id}' };
+    return _client.httpPost(url, body: body);
+  }
+
+  Future<ChatMember> getChatMember(chat_id, int user_id) async {
+    String url = '${_baseUrl}${_token}/getChatMember';
+    Map body = {
+      'chat_id': '${chat_id}',
+      'user_id': '${user_id}'
+    };
+    return _client.httpPost(url, body: body, returnType: new ChatMember());
+  }
+
+  Future<bool> setChatStickerSet(chat_id, String sticker_set_name) async {
+    String url = '${_baseUrl}${_token}/setChatStickerSet';
+    Map body = {
+      'chat_id': '${chat_id}',
+      'sticker_set_name': sticker_set_name,
+    };
+    return _client.httpPost(url, body: body);
+  }
+
+  Future<bool> deleteChatStickerSet(chat_id) async {
+    String url = '${_baseUrl}${_token}/deleteChatStickerSet';
+    Map body = { 'chat_id': '${chat_id}' };
+    return _client.httpPost(url, body: body);
+  }
 }

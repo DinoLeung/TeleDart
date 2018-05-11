@@ -10,13 +10,14 @@ class HttpClient {
   Future httpGet(String url, {Object returnType, bool isList}) async {
     return http.get(url)
         .then((response) {
-      if (response.statusCode == 200 || response.statusCode == 0)
-        return returnType != null ?
-            _dson.map(JSON.decode(response.body)['result'], returnType, isList) :
-            JSON.decode(response.body)['result'];
-      else
-        return new Future.error('HttpClient Error: ${response.statusCode} ${response.reasonPhrase}');
-    })
+          dynamic body = JSON.decode(response.body);
+          if (body['ok'])
+            return returnType != null ?
+                _dson.map(body['result'], returnType, isList) :
+                body['result'];
+          else
+            return new Future.error('HttpClient Error ${body['error_code']} ${body['description']}');
+        })
         .catchError((error) {
       return new Future.error(error);
     });
@@ -26,17 +27,18 @@ class HttpClient {
     return http.post(url,
         body: body)
         .then((response) {
-      if (response.statusCode == 200 || response.statusCode == 0) {
-        dynamic json = (jsonItem == null ?
-            JSON.decode(response.body)['result'] :
-            JSON.decode(response.body)['result'][jsonItem]);
-        return returnType != null ?
-            _dson.map(json, returnType, isList) :
-            json;
-      }
-      else
-        return new Future.error('HttpClient Error: ${response.statusCode} ${response.reasonPhrase}');
-    })
+          dynamic body = JSON.decode(response.body);
+          if (body['ok']) {
+            dynamic json = (jsonItem == null ?
+                body['result'] :
+                body['result'][jsonItem]);
+            return returnType != null ?
+                _dson.map(json, returnType, isList) :
+                json;
+          }
+          else
+            return new Future.error('HttpClient Error ${body['error_code']} ${body['description']}');
+        })
         .catchError((error) {
       return new Future.error(error);
     });
@@ -52,16 +54,17 @@ class HttpClient {
         .then((response) =>
             http.Response.fromStream(response))
         .then((response) {
-          if (response.statusCode == 200 || response.statusCode == 0) {
+          dynamic body = JSON.decode(response.body);
+          if (body['ok']) {
             dynamic json = (jsonItem == null ?
-                JSON.decode(response.body)['result'] :
-                JSON.decode(response.body)['result'][jsonItem]);
+                body['result'] :
+                body['result'][jsonItem]);
             return returnType != null ?
                 _dson.map(json, returnType, isList) :
                 json;
           }
           else
-            return new Future.error('HttpClient Error: ${response.statusCode} ${response.reasonPhrase}');
+            return new Future.error('HttpClient Error ${body['error_code']} ${body['description']}');
         })
         .catchError((error) {
           return new Future.error(error);
