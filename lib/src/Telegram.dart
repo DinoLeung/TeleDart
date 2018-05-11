@@ -737,4 +737,97 @@ class Telegram {
     Map body = { 'sticker': sticker };
     return _client.httpPost(requestUrl, body: body);
   }
+
+  Future<bool> answerInlineQuery(String inline_query_id, List<InlineQueryResult> results,
+      {int cache_time, bool is_personal, String next_offset, String switch_pm_text,
+        String switch_pm_parameter}) async {
+    String requestUrl = '${_baseUrl}${_token}/answerInlineQuery';
+    Map body = {
+      'inline_query_id': inline_query_id,
+      'results': _dson.encode(results),
+      'cache_time': (cache_time == null ? '' : '${cache_time}'),
+      'is_personal': (is_personal == null ? '' : '${is_personal}'),
+      'next_offset': (next_offset == null ? '' : next_offset),
+      'switch_pm_text': (switch_pm_text == null ? '' : switch_pm_text),
+      'switch_pm_parameter': (switch_pm_parameter == null ? '' : switch_pm_parameter)
+    };
+    return _client.httpPost(requestUrl, body: body);
+  }
+
+  Future<Message> sendInvoice(int chat_id, String title, String description,
+      String payload, String provider_token, String start_parameter,
+      String currency, List<LabeledPrice> prices,
+      {String provider_data, String photo_url, int photo_size, int photo_width,
+        int photo_height, bool need_name, bool need_phone_number, bool need_email,
+        bool need_shipping_address, bool send_phone_number_to_provider,
+        bool send_email_to_provider, bool is_flexible, bool disable_notification,
+        int reply_to_message_id, InlineKeyboardMarkup reply_markup}) async {
+    String requestUrl = '${_baseUrl}${_token}/sendInvoice';
+    Map body = {
+      'chat_id': '${chat_id}',
+      'title': title,
+      'description': description,
+      'payload': payload,
+      'provider_token': provider_token,
+      'start_parameter': start_parameter,
+      'currency': currency,
+      'prices': _dson.encode(prices),
+      'provider_data': (provider_data == null ? '' : provider_data),
+      'photo_url': (photo_url == null ? '' : photo_url),
+      'photo_size': (photo_size == null ? '' : '${photo_size}'),
+      'photo_width': (photo_width == null ? '' : '${photo_width}'),
+      'photo_height': (photo_height == null ? '' : '${photo_height}'),
+      'need_name': (need_name == null ? '' : '${need_name}'),
+      'need_phone_number': (need_phone_number == null
+          ? ''
+          : '${need_phone_number}'),
+      'need_email': (need_email == null ? '' : '${need_email}'),
+      'need_shipping_address': (need_shipping_address == null
+          ? ''
+          : '${need_shipping_address}'),
+      'send_phone_number_to_provider': (send_phone_number_to_provider == null
+          ? ''
+          : '${send_phone_number_to_provider}'),
+      'send_email_to_provider': (send_email_to_provider == null
+          ? ''
+          : '${send_email_to_provider}'),
+      'is_flexible': (is_flexible == null ? '' : '${is_flexible}'),
+      'disable_notification': (disable_notification == null
+          ? ''
+          : '${disable_notification}'),
+      'reply_to_message_id': (reply_to_message_id == null
+          ? ''
+          : '${reply_to_message_id}'),
+      'reply_markup': (reply_markup == null ? '' : _dson.encode(reply_markup))
+    };
+    return _client.httpPost(requestUrl, body: body, returnType: new Message());
+  }
+
+  Future<bool> answerShippingQuery(String shipping_query_id, bool ok,
+      {List<ShippingOption> shipping_options, String error_message}) async {
+    if(!ok && (shipping_options == null || error_message == null))
+      return new Future.error('Telegram Error: Attribute \'shipping_options\' and \'error_message\' can not be null when \'ok\' = false');
+    String requestUrl = '${_baseUrl}${_token}/answerShippingQuery';
+    Map body = {
+      'shipping_query_id': shipping_query_id,
+      'ok': '${ok}',
+      'shipping_options': (shipping_options == null ? '' : _dson.encode(shipping_options)),
+      'error_message': (error_message == null ? '' : error_message)
+    };
+    return _client.httpPost(requestUrl, body: body);
+  }
+
+  Future<bool> answerPreCheckoutQuery(String pre_checkout_query_id, bool ok,
+      {String error_message}) async {
+    if(!ok &&  error_message == null)
+      return new Future.error('Telegram Error: Attribute \'error_message\' can not be null when \'ok\' = false');
+    String requestUrl = '${_baseUrl}${_token}/answerShippingQuery';
+    Map body = {
+      'pre_checkout_query_id': pre_checkout_query_id,
+      'ok': '${ok}',
+      'error_message': (error_message == null ? '' : error_message)
+    };
+    return _client.httpPost(requestUrl, body: body);
+  }
+
 }
