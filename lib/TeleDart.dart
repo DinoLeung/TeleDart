@@ -3,6 +3,10 @@
 /// More dartdocs go here.
 library TeleDart;
 
-export 'src/TeleDart_base.dart';
+export 'package:TeleDart/src/TeleDart_base.dart';
+
+export 'package:TeleDart/src/TeleDart.dart';
+export 'package:TeleDart/src/Telegram/Telegram.dart';
+export 'package:TeleDart/src/Telegram/Model.dart';
 
 // TODO: Export any libraries intended for clients of this package.
