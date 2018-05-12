@@ -1,6 +1,6 @@
 import 'dart:async';
-import './Telegram.dart';
-import './Model.dart';
+import 'package:TeleDart/src/Telegram/Telegram.dart';
+import 'package:TeleDart/src/Telegram/Model.dart';
 
 class TeleDart{
   Telegram _tg;

@@ -1,5 +1,7 @@
 import 'package:dartson/dartson_static.dart';
 
+///https://core.telegram.org/bots/api#available-types
+
 @Entity()
 class Update {
   int update_id;
@@ -1030,7 +1032,7 @@ class Animation {
 class CallbackGame{}
 
 @Entity()
-class GameHeightScore {
+class GameHighScore {
   int position;
   User user;
   int score;
