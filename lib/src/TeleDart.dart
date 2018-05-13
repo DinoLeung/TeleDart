@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 import 'package:TeleDart/src/Telegram/Telegram.dart';
 import 'package:TeleDart/src/Telegram/Model.dart';
 
@@ -15,8 +16,7 @@ class TeleDart{
   void startPolling(
       {int offset = 0, int limit = 100, timeout = 30,
         List<String> allowed_updates}) {
-
-    if(!_webhook){
+    if(!_webhook)
       _tg.getUpdates(offset: offset, limit: limit,
           timeout: timeout, allowed_updates: allowed_updates)
           .then((updates) {
@@ -31,14 +31,16 @@ class TeleDart{
             startPolling(offset: offset, limit: limit,
                 timeout: timeout, allowed_updates: allowed_updates);
           })
+          // TODO: find out what exception is normal
           .catchError((error) {
-            print(error.toString());
+            if(error is HandshakeException)
+              startPolling(offset: offset, limit: limit,
+                  timeout: timeout, allowed_updates: allowed_updates);
+            else
+              print(error.toString());
           });
-    }
-    else {
+    else
       throw new Exception('TeleDart Error: Webhook is enabled.');
-    }
-
   }
 
 }
