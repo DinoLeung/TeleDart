@@ -1,7 +1,7 @@
 import 'dart:async';
+import 'dart:convert';
 import 'package:dartson/dartson.dart';
 import 'package:http/http.dart' as http;
-
 import 'package:TeleDart/src/Telegram/Model.dart';
 import 'package:TeleDart/src/Telegram/HttpClient.dart';
 
@@ -14,13 +14,15 @@ class Telegram {
   final _dson = new Dartson.JSON();
   final _client = new HttpClient();
 
-  /// https://core.telegram.org/bots/api#update
-  Future<List<Update>> getUpdates({int offset, int limit, int timeout}) async {
+  /// https://core.telegram.org/bots/api#getupdates
+  Future<List<Update>> getUpdates({int offset, int limit, int timeout,
+    List<String> allowed_updates}) async {
 
     String requestUrl = '${_baseUrl}${_token}/getUpdates?'
       + (offset == null ? '' : 'offset=${offset}&')
       + (limit == null ? '' : 'limit=${limit}&')
-      + (timeout == null ? '' : 'timeout=${timeout}');
+      + (timeout == null ? '' : 'timeout=${timeout}')
+      + (allowed_updates == null ? '' : JSON.encode(allowed_updates));
 
     return _client.httpGet(requestUrl, returnType: new Update(), isList: true);
   }
@@ -33,7 +35,7 @@ class Telegram {
     Map body = {
       'url': url,
       'max_connections': max_connections == null ? '' : '${max_connections}',
-      'allowed_updates': allowed_updates == null ? '' : '${allowed_updates}'
+      'allowed_updates': allowed_updates == null ? '' : JSON.encode(allowed_updates)
     };
     if(certificate.length > 0){
       http.MultipartFile file = new http.MultipartFile.fromBytes('certificate',
