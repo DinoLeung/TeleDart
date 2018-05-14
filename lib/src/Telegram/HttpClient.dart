@@ -20,7 +20,7 @@ class HttpClient {
                 _dson.map(body['result'], returnType, isList) :
                 body['result'];
           else
-            return new Future.error('HttpClient Error ${body['error_code']} ${body['description']}');
+            return new Future.error(new HttpClientException('${body['error_code']} ${body['description']}'));
         })
         .catchError((error) {
       return new Future.error(error);
@@ -46,7 +46,7 @@ class HttpClient {
                 json;
           }
           else
-            return new Future.error('HttpClient Error ${body['error_code']} ${body['description']}');
+            return new Future.error(new HttpClientException('${body['error_code']} ${body['description']}'));
         })
         .catchError((error) {
       return new Future.error(error);
@@ -80,11 +80,16 @@ class HttpClient {
                 json;
           }
           else
-            return new Future.error('HttpClient Error ${body['error_code']} ${body['description']}');
+            return new Future.error(new HttpClientException('${body['error_code']} ${body['description']}'));
         })
         .catchError((error) {
           return new Future.error(error);
         });
   }
 
+}
+
+class HttpClientException implements Exception {
+  String cause;
+  HttpClientException(this.cause);
 }

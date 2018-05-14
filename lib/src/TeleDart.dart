@@ -19,9 +19,9 @@ class TeleDart extends Events{
         List<String> allowed_updates}){
 
     if(_webhook)
-      throw new Exception('TeleDart Error: Webhook is enabled.');
+      throw new TeleDartException('Webhook is enabled.');
     if(timeout > MAX_TIMEOUT)
-      throw new Exception('TeleDart Error: Timeout may not greater than 60.');
+      throw new TeleDartException('Timeout may not greater than 60.');
 
     _tg.getUpdates(offset: offset, limit: limit,
         timeout: timeout, allowed_updates: allowed_updates)
@@ -47,8 +47,20 @@ class TeleDart extends Events{
 
   // TODO: add updates to event queue
   void updatesHandler(Update update){
+    print('${update.update_id}: ${update.message.text}');
     if(update.message != null){
-      this.emit('message', update.message);
+      // bot commands
+      if(update.message.text.startsWith('\/')){
+        // get the command flag
+        String flag = update.message.text.substring(1);
+        if(flag.contains(' '))
+          flag = flag.substring(0, flag.indexOf(' '));
+        if(flag.contains('\@'))
+          flag = flag.substring(0, flag.indexOf('\@'));
+        this.emit(flag, update.message);
+      }
+      else
+        this.emit('message', update.message);
     }
     else if(update.edited_messaged != null){
       this.emit('edited_messaged', update.edited_messaged);
@@ -69,4 +81,9 @@ class TeleDart extends Events{
       this.emit('callback_query', update.callback_query);
     }
   }
+}
+
+class TeleDartException implements Exception {
+  String cause;
+  TeleDartException(this.cause);
 }
