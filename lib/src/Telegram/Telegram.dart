@@ -941,4 +941,5 @@ class Telegram {
 class TelegramException implements Exception {
   String cause;
   TelegramException(this.cause);
+  String toString() => 'TelegramException: ${cause}';
 }

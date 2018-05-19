@@ -92,4 +92,6 @@ class HttpClient {
 class HttpClientException implements Exception {
   String cause;
   HttpClientException(this.cause);
+  String toString() => 'HttpClientException: ${cause}';
+
 }

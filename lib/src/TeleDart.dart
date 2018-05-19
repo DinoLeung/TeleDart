@@ -5,25 +5,28 @@ import 'package:TeleDart/src/Telegram/Telegram.dart';
 import 'package:TeleDart/src/Telegram/Model.dart';
 
 class TeleDart extends Events{
-  Telegram _tg;
+  Telegram telegram;
 
   bool _webhook = false;
-  final MAX_TIMEOUT = 60;
+  final MAX_TIMEOUT = 50;
 
-  TeleDart(String token) : super(){
-    _tg = new Telegram(token);
+  TeleDart(Telegram tg) : super(){
+    telegram = tg;
   }
 
-  void startPolling(
-      {int offset: 0, int limit: 100, timeout: 30,
-        List<String> allowed_updates}){
+  TeleDart.fromToken(String token) : super(){
+    telegram = new Telegram(token);
+  }
+
+  void startPolling({int offset: 0, int limit: 100, timeout: 30,
+      List<String> allowed_updates}){
 
     if(_webhook)
       throw new TeleDartException('Webhook is enabled.');
     if(timeout > MAX_TIMEOUT)
-      throw new TeleDartException('Timeout may not greater than 60.');
+      throw new TeleDartException('Timeout may not greater than ${MAX_TIMEOUT}.');
 
-    _tg.getUpdates(offset: offset, limit: limit,
+    telegram.getUpdates(offset: offset, limit: limit,
         timeout: timeout, allowed_updates: allowed_updates)
         .then((updates) {
           if(updates.length > 0){
@@ -37,11 +40,12 @@ class TeleDart extends Events{
         })
         // TODO: find out what exceptions can be ignored
         .catchError((error) {
+          print(error.toString());
           if(error is HandshakeException)
             startPolling(offset: offset, limit: limit,
                 timeout: timeout, allowed_updates: allowed_updates);
           else
-            throw new Exception(error.toString());
+            throw new TeleDartException(error.toString());
         });
   }
 
@@ -81,9 +85,11 @@ class TeleDart extends Events{
       this.emit('callback_query', update.callback_query);
     }
   }
+
 }
 
 class TeleDartException implements Exception {
   String cause;
   TeleDartException(this.cause);
+  String toString() => 'TeleDartException: ${cause}';
 }
