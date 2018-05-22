@@ -39,11 +39,10 @@ class Telegram {
       'allowed_updates': allowed_updates == null ? '' : JSON.encode(allowed_updates)
     };
     if(certificate.lengthSync() > 0){
+      // filename cannot be empty to post to Telegram server
       http.MultipartFile file = new http.MultipartFile('certificate',
           certificate.openRead(), certificate.lengthSync(),
           filename: '${certificate.lengthSync()}');
-//      http.MultipartFile file = new http.MultipartFile.fromBytes('certificate',
-//          certificate, filename: '${certificate.length}');
       return _client.httpMultipartPost(requestUrl, file, body: body);
     }
     else {
@@ -113,8 +112,6 @@ class Telegram {
 
     if(photo is io.File) {
       // filename cannot be empty to post to Telegram server
-//      http.MultipartFile file = new http.MultipartFile.fromBytes('photo', photo,
-//          filename: '${photo.length}');
       http.MultipartFile file = new http.MultipartFile('photo', photo.openRead(),
           photo.lengthSync(), filename: '${photo.lengthSync()}');
       return _client.httpMultipartPost(requestUrl, file, body: body, returnType: new Message());
@@ -148,8 +145,6 @@ class Telegram {
 
     if(audio is io.File) {
       // filename cannot be empty to post to Telegram server
-//      http.MultipartFile file = new http.MultipartFile.fromBytes('audio', audio,
-//          filename: '${audio.length}');
       http.MultipartFile file = new http.MultipartFile('audio', audio.openRead(),
           audio.lengthSync(), filename: '${audio.lengthSync()}');
       return _client.httpMultipartPost(requestUrl, file, body: body, returnType: new Message());
@@ -179,8 +174,6 @@ class Telegram {
 
     if(document is io.File) {
       // filename cannot be empty to post to Telegram server
-//      http.MultipartFile file = new http.MultipartFile.fromBytes('document', document,
-//          filename: '${document.length}');
       http.MultipartFile file = new http.MultipartFile('document', document.openRead(),
           document.lengthSync(), filename: '${document.lengthSync()}');
       return _client.httpMultipartPost(requestUrl, file, body: body, returnType: new Message());
@@ -215,8 +208,6 @@ class Telegram {
 
     if(video is io.File) {
       // filename cannot be empty to post to Telegram server
-//      http.MultipartFile file = new http.MultipartFile.fromBytes('video', video,
-//          filename: '${video.length}');
       http.MultipartFile file = new http.MultipartFile('video', video.openRead(),
           video.lengthSync(), filename: '${video.lengthSync()}');
       return _client.httpMultipartPost(requestUrl, file, body: body, returnType: new Message());
@@ -248,8 +239,6 @@ class Telegram {
 
     if(voice is io.File) {
       // filename cannot be empty to post to Telegram server
-//      http.MultipartFile file = new http.MultipartFile.fromBytes('voice', voice,
-//          filename: '${voice.length}');
       http.MultipartFile file = new http.MultipartFile('voice', voice.openRead(),
           voice.lengthSync(), filename: '${voice.lengthSync()}');
       return _client.httpMultipartPost(requestUrl, file, body: body, returnType: new Message());
@@ -279,8 +268,6 @@ class Telegram {
 
     if(video_note is io.File) {
       // filename cannot be empty to post to Telegram server
-//      http.MultipartFile file = new http.MultipartFile.fromBytes('video_note', video_note,
-//          filename: '${video_note.length}');
       http.MultipartFile file = new http.MultipartFile('video_note', video_note.openRead(),
           video_note.lengthSync(), filename: '${video_note.lengthSync()}');
       return _client.httpMultipartPost(requestUrl, file, body: body, returnType: new Message());
@@ -495,8 +482,7 @@ class Telegram {
   Future<bool> setChatPhoto(chat_id, io.File photo) async {
     String requestUrl = '${_baseUrl}${_token}/setChatPhoto';
     Map body = { 'chat_id': '${chat_id}' };
-//    http.MultipartFile file = new http.MultipartFile.fromBytes('photo', photo,
-//        filename: '${photo.length}');
+    // filename cannot be empty to post to Telegram server
     http.MultipartFile file = new http.MultipartFile('photo', photo.openRead(),
         photo.lengthSync(), filename: '${photo.lengthSync()}');
     return _client.httpMultipartPost(requestUrl, file, body: body);
@@ -707,8 +693,6 @@ class Telegram {
 
     if(sticker is io.File) {
       // filename cannot be empty to post to Telegram server
-//      http.MultipartFile file = new http.MultipartFile.fromBytes('sticker', sticker,
-//          filename: '${sticker.length}');
       http.MultipartFile file = new http.MultipartFile('sticker', sticker.openRead(),
           sticker.lengthSync(), filename: '${sticker.lengthSync()}');
       return _client.httpMultipartPost(requestUrl, file, body: body, returnType: new Message());
@@ -733,8 +717,7 @@ class Telegram {
   Future<File> uploadStickerFile(int user_id, io.File png_sticker) async {
     String requestUrl = '${_baseUrl}${_token}/uploadStickerFile';
     Map body = { 'user_id': '${user_id}' };
-//    http.MultipartFile file = new http.MultipartFile.fromBytes('png_sticker', png_sticker,
-//        filename: '${png_sticker.length}');
+    // filename cannot be empty to post to Telegram server
     http.MultipartFile file = new http.MultipartFile('png_sticker', png_sticker.openRead(),
         png_sticker.lengthSync(), filename: '${png_sticker.lengthSync()}');
     return _client.httpMultipartPost(requestUrl, file, body: body, returnType: new File());
@@ -757,8 +740,6 @@ class Telegram {
 
     if(png_sticker is io.File) {
       // filename cannot be empty to post to Telegram server
-//      http.MultipartFile file = new http.MultipartFile.fromBytes('png_sticker', png_sticker,
-//          filename: '${png_sticker.length}');
       http.MultipartFile file = new http.MultipartFile('png_sticker', png_sticker.openRead(),
           png_sticker.lengthSync(), filename: '${png_sticker.lengthSync()}');
       return _client.httpMultipartPost(requestUrl, file, body: body);
@@ -786,8 +767,6 @@ class Telegram {
 
     if(png_sticker is io.File) {
       // filename cannot be empty to post to Telegram server
-//      http.MultipartFile file = new http.MultipartFile.fromBytes('png_sticker', png_sticker,
-//          filename: '${png_sticker.length}');
       http.MultipartFile file = new http.MultipartFile('png_sticker', png_sticker.openRead(),
           png_sticker.lengthSync(), filename: '${png_sticker.lengthSync()}');
       return _client.httpMultipartPost(requestUrl, file, body: body);

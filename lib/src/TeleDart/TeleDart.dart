@@ -69,12 +69,6 @@ class TeleDart extends Event{
   // add updates to events queue
   void updatesHandler(Update update){
     if(update.message != null){
-      // bot commands
-//      if(update.message.entityOf('bot_command') != null){
-//        this.emitCommand(update.message);
-//        print('done emitting');
-//      }
-//      else
       this.emitMessage(update.message);
     }
     else if(update.edited_message != null){

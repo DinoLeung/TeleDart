@@ -1,29 +1,9 @@
 import 'package:TeleDart/src/Telegram/Model.dart';
 
-//class CommandEvent {
-//  String flag;
-//  Message message;
-//  CommandEvent(this.flag, this.message);
-//}
-
 class MessageEvent {
   final Message message;
   MessageEvent(this.message);
 }
-
-//class EditedMessageEvent {
-//  Message message;
-//  EditedMessageEvent(this.message);
-//}
-//
-//class ChannelPostEvent {
-//  Message message;
-//  ChannelPostEvent(this.message);
-//}
-//class EditedChannelPostEvent {
-//  Message message;
-//  EditedChannelPostEvent(this.message);
-//}
 
 class InlineQueryEvent {
   InlineQuery inline_query;

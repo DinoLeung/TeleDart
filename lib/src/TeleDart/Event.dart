@@ -7,7 +7,6 @@ class Event {
 
   User me;
 
-//  StreamController _commandStreamController;
   StreamController _messageStreamController;
   StreamController _editedMessageStreamController;
   StreamController _channelPostStreamController;
@@ -19,7 +18,6 @@ class Event {
   StreamController _preCheckoutQueryStreamController;
 
   Event({bool sync: false}) {
-//    _commandStreamController = new StreamController.broadcast(sync: sync);
     _messageStreamController = new StreamController.broadcast(sync: sync);
     _editedMessageStreamController = new StreamController.broadcast(sync: sync);
     _channelPostStreamController = new StreamController.broadcast(sync: sync);
@@ -30,20 +28,6 @@ class Event {
     _shippingQueryStreamController = new StreamController.broadcast(sync: sync);
     _preCheckoutQueryStreamController = new StreamController.broadcast(sync: sync);
   }
-
-  // Commands events
-//  Stream<MessageEvent> onCommand([String flag]) {
-//    if (flag == null)
-//      return _commandStreamController.stream;
-//    else {
-//      return _commandStreamController.stream.where((MessageEvent event) =>
-//      event.message.getEntity('bot_command') == '\/${flag}'
-//          || event.message.getEntity('bot_command') == '\/${flag}\@${me.username}');
-//    }
-//  }
-//  void emitCommand(Message msg) {
-//    _commandStreamController.add(new MessageEvent(msg));
-//  }
 
   // Message events
   Stream<MessageEvent> onMessage({String entityType, String keyword}) {
