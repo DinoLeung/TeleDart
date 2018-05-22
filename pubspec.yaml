@@ -10,7 +10,6 @@ environment:
 dependencies:
   dartson: ">=0.2.0 <0.3.0"
   http: "^0.11.3+16"
-  events: "^0.1.2+1"
 #  path: ^1.4.1
 
 transformers:
