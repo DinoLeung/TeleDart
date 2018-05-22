@@ -7,7 +7,7 @@ class Event {
 
   User me;
 
-  StreamController _commandStreamController;
+//  StreamController _commandStreamController;
   StreamController _messageStreamController;
   StreamController _editedMessageStreamController;
   StreamController _channelPostStreamController;
@@ -19,7 +19,7 @@ class Event {
   StreamController _preCheckoutQueryStreamController;
 
   Event({bool sync: false}) {
-    _commandStreamController = new StreamController.broadcast(sync: sync);
+//    _commandStreamController = new StreamController.broadcast(sync: sync);
     _messageStreamController = new StreamController.broadcast(sync: sync);
     _editedMessageStreamController = new StreamController.broadcast(sync: sync);
     _channelPostStreamController = new StreamController.broadcast(sync: sync);
@@ -32,26 +32,82 @@ class Event {
   }
 
   // Commands events
-  Stream<MessageEvent> onCommand([String flag]) {
-    if (flag == null)
-      return _commandStreamController.stream;
-    else {
-      return _commandStreamController.stream.where((MessageEvent event) =>
-      event.message.getEntity('bot_command') == '\/${flag}'
-          || event.message.getEntity('bot_command') == '\/${flag}\@${me.username}');
-    }
-  }
-  void emitCommand(Message msg) {
-    _commandStreamController.add(new MessageEvent(msg));
-  }
+//  Stream<MessageEvent> onCommand([String flag]) {
+//    if (flag == null)
+//      return _commandStreamController.stream;
+//    else {
+//      return _commandStreamController.stream.where((MessageEvent event) =>
+//      event.message.getEntity('bot_command') == '\/${flag}'
+//          || event.message.getEntity('bot_command') == '\/${flag}\@${me.username}');
+//    }
+//  }
+//  void emitCommand(Message msg) {
+//    _commandStreamController.add(new MessageEvent(msg));
+//  }
 
   // Message events
-  Stream<MessageEvent> onMessage([String text]) {
-    if(text == null)
+  Stream<MessageEvent> onMessage({String entityType, String keyword}) {
+    if(entityType == null && keyword == null)
       return _messageStreamController.stream;
-    else
-      return _messageStreamController.stream.where((MessageEvent event) =>
-        event.message.text.contains(text));
+    else {
+      if(entityType != null && keyword != null){
+        /**
+         * entities and caption_entities
+         * Type of the entity.
+         * Can be mention (@username), hashtag, bot_command, url, email,
+         * bold (bold text), italic (italic text), code (monowidth string),
+         * pre (monowidth block), text_link (for clickable text URLs),
+         * text_mention (for users without usernames)
+         * normal message has NO entity
+         */
+        return _messageStreamController.stream.where((MessageEvent event) {
+          switch (entityType){
+            case 'mention':
+              return event.message.getEntity(entityType) == '\@${keyword}';
+              break;
+            case 'hashtag':
+              return event.message.getEntity(entityType) == '\#${keyword}';
+              break;
+            case 'bot_command':
+              return event.message.getEntity(entityType) == '\/${keyword}'
+                  || event.message.getEntity(entityType) == '\/${keyword}\@${me.username}';
+              break;
+            case 'url' :
+            case 'email':
+            case 'bold':
+            case 'italic':
+            case 'code':
+            case 'pre':
+            return event.message.getEntity(entityType) == '${keyword}';
+              break;
+            case 'text_link':
+              return event.message.entityOf(entityType).url == '${keyword}';
+              break;
+            case 'text_mention':
+              return event.message.entityOf(entityType).user.id as String == keyword
+                  || event.message.entityOf(entityType).user.first_name == keyword;
+              break;
+            default: //entityType not exist
+              throw new TeleDartEventException('Entity Type ${entityType} not exist');
+              break;
+          }
+        });
+      }
+      else {
+        if(entityType != null)
+          return _messageStreamController.stream.where((MessageEvent event) =>
+          event.message.entityOf(entityType) != null);
+        else // normal message
+          return _messageStreamController.stream.where((MessageEvent event) {
+            if(event.message.text != null)
+              return event.message.text.contains(keyword);
+            else if(event.message.caption != null)
+              return event.message.caption.contains(keyword);
+            else
+              return false;
+        });
+      }
+    }
   }
   void emitMessage(Message msg) {
     _messageStreamController.add(new MessageEvent(msg));
@@ -120,5 +176,11 @@ class Event {
   void emitPreCheckoutQuery(PreCheckoutQuery pre_checkout_query) {
     _preCheckoutQueryStreamController.add(new PreCheckoutQueryEvent(pre_checkout_query));
   }
+}
+
+class TeleDartEventException {
+  String cause;
+  TeleDartEventException(this.cause);
+  String toString() => 'TeleDartEventException: ${cause}';
 }
 

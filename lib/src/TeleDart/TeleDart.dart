@@ -19,11 +19,12 @@ class TeleDart extends Event{
     await telegram.getMe()
         .then((user) => super.me = user)
         .then((_) => print('${me.username} is initialised'))
-        .catchError((cause) =>
-          throw new TeleDartException(cause.toString()));
+        .catchError((exception) =>
+          throw new TeleDartException(exception.toString()));
   }
 
   Future getUpdates() async{
+    // initialise bot info before getting updates
     _initBotInfo().then((_) {
       if(_webhook){
         // TODO: get updates with webhook
@@ -54,8 +55,8 @@ class TeleDart extends Event{
           startPolling(offset: offset, limit: limit,
               timeout: timeout, allowed_updates: allowed_updates);
         })
-        // TODO: find out what exceptions can be ignored
         .catchError((error) {
+          // TODO: find out what exceptions can be ignored
           print(error.toString());
           if(error is HandshakeException)
             startPolling(offset: offset, limit: limit,
@@ -65,27 +66,16 @@ class TeleDart extends Event{
         });
   }
 
-  // TODO: add updates to event queue
+  // add updates to events queue
   void updatesHandler(Update update){
-    /**
-     * entities and caption_entities
-     * Type of the entity.
-     * Can be mention (@username), hashtag, bot_command, url, email,
-     * bold (bold text), italic (italic text), code (monowidth string),
-     * pre (monowidth block), text_link (for clickable text URLs),
-     * text_mention (for users without usernames)
-     * normal message has NO entity
-     */
-
-    print('${update.update_id}: ${update.message.text}');
     if(update.message != null){
       // bot commands
-      if(update.message.entityOf('bot_command') != null){
-        this.emitCommand(update.message);
-        print('done emitting');
-      }
-      else
-        this.emitMessage(update.message);
+//      if(update.message.entityOf('bot_command') != null){
+//        this.emitCommand(update.message);
+//        print('done emitting');
+//      }
+//      else
+      this.emitMessage(update.message);
     }
     else if(update.edited_message != null){
       this.emitEditedMessage(update.edited_message);
