@@ -1,6 +1,7 @@
 import 'dart:async';
-import 'dart:io';
-import 'package:TeleDart/src/TeleDart/Event.dart';
+
+import 'package:TeleDart/src/TeleDart/Event/Event.dart';
+import 'package:TeleDart/src/TeleDart/WebAccess/LongPolling.dart';
 import 'package:TeleDart/src/Telegram/Telegram.dart';
 import 'package:TeleDart/src/Telegram/Model.dart';
 
@@ -30,40 +31,13 @@ class TeleDart extends Event{
         // TODO: get updates with webhook
       }
       else {
-        startPolling();
+        LongPolling lp = new LongPolling(telegram);
+        lp.startPolling();
+        lp.onUpdate().listen((update) => updatesHandler(update));
       }
-    });
-  }
-
-  void startPolling({int offset: 0, int limit: 100, timeout: 30,
-      List<String> allowed_updates}) {
-
-    if(_webhook)
-      throw new TeleDartException('Webhook is enabled.');
-    if(timeout > MAX_TIMEOUT)
-      throw new TeleDartException('Timeout may not greater than ${MAX_TIMEOUT}.');
-
-    telegram.getUpdates(offset: offset, limit: limit,
-        timeout: timeout, allowed_updates: allowed_updates)
-        .then((updates) {
-          if(updates.length > 0){
-            for (Update update in updates) {
-              updatesHandler(update);
-              offset = update.update_id + 1;
-            }
-          }
-          startPolling(offset: offset, limit: limit,
-              timeout: timeout, allowed_updates: allowed_updates);
-        })
-        .catchError((error) {
-          // TODO: find out what exceptions can be ignored
-          print(error.toString());
-          if(error is HandshakeException)
-            startPolling(offset: offset, limit: limit,
-                timeout: timeout, allowed_updates: allowed_updates);
-          else
-            throw new TeleDartException(error.toString());
-        });
+    })
+    .catchError(((exception) =>
+      throw new TeleDartException(exception.toString())));
   }
 
   // add updates to events queue

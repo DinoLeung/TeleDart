@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:TeleDart/src/TeleDart/EventObject.dart';
+import 'package:TeleDart/src/TeleDart/Event/EventObject.dart';
 import 'package:TeleDart/src/Telegram/Model.dart';
 
 class Event {
@@ -31,10 +31,25 @@ class Event {
 
   // Message events
   Stream<MessageEvent> onMessage({String entityType, String keyword}) {
-    if(entityType == null && keyword == null)
-      return _messageStreamController.stream;
-    else {
-      if(entityType != null && keyword != null){
+    if(entityType == null) {
+      if (keyword == null) // no entityType and keyword
+        return _messageStreamController.stream;
+      else { // no entityType but keyword
+        return _messageStreamController.stream.where((MessageEvent event) {
+          if (event.message.text != null)
+            return event.message.text.contains(keyword);
+          else if (event.message.caption != null)
+            return event.message.caption.contains(keyword);
+          else
+            return false;
+        });
+      }
+    }
+    else { // with entityType but no keyword
+      if (keyword == null)
+        return _messageStreamController.stream.where((MessageEvent event) =>
+          event.message.entityOf(entityType) != null);
+      else { // with entityType and keyword
         /**
          * entities and caption_entities
          * Type of the entity.
@@ -62,7 +77,7 @@ class Event {
             case 'italic':
             case 'code':
             case 'pre':
-            return event.message.getEntity(entityType) == '${keyword}';
+              return event.message.getEntity(entityType) == '${keyword}';
               break;
             case 'text_link':
               return event.message.entityOf(entityType).url == '${keyword}';
@@ -77,20 +92,6 @@ class Event {
           }
         });
       }
-      else {
-        if(entityType != null)
-          return _messageStreamController.stream.where((MessageEvent event) =>
-          event.message.entityOf(entityType) != null);
-        else // normal message
-          return _messageStreamController.stream.where((MessageEvent event) {
-            if(event.message.text != null)
-              return event.message.text.contains(keyword);
-            else if(event.message.caption != null)
-              return event.message.caption.contains(keyword);
-            else
-              return false;
-        });
-      }
     }
   }
   void emitMessage(Message msg) {
@@ -98,7 +99,7 @@ class Event {
   }
 
   // Edited Messaged events
-  Stream<MessageEvent> onEditedMessage() {
+  Stream<MessageEvent> onEditedMessage(Function callback) {
     return _editedMessageStreamController.stream;
   }
   void emitEditedMessage(Message msg) {
@@ -162,7 +163,7 @@ class Event {
   }
 }
 
-class TeleDartEventException {
+class TeleDartEventException implements Exception{
   String cause;
   TeleDartEventException(this.cause);
   String toString() => 'TeleDartEventException: ${cause}';
