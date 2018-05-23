@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:TeleDart/src/TeleDart/Event/EventObject.dart';
 import 'package:TeleDart/src/Telegram/Model.dart';
 
 class Event {
@@ -30,16 +29,16 @@ class Event {
   }
 
   // Message events
-  Stream<MessageEvent> onMessage({String entityType, String keyword}) {
+  Stream<Message> onMessage({String entityType, String keyword}) {
     if(entityType == null) {
       if (keyword == null) // no entityType and keyword
         return _messageStreamController.stream;
       else { // no entityType but keyword
-        return _messageStreamController.stream.where((MessageEvent event) {
-          if (event.message.text != null)
-            return event.message.text.contains(keyword);
-          else if (event.message.caption != null)
-            return event.message.caption.contains(keyword);
+        return _messageStreamController.stream.where((Message message) {
+          if (message.text != null)
+            return message.text.contains(keyword);
+          else if (message.caption != null)
+            return message.caption.contains(keyword);
           else
             return false;
         });
@@ -47,8 +46,8 @@ class Event {
     }
     else { // with entityType but no keyword
       if (keyword == null)
-        return _messageStreamController.stream.where((MessageEvent event) =>
-          event.message.entityOf(entityType) != null);
+        return _messageStreamController.stream.where((Message message) =>
+          message.entityOf(entityType) != null);
       else { // with entityType and keyword
         /**
          * entities and caption_entities
@@ -59,17 +58,17 @@ class Event {
          * text_mention (for users without usernames)
          * normal message has NO entity
          */
-        return _messageStreamController.stream.where((MessageEvent event) {
+        return _messageStreamController.stream.where((Message message) {
           switch (entityType){
             case 'mention':
-              return event.message.getEntity(entityType) == '\@${keyword}';
+              return message.getEntity(entityType) == '\@${keyword}';
               break;
             case 'hashtag':
-              return event.message.getEntity(entityType) == '\#${keyword}';
+              return message.getEntity(entityType) == '\#${keyword}';
               break;
             case 'bot_command':
-              return event.message.getEntity(entityType) == '\/${keyword}'
-                  || event.message.getEntity(entityType) == '\/${keyword}\@${me.username}';
+              return message.getEntity(entityType) == '\/${keyword}'
+                  || message.getEntity(entityType) == '\/${keyword}\@${me.username}';
               break;
             case 'url' :
             case 'email':
@@ -77,17 +76,17 @@ class Event {
             case 'italic':
             case 'code':
             case 'pre':
-              return event.message.getEntity(entityType) == '${keyword}';
+              return message.getEntity(entityType) == '${keyword}';
               break;
             case 'text_link':
-              return event.message.entityOf(entityType).url == '${keyword}';
+              return message.entityOf(entityType).url == '${keyword}';
               break;
             case 'text_mention':
-              return event.message.entityOf(entityType).user.id as String == keyword
-                  || event.message.entityOf(entityType).user.first_name == keyword;
+              return message.entityOf(entityType).user.id as String == keyword
+                  || message.entityOf(entityType).user.first_name == keyword;
               break;
             default: //entityType not exist
-              throw new TeleDartEventException('Entity Type ${entityType} not exist');
+              throw new TeleDartEventException('Update Type ${entityType} not exist');
               break;
           }
         });
@@ -95,71 +94,71 @@ class Event {
     }
   }
   void emitMessage(Message msg) {
-    _messageStreamController.add(new MessageEvent(msg));
+    _messageStreamController.add(msg);
   }
 
   // Edited Messaged events
-  Stream<MessageEvent> onEditedMessage(Function callback) {
+  Stream<Message> onEditedMessage() {
     return _editedMessageStreamController.stream;
   }
   void emitEditedMessage(Message msg) {
-    _editedMessageStreamController.add(new MessageEvent(msg));
+    _editedMessageStreamController.add(msg);
   }
 
   // Channel Post events
-  Stream<MessageEvent> onChannelPost() {
+  Stream<Message> onChannelPost() {
     return _channelPostStreamController.stream;
   }
   void emitChannelPost(Message msg) {
-    _channelPostStreamController.add(new MessageEvent(msg));
+    _channelPostStreamController.add(msg);
   }
 
   // Edited Channel Post events
-  Stream<MessageEvent> onEditedChannelPost() {
+  Stream<Message> onEditedChannelPost() {
     return _editedChannelPostStreamController.stream;
   }
   void emitEditedChannelPost(Message msg) {
-    _editedChannelPostStreamController.add(new MessageEvent(msg));
+    _editedChannelPostStreamController.add(msg);
   }
 
   // Inline Query events
-  Stream<InlineQueryEvent> onInlineQuery() {
+  Stream<InlineQuery> onInlineQuery() {
     return _inlineQueryStreamController.stream;
   }
   void emitInlineQuery(InlineQuery inline_query) {
-    _inlineQueryStreamController.add(new InlineQueryEvent(inline_query));
+    _inlineQueryStreamController.add(inline_query);
   }
 
   // Chosen Inline Query events
-  Stream<ChosenInlineQueryEvent> onChosenInlineQuery() {
+  Stream<ChosenInlineResult> onChosenInlineQuery() {
     return _chosenInlineQueryStreamController.stream;
   }
   void emitChosenInlineQuery(ChosenInlineResult chosen_inline_result) {
-    _chosenInlineQueryStreamController.add(new ChosenInlineQueryEvent(chosen_inline_result));
+    _chosenInlineQueryStreamController.add(chosen_inline_result);
   }
 
   // Callback Query events
-  Stream<CallbackQueryEvent> onCallbackQuery() {
+  Stream<CallbackQuery> onCallbackQuery() {
     return _callbackQueryStreamController.stream;
   }
   void emitCallbackQuery(CallbackQuery callback_query) {
-    _callbackQueryStreamController.add(new CallbackQueryEvent(callback_query));
+    _callbackQueryStreamController.add(callback_query);
   }
 
   // Shipping Query events
-  Stream<ShippingQueryEvent> onShippingQuery() {
+  Stream<ShippingQuery> onShippingQuery() {
     return _shippingQueryStreamController.stream;
   }
   void emitShippingQuery(ShippingQuery shipping_query) {
-    _shippingQueryStreamController.add(new ShippingQueryEvent(shipping_query));
+    _shippingQueryStreamController.add(shipping_query);
   }
 
   // Pre Checkout Query events
-  Stream<PreCheckoutQueryEvent> onPreCheckoutQuery() {
+  Stream<PreCheckoutQuery> onPreCheckoutQuery() {
     return _preCheckoutQueryStreamController.stream;
   }
   void emitPreCheckoutQuery(PreCheckoutQuery pre_checkout_query) {
-    _preCheckoutQueryStreamController.add(new PreCheckoutQueryEvent(pre_checkout_query));
+    _preCheckoutQueryStreamController.add(pre_checkout_query);
   }
 }
 

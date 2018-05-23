@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'dart:io';
+import 'dart:io' as io;
 
 import 'package:TeleDart/src/Telegram/Telegram.dart';
 import 'package:TeleDart/src/Telegram/Model.dart';
@@ -17,12 +17,20 @@ class LongPolling {
   int timeout;
   List<String> allowed_updates;
 
+  bool _isPolling = false;
+  bool get isPolling => _isPolling;
+
   StreamController _updateStreamController;
 
   LongPolling(this.telegram,
       {this.offset: 0, this.limit: 100, this.timeout: 30,
         this.allowed_updates}) {
     _updateStreamController = new StreamController();
+  }
+
+  void stopPolling() {
+    if (_isPolling)
+      _isPolling = false;
   }
 
   void startPolling() {
@@ -32,28 +40,37 @@ class LongPolling {
     if(timeout > MAX_TIMEOUT)
       throw new LongPollingException('Timeout may not greater than ${MAX_TIMEOUT}.');
 
-    telegram.getUpdates(offset: offset, limit: limit,
-        timeout: timeout, allowed_updates: allowed_updates)
-      .then((updates) {
+    if (!_isPolling){
+      _isPolling = true;
+      _recursivePolling();
+    }
+    else
+      throw new LongPollingException('A long poll is aleady inplace');
+  }
+
+  void _recursivePolling() {
+    if (_isPolling)
+      telegram.getUpdates(offset: offset, limit: limit,
+          timeout: timeout, allowed_updates: allowed_updates)
+          .then((updates) {
         if(updates.length > 0){
           for (Update update in updates) {
             _updateStreamController.add(update);
             offset = update.update_id + 1;
           }
         }
-        startPolling();
+        _recursivePolling();
       })
-      .catchError((error) {
+          .catchError((error) {
         // TODO: find out what exceptions can be ignored
-        print(error.toString());
-        if(error is HandshakeException)
-          startPolling();
+//        print(error.toString());
+        if(error is io.HandshakeException)
+          _recursivePolling();
         else
           throw new LongPollingException(error.toString());
       });
   }
 
-  // Edited Messaged events
   Stream<Update> onUpdate() {
     return _updateStreamController.stream;
   }

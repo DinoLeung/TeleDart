@@ -20,11 +20,10 @@ class HttpClient {
                 _dson.map(body['result'], returnType, isList) :
                 body['result'];
           else
-            return new Future.error(new HttpClientException('${body['error_code']} ${body['description']}'));
+            return new Future.error(
+                new HttpClientException('${body['error_code']} ${body['description']}'));
         })
-        .catchError((error) {
-      return new Future.error(error);
-    });
+        .catchError((error) => new Future.error(error));
   }
   /// HTTP post method (x-www-form-urlencoded)
   /// [url] - request url (required)
@@ -33,24 +32,22 @@ class HttpClient {
   /// [isList] - true if return list of nominated object
   /// [jsonItem] - specific json child other then `result`
   Future httpPost(String url, {Map body, Object returnType, bool isList, String jsonItem}) async {
-    return http.post(url,
-        body: body)
-        .then((response) {
-          dynamic body = JSON.decode(response.body);
-          if (body['ok']) {
-            dynamic json = (jsonItem == null ?
-                body['result'] :
-                body['result'][jsonItem]);
-            return returnType != null ?
-                _dson.map(json, returnType, isList) :
-                json;
-          }
-          else
-            return new Future.error(new HttpClientException('${body['error_code']} ${body['description']}'));
-        })
-        .catchError((error) {
-      return new Future.error(error);
-    });
+    return http.post(url, body: body)
+      .then((response) {
+        dynamic body = JSON.decode(response.body);
+        if (body['ok']) {
+          dynamic json = (jsonItem == null ?
+              body['result'] :
+              body['result'][jsonItem]);
+          return returnType != null ?
+              _dson.map(json, returnType, isList) :
+              json;
+        }
+        else
+          return new Future.error(
+              new HttpClientException('${body['error_code']} ${body['description']}'));
+      })
+      .catchError((error) => new Future.error(error));
   }
 
   /// HTTP post method (multipart/form-data)
@@ -67,24 +64,23 @@ class HttpClient {
       ..fields.addAll(body)
       ..files.add(file);
     return request.send()
-        .then((response) =>
-            http.Response.fromStream(response))
-        .then((response) {
-          dynamic body = JSON.decode(response.body);
-          if (body['ok']) {
-            dynamic json = (jsonItem == null ?
-                body['result'] :
-                body['result'][jsonItem]);
-            return returnType != null ?
-                _dson.map(json, returnType, isList) :
-                json;
-          }
-          else
-            return new Future.error(new HttpClientException('${body['error_code']} ${body['description']}'));
-        })
-        .catchError((error) {
-          return new Future.error(error);
-        });
+      .then((response) =>
+          http.Response.fromStream(response))
+      .then((response) {
+        dynamic body = JSON.decode(response.body);
+        if (body['ok']) {
+          dynamic json = (jsonItem == null ?
+              body['result'] :
+              body['result'][jsonItem]);
+          return returnType != null ?
+              _dson.map(json, returnType, isList) :
+              json;
+        }
+        else
+          return new Future.error(
+              new HttpClientException('${body['error_code']} ${body['description']}'));
+      })
+      .catchError((error) => new Future.error(error));
   }
 
 }
