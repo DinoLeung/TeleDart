@@ -2,8 +2,8 @@ import 'dart:async';
 import 'dart:io' as io;
 
 import 'package:TeleDart/src/TeleDart/Event/Event.dart';
-import 'package:TeleDart/src/TeleDart/UpdateMethod/LongPolling.dart';
-import 'package:TeleDart/src/TeleDart/UpdateMethod/Webhook.dart';
+import 'package:TeleDart/src/TeleDart/Fetch/LongPolling.dart';
+import 'package:TeleDart/src/TeleDart/Fetch/Webhook.dart';
 import 'package:TeleDart/src/Telegram/Telegram.dart';
 import 'package:TeleDart/src/Telegram/Model.dart';
 
@@ -27,34 +27,54 @@ class TeleDart extends Event{
           throw new TeleDartException(exception.toString()));
   }
 
-  Future getUpdates(bool useWebhook,
-      {String url, io.File certificate, int max_connections: 40,
-        int offset: 0, int limit: 100, int timeout: 30,
-        List<String> allowed_updates}) async{
+  Future getUpdates({bool webhook: false}) async{
     // initialise bot info before getting updates
     _initBotInfo().then((_) {
-      if(useWebhook){
-        // TODO: get updates with webhook
-        _webhook = new Webhook(telegram, url)
-            ..certificate = certificate
-            ..max_connections = max_connections
-            ..allowed_updates = allowed_updates;
-        _webhook.setWebhook().catchError((error) =>
-            throw new TeleDartException(error.toString()));
-        _webhook.startWebhook();
+      if(webhook){
+        if(_webhook == null)
+          throw new TeleDartException('Webhook has not been set up yet');
+        else {
+          _webhook.startWebhook();
+          _webhook.onUpdate().listen((update) => updatesHandler(update));
+        }
       }
       else {
-        _longPolling = new LongPolling(telegram)
-            ..offset = offset
-            ..limit = limit
-            ..timeout = timeout
-            ..allowed_updates = allowed_updates;
+        _longPolling ??= new LongPolling(telegram);
         _longPolling.startPolling();
         _longPolling.onUpdate().listen((update) => updatesHandler(update));
       }
     })
     .catchError(((exception) =>
       throw new TeleDartException(exception.toString())));
+  }
+
+  void setupLongPolling({int offset: 0, int limit: 100, int timeout: 30,
+    List<String> allowed_updates}) {
+    _longPolling = new LongPolling(telegram)
+        ..offset = offset
+        ..limit = limit
+        ..timeout = timeout
+        ..allowed_updates = allowed_updates;
+  }
+
+  Future setupWebhook(String url, String secretPath,
+      {int port: 443, io.File privateKey, io.File certificate, int max_connections: 40,
+        List<String> allowed_updates}) async {
+
+    _webhook = new Webhook(telegram, url, secretPath)
+        ..port = port
+        ..privateKey = privateKey
+        ..certificate = certificate
+        ..max_connections = max_connections
+        ..allowed_updates = allowed_updates;
+
+    return _webhook.setWebhook();
+  }
+
+  void removeWebhook() {
+    if(_webhook != null)
+      _webhook.deleteWebhook()
+          .then((_) => _webhook = null);
   }
 
   // add updates to events queue
