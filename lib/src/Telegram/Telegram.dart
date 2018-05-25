@@ -38,7 +38,7 @@ class Telegram {
       'max_connections': max_connections == null ? '' : '${max_connections}',
       'allowed_updates': allowed_updates == null ? '' : JSON.encode(allowed_updates)
     };
-    if(certificate.lengthSync() > 0){
+    if(certificate != null){
       // filename cannot be empty to post to Telegram server
       http.MultipartFile file = new http.MultipartFile('certificate',
           certificate.openRead(), certificate.lengthSync(),

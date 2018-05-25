@@ -1,13 +1,17 @@
 import 'dart:async';
-import 'dart:io';
-import 'package:TeleDart/src/TeleDart/Event.dart';
+import 'dart:io' as io;
+
+import 'package:TeleDart/src/TeleDart/Event/Event.dart';
+import 'package:TeleDart/src/TeleDart/Fetch/LongPolling.dart';
+import 'package:TeleDart/src/TeleDart/Fetch/Webhook.dart';
 import 'package:TeleDart/src/Telegram/Telegram.dart';
 import 'package:TeleDart/src/Telegram/Model.dart';
 
 class TeleDart extends Event{
   Telegram telegram;
 
-  bool _webhook = false;
+  LongPolling _longPolling;
+  Webhook _webhook;
 
   final MAX_TIMEOUT = 50;
 
@@ -23,75 +27,78 @@ class TeleDart extends Event{
           throw new TeleDartException(exception.toString()));
   }
 
-  Future getUpdates() async{
+  Future getUpdates({bool webhook: false}) async{
     // initialise bot info before getting updates
     _initBotInfo().then((_) {
-      if(_webhook){
-        // TODO: get updates with webhook
+      if(webhook){
+        if(_webhook == null)
+          throw new TeleDartException('Webhook has not been set up yet');
+        else {
+          _webhook.startWebhook();
+          _webhook.onUpdate().listen((update) => updatesHandler(update));
+        }
       }
       else {
-        startPolling();
+        _longPolling ??= new LongPolling(telegram);
+        _longPolling.startPolling();
+        _longPolling.onUpdate().listen((update) => updatesHandler(update));
       }
-    });
+    })
+    .catchError(((exception) =>
+      throw new TeleDartException(exception.toString())));
   }
 
-  void startPolling({int offset: 0, int limit: 100, timeout: 30,
-      List<String> allowed_updates}) {
+  void setupLongPolling({int offset: 0, int limit: 100, int timeout: 30,
+    List<String> allowed_updates}) {
+    _longPolling = new LongPolling(telegram)
+        ..offset = offset
+        ..limit = limit
+        ..timeout = timeout
+        ..allowed_updates = allowed_updates;
+  }
 
-    if(_webhook)
-      throw new TeleDartException('Webhook is enabled.');
-    if(timeout > MAX_TIMEOUT)
-      throw new TeleDartException('Timeout may not greater than ${MAX_TIMEOUT}.');
+  Future setupWebhook(String url, String secretPath,
+      {int port: 443, io.File privateKey, io.File certificate, int max_connections: 40,
+        List<String> allowed_updates}) async {
 
-    telegram.getUpdates(offset: offset, limit: limit,
-        timeout: timeout, allowed_updates: allowed_updates)
-        .then((updates) {
-          if(updates.length > 0){
-            for (Update update in updates) {
-              updatesHandler(update);
-              offset = update.update_id + 1;
-            }
-          }
-          startPolling(offset: offset, limit: limit,
-              timeout: timeout, allowed_updates: allowed_updates);
-        })
-        .catchError((error) {
-          // TODO: find out what exceptions can be ignored
-          print(error.toString());
-          if(error is HandshakeException)
-            startPolling(offset: offset, limit: limit,
-                timeout: timeout, allowed_updates: allowed_updates);
-          else
-            throw new TeleDartException(error.toString());
-        });
+    _webhook = new Webhook(telegram, url, secretPath)
+        ..port = port
+        ..privateKey = privateKey
+        ..certificate = certificate
+        ..max_connections = max_connections
+        ..allowed_updates = allowed_updates;
+
+    return _webhook.setWebhook();
+  }
+
+  void removeWebhook() {
+    if(_webhook != null)
+      _webhook.deleteWebhook()
+          .then((_) => _webhook = null);
   }
 
   // add updates to events queue
   void updatesHandler(Update update){
-    if(update.message != null){
+    if(update == null)
+      throw new TeleDartException('Update cannot not be null');
+    else if(update.message != null)
       this.emitMessage(update.message);
-    }
-    else if(update.edited_message != null){
+    else if(update.edited_message != null)
       this.emitEditedMessage(update.edited_message);
-    }
-    else if(update.channel_post != null){
+    else if(update.channel_post != null)
       this.emitChannelPost(update.channel_post);
-    }
-    else if(update.edited_channel_post != null){
+    else if(update.edited_channel_post != null)
       this.emitEditedChannelPost(update.edited_channel_post);
-    }
-    else if(update.inline_query != null){
+    else if(update.inline_query != null)
       this.emitInlineQuery(update.inline_query);
-    }
-    else if(update.chosen_inline_result != null){
+    else if(update.chosen_inline_result != null)
       this.emitChosenInlineQuery(update.chosen_inline_result);
-    }
-    else if(update.callback_query != null){
+    else if(update.callback_query != null)
       this.emitCallbackQuery(update.callback_query);
-    }
-    else if(update.pre_checkout_query != null){
+    else if(update.pre_checkout_query != null)
       this.emitPreCheckoutQuery(update.pre_checkout_query);
-    }
+    else
+      throw new TeleDartException('Object in Update cannot be null');
   }
 
   Future<Message> reply(Message msgToReply, String reply, [bool withQuote]) async {
