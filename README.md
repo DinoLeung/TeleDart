@@ -2,7 +2,7 @@
 
 A easy to use Telegram bot API framework in Dart
 
-[![IMG](https://github.com/DinoLeung/TeleDart/tree/master/example/dart_bird_catchs_telegram.svg)]()
+![TeleDart](example/dart_bird_catchs_telegram.svg)
 
 [![Bot API Version](https://img.shields.io/badge/Bot%20API-v3.6-blue.svg?style=flat-square)](https://core.telegram.org/bots/api)
 [![Dart Version](https://img.shields.io/badge/Dart-v1.24.3-blue.svg?style=flat-square)](https://www.dartlang.org/guides/get-started)
