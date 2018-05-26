@@ -1,6 +1,6 @@
-import 'package:dartson/dartson_static.dart';
-
 ///https://core.telegram.org/bots/api#available-types
+
+import 'package:dartson/dartson_static.dart';
 
 @Entity()
 class Update {

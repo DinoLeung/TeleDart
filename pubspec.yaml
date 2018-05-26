@@ -5,7 +5,7 @@ version: 0.0.2
 #author: dino <dino@330z.net>
 
 environment:
-  sdk: '>=1.20.1 <2.0.0'
+  sdk: '>=1.24.3 <2.0.0'
 
 dependencies:
   dartson: ">=0.2.0 <0.3.0"

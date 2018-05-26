@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'dart:io' as io;
 
-import 'package:TeleDart/src/Telegram/Telegram.dart';
-import 'package:TeleDart/src/Telegram/Model.dart';
+import '../../Telegram/Telegram.dart';
+import '../../Telegram/Model.dart';
 
 class LongPolling {
 
