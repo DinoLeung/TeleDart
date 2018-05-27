@@ -2,7 +2,7 @@
 
 A easy to use Telegram bot API framework in Dart
 
-![TeleDart](example/dart_bird_catchs_telegram.svg)
+![TeleDart](https://raw.githubusercontent.com/DinoLeung/TeleDart/master/example/dart_bird_catchs_telegram.svg?sanitize=true)
 
 [![Bot API Version](https://img.shields.io/badge/Bot%20API-v3.6-blue.svg?style=flat-square)](https://core.telegram.org/bots/api)
 [![Dart Version](https://img.shields.io/badge/Dart-v1.24.3-blue.svg?style=flat-square)](https://www.dartlang.org/guides/get-started)
@@ -16,8 +16,8 @@ A simple usage example:
 ```
 import 'dart:io' as io;
 
-import 'package:TeleDart/TeleDart.dart';
-import 'package:TeleDart/Telegram.dart';
+import 'package:teledart/teledart.dart';
+import 'package:teledart/telegram.dart';
 
 void main() {
   TeleDart teledart = new TeleDart(new Telegram('YOUR_BOT_TOKEN'), new Event());
