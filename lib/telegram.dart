@@ -1,6 +1,6 @@
 /// Telegram bot API methods
 ///
 /// https://core.telegram.org/bots/api#available-methods
-library Telegram;
+library telegram;
 
-export 'package:TeleDart/src/Telegram/Telegram.dart';
+export 'package:teledart/src/telegram/telegram.dart';

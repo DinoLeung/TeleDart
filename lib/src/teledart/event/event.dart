@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import '../../Telegram/Model.dart';
+import '../../telegram/model.dart';
 
 class Event {
 

@@ -1,11 +1,11 @@
 import 'dart:async';
 import 'dart:io' as io;
 
-import 'Event/Event.dart';
-import 'Fetch/LongPolling.dart';
-import 'Fetch/Webhook.dart';
-import '../Telegram/Telegram.dart';
-import '../Telegram/Model.dart';
+import 'event/event.dart';
+import 'fetch/long_polling.dart';
+import 'fetch/webhook.dart';
+import '../telegram/telegram.dart';
+import '../telegram/model.dart';
 
 class TeleDart{
 
@@ -15,7 +15,7 @@ class TeleDart{
   LongPolling _longPolling;
   Webhook _webhook;
 
-  final int MAX_TIMEOUT = 50;
+  final int maxTimeout = 50;
 
   /// Constructor in dependency injection manner
   TeleDart(Telegram telegram, Event event){
@@ -39,7 +39,7 @@ class TeleDart{
   /// Setup desired configurations using [setupLongPolling] or [setupWebhook]
   ///
   /// Throws [TeleDartException]
-  Future getUpdates({bool webhook: false}) async{
+  Future startFetching({bool webhook: false}) async{
     // initialise bot info before getting updates
     _initBotInfo().then((_) {
       if(webhook){
