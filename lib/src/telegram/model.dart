@@ -134,31 +134,18 @@ class Message {
 //        this.invoice, this.successful_payment, this.connected_website});
 
   int indexOfEntity(String type) {
-    if(entities != null) {
-      for (MessageEntity ett in entities)
+    List<MessageEntity> etts = entities ?? caption_entities;
+    if(etts != null)
+      for (MessageEntity ett in etts)
         if (ett.type == type)
-          return entities.indexOf(ett);
-      return -1;
-    }
-    else if(caption_entities != null) {
-      for (MessageEntity ett in caption_entities)
-        if (ett.type == type)
-          return caption_entities.indexOf(ett);
-      return -1;
-    }
-    else
-      return -1;
+          return etts.indexOf(ett);
+    return -1;
   }
 
   MessageEntity entityOf(String type) {
     int i = indexOfEntity(type);
     if(i >= 0) {
-      if (entities != null)
-        return entities[i];
-      else if (caption_entities != null)
-        return caption_entities[i];
-      else
-        return null;
+      return (entities ?? caption_entities)[i];
     }
     else
       return null;
@@ -167,12 +154,7 @@ class Message {
   String getEntity(String type) {
     MessageEntity ett = entityOf(type);
     if(ett != null) {
-      if (text != null)
-        return text.substring(ett.offset, ett.offset + ett.length);
-      else if (caption != null)
-        return caption.substring(ett.offset, ett.offset + ett.length);
-      else
-        return null;
+      return (text ?? caption).substring(ett.offset, ett.offset + ett.length);
     }
     else
       return null;

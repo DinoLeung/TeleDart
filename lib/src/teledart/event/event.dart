@@ -12,8 +12,6 @@ class Event {
   StreamController _editedChannelPostStreamController;
   StreamController _inlineQueryStreamController;
   StreamController _chosenInlineQueryStreamController;
-
-  StreamController get messageStreamController => _messageStreamController;
   StreamController _callbackQueryStreamController;
   StreamController _shippingQueryStreamController;
   StreamController _preCheckoutQueryStreamController;
@@ -36,14 +34,9 @@ class Event {
       if (keyword == null) // no entityType and keyword
         return _messageStreamController.stream;
       else { // no entityType but keyword
-        return _messageStreamController.stream.where((Message message) {
-          if (message.text != null)
-            return message.text.contains(keyword);
-          else if (message.caption != null)
-            return message.caption.contains(keyword);
-          else
-            return false;
-        });
+        return _messageStreamController.stream.where((Message message) =>
+          (message.text ?? message.caption ?? '').contains(keyword)
+        );
       }
     }
     else { // with entityType but no keyword
