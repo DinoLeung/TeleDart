@@ -9,3 +9,7 @@
 ## 0.0.3
 
 - Edited README.md
+
+## 0.0.4
+
+- More editing on README.md
