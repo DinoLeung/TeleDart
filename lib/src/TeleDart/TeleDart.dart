@@ -39,7 +39,7 @@ class TeleDart{
   /// Setup desired configurations using [setupLongPolling] or [setupWebhook]
   ///
   /// Throws [TeleDartException]
-  Future getUpdates({bool webhook: false}) async{
+  Future startFetching({bool webhook: false}) async{
     // initialise bot info before getting updates
     _initBotInfo().then((_) {
       if(webhook){
