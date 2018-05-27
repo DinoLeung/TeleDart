@@ -1,7 +1,7 @@
 import 'dart:io' as io;
 
-import 'package:TeleDart/TeleDart.dart';
-import 'package:TeleDart/Telegram.dart';
+import 'package:teledart/teledart.dart';
+import 'package:teledart/telegram.dart';
 
 void main() {
   TeleDart teledart = new TeleDart(new Telegram('YOUR_BOT_TOKEN'), new Event());

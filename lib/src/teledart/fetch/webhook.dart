@@ -3,8 +3,9 @@ import 'dart:io' as io;
 import 'dart:convert';
 
 import 'package:dartson/dartson.dart';
-import '../../Telegram/Telegram.dart';
-import '../../Telegram/Model.dart';
+
+import '../../telegram/telegram.dart';
+import '../../telegram/model.dart';
 
 class Webhook {
 

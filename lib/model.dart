@@ -1,6 +1,6 @@
 /// Telegram bot API objects
 ///
 /// See: [https://core.telegram.org/bots/api#available-types](https://core.telegram.org/bots/api#available-types)
-library Model;
+library model;
 
-export 'package:TeleDart/src/Telegram/Model.dart';
+export 'package:teledart/src/telegram/model.dart';

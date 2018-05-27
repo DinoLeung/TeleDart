@@ -5,8 +5,8 @@ import 'dart:io' as io;
 import 'package:dartson/dartson.dart';
 import 'package:http/http.dart' as http;
 
-import 'Model.dart';
-import 'HttpClient.dart';
+import 'model.dart';
+import 'http_client.dart';
 
 class Telegram {
 
