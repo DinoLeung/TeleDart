@@ -13,3 +13,8 @@
 ## 0.0.4
 
 - More editing on README.md
+
+## 0.05
+
+- Add onMessage short-cuts
+- Add sendMessage short-cuts
