@@ -29,7 +29,7 @@ import 'package:teledart/telegram.dart';
 import 'package:teledart/model.dart';
 
 void main() {
-  TeleDart teledart = new TeleDart(new Telegram('405338616:AAHNiP_E0_8maqjzk8PrDvxBqHK-tgiGjwc'), new Event());
+  TeleDart teledart = new TeleDart(new Telegram('YOUR_BOT_TOKEN'), new Event());
 
   teledart.startFetching();
 
