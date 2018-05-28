@@ -1,3 +1,8 @@
+/**
+ *TeleDart - Telegram Bot API for Dart
+ * Copyright (C) 2018  Dino PH Leung
+ */
+
 import 'dart:async';
 import 'dart:io' as io;
 

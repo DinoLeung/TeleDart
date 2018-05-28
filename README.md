@@ -9,8 +9,7 @@ allowing you to create your own bot easily.
 
 [![Bot API Version](https://img.shields.io/badge/Bot%20API-v3.6-blue.svg?style=flat-square)](https://core.telegram.org/bots/api)
 [![Dart Version](https://img.shields.io/badge/Dart-v1.24.3-blue.svg?style=flat-square)](https://www.dartlang.org/guides/get-started)
-[![License](https://img.shields.io/badge/Lcense-GNU-red.svg?style=flat-square)](https://github.com/DinoLeung/TeleDart/tree/master/LICENSE)
-
+[![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg?style=flat-square)](https://www.gnu.org/licenses/gpl-3.0)
 ## Features
 
 * Fully support [Telegram Bot API 3.6](https://core.telegram.org/bots/api#february-13-2018)

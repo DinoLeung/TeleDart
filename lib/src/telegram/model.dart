@@ -1,3 +1,8 @@
+/**
+ *TeleDart - Telegram Bot API for Dart
+ * Copyright (C) 2018  Dino PH Leung
+ */
+
 ///https://core.telegram.org/bots/api#available-types
 
 import 'package:dartson/dartson_static.dart';
