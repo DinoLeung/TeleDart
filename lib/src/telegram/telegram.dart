@@ -302,7 +302,7 @@ class Telegram {
   }
 
   /// [https://core.telegram.org/bots/api#sendMediaGroup](https://core.telegram.org/bots/api#sendMediaGroup)
-  Future<Message> sendMediaGroup(chat_id, List<InputMedia> media,
+  Future<List<Message>> sendMediaGroup(chat_id, List<InputMedia> media,
       {bool disable_notification, int reply_to_message_id}) async {
     String requestUrl = '${_baseUrl}${_token}/sendMediaGroup';
     Map body = {
@@ -311,7 +311,7 @@ class Telegram {
       'disable_notification': (disable_notification == null ? '' : '${disable_notification}'),
       'reply_to_message_id': (reply_to_message_id == null ? '' : '${reply_to_message_id}')
     };
-    return _client.httpPost(requestUrl, body: body, returnType: new Message());
+    return _client.httpPost(requestUrl, body: body, returnType: new Message(), isList: true);
   }
 
   /// [https://core.telegram.org/bots/api#sendLocation](https://core.telegram.org/bots/api#sendLocation)

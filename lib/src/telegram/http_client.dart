@@ -42,7 +42,7 @@ class HttpClient {
             return new Future.error(
                 new HttpClientException('${body['error_code']} ${body['description']}'));
         })
-        .catchError((error) => new Future.error(error));
+        .catchError((error) => new Future.error(new HttpClientException('${error}')));
   }
   /// HTTP post method (x-www-form-urlencoded)
   /// [url] - request url (required)
@@ -66,7 +66,7 @@ class HttpClient {
           return new Future.error(
               new HttpClientException('${body['error_code']} ${body['description']}'));
       })
-      .catchError((error) => new Future.error(error));
+      .catchError((error) => new Future.error(new HttpClientException('${error}')));
   }
 
   /// HTTP post method (multipart/form-data)
@@ -99,7 +99,7 @@ class HttpClient {
           return new Future.error(
               new HttpClientException('${body['error_code']} ${body['description']}'));
       })
-      .catchError((error) => new Future.error(error));
+      .catchError((error) => new Future.error(new HttpClientException('${error}')));
   }
 
 }

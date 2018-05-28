@@ -22,6 +22,7 @@ import '../../telegram/model.dart';
 
 class Event {
 
+  /// User object of bot.
   User me;
 
   StreamController _messageStreamController;
