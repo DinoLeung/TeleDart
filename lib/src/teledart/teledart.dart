@@ -1,3 +1,21 @@
+/**
+ *TeleDart - Telegram Bot API for Dart
+ * Copyright (C) 2018  Dino PH Leung
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
 import 'dart:async';
 import 'dart:io' as io;
 
@@ -110,26 +128,7 @@ class TeleDart{
 
   // Private method to add updates into events queue
   void _updatesHandler(Update update){
-    if(update == null)
-      throw new TeleDartException('Update cannot not be null');
-    else if(update.message != null)
-      _event.emitMessage(update.message);
-    else if(update.edited_message != null)
-      _event.emitEditedMessage(update.edited_message);
-    else if(update.channel_post != null)
-      _event.emitChannelPost(update.channel_post);
-    else if(update.edited_channel_post != null)
-      _event.emitEditedChannelPost(update.edited_channel_post);
-    else if(update.inline_query != null)
-      _event.emitInlineQuery(update.inline_query);
-    else if(update.chosen_inline_result != null)
-      _event.emitChosenInlineQuery(update.chosen_inline_result);
-    else if(update.callback_query != null)
-      _event.emitCallbackQuery(update.callback_query);
-    else if(update.pre_checkout_query != null)
-      _event.emitPreCheckoutQuery(update.pre_checkout_query);
-    else
-      throw new TeleDartException('Object in Update cannot be null');
+    _event.emitUpdate(update);
   }
 
   /// Listens to message events with [entityType] and [keyword] in text and caption
@@ -175,6 +174,175 @@ class TeleDart{
   /// Listens to pre checkout query events
   Stream<PreCheckoutQuery> onPreCheckoutQuery() => _event.onPreCheckoutQuery();
 
+  // Short-cuts revolution
+
+  /// Short-cut for onMessage handling entityType `mention` (@username)
+  Stream<Message> onMention([String keyword]) =>
+      _event.onMessage(entityType: 'mention', keyword: keyword);
+
+  /// Short-cut for onMessage handling entityType `hashtag`
+  Stream<Message> onHashtag([String keyword]) =>
+      _event.onMessage(entityType: 'hashtag', keyword: keyword);
+
+  /// Short-cut for onMessage handling entityType `bot_command`
+  Stream<Message> onCommand([String keyword]) =>
+      _event.onMessage(entityType: 'bot_command', keyword: keyword);
+
+  /// Short-cut for onMessage handling entityType `text_link`
+  Stream<Message> onTextLink([String keyword]) =>
+      _event.onMessage(entityType: 'text_link', keyword: keyword);
+
+  /// Short-cut for onMessage handling entityType `text_mention`
+  Stream<Message> onTextMention([String keyword]) =>
+      _event.onMessage(entityType: 'text_mention', keyword: keyword);
+
+  /// Short-cut to reply with a text message
+  Future<Message> replyMessage(Message orgMsg, String text,
+      {bool withQuote: false, String parse_mode, bool disable_web_page_preview,
+        bool disable_notification, ReplyMarkup reply_markup}) =>
+      telegram.sendMessage(orgMsg.from.id, text,
+          parse_mode: parse_mode,
+          disable_web_page_preview: disable_web_page_preview,
+          disable_notification: disable_notification,
+          reply_to_message_id: withQuote ? orgMsg.message_id : null,
+          reply_markup: reply_markup);
+
+  /// Short-cut to reply with a photo message
+  Future<Message> replyPhoto(Message orgMsg, photo,
+      {bool withQuote: false, String caption, String parse_mode,
+        bool disable_notification, ReplyMarkup reply_markup}) =>
+      telegram.sendPhoto(orgMsg.from.id, photo,
+          caption: caption,
+          parse_mode: parse_mode,
+          disable_notification: disable_notification,
+          reply_to_message_id: withQuote ? orgMsg.message_id : null,
+          reply_markup: reply_markup);
+
+  /// Short-cut to reply with a audio message
+  Future<Message> replyAudio(Message orgMsg, audio,
+      {bool withQuote: false, String caption, String parse_mode, int duration,
+        String performer, String title, bool disable_notification,
+        ReplyMarkup reply_markup}) =>
+      telegram.sendAudio(orgMsg.from.id, audio,
+          caption: caption,
+          parse_mode: parse_mode,
+          duration: duration,
+          performer: performer,
+          title: title,
+          disable_notification: disable_notification,
+          reply_to_message_id: withQuote ? orgMsg.message_id : null,
+          reply_markup: reply_markup);
+
+  /// Short-cut to reply with a document message
+  Future<Message> replyDocument(Message orgMsg, document,
+      {bool withQuote: false, String caption, String parse_mode,
+        bool disable_notification, ReplyMarkup reply_markup}) =>
+      telegram.sendDocument(orgMsg.from.id, document,
+          caption: caption,
+          parse_mode: parse_mode,
+          disable_notification: disable_notification,
+          reply_to_message_id: withQuote ? orgMsg.message_id : null,
+          reply_markup: reply_markup);
+
+  /// Short-cut to reply with a video message
+  Future<Message> replyVideo(Message orgMsg, video,
+      {bool withQuote: false, int duration, int width, int height,
+        String caption, String parse_mode, bool supports_streaming,
+        bool disable_notification, ReplyMarkup reply_markup}) =>
+      telegram.sendVideo(orgMsg.from.id, video,
+          duration: duration,
+          width: width,
+          height: height,
+          caption: caption,
+          parse_mode: parse_mode,
+          supports_streaming: supports_streaming,
+          disable_notification: disable_notification,
+          reply_to_message_id: withQuote ? orgMsg.message_id : null,
+          reply_markup: reply_markup);
+
+  /// Short-cut to reply with a voice message
+  Future<Message> replyVoice(Message orgMsg, voice,
+      {bool withQuote: false, String caption, String parse_mode,
+        bool disable_notification, ReplyMarkup reply_markup}) =>
+      telegram.sendVoice(orgMsg.from.id, voice,
+          caption: caption,
+          parse_mode: parse_mode,
+          disable_notification: disable_notification,
+          reply_to_message_id: withQuote ? orgMsg.message_id : null,
+          reply_markup: reply_markup);
+
+  /// Short-cut to reply with a video note message
+  Future<Message> replyVideoNote(Message orgMsg, video_note,
+      {bool withQuote: false, int duration, int length, bool disable_notification,
+        ReplyMarkup reply_markup}) =>
+      telegram.sendVideoNote(orgMsg.from.id, video_note,
+          duration: duration,
+          length: length,
+          disable_notification: disable_notification,
+          reply_to_message_id: withQuote ? orgMsg.message_id : null,
+          reply_markup: reply_markup);
+
+  /// Short-cut to reply with a media group message
+  Future<List<Message>> replyMediaGroup(Message orgMsg, List<InputMedia> media,
+      {bool withQuote: false, bool disable_notification}) =>
+      telegram.sendMediaGroup(orgMsg.from.id, media,
+          disable_notification: disable_notification,
+          reply_to_message_id: withQuote ? orgMsg.message_id : null);
+
+  /// Short-cut to reply with a location message
+  Future<Message> replyLocation(Message orgMsg, double latitude, double longitude,
+      {bool withQuote: false, int live_period, bool disable_notification,
+        ReplyMarkup reply_markup}) =>
+      telegram.sendLocation(orgMsg.from.id, latitude, longitude,
+          live_period: live_period,
+          disable_notification: disable_notification,
+          reply_to_message_id: withQuote ? orgMsg.message_id : null,
+          reply_markup: reply_markup);
+
+  /// Short-cut to edit a live location message
+  Future<Message> editLiveLocation(double latitude, double longitude,
+      {chat_id, int message_id, String inline_message_id,
+        ReplyMarkup reply_markup}) =>
+      telegram.editMessageLiveLocation(latitude, longitude,
+          chat_id: chat_id,
+          message_id: message_id,
+          inline_message_id: inline_message_id,
+          reply_markup: reply_markup);
+
+  /// Short-cut to stop a live location message
+  Future<Message> stopLiveLocation(
+      {chat_id, int message_id, String inline_message_id,
+        ReplyMarkup reply_markup}) =>
+      telegram.stopMessageLiveLocation(
+          chat_id: chat_id,
+          message_id: message_id,
+          inline_message_id: inline_message_id,
+          reply_markup: reply_markup);
+
+  /// Short-cut to reply with a venue message
+  Future<Message> replyVenue(Message orgMsg, double latitude, double longitude,
+      String title, String address,
+      {bool withQuote: false, String foursquare_id, bool disable_notification,
+        ReplyMarkup reply_markup}) =>
+      telegram.sendVenue(orgMsg.from.id, latitude, longitude, title, address,
+          foursquare_id: foursquare_id,
+          disable_notification: disable_notification,
+          reply_to_message_id: withQuote ? orgMsg.message_id : null,
+          reply_markup: reply_markup);
+
+  /// Short-cut to reply with a contact message
+  Future<Message> replyContact(Message orgMsg, String phone_number, String first_name,
+      {bool withQuote: false, String last_name, bool disable_notification,
+        ReplyMarkup reply_markup}) =>
+      telegram.sendContact(orgMsg.from.id, phone_number, first_name,
+          last_name: last_name,
+          disable_notification: disable_notification,
+          reply_to_message_id: withQuote ? orgMsg.message_id : null,
+          reply_markup: reply_markup);
+
+  /// Short-cut to reply with a caht action
+  Future<bool> replyChatAction(Message orgMsg, String action) =>
+      telegram.sendChatAction(orgMsg.from.id, action);
 }
 
 class TeleDartException implements Exception {
