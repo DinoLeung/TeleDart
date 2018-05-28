@@ -1,3 +1,21 @@
+/**
+ *TeleDart - Telegram Bot API for Dart
+ * Copyright (C) 2018  Dino PH Leung
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
 ///https://core.telegram.org/bots/api#available-types
 
 import 'package:dartson/dartson_static.dart';
@@ -134,31 +152,18 @@ class Message {
 //        this.invoice, this.successful_payment, this.connected_website});
 
   int indexOfEntity(String type) {
-    if(entities != null) {
-      for (MessageEntity ett in entities)
+    List<MessageEntity> etts = entities ?? caption_entities;
+    if(etts != null)
+      for (MessageEntity ett in etts)
         if (ett.type == type)
-          return entities.indexOf(ett);
-      return -1;
-    }
-    else if(caption_entities != null) {
-      for (MessageEntity ett in caption_entities)
-        if (ett.type == type)
-          return caption_entities.indexOf(ett);
-      return -1;
-    }
-    else
-      return -1;
+          return etts.indexOf(ett);
+    return -1;
   }
 
   MessageEntity entityOf(String type) {
     int i = indexOfEntity(type);
     if(i >= 0) {
-      if (entities != null)
-        return entities[i];
-      else if (caption_entities != null)
-        return caption_entities[i];
-      else
-        return null;
+      return (entities ?? caption_entities)[i];
     }
     else
       return null;
@@ -167,12 +172,7 @@ class Message {
   String getEntity(String type) {
     MessageEntity ett = entityOf(type);
     if(ett != null) {
-      if (text != null)
-        return text.substring(ett.offset, ett.offset + ett.length);
-      else if (caption != null)
-        return caption.substring(ett.offset, ett.offset + ett.length);
-      else
-        return null;
+      return (text ?? caption).substring(ett.offset, ett.offset + ett.length);
     }
     else
       return null;
