@@ -29,11 +29,11 @@ import 'package:teledart/telegram.dart';
 import 'package:teledart/model.dart';
 
 void main() {
-  TeleDart teledart = new TeleDart(new Telegram('YOUR_BOT_TOKEN'), new Event());
+  TeleDart teledart = new TeleDart(new Telegram('405338616:AAHNiP_E0_8maqjzk8PrDvxBqHK-tgiGjwc'), new Event());
 
   teledart.startFetching();
 
-  // You can listen to message like its
+  // You can listen to messages like its
   teledart.onMessage(entityType: 'bot_command', keyword: 'start')
       .listen((message) {
         teledart.telegram.sendMessage(message.from.id, 'Hello TeleDart!');
@@ -49,12 +49,14 @@ void main() {
       .where((Message message) =>
           message.text.contains('telegram'))
       .listen((message) {
-        teledart.replyPhoto(
+    teledart.replyPhoto(
             message,
-            new io.File('example/dart_bird_catchs_telegram.png'),
+//            new io.File('example/dart_bird_catchs_telegram.png'),
+            'https://raw.githubusercontent.com/DinoLeung/TeleDart/master/example/dart_bird_catchs_telegram.png',
             caption: 'This is how the Dart Bird and Telegram are met');
-      });
+  });
 }
+
 ```
 
 ## Bugs and feature requests

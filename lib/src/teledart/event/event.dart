@@ -25,6 +25,8 @@ class Event {
   /// User object of bot.
   User me;
 
+  StreamController _updateStreamController;
+
   StreamController _messageStreamController;
   StreamController _editedMessageStreamController;
   StreamController _channelPostStreamController;
@@ -36,6 +38,8 @@ class Event {
   StreamController _preCheckoutQueryStreamController;
 
   Event({bool sync: false}) {
+    _updateStreamController = new StreamController.broadcast(sync: sync);
+
     _messageStreamController = new StreamController.broadcast(sync: sync);
     _editedMessageStreamController = new StreamController.broadcast(sync: sync);
     _channelPostStreamController = new StreamController.broadcast(sync: sync);
@@ -99,9 +103,28 @@ class Event {
     }
   }
 
-  /// Emits message events
-  void emitMessage(Message msg) {
-    _messageStreamController.add(msg);
+  /// Emits update events
+  void emitUpdate(Update update) {
+    if(update == null)
+      throw new TeleDartEventException('Update cannot not be null');
+    else if(update.message != null)
+      _messageStreamController.add(update.message);
+    else if(update.edited_message != null)
+      _editedMessageStreamController.add(update.edited_message);
+    else if(update.channel_post != null)
+      _channelPostStreamController.add(update.channel_post);
+    else if(update.edited_channel_post != null)
+      _editedChannelPostStreamController.add(update.edited_channel_post);
+    else if(update.inline_query != null)
+      _inlineQueryStreamController.add(update.inline_query);
+    else if(update.chosen_inline_result != null)
+      _chosenInlineQueryStreamController.add(update.chosen_inline_result);
+    else if(update.callback_query != null)
+      _callbackQueryStreamController.add(update.callback_query);
+    else if(update.pre_checkout_query != null)
+      _preCheckoutQueryStreamController.add(update.pre_checkout_query);
+    else
+      throw new TeleDartEventException('Object in Update cannot be null');
   }
 
   /// Listens to edited message events
@@ -109,19 +132,9 @@ class Event {
     return _editedMessageStreamController.stream;
   }
 
-  /// Emits edited message events
-  void emitEditedMessage(Message msg) {
-    _editedMessageStreamController.add(msg);
-  }
-
   /// Listens to channel post events
   Stream<Message> onChannelPost() {
     return _channelPostStreamController.stream;
-  }
-
-  /// Emits channel post events
-  void emitChannelPost(Message msg) {
-    _channelPostStreamController.add(msg);
   }
 
   /// Listens to edited channel post events
@@ -129,19 +142,9 @@ class Event {
     return _editedChannelPostStreamController.stream;
   }
 
-  /// Emits edited channel post events
-  void emitEditedChannelPost(Message msg) {
-    _editedChannelPostStreamController.add(msg);
-  }
-
   /// Listens to inline query events
   Stream<InlineQuery> onInlineQuery() {
     return _inlineQueryStreamController.stream;
-  }
-
-  /// Emits inline query events
-  void emitInlineQuery(InlineQuery inline_query) {
-    _inlineQueryStreamController.add(inline_query);
   }
 
   /// Listens to chosen inline query events
@@ -149,19 +152,9 @@ class Event {
     return _chosenInlineQueryStreamController.stream;
   }
 
-  /// Emits chosen inline query events
-  void emitChosenInlineQuery(ChosenInlineResult chosen_inline_result) {
-    _chosenInlineQueryStreamController.add(chosen_inline_result);
-  }
-
   /// Listens to callback query events
   Stream<CallbackQuery> onCallbackQuery() {
     return _callbackQueryStreamController.stream;
-  }
-
-  /// Emits callback query events
-  void emitCallbackQuery(CallbackQuery callback_query) {
-    _callbackQueryStreamController.add(callback_query);
   }
 
   /// Listens to shipping query events
@@ -169,19 +162,9 @@ class Event {
     return _shippingQueryStreamController.stream;
   }
 
-  /// Emits shipping query events
-  void emitShippingQuery(ShippingQuery shipping_query) {
-    _shippingQueryStreamController.add(shipping_query);
-  }
-
   /// Listens to pre checkout query events
   Stream<PreCheckoutQuery> onPreCheckoutQuery() {
     return _preCheckoutQueryStreamController.stream;
-  }
-
-  /// Emits pre checkout query events
-  void emitPreCheckoutQuery(PreCheckoutQuery pre_checkout_query) {
-    _preCheckoutQueryStreamController.add(pre_checkout_query);
   }
 }
 

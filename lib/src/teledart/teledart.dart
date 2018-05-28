@@ -128,26 +128,7 @@ class TeleDart{
 
   // Private method to add updates into events queue
   void _updatesHandler(Update update){
-    if(update == null)
-      throw new TeleDartException('Update cannot not be null');
-    else if(update.message != null)
-      _event.emitMessage(update.message);
-    else if(update.edited_message != null)
-      _event.emitEditedMessage(update.edited_message);
-    else if(update.channel_post != null)
-      _event.emitChannelPost(update.channel_post);
-    else if(update.edited_channel_post != null)
-      _event.emitEditedChannelPost(update.edited_channel_post);
-    else if(update.inline_query != null)
-      _event.emitInlineQuery(update.inline_query);
-    else if(update.chosen_inline_result != null)
-      _event.emitChosenInlineQuery(update.chosen_inline_result);
-    else if(update.callback_query != null)
-      _event.emitCallbackQuery(update.callback_query);
-    else if(update.pre_checkout_query != null)
-      _event.emitPreCheckoutQuery(update.pre_checkout_query);
-    else
-      throw new TeleDartException('Object in Update cannot be null');
+    _event.emitUpdate(update);
   }
 
   /// Listens to message events with [entityType] and [keyword] in text and caption
