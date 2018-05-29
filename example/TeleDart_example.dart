@@ -20,7 +20,7 @@ void main() {
       teledart.replyMessage(message, 'This works too!')));
 
   // You can even filter streams even more diverse with stream processing methods
-  // See: https://www.dartlang.org/tutorials/language/streams#methods-that-process-a-stream
+  // See: https://www.dartlang.org/tutorials/language/streams#methods-that-modify-a-stream
   teledart.onMessage(keyword: 'dart')
       .where((Message message) =>
           message.text.contains('telegram'))
