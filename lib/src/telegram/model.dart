@@ -30,6 +30,7 @@ class Update {
   InlineQuery inline_query;
   ChosenInlineResult chosen_inline_result;
   CallbackQuery callback_query;
+  ShippingQuery shipping_query;
   PreCheckoutQuery pre_checkout_query;
 
 //  Update(this.update_id,

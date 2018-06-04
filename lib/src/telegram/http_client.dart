@@ -33,7 +33,7 @@ class HttpClient {
   Future httpGet(String url, {Object returnType, bool isList}) async {
     return http.get(url)
         .then((response) {
-          dynamic body = JSON.decode(response.body);
+          dynamic body = jsonDecode(response.body);
           if (body['ok'])
             return returnType != null ?
                 _dson.map(body['result'], returnType, isList) :
@@ -53,7 +53,7 @@ class HttpClient {
   Future httpPost(String url, {Map body, Object returnType, bool isList, String jsonItem}) async {
     return http.post(url, body: body)
       .then((response) {
-        dynamic body = JSON.decode(response.body);
+        dynamic body = jsonDecode(response.body);
         if (body['ok']) {
           dynamic json = (jsonItem == null ?
               body['result'] :
@@ -86,7 +86,7 @@ class HttpClient {
       .then((response) =>
           http.Response.fromStream(response))
       .then((response) {
-        dynamic body = JSON.decode(response.body);
+        dynamic body = jsonDecode(response.body);
         if (body['ok']) {
           dynamic json = (jsonItem == null ?
               body['result'] :

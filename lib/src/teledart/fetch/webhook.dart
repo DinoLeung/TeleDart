@@ -73,8 +73,8 @@ class Webhook {
   void setWebhook() {
     // initialise server
     Future serverFuture = _context == null ?
-    io.HttpServer.bind(io.InternetAddress.LOOPBACK_IP_V4.address, port) :
-    io.HttpServer.bindSecure(io.InternetAddress.LOOPBACK_IP_V4.address, port, _context);
+    io.HttpServer.bind(io.InternetAddress.loopbackIPv4.address, port) :
+    io.HttpServer.bindSecure(io.InternetAddress.loopbackIPv4.address, port, _context);
 
     serverFuture.then((server) => _server = server)
     .then((_) {
@@ -93,8 +93,8 @@ class Webhook {
     _server.listen((io.HttpRequest request) {
       if(request.method == 'POST' &&
           request.uri.path == this.secretPath ) {
-        request.transform(UTF8.decoder).join().then((data) =>
-            emitUpdate(_dson.map(JSON.decode(data), new Update(), true)));
+        request.transform(utf8.decoder).join().then((data) =>
+            emitUpdate(_dson.map(jsonDecode(data), new Update(), true)));
         request.response.write('ok');
         request.response.close();
       }

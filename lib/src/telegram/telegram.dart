@@ -43,7 +43,7 @@ class Telegram {
       + (offset == null ? '' : 'offset=${offset}&')
       + (limit == null ? '' : 'limit=${limit}&')
       + (timeout == null ? '' : 'timeout=${timeout}')
-      + (allowed_updates == null ? '' : JSON.encode(allowed_updates));
+      + (allowed_updates == null ? '' : jsonEncode(allowed_updates));
 
     return _client.httpGet(requestUrl, returnType: new Update(), isList: true);
   }
@@ -56,7 +56,7 @@ class Telegram {
     Map body = {
       'url': url,
       'max_connections': max_connections == null ? '' : '${max_connections}',
-      'allowed_updates': allowed_updates == null ? '' : JSON.encode(allowed_updates)
+      'allowed_updates': allowed_updates == null ? '' : jsonEncode(allowed_updates)
     };
     if(certificate != null){
       // filename cannot be empty to post to Telegram server
