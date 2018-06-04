@@ -42,7 +42,7 @@ class TeleDart{
   }
 
   /// Private method to get bot info
-  Future _initBotInfo() async{
+  Future<void> _initBotInfo() async{
     await telegram.getMe()
         .then((user) => _event.me = user)
         .then((_) => print('${_event.me.username} is initialised'))
@@ -57,7 +57,7 @@ class TeleDart{
   /// Setup desired configurations using [setupLongPolling] or [setupWebhook]
   ///
   /// Throws [TeleDartException]
-  Future startFetching({bool webhook: false}) async{
+  Future<void> startFetching({bool webhook: false}) async{
     // initialise bot info before getting updates
     _initBotInfo().then((_) {
       if(webhook){
@@ -102,7 +102,7 @@ class TeleDart{
   /// Provide [privateKey] and [certificate] pair for HTTPS configuration
   ///
   /// See: [https://core.telegram.org/bots/api#setwebhook](https://core.telegram.org/bots/api#setwebhook)
-  Future setupWebhook(String url, String secretPath,
+  Future<void> setupWebhook(String url, String secretPath,
       {int port: 443, io.File privateKey, io.File certificate,
         int max_connections: 40, List<String> allowed_updates}) async {
 

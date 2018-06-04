@@ -30,10 +30,10 @@ class HttpClient {
   /// [url] request url with query string (required)
   /// [returnType] - nominate a type return object
   /// [isList] - true if return list of nominated object
-  Future httpGet(String url, {Object returnType, bool isList}) async {
+  Future<dynamic> httpGet(String url, {Object returnType, bool isList}) async {
     return http.get(url)
         .then((response) {
-          dynamic body = jsonDecode(response.body);
+          Map<String, dynamic> body = jsonDecode(response.body);
           if (body['ok'])
             return returnType != null ?
                 _dson.map(body['result'], returnType, isList) :
@@ -50,10 +50,10 @@ class HttpClient {
   /// [returnType] - nominate a type return object
   /// [isList] - true if return list of nominated object
   /// [jsonItem] - specific json child other then `result`
-  Future httpPost(String url, {Map body, Object returnType, bool isList, String jsonItem}) async {
+  Future<dynamic> httpPost(String url, {Map body, Object returnType, bool isList, String jsonItem}) async {
     return http.post(url, body: body)
       .then((response) {
-        dynamic body = jsonDecode(response.body);
+        Map<String, dynamic> body = jsonDecode(response.body);
         if (body['ok']) {
           dynamic json = (jsonItem == null ?
               body['result'] :
@@ -76,7 +76,7 @@ class HttpClient {
   /// [returnType] - nominate a type return object
   /// [isList] - true if return list of nominated object
   /// [jsonItem] - specific json child other then `result`
-  Future httpMultipartPost(String url, http.MultipartFile file,
+  Future<dynamic> httpMultipartPost(String url, http.MultipartFile file,
       {Map body, Object returnType, bool isList, String jsonItem}) async {
     http.MultipartRequest request = new http.MultipartRequest('POST', Uri.parse(url))
       ..headers.addAll({'Content-Type': 'multipart/form-data'})
@@ -86,7 +86,7 @@ class HttpClient {
       .then((response) =>
           http.Response.fromStream(response))
       .then((response) {
-        dynamic body = jsonDecode(response.body);
+        Map<String, dynamic> body = jsonDecode(response.body);
         if (body['ok']) {
           dynamic json = (jsonItem == null ?
               body['result'] :
