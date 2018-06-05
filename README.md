@@ -22,7 +22,7 @@ allowing you to create your own bot easily.
 A simple usage example:
 
 ```
-import 'dart:io' as io;
+//import 'dart:io' as io;
 
 import 'package:teledart/teledart.dart';
 import 'package:teledart/telegram.dart';
