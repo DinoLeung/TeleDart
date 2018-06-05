@@ -2,7 +2,8 @@
 
 [Telegram](https://telegram.org/) is a popular secured instant messenger. 
 They have an open [bot platform](https://telegram.org/blog/bot-revolution),
-this package is a Dart implementation of their [bot API](https://core.telegram.org/bots/api)
+this package is a [Dart](https://www.dartlang.org/) 
+implementation of their [bot API](https://core.telegram.org/bots/api)
 allowing you to create your own bot easily.
 
 ![TeleDart](https://raw.githubusercontent.com/DinoLeung/TeleDart/master/example/dart_bird_catchs_telegram.svg?sanitize=true)
@@ -16,6 +17,7 @@ allowing you to create your own bot easily.
 * [Inline mode](https://core.telegram.org/bots/api#inline-mode)
 * [Telegram Payment Platform](https://telegram.org/blog/payments)
 * [HTML5 Games](https://core.telegram.org/bots/api#games)
+* [Dart 2](https://www.dartlang.org/dart-2) ready!!!
 
 ## Usage
 
