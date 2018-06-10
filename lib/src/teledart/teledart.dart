@@ -42,7 +42,7 @@ class TeleDart{
   }
 
   /// Private method to get bot info
-  Future _initBotInfo() async{
+  Future<void> _initBotInfo() async{
     await telegram.getMe()
         .then((user) => _event.me = user)
         .then((_) => print('${_event.me.username} is initialised'))
@@ -57,7 +57,7 @@ class TeleDart{
   /// Setup desired configurations using [setupLongPolling] or [setupWebhook]
   ///
   /// Throws [TeleDartException]
-  Future startFetching({bool webhook: false}) async{
+  Future<void> startFetching({bool webhook: false}) async{
     // initialise bot info before getting updates
     _initBotInfo().then((_) {
       if(webhook){
@@ -102,7 +102,7 @@ class TeleDart{
   /// Provide [privateKey] and [certificate] pair for HTTPS configuration
   ///
   /// See: [https://core.telegram.org/bots/api#setwebhook](https://core.telegram.org/bots/api#setwebhook)
-  Future setupWebhook(String url, String secretPath,
+  Future<void> setupWebhook(String url, String secretPath,
       {int port: 443, io.File privateKey, io.File certificate,
         int max_connections: 40, List<String> allowed_updates}) async {
 
@@ -163,7 +163,7 @@ class TeleDart{
   Stream<InlineQuery> onInlineQuery() => _event.onInlineQuery();
 
   /// Listens to chosen inline query events
-  Stream<ChosenInlineResult> onChosenInlineQuery() => _event.onChosenInlineQuery();
+  Stream<ChosenInlineResult> onChosenInlineResult() => _event.onChosenInlineResult();
 
   /// Listens to callback query events
   Stream<CallbackQuery> onCallbackQuery() => _event.onCallbackQuery();
@@ -340,9 +340,15 @@ class TeleDart{
           reply_to_message_id: withQuote ? orgMsg.message_id : null,
           reply_markup: reply_markup);
 
-  /// Short-cut to reply with a caht action
-  Future<bool> replyChatAction(Message orgMsg, String action) =>
-      telegram.sendChatAction(orgMsg.from.id, action);
+  /// Short-cut to answer inline query
+  Future<bool> answerInlineQuery(InlineQuery inline_query, List<InlineQueryResult> results,
+      {int cache_time, bool is_personal, String next_offset, String switch_pm_text,
+        String switch_pm_parameter}) =>
+      telegram.answerInlineQuery(inline_query.id, results,
+          cache_time: cache_time,
+          is_personal: is_personal,
+          next_offset: next_offset,
+          switch_pm_text: switch_pm_text);
 }
 
 class TeleDartException implements Exception {
