@@ -1,6 +1,6 @@
 name: teledart
 description: Telegram bot api framework in Dart
-version: 0.0.6
+version: 0.0.7
 homepage: https://github.com/DinoLeung/TeleDart
 author: dino <dino@330z.net>
 

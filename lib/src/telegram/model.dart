@@ -328,7 +328,7 @@ class File {
 class ReplyMarkup {}
 
 @Entity()
-class ReplyKeyboardMarkup extends ReplyMarkup {
+class ReplyKeyboardMarkup implements ReplyMarkup {
   List<KeyboardButton> keyboard;
   bool resize_keyboard;
   bool one_time_keyboard;
@@ -351,7 +351,7 @@ class KeyboardButton {
 }
 
 @Entity()
-class ReplyKeyboardRemove extends ReplyMarkup {
+class ReplyKeyboardRemove implements ReplyMarkup {
   bool remove_keyboard;
   bool selective;
 
@@ -361,7 +361,7 @@ class ReplyKeyboardRemove extends ReplyMarkup {
 }
 
 @Entity()
-class InlineKeyboardMarkup extends ReplyMarkup {
+class InlineKeyboardMarkup implements ReplyMarkup {
   List<InlineKeyboardButton> inline_keyboard;
 
 //  InlineKeyboardMarkup(this.inline_keyboard);
@@ -401,7 +401,7 @@ class CallbackQuery {
 }
 
 @Entity()
-class ForceReply extends ReplyMarkup {
+class ForceReply implements ReplyMarkup {
   bool forceReply;
   bool selective;
 
@@ -471,13 +471,29 @@ abstract class InputMedia {
 }
 
 @Entity()
-class InputMediaPhoto extends InputMedia {
+class InputMediaPhoto implements InputMedia {
+  @override
+  String caption;
+  @override
+  String media;
+  @override
+  String parse_mode;
+  @override
+  String type;
 //  InputMediaPhoto(String type, String media, String caption, String parse_mode)
 //      : super(type, media, caption, parse_mode);
 }
 
 @Entity()
-class InputMediaVideo extends InputMedia {
+class InputMediaVideo implements InputMedia {
+  @override
+  String caption;
+  @override
+  String media;
+  @override
+  String parse_mode;
+  @override
+  String type;
   int width;
   int height;
   int duration;
