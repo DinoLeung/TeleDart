@@ -2,7 +2,8 @@
 
 [Telegram](https://telegram.org/) is a popular secured instant messenger. 
 They have an open [bot platform](https://telegram.org/blog/bot-revolution),
-this package is a Dart implementation of their [bot API](https://core.telegram.org/bots/api)
+this package is a [Dart](https://www.dartlang.org/) 
+implementation of their [bot API](https://core.telegram.org/bots/api)
 allowing you to create your own bot easily.
 
 ![TeleDart](https://raw.githubusercontent.com/DinoLeung/TeleDart/master/example/dart_bird_catchs_telegram.svg?sanitize=true)
@@ -16,13 +17,14 @@ allowing you to create your own bot easily.
 * [Inline mode](https://core.telegram.org/bots/api#inline-mode)
 * [Telegram Payment Platform](https://telegram.org/blog/payments)
 * [HTML5 Games](https://core.telegram.org/bots/api#games)
+* [Dart 2](https://www.dartlang.org/dart-2) ready!!!
 
 ## Usage
 
 A simple usage example:
 
 ```
-import 'dart:io' as io;
+//import 'dart:io' as io;
 
 import 'package:teledart/teledart.dart';
 import 'package:teledart/telegram.dart';
@@ -44,7 +46,7 @@ void main() {
       teledart.replyMessage(message, 'This works too!')));
 
   // You can even filter streams even more diverse with stream processing methods
-  // See: https://www.dartlang.org/tutorials/language/streams#methods-that-process-a-stream
+  // See: https://www.dartlang.org/tutorials/language/streams#methods-that-modify-a-stream
   teledart.onMessage(keyword: 'dart')
       .where((Message message) =>
           message.text.contains('telegram'))
@@ -55,8 +57,28 @@ void main() {
             'https://raw.githubusercontent.com/DinoLeung/TeleDart/master/example/dart_bird_catchs_telegram.png',
             caption: 'This is how the Dart Bird and Telegram are met');
   });
-}
 
+  // Inline mode
+  teledart.onInlineQuery().listen((inlineQuery) {
+    List<InlineQueryResult> results = [
+      new InlineQueryResultArticle()
+        ..id = 'ping'
+        ..title = 'ping'
+        ..input_message_content = (
+            new InputTextMessageContent()
+              ..message_text = '*pong*'
+              ..parse_mode = 'markdown'),
+      new InlineQueryResultArticle()
+        ..id = 'ding'
+        ..title = 'ding'
+        ..input_message_content = (
+            new InputTextMessageContent()
+              ..message_text = '_dong_'
+              ..parse_mode = 'markdown')
+    ];
+    teledart.answerInlineQuery(inlineQuery, results);
+  });
+}
 ```
 
 ## Bugs and feature requests

@@ -18,7 +18,16 @@
 
 - Add onMessage short-cuts
 - Add sendMessage short-cuts
+- Add missing ShippingQuery to Update
 
 ## 0.0.6
 
-- edit README.md
+- Edit README.md
+
+## 0.0.7
+
+- Dart2 ready!
+- Add short-cut for inline query
+- Rename ChosenInlineQuery into ChosenInlineResult and associated objects
+- Add missing InlineQueryResultVoice to model
+- Bug fixes

@@ -25,27 +25,27 @@ class Event {
   /// User object of bot.
   User me;
 
-  StreamController _updateStreamController;
+//  StreamController<Update> _updateStreamController;
 
-  StreamController _messageStreamController;
-  StreamController _editedMessageStreamController;
-  StreamController _channelPostStreamController;
-  StreamController _editedChannelPostStreamController;
-  StreamController _inlineQueryStreamController;
-  StreamController _chosenInlineQueryStreamController;
-  StreamController _callbackQueryStreamController;
-  StreamController _shippingQueryStreamController;
-  StreamController _preCheckoutQueryStreamController;
+  StreamController<Message> _messageStreamController;
+  StreamController<Message> _editedMessageStreamController;
+  StreamController<Message> _channelPostStreamController;
+  StreamController<Message> _editedChannelPostStreamController;
+  StreamController<InlineQuery> _inlineQueryStreamController;
+  StreamController<ChosenInlineResult> _chosenInlineResultStreamController;
+  StreamController<CallbackQuery> _callbackQueryStreamController;
+  StreamController<ShippingQuery> _shippingQueryStreamController;
+  StreamController<PreCheckoutQuery> _preCheckoutQueryStreamController;
 
   Event({bool sync: false}) {
-    _updateStreamController = new StreamController.broadcast(sync: sync);
+//    _updateStreamController = new StreamController.broadcast(sync: sync);
 
     _messageStreamController = new StreamController.broadcast(sync: sync);
     _editedMessageStreamController = new StreamController.broadcast(sync: sync);
     _channelPostStreamController = new StreamController.broadcast(sync: sync);
     _editedChannelPostStreamController = new StreamController.broadcast(sync: sync);
     _inlineQueryStreamController = new StreamController.broadcast(sync: sync);
-    _chosenInlineQueryStreamController = new StreamController.broadcast(sync: sync);
+    _chosenInlineResultStreamController = new StreamController.broadcast(sync: sync);
     _callbackQueryStreamController = new StreamController.broadcast(sync: sync);
     _shippingQueryStreamController = new StreamController.broadcast(sync: sync);
     _preCheckoutQueryStreamController = new StreamController.broadcast(sync: sync);
@@ -118,9 +118,11 @@ class Event {
     else if(update.inline_query != null)
       _inlineQueryStreamController.add(update.inline_query);
     else if(update.chosen_inline_result != null)
-      _chosenInlineQueryStreamController.add(update.chosen_inline_result);
+      _chosenInlineResultStreamController.add(update.chosen_inline_result);
     else if(update.callback_query != null)
       _callbackQueryStreamController.add(update.callback_query);
+    else if(update.shipping_query != null)
+      _shippingQueryStreamController.add(update.shipping_query);
     else if(update.pre_checkout_query != null)
       _preCheckoutQueryStreamController.add(update.pre_checkout_query);
     else
@@ -148,8 +150,8 @@ class Event {
   }
 
   /// Listens to chosen inline query events
-  Stream<ChosenInlineResult> onChosenInlineQuery() {
-    return _chosenInlineQueryStreamController.stream;
+  Stream<ChosenInlineResult> onChosenInlineResult() {
+    return _chosenInlineResultStreamController.stream;
   }
 
   /// Listens to callback query events

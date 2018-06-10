@@ -30,6 +30,7 @@ class Update {
   InlineQuery inline_query;
   ChosenInlineResult chosen_inline_result;
   CallbackQuery callback_query;
+  ShippingQuery shipping_query;
   PreCheckoutQuery pre_checkout_query;
 
 //  Update(this.update_id,
@@ -327,7 +328,7 @@ class File {
 class ReplyMarkup {}
 
 @Entity()
-class ReplyKeyboardMarkup extends ReplyMarkup {
+class ReplyKeyboardMarkup implements ReplyMarkup {
   List<KeyboardButton> keyboard;
   bool resize_keyboard;
   bool one_time_keyboard;
@@ -350,7 +351,7 @@ class KeyboardButton {
 }
 
 @Entity()
-class ReplyKeyboardRemove extends ReplyMarkup {
+class ReplyKeyboardRemove implements ReplyMarkup {
   bool remove_keyboard;
   bool selective;
 
@@ -360,7 +361,7 @@ class ReplyKeyboardRemove extends ReplyMarkup {
 }
 
 @Entity()
-class InlineKeyboardMarkup extends ReplyMarkup {
+class InlineKeyboardMarkup implements ReplyMarkup {
   List<InlineKeyboardButton> inline_keyboard;
 
 //  InlineKeyboardMarkup(this.inline_keyboard);
@@ -400,7 +401,7 @@ class CallbackQuery {
 }
 
 @Entity()
-class ForceReply extends ReplyMarkup {
+class ForceReply implements ReplyMarkup {
   bool forceReply;
   bool selective;
 
@@ -470,13 +471,29 @@ abstract class InputMedia {
 }
 
 @Entity()
-class InputMediaPhoto extends InputMedia {
+class InputMediaPhoto implements InputMedia {
+  @override
+  String caption;
+  @override
+  String media;
+  @override
+  String parse_mode;
+  @override
+  String type;
 //  InputMediaPhoto(String type, String media, String caption, String parse_mode)
 //      : super(type, media, caption, parse_mode);
 }
 
 @Entity()
-class InputMediaVideo extends InputMedia {
+class InputMediaVideo implements InputMedia {
+  @override
+  String caption;
+  @override
+  String media;
+  @override
+  String parse_mode;
+  @override
+  String type;
   int width;
   int height;
   int duration;
@@ -549,7 +566,11 @@ abstract class InlineQueryResult {
 }
 
 @Entity()
-class InlineQueryResultArticle extends InlineQueryResult {
+class InlineQueryResultArticle implements InlineQueryResult {
+  @override
+  String id;
+  @override
+  String type = 'article';
   String title;
   InputMessageContent input_message_content;
   InlineKeyboardMarkup reply_markup;
@@ -568,7 +589,11 @@ class InlineQueryResultArticle extends InlineQueryResult {
 }
 
 @Entity()
-class InlineQueryResultPhoto extends InlineQueryResult {
+class InlineQueryResultPhoto implements InlineQueryResult {
+  @override
+  String id;
+  @override
+  String type = 'photo';
   String photo_url;
   String thumb_url;
   int photo_width;
@@ -589,7 +614,11 @@ class InlineQueryResultPhoto extends InlineQueryResult {
 }
 
 @Entity()
-class InlineQueryResultGif extends InlineQueryResult {
+class InlineQueryResultGif implements InlineQueryResult {
+  @override
+  String id;
+  @override
+  String type = 'gif';
   String gif_url;
   int gif_width;
   int gif_height;
@@ -609,7 +638,11 @@ class InlineQueryResultGif extends InlineQueryResult {
 }
 
 @Entity()
-class InlineQueryResultMpeg4Gif extends InlineQueryResult {
+class InlineQueryResultMpeg4Gif implements InlineQueryResult {
+  @override
+  String id;
+  @override
+  String type = 'mpeg4_gif';
   String mpeg4_url;
   int mpeg4_width;
   int mpeg4_height;
@@ -630,7 +663,11 @@ class InlineQueryResultMpeg4Gif extends InlineQueryResult {
 }
 
 @Entity()
-class InlineQueryResultVideo extends InlineQueryResult {
+class InlineQueryResultVideo implements InlineQueryResult {
+  @override
+  String id;
+  @override
+  String type = 'video';
   String video_url;
   String mime_type;
   String thumb_url;
@@ -654,7 +691,11 @@ class InlineQueryResultVideo extends InlineQueryResult {
 }
 
 @Entity()
-class InlineQueryResultAudio extends InlineQueryResult {
+class InlineQueryResultAudio implements InlineQueryResult {
+  @override
+  String id;
+  @override
+  String type = 'audio';
   String audio_url;
   String title;
   String caption;
@@ -672,7 +713,32 @@ class InlineQueryResultAudio extends InlineQueryResult {
 }
 
 @Entity()
-class InlineQueryResultDocument extends InlineQueryResult {
+class InlineQueryResultVoice implements InlineQueryResult {
+  @override
+  String id;
+  @override
+  String type = 'voice';
+  String voice_url;
+  String title;
+  String caption;
+  String parse_mode;
+  int voice_duration;
+  InlineKeyboardMarkup reply_markup;
+  InputMessageContent input_message_content;
+
+//  InlineQueryResultVoice(String id, this.voice_url, this.title, this.caption,
+//      {this.parse_mode, this.voice_duration, this.reply_markup,
+//        this.input_message_content})
+//      : super('voice', id);
+
+}
+
+@Entity()
+class InlineQueryResultDocument implements InlineQueryResult {
+  @override
+  String id;
+  @override
+  String type = 'document';
   String title;
   String caption;
   String parse_mode;
@@ -694,7 +760,11 @@ class InlineQueryResultDocument extends InlineQueryResult {
 }
 
 @Entity()
-class InlineQueryResultLocation extends InlineQueryResult {
+class InlineQueryResultLocation implements InlineQueryResult {
+  @override
+  String id;
+  @override
+  String type = 'location';
   double latitude;
   double longitude;
   String title;
@@ -713,7 +783,11 @@ class InlineQueryResultLocation extends InlineQueryResult {
 }
 
 @Entity()
-class InlineQueryResultVenue extends InlineQueryResult {
+class InlineQueryResultVenue implements InlineQueryResult {
+  @override
+  String id;
+  @override
+  String type = 'venue';
   double latitude;
   double longitude;
   String title;
@@ -734,7 +808,11 @@ class InlineQueryResultVenue extends InlineQueryResult {
 }
 
 @Entity()
-class InlineQueryResultContact extends InlineQueryResult {
+class InlineQueryResultContact implements InlineQueryResult {
+  @override
+  String id;
+  @override
+  String type = 'contact';
   String phone_number;
   String first_name;
   String last_name;
@@ -752,7 +830,11 @@ class InlineQueryResultContact extends InlineQueryResult {
 }
 
 @Entity()
-class InlineQueryResultGame extends InlineQueryResult {
+class InlineQueryResultGame implements InlineQueryResult {
+  @override
+  String id;
+  @override
+  String type = 'game';
   String game_short_name;
   InlineKeyboardMarkup reply_markup;
 
@@ -762,7 +844,11 @@ class InlineQueryResultGame extends InlineQueryResult {
 }
 
 @Entity()
-class InlineQueryResultCachedPhoto extends InlineQueryResult {
+class InlineQueryResultCachedPhoto implements InlineQueryResult {
+  @override
+  String id;
+  @override
+  String type = 'photo';
   String photo_file_id;
   String title;
   String description;
@@ -779,7 +865,11 @@ class InlineQueryResultCachedPhoto extends InlineQueryResult {
 }
 
 @Entity()
-class InlineQueryResultCachedGif extends InlineQueryResult {
+class InlineQueryResultCachedGif implements InlineQueryResult {
+  @override
+  String id;
+  @override
+  String type = 'gif';
   String gif_file_id;
   String title;
   String caption;
@@ -795,7 +885,11 @@ class InlineQueryResultCachedGif extends InlineQueryResult {
 }
 
 @Entity()
-class InlineQueryResultCachedMpeg4Gif extends InlineQueryResult {
+class InlineQueryResultCachedMpeg4Gif implements InlineQueryResult {
+  @override
+  String id;
+  @override
+  String type = 'mpeg4_gif';
   String mpeg4_file_id;
   String title;
   String caption;
@@ -810,7 +904,11 @@ class InlineQueryResultCachedMpeg4Gif extends InlineQueryResult {
 }
 
 @Entity()
-class InlineQueryResultCachedSticker extends InlineQueryResult {
+class InlineQueryResultCachedSticker implements InlineQueryResult {
+  @override
+  String id;
+  @override
+  String type = 'sticker';
   String sticker_file_id;
   InlineKeyboardMarkup reply_markup;
   InputMessageContent input_message_content;
@@ -822,7 +920,11 @@ class InlineQueryResultCachedSticker extends InlineQueryResult {
 }
 
 @Entity()
-class InlineQueryResultCachedDocument extends InlineQueryResult {
+class InlineQueryResultCachedDocument implements InlineQueryResult {
+  @override
+  String id;
+  @override
+  String type = 'document';
   String document_file_id;
   String description;
   String caption;
@@ -838,7 +940,11 @@ class InlineQueryResultCachedDocument extends InlineQueryResult {
 }
 
 @Entity()
-class InlineQueryResultCachedVideo extends InlineQueryResult {
+class InlineQueryResultCachedVideo implements InlineQueryResult {
+  @override
+  String id;
+  @override
+  String type = 'video';
   String video_file_id;
   String title;
   String description;
@@ -854,7 +960,11 @@ class InlineQueryResultCachedVideo extends InlineQueryResult {
 }
 
 @Entity()
-class InlineQueryResultCachedVoice extends InlineQueryResult {
+class InlineQueryResultCachedVoice implements InlineQueryResult {
+  @override
+  String id;
+  @override
+  String type = 'voice';
   String voice_file_id;
   String title;
   String caption;
@@ -869,7 +979,11 @@ class InlineQueryResultCachedVoice extends InlineQueryResult {
 }
 
 @Entity()
-class InlineQueryResultCachedAudio extends InlineQueryResult {
+class InlineQueryResultCachedAudio implements InlineQueryResult {
+  @override
+  String id;
+  @override
+  String type = 'audio';
   String audio_file_id;
   String caption;
   String parse_mode;
@@ -886,7 +1000,7 @@ class InlineQueryResultCachedAudio extends InlineQueryResult {
 class InputMessageContent {}
 
 @Entity()
-class InputTextMessageContent extends InputMessageContent {
+class InputTextMessageContent implements InputMessageContent {
   String message_text;
   String parse_mode;
   bool disable_web_page_preview;
@@ -897,7 +1011,7 @@ class InputTextMessageContent extends InputMessageContent {
 }
 
 @Entity()
-class InputLocationMessageContent extends InputMessageContent {
+class InputLocationMessageContent implements InputMessageContent {
   double latitude;
   double longitude;
   int live_period;
@@ -908,7 +1022,7 @@ class InputLocationMessageContent extends InputMessageContent {
 }
 
 @Entity()
-class InputVenueMessageContent extends InputMessageContent {
+class InputVenueMessageContent implements InputMessageContent {
   double latitude;
   double longitude;
   String title;
@@ -922,7 +1036,7 @@ class InputVenueMessageContent extends InputMessageContent {
 }
 
 @Entity()
-class InputContactMessageContent extends InputMessageContent {
+class InputContactMessageContent implements InputMessageContent {
   String phone_number;
   String first_name;
   String last_name;
