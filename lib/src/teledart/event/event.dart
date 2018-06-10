@@ -32,7 +32,7 @@ class Event {
   StreamController<Message> _channelPostStreamController;
   StreamController<Message> _editedChannelPostStreamController;
   StreamController<InlineQuery> _inlineQueryStreamController;
-  StreamController<ChosenInlineResult> _chosenInlineQueryStreamController;
+  StreamController<ChosenInlineResult> _chosenInlineResultStreamController;
   StreamController<CallbackQuery> _callbackQueryStreamController;
   StreamController<ShippingQuery> _shippingQueryStreamController;
   StreamController<PreCheckoutQuery> _preCheckoutQueryStreamController;
@@ -45,7 +45,7 @@ class Event {
     _channelPostStreamController = new StreamController.broadcast(sync: sync);
     _editedChannelPostStreamController = new StreamController.broadcast(sync: sync);
     _inlineQueryStreamController = new StreamController.broadcast(sync: sync);
-    _chosenInlineQueryStreamController = new StreamController.broadcast(sync: sync);
+    _chosenInlineResultStreamController = new StreamController.broadcast(sync: sync);
     _callbackQueryStreamController = new StreamController.broadcast(sync: sync);
     _shippingQueryStreamController = new StreamController.broadcast(sync: sync);
     _preCheckoutQueryStreamController = new StreamController.broadcast(sync: sync);
@@ -118,7 +118,7 @@ class Event {
     else if(update.inline_query != null)
       _inlineQueryStreamController.add(update.inline_query);
     else if(update.chosen_inline_result != null)
-      _chosenInlineQueryStreamController.add(update.chosen_inline_result);
+      _chosenInlineResultStreamController.add(update.chosen_inline_result);
     else if(update.callback_query != null)
       _callbackQueryStreamController.add(update.callback_query);
     else if(update.shipping_query != null)
@@ -150,8 +150,8 @@ class Event {
   }
 
   /// Listens to chosen inline query events
-  Stream<ChosenInlineResult> onChosenInlineQuery() {
-    return _chosenInlineQueryStreamController.stream;
+  Stream<ChosenInlineResult> onChosenInlineResult() {
+    return _chosenInlineResultStreamController.stream;
   }
 
   /// Listens to callback query events

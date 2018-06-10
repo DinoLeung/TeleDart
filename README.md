@@ -57,8 +57,28 @@ void main() {
             'https://raw.githubusercontent.com/DinoLeung/TeleDart/master/example/dart_bird_catchs_telegram.png',
             caption: 'This is how the Dart Bird and Telegram are met');
   });
-}
 
+  // Inline mode
+  teledart.onInlineQuery().listen((inlineQuery) {
+    List<InlineQueryResult> results = [
+      new InlineQueryResultArticle()
+        ..id = 'ping'
+        ..title = 'ping'
+        ..input_message_content = (
+            new InputTextMessageContent()
+              ..message_text = '*pong*'
+              ..parse_mode = 'markdown'),
+      new InlineQueryResultArticle()
+        ..id = 'ding'
+        ..title = 'ding'
+        ..input_message_content = (
+            new InputTextMessageContent()
+              ..message_text = '_dong_'
+              ..parse_mode = 'markdown')
+    ];
+    teledart.answerInlineQuery(inlineQuery, results);
+  });
+}
 ```
 
 ## Bugs and feature requests

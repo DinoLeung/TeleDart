@@ -163,7 +163,7 @@ class TeleDart{
   Stream<InlineQuery> onInlineQuery() => _event.onInlineQuery();
 
   /// Listens to chosen inline query events
-  Stream<ChosenInlineResult> onChosenInlineQuery() => _event.onChosenInlineQuery();
+  Stream<ChosenInlineResult> onChosenInlineResult() => _event.onChosenInlineResult();
 
   /// Listens to callback query events
   Stream<CallbackQuery> onCallbackQuery() => _event.onCallbackQuery();
@@ -340,9 +340,15 @@ class TeleDart{
           reply_to_message_id: withQuote ? orgMsg.message_id : null,
           reply_markup: reply_markup);
 
-  /// Short-cut to reply with a caht action
-  Future<bool> replyChatAction(Message orgMsg, String action) =>
-      telegram.sendChatAction(orgMsg.from.id, action);
+  /// Short-cut to answer inline query
+  Future<bool> answerInlineQuery(InlineQuery inline_query, List<InlineQueryResult> results,
+      {int cache_time, bool is_personal, String next_offset, String switch_pm_text,
+        String switch_pm_parameter}) =>
+      telegram.answerInlineQuery(inline_query.id, results,
+          cache_time: cache_time,
+          is_personal: is_personal,
+          next_offset: next_offset,
+          switch_pm_text: switch_pm_text);
 }
 
 class TeleDartException implements Exception {
