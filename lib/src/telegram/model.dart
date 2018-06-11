@@ -154,27 +154,24 @@ class Message {
 
   int indexOfEntity(String type) {
     List<MessageEntity> etts = entities ?? caption_entities;
-    if(etts != null)
+    if (etts != null)
       for (MessageEntity ett in etts)
-        if (ett.type == type)
-          return etts.indexOf(ett);
+        if (ett.type == type) return etts.indexOf(ett);
     return -1;
   }
 
   MessageEntity entityOf(String type) {
     int i = indexOfEntity(type);
-    if(i >= 0) {
+    if (i >= 0)
       return (entities ?? caption_entities)[i];
-    }
     else
       return null;
   }
 
   String getEntity(String type) {
     MessageEntity ett = entityOf(type);
-    if(ett != null) {
+    if (ett != null)
       return (text ?? caption).substring(ett.offset, ett.offset + ett.length);
-    }
     else
       return null;
   }
@@ -1188,7 +1185,7 @@ class Animation {
 }
 
 @Entity()
-class CallbackGame{}
+class CallbackGame {}
 
 @Entity()
 class GameHighScore {
