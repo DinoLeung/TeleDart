@@ -1,5 +1,5 @@
 /**
- *TeleDart - Telegram Bot API for Dart
+ * TeleDart - Telegram Bot API for Dart
  * Copyright (C) 2018  Dino PH Leung
  *
  * This program is free software: you can redistribute it and/or modify
