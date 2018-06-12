@@ -242,7 +242,7 @@ class File {
 }
 
 @Entity()
-class ReplyMarkup {}
+abstract class ReplyMarkup {}
 
 @Entity()
 class ReplyKeyboardMarkup implements ReplyMarkup {
@@ -721,7 +721,7 @@ class InlineQueryResultCachedAudio implements InlineQueryResult {
 }
 
 @Entity()
-class InputMessageContent {}
+abstract class InputMessageContent {}
 
 @Entity()
 class InputTextMessageContent implements InputMessageContent {
