@@ -98,7 +98,7 @@ class Webhook {
         request.response.write('ok');
         request.response.close();
       } else {
-        request.response..statusCode = io.HttpStatus.METHOD_NOT_ALLOWED;
+        request.response..statusCode = io.HttpStatus.methodNotAllowed;
       }
       request.response.close();
     }).onError(
