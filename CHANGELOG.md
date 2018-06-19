@@ -31,3 +31,8 @@
 - Rename ChosenInlineQuery into ChosenInlineResult and associated objects
 - Add missing InlineQueryResultVoice to model
 - Bug fixes
+
+## 0.0.8
+
+- Bug fixes
+- Edit example
