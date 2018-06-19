@@ -1,5 +1,5 @@
 /**
- *TeleDart - Telegram Bot API for Dart
+ * TeleDart - Telegram Bot API for Dart
  * Copyright (C) 2018  Dino PH Leung
  *
  * This program is free software: you can redistribute it and/or modify
@@ -21,7 +21,6 @@ import 'dart:async';
 import '../../telegram/model.dart';
 
 class Event {
-
   /// User object of bot.
   User me;
 
@@ -43,32 +42,36 @@ class Event {
     _messageStreamController = new StreamController.broadcast(sync: sync);
     _editedMessageStreamController = new StreamController.broadcast(sync: sync);
     _channelPostStreamController = new StreamController.broadcast(sync: sync);
-    _editedChannelPostStreamController = new StreamController.broadcast(sync: sync);
+    _editedChannelPostStreamController =
+        new StreamController.broadcast(sync: sync);
     _inlineQueryStreamController = new StreamController.broadcast(sync: sync);
-    _chosenInlineResultStreamController = new StreamController.broadcast(sync: sync);
+    _chosenInlineResultStreamController =
+        new StreamController.broadcast(sync: sync);
     _callbackQueryStreamController = new StreamController.broadcast(sync: sync);
     _shippingQueryStreamController = new StreamController.broadcast(sync: sync);
-    _preCheckoutQueryStreamController = new StreamController.broadcast(sync: sync);
+    _preCheckoutQueryStreamController =
+        new StreamController.broadcast(sync: sync);
   }
 
   /// Listens to message events
   Stream<Message> onMessage({String entityType, String keyword}) {
-    if(entityType == null) {
+    if (entityType == null) {
       if (keyword == null) // no entityType and keyword
         return _messageStreamController.stream;
-      else { // no entityType but keyword
+      else {
+        // no entityType but keyword
         return _messageStreamController.stream.where((Message message) =>
-          (message.text ?? message.caption ?? '').contains(keyword)
-        );
+            (message.text ?? message.caption ?? '').contains(keyword));
       }
-    }
-    else { // with entityType but no keyword
+    } else {
+      // with entityType but no keyword
       if (keyword == null)
-        return _messageStreamController.stream.where((Message message) =>
-          message.entityOf(entityType) != null);
-      else { // with entityType and keyword
+        return _messageStreamController.stream
+            .where((Message message) => message.entityOf(entityType) != null);
+      else {
+        // with entityType and keyword
         return _messageStreamController.stream.where((Message message) {
-          switch (entityType){
+          switch (entityType) {
             case 'mention':
               return message.getEntity(entityType) == '\@${keyword}';
               break;
@@ -76,10 +79,11 @@ class Event {
               return message.getEntity(entityType) == '\#${keyword}';
               break;
             case 'bot_command':
-              return message.getEntity(entityType) == '\/${keyword}'
-                  || message.getEntity(entityType) == '\/${keyword}\@${me.username}';
+              return message.getEntity(entityType) == '\/${keyword}' ||
+                  message.getEntity(entityType) ==
+                      '\/${keyword}\@${me.username}';
               break;
-            case 'url' :
+            case 'url':
             case 'email':
             case 'bold':
             case 'italic':
@@ -91,11 +95,13 @@ class Event {
               return message.entityOf(entityType).url == '${keyword}';
               break;
             case 'text_mention':
-              return message.entityOf(entityType).user.id as String == keyword
-                  || message.entityOf(entityType).user.first_name == keyword;
+              return message.entityOf(entityType).user.id as String ==
+                      keyword ||
+                  message.entityOf(entityType).user.first_name == keyword;
               break;
             default: //entityType not exist
-              throw new TeleDartEventException('Update Type ${entityType} not exist');
+              throw new TeleDartEventException(
+                  'Update Type ${entityType} not exist');
               break;
           }
         });
@@ -105,25 +111,25 @@ class Event {
 
   /// Emits update events
   void emitUpdate(Update update) {
-    if(update == null)
+    if (update == null)
       throw new TeleDartEventException('Update cannot not be null');
-    else if(update.message != null)
+    else if (update.message != null)
       _messageStreamController.add(update.message);
-    else if(update.edited_message != null)
+    else if (update.edited_message != null)
       _editedMessageStreamController.add(update.edited_message);
-    else if(update.channel_post != null)
+    else if (update.channel_post != null)
       _channelPostStreamController.add(update.channel_post);
-    else if(update.edited_channel_post != null)
+    else if (update.edited_channel_post != null)
       _editedChannelPostStreamController.add(update.edited_channel_post);
-    else if(update.inline_query != null)
+    else if (update.inline_query != null)
       _inlineQueryStreamController.add(update.inline_query);
-    else if(update.chosen_inline_result != null)
+    else if (update.chosen_inline_result != null)
       _chosenInlineResultStreamController.add(update.chosen_inline_result);
-    else if(update.callback_query != null)
+    else if (update.callback_query != null)
       _callbackQueryStreamController.add(update.callback_query);
-    else if(update.shipping_query != null)
+    else if (update.shipping_query != null)
       _shippingQueryStreamController.add(update.shipping_query);
-    else if(update.pre_checkout_query != null)
+    else if (update.pre_checkout_query != null)
       _preCheckoutQueryStreamController.add(update.pre_checkout_query);
     else
       throw new TeleDartEventException('Object in Update cannot be null');
@@ -170,9 +176,8 @@ class Event {
   }
 }
 
-class TeleDartEventException implements Exception{
+class TeleDartEventException implements Exception {
   String cause;
   TeleDartEventException(this.cause);
   String toString() => 'TeleDartEventException: ${cause}';
 }
-
