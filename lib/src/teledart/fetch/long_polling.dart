@@ -23,7 +23,7 @@ import '../../telegram/telegram.dart';
 import '../../telegram/model.dart';
 
 class LongPolling {
-  Telegram telegram;
+  final Telegram telegram;
 
   final MAX_TIMEOUT = 50;
 

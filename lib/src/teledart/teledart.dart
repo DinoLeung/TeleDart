@@ -26,8 +26,8 @@ import '../telegram/telegram.dart';
 import '../telegram/model.dart';
 
 class TeleDart {
-  Telegram telegram;
-  Event _event;
+  final Telegram telegram;
+  final Event _event;
 
   LongPolling _longPolling;
   Webhook _webhook;
@@ -35,10 +35,7 @@ class TeleDart {
   final int maxTimeout = 50;
 
   /// Constructor in dependency injection manner
-  TeleDart(Telegram telegram, Event event) {
-    this.telegram = telegram;
-    this._event = event;
-  }
+  TeleDart(this.telegram, this._event);
 
   /// Private method to get bot info
   Future<void> _initBotInfo() async {

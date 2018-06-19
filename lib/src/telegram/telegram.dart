@@ -27,12 +27,12 @@ import 'model.dart';
 import 'http_client.dart';
 
 class Telegram {
+  final Dartson<dynamic> _dson = new Dartson.JSON();
+  final HttpClient _client = new HttpClient();
   final String _baseUrl = 'https://api.telegram.org/bot';
-  String _token;
-  Telegram(this._token);
+  final String _token;
 
-  final _dson = new Dartson.JSON();
-  final _client = new HttpClient();
+  Telegram(this._token);
 
   /// [https://core.telegram.org/bots/api#getupdates](https://core.telegram.org/bots/api#getupdates)
   Future<List<Update>> getUpdates(

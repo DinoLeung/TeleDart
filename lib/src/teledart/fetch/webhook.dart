@@ -26,9 +26,9 @@ import '../../telegram/telegram.dart';
 import '../../telegram/model.dart';
 
 class Webhook {
-  final _dson = new Dartson.JSON();
+  final Telegram telegram;
 
-  Telegram telegram;
+  final _dson = new Dartson.JSON();
 
   io.HttpServer _server;
   io.SecurityContext _context;
