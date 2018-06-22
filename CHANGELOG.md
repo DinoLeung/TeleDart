@@ -36,3 +36,8 @@
 
 - Bug fixes
 - Edit example
+
+## 0.0.9
+
+- Bug fixes
+- Edit example in README.md
