@@ -79,14 +79,18 @@ class LongPolling {
           }
         }
         _recursivePolling();
-      }).catchError((error) {
-        // TODO: find out what exceptions can be ignored
-//        print(error.toString());
-        if (error is io.HandshakeException)
-          _recursivePolling();
-        else
-          throw new LongPollingException(error.toString());
-      });
+      }).catchError((error) =>
+              // TODO: find out what exceptions can be ignored
+              error is io.HandshakeException
+                  ? _recursivePolling()
+                  : throw new LongPollingException(error.toString()));
+//       }).catchError((error) {
+// //        print(error.toString());
+//         if (error is io.HandshakeException)
+//           _recursivePolling();
+//         else
+//           throw new LongPollingException(error.toString());
+//       });
   }
 
   void emitUpdate(Update update) => _updateStreamController.add(update);

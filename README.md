@@ -24,8 +24,6 @@ allowing you to create your own bot easily.
 A simple usage example:
 
 ```
-//import 'dart:io' as io;
-
 import 'package:teledart/teledart.dart';
 import 'package:teledart/telegram.dart';
 import 'package:teledart/model.dart';
@@ -35,33 +33,30 @@ void main() {
 
   teledart.startFetching();
 
-  // You can listen to messages like this
   teledart
-      .onMessage(entityType: 'bot_command', keyword: 'start')
-      .listen((message) {
-    teledart.telegram.sendMessage(message.from.id, 'Hello TeleDart!');
-  });
+        .onCommand('hello')
+        .listen(((message) => teledart.replyMessage(message, 'world')));
+}
+```
 
-  // Or using short cuts
-  teledart
-      .onCommand('short')
-      .listen(((message) => teledart.replyMessage(message, 'This works too!')));
+Modifying [Stream](https://www.dartlang.org/tutorials/language/streams#methods-that-modify-a-stream): 
 
-  // You can even filter streams even more diverse with stream processing methods
-  // See: https://www.dartlang.org/tutorials/language/streams#methods-that-modify-a-stream
-  teledart
+```
+teledart
       .onMessage(keyword: 'dart')
       .where((Message message) => message.text.contains('telegram'))
       .listen((message) {
     teledart.replyPhoto(
         message,
-//            new io.File('example/dart_bird_catchs_telegram.png'),
         'https://raw.githubusercontent.com/DinoLeung/TeleDart/master/example/dart_bird_catchs_telegram.png',
         caption: 'This is how the Dart Bird and Telegram are met');
   });
+```
 
-  // Inline mode
-  teledart.onInlineQuery().listen((inlineQuery) {
+[Inline mode](https://core.telegram.org/bots/api#inline-mode) example:
+
+```
+teledart.onInlineQuery().listen((inlineQuery) {
     List<InlineQueryResult> results = [
       new InlineQueryResultArticle()
         ..id = 'ping'
@@ -78,7 +73,6 @@ void main() {
     ];
     teledart.answerInlineQuery(inlineQuery, results);
   });
-}
 ```
 
 ## Bugs and feature requests

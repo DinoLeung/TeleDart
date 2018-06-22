@@ -71,9 +71,9 @@ class Webhook {
     }
   }
 
-  void setWebhook() {
+  Future<void> setWebhook() async {
     // initialise server
-    Future serverFuture = _context == null
+    Future<dynamic> serverFuture = _context == null
         ? io.HttpServer.bind(io.InternetAddress.loopbackIPv4.address, port)
         : io.HttpServer.bindSecure(
             io.InternetAddress.loopbackIPv4.address, port, _context);
@@ -87,7 +87,7 @@ class Webhook {
         (error) => new Future.error(new WebhookException(error.toString())));
   }
 
-  void startWebhook() {
+  Future<void> startWebhook() async {
     if (_server == null)
       throw new WebhookException(
           'Please use setWebhook() to initialise webhook before start webhook.');
@@ -105,7 +105,7 @@ class Webhook {
         (error) => new Future.error(new WebhookException(error.toString())));
   }
 
-  Future deleteWebhook() async {
+  Future<void> deleteWebhook() async {
     telegram.deleteWebhook().catchError(
         (error) => new Future.error(new WebhookException(error.toString())));
   }
