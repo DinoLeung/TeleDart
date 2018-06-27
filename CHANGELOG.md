@@ -1,28 +1,12 @@
-## 0.0.1
+## 0.0.9
 
-- Initial version, created by Stagehand
+- Bug fixes
+- Edit example in README.md
 
-## 0.0.2
+## 0.0.8
 
-- First release
-
-## 0.0.3
-
-- Edited README.md
-
-## 0.0.4
-
-- More editing on README.md
-
-## 0.0.5
-
-- Add onMessage short-cuts
-- Add sendMessage short-cuts
-- Add missing ShippingQuery to Update
-
-## 0.0.6
-
-- Edit README.md
+- Bug fixes
+- Edit example
 
 ## 0.0.7
 
@@ -32,12 +16,28 @@
 - Add missing InlineQueryResultVoice to model
 - Bug fixes
 
-## 0.0.8
+## 0.0.6
 
-- Bug fixes
-- Edit example
+- Edit README.md
 
-## 0.0.9
+## 0.0.5
 
-- Bug fixes
-- Edit example in README.md
+- Add onMessage short-cuts
+- Add sendMessage short-cuts
+- Add missing ShippingQuery to Update
+
+## 0.0.4
+
+- More editing on README.md
+
+## 0.0.3
+
+- Edited README.md
+
+## 0.0.2
+
+- First release
+
+## 0.0.1
+
+- Initial version, created by Stagehand
