@@ -360,6 +360,7 @@ class Telegram {
     }
   }
 
+  // TODO: #9
   /// [https://core.telegram.org/bots/api#sendMediaGroup](https://core.telegram.org/bots/api#sendMediaGroup)
   Future<List<Message>> sendMediaGroup(chat_id, List<InputMedia> media,
       {bool disable_notification, int reply_to_message_id}) async {

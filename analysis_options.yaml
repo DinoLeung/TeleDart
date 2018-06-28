@@ -14,3 +14,4 @@ linter:
     - unrelated_type_equality_checks
     - valid_regexps
     - always_declare_return_types
+    - prefer_single_quotes
