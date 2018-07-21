@@ -1,3 +1,8 @@
+## 0.0.10
+
+- Fixes pubspec.ymal SDK constraint to support Dart 2 release
+- Edit README.md Dart Version shield to build version
+
 ## 0.0.9
 
 - Bug fixes
