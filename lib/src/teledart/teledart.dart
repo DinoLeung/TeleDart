@@ -143,7 +143,6 @@ class TeleDart {
   ///  onMessage(entityType: 'bot_command', keyword: 'start').listen((message) =>
   ///    teledart.telegram.sendMessage(message.from.id, 'hello world!'));
   ///  ```
-  ///
   Stream<Message> onMessage({String entityType, String keyword}) =>
       _event.onMessage(entityType: entityType, keyword: keyword);
 
