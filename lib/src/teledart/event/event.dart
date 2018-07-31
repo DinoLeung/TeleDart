@@ -59,10 +59,11 @@ class Event {
       if (keyword == null) // no entityType and keyword
         return _messageStreamController.stream;
       else {
-        // TODO: 17
         // no entityType but keyword
+        // with regular expressions
         return _messageStreamController.stream.where((Message message) =>
-            (message.text ?? message.caption ?? '').contains(keyword));
+            (message.text ?? message.caption ?? '')
+                .contains(new RegExp(keyword)));
       }
     } else {
       // with entityType but no keyword
