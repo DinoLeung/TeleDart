@@ -1,3 +1,7 @@
+## 0.0.11
+
+- Supports regular expression in onMessage()
+
 ## 0.0.10
 
 - Fixes pubspec.ymal SDK constraint to support Dart 2 release

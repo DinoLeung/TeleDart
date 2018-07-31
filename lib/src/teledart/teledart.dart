@@ -138,6 +138,8 @@ class TeleDart {
   ///
   /// **Normal message has NO [entityType]**
   ///
+  /// Normal message accepts regular expressions as [keyword]
+  ///
   /// To listen to `/start`
   ///  ```
   ///  onMessage(entityType: 'bot_command', keyword: 'start').listen((message) =>
