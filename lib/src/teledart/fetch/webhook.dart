@@ -20,15 +20,11 @@ import 'dart:async';
 import 'dart:io' as io;
 import 'dart:convert';
 
-import 'package:dartson/dartson.dart';
-
 import '../../telegram/telegram.dart';
 import '../../telegram/model.dart';
 
 class Webhook {
   final Telegram telegram;
-
-  final _dson = new Dartson.JSON();
 
   io.HttpServer _server;
   io.SecurityContext _context;
@@ -93,12 +89,14 @@ class Webhook {
           'Please use setWebhook() to initialise webhook before start webhook.');
     _server.listen((io.HttpRequest request) {
       if (request.method == 'POST' && request.uri.path == this.secretPath) {
-        request.transform(utf8.decoder).join().then((data) =>
-            emitUpdate(_dson.map(jsonDecode(data), new Update(), true)));
+        request
+            .transform(utf8.decoder)
+            .join()
+            .then((data) => emitUpdate(new Update.fromJson(jsonDecode(data))));
         request.response.write('ok');
         request.response.close();
       } else {
-        request.response..statusCode = io.HttpStatus.methodNotAllowed;
+        request.response.statusCode = io.HttpStatus.methodNotAllowed;
       }
       request.response.close();
     }).onError(

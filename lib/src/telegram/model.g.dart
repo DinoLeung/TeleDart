@@ -1,0 +1,1659 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
+part of 'model.dart';
+
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+Update _$UpdateFromJson(Map<String, dynamic> json) {
+  return Update(
+      update_id: json['update_id'] as int,
+      message: Message.fromJson(json['message'] as Map<String, dynamic>),
+      edited_message:
+          Message.fromJson(json['edited_message'] as Map<String, dynamic>),
+      channel_post:
+          Message.fromJson(json['channel_post'] as Map<String, dynamic>),
+      edited_channel_post:
+          Message.fromJson(json['edited_channel_post'] as Map<String, dynamic>),
+      inline_query:
+          InlineQuery.fromJson(json['inline_query'] as Map<String, dynamic>),
+      chosen_inline_result: ChosenInlineResult.fromJson(
+          json['chosen_inline_result'] as Map<String, dynamic>),
+      callback_query: CallbackQuery.fromJson(
+          json['callback_query'] as Map<String, dynamic>),
+      shipping_query: ShippingQuery.fromJson(
+          json['shipping_query'] as Map<String, dynamic>),
+      pre_checkout_query: PreCheckoutQuery.fromJson(
+          json['pre_checkout_query'] as Map<String, dynamic>));
+}
+
+Map<String, dynamic> _$UpdateToJson(Update instance) => <String, dynamic>{
+      'update_id': instance.update_id,
+      'message': instance.message,
+      'edited_message': instance.edited_message,
+      'channel_post': instance.channel_post,
+      'edited_channel_post': instance.edited_channel_post,
+      'inline_query': instance.inline_query,
+      'chosen_inline_result': instance.chosen_inline_result,
+      'callback_query': instance.callback_query,
+      'shipping_query': instance.shipping_query,
+      'pre_checkout_query': instance.pre_checkout_query
+    };
+
+WebhookInfo _$WebhookInfoFromJson(Map<String, dynamic> json) {
+  return WebhookInfo(
+      url: json['url'] as String,
+      has_custom_certificate: json['has_custom_certificate'] as bool,
+      pending_update_count: json['pending_update_count'] as int,
+      last_error_date: json['last_error_date'] as int,
+      last_error_message: json['last_error_message'] as String,
+      max_connections: json['max_connections'] as int,
+      allowed_updates:
+          (json['allowed_updates'] as List).map((e) => e as String).toList());
+}
+
+Map<String, dynamic> _$WebhookInfoToJson(WebhookInfo instance) =>
+    <String, dynamic>{
+      'url': instance.url,
+      'has_custom_certificate': instance.has_custom_certificate,
+      'pending_update_count': instance.pending_update_count,
+      'last_error_date': instance.last_error_date,
+      'last_error_message': instance.last_error_message,
+      'max_connections': instance.max_connections,
+      'allowed_updates': instance.allowed_updates
+    };
+
+User _$UserFromJson(Map<String, dynamic> json) {
+  return User(
+      id: json['id'] as int,
+      is_bot: json['is_bot'] as bool,
+      first_name: json['first_name'] as String,
+      last_name: json['last_name'] as String,
+      username: json['username'] as String,
+      language_code: json['language_code'] as String);
+}
+
+Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
+      'id': instance.id,
+      'is_bot': instance.is_bot,
+      'first_name': instance.first_name,
+      'last_name': instance.last_name,
+      'username': instance.username,
+      'language_code': instance.language_code
+    };
+
+Chat _$ChatFromJson(Map<String, dynamic> json) {
+  return Chat(
+      id: json['id'] as int,
+      type: json['type'] as String,
+      title: json['title'] as String,
+      username: json['username'] as String,
+      first_name: json['first_name'] as String,
+      last_name: json['last_name'] as String,
+      all_members_are_administrators:
+          json['all_members_are_administrators'] as bool,
+      photo: ChatPhoto.fromJson(json['photo'] as Map<String, dynamic>),
+      description: json['description'] as String,
+      invite_link: json['invite_link'] as String,
+      pinned_message:
+          Message.fromJson(json['pinned_message'] as Map<String, dynamic>),
+      sticker_set_name: json['sticker_set_name'] as String,
+      can_set_sticker_set: json['can_set_sticker_set'] as bool);
+}
+
+Map<String, dynamic> _$ChatToJson(Chat instance) => <String, dynamic>{
+      'id': instance.id,
+      'type': instance.type,
+      'title': instance.title,
+      'username': instance.username,
+      'first_name': instance.first_name,
+      'last_name': instance.last_name,
+      'all_members_are_administrators': instance.all_members_are_administrators,
+      'photo': instance.photo,
+      'description': instance.description,
+      'invite_link': instance.invite_link,
+      'pinned_message': instance.pinned_message,
+      'sticker_set_name': instance.sticker_set_name,
+      'can_set_sticker_set': instance.can_set_sticker_set
+    };
+
+Message _$MessageFromJson(Map<String, dynamic> json) {
+  return Message(
+      message_id: json['message_id'] as int,
+      from: User.fromJson(json['from'] as Map<String, dynamic>),
+      date: json['date'] as int,
+      chat: Chat.fromJson(json['chat'] as Map<String, dynamic>),
+      forward_from: User.fromJson(json['forward_from'] as Map<String, dynamic>),
+      forward_from_char:
+          Chat.fromJson(json['forward_from_char'] as Map<String, dynamic>),
+      forward_from_message_id: json['forward_from_message_id'] as int,
+      forward_signature: json['forward_signature'] as String,
+      forward_date: json['forward_date'] as int,
+      reply_to_message:
+          Message.fromJson(json['reply_to_message'] as Map<String, dynamic>),
+      edit_date: json['edit_date'] as int,
+      media_group_id: json['media_group_id'] as String,
+      author_signature: json['author_signature'] as String,
+      text: json['text'] as String,
+      entities: (json['entities'] as List)
+          .map((e) => MessageEntity.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      caption_entities: (json['caption_entities'] as List)
+          .map((e) => MessageEntity.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      audio: Audio.fromJson(json['audio'] as Map<String, dynamic>),
+      document: Document.fromJson(json['document'] as Map<String, dynamic>),
+      game: Game.fromJson(json['game'] as Map<String, dynamic>),
+      photo: (json['photo'] as List)
+          .map((e) => PhotoSize.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      sticker: Sticker.fromJson(json['sticker'] as Map<String, dynamic>),
+      video: Video.fromJson(json['video'] as Map<String, dynamic>),
+      voice: Voice.fromJson(json['voice'] as Map<String, dynamic>),
+      video_note:
+          VideoNote.fromJson(json['video_note'] as Map<String, dynamic>),
+      caption: json['caption'] as String,
+      contact: Contact.fromJson(json['contact'] as Map<String, dynamic>),
+      location: Location.fromJson(json['location'] as Map<String, dynamic>),
+      venue: Venue.fromJson(json['venue'] as Map<String, dynamic>),
+      new_chat_members: (json['new_chat_members'] as List)
+          .map((e) => User.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      left_chat_member:
+          User.fromJson(json['left_chat_member'] as Map<String, dynamic>),
+      new_chat_title: json['new_chat_title'] as String,
+      new_chat_photo: (json['new_chat_photo'] as List)
+          .map((e) => PhotoSize.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      delete_chat_photo: json['delete_chat_photo'] as bool,
+      group_chat_created: json['group_chat_created'] as bool,
+      supergroup_chat_created: json['supergroup_chat_created'] as bool,
+      channel_chat_created: json['channel_chat_created'] as bool,
+      migrate_to_chat_id: json['migrate_to_chat_id'] as int,
+      migrate_from_chat_id: json['migrate_from_chat_id'] as int,
+      pinned_message:
+          Message.fromJson(json['pinned_message'] as Map<String, dynamic>),
+      invoice: Invoice.fromJson(json['invoice'] as Map<String, dynamic>),
+      successful_payment: SuccessfulPayment.fromJson(
+          json['successful_payment'] as Map<String, dynamic>),
+      connected_website: json['connected_website'] as String);
+}
+
+Map<String, dynamic> _$MessageToJson(Message instance) => <String, dynamic>{
+      'message_id': instance.message_id,
+      'from': instance.from,
+      'date': instance.date,
+      'chat': instance.chat,
+      'forward_from': instance.forward_from,
+      'forward_from_char': instance.forward_from_char,
+      'forward_from_message_id': instance.forward_from_message_id,
+      'forward_signature': instance.forward_signature,
+      'forward_date': instance.forward_date,
+      'reply_to_message': instance.reply_to_message,
+      'edit_date': instance.edit_date,
+      'media_group_id': instance.media_group_id,
+      'author_signature': instance.author_signature,
+      'text': instance.text,
+      'entities': instance.entities,
+      'caption_entities': instance.caption_entities,
+      'audio': instance.audio,
+      'document': instance.document,
+      'game': instance.game,
+      'photo': instance.photo,
+      'sticker': instance.sticker,
+      'video': instance.video,
+      'voice': instance.voice,
+      'video_note': instance.video_note,
+      'caption': instance.caption,
+      'contact': instance.contact,
+      'location': instance.location,
+      'venue': instance.venue,
+      'new_chat_members': instance.new_chat_members,
+      'left_chat_member': instance.left_chat_member,
+      'new_chat_title': instance.new_chat_title,
+      'new_chat_photo': instance.new_chat_photo,
+      'delete_chat_photo': instance.delete_chat_photo,
+      'group_chat_created': instance.group_chat_created,
+      'supergroup_chat_created': instance.supergroup_chat_created,
+      'channel_chat_created': instance.channel_chat_created,
+      'migrate_to_chat_id': instance.migrate_to_chat_id,
+      'migrate_from_chat_id': instance.migrate_from_chat_id,
+      'pinned_message': instance.pinned_message,
+      'invoice': instance.invoice,
+      'successful_payment': instance.successful_payment,
+      'connected_website': instance.connected_website
+    };
+
+MessageEntity _$MessageEntityFromJson(Map<String, dynamic> json) {
+  return MessageEntity(
+      type: json['type'] as String,
+      offset: json['offset'] as int,
+      length: json['length'] as int,
+      url: json['url'] as String,
+      user: User.fromJson(json['user'] as Map<String, dynamic>));
+}
+
+Map<String, dynamic> _$MessageEntityToJson(MessageEntity instance) =>
+    <String, dynamic>{
+      'type': instance.type,
+      'offset': instance.offset,
+      'length': instance.length,
+      'url': instance.url,
+      'user': instance.user
+    };
+
+PhotoSize _$PhotoSizeFromJson(Map<String, dynamic> json) {
+  return PhotoSize(
+      file_id: json['file_id'] as String,
+      width: json['width'] as int,
+      height: json['height'] as int,
+      file_size: json['file_size'] as int);
+}
+
+Map<String, dynamic> _$PhotoSizeToJson(PhotoSize instance) => <String, dynamic>{
+      'file_id': instance.file_id,
+      'width': instance.width,
+      'height': instance.height,
+      'file_size': instance.file_size
+    };
+
+Audio _$AudioFromJson(Map<String, dynamic> json) {
+  return Audio(
+      file_id: json['file_id'] as String,
+      duration: json['duration'] as int,
+      performer: json['performer'] as String,
+      title: json['title'] as String,
+      mime_type: json['mime_type'] as String,
+      file_size: json['file_size'] as int);
+}
+
+Map<String, dynamic> _$AudioToJson(Audio instance) => <String, dynamic>{
+      'file_id': instance.file_id,
+      'duration': instance.duration,
+      'performer': instance.performer,
+      'title': instance.title,
+      'mime_type': instance.mime_type,
+      'file_size': instance.file_size
+    };
+
+Document _$DocumentFromJson(Map<String, dynamic> json) {
+  return Document(
+      file_id: json['file_id'] as String,
+      thumb: PhotoSize.fromJson(json['thumb'] as Map<String, dynamic>),
+      file_name: json['file_name'] as String,
+      mimi_type: json['mimi_type'] as String,
+      file_size: json['file_size'] as int);
+}
+
+Map<String, dynamic> _$DocumentToJson(Document instance) => <String, dynamic>{
+      'file_id': instance.file_id,
+      'thumb': instance.thumb,
+      'file_name': instance.file_name,
+      'mimi_type': instance.mimi_type,
+      'file_size': instance.file_size
+    };
+
+Video _$VideoFromJson(Map<String, dynamic> json) {
+  return Video(
+      file_id: json['file_id'] as String,
+      width: json['width'] as int,
+      height: json['height'] as int,
+      duration: json['duration'] as int,
+      thumb: PhotoSize.fromJson(json['thumb'] as Map<String, dynamic>),
+      mime_type: json['mime_type'] as String,
+      file_size: json['file_size'] as int);
+}
+
+Map<String, dynamic> _$VideoToJson(Video instance) => <String, dynamic>{
+      'file_id': instance.file_id,
+      'width': instance.width,
+      'height': instance.height,
+      'duration': instance.duration,
+      'thumb': instance.thumb,
+      'mime_type': instance.mime_type,
+      'file_size': instance.file_size
+    };
+
+Voice _$VoiceFromJson(Map<String, dynamic> json) {
+  return Voice(
+      file_id: json['file_id'] as String,
+      duration: json['duration'] as int,
+      mime_type: json['mime_type'] as String,
+      file_size: json['file_size'] as int);
+}
+
+Map<String, dynamic> _$VoiceToJson(Voice instance) => <String, dynamic>{
+      'file_id': instance.file_id,
+      'duration': instance.duration,
+      'mime_type': instance.mime_type,
+      'file_size': instance.file_size
+    };
+
+VideoNote _$VideoNoteFromJson(Map<String, dynamic> json) {
+  return VideoNote(
+      file_id: json['file_id'] as String,
+      length: json['length'] as int,
+      duration: json['duration'] as int,
+      thumb: PhotoSize.fromJson(json['thumb'] as Map<String, dynamic>),
+      file_size: json['file_size'] as int);
+}
+
+Map<String, dynamic> _$VideoNoteToJson(VideoNote instance) => <String, dynamic>{
+      'file_id': instance.file_id,
+      'length': instance.length,
+      'duration': instance.duration,
+      'thumb': instance.thumb,
+      'file_size': instance.file_size
+    };
+
+Contact _$ContactFromJson(Map<String, dynamic> json) {
+  return Contact(
+      phone_number: json['phone_number'] as String,
+      first_name: json['first_name'] as String,
+      last_name: json['last_name'] as String,
+      user_id: json['user_id'] as int);
+}
+
+Map<String, dynamic> _$ContactToJson(Contact instance) => <String, dynamic>{
+      'phone_number': instance.phone_number,
+      'first_name': instance.first_name,
+      'last_name': instance.last_name,
+      'user_id': instance.user_id
+    };
+
+Location _$LocationFromJson(Map<String, dynamic> json) {
+  return Location(
+      longitude: (json['longitude'] as num).toDouble(),
+      latitude: (json['latitude'] as num).toDouble());
+}
+
+Map<String, dynamic> _$LocationToJson(Location instance) => <String, dynamic>{
+      'longitude': instance.longitude,
+      'latitude': instance.latitude
+    };
+
+Venue _$VenueFromJson(Map<String, dynamic> json) {
+  return Venue(
+      location: Location.fromJson(json['location'] as Map<String, dynamic>),
+      title: json['title'] as String,
+      address: json['address'] as String,
+      foursquare_id: json['foursquare_id'] as String);
+}
+
+Map<String, dynamic> _$VenueToJson(Venue instance) => <String, dynamic>{
+      'location': instance.location,
+      'title': instance.title,
+      'address': instance.address,
+      'foursquare_id': instance.foursquare_id
+    };
+
+UserProfilePhotos _$UserProfilePhotosFromJson(Map<String, dynamic> json) {
+  return UserProfilePhotos(
+      total_count: json['total_count'] as int,
+      photos: (json['photos'] as List)
+          .map((e) => PhotoSize.fromJson(e as Map<String, dynamic>))
+          .toList());
+}
+
+Map<String, dynamic> _$UserProfilePhotosToJson(UserProfilePhotos instance) =>
+    <String, dynamic>{
+      'total_count': instance.total_count,
+      'photos': instance.photos
+    };
+
+File _$FileFromJson(Map<String, dynamic> json) {
+  return File(
+      file_id: json['file_id'] as String,
+      file_size: json['file_size'] as int,
+      file_path: json['file_path'] as String);
+}
+
+Map<String, dynamic> _$FileToJson(File instance) => <String, dynamic>{
+      'file_id': instance.file_id,
+      'file_size': instance.file_size,
+      'file_path': instance.file_path
+    };
+
+ReplyMarkup _$ReplyMarkupFromJson(Map<String, dynamic> json) {
+  return ReplyMarkup();
+}
+
+Map<String, dynamic> _$ReplyMarkupToJson(ReplyMarkup instance) =>
+    <String, dynamic>{};
+
+ReplyKeyboardMarkup _$ReplyKeyboardMarkupFromJson(Map<String, dynamic> json) {
+  return ReplyKeyboardMarkup(
+      keyboard: (json['keyboard'] as List)
+          .map((e) => KeyboardButton.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      resize_keyboard: json['resize_keyboard'] as bool,
+      one_time_keyboard: json['one_time_keyboard'] as bool,
+      selective: json['selective'] as bool);
+}
+
+Map<String, dynamic> _$ReplyKeyboardMarkupToJson(
+        ReplyKeyboardMarkup instance) =>
+    <String, dynamic>{
+      'keyboard': instance.keyboard,
+      'resize_keyboard': instance.resize_keyboard,
+      'one_time_keyboard': instance.one_time_keyboard,
+      'selective': instance.selective
+    };
+
+KeyboardButton _$KeyboardButtonFromJson(Map<String, dynamic> json) {
+  return KeyboardButton(
+      text: json['text'] as String,
+      request_contact: json['request_contact'] as bool,
+      request_location: json['request_location'] as bool);
+}
+
+Map<String, dynamic> _$KeyboardButtonToJson(KeyboardButton instance) =>
+    <String, dynamic>{
+      'text': instance.text,
+      'request_contact': instance.request_contact,
+      'request_location': instance.request_location
+    };
+
+ReplyKeyboardRemove _$ReplyKeyboardRemoveFromJson(Map<String, dynamic> json) {
+  return ReplyKeyboardRemove(
+      remove_keyboard: json['remove_keyboard'] as bool,
+      selective: json['selective'] as bool);
+}
+
+Map<String, dynamic> _$ReplyKeyboardRemoveToJson(
+        ReplyKeyboardRemove instance) =>
+    <String, dynamic>{
+      'remove_keyboard': instance.remove_keyboard,
+      'selective': instance.selective
+    };
+
+InlineKeyboardMarkup _$InlineKeyboardMarkupFromJson(Map<String, dynamic> json) {
+  return InlineKeyboardMarkup(
+      inline_keyboard: (json['inline_keyboard'] as List)
+          .map((e) => InlineKeyboardButton.fromJson(e as Map<String, dynamic>))
+          .toList());
+}
+
+Map<String, dynamic> _$InlineKeyboardMarkupToJson(
+        InlineKeyboardMarkup instance) =>
+    <String, dynamic>{'inline_keyboard': instance.inline_keyboard};
+
+InlineKeyboardButton _$InlineKeyboardButtonFromJson(Map<String, dynamic> json) {
+  return InlineKeyboardButton(
+      text: json['text'] as String,
+      url: json['url'] as String,
+      callback_data: json['callback_data'] as String,
+      switch_inline_query: json['switch_inline_query'] as String,
+      switch_inline_query_current_chat:
+          json['switch_inline_query_current_chat'] as String,
+      callback_game:
+          CallbackGame.fromJson(json['callback_game'] as Map<String, dynamic>),
+      pay: json['pay'] as bool);
+}
+
+Map<String, dynamic> _$InlineKeyboardButtonToJson(
+        InlineKeyboardButton instance) =>
+    <String, dynamic>{
+      'text': instance.text,
+      'url': instance.url,
+      'callback_data': instance.callback_data,
+      'switch_inline_query': instance.switch_inline_query,
+      'switch_inline_query_current_chat':
+          instance.switch_inline_query_current_chat,
+      'callback_game': instance.callback_game,
+      'pay': instance.pay
+    };
+
+CallbackQuery _$CallbackQueryFromJson(Map<String, dynamic> json) {
+  return CallbackQuery(
+      id: json['id'] as String,
+      from: User.fromJson(json['from'] as Map<String, dynamic>),
+      message: Message.fromJson(json['message'] as Map<String, dynamic>),
+      inline_message_id: json['inline_message_id'] as String,
+      chat_instance: json['chat_instance'] as String,
+      data: json['data'] as String,
+      game_short_name: json['game_short_name'] as String);
+}
+
+Map<String, dynamic> _$CallbackQueryToJson(CallbackQuery instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'from': instance.from,
+      'message': instance.message,
+      'inline_message_id': instance.inline_message_id,
+      'chat_instance': instance.chat_instance,
+      'data': instance.data,
+      'game_short_name': instance.game_short_name
+    };
+
+ForceReply _$ForceReplyFromJson(Map<String, dynamic> json) {
+  return ForceReply(
+      forceReply: json['forceReply'] as bool,
+      selective: json['selective'] as bool);
+}
+
+Map<String, dynamic> _$ForceReplyToJson(ForceReply instance) =>
+    <String, dynamic>{
+      'forceReply': instance.forceReply,
+      'selective': instance.selective
+    };
+
+ChatPhoto _$ChatPhotoFromJson(Map<String, dynamic> json) {
+  return ChatPhoto(
+      small_file_id: json['small_file_id'] as String,
+      big_file_id: json['big_file_id'] as String);
+}
+
+Map<String, dynamic> _$ChatPhotoToJson(ChatPhoto instance) => <String, dynamic>{
+      'small_file_id': instance.small_file_id,
+      'big_file_id': instance.big_file_id
+    };
+
+ChatMember _$ChatMemberFromJson(Map<String, dynamic> json) {
+  return ChatMember(
+      user: User.fromJson(json['user'] as Map<String, dynamic>),
+      status: json['status'] as String,
+      until_date: json['until_date'] as int,
+      can_be_edited: json['can_be_edited'] as bool,
+      can_change_info: json['can_change_info'] as bool,
+      can_post_messages: json['can_post_messages'] as bool,
+      can_edit_messages: json['can_edit_messages'] as bool,
+      can_delete_messages: json['can_delete_messages'] as bool,
+      can_invite_users: json['can_invite_users'] as bool,
+      can_restrict_members: json['can_restrict_members'] as bool,
+      can_pin_messages: json['can_pin_messages'] as bool,
+      can_promote_members: json['can_promote_members'] as bool,
+      can_send_message: json['can_send_message'] as bool,
+      can_send_media_messages: json['can_send_media_messages'] as bool,
+      can_send_other_messages: json['can_send_other_messages'] as bool,
+      can_add_web_page_previews: json['can_add_web_page_previews'] as bool);
+}
+
+Map<String, dynamic> _$ChatMemberToJson(ChatMember instance) =>
+    <String, dynamic>{
+      'user': instance.user,
+      'status': instance.status,
+      'until_date': instance.until_date,
+      'can_be_edited': instance.can_be_edited,
+      'can_change_info': instance.can_change_info,
+      'can_post_messages': instance.can_post_messages,
+      'can_edit_messages': instance.can_edit_messages,
+      'can_delete_messages': instance.can_delete_messages,
+      'can_invite_users': instance.can_invite_users,
+      'can_restrict_members': instance.can_restrict_members,
+      'can_pin_messages': instance.can_pin_messages,
+      'can_promote_members': instance.can_promote_members,
+      'can_send_message': instance.can_send_message,
+      'can_send_media_messages': instance.can_send_media_messages,
+      'can_send_other_messages': instance.can_send_other_messages,
+      'can_add_web_page_previews': instance.can_add_web_page_previews
+    };
+
+ResponseParameters _$ResponseParametersFromJson(Map<String, dynamic> json) {
+  return ResponseParameters(
+      migrate_to_chat_id: json['migrate_to_chat_id'] as int,
+      retry_after: json['retry_after'] as int);
+}
+
+Map<String, dynamic> _$ResponseParametersToJson(ResponseParameters instance) =>
+    <String, dynamic>{
+      'migrate_to_chat_id': instance.migrate_to_chat_id,
+      'retry_after': instance.retry_after
+    };
+
+InputMedia _$InputMediaFromJson(Map<String, dynamic> json) {
+  return InputMedia()
+    ..type = json['type'] as String
+    ..media = json['media'] as String
+    ..caption = json['caption'] as String
+    ..parse_mode = json['parse_mode'] as String;
+}
+
+Map<String, dynamic> _$InputMediaToJson(InputMedia instance) =>
+    <String, dynamic>{
+      'type': instance.type,
+      'media': instance.media,
+      'caption': instance.caption,
+      'parse_mode': instance.parse_mode
+    };
+
+InputMediaPhoto _$InputMediaPhotoFromJson(Map<String, dynamic> json) {
+  return InputMediaPhoto(
+      type: json['type'] as String,
+      media: json['media'] as String,
+      caption: json['caption'] as String,
+      parse_mode: json['parse_mode'] as String);
+}
+
+Map<String, dynamic> _$InputMediaPhotoToJson(InputMediaPhoto instance) =>
+    <String, dynamic>{
+      'caption': instance.caption,
+      'media': instance.media,
+      'parse_mode': instance.parse_mode,
+      'type': instance.type
+    };
+
+InputMediaVideo _$InputMediaVideoFromJson(Map<String, dynamic> json) {
+  return InputMediaVideo(
+      type: json['type'] as String,
+      media: json['media'] as String,
+      caption: json['caption'] as String,
+      parse_mode: json['parse_mode'] as String,
+      width: json['width'] as int,
+      height: json['height'] as int,
+      duration: json['duration'] as int,
+      supports_streaming: json['supports_streaming'] as bool);
+}
+
+Map<String, dynamic> _$InputMediaVideoToJson(InputMediaVideo instance) =>
+    <String, dynamic>{
+      'caption': instance.caption,
+      'media': instance.media,
+      'parse_mode': instance.parse_mode,
+      'type': instance.type,
+      'width': instance.width,
+      'height': instance.height,
+      'duration': instance.duration,
+      'supports_streaming': instance.supports_streaming
+    };
+
+Sticker _$StickerFromJson(Map<String, dynamic> json) {
+  return Sticker(
+      file_id: json['file_id'] as String,
+      width: json['width'] as int,
+      height: json['height'] as int,
+      thumb: PhotoSize.fromJson(json['thumb'] as Map<String, dynamic>),
+      emoji: json['emoji'] as String,
+      set_name: json['set_name'] as String,
+      mask_position:
+          MaskPosition.fromJson(json['mask_position'] as Map<String, dynamic>),
+      file_size: json['file_size'] as int);
+}
+
+Map<String, dynamic> _$StickerToJson(Sticker instance) => <String, dynamic>{
+      'file_id': instance.file_id,
+      'width': instance.width,
+      'height': instance.height,
+      'thumb': instance.thumb,
+      'emoji': instance.emoji,
+      'set_name': instance.set_name,
+      'mask_position': instance.mask_position,
+      'file_size': instance.file_size
+    };
+
+StickerSet _$StickerSetFromJson(Map<String, dynamic> json) {
+  return StickerSet(
+      name: json['name'] as String,
+      title: json['title'] as String,
+      contains_masks: json['contains_masks'] as bool,
+      stickers: (json['stickers'] as List)
+          .map((e) => Sticker.fromJson(e as Map<String, dynamic>))
+          .toList());
+}
+
+Map<String, dynamic> _$StickerSetToJson(StickerSet instance) =>
+    <String, dynamic>{
+      'name': instance.name,
+      'title': instance.title,
+      'contains_masks': instance.contains_masks,
+      'stickers': instance.stickers
+    };
+
+MaskPosition _$MaskPositionFromJson(Map<String, dynamic> json) {
+  return MaskPosition(
+      point: Sticker.fromJson(json['point'] as Map<String, dynamic>),
+      x_shift: (json['x_shift'] as num).toDouble(),
+      y_shift: (json['y_shift'] as num).toDouble(),
+      scale: (json['scale'] as num).toDouble());
+}
+
+Map<String, dynamic> _$MaskPositionToJson(MaskPosition instance) =>
+    <String, dynamic>{
+      'point': instance.point,
+      'x_shift': instance.x_shift,
+      'y_shift': instance.y_shift,
+      'scale': instance.scale
+    };
+
+InlineQuery _$InlineQueryFromJson(Map<String, dynamic> json) {
+  return InlineQuery(
+      id: json['id'] as String,
+      from: User.fromJson(json['from'] as Map<String, dynamic>),
+      location: Location.fromJson(json['location'] as Map<String, dynamic>),
+      query: json['query'] as String,
+      offset: json['offset'] as String);
+}
+
+Map<String, dynamic> _$InlineQueryToJson(InlineQuery instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'from': instance.from,
+      'location': instance.location,
+      'query': instance.query,
+      'offset': instance.offset
+    };
+
+InlineQueryResult _$InlineQueryResultFromJson(Map<String, dynamic> json) {
+  return InlineQueryResult()
+    ..type = json['type'] as String
+    ..id = json['id'] as String;
+}
+
+Map<String, dynamic> _$InlineQueryResultToJson(InlineQueryResult instance) =>
+    <String, dynamic>{'type': instance.type, 'id': instance.id};
+
+InlineQueryResultArticle _$InlineQueryResultArticleFromJson(
+    Map<String, dynamic> json) {
+  return InlineQueryResultArticle(
+      id: json['id'] as String,
+      type: json['type'] as String,
+      title: json['title'] as String,
+      input_message_content: InputMessageContent.fromJson(
+          json['input_message_content'] as Map<String, dynamic>),
+      reply_markup: InlineKeyboardMarkup.fromJson(
+          json['reply_markup'] as Map<String, dynamic>),
+      url: json['url'] as String,
+      hide_url: json['hide_url'] as bool,
+      description: json['description'] as String,
+      thumb_url: json['thumb_url'] as String,
+      thumb_width: json['thumb_width'] as String,
+      thumb_height: json['thumb_height'] as String);
+}
+
+Map<String, dynamic> _$InlineQueryResultArticleToJson(
+        InlineQueryResultArticle instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'type': instance.type,
+      'title': instance.title,
+      'input_message_content': instance.input_message_content,
+      'reply_markup': instance.reply_markup,
+      'url': instance.url,
+      'hide_url': instance.hide_url,
+      'description': instance.description,
+      'thumb_url': instance.thumb_url,
+      'thumb_width': instance.thumb_width,
+      'thumb_height': instance.thumb_height
+    };
+
+InlineQueryResultPhoto _$InlineQueryResultPhotoFromJson(
+    Map<String, dynamic> json) {
+  return InlineQueryResultPhoto(
+      id: json['id'] as String,
+      type: json['type'] as String,
+      photo_url: json['photo_url'] as String,
+      thumb_url: json['thumb_url'] as String,
+      photo_width: json['photo_width'] as int,
+      photo_height: json['photo_height'] as int,
+      title: json['title'] as String,
+      description: json['description'] as String,
+      caption: json['caption'] as String,
+      parse_mode: json['parse_mode'] as String,
+      reply_markup: InlineKeyboardMarkup.fromJson(
+          json['reply_markup'] as Map<String, dynamic>),
+      input_message_content: InputMessageContent.fromJson(
+          json['input_message_content'] as Map<String, dynamic>));
+}
+
+Map<String, dynamic> _$InlineQueryResultPhotoToJson(
+        InlineQueryResultPhoto instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'type': instance.type,
+      'photo_url': instance.photo_url,
+      'thumb_url': instance.thumb_url,
+      'photo_width': instance.photo_width,
+      'photo_height': instance.photo_height,
+      'title': instance.title,
+      'description': instance.description,
+      'caption': instance.caption,
+      'parse_mode': instance.parse_mode,
+      'reply_markup': instance.reply_markup,
+      'input_message_content': instance.input_message_content
+    };
+
+InlineQueryResultGif _$InlineQueryResultGifFromJson(Map<String, dynamic> json) {
+  return InlineQueryResultGif(
+      id: json['id'] as String,
+      type: json['type'] as String,
+      gif_url: json['gif_url'] as String,
+      gif_width: json['gif_width'] as int,
+      gif_height: json['gif_height'] as int,
+      gif_duration: json['gif_duration'] as int,
+      thumb_url: json['thumb_url'] as String,
+      caption: json['caption'] as String,
+      parse_mode: json['parse_mode'] as String,
+      reply_markup: InlineKeyboardMarkup.fromJson(
+          json['reply_markup'] as Map<String, dynamic>),
+      input_message_content: InputMessageContent.fromJson(
+          json['input_message_content'] as Map<String, dynamic>));
+}
+
+Map<String, dynamic> _$InlineQueryResultGifToJson(
+        InlineQueryResultGif instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'type': instance.type,
+      'gif_url': instance.gif_url,
+      'gif_width': instance.gif_width,
+      'gif_height': instance.gif_height,
+      'gif_duration': instance.gif_duration,
+      'thumb_url': instance.thumb_url,
+      'caption': instance.caption,
+      'parse_mode': instance.parse_mode,
+      'reply_markup': instance.reply_markup,
+      'input_message_content': instance.input_message_content
+    };
+
+InlineQueryResultMpeg4Gif _$InlineQueryResultMpeg4GifFromJson(
+    Map<String, dynamic> json) {
+  return InlineQueryResultMpeg4Gif(
+      id: json['id'] as String,
+      type: json['type'] as String,
+      mpeg4_url: json['mpeg4_url'] as String,
+      mpeg4_width: json['mpeg4_width'] as int,
+      mpeg4_height: json['mpeg4_height'] as int,
+      mpeg4_duration: json['mpeg4_duration'] as int,
+      thumb_url: json['thumb_url'] as String,
+      title: json['title'] as String,
+      caption: json['caption'] as String,
+      parse_mode: json['parse_mode'] as String,
+      reply_markup: InlineKeyboardMarkup.fromJson(
+          json['reply_markup'] as Map<String, dynamic>),
+      input_message_content: InputMessageContent.fromJson(
+          json['input_message_content'] as Map<String, dynamic>));
+}
+
+Map<String, dynamic> _$InlineQueryResultMpeg4GifToJson(
+        InlineQueryResultMpeg4Gif instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'type': instance.type,
+      'mpeg4_url': instance.mpeg4_url,
+      'mpeg4_width': instance.mpeg4_width,
+      'mpeg4_height': instance.mpeg4_height,
+      'mpeg4_duration': instance.mpeg4_duration,
+      'thumb_url': instance.thumb_url,
+      'title': instance.title,
+      'caption': instance.caption,
+      'parse_mode': instance.parse_mode,
+      'reply_markup': instance.reply_markup,
+      'input_message_content': instance.input_message_content
+    };
+
+InlineQueryResultVideo _$InlineQueryResultVideoFromJson(
+    Map<String, dynamic> json) {
+  return InlineQueryResultVideo(
+      id: json['id'] as String,
+      type: json['type'] as String,
+      video_url: json['video_url'] as String,
+      mime_type: json['mime_type'] as String,
+      thumb_url: json['thumb_url'] as String,
+      title: json['title'] as String,
+      caption: json['caption'] as String,
+      parse_mode: json['parse_mode'] as String,
+      video_width: json['video_width'] as int,
+      video_height: json['video_height'] as int,
+      video_duration: json['video_duration'] as int,
+      description: json['description'] as String,
+      reply_markup: InlineKeyboardMarkup.fromJson(
+          json['reply_markup'] as Map<String, dynamic>),
+      input_message_content: InputMessageContent.fromJson(
+          json['input_message_content'] as Map<String, dynamic>));
+}
+
+Map<String, dynamic> _$InlineQueryResultVideoToJson(
+        InlineQueryResultVideo instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'type': instance.type,
+      'video_url': instance.video_url,
+      'mime_type': instance.mime_type,
+      'thumb_url': instance.thumb_url,
+      'title': instance.title,
+      'caption': instance.caption,
+      'parse_mode': instance.parse_mode,
+      'video_width': instance.video_width,
+      'video_height': instance.video_height,
+      'video_duration': instance.video_duration,
+      'description': instance.description,
+      'reply_markup': instance.reply_markup,
+      'input_message_content': instance.input_message_content
+    };
+
+InlineQueryResultAudio _$InlineQueryResultAudioFromJson(
+    Map<String, dynamic> json) {
+  return InlineQueryResultAudio(
+      id: json['id'] as String,
+      type: json['type'] as String,
+      audio_url: json['audio_url'] as String,
+      title: json['title'] as String,
+      caption: json['caption'] as String,
+      parse_mode: json['parse_mode'] as String,
+      performer: json['performer'] as String,
+      audio_duration: json['audio_duration'] as int,
+      reply_markup: InlineKeyboardMarkup.fromJson(
+          json['reply_markup'] as Map<String, dynamic>),
+      input_message_content: InputMessageContent.fromJson(
+          json['input_message_content'] as Map<String, dynamic>));
+}
+
+Map<String, dynamic> _$InlineQueryResultAudioToJson(
+        InlineQueryResultAudio instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'type': instance.type,
+      'audio_url': instance.audio_url,
+      'title': instance.title,
+      'caption': instance.caption,
+      'parse_mode': instance.parse_mode,
+      'performer': instance.performer,
+      'audio_duration': instance.audio_duration,
+      'reply_markup': instance.reply_markup,
+      'input_message_content': instance.input_message_content
+    };
+
+InlineQueryResultVoice _$InlineQueryResultVoiceFromJson(
+    Map<String, dynamic> json) {
+  return InlineQueryResultVoice(
+      id: json['id'] as String,
+      type: json['type'] as String,
+      voice_url: json['voice_url'] as String,
+      title: json['title'] as String,
+      caption: json['caption'] as String,
+      parse_mode: json['parse_mode'] as String,
+      voice_duration: json['voice_duration'] as int,
+      reply_markup: InlineKeyboardMarkup.fromJson(
+          json['reply_markup'] as Map<String, dynamic>),
+      input_message_content: InputMessageContent.fromJson(
+          json['input_message_content'] as Map<String, dynamic>));
+}
+
+Map<String, dynamic> _$InlineQueryResultVoiceToJson(
+        InlineQueryResultVoice instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'type': instance.type,
+      'voice_url': instance.voice_url,
+      'title': instance.title,
+      'caption': instance.caption,
+      'parse_mode': instance.parse_mode,
+      'voice_duration': instance.voice_duration,
+      'reply_markup': instance.reply_markup,
+      'input_message_content': instance.input_message_content
+    };
+
+InlineQueryResultDocument _$InlineQueryResultDocumentFromJson(
+    Map<String, dynamic> json) {
+  return InlineQueryResultDocument(
+      id: json['id'] as String,
+      type: json['type'] as String,
+      title: json['title'] as String,
+      caption: json['caption'] as String,
+      parse_mode: json['parse_mode'] as String,
+      document_url: json['document_url'] as String,
+      mime_type: json['mime_type'] as String,
+      description: json['description'] as String,
+      reply_markup: InlineKeyboardMarkup.fromJson(
+          json['reply_markup'] as Map<String, dynamic>),
+      input_message_content: InputMessageContent.fromJson(
+          json['input_message_content'] as Map<String, dynamic>),
+      thumb_url: json['thumb_url'] as String,
+      thumb_width: json['thumb_width'] as int,
+      thumb_height: json['thumb_height'] as int);
+}
+
+Map<String, dynamic> _$InlineQueryResultDocumentToJson(
+        InlineQueryResultDocument instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'type': instance.type,
+      'title': instance.title,
+      'caption': instance.caption,
+      'parse_mode': instance.parse_mode,
+      'document_url': instance.document_url,
+      'mime_type': instance.mime_type,
+      'description': instance.description,
+      'reply_markup': instance.reply_markup,
+      'input_message_content': instance.input_message_content,
+      'thumb_url': instance.thumb_url,
+      'thumb_width': instance.thumb_width,
+      'thumb_height': instance.thumb_height
+    };
+
+InlineQueryResultLocation _$InlineQueryResultLocationFromJson(
+    Map<String, dynamic> json) {
+  return InlineQueryResultLocation(
+      id: json['id'] as String,
+      type: json['type'] as String,
+      latitude: (json['latitude'] as num).toDouble(),
+      longitude: (json['longitude'] as num).toDouble(),
+      title: json['title'] as String,
+      live_period: json['live_period'] as int,
+      reply_markup: InlineKeyboardMarkup.fromJson(
+          json['reply_markup'] as Map<String, dynamic>),
+      input_message_content: InputMessageContent.fromJson(
+          json['input_message_content'] as Map<String, dynamic>),
+      thumb_url: json['thumb_url'] as String,
+      thumb_width: json['thumb_width'] as int,
+      thumb_height: json['thumb_height'] as int);
+}
+
+Map<String, dynamic> _$InlineQueryResultLocationToJson(
+        InlineQueryResultLocation instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'type': instance.type,
+      'latitude': instance.latitude,
+      'longitude': instance.longitude,
+      'title': instance.title,
+      'live_period': instance.live_period,
+      'reply_markup': instance.reply_markup,
+      'input_message_content': instance.input_message_content,
+      'thumb_url': instance.thumb_url,
+      'thumb_width': instance.thumb_width,
+      'thumb_height': instance.thumb_height
+    };
+
+InlineQueryResultVenue _$InlineQueryResultVenueFromJson(
+    Map<String, dynamic> json) {
+  return InlineQueryResultVenue(
+      id: json['id'] as String,
+      type: json['type'] as String,
+      latitude: (json['latitude'] as num).toDouble(),
+      longitude: (json['longitude'] as num).toDouble(),
+      title: json['title'] as String,
+      address: json['address'] as String,
+      foursquare_id: json['foursquare_id'] as String,
+      reply_markup: InlineKeyboardMarkup.fromJson(
+          json['reply_markup'] as Map<String, dynamic>),
+      input_message_content: InputMessageContent.fromJson(
+          json['input_message_content'] as Map<String, dynamic>),
+      thumb_url: json['thumb_url'] as String,
+      thumb_width: json['thumb_width'] as int,
+      thumb_height: json['thumb_height'] as int);
+}
+
+Map<String, dynamic> _$InlineQueryResultVenueToJson(
+        InlineQueryResultVenue instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'type': instance.type,
+      'latitude': instance.latitude,
+      'longitude': instance.longitude,
+      'title': instance.title,
+      'address': instance.address,
+      'foursquare_id': instance.foursquare_id,
+      'reply_markup': instance.reply_markup,
+      'input_message_content': instance.input_message_content,
+      'thumb_url': instance.thumb_url,
+      'thumb_width': instance.thumb_width,
+      'thumb_height': instance.thumb_height
+    };
+
+InlineQueryResultContact _$InlineQueryResultContactFromJson(
+    Map<String, dynamic> json) {
+  return InlineQueryResultContact(
+      id: json['id'] as String,
+      type: json['type'] as String,
+      phone_number: json['phone_number'] as String,
+      first_name: json['first_name'] as String,
+      last_name: json['last_name'] as String,
+      reply_markup: InlineKeyboardMarkup.fromJson(
+          json['reply_markup'] as Map<String, dynamic>),
+      input_message_content: InputMessageContent.fromJson(
+          json['input_message_content'] as Map<String, dynamic>),
+      thumb_url: json['thumb_url'] as String,
+      thumb_width: json['thumb_width'] as int,
+      thumb_height: json['thumb_height'] as int);
+}
+
+Map<String, dynamic> _$InlineQueryResultContactToJson(
+        InlineQueryResultContact instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'type': instance.type,
+      'phone_number': instance.phone_number,
+      'first_name': instance.first_name,
+      'last_name': instance.last_name,
+      'reply_markup': instance.reply_markup,
+      'input_message_content': instance.input_message_content,
+      'thumb_url': instance.thumb_url,
+      'thumb_width': instance.thumb_width,
+      'thumb_height': instance.thumb_height
+    };
+
+InlineQueryResultGame _$InlineQueryResultGameFromJson(
+    Map<String, dynamic> json) {
+  return InlineQueryResultGame(
+      id: json['id'] as String,
+      type: json['type'] as String,
+      game_short_name: json['game_short_name'] as String,
+      reply_markup: InlineKeyboardMarkup.fromJson(
+          json['reply_markup'] as Map<String, dynamic>));
+}
+
+Map<String, dynamic> _$InlineQueryResultGameToJson(
+        InlineQueryResultGame instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'type': instance.type,
+      'game_short_name': instance.game_short_name,
+      'reply_markup': instance.reply_markup
+    };
+
+InlineQueryResultCachedPhoto _$InlineQueryResultCachedPhotoFromJson(
+    Map<String, dynamic> json) {
+  return InlineQueryResultCachedPhoto(
+      id: json['id'] as String,
+      type: json['type'] as String,
+      photo_file_id: json['photo_file_id'] as String,
+      title: json['title'] as String,
+      description: json['description'] as String,
+      caption: json['caption'] as String,
+      parse_mode: json['parse_mode'] as String,
+      reply_markup: InlineKeyboardMarkup.fromJson(
+          json['reply_markup'] as Map<String, dynamic>),
+      input_message_content: InputMessageContent.fromJson(
+          json['input_message_content'] as Map<String, dynamic>));
+}
+
+Map<String, dynamic> _$InlineQueryResultCachedPhotoToJson(
+        InlineQueryResultCachedPhoto instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'type': instance.type,
+      'photo_file_id': instance.photo_file_id,
+      'title': instance.title,
+      'description': instance.description,
+      'caption': instance.caption,
+      'parse_mode': instance.parse_mode,
+      'reply_markup': instance.reply_markup,
+      'input_message_content': instance.input_message_content
+    };
+
+InlineQueryResultCachedGif _$InlineQueryResultCachedGifFromJson(
+    Map<String, dynamic> json) {
+  return InlineQueryResultCachedGif(
+      id: json['id'] as String,
+      type: json['type'] as String,
+      gif_file_id: json['gif_file_id'] as String,
+      title: json['title'] as String,
+      caption: json['caption'] as String,
+      parse_mode: json['parse_mode'] as String,
+      reply_markup: InlineKeyboardMarkup.fromJson(
+          json['reply_markup'] as Map<String, dynamic>),
+      input_message_content: InputMessageContent.fromJson(
+          json['input_message_content'] as Map<String, dynamic>));
+}
+
+Map<String, dynamic> _$InlineQueryResultCachedGifToJson(
+        InlineQueryResultCachedGif instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'type': instance.type,
+      'gif_file_id': instance.gif_file_id,
+      'title': instance.title,
+      'caption': instance.caption,
+      'parse_mode': instance.parse_mode,
+      'reply_markup': instance.reply_markup,
+      'input_message_content': instance.input_message_content
+    };
+
+InlineQueryResultCachedMpeg4Gif _$InlineQueryResultCachedMpeg4GifFromJson(
+    Map<String, dynamic> json) {
+  return InlineQueryResultCachedMpeg4Gif(
+      id: json['id'] as String,
+      type: json['type'] as String,
+      mpeg4_file_id: json['mpeg4_file_id'] as String,
+      title: json['title'] as String,
+      caption: json['caption'] as String,
+      parse_mode: json['parse_mode'] as String,
+      reply_markup: InlineKeyboardMarkup.fromJson(
+          json['reply_markup'] as Map<String, dynamic>),
+      input_message_content: InputMessageContent.fromJson(
+          json['input_message_content'] as Map<String, dynamic>));
+}
+
+Map<String, dynamic> _$InlineQueryResultCachedMpeg4GifToJson(
+        InlineQueryResultCachedMpeg4Gif instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'type': instance.type,
+      'mpeg4_file_id': instance.mpeg4_file_id,
+      'title': instance.title,
+      'caption': instance.caption,
+      'parse_mode': instance.parse_mode,
+      'reply_markup': instance.reply_markup,
+      'input_message_content': instance.input_message_content
+    };
+
+InlineQueryResultCachedSticker _$InlineQueryResultCachedStickerFromJson(
+    Map<String, dynamic> json) {
+  return InlineQueryResultCachedSticker(
+      id: json['id'] as String,
+      type: json['type'] as String,
+      sticker_file_id: json['sticker_file_id'] as String,
+      reply_markup: InlineKeyboardMarkup.fromJson(
+          json['reply_markup'] as Map<String, dynamic>),
+      input_message_content: InputMessageContent.fromJson(
+          json['input_message_content'] as Map<String, dynamic>));
+}
+
+Map<String, dynamic> _$InlineQueryResultCachedStickerToJson(
+        InlineQueryResultCachedSticker instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'type': instance.type,
+      'sticker_file_id': instance.sticker_file_id,
+      'reply_markup': instance.reply_markup,
+      'input_message_content': instance.input_message_content
+    };
+
+InlineQueryResultCachedDocument _$InlineQueryResultCachedDocumentFromJson(
+    Map<String, dynamic> json) {
+  return InlineQueryResultCachedDocument(
+      id: json['id'] as String,
+      type: json['type'] as String,
+      document_file_id: json['document_file_id'] as String,
+      description: json['description'] as String,
+      caption: json['caption'] as String,
+      parse_mode: json['parse_mode'] as String,
+      reply_markup: InlineKeyboardMarkup.fromJson(
+          json['reply_markup'] as Map<String, dynamic>),
+      input_message_content: InputMessageContent.fromJson(
+          json['input_message_content'] as Map<String, dynamic>));
+}
+
+Map<String, dynamic> _$InlineQueryResultCachedDocumentToJson(
+        InlineQueryResultCachedDocument instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'type': instance.type,
+      'document_file_id': instance.document_file_id,
+      'description': instance.description,
+      'caption': instance.caption,
+      'parse_mode': instance.parse_mode,
+      'reply_markup': instance.reply_markup,
+      'input_message_content': instance.input_message_content
+    };
+
+InlineQueryResultCachedVideo _$InlineQueryResultCachedVideoFromJson(
+    Map<String, dynamic> json) {
+  return InlineQueryResultCachedVideo(
+      id: json['id'] as String,
+      type: json['type'] as String,
+      video_file_id: json['video_file_id'] as String,
+      title: json['title'] as String,
+      description: json['description'] as String,
+      caption: json['caption'] as String,
+      parse_mode: json['parse_mode'] as String,
+      reply_markup: InlineKeyboardMarkup.fromJson(
+          json['reply_markup'] as Map<String, dynamic>),
+      input_message_content: InputMessageContent.fromJson(
+          json['input_message_content'] as Map<String, dynamic>));
+}
+
+Map<String, dynamic> _$InlineQueryResultCachedVideoToJson(
+        InlineQueryResultCachedVideo instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'type': instance.type,
+      'video_file_id': instance.video_file_id,
+      'title': instance.title,
+      'description': instance.description,
+      'caption': instance.caption,
+      'parse_mode': instance.parse_mode,
+      'reply_markup': instance.reply_markup,
+      'input_message_content': instance.input_message_content
+    };
+
+InlineQueryResultCachedVoice _$InlineQueryResultCachedVoiceFromJson(
+    Map<String, dynamic> json) {
+  return InlineQueryResultCachedVoice(
+      id: json['id'] as String,
+      type: json['type'] as String,
+      voice_file_id: json['voice_file_id'] as String,
+      title: json['title'] as String,
+      caption: json['caption'] as String,
+      parse_mode: json['parse_mode'] as String,
+      reply_markup: InlineKeyboardMarkup.fromJson(
+          json['reply_markup'] as Map<String, dynamic>),
+      input_message_content: InputMessageContent.fromJson(
+          json['input_message_content'] as Map<String, dynamic>));
+}
+
+Map<String, dynamic> _$InlineQueryResultCachedVoiceToJson(
+        InlineQueryResultCachedVoice instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'type': instance.type,
+      'voice_file_id': instance.voice_file_id,
+      'title': instance.title,
+      'caption': instance.caption,
+      'parse_mode': instance.parse_mode,
+      'reply_markup': instance.reply_markup,
+      'input_message_content': instance.input_message_content
+    };
+
+InlineQueryResultCachedAudio _$InlineQueryResultCachedAudioFromJson(
+    Map<String, dynamic> json) {
+  return InlineQueryResultCachedAudio(
+      id: json['id'] as String,
+      type: json['type'] as String,
+      audio_file_id: json['audio_file_id'] as String,
+      caption: json['caption'] as String,
+      parse_mode: json['parse_mode'] as String,
+      reply_markup: InlineKeyboardMarkup.fromJson(
+          json['reply_markup'] as Map<String, dynamic>),
+      input_message_content: InputMessageContent.fromJson(
+          json['input_message_content'] as Map<String, dynamic>));
+}
+
+Map<String, dynamic> _$InlineQueryResultCachedAudioToJson(
+        InlineQueryResultCachedAudio instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'type': instance.type,
+      'audio_file_id': instance.audio_file_id,
+      'caption': instance.caption,
+      'parse_mode': instance.parse_mode,
+      'reply_markup': instance.reply_markup,
+      'input_message_content': instance.input_message_content
+    };
+
+InputMessageContent _$InputMessageContentFromJson(Map<String, dynamic> json) {
+  return InputMessageContent();
+}
+
+Map<String, dynamic> _$InputMessageContentToJson(
+        InputMessageContent instance) =>
+    <String, dynamic>{};
+
+InputTextMessageContent _$InputTextMessageContentFromJson(
+    Map<String, dynamic> json) {
+  return InputTextMessageContent(
+      message_text: json['message_text'] as String,
+      parse_mode: json['parse_mode'] as String,
+      disable_web_page_preview: json['disable_web_page_preview'] as bool);
+}
+
+Map<String, dynamic> _$InputTextMessageContentToJson(
+        InputTextMessageContent instance) =>
+    <String, dynamic>{
+      'message_text': instance.message_text,
+      'parse_mode': instance.parse_mode,
+      'disable_web_page_preview': instance.disable_web_page_preview
+    };
+
+InputLocationMessageContent _$InputLocationMessageContentFromJson(
+    Map<String, dynamic> json) {
+  return InputLocationMessageContent(
+      latitude: (json['latitude'] as num).toDouble(),
+      longitude: (json['longitude'] as num).toDouble(),
+      live_period: json['live_period'] as int);
+}
+
+Map<String, dynamic> _$InputLocationMessageContentToJson(
+        InputLocationMessageContent instance) =>
+    <String, dynamic>{
+      'latitude': instance.latitude,
+      'longitude': instance.longitude,
+      'live_period': instance.live_period
+    };
+
+InputVenueMessageContent _$InputVenueMessageContentFromJson(
+    Map<String, dynamic> json) {
+  return InputVenueMessageContent(
+      latitude: (json['latitude'] as num).toDouble(),
+      longitude: (json['longitude'] as num).toDouble(),
+      title: json['title'] as String,
+      address: json['address'] as String,
+      foursquare_id: json['foursquare_id'] as String);
+}
+
+Map<String, dynamic> _$InputVenueMessageContentToJson(
+        InputVenueMessageContent instance) =>
+    <String, dynamic>{
+      'latitude': instance.latitude,
+      'longitude': instance.longitude,
+      'title': instance.title,
+      'address': instance.address,
+      'foursquare_id': instance.foursquare_id
+    };
+
+InputContactMessageContent _$InputContactMessageContentFromJson(
+    Map<String, dynamic> json) {
+  return InputContactMessageContent(
+      phone_number: json['phone_number'] as String,
+      first_name: json['first_name'] as String,
+      last_name: json['last_name'] as String);
+}
+
+Map<String, dynamic> _$InputContactMessageContentToJson(
+        InputContactMessageContent instance) =>
+    <String, dynamic>{
+      'phone_number': instance.phone_number,
+      'first_name': instance.first_name,
+      'last_name': instance.last_name
+    };
+
+ChosenInlineResult _$ChosenInlineResultFromJson(Map<String, dynamic> json) {
+  return ChosenInlineResult(
+      result_id: json['result_id'] as String,
+      from: User.fromJson(json['from'] as Map<String, dynamic>),
+      location: Location.fromJson(json['location'] as Map<String, dynamic>),
+      inline_message_id: json['inline_message_id'] as String,
+      query: json['query'] as String);
+}
+
+Map<String, dynamic> _$ChosenInlineResultToJson(ChosenInlineResult instance) =>
+    <String, dynamic>{
+      'result_id': instance.result_id,
+      'from': instance.from,
+      'location': instance.location,
+      'inline_message_id': instance.inline_message_id,
+      'query': instance.query
+    };
+
+LabeledPrice _$LabeledPriceFromJson(Map<String, dynamic> json) {
+  return LabeledPrice(
+      label: json['label'] as String, amount: json['amount'] as int);
+}
+
+Map<String, dynamic> _$LabeledPriceToJson(LabeledPrice instance) =>
+    <String, dynamic>{'label': instance.label, 'amount': instance.amount};
+
+Invoice _$InvoiceFromJson(Map<String, dynamic> json) {
+  return Invoice(
+      title: json['title'] as String,
+      description: json['description'] as String,
+      start_parameter: json['start_parameter'] as String,
+      currency: json['currency'] as String,
+      total_amount: json['total_amount'] as int);
+}
+
+Map<String, dynamic> _$InvoiceToJson(Invoice instance) => <String, dynamic>{
+      'title': instance.title,
+      'description': instance.description,
+      'start_parameter': instance.start_parameter,
+      'currency': instance.currency,
+      'total_amount': instance.total_amount
+    };
+
+ShippingAddress _$ShippingAddressFromJson(Map<String, dynamic> json) {
+  return ShippingAddress(
+      country_code: json['country_code'] as String,
+      state: json['state'] as String,
+      city: json['city'] as String,
+      street_line1: json['street_line1'] as String,
+      street_line2: json['street_line2'] as String,
+      post_code: json['post_code'] as String);
+}
+
+Map<String, dynamic> _$ShippingAddressToJson(ShippingAddress instance) =>
+    <String, dynamic>{
+      'country_code': instance.country_code,
+      'state': instance.state,
+      'city': instance.city,
+      'street_line1': instance.street_line1,
+      'street_line2': instance.street_line2,
+      'post_code': instance.post_code
+    };
+
+OrderInfo _$OrderInfoFromJson(Map<String, dynamic> json) {
+  return OrderInfo(
+      name: json['name'] as String,
+      phone_number: json['phone_number'] as String,
+      email: json['email'] as String,
+      shippingAddress: ShippingAddress.fromJson(
+          json['shippingAddress'] as Map<String, dynamic>));
+}
+
+Map<String, dynamic> _$OrderInfoToJson(OrderInfo instance) => <String, dynamic>{
+      'name': instance.name,
+      'phone_number': instance.phone_number,
+      'email': instance.email,
+      'shippingAddress': instance.shippingAddress
+    };
+
+ShippingOption _$ShippingOptionFromJson(Map<String, dynamic> json) {
+  return ShippingOption(
+      id: json['id'] as String,
+      title: json['title'] as String,
+      prices: (json['prices'] as List)
+          .map((e) => LabeledPrice.fromJson(e as Map<String, dynamic>))
+          .toList());
+}
+
+Map<String, dynamic> _$ShippingOptionToJson(ShippingOption instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'title': instance.title,
+      'prices': instance.prices
+    };
+
+SuccessfulPayment _$SuccessfulPaymentFromJson(Map<String, dynamic> json) {
+  return SuccessfulPayment(
+      currency: json['currency'] as String,
+      total_amount: json['total_amount'] as int,
+      invoice_payload: json['invoice_payload'] as String,
+      shipping_option_id: json['shipping_option_id'] as String,
+      order_info:
+          OrderInfo.fromJson(json['order_info'] as Map<String, dynamic>),
+      telegram_payment_charge_id: json['telegram_payment_charge_id'] as String,
+      provider_payment_charge_id: json['provider_payment_charge_id'] as String);
+}
+
+Map<String, dynamic> _$SuccessfulPaymentToJson(SuccessfulPayment instance) =>
+    <String, dynamic>{
+      'currency': instance.currency,
+      'total_amount': instance.total_amount,
+      'invoice_payload': instance.invoice_payload,
+      'shipping_option_id': instance.shipping_option_id,
+      'order_info': instance.order_info,
+      'telegram_payment_charge_id': instance.telegram_payment_charge_id,
+      'provider_payment_charge_id': instance.provider_payment_charge_id
+    };
+
+ShippingQuery _$ShippingQueryFromJson(Map<String, dynamic> json) {
+  return ShippingQuery(
+      id: json['id'] as String,
+      from: User.fromJson(json['from'] as Map<String, dynamic>),
+      invoice_payload: json['invoice_payload'] as String,
+      shipping_address: ShippingAddress.fromJson(
+          json['shipping_address'] as Map<String, dynamic>));
+}
+
+Map<String, dynamic> _$ShippingQueryToJson(ShippingQuery instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'from': instance.from,
+      'invoice_payload': instance.invoice_payload,
+      'shipping_address': instance.shipping_address
+    };
+
+PreCheckoutQuery _$PreCheckoutQueryFromJson(Map<String, dynamic> json) {
+  return PreCheckoutQuery(
+      id: json['id'] as String,
+      from: User.fromJson(json['from'] as Map<String, dynamic>),
+      currency: json['currency'] as String,
+      total_amount: json['total_amount'] as int,
+      invoice_payload: json['invoice_payload'] as String,
+      shipping_option_id: json['shipping_option_id'] as String,
+      order_info:
+          OrderInfo.fromJson(json['order_info'] as Map<String, dynamic>));
+}
+
+Map<String, dynamic> _$PreCheckoutQueryToJson(PreCheckoutQuery instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'from': instance.from,
+      'currency': instance.currency,
+      'total_amount': instance.total_amount,
+      'invoice_payload': instance.invoice_payload,
+      'shipping_option_id': instance.shipping_option_id,
+      'order_info': instance.order_info
+    };
+
+Game _$GameFromJson(Map<String, dynamic> json) {
+  return Game(
+      title: json['title'] as String,
+      description: json['description'] as String,
+      photo: (json['photo'] as List)
+          .map((e) => PhotoSize.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      text: json['text'] as String,
+      text_entities: (json['text_entities'] as List)
+          .map((e) => MessageEntity.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      animation: Animation.fromJson(json['animation'] as Map<String, dynamic>));
+}
+
+Map<String, dynamic> _$GameToJson(Game instance) => <String, dynamic>{
+      'title': instance.title,
+      'description': instance.description,
+      'photo': instance.photo,
+      'text': instance.text,
+      'text_entities': instance.text_entities,
+      'animation': instance.animation
+    };
+
+Animation _$AnimationFromJson(Map<String, dynamic> json) {
+  return Animation(
+      file_id: json['file_id'] as String,
+      thumb: PhotoSize.fromJson(json['thumb'] as Map<String, dynamic>),
+      file_name: json['file_name'] as String,
+      mime_type: json['mime_type'] as String,
+      file_size: json['file_size'] as int);
+}
+
+Map<String, dynamic> _$AnimationToJson(Animation instance) => <String, dynamic>{
+      'file_id': instance.file_id,
+      'thumb': instance.thumb,
+      'file_name': instance.file_name,
+      'mime_type': instance.mime_type,
+      'file_size': instance.file_size
+    };
+
+CallbackGame _$CallbackGameFromJson(Map<String, dynamic> json) {
+  return CallbackGame();
+}
+
+Map<String, dynamic> _$CallbackGameToJson(CallbackGame instance) =>
+    <String, dynamic>{};
+
+GameHighScore _$GameHighScoreFromJson(Map<String, dynamic> json) {
+  return GameHighScore(
+      position: json['position'] as int,
+      user: User.fromJson(json['user'] as Map<String, dynamic>),
+      score: json['score'] as int);
+}
+
+Map<String, dynamic> _$GameHighScoreToJson(GameHighScore instance) =>
+    <String, dynamic>{
+      'position': instance.position,
+      'user': instance.user,
+      'score': instance.score
+    };
