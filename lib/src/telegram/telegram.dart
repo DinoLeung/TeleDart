@@ -45,7 +45,6 @@ class Telegram {
         (allowed_updates == null
             ? ''
             : 'allowed_updates=${jsonEncode(allowed_updates)}');
-    // return _client.httpGet(requestUrl, returnType: new Update(), isList: true);
     return (await _client.httpGet(requestUrl))
         .map<Update>((update) => Update.fromJson(update))
         .toList();
@@ -347,8 +346,6 @@ class Telegram {
       'disable_notification': disable_notification ?? '',
       'reply_to_message_id': reply_to_message_id ?? ''
     };
-    // return _client.httpPost(requestUrl,
-    //     body: body, returnType: new Message(), isList: true);
     return (await _client.httpPost(requestUrl, body: body))
         .map<Message>((message) => Message.fromJson(message))
         .toList();
@@ -470,11 +467,6 @@ class Telegram {
       'offset': offset ?? '',
       'limit': limit ?? ''
     };
-    // return _client.httpPost(requestUrl,
-    //     body: body,
-    //     returnType: new UserProfilePhotos(),
-    //     isList: true,
-    //     jsonItem: 'photos');
     return ((await _client.httpPost(requestUrl, body: body))['photos'])
         .map<UserProfilePhotos>((photo) => UserProfilePhotos.fromJson(photo))
         .toList();
@@ -631,8 +623,6 @@ class Telegram {
   Future<List<ChatMember>> getChatAdministrators(int chat_id) async {
     String requestUrl = '${_baseUrl}${_token}/getChatAdministrators';
     Map<String, dynamic> body = {'chat_id': chat_id};
-    // return _client.httpPost(requestUrl,
-    //     body: body, returnType: new ChatMember(), isList: true);
     return (await _client.httpPost(requestUrl, body: body))
         .map<ChatMember>((member) => ChatMember.fromJson(member))
         .toList();
@@ -804,8 +794,6 @@ class Telegram {
   Future<StickerSet> getStickerSet(String name) async {
     String requestUrl = '${_baseUrl}${_token}/getStickerSet';
     Map<String, dynamic> body = {'name': name};
-    // return _client.httpPost(requestUrl,
-    //     body: body, returnType: new StickerSet(), isList: true);
     return StickerSet.fromJson(await _client.httpPost(requestUrl, body: body));
   }
 
@@ -1051,8 +1039,6 @@ class Telegram {
       'message_id': message_id ?? '',
       'inline_message_id': inline_message_id ?? ''
     };
-    // return _client.httpPost(requestUrl,
-    //     body: body, returnType: new GameHighScore(), isList: true);
     return (await _client.httpPost(requestUrl, body: body))
         .map<GameHighScore>(
             (gameHighScore) => GameHighScore.fromJson(gameHighScore))
