@@ -19,23 +19,16 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:dartson/dartson.dart';
 import 'package:http/http.dart' as http;
 
 class HttpClient {
-  final _dson = new Dartson.JSON();
-
   /// HTTP get method
   /// [url] request url with query string (required)
-  /// [returnType] - nominate a type return object
-  /// [isList] - true if return list of nominated object
-  Future<dynamic> httpGet(String url, {Object returnType, bool isList}) async {
+  Future<dynamic> httpGet(String url) async {
     return http.get(url).then((response) {
       Map<String, dynamic> body = jsonDecode(response.body);
       if (body['ok'])
-        return returnType != null
-            ? _dson.map(body['result'], returnType, isList)
-            : body['result'];
+        return body['result'];
       else
         return new Future.error(new HttpClientException(
             '${body['error_code']} ${body['description']}'));
@@ -46,50 +39,41 @@ class HttpClient {
   /// HTTP post method (x-www-form-urlencoded)
   /// [url] - request url (required)
   /// [body] - parameters in map
-  /// [returnType] - nominate a type return object
-  /// [isList] - true if return list of nominated object
-  /// [jsonItem] - specific json child other then `result`
-  Future<dynamic> httpPost(String url,
-      {Map body, Object returnType, bool isList, String jsonItem}) async {
-    return http.post(url, body: body).then((response) {
-      Map<String, dynamic> body = jsonDecode(response.body);
-      if (body['ok']) {
-        dynamic json =
-            (jsonItem == null ? body['result'] : body['result'][jsonItem]);
-        return returnType != null ? _dson.map(json, returnType, isList) : json;
-      } else
+  Future<dynamic> httpPost(String url, {Map<String, dynamic> body}) async {
+    return http
+        .post(url, body: body.map((k, v) => MapEntry(k, '${v}')))
+        .then((response) {
+      Map<String, dynamic> responseBody = jsonDecode(response.body);
+      if (responseBody['ok'])
+        return responseBody['result'];
+      else
         return new Future.error(new HttpClientException(
-            '${body['error_code']} ${body['description']}'));
+            '${responseBody['error_code']} ${responseBody['description']}'));
     }).catchError(
-        (error) => new Future.error(new HttpClientException('${error}')));
+            (error) => new Future.error(new HttpClientException('${error}')));
   }
 
   /// HTTP post method (multipart/form-data)
   /// [url] - request url (required)
   /// [file] - file to upload (required)
   /// [body] - parameters in map
-  /// [returnType] - nominate a type return object
-  /// [isList] - true if return list of nominated object
-  /// [jsonItem] - specific json child other then `result`
   Future<dynamic> httpMultipartPost(String url, http.MultipartFile file,
-      {Map body, Object returnType, bool isList, String jsonItem}) async {
+      {Map<String, dynamic> body}) async {
     http.MultipartRequest request =
         new http.MultipartRequest('POST', Uri.parse(url))
           ..headers.addAll({'Content-Type': 'multipart/form-data'})
-          ..fields.addAll(body)
+          ..fields.addAll(body.map((k, v) => MapEntry(k, '${v}')))
           ..files.add(file);
     return request
         .send()
         .then((response) => http.Response.fromStream(response))
         .then((response) {
-      Map<String, dynamic> body = jsonDecode(response.body);
-      if (body['ok']) {
-        dynamic json =
-            (jsonItem == null ? body['result'] : body['result'][jsonItem]);
-        return returnType != null ? _dson.map(json, returnType, isList) : json;
-      } else
+      Map<String, dynamic> responseBody = jsonDecode(response.body);
+      if (responseBody['ok'])
+        return responseBody['result'];
+      else
         return new Future.error(new HttpClientException(
-            '${body['error_code']} ${body['description']}'));
+            '${responseBody['error_code']} ${responseBody['description']}'));
     }).catchError(
             (error) => new Future.error(new HttpClientException('${error}')));
   }

@@ -1,3 +1,8 @@
+## 0.0.12
+
+- Depends on json_serializable/json_annotation handling json objects
+- Fixes typos in model.dart
+
 ## 0.0.11
 
 - Supports regular expression in onMessage()
