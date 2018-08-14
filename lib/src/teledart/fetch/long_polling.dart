@@ -35,7 +35,7 @@ class LongPolling {
   bool _isPolling = false;
   bool get isPolling => _isPolling;
 
-  StreamController _updateStreamController;
+  StreamController<Update> _updateStreamController;
 
   LongPolling(this.telegram,
       {this.offset: 0,

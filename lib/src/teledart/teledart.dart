@@ -125,9 +125,7 @@ class TeleDart {
   }
 
   // Private method to add updates into events queue
-  void _updatesHandler(Update update) {
-    _event.emitUpdate(update);
-  }
+  void _updatesHandler(Update update) => _event.emitUpdate(update);
 
   /// Listens to message events with [entityType] and [keyword] in text and caption
   ///

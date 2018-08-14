@@ -23,7 +23,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'model.g.dart';
 
-@JsonSerializable(nullable: false)
+@JsonSerializable(nullable: true)
 class Update {
   int update_id;
   Message message;
@@ -50,7 +50,7 @@ class Update {
   Map<String, dynamic> toJson() => _$UpdateToJson(this);
 }
 
-@JsonSerializable(nullable: false)
+@JsonSerializable(nullable: true)
 class WebhookInfo {
   String url;
   bool has_custom_certificate;
@@ -72,7 +72,7 @@ class WebhookInfo {
   Map<String, dynamic> toJson() => _$WebhookInfoToJson(this);
 }
 
-@JsonSerializable(nullable: false)
+@JsonSerializable(nullable: true)
 class User {
   int id;
   bool is_bot;
@@ -91,7 +91,7 @@ class User {
   Map<String, dynamic> toJson() => _$UserToJson(this);
 }
 
-@JsonSerializable(nullable: false)
+@JsonSerializable(nullable: true)
 class Chat {
   int id;
   String type;
@@ -124,14 +124,14 @@ class Chat {
   Map<String, dynamic> toJson() => _$ChatToJson(this);
 }
 
-@JsonSerializable(nullable: false)
+@JsonSerializable(nullable: true)
 class Message {
   int message_id;
   User from;
   int date;
   Chat chat;
   User forward_from;
-  Chat forward_from_char;
+  Chat forward_from_chat;
   int forward_from_message_id;
   String forward_signature;
   int forward_date;
@@ -144,6 +144,7 @@ class Message {
   List<MessageEntity> caption_entities;
   Audio audio;
   Document document;
+  Animation animation;
   Game game;
   List<PhotoSize> photo;
   Sticker sticker;
@@ -168,50 +169,54 @@ class Message {
   Invoice invoice;
   SuccessfulPayment successful_payment;
   String connected_website;
+  // PassportData passport_data;
 
-  Message(
-      {this.message_id,
-      this.from,
-      this.date,
-      this.chat,
-      this.forward_from,
-      this.forward_from_char,
-      this.forward_from_message_id,
-      this.forward_signature,
-      this.forward_date,
-      this.reply_to_message,
-      this.edit_date,
-      this.media_group_id,
-      this.author_signature,
-      this.text,
-      this.entities,
-      this.caption_entities,
-      this.audio,
-      this.document,
-      this.game,
-      this.photo,
-      this.sticker,
-      this.video,
-      this.voice,
-      this.video_note,
-      this.caption,
-      this.contact,
-      this.location,
-      this.venue,
-      this.new_chat_members,
-      this.left_chat_member,
-      this.new_chat_title,
-      this.new_chat_photo,
-      this.delete_chat_photo,
-      this.group_chat_created,
-      this.supergroup_chat_created,
-      this.channel_chat_created,
-      this.migrate_to_chat_id,
-      this.migrate_from_chat_id,
-      this.pinned_message,
-      this.invoice,
-      this.successful_payment,
-      this.connected_website});
+  Message({
+    this.message_id,
+    this.from,
+    this.date,
+    this.chat,
+    this.forward_from,
+    this.forward_from_chat,
+    this.forward_from_message_id,
+    this.forward_signature,
+    this.forward_date,
+    this.reply_to_message,
+    this.edit_date,
+    this.media_group_id,
+    this.author_signature,
+    this.text,
+    this.entities,
+    this.caption_entities,
+    this.audio,
+    this.document,
+    this.animation,
+    this.game,
+    this.photo,
+    this.sticker,
+    this.video,
+    this.voice,
+    this.video_note,
+    this.caption,
+    this.contact,
+    this.location,
+    this.venue,
+    this.new_chat_members,
+    this.left_chat_member,
+    this.new_chat_title,
+    this.new_chat_photo,
+    this.delete_chat_photo,
+    this.group_chat_created,
+    this.supergroup_chat_created,
+    this.channel_chat_created,
+    this.migrate_to_chat_id,
+    this.migrate_from_chat_id,
+    this.pinned_message,
+    this.invoice,
+    this.successful_payment,
+    this.connected_website,
+    // this.passport_data
+  });
 
   factory Message.fromJson(Map<String, dynamic> json) =>
       _$MessageFromJson(json);
@@ -242,7 +247,7 @@ class Message {
   }
 }
 
-@JsonSerializable(nullable: false)
+@JsonSerializable(nullable: true)
 class MessageEntity {
   String type;
   int offset;
@@ -255,7 +260,7 @@ class MessageEntity {
   Map<String, dynamic> toJson() => _$MessageEntityToJson(this);
 }
 
-@JsonSerializable(nullable: false)
+@JsonSerializable(nullable: true)
 class PhotoSize {
   String file_id;
   int width;
@@ -267,7 +272,7 @@ class PhotoSize {
   Map<String, dynamic> toJson() => _$PhotoSizeToJson(this);
 }
 
-@JsonSerializable(nullable: false)
+@JsonSerializable(nullable: true)
 class Audio {
   String file_id;
   int duration;
@@ -275,36 +280,38 @@ class Audio {
   String title;
   String mime_type;
   int file_size;
+  PhotoSize thumb;
   Audio(
       {this.file_id,
       this.duration,
       this.performer,
       this.title,
       this.mime_type,
-      this.file_size});
+      this.file_size,
+      this.thumb});
   factory Audio.fromJson(Map<String, dynamic> json) => _$AudioFromJson(json);
   Map<String, dynamic> toJson() => _$AudioToJson(this);
 }
 
-@JsonSerializable(nullable: false)
+@JsonSerializable(nullable: true)
 class Document {
   String file_id;
   PhotoSize thumb;
   String file_name;
-  String mimi_type;
+  String mime_type;
   int file_size;
   Document(
       {this.file_id,
       this.thumb,
       this.file_name,
-      this.mimi_type,
+      this.mime_type,
       this.file_size});
   factory Document.fromJson(Map<String, dynamic> json) =>
       _$DocumentFromJson(json);
   Map<String, dynamic> toJson() => _$DocumentToJson(this);
 }
 
-@JsonSerializable(nullable: false)
+@JsonSerializable(nullable: true)
 class Video {
   String file_id;
   int width;
@@ -325,7 +332,31 @@ class Video {
   Map<String, dynamic> toJson() => _$VideoToJson(this);
 }
 
-@JsonSerializable(nullable: false)
+@JsonSerializable(nullable: true)
+class Animation {
+  String file_id;
+  int width;
+  int height;
+  int duration;
+  PhotoSize thumb;
+  String file_name;
+  String mime_type;
+  int file_size;
+  Animation(
+      {this.file_id,
+      this.width,
+      this.height,
+      this.duration,
+      this.thumb,
+      this.file_name,
+      this.mime_type,
+      this.file_size});
+  factory Animation.fromJson(Map<String, dynamic> json) =>
+      _$AnimationFromJson(json);
+  Map<String, dynamic> toJson() => _$AnimationToJson(this);
+}
+
+@JsonSerializable(nullable: true)
 class Voice {
   String file_id;
   int duration;
@@ -336,7 +367,7 @@ class Voice {
   Map<String, dynamic> toJson() => _$VoiceToJson(this);
 }
 
-@JsonSerializable(nullable: false)
+@JsonSerializable(nullable: true)
 class VideoNote {
   String file_id;
   int length;
@@ -350,19 +381,25 @@ class VideoNote {
   Map<String, dynamic> toJson() => _$VideoNoteToJson(this);
 }
 
-@JsonSerializable(nullable: false)
+@JsonSerializable(nullable: true)
 class Contact {
   String phone_number;
   String first_name;
   String last_name;
   int user_id;
-  Contact({this.phone_number, this.first_name, this.last_name, this.user_id});
+  String vcard;
+  Contact(
+      {this.phone_number,
+      this.first_name,
+      this.last_name,
+      this.user_id,
+      this.vcard});
   factory Contact.fromJson(Map<String, dynamic> json) =>
       _$ContactFromJson(json);
   Map<String, dynamic> toJson() => _$ContactToJson(this);
 }
 
-@JsonSerializable(nullable: false)
+@JsonSerializable(nullable: true)
 class Location {
   double longitude;
   double latitude;
@@ -373,18 +410,24 @@ class Location {
       _$LocationToJson(this);
 }
 
-@JsonSerializable(nullable: false)
+@JsonSerializable(nullable: true)
 class Venue {
   Location location;
   String title;
   String address;
   String foursquare_id;
-  Venue({this.location, this.title, this.address, this.foursquare_id});
+  String foursquare_type;
+  Venue(
+      {this.location,
+      this.title,
+      this.address,
+      this.foursquare_id,
+      this.foursquare_type});
   factory Venue.fromJson(Map<String, dynamic> json) => _$VenueFromJson(json);
   Map<String, dynamic> toJson() => _$VenueToJson(this);
 }
 
-@JsonSerializable(nullable: false)
+@JsonSerializable(nullable: true)
 class UserProfilePhotos {
   int total_count;
   List<PhotoSize> photos;
@@ -394,7 +437,7 @@ class UserProfilePhotos {
   Map<String, dynamic> toJson() => _$UserProfilePhotosToJson(this);
 }
 
-@JsonSerializable(nullable: false)
+@JsonSerializable(nullable: true)
 class File {
   String file_id;
   int file_size;
@@ -404,7 +447,7 @@ class File {
   Map<String, dynamic> toJson() => _$FileToJson(this);
 }
 
-@JsonSerializable(nullable: false)
+@JsonSerializable(nullable: true)
 // abstract class ReplyMarkup {}
 class ReplyMarkup {
   ReplyMarkup();
@@ -413,7 +456,7 @@ class ReplyMarkup {
   Map<String, dynamic> toJson() => _$ReplyMarkupToJson(this);
 }
 
-@JsonSerializable(nullable: false)
+@JsonSerializable(nullable: true)
 class ReplyKeyboardMarkup implements ReplyMarkup {
   List<KeyboardButton> keyboard;
   bool resize_keyboard;
@@ -429,7 +472,7 @@ class ReplyKeyboardMarkup implements ReplyMarkup {
   Map<String, dynamic> toJson() => _$ReplyKeyboardMarkupToJson(this);
 }
 
-@JsonSerializable(nullable: false)
+@JsonSerializable(nullable: true)
 class KeyboardButton {
   String text;
   bool request_contact;
@@ -440,7 +483,7 @@ class KeyboardButton {
   Map<String, dynamic> toJson() => _$KeyboardButtonToJson(this);
 }
 
-@JsonSerializable(nullable: false)
+@JsonSerializable(nullable: true)
 class ReplyKeyboardRemove implements ReplyMarkup {
   bool remove_keyboard;
   bool selective;
@@ -450,7 +493,7 @@ class ReplyKeyboardRemove implements ReplyMarkup {
   Map<String, dynamic> toJson() => _$ReplyKeyboardRemoveToJson(this);
 }
 
-@JsonSerializable(nullable: false)
+@JsonSerializable(nullable: true)
 class InlineKeyboardMarkup implements ReplyMarkup {
   List<InlineKeyboardButton> inline_keyboard;
   InlineKeyboardMarkup({this.inline_keyboard});
@@ -459,7 +502,7 @@ class InlineKeyboardMarkup implements ReplyMarkup {
   Map<String, dynamic> toJson() => _$InlineKeyboardMarkupToJson(this);
 }
 
-@JsonSerializable(nullable: false)
+@JsonSerializable(nullable: true)
 class InlineKeyboardButton {
   String text;
   String url;
@@ -481,7 +524,7 @@ class InlineKeyboardButton {
   Map<String, dynamic> toJson() => _$InlineKeyboardButtonToJson(this);
 }
 
-@JsonSerializable(nullable: false)
+@JsonSerializable(nullable: true)
 class CallbackQuery {
   String id;
   User from;
@@ -503,17 +546,17 @@ class CallbackQuery {
   Map<String, dynamic> toJson() => _$CallbackQueryToJson(this);
 }
 
-@JsonSerializable(nullable: false)
+@JsonSerializable(nullable: true)
 class ForceReply implements ReplyMarkup {
-  bool forceReply;
+  bool force_reply;
   bool selective;
-  ForceReply({this.forceReply, this.selective});
+  ForceReply({this.force_reply, this.selective});
   factory ForceReply.fromJson(Map<String, dynamic> json) =>
       _$ForceReplyFromJson(json);
   Map<String, dynamic> toJson() => _$ForceReplyToJson(this);
 }
 
-@JsonSerializable(nullable: false)
+@JsonSerializable(nullable: true)
 class ChatPhoto {
   String small_file_id;
   String big_file_id;
@@ -523,7 +566,7 @@ class ChatPhoto {
   Map<String, dynamic> toJson() => _$ChatPhotoToJson(this);
 }
 
-@JsonSerializable(nullable: false)
+@JsonSerializable(nullable: true)
 class ChatMember {
   User user;
   String status;
@@ -537,7 +580,7 @@ class ChatMember {
   bool can_restrict_members;
   bool can_pin_messages;
   bool can_promote_members;
-  bool can_send_message;
+  bool can_send_messages;
   bool can_send_media_messages;
   bool can_send_other_messages;
   bool can_add_web_page_previews;
@@ -554,7 +597,7 @@ class ChatMember {
       this.can_restrict_members,
       this.can_pin_messages,
       this.can_promote_members,
-      this.can_send_message,
+      this.can_send_messages,
       this.can_send_media_messages,
       this.can_send_other_messages,
       this.can_add_web_page_previews});
@@ -563,7 +606,7 @@ class ChatMember {
   Map<String, dynamic> toJson() => _$ChatMemberToJson(this);
 }
 
-@JsonSerializable(nullable: false)
+@JsonSerializable(nullable: true)
 class ResponseParameters {
   int migrate_to_chat_id;
   int retry_after;
@@ -573,7 +616,7 @@ class ResponseParameters {
   Map<String, dynamic> toJson() => _$ResponseParametersToJson(this);
 }
 
-@JsonSerializable(nullable: false)
+@JsonSerializable(nullable: true)
 // abstract class InputMedia {
 class InputMedia {
   String type;
@@ -586,7 +629,7 @@ class InputMedia {
   Map<String, dynamic> toJson() => _$InputMediaToJson(this);
 }
 
-@JsonSerializable(nullable: false)
+@JsonSerializable(nullable: true)
 class InputMediaPhoto implements InputMedia {
   @override
   String caption;
@@ -595,7 +638,7 @@ class InputMediaPhoto implements InputMedia {
   @override
   String parse_mode;
   @override
-  String type;
+  String type = 'photo';
   InputMediaPhoto({this.type, this.media, this.caption, this.parse_mode});
   factory InputMediaPhoto.fromJson(Map<String, dynamic> json) =>
       _$InputMediaPhotoFromJson(json);
@@ -603,7 +646,7 @@ class InputMediaPhoto implements InputMedia {
   Map<String, dynamic> toJson() => _$InputMediaPhotoToJson(this);
 }
 
-@JsonSerializable(nullable: false)
+@JsonSerializable(nullable: true)
 class InputMediaVideo implements InputMedia {
   @override
   String caption;
@@ -612,7 +655,8 @@ class InputMediaVideo implements InputMedia {
   @override
   String parse_mode;
   @override
-  String type;
+  String type = 'video';
+  dynamic thumb; // InputFile or String
   int width;
   int height;
   int duration;
@@ -622,6 +666,7 @@ class InputMediaVideo implements InputMedia {
       this.media,
       this.caption,
       this.parse_mode,
+      this.thumb,
       this.width,
       this.height,
       this.duration,
@@ -632,7 +677,84 @@ class InputMediaVideo implements InputMedia {
   Map<String, dynamic> toJson() => _$InputMediaVideoToJson(this);
 }
 
-@JsonSerializable(nullable: false)
+@JsonSerializable(nullable: true)
+class InputMediaAnimation implements InputMedia {
+  @override
+  String caption;
+  @override
+  String media;
+  @override
+  String parse_mode;
+  @override
+  String type = 'animation';
+  dynamic thumb; // InputFile or String
+  int width;
+  int height;
+  int duration;
+  InputMediaAnimation(
+      {this.type,
+      this.media,
+      this.caption,
+      this.parse_mode,
+      this.thumb,
+      this.width,
+      this.height,
+      this.duration});
+  factory InputMediaAnimation.fromJson(Map<String, dynamic> json) =>
+      _$InputMediaAnimationFromJson(json);
+  @override
+  Map<String, dynamic> toJson() => _$InputMediaAnimationToJson(this);
+}
+
+@JsonSerializable(nullable: true)
+class InputMediaAudio implements InputMedia {
+  @override
+  String caption;
+  @override
+  String media;
+  @override
+  String parse_mode;
+  @override
+  String type = 'audio';
+  dynamic thumb; // InputFile or String
+  int duration;
+  String performer;
+  String title;
+  InputMediaAudio(
+      {this.type,
+      this.media,
+      this.thumb,
+      this.caption,
+      this.parse_mode,
+      this.duration,
+      this.performer,
+      this.title});
+  factory InputMediaAudio.fromJson(Map<String, dynamic> json) =>
+      _$InputMediaAudioFromJson(json);
+  @override
+  Map<String, dynamic> toJson() => _$InputMediaAudioToJson(this);
+}
+
+@JsonSerializable(nullable: true)
+class InputMediaDocument implements InputMedia {
+  @override
+  String caption;
+  @override
+  String media;
+  @override
+  String parse_mode;
+  @override
+  String type = 'document';
+  dynamic thumb;
+  InputMediaDocument(
+      {this.type, this.media, this.thumb, this.caption, this.parse_mode});
+  factory InputMediaDocument.fromJson(Map<String, dynamic> json) =>
+      _$InputMediaDocumentFromJson(json);
+  @override
+  Map<String, dynamic> toJson() => _$InputMediaDocumentToJson(this);
+}
+
+@JsonSerializable(nullable: true)
 class Sticker {
   String file_id;
   int width;
@@ -656,7 +778,7 @@ class Sticker {
   Map<String, dynamic> toJson() => _$StickerToJson(this);
 }
 
-@JsonSerializable(nullable: false)
+@JsonSerializable(nullable: true)
 class StickerSet {
   String name;
   String title;
@@ -668,9 +790,9 @@ class StickerSet {
   Map<String, dynamic> toJson() => _$StickerSetToJson(this);
 }
 
-@JsonSerializable(nullable: false)
+@JsonSerializable(nullable: true)
 class MaskPosition {
-  Sticker point;
+  String point;
   double x_shift;
   double y_shift;
   double scale;
@@ -680,7 +802,7 @@ class MaskPosition {
   Map<String, dynamic> toJson() => _$MaskPositionToJson(this);
 }
 
-@JsonSerializable(nullable: false)
+@JsonSerializable(nullable: true)
 class InlineQuery {
   String id;
   User from;
@@ -693,7 +815,7 @@ class InlineQuery {
   Map<String, dynamic> toJson() => _$InlineQueryToJson(this);
 }
 
-@JsonSerializable(nullable: false)
+@JsonSerializable(nullable: true)
 // abstract class InlineQueryResult {
 class InlineQueryResult {
   String type;
@@ -704,7 +826,7 @@ class InlineQueryResult {
   Map<String, dynamic> toJson() => _$InlineQueryResultToJson(this);
 }
 
-@JsonSerializable(nullable: false)
+@JsonSerializable(nullable: true)
 class InlineQueryResultArticle implements InlineQueryResult {
   @override
   String id;
@@ -737,7 +859,7 @@ class InlineQueryResultArticle implements InlineQueryResult {
   Map<String, dynamic> toJson() => _$InlineQueryResultArticleToJson(this);
 }
 
-@JsonSerializable(nullable: false)
+@JsonSerializable(nullable: true)
 class InlineQueryResultPhoto implements InlineQueryResult {
   @override
   String id;
@@ -772,7 +894,7 @@ class InlineQueryResultPhoto implements InlineQueryResult {
   Map<String, dynamic> toJson() => _$InlineQueryResultPhotoToJson(this);
 }
 
-@JsonSerializable(nullable: false)
+@JsonSerializable(nullable: true)
 class InlineQueryResultGif implements InlineQueryResult {
   @override
   String id;
@@ -783,6 +905,7 @@ class InlineQueryResultGif implements InlineQueryResult {
   int gif_height;
   int gif_duration;
   String thumb_url;
+  String title;
   String caption;
   String parse_mode;
   InlineKeyboardMarkup reply_markup;
@@ -795,6 +918,7 @@ class InlineQueryResultGif implements InlineQueryResult {
       this.gif_height,
       this.gif_duration,
       this.thumb_url,
+      this.title,
       this.caption,
       this.parse_mode,
       this.reply_markup,
@@ -805,7 +929,7 @@ class InlineQueryResultGif implements InlineQueryResult {
   Map<String, dynamic> toJson() => _$InlineQueryResultGifToJson(this);
 }
 
-@JsonSerializable(nullable: false)
+@JsonSerializable(nullable: true)
 class InlineQueryResultMpeg4Gif implements InlineQueryResult {
   @override
   String id;
@@ -840,7 +964,7 @@ class InlineQueryResultMpeg4Gif implements InlineQueryResult {
   Map<String, dynamic> toJson() => _$InlineQueryResultMpeg4GifToJson(this);
 }
 
-@JsonSerializable(nullable: false)
+@JsonSerializable(nullable: true)
 class InlineQueryResultVideo implements InlineQueryResult {
   @override
   String id;
@@ -879,7 +1003,7 @@ class InlineQueryResultVideo implements InlineQueryResult {
   Map<String, dynamic> toJson() => _$InlineQueryResultVideoToJson(this);
 }
 
-@JsonSerializable(nullable: false)
+@JsonSerializable(nullable: true)
 class InlineQueryResultAudio implements InlineQueryResult {
   @override
   String id;
@@ -910,7 +1034,7 @@ class InlineQueryResultAudio implements InlineQueryResult {
   Map<String, dynamic> toJson() => _$InlineQueryResultAudioToJson(this);
 }
 
-@JsonSerializable(nullable: false)
+@JsonSerializable(nullable: true)
 class InlineQueryResultVoice implements InlineQueryResult {
   @override
   String id;
@@ -939,7 +1063,7 @@ class InlineQueryResultVoice implements InlineQueryResult {
   Map<String, dynamic> toJson() => _$InlineQueryResultVoiceToJson(this);
 }
 
-@JsonSerializable(nullable: false)
+@JsonSerializable(nullable: true)
 class InlineQueryResultDocument implements InlineQueryResult {
   @override
   String id;
@@ -976,7 +1100,7 @@ class InlineQueryResultDocument implements InlineQueryResult {
   Map<String, dynamic> toJson() => _$InlineQueryResultDocumentToJson(this);
 }
 
-@JsonSerializable(nullable: false)
+@JsonSerializable(nullable: true)
 class InlineQueryResultLocation implements InlineQueryResult {
   @override
   String id;
@@ -1009,7 +1133,7 @@ class InlineQueryResultLocation implements InlineQueryResult {
   Map<String, dynamic> toJson() => _$InlineQueryResultLocationToJson(this);
 }
 
-@JsonSerializable(nullable: false)
+@JsonSerializable(nullable: true)
 class InlineQueryResultVenue implements InlineQueryResult {
   @override
   String id;
@@ -1020,6 +1144,7 @@ class InlineQueryResultVenue implements InlineQueryResult {
   String title;
   String address;
   String foursquare_id;
+  String foursquare_type;
   InlineKeyboardMarkup reply_markup;
   InputMessageContent input_message_content;
   String thumb_url;
@@ -1033,6 +1158,7 @@ class InlineQueryResultVenue implements InlineQueryResult {
       this.title,
       this.address,
       this.foursquare_id,
+      this.foursquare_type,
       this.reply_markup,
       this.input_message_content,
       this.thumb_url,
@@ -1044,7 +1170,7 @@ class InlineQueryResultVenue implements InlineQueryResult {
   Map<String, dynamic> toJson() => _$InlineQueryResultVenueToJson(this);
 }
 
-@JsonSerializable(nullable: false)
+@JsonSerializable(nullable: true)
 class InlineQueryResultContact implements InlineQueryResult {
   @override
   String id;
@@ -1053,6 +1179,7 @@ class InlineQueryResultContact implements InlineQueryResult {
   String phone_number;
   String first_name;
   String last_name;
+  String vcard;
   InlineKeyboardMarkup reply_markup;
   InputMessageContent input_message_content;
   String thumb_url;
@@ -1064,6 +1191,7 @@ class InlineQueryResultContact implements InlineQueryResult {
       this.phone_number,
       this.first_name,
       this.last_name,
+      this.vcard,
       this.reply_markup,
       this.input_message_content,
       this.thumb_url,
@@ -1075,7 +1203,7 @@ class InlineQueryResultContact implements InlineQueryResult {
   Map<String, dynamic> toJson() => _$InlineQueryResultContactToJson(this);
 }
 
-@JsonSerializable(nullable: false)
+@JsonSerializable(nullable: true)
 class InlineQueryResultGame implements InlineQueryResult {
   @override
   String id;
@@ -1091,7 +1219,7 @@ class InlineQueryResultGame implements InlineQueryResult {
   Map<String, dynamic> toJson() => _$InlineQueryResultGameToJson(this);
 }
 
-@JsonSerializable(nullable: false)
+@JsonSerializable(nullable: true)
 class InlineQueryResultCachedPhoto implements InlineQueryResult {
   @override
   String id;
@@ -1120,7 +1248,7 @@ class InlineQueryResultCachedPhoto implements InlineQueryResult {
   Map<String, dynamic> toJson() => _$InlineQueryResultCachedPhotoToJson(this);
 }
 
-@JsonSerializable(nullable: false)
+@JsonSerializable(nullable: true)
 class InlineQueryResultCachedGif implements InlineQueryResult {
   @override
   String id;
@@ -1147,7 +1275,7 @@ class InlineQueryResultCachedGif implements InlineQueryResult {
   Map<String, dynamic> toJson() => _$InlineQueryResultCachedGifToJson(this);
 }
 
-@JsonSerializable(nullable: false)
+@JsonSerializable(nullable: true)
 class InlineQueryResultCachedMpeg4Gif implements InlineQueryResult {
   @override
   String id;
@@ -1175,7 +1303,7 @@ class InlineQueryResultCachedMpeg4Gif implements InlineQueryResult {
       _$InlineQueryResultCachedMpeg4GifToJson(this);
 }
 
-@JsonSerializable(nullable: false)
+@JsonSerializable(nullable: true)
 class InlineQueryResultCachedSticker implements InlineQueryResult {
   @override
   String id;
@@ -1196,12 +1324,13 @@ class InlineQueryResultCachedSticker implements InlineQueryResult {
   Map<String, dynamic> toJson() => _$InlineQueryResultCachedStickerToJson(this);
 }
 
-@JsonSerializable(nullable: false)
+@JsonSerializable(nullable: true)
 class InlineQueryResultCachedDocument implements InlineQueryResult {
   @override
   String id;
   @override
   String type = 'document';
+  String title;
   String document_file_id;
   String description;
   String caption;
@@ -1211,6 +1340,7 @@ class InlineQueryResultCachedDocument implements InlineQueryResult {
   InlineQueryResultCachedDocument(
       {this.id,
       this.type,
+      this.title,
       this.document_file_id,
       this.description,
       this.caption,
@@ -1224,7 +1354,7 @@ class InlineQueryResultCachedDocument implements InlineQueryResult {
       _$InlineQueryResultCachedDocumentToJson(this);
 }
 
-@JsonSerializable(nullable: false)
+@JsonSerializable(nullable: true)
 class InlineQueryResultCachedVideo implements InlineQueryResult {
   @override
   String id;
@@ -1253,7 +1383,7 @@ class InlineQueryResultCachedVideo implements InlineQueryResult {
   Map<String, dynamic> toJson() => _$InlineQueryResultCachedVideoToJson(this);
 }
 
-@JsonSerializable(nullable: false)
+@JsonSerializable(nullable: true)
 class InlineQueryResultCachedVoice implements InlineQueryResult {
   @override
   String id;
@@ -1280,7 +1410,7 @@ class InlineQueryResultCachedVoice implements InlineQueryResult {
   Map<String, dynamic> toJson() => _$InlineQueryResultCachedVoiceToJson(this);
 }
 
-@JsonSerializable(nullable: false)
+@JsonSerializable(nullable: true)
 class InlineQueryResultCachedAudio implements InlineQueryResult {
   @override
   String id;
@@ -1304,7 +1434,7 @@ class InlineQueryResultCachedAudio implements InlineQueryResult {
   Map<String, dynamic> toJson() => _$InlineQueryResultCachedAudioToJson(this);
 }
 
-@JsonSerializable(nullable: false)
+@JsonSerializable(nullable: true)
 // abstract class InputMessageContent {
 class InputMessageContent {
   InputMessageContent();
@@ -1313,7 +1443,7 @@ class InputMessageContent {
   Map<String, dynamic> toJson() => _$InputMessageContentToJson(this);
 }
 
-@JsonSerializable(nullable: false)
+@JsonSerializable(nullable: true)
 class InputTextMessageContent implements InputMessageContent {
   String message_text;
   String parse_mode;
@@ -1325,7 +1455,7 @@ class InputTextMessageContent implements InputMessageContent {
   Map<String, dynamic> toJson() => _$InputTextMessageContentToJson(this);
 }
 
-@JsonSerializable(nullable: false)
+@JsonSerializable(nullable: true)
 class InputLocationMessageContent implements InputMessageContent {
   double latitude;
   double longitude;
@@ -1337,37 +1467,40 @@ class InputLocationMessageContent implements InputMessageContent {
   Map<String, dynamic> toJson() => _$InputLocationMessageContentToJson(this);
 }
 
-@JsonSerializable(nullable: false)
+@JsonSerializable(nullable: true)
 class InputVenueMessageContent implements InputMessageContent {
   double latitude;
   double longitude;
   String title;
   String address;
   String foursquare_id;
+  String foursquare_type;
   InputVenueMessageContent(
       {this.latitude,
       this.longitude,
       this.title,
       this.address,
-      this.foursquare_id});
+      this.foursquare_id,
+      this.foursquare_type});
   factory InputVenueMessageContent.fromJson(Map<String, dynamic> json) =>
       _$InputVenueMessageContentFromJson(json);
   Map<String, dynamic> toJson() => _$InputVenueMessageContentToJson(this);
 }
 
-@JsonSerializable(nullable: false)
+@JsonSerializable(nullable: true)
 class InputContactMessageContent implements InputMessageContent {
   String phone_number;
   String first_name;
   String last_name;
+  String vcard;
   InputContactMessageContent(
-      {this.phone_number, this.first_name, this.last_name});
+      {this.phone_number, this.first_name, this.last_name, this.vcard});
   factory InputContactMessageContent.fromJson(Map<String, dynamic> json) =>
       _$InputContactMessageContentFromJson(json);
   Map<String, dynamic> toJson() => _$InputContactMessageContentToJson(this);
 }
 
-@JsonSerializable(nullable: false)
+@JsonSerializable(nullable: true)
 class ChosenInlineResult {
   String result_id;
   User from;
@@ -1385,7 +1518,7 @@ class ChosenInlineResult {
   Map<String, dynamic> toJson() => _$ChosenInlineResultToJson(this);
 }
 
-@JsonSerializable(nullable: false)
+@JsonSerializable(nullable: true)
 class LabeledPrice {
   String label;
   int amount;
@@ -1395,7 +1528,7 @@ class LabeledPrice {
   Map<String, dynamic> toJson() => _$LabeledPriceToJson(this);
 }
 
-@JsonSerializable(nullable: false)
+@JsonSerializable(nullable: true)
 class Invoice {
   String title;
   String description;
@@ -1413,7 +1546,7 @@ class Invoice {
   Map<String, dynamic> toJson() => _$InvoiceToJson(this);
 }
 
-@JsonSerializable(nullable: false)
+@JsonSerializable(nullable: true)
 class ShippingAddress {
   String country_code;
   String state;
@@ -1433,7 +1566,7 @@ class ShippingAddress {
   Map<String, dynamic> toJson() => _$ShippingAddressToJson(this);
 }
 
-@JsonSerializable(nullable: false)
+@JsonSerializable(nullable: true)
 class OrderInfo {
   String name;
   String phone_number;
@@ -1445,7 +1578,7 @@ class OrderInfo {
   Map<String, dynamic> toJson() => _$OrderInfoToJson(this);
 }
 
-@JsonSerializable(nullable: false)
+@JsonSerializable(nullable: true)
 class ShippingOption {
   String id;
   String title;
@@ -1456,7 +1589,7 @@ class ShippingOption {
   Map<String, dynamic> toJson() => _$ShippingOptionToJson(this);
 }
 
-@JsonSerializable(nullable: false)
+@JsonSerializable(nullable: true)
 class SuccessfulPayment {
   String currency;
   int total_amount;
@@ -1478,7 +1611,7 @@ class SuccessfulPayment {
   Map<String, dynamic> toJson() => _$SuccessfulPaymentToJson(this);
 }
 
-@JsonSerializable(nullable: false)
+@JsonSerializable(nullable: true)
 class ShippingQuery {
   String id;
   User from;
@@ -1491,7 +1624,7 @@ class ShippingQuery {
   Map<String, dynamic> toJson() => _$ShippingQueryToJson(this);
 }
 
-@JsonSerializable(nullable: false)
+@JsonSerializable(nullable: true)
 class PreCheckoutQuery {
   String id;
   User from;
@@ -1513,7 +1646,53 @@ class PreCheckoutQuery {
   Map<String, dynamic> toJson() => _$PreCheckoutQueryToJson(this);
 }
 
-@JsonSerializable(nullable: false)
+// TODO
+// @JsonSerializable(nullable: true)
+// class PassportData {
+//   List<EncryptedPassportElement> data;
+//   EncryptedCredentials credentials;
+//   PassportData({this.data, this.credentials});
+//   factory PassportData.fromJson(Map<String, dynamic> json) =>
+//       _$PassportDataFromJson(json);
+//   Map<String, dynamic> toJson() => _$PassportDataToJson(this);
+// }
+
+// @JsonSerializable(nullable: true)
+// class PassportFile {
+//   String file_id;
+//   int file_size;
+//   int file_date;
+//   PassportFile({this.file_id, this.file_size, this.file_date});
+//   factory PassportFile.fromJson(Map<String, dynamic> json) =>
+//       _$PassportFileFromJson(json);
+//   Map<String, dynamic> toJson() => _$PassportFileToJson(this);
+// }
+
+// @JsonSerializable(nullable: true)
+// class EncryptedPassportElement {
+//   String type;
+//   String data;
+//   String phone_number;
+//   String email;
+//   List<PassportFile> files;
+//   PassportFile front_side;
+//   PassportFile reverse_side;
+//   PassportFile selfie;
+//   EncryptedPassportElement(
+//       {this.type,
+//       this.data,
+//       this.phone_number,
+//       this.email,
+//       this.files,
+//       this.front_side,
+//       this.reverse_side,
+//       this.selfie});
+//   factory EncryptedPassportElement.fromJson(Map<String, dynamic> json) =>
+//       _$EncryptedPassportElementFromJson(json);
+//   Map<String, dynamic> toJson() => _$EncryptedPassportElementToJson(this);
+// }
+
+@JsonSerializable(nullable: true)
 class Game {
   String title;
   String description;
@@ -1532,25 +1711,7 @@ class Game {
   Map<String, dynamic> toJson() => _$GameToJson(this);
 }
 
-@JsonSerializable(nullable: false)
-class Animation {
-  String file_id;
-  PhotoSize thumb;
-  String file_name;
-  String mime_type;
-  int file_size;
-  Animation(
-      {this.file_id,
-      this.thumb,
-      this.file_name,
-      this.mime_type,
-      this.file_size});
-  factory Animation.fromJson(Map<String, dynamic> json) =>
-      _$AnimationFromJson(json);
-  Map<String, dynamic> toJson() => _$AnimationToJson(this);
-}
-
-@JsonSerializable(nullable: false)
+@JsonSerializable(nullable: true)
 class CallbackGame {
   CallbackGame();
   factory CallbackGame.fromJson(Map<String, dynamic> json) =>
@@ -1558,7 +1719,7 @@ class CallbackGame {
   Map<String, dynamic> toJson() => _$CallbackGameToJson(this);
 }
 
-@JsonSerializable(nullable: false)
+@JsonSerializable(nullable: true)
 class GameHighScore {
   int position;
   User user;
