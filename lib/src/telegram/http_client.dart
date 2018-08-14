@@ -39,8 +39,10 @@ class HttpClient {
   /// HTTP post method (x-www-form-urlencoded)
   /// [url] - request url (required)
   /// [body] - parameters in map
-  Future<dynamic> httpPost(String url, {Map body}) async {
-    return http.post(url, body: body).then((response) {
+  Future<dynamic> httpPost(String url, {Map<String, dynamic> body}) async {
+    return http
+        .post(url, body: body.map((k, v) => MapEntry(k, '${v}')))
+        .then((response) {
       Map<String, dynamic> responseBody = jsonDecode(response.body);
       if (responseBody['ok'])
         return responseBody['result'];
@@ -48,7 +50,7 @@ class HttpClient {
         return new Future.error(new HttpClientException(
             '${responseBody['error_code']} ${responseBody['description']}'));
     }).catchError(
-        (error) => new Future.error(new HttpClientException('${error}')));
+            (error) => new Future.error(new HttpClientException('${error}')));
   }
 
   /// HTTP post method (multipart/form-data)
@@ -56,11 +58,11 @@ class HttpClient {
   /// [file] - file to upload (required)
   /// [body] - parameters in map
   Future<dynamic> httpMultipartPost(String url, http.MultipartFile file,
-      {Map body}) async {
+      {Map<String, dynamic> body}) async {
     http.MultipartRequest request =
         new http.MultipartRequest('POST', Uri.parse(url))
           ..headers.addAll({'Content-Type': 'multipart/form-data'})
-          ..fields.addAll(body)
+          ..fields.addAll(body.map((k, v) => MapEntry(k, '${v}')))
           ..files.add(file);
     return request
         .send()

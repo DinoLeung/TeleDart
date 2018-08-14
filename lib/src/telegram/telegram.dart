@@ -42,7 +42,9 @@ class Telegram {
         (offset == null ? '' : 'offset=${offset}&') +
         (limit == null ? '' : 'limit=${limit}&') +
         (timeout == null ? '' : 'timeout=${timeout}') +
-        (allowed_updates == null ? '' : jsonEncode(allowed_updates));
+        (allowed_updates == null
+            ? ''
+            : 'allowed_updates=${jsonEncode(allowed_updates)}');
     // return _client.httpGet(requestUrl, returnType: new Update(), isList: true);
     return (await _client.httpGet(requestUrl))
         .map<Update>((update) => Update.fromJson(update))
@@ -55,7 +57,7 @@ class Telegram {
       int max_connections,
       List<String> allowed_updates}) async {
     String requestUrl = '${_baseUrl}${_token}/setWebhook';
-    Map body = {
+    Map<String, dynamic> body = {
       'url': url,
       'max_connections': max_connections ?? '',
       'allowed_updates': allowed_updates ?? ''
@@ -95,14 +97,14 @@ class Telegram {
       int reply_to_message_id,
       ReplyMarkup reply_markup}) async {
     String requestUrl = '${_baseUrl}${_token}/sendMessage';
-    Map body = {
+    Map<String, dynamic> body = {
       'chat_id': chat_id,
       'text': text,
       'parse_mode': parse_mode ?? '',
       'disable_web_page_preview': disable_web_page_preview ?? '',
       'disable_notification': disable_notification ?? '',
       'reply_to_message_id': reply_to_message_id ?? '',
-      'reply_markup': reply_markup ?? ''
+      'reply_markup': reply_markup == null ? '' : jsonEncode(reply_markup)
     };
     return Message.fromJson(await _client.httpPost(requestUrl, body: body));
   }
@@ -111,7 +113,7 @@ class Telegram {
   Future<Message> forwardMessage(int chat_id, int from_char_id, int message_id,
       {bool disable_notification}) async {
     String requestUrl = '${_baseUrl}${_token}/forwardMessage';
-    Map body = {
+    Map<String, dynamic> body = {
       'chat_id': chat_id,
       'from_char_id': from_char_id,
       'message_id': message_id,
@@ -128,13 +130,13 @@ class Telegram {
       int reply_to_message_id,
       ReplyMarkup reply_markup}) async {
     String requestUrl = '${_baseUrl}${_token}/sendPhoto';
-    Map body = {
+    Map<String, dynamic> body = {
       'chat_id': chat_id,
       'caption': caption ?? '',
       'parse_mode': parse_mode ?? '',
       'disable_notification': disable_notification ?? '',
       'reply_to_message_id': reply_to_message_id ?? '',
-      'reply_markup': reply_markup ?? ''
+      'reply_markup': reply_markup == null ? '' : jsonEncode(reply_markup)
     };
 
     if (photo is io.File) {
@@ -164,7 +166,7 @@ class Telegram {
       int reply_to_message_id,
       ReplyMarkup reply_markup}) async {
     String requestUrl = '${_baseUrl}${_token}/sendAudio';
-    Map body = {
+    Map<String, dynamic> body = {
       'chat_id': chat_id,
       'caption': caption ?? '',
       'parse_mode': parse_mode ?? '',
@@ -173,7 +175,7 @@ class Telegram {
       'title': title ?? '',
       'disable_notification': disable_notification ?? '',
       'reply_to_message_id': reply_to_message_id ?? '',
-      'reply_markup': reply_markup ?? ''
+      'reply_markup': reply_markup == null ? '' : jsonEncode(reply_markup)
     };
 
     if (audio is io.File) {
@@ -200,13 +202,13 @@ class Telegram {
       int reply_to_message_id,
       ReplyMarkup reply_markup}) async {
     String requestUrl = '${_baseUrl}${_token}/sendDocument';
-    Map body = {
+    Map<String, dynamic> body = {
       'chat_id': chat_id,
       'caption': caption ?? '',
       'parse_mode': parse_mode ?? '',
       'disable_notification': disable_notification ?? '',
       'reply_to_message_id': reply_to_message_id ?? '',
-      'reply_markup': reply_markup ?? ''
+      'reply_markup': reply_markup == null ? '' : jsonEncode(reply_markup)
     };
 
     if (document is io.File) {
@@ -237,7 +239,7 @@ class Telegram {
       int reply_to_message_id,
       ReplyMarkup reply_markup}) async {
     String requestUrl = '${_baseUrl}${_token}/sendVideo';
-    Map body = {
+    Map<String, dynamic> body = {
       'chat_id': chat_id,
       'duration': duration ?? '',
       'width': width ?? '',
@@ -247,7 +249,7 @@ class Telegram {
       'supports_streaming': supports_streaming ?? '',
       'disable_notification': disable_notification ?? '',
       'reply_to_message_id': reply_to_message_id ?? '',
-      'reply_markup': reply_markup ?? ''
+      'reply_markup': reply_markup == null ? '' : jsonEncode(reply_markup)
     };
 
     if (video is io.File) {
@@ -275,14 +277,14 @@ class Telegram {
       int reply_to_message_id,
       ReplyMarkup reply_markup}) async {
     String requestUrl = '${_baseUrl}${_token}/sendVoice';
-    Map body = {
+    Map<String, dynamic> body = {
       'chat_id': chat_id,
       'caption': caption ?? '',
       'parse_mode': parse_mode ?? '',
       'duration': duration ?? '',
       'disable_notification': disable_notification ?? '',
       'reply_to_message_id': reply_to_message_id ?? '',
-      'reply_markup': reply_markup ?? ''
+      'reply_markup': reply_markup == null ? '' : jsonEncode(reply_markup)
     };
 
     if (voice is io.File) {
@@ -309,13 +311,13 @@ class Telegram {
       int reply_to_message_id,
       ReplyMarkup reply_markup}) async {
     String requestUrl = '${_baseUrl}${_token}/sendVideoNote';
-    Map body = {
+    Map<String, dynamic> body = {
       'chat_id': chat_id,
       'duration': duration ?? '',
       'length': length ?? '',
       'disable_notification': disable_notification ?? '',
       'reply_to_message_id': reply_to_message_id ?? '',
-      'reply_markup': reply_markup ?? ''
+      'reply_markup': reply_markup == null ? '' : jsonEncode(reply_markup)
     };
 
     if (video_note is io.File) {
@@ -339,9 +341,9 @@ class Telegram {
   Future<List<Message>> sendMediaGroup(int chat_id, List<InputMedia> media,
       {bool disable_notification, int reply_to_message_id}) async {
     String requestUrl = '${_baseUrl}${_token}/sendMediaGroup';
-    Map body = {
+    Map<String, dynamic> body = {
       'chat_id': chat_id,
-      'media': media,
+      'media': jsonEncode(media),
       'disable_notification': disable_notification ?? '',
       'reply_to_message_id': reply_to_message_id ?? ''
     };
@@ -359,13 +361,13 @@ class Telegram {
       int reply_to_message_id,
       ReplyMarkup reply_markup}) async {
     String requestUrl = '${_baseUrl}${_token}/sendLocation';
-    Map body = {
+    Map<String, dynamic> body = {
       'chat_id': chat_id,
       'latitude': latitude,
       'longitude': longitude,
       'disable_notification': disable_notification ?? '',
       'reply_to_message_id': reply_to_message_id ?? '',
-      'reply_markup': reply_markup ?? ''
+      'reply_markup': reply_markup == null ? '' : jsonEncode(reply_markup)
     };
     return Message.fromJson(await _client.httpPost(requestUrl, body: body));
   }
@@ -380,13 +382,13 @@ class Telegram {
       return new Future.error(new TelegramException(
           'Require either \'chat_id\' and \'message_id\', or \'inline_message_id\''));
     String requestUrl = '${_baseUrl}${_token}/editMessageLiveLocation';
-    Map body = {
+    Map<String, dynamic> body = {
       'latitude': latitude,
       'longitude': longitude,
       'chat_id': chat_id ?? '',
       'message_id': message_id ?? '',
       'inline_message_id': inline_message_id ?? '',
-      'reply_markup': reply_markup ?? ''
+      'reply_markup': reply_markup == null ? '' : jsonEncode(reply_markup)
     };
     return Message.fromJson(await _client.httpPost(requestUrl, body: body));
   }
@@ -401,11 +403,11 @@ class Telegram {
       return new Future.error(new TelegramException(
           'Require either \'chat_id\' and \'message_id\', or \'inline_message_id\''));
     String requestUrl = '${_baseUrl}${_token}/stopMessageLiveLocation';
-    Map body = {
+    Map<String, dynamic> body = {
       'chat_id': chat_id ?? '',
       'message_id': message_id ?? '',
       'inline_message_id': inline_message_id ?? '',
-      'reply_markup': reply_markup ?? ''
+      'reply_markup': reply_markup == null ? '' : jsonEncode(reply_markup)
     };
     return Message.fromJson(await _client.httpPost(requestUrl, body: body));
   }
@@ -418,7 +420,7 @@ class Telegram {
       int reply_to_message_id,
       ReplyMarkup reply_markup}) async {
     String requestUrl = '${_baseUrl}${_token}/sendVenue';
-    Map body = {
+    Map<String, dynamic> body = {
       'chat_id': chat_id,
       'latitude': latitude,
       'longitude': longitude,
@@ -427,7 +429,7 @@ class Telegram {
       'foursquare_id': foursquare_id ?? '',
       'disable_notification': disable_notification ?? '',
       'reply_to_message_id': reply_to_message_id ?? '',
-      'reply_markup': reply_markup ?? ''
+      'reply_markup': reply_markup == null ? '' : jsonEncode(reply_markup)
     };
     return Message.fromJson(await _client.httpPost(requestUrl, body: body));
   }
@@ -440,14 +442,14 @@ class Telegram {
       int reply_to_message_id,
       ReplyMarkup reply_markup}) async {
     String requestUrl = '${_baseUrl}${_token}/sendContact';
-    Map body = {
+    Map<String, dynamic> body = {
       'chat_id': chat_id,
       'phone_number': phone_number,
       'first_name': first_name,
       'last_name': last_name ?? '',
       'disable_notification': disable_notification ?? '',
       'reply_to_message_id': reply_to_message_id ?? '',
-      'reply_markup': reply_markup ?? ''
+      'reply_markup': reply_markup == null ? '' : jsonEncode(reply_markup)
     };
     return Message.fromJson(await _client.httpPost(requestUrl, body: body));
   }
@@ -455,7 +457,7 @@ class Telegram {
   /// [https://core.telegram.org/bots/api#sendChatAction](https://core.telegram.org/bots/api#sendChatAction)
   Future<bool> sendChatAction(int chat_id, String action) async {
     String requestUrl = '${_baseUrl}${_token}/sendChatAction';
-    Map body = {'chat_id': chat_id, 'action': action};
+    Map<String, dynamic> body = {'chat_id': chat_id, 'action': action};
     return _client.httpPost(requestUrl, body: body);
   }
 
@@ -463,7 +465,7 @@ class Telegram {
   Future<List<UserProfilePhotos>> getUserProfilePhotos(int user_id,
       {int offset, int limit}) async {
     String requestUrl = '${_baseUrl}${_token}/getUserProfilePhotos';
-    Map body = {
+    Map<String, dynamic> body = {
       'user_id': user_id,
       'offset': offset ?? '',
       'limit': limit ?? ''
@@ -481,7 +483,7 @@ class Telegram {
   /// [https://core.telegram.org/bots/api#getFile](https://core.telegram.org/bots/api#getFile)
   Future<File> getFile(String file_id) async {
     String requestUrl = '${_baseUrl}${_token}/getFile';
-    Map body = {'file_id': file_id};
+    Map<String, dynamic> body = {'file_id': file_id};
     return File.fromJson(await _client.httpPost(requestUrl, body: body));
   }
 
@@ -489,7 +491,7 @@ class Telegram {
   Future<bool> kickChatMember(int chat_id, int user_id,
       {int until_date}) async {
     String requestUrl = '${_baseUrl}${_token}/kickChatMember';
-    Map body = {
+    Map<String, dynamic> body = {
       'chat_id': chat_id,
       'user_id': user_id,
       'until_date': until_date ?? ''
@@ -500,7 +502,7 @@ class Telegram {
   /// [https://core.telegram.org/bots/api#unbanChatMember](https://core.telegram.org/bots/api#unbanChatMember)
   Future<bool> unbanChatMember(int chat_id, int user_id) async {
     String requestUrl = '${_baseUrl}${_token}/unbanChatMember';
-    Map body = {'chat_id': chat_id, 'user_id': user_id};
+    Map<String, dynamic> body = {'chat_id': chat_id, 'user_id': user_id};
     return _client.httpPost(requestUrl, body: body);
   }
 
@@ -512,7 +514,7 @@ class Telegram {
       bool can_send_other_messages,
       bool can_add_web_page_previews}) async {
     String requestUrl = '${_baseUrl}${_token}/unbanChatMember';
-    Map body = {
+    Map<String, dynamic> body = {
       'chat_id': chat_id,
       'user_id': user_id,
       'until_date': until_date ?? '',
@@ -535,7 +537,7 @@ class Telegram {
       bool can_pin_messages,
       bool can_promote_members}) async {
     String requestUrl = '${_baseUrl}${_token}/promoteChatMember';
-    Map body = {
+    Map<String, dynamic> body = {
       'chat_id': chat_id,
       'user_id': user_id,
       'can_change_info': can_change_info ?? '',
@@ -553,14 +555,14 @@ class Telegram {
   /// [https://core.telegram.org/bots/api#exportChatInviteLink](https://core.telegram.org/bots/api#exportChatInviteLink)
   Future<String> exportChatInviteLink(int chat_id) async {
     String requestUrl = '${_baseUrl}${_token}/exportChatInviteLink';
-    Map body = {'chat_id': chat_id};
+    Map<String, dynamic> body = {'chat_id': chat_id};
     return _client.httpPost(requestUrl, body: body);
   }
 
   /// [https://core.telegram.org/bots/api#setChatPhoto](https://core.telegram.org/bots/api#setChatPhoto)
   Future<bool> setChatPhoto(int chat_id, io.File photo) async {
     String requestUrl = '${_baseUrl}${_token}/setChatPhoto';
-    Map body = {'chat_id': chat_id};
+    Map<String, dynamic> body = {'chat_id': chat_id};
     // filename cannot be empty to post to Telegram server
     http.MultipartFile file = new http.MultipartFile(
         'photo', photo.openRead(), photo.lengthSync(),
@@ -571,21 +573,24 @@ class Telegram {
   /// [https://core.telegram.org/bots/api#deleteChatPhoto](https://core.telegram.org/bots/api#deleteChatPhoto)
   Future<bool> deleteChatPhoto(int chat_id) async {
     String requestUrl = '${_baseUrl}${_token}/deleteChatPhoto';
-    Map body = {'chat_id': chat_id};
+    Map<String, dynamic> body = {'chat_id': chat_id};
     return _client.httpPost(requestUrl, body: body);
   }
 
   /// [https://core.telegram.org/bots/api#setChatTitle](https://core.telegram.org/bots/api#setChatTitle)
   Future<bool> setChatTitle(int chat_id, String title) async {
     String requestUrl = '${_baseUrl}${_token}/setChatTitle';
-    Map body = {'chat_id': chat_id, 'title': title};
+    Map<String, dynamic> body = {'chat_id': chat_id, 'title': title};
     return _client.httpPost(requestUrl, body: body);
   }
 
   /// [https://core.telegram.org/bots/api#setChatDescription](https://core.telegram.org/bots/api#setChatDescription)
   Future<bool> setChatDescription(int chat_id, {String description}) async {
     String requestUrl = '${_baseUrl}${_token}/setChatDescription';
-    Map body = {'chat_id': chat_id, 'description': description ?? ''};
+    Map<String, dynamic> body = {
+      'chat_id': chat_id,
+      'description': description ?? ''
+    };
     return _client.httpPost(requestUrl, body: body);
   }
 
@@ -593,7 +598,7 @@ class Telegram {
   Future<bool> pinChatMessage(int chat_id, int message_id,
       {bool disable_notification}) async {
     String requestUrl = '${_baseUrl}${_token}/pinChatMessage';
-    Map body = {
+    Map<String, dynamic> body = {
       'chat_id': chat_id,
       'message_id': message_id,
       'disable_notification': disable_notification ?? ''
@@ -604,28 +609,28 @@ class Telegram {
   /// [https://core.telegram.org/bots/api#unpinChatMessage](https://core.telegram.org/bots/api#unpinChatMessage)
   Future<bool> unpinChatMessage(int chat_id) async {
     String requestUrl = '${_baseUrl}${_token}/unpinChatMessage';
-    Map body = {'chat_id': chat_id};
+    Map<String, dynamic> body = {'chat_id': chat_id};
     return _client.httpPost(requestUrl, body: body);
   }
 
   /// [https://core.telegram.org/bots/api#leaveChat](https://core.telegram.org/bots/api#leaveChat)
   Future<bool> leaveChat(int chat_id) async {
     String requestUrl = '${_baseUrl}${_token}/leaveChat';
-    Map body = {'chat_id': chat_id};
+    Map<String, dynamic> body = {'chat_id': chat_id};
     return _client.httpPost(requestUrl, body: body);
   }
 
   /// [https://core.telegram.org/bots/api#getChat](https://core.telegram.org/bots/api#getChat)
   Future<Chat> getChat(int chat_id) async {
     String requestUrl = '${_baseUrl}${_token}/getChat';
-    Map body = {'chat_id': chat_id};
+    Map<String, dynamic> body = {'chat_id': chat_id};
     return Chat.fromJson(await _client.httpPost(requestUrl, body: body));
   }
 
   /// [https://core.telegram.org/bots/api#getChatAdministrators](https://core.telegram.org/bots/api#getChatAdministrators)
   Future<List<ChatMember>> getChatAdministrators(int chat_id) async {
     String requestUrl = '${_baseUrl}${_token}/getChatAdministrators';
-    Map body = {'chat_id': chat_id};
+    Map<String, dynamic> body = {'chat_id': chat_id};
     // return _client.httpPost(requestUrl,
     //     body: body, returnType: new ChatMember(), isList: true);
     return (await _client.httpPost(requestUrl, body: body))
@@ -636,28 +641,31 @@ class Telegram {
   /// [https://core.telegram.org/bots/api#getChatMembersCount](https://core.telegram.org/bots/api#getChatMembersCount)
   Future<int> getChatMembersCount(int chat_id) async {
     String requestUrl = '${_baseUrl}${_token}/getChatMembersCount';
-    Map body = {'chat_id': chat_id};
+    Map<String, dynamic> body = {'chat_id': chat_id};
     return _client.httpPost(requestUrl, body: body);
   }
 
   /// [https://core.telegram.org/bots/api#getChatMember](https://core.telegram.org/bots/api#getChatMember)
   Future<ChatMember> getChatMember(int chat_id, int user_id) async {
     String requestUrl = '${_baseUrl}${_token}/getChatMember';
-    Map body = {'chat_id': chat_id, 'user_id': user_id};
+    Map<String, dynamic> body = {'chat_id': chat_id, 'user_id': user_id};
     return ChatMember.fromJson(await _client.httpPost(requestUrl, body: body));
   }
 
   /// [https://core.telegram.org/bots/api#setChatStickerSet](https://core.telegram.org/bots/api#setChatStickerSet)
   Future<bool> setChatStickerSet(int chat_id, String sticker_set_name) async {
     String requestUrl = '${_baseUrl}${_token}/setChatStickerSet';
-    Map body = {'chat_id': chat_id, 'sticker_set_name': sticker_set_name};
+    Map<String, dynamic> body = {
+      'chat_id': chat_id,
+      'sticker_set_name': sticker_set_name
+    };
     return _client.httpPost(requestUrl, body: body);
   }
 
   /// [https://core.telegram.org/bots/api#deleteChatStickerSet](https://core.telegram.org/bots/api#deleteChatStickerSet)
   Future<bool> deleteChatStickerSet(int chat_id) async {
     String requestUrl = '${_baseUrl}${_token}/deleteChatStickerSet';
-    Map body = {'chat_id': chat_id};
+    Map<String, dynamic> body = {'chat_id': chat_id};
     return _client.httpPost(requestUrl, body: body);
   }
 
@@ -665,7 +673,7 @@ class Telegram {
   Future<bool> answerCallbackQuery(String callback_query_id,
       {String text, bool show_alert, String url, int cache_time}) async {
     String requestUrl = '${_baseUrl}${_token}/answerCallbackQuery';
-    Map body = {
+    Map<String, dynamic> body = {
       'callback_query_id': callback_query_id,
       'text': text ?? '',
       'show_alert': show_alert ?? '',
@@ -687,14 +695,14 @@ class Telegram {
       return new Future.error(new TelegramException(
           'Require either \'chat_id\' and \'message_id\', or \'inline_message_id\''));
     String requestUrl = '${_baseUrl}${_token}/editMessageText';
-    Map body = {
+    Map<String, dynamic> body = {
       'chat_id': chat_id ?? '',
       'message_id': message_id ?? '',
       'inline_message_id': inline_message_id ?? '',
       'text': text,
       'parse_mode': parse_mode ?? '',
       'disable_web_page_preview': disable_web_page_preview ?? '',
-      'reply_markup': reply_markup ?? ''
+      'reply_markup': reply_markup == null ? '' : jsonEncode(reply_markup)
     };
     var res = await _client.httpPost(requestUrl, body: body);
     if (res == true)
@@ -716,13 +724,13 @@ class Telegram {
       return new Future.error(new TelegramException(
           'Require either \'chat_id\' and \'message_id\', or \'inline_message_id\''));
     String requestUrl = '${_baseUrl}${_token}/editMessageCaption';
-    Map body = {
+    Map<String, dynamic> body = {
       'chat_id': chat_id ?? '',
       'message_id': message_id ?? '',
       'inline_message_id': inline_message_id ?? '',
       'caption': caption ?? '',
       'parse_mode': parse_mode ?? '',
-      'reply_markup': reply_markup ?? ''
+      'reply_markup': reply_markup == null ? '' : jsonEncode(reply_markup)
     };
     var res = await _client.httpPost(requestUrl, body: body);
     if (res == true)
@@ -742,11 +750,11 @@ class Telegram {
       return new Future.error(new TelegramException(
           'Require either \'chat_id\' and \'message_id\', or \'inline_message_id\''));
     String requestUrl = '${_baseUrl}${_token}/editMessageReplyMarkup';
-    Map body = {
+    Map<String, dynamic> body = {
       'chat_id': chat_id ?? '',
       'message_id': message_id ?? '',
       'inline_message_id': inline_message_id ?? '',
-      'reply_markup': reply_markup ?? ''
+      'reply_markup': reply_markup == null ? '' : jsonEncode(reply_markup)
     };
     var res = await _client.httpPost(requestUrl, body: body);
     if (res == true)
@@ -759,7 +767,7 @@ class Telegram {
   /// [https://core.telegram.org/bots/api#deleteMessage](https://core.telegram.org/bots/api#deleteMessage)
   Future<bool> deleteMessage(int chat_id, int message_id) async {
     String requestUrl = '${_baseUrl}${_token}/deleteMessage';
-    Map body = {'chat_id': chat_id, 'message_id': message_id};
+    Map<String, dynamic> body = {'chat_id': chat_id, 'message_id': message_id};
     return _client.httpPost(requestUrl, body: body);
   }
 
@@ -769,11 +777,11 @@ class Telegram {
       int reply_to_message_id,
       ReplyMarkup reply_markup}) async {
     String requestUrl = '${_baseUrl}${_token}/sendSticker';
-    Map body = {
+    Map<String, dynamic> body = {
       'chat_id': chat_id,
       'disable_notification': disable_notification ?? '',
       'reply_to_message_id': reply_to_message_id ?? '',
-      'reply_markup': reply_markup ?? ''
+      'reply_markup': reply_markup == null ? '' : jsonEncode(reply_markup)
     };
 
     if (sticker is io.File) {
@@ -795,7 +803,7 @@ class Telegram {
   /// [https://core.telegram.org/bots/api#getStickerSet](https://core.telegram.org/bots/api#getStickerSet)
   Future<StickerSet> getStickerSet(String name) async {
     String requestUrl = '${_baseUrl}${_token}/getStickerSet';
-    Map body = {'name': name};
+    Map<String, dynamic> body = {'name': name};
     // return _client.httpPost(requestUrl,
     //     body: body, returnType: new StickerSet(), isList: true);
     return StickerSet.fromJson(await _client.httpPost(requestUrl, body: body));
@@ -804,7 +812,7 @@ class Telegram {
   /// [https://core.telegram.org/bots/api#uploadStickerFile](https://core.telegram.org/bots/api#uploadStickerFile)
   Future<File> uploadStickerFile(int user_id, io.File png_sticker) async {
     String requestUrl = '${_baseUrl}${_token}/uploadStickerFile';
-    Map body = {'user_id': user_id};
+    Map<String, dynamic> body = {'user_id': user_id};
     // filename cannot be empty to post to Telegram server
     http.MultipartFile file = new http.MultipartFile(
         'png_sticker', png_sticker.openRead(), png_sticker.lengthSync(),
@@ -819,13 +827,13 @@ class Telegram {
       {bool contains_masks, MaskPosition mask_position}) async {
     String requestUrl = '${_baseUrl}${_token}/createNewStickerSet';
     User botInfo = await getMe();
-    Map body = {
+    Map<String, dynamic> body = {
       'user_id': user_id,
       'name': '${name}_by_${botInfo.username}',
       'title': title,
       'emojis': emojis,
       'contains_masks': contains_masks ?? '',
-      'mask_position': mask_position ?? ''
+      'mask_position': mask_position == null ? '' : jsonEncode(mask_position)
     };
 
     if (png_sticker is io.File) {
@@ -848,11 +856,11 @@ class Telegram {
       int user_id, String name, io.File png_sticker, String emojis,
       {MaskPosition mask_position}) async {
     String requestUrl = '${_baseUrl}${_token}/addStickerToSet';
-    Map body = {
+    Map<String, dynamic> body = {
       'user_id': user_id,
       'name': name,
       'emojis': emojis,
-      'mask_position': mask_position ?? ''
+      'mask_position': mask_position == null ? '' : jsonEncode(mask_position)
     };
 
     if (png_sticker is io.File) {
@@ -873,14 +881,14 @@ class Telegram {
   /// [https://core.telegram.org/bots/api#setStickerPositionInSet](https://core.telegram.org/bots/api#setStickerPositionInSet)
   Future<bool> setStickerPositionInSet(String sticker, int position) async {
     String requestUrl = '${_baseUrl}${_token}/setStickerPositionInSet';
-    Map body = {'sticker': sticker, 'position': position};
+    Map<String, dynamic> body = {'sticker': sticker, 'position': position};
     return _client.httpPost(requestUrl, body: body);
   }
 
   /// [https://core.telegram.org/bots/api#deleteStickerFromSet](https://core.telegram.org/bots/api#deleteStickerFromSet)
   Future<bool> deleteStickerFromSet(String sticker) async {
     String requestUrl = '${_baseUrl}${_token}/deleteStickerFromSet';
-    Map body = {'sticker': sticker};
+    Map<String, dynamic> body = {'sticker': sticker};
     return _client.httpPost(requestUrl, body: body);
   }
 
@@ -893,9 +901,9 @@ class Telegram {
       String switch_pm_text,
       String switch_pm_parameter}) async {
     String requestUrl = '${_baseUrl}${_token}/answerInlineQuery';
-    Map body = {
+    Map<String, dynamic> body = {
       'inline_query_id': inline_query_id,
-      'results': results,
+      'results': jsonEncode(results),
       'cache_time': cache_time ?? '',
       'is_personal': is_personal ?? '',
       'next_offset': next_offset ?? '',
@@ -931,7 +939,7 @@ class Telegram {
       int reply_to_message_id,
       InlineKeyboardMarkup reply_markup}) async {
     String requestUrl = '${_baseUrl}${_token}/sendInvoice';
-    Map body = {
+    Map<String, dynamic> body = {
       'chat_id': chat_id,
       'title': title,
       'description': description,
@@ -939,7 +947,7 @@ class Telegram {
       'provider_token': provider_token,
       'start_parameter': start_parameter,
       'currency': currency,
-      'prices': prices,
+      'prices': jsonEncode(prices),
       'provider_data': provider_data ?? '',
       'photo_url': photo_url ?? '',
       'photo_size': photo_size ?? '',
@@ -954,7 +962,7 @@ class Telegram {
       'is_flexible': is_flexible ?? '',
       'disable_notification': disable_notification ?? '',
       'reply_to_message_id': reply_to_message_id ?? '',
-      'reply_markup': reply_markup ?? ''
+      'reply_markup': reply_markup == null ? '' : jsonEncode(reply_markup)
     };
     return Message.fromJson(await _client.httpPost(requestUrl, body: body));
   }
@@ -966,10 +974,11 @@ class Telegram {
       return new Future.error(new TelegramException(
           'Attribute \'shipping_options\' and \'error_message\' can not be null when \'ok\' = false'));
     String requestUrl = '${_baseUrl}${_token}/answerShippingQuery';
-    Map body = {
+    Map<String, dynamic> body = {
       'shipping_query_id': shipping_query_id,
       'ok': ok,
-      'shipping_options': shipping_options ?? '',
+      'shipping_options':
+          shipping_options == null ? '' : jsonEncode(shipping_options),
       'error_message': error_message ?? ''
     };
     return _client.httpPost(requestUrl, body: body);
@@ -982,7 +991,7 @@ class Telegram {
       return new Future.error(new TelegramException(
           'Attribute \'error_message\' can not be null when \'ok\' = false'));
     String requestUrl = '${_baseUrl}${_token}/answerShippingQuery';
-    Map body = {
+    Map<String, dynamic> body = {
       'pre_checkout_query_id': pre_checkout_query_id,
       'ok': ok,
       'error_message': error_message ?? ''
@@ -996,12 +1005,12 @@ class Telegram {
       int reply_to_message_id,
       InlineKeyboardMarkup reply_markup}) async {
     String requestUrl = '${_baseUrl}${_token}/sendGame';
-    Map body = {
+    Map<String, dynamic> body = {
       'chat_id': chat_id,
       'game_short_name': game_short_name,
-      'disable_notification': (disable_notification ?? ''),
-      'reply_to_message_id': (reply_to_message_id ?? ''),
-      'reply_markup': (reply_markup ?? '')
+      'disable_notification': disable_notification ?? '',
+      'reply_to_message_id': reply_to_message_id ?? '',
+      'reply_markup': reply_markup == null ? '' : jsonEncode(reply_markup)
     };
     return Message.fromJson(await _client.httpPost(requestUrl, body: body));
   }
@@ -1017,7 +1026,7 @@ class Telegram {
       return new Future.error(new TelegramException(
           'Require either \'chat_id\' and \'message_id\', or \'inline_message_id\''));
     String requestUrl = '${_baseUrl}${_token}/setGameScore';
-    Map body = {
+    Map<String, dynamic> body = {
       'user_id': user_id,
       'score': score,
       'force': force ?? '',
@@ -1036,7 +1045,7 @@ class Telegram {
       return new Future.error(new TelegramException(
           'Require either \'chat_id\' and \'message_id\', or \'inline_message_id\''));
     String requestUrl = '${_baseUrl}${_token}/getGameHighScores';
-    Map body = {
+    Map<String, dynamic> body = {
       'user_id': user_id,
       'chat_id': chat_id ?? '',
       'message_id': message_id ?? '',
