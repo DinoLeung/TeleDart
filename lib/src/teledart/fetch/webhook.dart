@@ -38,7 +38,7 @@ class Webhook {
   int port;
   io.File privateKey;
 
-  StreamController _updateStreamController;
+  StreamController<Update> _updateStreamController;
 
   Webhook(this.telegram, this.url, this.secretPath,
       {this.port: 443,

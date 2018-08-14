@@ -1646,7 +1646,7 @@ class PreCheckoutQuery {
   Map<String, dynamic> toJson() => _$PreCheckoutQueryToJson(this);
 }
 
-// TODO
+// TODO #23
 // @JsonSerializable(nullable: true)
 // class PassportData {
 //   List<EncryptedPassportElement> data;
