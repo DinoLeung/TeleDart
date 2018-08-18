@@ -694,9 +694,9 @@ class InputMediaAnimation implements InputMedia {
   InputMediaAnimation(
       {this.type,
       this.media,
+      this.thumb,
       this.caption,
       this.parse_mode,
-      this.thumb,
       this.width,
       this.height,
       this.duration});
@@ -1646,51 +1646,178 @@ class PreCheckoutQuery {
   Map<String, dynamic> toJson() => _$PreCheckoutQueryToJson(this);
 }
 
-// TODO #23
-// @JsonSerializable(nullable: true)
-// class PassportData {
-//   List<EncryptedPassportElement> data;
-//   EncryptedCredentials credentials;
-//   PassportData({this.data, this.credentials});
-//   factory PassportData.fromJson(Map<String, dynamic> json) =>
-//       _$PassportDataFromJson(json);
-//   Map<String, dynamic> toJson() => _$PassportDataToJson(this);
-// }
+// // TODO #23
+@JsonSerializable(nullable: true)
+class PassportData {
+  List<EncryptedPassportElement> data;
+  EncryptedCredentials credentials;
+  PassportData({this.data, this.credentials});
+  factory PassportData.fromJson(Map<String, dynamic> json) =>
+      _$PassportDataFromJson(json);
+  Map<String, dynamic> toJson() => _$PassportDataToJson(this);
+}
 
-// @JsonSerializable(nullable: true)
-// class PassportFile {
-//   String file_id;
-//   int file_size;
-//   int file_date;
-//   PassportFile({this.file_id, this.file_size, this.file_date});
-//   factory PassportFile.fromJson(Map<String, dynamic> json) =>
-//       _$PassportFileFromJson(json);
-//   Map<String, dynamic> toJson() => _$PassportFileToJson(this);
-// }
+@JsonSerializable(nullable: true)
+class PassportFile {
+  String file_id;
+  int file_size;
+  int file_date;
+  PassportFile({this.file_id, this.file_size, this.file_date});
+  factory PassportFile.fromJson(Map<String, dynamic> json) =>
+      _$PassportFileFromJson(json);
+  Map<String, dynamic> toJson() => _$PassportFileToJson(this);
+}
 
-// @JsonSerializable(nullable: true)
-// class EncryptedPassportElement {
-//   String type;
-//   String data;
-//   String phone_number;
-//   String email;
-//   List<PassportFile> files;
-//   PassportFile front_side;
-//   PassportFile reverse_side;
-//   PassportFile selfie;
-//   EncryptedPassportElement(
-//       {this.type,
-//       this.data,
-//       this.phone_number,
-//       this.email,
-//       this.files,
-//       this.front_side,
-//       this.reverse_side,
-//       this.selfie});
-//   factory EncryptedPassportElement.fromJson(Map<String, dynamic> json) =>
-//       _$EncryptedPassportElementFromJson(json);
-//   Map<String, dynamic> toJson() => _$EncryptedPassportElementToJson(this);
-// }
+@JsonSerializable(nullable: true)
+class EncryptedPassportElement {
+  String type;
+  String data;
+  String phone_number;
+  String email;
+  List<PassportFile> files;
+  PassportFile front_side;
+  PassportFile reverse_side;
+  PassportFile selfie;
+  EncryptedPassportElement(
+      {this.type,
+      this.data,
+      this.phone_number,
+      this.email,
+      this.files,
+      this.front_side,
+      this.reverse_side,
+      this.selfie});
+  factory EncryptedPassportElement.fromJson(Map<String, dynamic> json) =>
+      _$EncryptedPassportElementFromJson(json);
+  Map<String, dynamic> toJson() => _$EncryptedPassportElementToJson(this);
+}
+
+@JsonSerializable(nullable: true)
+class EncryptedCredentials {
+  String data;
+  String hash;
+  String secret;
+  EncryptedCredentials({this.data, this.hash, this.secret});
+  factory EncryptedCredentials.fromJson(Map<String, dynamic> json) =>
+      _$EncryptedCredentialsFromJson(json);
+  Map<String, dynamic> toJson() => _$EncryptedCredentialsToJson(this);
+}
+
+@JsonSerializable(nullable: true)
+// abstract class PassportElementError {}
+class PassportElementError {
+  String source;
+  String type;
+  String message;
+  PassportElementError({this.source, this.type, this.message});
+  factory PassportElementError.fromJson(Map<String, dynamic> json) =>
+      _$PassportElementErrorFromJson(json);
+  Map<String, dynamic> toJson() => _$PassportElementErrorToJson(this);
+}
+
+@JsonSerializable(nullable: true)
+class PassportElementErrorDataField implements PassportElementError {
+  @override
+  String source;
+  @override
+  String type;
+  @override
+  String message;
+  String field_name;
+  String data_hash;
+  PassportElementErrorDataField(
+      {this.source, this.type, this.message, this.field_name, this.data_hash});
+  factory PassportElementErrorDataField.fromJson(Map<String, dynamic> json) =>
+      _$PassportElementErrorDataFieldFromJson(json);
+  @override
+  Map<String, dynamic> toJson() => _$PassportElementErrorDataFieldToJson(this);
+}
+
+@JsonSerializable(nullable: true)
+class PassportElementErrorFrontSide implements PassportElementError {
+  @override
+  String source;
+  @override
+  String type;
+  @override
+  String message;
+  String file_hash;
+  PassportElementErrorFrontSide(
+      {this.source, this.type, this.message, this.file_hash});
+  factory PassportElementErrorFrontSide.fromJson(Map<String, dynamic> json) =>
+      _$PassportElementErrorFrontSideFromJson(json);
+  @override
+  Map<String, dynamic> toJson() => _$PassportElementErrorFrontSideToJson(this);
+}
+
+@JsonSerializable(nullable: true)
+class PassportElementErrorReverseSide implements PassportElementError {
+  @override
+  String source;
+  @override
+  String type;
+  @override
+  String message;
+  String file_hash;
+  PassportElementErrorReverseSide(
+      {this.source, this.type, this.message, this.file_hash});
+  factory PassportElementErrorReverseSide.fromJson(Map<String, dynamic> json) =>
+      _$PassportElementErrorReverseSideFromJson(json);
+  @override
+  Map<String, dynamic> toJson() =>
+      _$PassportElementErrorReverseSideToJson(this);
+}
+
+@JsonSerializable(nullable: true)
+class PassportElementErrorSelfie implements PassportElementError {
+  @override
+  String source;
+  @override
+  String type;
+  @override
+  String message;
+  String file_hash;
+  PassportElementErrorSelfie(
+      {this.source, this.type, this.message, this.file_hash});
+  factory PassportElementErrorSelfie.fromJson(Map<String, dynamic> json) =>
+      _$PassportElementErrorSelfieFromJson(json);
+  @override
+  Map<String, dynamic> toJson() => _$PassportElementErrorSelfieToJson(this);
+}
+
+@JsonSerializable(nullable: true)
+class PassportElementErrorFile implements PassportElementError {
+  @override
+  String source;
+  @override
+  String type;
+  @override
+  String message;
+  String file_hash;
+  PassportElementErrorFile(
+      {this.source, this.type, this.message, this.file_hash});
+  factory PassportElementErrorFile.fromJson(Map<String, dynamic> json) =>
+      _$PassportElementErrorFileFromJson(json);
+  @override
+  Map<String, dynamic> toJson() => _$PassportElementErrorFileToJson(this);
+}
+
+@JsonSerializable(nullable: true)
+class PassportElementErrorFiles implements PassportElementError {
+  @override
+  String source;
+  @override
+  String type;
+  @override
+  String message;
+  List<String> file_hashes;
+  PassportElementErrorFiles(
+      {this.source, this.type, this.message, this.file_hashes});
+  factory PassportElementErrorFiles.fromJson(Map<String, dynamic> json) =>
+      _$PassportElementErrorFilesFromJson(json);
+  @override
+  Map<String, dynamic> toJson() => _$PassportElementErrorFilesToJson(this);
+}
 
 @JsonSerializable(nullable: true)
 class Game {
