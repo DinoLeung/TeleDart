@@ -603,6 +603,7 @@ class Telegram {
   Future<Message> sendVenue(int chat_id, double latitude, double longitude,
       String title, String address,
       {String foursquare_id,
+      String foursquare_type,
       bool disable_notification,
       int reply_to_message_id,
       ReplyMarkup reply_markup}) async {
@@ -614,6 +615,7 @@ class Telegram {
       'title': title,
       'address': address,
       'foursquare_id': foursquare_id ?? '',
+      'foursquare_type': foursquare_type ?? '',
       'disable_notification': disable_notification ?? '',
       'reply_to_message_id': reply_to_message_id ?? '',
       'reply_markup': reply_markup == null ? '' : jsonEncode(reply_markup)
@@ -625,6 +627,7 @@ class Telegram {
   Future<Message> sendContact(
       int chat_id, String phone_number, String first_name,
       {String last_name,
+      String vcard,
       bool disable_notification,
       int reply_to_message_id,
       ReplyMarkup reply_markup}) async {
@@ -634,6 +637,7 @@ class Telegram {
       'phone_number': phone_number,
       'first_name': first_name,
       'last_name': last_name ?? '',
+      'vcard': vcard ?? '',
       'disable_notification': disable_notification ?? '',
       'reply_to_message_id': reply_to_message_id ?? '',
       'reply_markup': reply_markup == null ? '' : jsonEncode(reply_markup)

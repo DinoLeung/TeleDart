@@ -8,12 +8,12 @@ allowing you to create your own bot easily.
 
 ![TeleDart](https://raw.githubusercontent.com/DinoLeung/TeleDart/master/example/dart_bird_catchs_telegram.svg?sanitize=true)
 
-[![Bot API Version](https://img.shields.io/badge/Bot%20API-v3.6-blue.svg?style=flat-square)](https://core.telegram.org/bots/api)
+[![Bot API Version](https://img.shields.io/badge/Bot%20API-v4.0-blue.svg?style=flat-square)](https://core.telegram.org/bots/api)
 [![Dart Version](https://img.shields.io/badge/Dart-2.0.0-blue.svg?style=flat-square)](https://www.dartlang.org/dart-2)
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg?style=flat-square)](https://www.gnu.org/licenses/gpl-3.0)
 ## Features
 
-* Fully support [Telegram Bot API 3.6](https://core.telegram.org/bots/api#february-13-2018)
+* Fully support [Telegram Bot API 4.0](https://core.telegram.org/bots/api#https://core.telegram.org/bots/api#july-26-2018)
 * [Inline mode](https://core.telegram.org/bots/api#inline-mode)
 * [Telegram Payment Platform](https://telegram.org/blog/payments)
 * [HTML5 Games](https://core.telegram.org/bots/api#games)

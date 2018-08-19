@@ -782,9 +782,9 @@ InputMediaAnimation _$InputMediaAnimationFromJson(Map<String, dynamic> json) {
   return InputMediaAnimation(
       type: json['type'] as String,
       media: json['media'] as String,
+      thumb: json['thumb'],
       caption: json['caption'] as String,
       parse_mode: json['parse_mode'] as String,
-      thumb: json['thumb'],
       width: json['width'] as int,
       height: json['height'] as int,
       duration: json['duration'] as int);
