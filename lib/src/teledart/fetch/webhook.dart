@@ -93,10 +93,10 @@ class Webhook {
             .transform(utf8.decoder)
             .join()
             .then((data) => emitUpdate(new Update.fromJson(jsonDecode(data))));
-        request.response.write('ok');
-        request.response.close();
+        request.response.write({'ok': true});
       } else {
         request.response.statusCode = io.HttpStatus.methodNotAllowed;
+        request.response.write({'ok': false});
       }
       request.response.close();
     }).onError(
