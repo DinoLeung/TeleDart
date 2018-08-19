@@ -13,7 +13,7 @@ allowing you to create your own bot easily.
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg?style=flat-square)](https://www.gnu.org/licenses/gpl-3.0)
 ## Features
 
-* Fully support [Telegram Bot API 4.0](https://core.telegram.org/bots/api#https://core.telegram.org/bots/api#july-26-2018)
+* Fully support [Telegram Bot API 4.0](https://core.telegram.org/bots/api#july-26-2018)
 * [Inline mode](https://core.telegram.org/bots/api#inline-mode)
 * [Telegram Payment Platform](https://telegram.org/blog/payments)
 * [HTML5 Games](https://core.telegram.org/bots/api#games)
