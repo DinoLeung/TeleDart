@@ -129,10 +129,10 @@ class TeleDart {
 
   /// Listens to message events with [entityType] and [keyword] in text and caption
   ///
-  /// entityType include `mention` (@username), `hashtag`, `bot_command`, `url`,
-  /// `email`, `bold` (bold text), `italic` (italic text), `code` (monowidth string),
-  /// `pre` (monowidth block), `text_link` (for clickable text URLs), `text_mention`
-  /// (for users without usernames)
+  /// entityType include `mention` (@username), `hashtag`, `cashtag`, `bot_command`,
+  /// `url`, `email`, `phone_number`, `bold` (bold text), `italic` (italic text),
+  /// `code` (monowidth string), `pre` (monowidth block), `text_link` (for
+  /// clickable text URLs), `text_mention` (for users without usernames)
   ///
   /// **Normal message has NO [entityType]**
   ///
@@ -177,6 +177,10 @@ class TeleDart {
   Stream<Message> onMention([String keyword]) =>
       _event.onMessage(entityType: 'mention', keyword: keyword);
 
+  /// Short-cut for onMessage handling entityType `cashtag`
+  Stream<Message> onCashtag([String keyword]) =>
+      _event.onMessage(entityType: 'cashtag', keyword: keyword);
+
   /// Short-cut for onMessage handling entityType `hashtag`
   Stream<Message> onHashtag([String keyword]) =>
       _event.onMessage(entityType: 'hashtag', keyword: keyword);
@@ -184,6 +188,34 @@ class TeleDart {
   /// Short-cut for onMessage handling entityType `bot_command`
   Stream<Message> onCommand([String keyword]) =>
       _event.onMessage(entityType: 'bot_command', keyword: keyword);
+
+  /// Short-cut for onMessage handling entityType `url`
+  Stream<Message> onUrl([String keyword]) =>
+      _event.onMessage(entityType: 'url', keyword: keyword);
+
+  /// Short-cut for onMessage handling entityType `email`
+  Stream<Message> onEmail([String keyword]) =>
+      _event.onMessage(entityType: 'email', keyword: keyword);
+
+  /// Short-cut for onMessage handling entityType `phone_number`
+  Stream<Message> onPhoneNumber([String keyword]) =>
+      _event.onMessage(entityType: 'phone_number', keyword: keyword);
+
+  /// Short-cut for onMessage handling entityType `bold`
+  Stream<Message> onBold([String keyword]) =>
+      _event.onMessage(entityType: 'bold', keyword: keyword);
+
+  /// Short-cut for onMessage handling entityType `italic`
+  Stream<Message> onItalic([String keyword]) =>
+      _event.onMessage(entityType: 'italic', keyword: keyword);
+
+  /// Short-cut for onMessage handling entityType `code`
+  Stream<Message> onCode([String keyword]) =>
+      _event.onMessage(entityType: 'code', keyword: keyword);
+
+  /// Short-cut for onMessage handling entityType `pre`
+  Stream<Message> onPre([String keyword]) =>
+      _event.onMessage(entityType: 'pre', keyword: keyword);
 
   /// Short-cut for onMessage handling entityType `text_link`
   Stream<Message> onTextLink([String keyword]) =>
@@ -208,7 +240,7 @@ class TeleDart {
           reply_markup: reply_markup);
 
   /// Short-cut to reply with a photo message
-  Future<Message> replyPhoto(Message orgMsg, photo,
+  Future<Message> replyPhoto(Message orgMsg, dynamic photo,
           {bool withQuote: false,
           String caption,
           String parse_mode,
@@ -222,13 +254,14 @@ class TeleDart {
           reply_markup: reply_markup);
 
   /// Short-cut to reply with a audio message
-  Future<Message> replyAudio(Message orgMsg, audio,
+  Future<Message> replyAudio(Message orgMsg, dynamic audio,
           {bool withQuote: false,
           String caption,
           String parse_mode,
           int duration,
           String performer,
           String title,
+          dynamic thumb,
           bool disable_notification,
           ReplyMarkup reply_markup}) =>
       telegram.sendAudio(orgMsg.from.id, audio,
@@ -237,18 +270,21 @@ class TeleDart {
           duration: duration,
           performer: performer,
           title: title,
+          thumb: thumb,
           disable_notification: disable_notification,
           reply_to_message_id: withQuote ? orgMsg.message_id : null,
           reply_markup: reply_markup);
 
   /// Short-cut to reply with a document message
-  Future<Message> replyDocument(Message orgMsg, document,
+  Future<Message> replyDocument(Message orgMsg, dynamic document,
           {bool withQuote: false,
+          dynamic thumb,
           String caption,
           String parse_mode,
           bool disable_notification,
           ReplyMarkup reply_markup}) =>
       telegram.sendDocument(orgMsg.from.id, document,
+          thumb: thumb,
           caption: caption,
           parse_mode: parse_mode,
           disable_notification: disable_notification,
@@ -256,11 +292,12 @@ class TeleDart {
           reply_markup: reply_markup);
 
   /// Short-cut to reply with a video message
-  Future<Message> replyVideo(Message orgMsg, video,
+  Future<Message> replyVideo(Message orgMsg, dynamic video,
           {bool withQuote: false,
           int duration,
           int width,
           int height,
+          dynamic thumb,
           String caption,
           String parse_mode,
           bool supports_streaming,
@@ -270,6 +307,7 @@ class TeleDart {
           duration: duration,
           width: width,
           height: height,
+          thumb: thumb,
           caption: caption,
           parse_mode: parse_mode,
           supports_streaming: supports_streaming,
@@ -277,8 +315,31 @@ class TeleDart {
           reply_to_message_id: withQuote ? orgMsg.message_id : null,
           reply_markup: reply_markup);
 
+  /// Short-cut to reply with a animation message
+  Future<Message> replyAnimation(Message orgMsg, dynamic animation,
+          {bool withQuote: false,
+          int duration,
+          int width,
+          int height,
+          dynamic thumb,
+          String caption,
+          String parse_mode,
+          bool disable_notification,
+          int reply_to_message_id,
+          ReplyMarkup reply_markup}) =>
+      telegram.sendAnimation(orgMsg.from.id, animation,
+          duration: duration,
+          width: width,
+          height: height,
+          thumb: thumb,
+          caption: caption,
+          parse_mode: parse_mode,
+          disable_notification: disable_notification,
+          reply_to_message_id: withQuote ? orgMsg.message_id : null,
+          reply_markup: reply_markup);
+
   /// Short-cut to reply with a voice message
-  Future<Message> replyVoice(Message orgMsg, voice,
+  Future<Message> replyVoice(Message orgMsg, dynamic voice,
           {bool withQuote: false,
           String caption,
           String parse_mode,
@@ -292,15 +353,17 @@ class TeleDart {
           reply_markup: reply_markup);
 
   /// Short-cut to reply with a video note message
-  Future<Message> replyVideoNote(Message orgMsg, video_note,
+  Future<Message> replyVideoNote(Message orgMsg, dynamic video_note,
           {bool withQuote: false,
           int duration,
           int length,
+          dynamic thumb,
           bool disable_notification,
           ReplyMarkup reply_markup}) =>
       telegram.sendVideoNote(orgMsg.from.id, video_note,
           duration: duration,
           length: length,
+          thumb: thumb,
           disable_notification: disable_notification,
           reply_to_message_id: withQuote ? orgMsg.message_id : null,
           reply_markup: reply_markup);
@@ -327,7 +390,7 @@ class TeleDart {
 
   /// Short-cut to edit a live location message
   Future<Message> editLiveLocation(double latitude, double longitude,
-          {chat_id,
+          {int chat_id,
           int message_id,
           String inline_message_id,
           ReplyMarkup reply_markup}) =>
@@ -339,7 +402,7 @@ class TeleDart {
 
   /// Short-cut to stop a live location message
   Future<Message> stopLiveLocation(
-          {chat_id,
+          {int chat_id,
           int message_id,
           String inline_message_id,
           ReplyMarkup reply_markup}) =>
@@ -354,10 +417,12 @@ class TeleDart {
           String title, String address,
           {bool withQuote: false,
           String foursquare_id,
+          String foursquare_type,
           bool disable_notification,
           ReplyMarkup reply_markup}) =>
       telegram.sendVenue(orgMsg.from.id, latitude, longitude, title, address,
           foursquare_id: foursquare_id,
+          foursquare_type: foursquare_type,
           disable_notification: disable_notification,
           reply_to_message_id: withQuote ? orgMsg.message_id : null,
           reply_markup: reply_markup);
@@ -367,10 +432,25 @@ class TeleDart {
           Message orgMsg, String phone_number, String first_name,
           {bool withQuote: false,
           String last_name,
+          String vcard,
           bool disable_notification,
           ReplyMarkup reply_markup}) =>
       telegram.sendContact(orgMsg.from.id, phone_number, first_name,
           last_name: last_name,
+          vcard: vcard,
+          disable_notification: disable_notification,
+          reply_to_message_id: withQuote ? orgMsg.message_id : null,
+          reply_markup: reply_markup);
+
+  // TODO: order of this block is not matching with telegram.TeleDart
+  // just put it here for now for the sake of providing functionality
+  /// Short-cut to reply with a contact message
+  Future<Message> replySticker(Message orgMsg, dynamic sticker,
+          {bool withQuote: false,
+          bool disable_notification,
+          int reply_to_message_id,
+          ReplyMarkup reply_markup}) =>
+      telegram.sendSticker(orgMsg.from.id, sticker,
           disable_notification: disable_notification,
           reply_to_message_id: withQuote ? orgMsg.message_id : null,
           reply_markup: reply_markup);
