@@ -77,6 +77,8 @@ class Event {
             case 'mention':
               return message.getEntity(entityType) == '\@${keyword}';
               break;
+            case 'cashtag':
+              return message.getEntity(entityType) == '\$${keyword}';
             case 'hashtag':
               return message.getEntity(entityType) == '\#${keyword}';
               break;
@@ -87,6 +89,7 @@ class Event {
               break;
             case 'url':
             case 'email':
+            case 'phone_number':
             case 'bold':
             case 'italic':
             case 'code':

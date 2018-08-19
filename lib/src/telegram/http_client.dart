@@ -57,13 +57,13 @@ class HttpClient {
   /// [url] - request url (required)
   /// [file] - file to upload (required)
   /// [body] - parameters in map
-  Future<dynamic> httpMultipartPost(String url, http.MultipartFile file,
+  Future<dynamic> httpMultipartPost(String url, List<http.MultipartFile> files,
       {Map<String, dynamic> body}) async {
     http.MultipartRequest request =
         new http.MultipartRequest('POST', Uri.parse(url))
           ..headers.addAll({'Content-Type': 'multipart/form-data'})
           ..fields.addAll(body.map((k, v) => MapEntry(k, '${v}')))
-          ..files.add(file);
+          ..files.addAll(files);
     return request
         .send()
         .then((response) => http.Response.fromStream(response))

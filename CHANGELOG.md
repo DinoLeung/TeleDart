@@ -1,3 +1,7 @@
+## 0.0.13
+
+- Supports API 4.0
+
 ## 0.0.12
 
 - Depends on json_serializable/json_annotation handling json objects
