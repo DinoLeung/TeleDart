@@ -1,3 +1,7 @@
+## 0.0.14
+
+- Add shortcuts
+
 ## 0.0.13
 
 - Supports API 4.0
