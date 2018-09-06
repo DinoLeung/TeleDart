@@ -525,7 +525,10 @@ class Telegram {
     }
   }
 
-  // TODO: #9
+  //TODO: #9
+  //! media can only take file_id or url
+  //* need to implement POST multipart/form-data uploading files
+  //* or even mixed input
   /// [https://core.telegram.org/bots/api#sendMediaGroup](https://core.telegram.org/bots/api#sendMediaGroup)
   Future<List<Message>> sendMediaGroup(int chat_id, List<InputMedia> media,
       {bool disable_notification, int reply_to_message_id}) async {

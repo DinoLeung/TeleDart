@@ -442,8 +442,8 @@ class TeleDart {
           reply_to_message_id: withQuote ? orgMsg.message_id : null,
           reply_markup: reply_markup);
 
-  // TODO: order of this block which is not matching with telegram.TeleDart
-  // just put it here for now for the sake of providing functionality
+  //TODO: order of this block is not matching with telegram.TeleDart
+  //! just put it here for now for the sake of providing functionality
   /// Short-cut to reply with a contact message
   Future<Message> replySticker(Message orgMsg, dynamic sticker,
           {bool withQuote: false,

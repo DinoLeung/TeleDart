@@ -80,7 +80,7 @@ class LongPolling {
         }
         _recursivePolling();
       }).catchError((error) =>
-              // TODO: find out what exceptions can be ignored
+              //TODO: find out what exceptions can be ignored
               error is io.HandshakeException
                   ? _recursivePolling()
                   : throw new LongPollingException(error.toString()));
