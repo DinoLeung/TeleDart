@@ -579,9 +579,11 @@ Map<String, dynamic> _$ReplyKeyboardRemoveToJson(
 InlineKeyboardMarkup _$InlineKeyboardMarkupFromJson(Map<String, dynamic> json) {
   return InlineKeyboardMarkup(
       inline_keyboard: (json['inline_keyboard'] as List)
-          ?.map((e) => e == null
-              ? null
-              : InlineKeyboardButton.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => (e as List)
+              ?.map((e) => e == null
+                  ? null
+                  : InlineKeyboardButton.fromJson(e as Map<String, dynamic>))
+              ?.toList())
           ?.toList());
 }
 
