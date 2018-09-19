@@ -495,7 +495,7 @@ class ReplyKeyboardRemove implements ReplyMarkup {
 
 @JsonSerializable(nullable: true)
 class InlineKeyboardMarkup implements ReplyMarkup {
-  List<InlineKeyboardButton> inline_keyboard;
+  List<List<InlineKeyboardButton>> inline_keyboard;
   InlineKeyboardMarkup({this.inline_keyboard});
   factory InlineKeyboardMarkup.fromJson(Map<String, dynamic> json) =>
       _$InlineKeyboardMarkupFromJson(json);

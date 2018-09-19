@@ -1,3 +1,7 @@
+##0.0.15
+
+- Hot fix inline_keyboard variable in InlineKeyboardMarkup
+
 ## 0.0.14
 
 - Add shortcuts
