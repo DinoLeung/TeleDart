@@ -1,4 +1,8 @@
-##0.0.15
+## 0.0.16
+
+- Hot fix model json annotation file
+
+## 0.0.15
 
 - Hot fix inline_keyboard variable in InlineKeyboardMarkup
 
