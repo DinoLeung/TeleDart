@@ -1953,7 +1953,13 @@ EncryptedPassportElement _$EncryptedPassportElementFromJson(
           : PassportFile.fromJson(json['reverse_side'] as Map<String, dynamic>),
       selfie: json['selfie'] == null
           ? null
-          : PassportFile.fromJson(json['selfie'] as Map<String, dynamic>));
+          : PassportFile.fromJson(json['selfie'] as Map<String, dynamic>),
+      translation: (json['translation'] as List)
+          ?.map((e) => e == null
+              ? null
+              : PassportFile.fromJson(e as Map<String, dynamic>))
+          ?.toList(),
+      hash: json['hash'] as String);
 }
 
 Map<String, dynamic> _$EncryptedPassportElementToJson(
@@ -1966,7 +1972,9 @@ Map<String, dynamic> _$EncryptedPassportElementToJson(
       'files': instance.files,
       'front_side': instance.front_side,
       'reverse_side': instance.reverse_side,
-      'selfie': instance.selfie
+      'selfie': instance.selfie,
+      'translation': instance.translation,
+      'hash': instance.hash
     };
 
 EncryptedCredentials _$EncryptedCredentialsFromJson(Map<String, dynamic> json) {
@@ -2108,6 +2116,61 @@ Map<String, dynamic> _$PassportElementErrorFilesToJson(
       'type': instance.type,
       'message': instance.message,
       'file_hashes': instance.file_hashes
+    };
+
+PassportElementErrorTranslationFile
+    _$PassportElementErrorTranslationFileFromJson(Map<String, dynamic> json) {
+  return PassportElementErrorTranslationFile(
+      source: json['source'] as String,
+      type: json['type'] as String,
+      message: json['message'] as String,
+      file_hash: json['file_hash'] as String);
+}
+
+Map<String, dynamic> _$PassportElementErrorTranslationFileToJson(
+        PassportElementErrorTranslationFile instance) =>
+    <String, dynamic>{
+      'source': instance.source,
+      'type': instance.type,
+      'message': instance.message,
+      'file_hash': instance.file_hash
+    };
+
+PassportElementErrorTranslationFiles
+    _$PassportElementErrorTranslationFilesFromJson(Map<String, dynamic> json) {
+  return PassportElementErrorTranslationFiles(
+      source: json['source'] as String,
+      type: json['type'] as String,
+      message: json['message'] as String,
+      file_hashes:
+          (json['file_hashes'] as List)?.map((e) => e as String)?.toList());
+}
+
+Map<String, dynamic> _$PassportElementErrorTranslationFilesToJson(
+        PassportElementErrorTranslationFiles instance) =>
+    <String, dynamic>{
+      'source': instance.source,
+      'type': instance.type,
+      'message': instance.message,
+      'file_hashes': instance.file_hashes
+    };
+
+PassportElementErrorUnspecified _$PassportElementErrorUnspecifiedFromJson(
+    Map<String, dynamic> json) {
+  return PassportElementErrorUnspecified(
+      source: json['source'] as String,
+      type: json['type'] as String,
+      message: json['message'] as String,
+      file_hash: json['file_hash'] as String);
+}
+
+Map<String, dynamic> _$PassportElementErrorUnspecifiedToJson(
+        PassportElementErrorUnspecified instance) =>
+    <String, dynamic>{
+      'source': instance.source,
+      'type': instance.type,
+      'message': instance.message,
+      'file_hash': instance.file_hash
     };
 
 Game _$GameFromJson(Map<String, dynamic> json) {
