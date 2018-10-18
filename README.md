@@ -13,10 +13,11 @@ allowing you to create your own bot easily.
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg?style=flat-square)](https://www.gnu.org/licenses/gpl-3.0)
 ## Features
 
-* Fully support [Telegram Bot API 4.0](https://core.telegram.org/bots/api#july-26-2018)
-* [Inline mode](https://core.telegram.org/bots/api#inline-mode)
+* Fully support [Telegram Bot API 4.1](https://core.telegram.org/bots/api#august-27-2018)
+* [Inline mode](https://telegram.org/blog/inline-bots)
 * [Telegram Payment Platform](https://telegram.org/blog/payments)
-* [HTML5 Games](https://core.telegram.org/bots/api#games)
+* [Telegram Passport](https://telegram.org/blog/passport)
+* [Gaming Platform](https://telegram.org/blog/games)
 * [Dart 2](https://www.dartlang.org/dart-2) ready!!!
 
 ## Usage

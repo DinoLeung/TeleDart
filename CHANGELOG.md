@@ -1,3 +1,12 @@
+## 0.0.18
+
+- Update readme
+
+## 0.0.17
+
+- Added Bot API 4.1 support
+- Update dependencies 
+
 ## 0.0.16
 
 - Hot fix model json annotation file

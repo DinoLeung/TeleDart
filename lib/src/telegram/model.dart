@@ -1677,6 +1677,8 @@ class EncryptedPassportElement {
   PassportFile front_side;
   PassportFile reverse_side;
   PassportFile selfie;
+  List<PassportFile> translation;
+  String hash;
   EncryptedPassportElement(
       {this.type,
       this.data,
@@ -1685,7 +1687,9 @@ class EncryptedPassportElement {
       this.files,
       this.front_side,
       this.reverse_side,
-      this.selfie});
+      this.selfie,
+      this.translation,
+      this.hash});
   factory EncryptedPassportElement.fromJson(Map<String, dynamic> json) =>
       _$EncryptedPassportElementFromJson(json);
   Map<String, dynamic> toJson() => _$EncryptedPassportElementToJson(this);
@@ -1816,6 +1820,57 @@ class PassportElementErrorFiles implements PassportElementError {
       _$PassportElementErrorFilesFromJson(json);
   @override
   Map<String, dynamic> toJson() => _$PassportElementErrorFilesToJson(this);
+}
+
+@JsonSerializable(nullable: true)
+class PassportElementErrorTranslationFile implements PassportElementError {
+  @override
+  String source;
+  @override
+  String type;
+  @override
+  String message;
+  String file_hash;
+  PassportElementErrorTranslationFile(
+      {this.source, this.type, this.message, this.file_hash});
+  factory PassportElementErrorTranslationFile.fromJson(Map<String, dynamic> json) =>
+      _$PassportElementErrorTranslationFileFromJson(json);
+  @override
+  Map<String, dynamic> toJson() => _$PassportElementErrorTranslationFileToJson(this);
+}
+
+@JsonSerializable(nullable: true)
+class PassportElementErrorTranslationFiles implements PassportElementError {
+  @override
+  String source;
+  @override
+  String type;
+  @override
+  String message;
+  List<String> file_hashes;
+  PassportElementErrorTranslationFiles(
+      {this.source, this.type, this.message, this.file_hashes});
+  factory PassportElementErrorTranslationFiles.fromJson(Map<String, dynamic> json) =>
+      _$PassportElementErrorTranslationFilesFromJson(json);
+  @override
+  Map<String, dynamic> toJson() => _$PassportElementErrorTranslationFilesToJson(this);
+}
+
+@JsonSerializable(nullable: true)
+class PassportElementErrorUnspecified implements PassportElementError {
+  @override
+  String source;
+  @override
+  String type;
+  @override
+  String message;
+  String file_hash;
+  PassportElementErrorUnspecified(
+      {this.source, this.type, this.message, this.file_hash});
+  factory PassportElementErrorUnspecified.fromJson(Map<String, dynamic> json) =>
+      _$PassportElementErrorUnspecifiedFromJson(json);
+  @override
+  Map<String, dynamic> toJson() => _$PassportElementErrorUnspecifiedToJson(this);
 }
 
 @JsonSerializable(nullable: true)
