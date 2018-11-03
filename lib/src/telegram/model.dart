@@ -1833,10 +1833,12 @@ class PassportElementErrorTranslationFile implements PassportElementError {
   String file_hash;
   PassportElementErrorTranslationFile(
       {this.source, this.type, this.message, this.file_hash});
-  factory PassportElementErrorTranslationFile.fromJson(Map<String, dynamic> json) =>
+  factory PassportElementErrorTranslationFile.fromJson(
+          Map<String, dynamic> json) =>
       _$PassportElementErrorTranslationFileFromJson(json);
   @override
-  Map<String, dynamic> toJson() => _$PassportElementErrorTranslationFileToJson(this);
+  Map<String, dynamic> toJson() =>
+      _$PassportElementErrorTranslationFileToJson(this);
 }
 
 @JsonSerializable(nullable: true)
@@ -1850,10 +1852,12 @@ class PassportElementErrorTranslationFiles implements PassportElementError {
   List<String> file_hashes;
   PassportElementErrorTranslationFiles(
       {this.source, this.type, this.message, this.file_hashes});
-  factory PassportElementErrorTranslationFiles.fromJson(Map<String, dynamic> json) =>
+  factory PassportElementErrorTranslationFiles.fromJson(
+          Map<String, dynamic> json) =>
       _$PassportElementErrorTranslationFilesFromJson(json);
   @override
-  Map<String, dynamic> toJson() => _$PassportElementErrorTranslationFilesToJson(this);
+  Map<String, dynamic> toJson() =>
+      _$PassportElementErrorTranslationFilesToJson(this);
 }
 
 @JsonSerializable(nullable: true)
@@ -1870,7 +1874,8 @@ class PassportElementErrorUnspecified implements PassportElementError {
   factory PassportElementErrorUnspecified.fromJson(Map<String, dynamic> json) =>
       _$PassportElementErrorUnspecifiedFromJson(json);
   @override
-  Map<String, dynamic> toJson() => _$PassportElementErrorUnspecifiedToJson(this);
+  Map<String, dynamic> toJson() =>
+      _$PassportElementErrorUnspecifiedToJson(this);
 }
 
 @JsonSerializable(nullable: true)
