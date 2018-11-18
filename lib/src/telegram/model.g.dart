@@ -497,8 +497,11 @@ UserProfilePhotos _$UserProfilePhotosFromJson(Map<String, dynamic> json) {
   return UserProfilePhotos(
       total_count: json['total_count'] as int,
       photos: (json['photos'] as List)
-          ?.map((e) =>
-              e == null ? null : PhotoSize.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => (e as List)
+              ?.map((e) => e == null
+                  ? null
+                  : PhotoSize.fromJson(e as Map<String, dynamic>))
+              ?.toList())
           ?.toList());
 }
 
@@ -531,9 +534,11 @@ Map<String, dynamic> _$ReplyMarkupToJson(ReplyMarkup instance) =>
 ReplyKeyboardMarkup _$ReplyKeyboardMarkupFromJson(Map<String, dynamic> json) {
   return ReplyKeyboardMarkup(
       keyboard: (json['keyboard'] as List)
-          ?.map((e) => e == null
-              ? null
-              : KeyboardButton.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => (e as List)
+              ?.map((e) => e == null
+                  ? null
+                  : KeyboardButton.fromJson(e as Map<String, dynamic>))
+              ?.toList())
           ?.toList(),
       resize_keyboard: json['resize_keyboard'] as bool,
       one_time_keyboard: json['one_time_keyboard'] as bool,

@@ -656,7 +656,7 @@ class Telegram {
   }
 
   /// [https://core.telegram.org/bots/api#getUserProfilePhotos](https://core.telegram.org/bots/api#getUserProfilePhotos)
-  Future<List<UserProfilePhotos>> getUserProfilePhotos(int user_id,
+  Future<UserProfilePhotos> getUserProfilePhotos(int user_id,
       {int offset, int limit}) async {
     String requestUrl = '${_baseUrl}${_token}/getUserProfilePhotos';
     Map<String, dynamic> body = {
@@ -664,9 +664,8 @@ class Telegram {
       'offset': offset ?? '',
       'limit': limit ?? ''
     };
-    return ((await _client.httpPost(requestUrl, body: body))['photos'])
-        .map<UserProfilePhotos>((photo) => UserProfilePhotos.fromJson(photo))
-        .toList();
+    return UserProfilePhotos.fromJson(
+        await _client.httpPost(requestUrl, body: body));
   }
 
   /// [https://core.telegram.org/bots/api#getFile](https://core.telegram.org/bots/api#getFile)
