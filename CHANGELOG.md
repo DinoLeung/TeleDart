@@ -1,6 +1,7 @@
 ## 0.0.20
 
-- Hot fix #34
+- Hot fix #34 400 Bad Request: field "keyboard" of the ReplyKeyboardMarkup should be an Array of Arrays
+- Fixed getUserProfilePhotos() returns UserProfilePhotos instead of List<UserProfilePhotos>
 
 ## 0.0.19
 
