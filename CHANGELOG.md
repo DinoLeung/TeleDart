@@ -1,3 +1,7 @@
+## 0.0.20
+
+- Hot fix #34
+
 ## 0.0.19
 
 - Update readme

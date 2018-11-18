@@ -430,7 +430,7 @@ class Venue {
 @JsonSerializable(nullable: true)
 class UserProfilePhotos {
   int total_count;
-  List<PhotoSize> photos;
+  List<List<PhotoSize>> photos;
   UserProfilePhotos({this.total_count, this.photos});
   factory UserProfilePhotos.fromJson(Map<String, dynamic> json) =>
       _$UserProfilePhotosFromJson(json);
@@ -458,7 +458,7 @@ class ReplyMarkup {
 
 @JsonSerializable(nullable: true)
 class ReplyKeyboardMarkup implements ReplyMarkup {
-  List<KeyboardButton> keyboard;
+  List<List<KeyboardButton>> keyboard;
   bool resize_keyboard;
   bool one_time_keyboard;
   bool selective;
