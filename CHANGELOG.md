@@ -1,3 +1,6 @@
+## 0.0.21
+- Hot fix #36, toJSON() passing null values explicitly
+
 ## 0.0.20
 
 - Hot fix #34 400 Bad Request: field "keyboard" of the ReplyKeyboardMarkup should be an Array of Arrays
