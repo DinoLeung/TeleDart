@@ -37,6 +37,10 @@ class LongPolling {
 
   StreamController<Update> _updateStreamController;
 
+  /// Setup long polling
+  ///
+  /// Throws [LongPollingException] if [limit] is less than 1 or greater than 100
+  /// or [timeout] is greater than 50.
   LongPolling(this.telegram,
       {this.offset: 0,
       this.limit: 100,
@@ -51,10 +55,13 @@ class LongPolling {
     _updateStreamController = new StreamController();
   }
 
+  /// Stop the long poll.
   void stopPolling() {
     if (_isPolling) _isPolling = false;
   }
 
+  /// Start the long poll, throws [LongPollingException] on error
+  /// or a long poll is already in place.
   void startPolling() {
     if (!_isPolling) {
       _isPolling = true;
@@ -63,6 +70,7 @@ class LongPolling {
       throw new LongPollingException('A long poll is aleady inplace');
   }
 
+  /// Private long polling loop, throws [LongPollingException] on error.
   void _recursivePolling() {
     if (_isPolling)
       telegram
@@ -80,21 +88,16 @@ class LongPolling {
         }
         _recursivePolling();
       }).catchError((error) =>
-              //TODO: find out what exceptions can be ignored
+              // TODO: find out what exceptions can be ignored
               error is io.HandshakeException
                   ? _recursivePolling()
                   : throw new LongPollingException(error.toString()));
-//       }).catchError((error) {
-// //        print(error.toString());
-//         if (error is io.HandshakeException)
-//           _recursivePolling();
-//         else
-//           throw new LongPollingException(error.toString());
-//       });
   }
 
+  /// Add [update] to the stream.
   void emitUpdate(Update update) => _updateStreamController.add(update);
 
+  /// When [update] is added to stream.
   Stream<Update> onUpdate() => _updateStreamController.stream;
 }
 
