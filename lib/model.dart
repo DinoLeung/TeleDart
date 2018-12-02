@@ -16,9 +16,12 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-/// Telegram bot API objects
+/// All types used in the Bot API responses are represented as JSON-objects.
+/// It is safe to use 32-bit signed integers for storing all __Integer__ fields unless otherwise noted.
 ///
-/// See: [https://core.telegram.org/bots/api#available-types](https://core.telegram.org/bots/api#available-types)
+/// __Optional__ fields may be not returned when irrelevant.
+///
+/// https://core.telegram.org/bots/api#available-types
 library model;
 
 export 'package:teledart/src/telegram/model.dart';

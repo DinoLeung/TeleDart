@@ -274,7 +274,10 @@ Message _$MessageFromJson(Map<String, dynamic> json) {
           ? null
           : SuccessfulPayment.fromJson(
               json['successful_payment'] as Map<String, dynamic>),
-      connected_website: json['connected_website'] as String);
+      connected_website: json['connected_website'] as String,
+      passport_data: json['passport_data'] == null
+          ? null
+          : PassportData.fromJson(json['passport_data'] as Map<String, dynamic>));
 }
 
 Map<String, dynamic> _$MessageToJson(Message instance) {
@@ -329,6 +332,7 @@ Map<String, dynamic> _$MessageToJson(Message instance) {
   writeNotNull('invoice', instance.invoice);
   writeNotNull('successful_payment', instance.successful_payment);
   writeNotNull('connected_website', instance.connected_website);
+  writeNotNull('passport_data', instance.passport_data);
   return val;
 }
 

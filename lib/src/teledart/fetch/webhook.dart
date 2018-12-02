@@ -40,6 +40,10 @@ class Webhook {
 
   StreamController<Update> _updateStreamController;
 
+  /// Setup webhook
+  ///
+  /// Throws [WebhookException] if [port] is not supported by Telegram
+  /// or [max_connections] is less than 1 or greater than 100.
   Webhook(this.telegram, this.url, this.secretPath,
       {this.port: 443,
       this.privateKey,
@@ -50,7 +54,7 @@ class Webhook {
       throw new WebhookException(
           'Ports currently supported for Webhooks: 443, 80, 88, 8443.');
     if (max_connections > 100 || max_connections < 1)
-      throw new WebhookException('Limit must between 1 and 100.');
+      throw new WebhookException('Connection limit must between 1 and 100.');
 
     _updateStreamController = new StreamController();
 
@@ -67,6 +71,7 @@ class Webhook {
     }
   }
 
+  /// Set webhook on telegram server.
   Future<void> setWebhook() async {
     // initialise server
     Future<dynamic> serverFuture = _context == null
@@ -83,6 +88,7 @@ class Webhook {
         (error) => new Future.error(new WebhookException(error.toString())));
   }
 
+  /// Start the webhook.
   Future<void> startWebhook() async {
     if (_server == null)
       throw new WebhookException(
@@ -103,17 +109,21 @@ class Webhook {
         (error) => new Future.error(new WebhookException(error.toString())));
   }
 
+  /// Remove webhook from telegram server
   Future<void> deleteWebhook() async {
     telegram.deleteWebhook().catchError(
         (error) => new Future.error(new WebhookException(error.toString())));
   }
 
+  /// Stop the webhook
   void stopWebhook() {
     if (_server != null) _server.close();
   }
 
+  /// Add [update] to the stream.
   void emitUpdate(Update update) => _updateStreamController.add(update);
 
+  /// When [update] is added to stream.
   Stream<Update> onUpdate() => _updateStreamController.stream;
 }
 

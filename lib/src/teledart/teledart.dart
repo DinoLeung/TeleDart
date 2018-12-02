@@ -75,7 +75,7 @@ class TeleDart {
 
   /// Configures long polling method
   ///
-  /// See: [https://core.telegram.org/bots/api#getupdates](https://core.telegram.org/bots/api#getupdates)
+  /// See: https://core.telegram.org/bots/api#getupdates
   void setupLongPolling(
       {int offset: 0,
       int limit: 100,
@@ -98,7 +98,7 @@ class TeleDart {
   /// Default [port] is `443`, Telegram API supports `443`, `80`, `88`, `8443`.
   /// Provide [privateKey] and [certificate] pair for HTTPS configuration
   ///
-  /// See: [https://core.telegram.org/bots/api#setwebhook](https://core.telegram.org/bots/api#setwebhook)
+  /// See: https://core.telegram.org/bots/api#setwebhook
   Future<void> setupWebhook(String url, String secretPath,
       {int port: 443,
       io.File privateKey,
@@ -124,7 +124,7 @@ class TeleDart {
       });
   }
 
-  // Private method to add updates into events queue
+  /// Private method to add updates into events queue
   void _updatesHandler(Update update) => _event.emitUpdate(update);
 
   /// Listens to message events with [entityType] and [keyword] in text and caption
@@ -442,8 +442,8 @@ class TeleDart {
           reply_to_message_id: withQuote ? orgMsg.message_id : null,
           reply_markup: reply_markup);
 
-  //TODO: order of this block is not matching with telegram.TeleDart
-  //! just put it here for now for the sake of providing functionality
+  // TODO: order of this block is not matching with telegram.TeleDart
+  // ! just put it here for now for the sake of providing functionality
   /// Short-cut to reply with a contact message
   Future<Message> replySticker(Message orgMsg, dynamic sticker,
           {bool withQuote: false,

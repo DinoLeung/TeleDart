@@ -16,12 +16,14 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-///https://core.telegram.org/bots/api#available-types
-
 import 'package:json_annotation/json_annotation.dart';
 
 part 'model.g.dart';
 
+/// This object represents an incoming update.
+/// At most one of the optional parameters can be present in any given update.
+///
+/// https://core.telegram.org/bots/api#update
 @JsonSerializable()
 class Update {
   int update_id;
@@ -49,6 +51,9 @@ class Update {
   Map<String, dynamic> toJson() => _$UpdateToJson(this);
 }
 
+/// Contains information about the current status of a webhook.
+///
+/// https://core.telegram.org/bots/api#webhookinfo
 @JsonSerializable()
 class WebhookInfo {
   String url;
@@ -71,6 +76,9 @@ class WebhookInfo {
   Map<String, dynamic> toJson() => _$WebhookInfoToJson(this);
 }
 
+/// This object represents a Telegram user or bot.
+///
+/// https://core.telegram.org/bots/api#user
 @JsonSerializable()
 class User {
   int id;
@@ -90,6 +98,9 @@ class User {
   Map<String, dynamic> toJson() => _$UserToJson(this);
 }
 
+/// This object represents a chat.
+///
+/// https://core.telegram.org/bots/api#chat
 @JsonSerializable()
 class Chat {
   int id;
@@ -123,6 +134,9 @@ class Chat {
   Map<String, dynamic> toJson() => _$ChatToJson(this);
 }
 
+/// This object represents a message.
+///
+/// https://core.telegram.org/bots/api#message
 @JsonSerializable()
 class Message {
   int message_id;
@@ -168,54 +182,53 @@ class Message {
   Invoice invoice;
   SuccessfulPayment successful_payment;
   String connected_website;
-  // PassportData passport_data;
+  PassportData passport_data;
 
-  Message({
-    this.message_id,
-    this.from,
-    this.date,
-    this.chat,
-    this.forward_from,
-    this.forward_from_chat,
-    this.forward_from_message_id,
-    this.forward_signature,
-    this.forward_date,
-    this.reply_to_message,
-    this.edit_date,
-    this.media_group_id,
-    this.author_signature,
-    this.text,
-    this.entities,
-    this.caption_entities,
-    this.audio,
-    this.document,
-    this.animation,
-    this.game,
-    this.photo,
-    this.sticker,
-    this.video,
-    this.voice,
-    this.video_note,
-    this.caption,
-    this.contact,
-    this.location,
-    this.venue,
-    this.new_chat_members,
-    this.left_chat_member,
-    this.new_chat_title,
-    this.new_chat_photo,
-    this.delete_chat_photo,
-    this.group_chat_created,
-    this.supergroup_chat_created,
-    this.channel_chat_created,
-    this.migrate_to_chat_id,
-    this.migrate_from_chat_id,
-    this.pinned_message,
-    this.invoice,
-    this.successful_payment,
-    this.connected_website,
-    // this.passport_data
-  });
+  Message(
+      {this.message_id,
+      this.from,
+      this.date,
+      this.chat,
+      this.forward_from,
+      this.forward_from_chat,
+      this.forward_from_message_id,
+      this.forward_signature,
+      this.forward_date,
+      this.reply_to_message,
+      this.edit_date,
+      this.media_group_id,
+      this.author_signature,
+      this.text,
+      this.entities,
+      this.caption_entities,
+      this.audio,
+      this.document,
+      this.animation,
+      this.game,
+      this.photo,
+      this.sticker,
+      this.video,
+      this.voice,
+      this.video_note,
+      this.caption,
+      this.contact,
+      this.location,
+      this.venue,
+      this.new_chat_members,
+      this.left_chat_member,
+      this.new_chat_title,
+      this.new_chat_photo,
+      this.delete_chat_photo,
+      this.group_chat_created,
+      this.supergroup_chat_created,
+      this.channel_chat_created,
+      this.migrate_to_chat_id,
+      this.migrate_from_chat_id,
+      this.pinned_message,
+      this.invoice,
+      this.successful_payment,
+      this.connected_website,
+      this.passport_data});
 
   factory Message.fromJson(Map<String, dynamic> json) =>
       _$MessageFromJson(json);
@@ -246,6 +259,9 @@ class Message {
   }
 }
 
+/// This object represents one special entity in a text message. For example, hashtags, usernames, URLs, etc.
+///
+/// https://core.telegram.org/bots/api#messageentity
 @JsonSerializable()
 class MessageEntity {
   String type;
@@ -259,6 +275,12 @@ class MessageEntity {
   Map<String, dynamic> toJson() => _$MessageEntityToJson(this);
 }
 
+/// This object represents one size of a photo or a [file] / [sticker] thumbnail.
+///
+/// https://core.telegram.org/bots/api#photosize
+///
+/// [file]: https://core.telegram.org/bots/api#document
+/// [sticker]: https://core.telegram.org/bots/api#sticker
 @JsonSerializable()
 class PhotoSize {
   String file_id;
@@ -271,6 +293,9 @@ class PhotoSize {
   Map<String, dynamic> toJson() => _$PhotoSizeToJson(this);
 }
 
+/// This object represents an audio file to be treated as music by the Telegram clients.
+///
+/// https://core.telegram.org/bots/api#audio
 @JsonSerializable()
 class Audio {
   String file_id;
@@ -292,6 +317,13 @@ class Audio {
   Map<String, dynamic> toJson() => _$AudioToJson(this);
 }
 
+/// This object represents a general file (as opposed to [photos], [voice messages] and [audio files]).
+///
+/// https://core.telegram.org/bots/api#document
+///
+/// [photos]: https://core.telegram.org/bots/api#photosize
+/// [voice messages]: https://core.telegram.org/bots/api#voice
+/// [audio files]: https://core.telegram.org/bots/api#audio
 @JsonSerializable()
 class Document {
   String file_id;
@@ -310,6 +342,9 @@ class Document {
   Map<String, dynamic> toJson() => _$DocumentToJson(this);
 }
 
+/// This object represents a video file.
+///
+/// https://core.telegram.org/bots/api#video
 @JsonSerializable()
 class Video {
   String file_id;
@@ -331,6 +366,9 @@ class Video {
   Map<String, dynamic> toJson() => _$VideoToJson(this);
 }
 
+/// This object represents an animation file (GIF or H.264/MPEG-4 AVC video without sound).
+///
+/// https://core.telegram.org/bots/api#animation
 @JsonSerializable()
 class Animation {
   String file_id;
@@ -355,6 +393,9 @@ class Animation {
   Map<String, dynamic> toJson() => _$AnimationToJson(this);
 }
 
+///This object represents a voice note.
+///
+/// https://core.telegram.org/bots/api#voice
 @JsonSerializable()
 class Voice {
   String file_id;
@@ -366,6 +407,12 @@ class Voice {
   Map<String, dynamic> toJson() => _$VoiceToJson(this);
 }
 
+/// This object represents a [video message] (available in Telegram apps as of [v.4.0]).
+///
+/// https://core.telegram.org/bots/api#videonote
+///
+/// [video message]: https://telegram.org/blog/video-messages-and-telescope
+/// [v.4.0]: https://telegram.org/blog/video-messages-and-telescope
 @JsonSerializable()
 class VideoNote {
   String file_id;
@@ -380,6 +427,9 @@ class VideoNote {
   Map<String, dynamic> toJson() => _$VideoNoteToJson(this);
 }
 
+/// This object represents a phone contact.
+///
+/// https://core.telegram.org/bots/api#contact
 @JsonSerializable()
 class Contact {
   String phone_number;
@@ -398,6 +448,9 @@ class Contact {
   Map<String, dynamic> toJson() => _$ContactToJson(this);
 }
 
+/// This object represents a point on the map.
+///
+/// https://core.telegram.org/bots/api#location
 @JsonSerializable()
 class Location {
   double longitude;
@@ -409,6 +462,9 @@ class Location {
       _$LocationToJson(this);
 }
 
+/// This object represents a venue.
+///
+/// https://core.telegram.org/bots/api#venue
 @JsonSerializable()
 class Venue {
   Location location;
@@ -426,6 +482,9 @@ class Venue {
   Map<String, dynamic> toJson() => _$VenueToJson(this);
 }
 
+/// This object represent a user's profile pictures.
+///
+/// https://core.telegram.org/bots/api#userprofilephotos
 @JsonSerializable()
 class UserProfilePhotos {
   int total_count;
@@ -436,6 +495,16 @@ class UserProfilePhotos {
   Map<String, dynamic> toJson() => _$UserProfilePhotosToJson(this);
 }
 
+/// This object represents a file ready to be downloaded.
+/// The file can be downloaded via the link [https://api.telegram.org/file/bot<token>/<file_path>].
+/// It is guaranteed that the link will be valid for at least 1 hour.
+/// When the link expires, a new one can be requested by calling [getFile].
+///
+/// *Maximum file size to download is 20 MB*
+///
+/// https://core.telegram.org/bots/api#file
+///
+/// [getFile]: https://core.telegram.org/bots/api#getfile
 @JsonSerializable()
 class File {
   String file_id;
@@ -446,6 +515,14 @@ class File {
   Map<String, dynamic> toJson() => _$FileToJson(this);
 }
 
+/// Object for an [inline keyboard], [custom reply keyboard], instructions to remove reply keyboard or to force a reply from the user.
+/// * [ReplyKeyboardMarkup](https://core.telegram.org/bots/api#replykeyboardmarkup)
+/// * [ReplyKeyboardRemove](https://core.telegram.org/bots/api#replykeyboardremove)
+/// * [InlineKeyboardMarkup](https://core.telegram.org/bots/api#inlinekeyboardmarkup)
+/// * [ForceReply](https://core.telegram.org/bots/api#forcereply)
+///
+/// [inline keyboard]: https://core.telegram.org/bots#inline-keyboards-and-on-the-fly-updating
+/// [custom reply keyboard]: https://core.telegram.org/bots#keyboards
 @JsonSerializable()
 // abstract class ReplyMarkup {}
 class ReplyMarkup {
@@ -455,6 +532,13 @@ class ReplyMarkup {
   Map<String, dynamic> toJson() => _$ReplyMarkupToJson(this);
 }
 
+/// This object represents a [custom keyboard] with reply options
+/// (see [Introduction to bots] for details and examples).
+///
+/// https://core.telegram.org/bots/api#replykeyboardmarkup
+///
+/// [custom keyboard]: https://core.telegram.org/bots#keyboards
+/// [Introduction to bots]: https://core.telegram.org/bots#keyboards
 @JsonSerializable()
 class ReplyKeyboardMarkup implements ReplyMarkup {
   List<List<KeyboardButton>> keyboard;
@@ -471,6 +555,14 @@ class ReplyKeyboardMarkup implements ReplyMarkup {
   Map<String, dynamic> toJson() => _$ReplyKeyboardMarkupToJson(this);
 }
 
+/// This object represents one button of the reply keyboard.
+/// For simple text buttons String can be used instead of this object to specify text of the button.
+/// Optional fields are mutually exclusive.
+///
+/// **Note:** request_contact and request_location options will only work in Telegram versions
+/// released after 9 April, 2016. Older clients will ignore them.
+///
+/// https://core.telegram.org/bots/api#keyboardbutton
 @JsonSerializable()
 class KeyboardButton {
   String text;
@@ -482,6 +574,15 @@ class KeyboardButton {
   Map<String, dynamic> toJson() => _$KeyboardButtonToJson(this);
 }
 
+/// Upon receiving a message with this object,
+/// Telegram clients will remove the current custom keyboard and display the default letter-keyboard.
+/// By default, custom keyboards are displayed until a new keyboard is sent by a bot.
+/// An exception is made for one-time keyboards that are hidden immediately after the user presses a
+/// button (see [ReplyKeyboardMarkup]).
+///
+/// https://core.telegram.org/bots/api#replykeyboardremove
+///
+/// [ReplyKeyboardMarkup]: https://core.telegram.org/bots/api#replykeyboardmarkup
 @JsonSerializable()
 class ReplyKeyboardRemove implements ReplyMarkup {
   bool remove_keyboard;
@@ -492,6 +593,14 @@ class ReplyKeyboardRemove implements ReplyMarkup {
   Map<String, dynamic> toJson() => _$ReplyKeyboardRemoveToJson(this);
 }
 
+/// This object represents an [inline keyboard] that appears right next to the message it belongs to.
+///
+/// **Note:** This will only work in Telegram versions released after 9 April, 2016. Older clients
+/// will display *unsupported message*.
+///
+/// https://core.telegram.org/bots/api#inlinekeyboardmarkup
+///
+/// [inline keyboard]: https://core.telegram.org/bots#inline-keyboards-and-on-the-fly-updating
 @JsonSerializable()
 class InlineKeyboardMarkup implements ReplyMarkup {
   List<List<InlineKeyboardButton>> inline_keyboard;
@@ -501,6 +610,10 @@ class InlineKeyboardMarkup implements ReplyMarkup {
   Map<String, dynamic> toJson() => _$InlineKeyboardMarkupToJson(this);
 }
 
+/// This object represents one button of an inline keyboard.
+/// You **must** use exactly one of the optional fields.
+///
+/// https://core.telegram.org/bots/api#inlinekeyboardbutton
 @JsonSerializable()
 class InlineKeyboardButton {
   String text;
@@ -523,6 +636,23 @@ class InlineKeyboardButton {
   Map<String, dynamic> toJson() => _$InlineKeyboardButtonToJson(this);
 }
 
+/// This object represents an incoming callback query from a callback button in an [inline keyboard].
+/// If the button that originated the query was attached to a message sent by the bot,
+/// the field *message* will be present.
+/// If the button was attached to a message sent via the bot (in [inline mode]),
+/// the field *inline_message_id* will be present.
+/// Exactly one of the fields *data* or *game_short_name* will be present.
+///
+/// **NOTE:** After the user presses a callback button,
+/// Telegram clients will display a progress bar until you call [answerCallbackQuery].
+/// It is, therefore, necessary to react by calling [answerCallbackQuery] even if no notification
+/// to the user is needed (e.g., without specifying any of the optional parameters).
+///
+/// https://core.telegram.org/bots/api#callbackquery
+///
+/// [inline keyboard]: https://core.telegram.org/bots#inline-keyboards-and-on-the-fly-updating
+/// [inline mode]: https://core.telegram.org/bots/api#inline-mode
+/// [answerCallbackQuery]: https://core.telegram.org/bots/api#answercallbackquery
 @JsonSerializable()
 class CallbackQuery {
   String id;
@@ -545,6 +675,31 @@ class CallbackQuery {
   Map<String, dynamic> toJson() => _$CallbackQueryToJson(this);
 }
 
+/// Upon receiving a message with this object,
+/// Telegram clients will display a reply interface to the user
+/// (act as if the user has selected the bot‘s message and tapped ’Reply').
+/// This can be extremely useful if you want to create user-friendly step-by-step interfaces
+/// without having to sacrifice [privacy mode].
+///
+/// **Example:** A [poll bot] for groups runs in privacy mode
+/// (only receives commands, replies to its messages and mentions).
+/// There could be two ways to create a new poll:
+/// * Explain the user how to send a command with parameters (e.g. /newpoll question answer1 answer2).
+/// May be appealing for hardcore users but lacks modern day polish.
+/// * Guide the user through a step-by-step process. ‘Please send me your question’,
+/// ‘Cool, now let’s add the first answer option‘, ’Great. Keep adding answer options,
+/// then send /done when you‘re ready’.
+///
+/// The last option is definitely more attractive.
+/// And if you use [ForceReply] in your bot‘s questions,
+/// it will receive the user’s answers even if it only receives replies,
+/// commands and mentions — without any extra work for the user.
+///
+/// https://core.telegram.org/bots/api#forcereply
+///
+/// [privacy mode]: https://core.telegram.org/bots#privacy-mode
+/// [poll bot]: https://t.me/PollBot
+/// [ForceReply]: https://core.telegram.org/bots/api#forcereply
 @JsonSerializable()
 class ForceReply implements ReplyMarkup {
   bool force_reply;
@@ -555,6 +710,9 @@ class ForceReply implements ReplyMarkup {
   Map<String, dynamic> toJson() => _$ForceReplyToJson(this);
 }
 
+/// This object represents a chat photo.
+///
+/// https://core.telegram.org/bots/api#chatphoto
 @JsonSerializable()
 class ChatPhoto {
   String small_file_id;
@@ -565,6 +723,9 @@ class ChatPhoto {
   Map<String, dynamic> toJson() => _$ChatPhotoToJson(this);
 }
 
+/// This object contains information about one member of a chat.
+///
+/// https://core.telegram.org/bots/api#chatmember
 @JsonSerializable()
 class ChatMember {
   User user;
@@ -605,6 +766,9 @@ class ChatMember {
   Map<String, dynamic> toJson() => _$ChatMemberToJson(this);
 }
 
+/// Contains information about why a request was unsuccessful.
+///
+/// https://core.telegram.org/bots/api#responseparameters
 @JsonSerializable()
 class ResponseParameters {
   int migrate_to_chat_id;
@@ -615,6 +779,14 @@ class ResponseParameters {
   Map<String, dynamic> toJson() => _$ResponseParametersToJson(this);
 }
 
+/// This object represents the content of a media message to be sent. It should be one of
+/// * [InputMediaAnimation](https://core.telegram.org/bots/api#inputmediaanimation)
+/// * [InputMediaDocument](https://core.telegram.org/bots/api#inputmediadocument)
+/// * [InputMediaAudio](https://core.telegram.org/bots/api#inputmediaaudio)
+/// * [InputMediaPhoto](https://core.telegram.org/bots/api#inputmediaphoto)
+/// * [InputMediaVideo](https://core.telegram.org/bots/api#inputmediavideo)
+///
+/// https://core.telegram.org/bots/api#inputmedia
 @JsonSerializable()
 // abstract class InputMedia {
 class InputMedia {
@@ -628,6 +800,9 @@ class InputMedia {
   Map<String, dynamic> toJson() => _$InputMediaToJson(this);
 }
 
+/// Represents a photo to be sent.
+///
+/// https://core.telegram.org/bots/api#inputmediaphoto
 @JsonSerializable()
 class InputMediaPhoto implements InputMedia {
   @override
@@ -645,6 +820,9 @@ class InputMediaPhoto implements InputMedia {
   Map<String, dynamic> toJson() => _$InputMediaPhotoToJson(this);
 }
 
+/// Represents a video to be sent.
+///
+/// https://core.telegram.org/bots/api#inputmediavideo
 @JsonSerializable()
 class InputMediaVideo implements InputMedia {
   @override
@@ -676,6 +854,9 @@ class InputMediaVideo implements InputMedia {
   Map<String, dynamic> toJson() => _$InputMediaVideoToJson(this);
 }
 
+/// Represents an animation file (GIF or H.264/MPEG-4 AVC video without sound) to be sent.
+///
+/// https://core.telegram.org/bots/api#inputmediaanimation
 @JsonSerializable()
 class InputMediaAnimation implements InputMedia {
   @override
@@ -705,6 +886,9 @@ class InputMediaAnimation implements InputMedia {
   Map<String, dynamic> toJson() => _$InputMediaAnimationToJson(this);
 }
 
+/// Represents an audio file to be treated as music to be sent.
+///
+/// https://core.telegram.org/bots/api#inputmediaaudio
 @JsonSerializable()
 class InputMediaAudio implements InputMedia {
   @override
@@ -734,6 +918,9 @@ class InputMediaAudio implements InputMedia {
   Map<String, dynamic> toJson() => _$InputMediaAudioToJson(this);
 }
 
+/// Represents a general file to be sent.
+///
+/// https://core.telegram.org/bots/api#inputmediadocument
 @JsonSerializable()
 class InputMediaDocument implements InputMedia {
   @override
@@ -753,6 +940,9 @@ class InputMediaDocument implements InputMedia {
   Map<String, dynamic> toJson() => _$InputMediaDocumentToJson(this);
 }
 
+/// This object represents a sticker.
+///
+/// https://core.telegram.org/bots/api#sticker
 @JsonSerializable()
 class Sticker {
   String file_id;
@@ -777,6 +967,9 @@ class Sticker {
   Map<String, dynamic> toJson() => _$StickerToJson(this);
 }
 
+/// This object represents a sticker set.
+///
+/// https://core.telegram.org/bots/api#stickerset
 @JsonSerializable()
 class StickerSet {
   String name;
@@ -789,6 +982,9 @@ class StickerSet {
   Map<String, dynamic> toJson() => _$StickerSetToJson(this);
 }
 
+/// This object describes the position on faces where a mask should be placed by default.
+///
+/// https://core.telegram.org/bots/api#maskposition
 @JsonSerializable()
 class MaskPosition {
   String point;
@@ -801,6 +997,11 @@ class MaskPosition {
   Map<String, dynamic> toJson() => _$MaskPositionToJson(this);
 }
 
+/// This object represents an incoming inline query.
+/// When the user sends an empty query,
+/// your bot could return some default or trending results.
+///
+/// https://core.telegram.org/bots/api#inlinequery
 @JsonSerializable()
 class InlineQuery {
   String id;
@@ -814,6 +1015,30 @@ class InlineQuery {
   Map<String, dynamic> toJson() => _$InlineQueryToJson(this);
 }
 
+/// This object represents one result of an inline query.
+/// Telegram clients currently support results of the following 20 types:
+/// * [InlineQueryResultCachedAudio](https://core.telegram.org/bots/api#inlinequeryresultcachedaudio)
+/// * [InlineQueryResultCachedDocument](https://core.telegram.org/bots/api#inlinequeryresultcacheddocument)
+/// * [InlineQueryResultCachedGif](https://core.telegram.org/bots/api#inlinequeryresultcachedgif)
+/// * [InlineQueryResultCachedMpeg4Gif](https://core.telegram.org/bots/api#inlinequeryresultcachedmpeg4gif)
+/// * [InlineQueryResultCachedPhoto](https://core.telegram.org/bots/api#inlinequeryresultcachedphoto)
+/// * [InlineQueryResultCachedSticker](https://core.telegram.org/bots/api#inlinequeryresultcachedsticker)
+/// * [InlineQueryResultCachedVideo](https://core.telegram.org/bots/api#inlinequeryresultcachedvideo)
+/// * [InlineQueryResultCachedVoice](https://core.telegram.org/bots/api#inlinequeryresultcachedvoice)
+/// * [InlineQueryResultArticle](https://core.telegram.org/bots/api#inlinequeryresultarticle)
+/// * [InlineQueryResultAudio](https://core.telegram.org/bots/api#inlinequeryresultaudio)
+/// * [InlineQueryResultContact](https://core.telegram.org/bots/api#inlinequeryresultcontact)
+/// * [InlineQueryResultGame](https://core.telegram.org/bots/api#inlinequeryresultgame)
+/// * [InlineQueryResultDocument](https://core.telegram.org/bots/api#inlinequeryresultdocument)
+/// * [InlineQueryResultGif](https://core.telegram.org/bots/api#inlinequeryresultgif)
+/// * [InlineQueryResultLocation](https://core.telegram.org/bots/api#inlinequeryresultlocation)
+/// * [InlineQueryResultMpeg4Gif](https://core.telegram.org/bots/api#inlinequeryresultmpeg4gif)
+/// * [InlineQueryResultPhoto](https://core.telegram.org/bots/api#inlinequeryresultphoto)
+/// * [InlineQueryResultVenue](https://core.telegram.org/bots/api#inlinequeryresultvenue)
+/// * [InlineQueryResultVideo](https://core.telegram.org/bots/api#inlinequeryresultvideo)
+/// * [InlineQueryResultVoice](https://core.telegram.org/bots/api#inlinequeryresultvoice)
+///
+/// https://core.telegram.org/bots/api#inlinequeryresult
 @JsonSerializable()
 // abstract class InlineQueryResult {
 class InlineQueryResult {
@@ -825,6 +1050,9 @@ class InlineQueryResult {
   Map<String, dynamic> toJson() => _$InlineQueryResultToJson(this);
 }
 
+/// Represents a link to an article or web page.
+///
+/// https://core.telegram.org/bots/api#inlinequeryresultarticle
 @JsonSerializable()
 class InlineQueryResultArticle implements InlineQueryResult {
   @override
@@ -858,6 +1086,12 @@ class InlineQueryResultArticle implements InlineQueryResult {
   Map<String, dynamic> toJson() => _$InlineQueryResultArticleToJson(this);
 }
 
+/// Represents a link to a photo.
+/// By default, this photo will be sent by the user with optional caption.
+/// Alternatively,
+/// you can use *input_message_content* to send a message with the specified content instead of the photo.
+///
+/// https://core.telegram.org/bots/api#inlinequeryresultphoto
 @JsonSerializable()
 class InlineQueryResultPhoto implements InlineQueryResult {
   @override
@@ -893,6 +1127,12 @@ class InlineQueryResultPhoto implements InlineQueryResult {
   Map<String, dynamic> toJson() => _$InlineQueryResultPhotoToJson(this);
 }
 
+/// Represents a link to an animated GIF file.
+/// By default, this animated GIF file will be sent by the user with optional caption.
+/// Alternatively,
+/// you can use *input_message_content* to send a message with the specified content instead of the animation.
+///
+/// https://core.telegram.org/bots/api#inlinequeryresultgif
 @JsonSerializable()
 class InlineQueryResultGif implements InlineQueryResult {
   @override
@@ -928,6 +1168,12 @@ class InlineQueryResultGif implements InlineQueryResult {
   Map<String, dynamic> toJson() => _$InlineQueryResultGifToJson(this);
 }
 
+/// Represents a link to a video animation (H.264/MPEG-4 AVC video without sound).
+/// By default, this animated MPEG-4 file will be sent by the user with optional caption.
+/// Alternatively,
+/// you can use *input_message_content* to send a message with the specified content instead of the animation.
+///
+/// https://core.telegram.org/bots/api#inlinequeryresultmpeg4gif
 @JsonSerializable()
 class InlineQueryResultMpeg4Gif implements InlineQueryResult {
   @override
@@ -963,6 +1209,15 @@ class InlineQueryResultMpeg4Gif implements InlineQueryResult {
   Map<String, dynamic> toJson() => _$InlineQueryResultMpeg4GifToJson(this);
 }
 
+/// Represents a link to a page containing an embedded video player or a video file.
+/// By default, this video file will be sent by the user with an optional caption.
+/// Alternatively,
+/// you can use *input_message_content* to send a message with the specified content instead of the video.
+///
+/// If an InlineQueryResultVideo message contains an embedded video (e.g., YouTube),
+/// you **must** replace its content using *input_message_content*.
+///
+/// https://core.telegram.org/bots/api#inlinequeryresultvideo
 @JsonSerializable()
 class InlineQueryResultVideo implements InlineQueryResult {
   @override
@@ -1002,6 +1257,15 @@ class InlineQueryResultVideo implements InlineQueryResult {
   Map<String, dynamic> toJson() => _$InlineQueryResultVideoToJson(this);
 }
 
+/// Represents a link to an mp3 audio file.
+/// By default, this audio file will be sent by the user.
+/// Alternatively,
+/// you can use *input_message_content* to send a message with the specified content instead of the audio.
+///
+/// **Note:** This will only work in Telegram versions released after 9 April, 2016.
+/// Older clients will ignore them.
+///
+/// https://core.telegram.org/bots/api#inlinequeryresultaudio
 @JsonSerializable()
 class InlineQueryResultAudio implements InlineQueryResult {
   @override
@@ -1033,6 +1297,15 @@ class InlineQueryResultAudio implements InlineQueryResult {
   Map<String, dynamic> toJson() => _$InlineQueryResultAudioToJson(this);
 }
 
+/// Represents a link to a voice recording in an .ogg container encoded with OPUS.
+/// By default, this voice recording will be sent by the user.
+/// Alternatively,
+/// you can use *input_message_content* to send a message with the specified content instead of the the voice message.
+///
+/// **Note:** This will only work in Telegram versions released after 9 April, 2016.
+/// Older clients will ignore them.
+///
+/// https://core.telegram.org/bots/api#inlinequeryresultvoice
 @JsonSerializable()
 class InlineQueryResultVoice implements InlineQueryResult {
   @override
@@ -1062,6 +1335,15 @@ class InlineQueryResultVoice implements InlineQueryResult {
   Map<String, dynamic> toJson() => _$InlineQueryResultVoiceToJson(this);
 }
 
+/// Represents a link to a file. By default, this file will be sent by the user with an optional caption.
+/// Alternatively,
+/// you can use *input_message_content* to send a message with the specified content instead of the file.
+/// Currently, only **.PDF** and **.ZIP** files can be sent using this method.
+///
+/// **Note:** This will only work in Telegram versions released after 9 April, 2016.
+/// Older clients will ignore them.
+///
+/// https://core.telegram.org/bots/api#inlinequeryresultdocument
 @JsonSerializable()
 class InlineQueryResultDocument implements InlineQueryResult {
   @override
@@ -1099,6 +1381,15 @@ class InlineQueryResultDocument implements InlineQueryResult {
   Map<String, dynamic> toJson() => _$InlineQueryResultDocumentToJson(this);
 }
 
+/// Represents a location on a map.
+/// By default, the location will be sent by the user.
+/// Alternatively,
+/// you can use *input_message_content* to send a message with the specified content instead of the location.
+///
+/// **Note:** This will only work in Telegram versions released after 9 April, 2016.
+/// Older clients will ignore them.
+///
+/// https://core.telegram.org/bots/api#inlinequeryresultlocation
 @JsonSerializable()
 class InlineQueryResultLocation implements InlineQueryResult {
   @override
@@ -1132,6 +1423,15 @@ class InlineQueryResultLocation implements InlineQueryResult {
   Map<String, dynamic> toJson() => _$InlineQueryResultLocationToJson(this);
 }
 
+/// Represents a venue.
+/// By default, the venue will be sent by the user.
+/// Alternatively,
+/// you can use *input_message_content* to send a message with the specified content instead of the venue.
+///
+/// **Note:** This will only work in Telegram versions released after 9 April, 2016.
+/// Older clients will ignore them.
+///
+/// https://core.telegram.org/bots/api#inlinequeryresultvenue
 @JsonSerializable()
 class InlineQueryResultVenue implements InlineQueryResult {
   @override
@@ -1169,6 +1469,15 @@ class InlineQueryResultVenue implements InlineQueryResult {
   Map<String, dynamic> toJson() => _$InlineQueryResultVenueToJson(this);
 }
 
+/// Represents a contact with a phone number.
+/// By default, the contact will be sent by the user.
+/// Alternatively,
+/// you can use *input_message_content* to send a message with the specified content instead of the contact.
+///
+/// **Note:** This will only work in Telegram versions released after 9 April, 2016.
+/// Older clients will ignore them.
+///
+/// https://core.telegram.org/bots/api#inlinequeryresultcontact
 @JsonSerializable()
 class InlineQueryResultContact implements InlineQueryResult {
   @override
@@ -1202,6 +1511,14 @@ class InlineQueryResultContact implements InlineQueryResult {
   Map<String, dynamic> toJson() => _$InlineQueryResultContactToJson(this);
 }
 
+/// Represents a [Game].
+///
+/// **Note:** This will only work in Telegram versions released after October 1, 2016.
+/// Older clients will not display any inline results if a game result is among them.
+///
+/// https://core.telegram.org/bots/api#inlinequeryresultgame
+///
+/// [Game]: https://core.telegram.org/bots/api#games
 @JsonSerializable()
 class InlineQueryResultGame implements InlineQueryResult {
   @override
@@ -1218,6 +1535,12 @@ class InlineQueryResultGame implements InlineQueryResult {
   Map<String, dynamic> toJson() => _$InlineQueryResultGameToJson(this);
 }
 
+/// Represents a link to a photo stored on the Telegram servers.
+/// By default, this photo will be sent by the user with an optional caption.
+/// Alternatively,
+/// you can use *input_message_content* to send a message with the specified content instead of the photo.
+///
+/// https://core.telegram.org/bots/api#inlinequeryresultcachedphoto
 @JsonSerializable()
 class InlineQueryResultCachedPhoto implements InlineQueryResult {
   @override
@@ -1247,6 +1570,12 @@ class InlineQueryResultCachedPhoto implements InlineQueryResult {
   Map<String, dynamic> toJson() => _$InlineQueryResultCachedPhotoToJson(this);
 }
 
+/// Represents a link to an animated GIF file stored on the Telegram servers.
+/// By default, this animated GIF file will be sent by the user with an optional caption.
+/// Alternatively,
+/// you can use *input_message_content* to send a message with specified content instead of the animation.
+///
+/// https://core.telegram.org/bots/api#inlinequeryresultcachedgif
 @JsonSerializable()
 class InlineQueryResultCachedGif implements InlineQueryResult {
   @override
@@ -1274,6 +1603,12 @@ class InlineQueryResultCachedGif implements InlineQueryResult {
   Map<String, dynamic> toJson() => _$InlineQueryResultCachedGifToJson(this);
 }
 
+/// Represents a link to a video animation (H.264/MPEG-4 AVC video without sound) stored on the Telegram servers.
+/// By default, this animated MPEG-4 file will be sent by the user with an optional caption.
+/// Alternatively,
+/// you can use *input_message_content* to send a message with the specified content instead of the animation.
+///
+/// https://core.telegram.org/bots/api#inlinequeryresultmpeg4gif
 @JsonSerializable()
 class InlineQueryResultCachedMpeg4Gif implements InlineQueryResult {
   @override
@@ -1302,6 +1637,15 @@ class InlineQueryResultCachedMpeg4Gif implements InlineQueryResult {
       _$InlineQueryResultCachedMpeg4GifToJson(this);
 }
 
+/// Represents a link to a sticker stored on the Telegram servers.
+/// By default, this sticker will be sent by the user.
+/// Alternatively,
+/// you can use *input_message_content* to send a message with the specified content instead of the sticker.
+///
+/// **Note:** This will only work in Telegram versions released after 9 April, 2016.
+/// Older clients will ignore them.
+///
+/// https://core.telegram.org/bots/api#inlinequeryresultcachedsticker
 @JsonSerializable()
 class InlineQueryResultCachedSticker implements InlineQueryResult {
   @override
@@ -1323,6 +1667,15 @@ class InlineQueryResultCachedSticker implements InlineQueryResult {
   Map<String, dynamic> toJson() => _$InlineQueryResultCachedStickerToJson(this);
 }
 
+/// Represents a link to a file stored on the Telegram servers.
+/// By default, this file will be sent by the user with an optional caption.
+/// Alternatively,
+/// you can use *input_message_content* to send a message with the specified content instead of the file.
+///
+/// **Note:** This will only work in Telegram versions released after 9 April, 2016.
+/// Older clients will ignore them.
+///
+/// https://core.telegram.org/bots/api#inlinequeryresultcacheddocument
 @JsonSerializable()
 class InlineQueryResultCachedDocument implements InlineQueryResult {
   @override
@@ -1353,6 +1706,12 @@ class InlineQueryResultCachedDocument implements InlineQueryResult {
       _$InlineQueryResultCachedDocumentToJson(this);
 }
 
+/// Represents a link to a video file stored on the Telegram servers.
+/// By default, this video file will be sent by the user with an optional caption.
+/// Alternatively,
+/// you can use *input_message_content* to send a message with the specified content instead of the video.
+///
+/// https://core.telegram.org/bots/api#inlinequeryresultcachedvideo
 @JsonSerializable()
 class InlineQueryResultCachedVideo implements InlineQueryResult {
   @override
@@ -1382,6 +1741,15 @@ class InlineQueryResultCachedVideo implements InlineQueryResult {
   Map<String, dynamic> toJson() => _$InlineQueryResultCachedVideoToJson(this);
 }
 
+/// Represents a link to a voice message stored on the Telegram servers.
+/// By default, this voice message will be sent by the user.
+/// Alternatively,
+/// you can use *input_message_content* to send a message with the specified content instead of the voice message.
+///
+/// **Note:** This will only work in Telegram versions released after 9 April, 2016.
+/// Older clients will ignore them
+///
+/// https://core.telegram.org/bots/api#inlinequeryresultcachedvoice
 @JsonSerializable()
 class InlineQueryResultCachedVoice implements InlineQueryResult {
   @override
@@ -1409,6 +1777,15 @@ class InlineQueryResultCachedVoice implements InlineQueryResult {
   Map<String, dynamic> toJson() => _$InlineQueryResultCachedVoiceToJson(this);
 }
 
+/// Represents a link to an mp3 audio file stored on the Telegram servers.
+/// By default, this audio file will be sent by the user.
+/// Alternatively,
+///  you can use *input_message_content* to send a message with the specified content instead of the audio.
+///
+/// **Note:** This will only work in Telegram versions released after 9 April, 2016.
+/// Older clients will ignore them
+///
+/// https://core.telegram.org/bots/api#inlinequeryresultcachedaudio
 @JsonSerializable()
 class InlineQueryResultCachedAudio implements InlineQueryResult {
   @override
@@ -1433,6 +1810,14 @@ class InlineQueryResultCachedAudio implements InlineQueryResult {
   Map<String, dynamic> toJson() => _$InlineQueryResultCachedAudioToJson(this);
 }
 
+/// This object represents the content of a message to be sent as a result of an inline query.
+/// Telegram clients currently support the following 4 types:
+/// * [InputTextMessageContent](https://core.telegram.org/bots/api#inputtextmessagecontent)
+/// * [InputLocationMessageContent](https://core.telegram.org/bots/api#inputlocationmessagecontent)
+/// * [InputVenueMessageContent](https://core.telegram.org/bots/api#inputvenuemessagecontent)
+/// * [InputContactMessageContent](https://core.telegram.org/bots/api#inputcontactmessagecontent)
+///
+/// https://core.telegram.org/bots/api#inputmessagecontent
 @JsonSerializable()
 // abstract class InputMessageContent {
 class InputMessageContent {
@@ -1442,6 +1827,11 @@ class InputMessageContent {
   Map<String, dynamic> toJson() => _$InputMessageContentToJson(this);
 }
 
+/// Represents the [content] of a text message to be sent as the result of an inline query.
+///
+/// https://core.telegram.org/bots/api#inputtextmessagecontent
+///
+/// [content]: https://core.telegram.org/bots/api#inputmessagecontent
 @JsonSerializable()
 class InputTextMessageContent implements InputMessageContent {
   String message_text;
@@ -1454,6 +1844,11 @@ class InputTextMessageContent implements InputMessageContent {
   Map<String, dynamic> toJson() => _$InputTextMessageContentToJson(this);
 }
 
+/// Represents the [content] of a location message to be sent as the result of an inline query.
+///
+/// https://core.telegram.org/bots/api#inputlocationmessagecontent
+///
+/// [content]: https://core.telegram.org/bots/api#inputmessagecontent
 @JsonSerializable()
 class InputLocationMessageContent implements InputMessageContent {
   double latitude;
@@ -1466,6 +1861,11 @@ class InputLocationMessageContent implements InputMessageContent {
   Map<String, dynamic> toJson() => _$InputLocationMessageContentToJson(this);
 }
 
+/// Represents the [content] of a venue message to be sent as the result of an inline query.
+///
+/// https://core.telegram.org/bots/api#inputvenuemessagecontent
+///
+/// [content]: https://core.telegram.org/bots/api#inputmessagecontent
 @JsonSerializable()
 class InputVenueMessageContent implements InputMessageContent {
   double latitude;
@@ -1486,6 +1886,11 @@ class InputVenueMessageContent implements InputMessageContent {
   Map<String, dynamic> toJson() => _$InputVenueMessageContentToJson(this);
 }
 
+/// Represents the [content] of a contact message to be sent as the result of an inline query.
+///
+/// https://core.telegram.org/bots/api#inputcontactmessagecontent
+///
+/// [content]: https://core.telegram.org/bots/api#inputmessagecontent
 @JsonSerializable()
 class InputContactMessageContent implements InputMessageContent {
   String phone_number;
@@ -1499,6 +1904,15 @@ class InputContactMessageContent implements InputMessageContent {
   Map<String, dynamic> toJson() => _$InputContactMessageContentToJson(this);
 }
 
+/// Represents a [result] of an inline query that was chosen by the user and sent to their chat partner.
+///
+/// **Note:** It is necessary to enable [inline feedback] via [@Botfather] in order to receive these objects in updates.
+///
+/// https://core.telegram.org/bots/api#choseninlineresult
+///
+/// [result]: https://core.telegram.org/bots/api#inlinequeryresult
+/// [inline feedback]: https://core.telegram.org/bots/inline#collecting-feedback
+/// [@Botfather]: https://t.me/botfather
 @JsonSerializable()
 class ChosenInlineResult {
   String result_id;
@@ -1517,6 +1931,9 @@ class ChosenInlineResult {
   Map<String, dynamic> toJson() => _$ChosenInlineResultToJson(this);
 }
 
+/// This object represents a portion of the price for goods or services.
+///
+/// https://core.telegram.org/bots/api#labeledprice
 @JsonSerializable()
 class LabeledPrice {
   String label;
@@ -1527,6 +1944,9 @@ class LabeledPrice {
   Map<String, dynamic> toJson() => _$LabeledPriceToJson(this);
 }
 
+/// This object contains basic information about an invoice.
+///
+/// https://core.telegram.org/bots/api#invoice
 @JsonSerializable()
 class Invoice {
   String title;
@@ -1545,6 +1965,9 @@ class Invoice {
   Map<String, dynamic> toJson() => _$InvoiceToJson(this);
 }
 
+/// This object represents a shipping address.
+///
+/// https://core.telegram.org/bots/api#shippingaddress
 @JsonSerializable()
 class ShippingAddress {
   String country_code;
@@ -1565,6 +1988,9 @@ class ShippingAddress {
   Map<String, dynamic> toJson() => _$ShippingAddressToJson(this);
 }
 
+/// This object represents information about an order.
+///
+/// https://core.telegram.org/bots/api#orderinfo
 @JsonSerializable()
 class OrderInfo {
   String name;
@@ -1577,6 +2003,9 @@ class OrderInfo {
   Map<String, dynamic> toJson() => _$OrderInfoToJson(this);
 }
 
+/// This object represents one shipping option.
+///
+/// https://core.telegram.org/bots/api#shippingoption
 @JsonSerializable()
 class ShippingOption {
   String id;
@@ -1588,6 +2017,9 @@ class ShippingOption {
   Map<String, dynamic> toJson() => _$ShippingOptionToJson(this);
 }
 
+/// This object contains basic information about a successful payment.
+///
+/// https://core.telegram.org/bots/api#successfulpayment
 @JsonSerializable()
 class SuccessfulPayment {
   String currency;
@@ -1610,6 +2042,9 @@ class SuccessfulPayment {
   Map<String, dynamic> toJson() => _$SuccessfulPaymentToJson(this);
 }
 
+/// This object contains information about an incoming shipping query.
+///
+/// https://core.telegram.org/bots/api#shippingquery
 @JsonSerializable()
 class ShippingQuery {
   String id;
@@ -1623,6 +2058,9 @@ class ShippingQuery {
   Map<String, dynamic> toJson() => _$ShippingQueryToJson(this);
 }
 
+/// This object contains information about an incoming pre-checkout query.
+///
+/// https://core.telegram.org/bots/api#precheckoutquery
 @JsonSerializable()
 class PreCheckoutQuery {
   String id;
@@ -1645,6 +2083,9 @@ class PreCheckoutQuery {
   Map<String, dynamic> toJson() => _$PreCheckoutQueryToJson(this);
 }
 
+/// Contains information about Telegram Passport data shared with the bot by the user.
+///
+/// https://core.telegram.org/bots/api#passportdata
 @JsonSerializable()
 class PassportData {
   List<EncryptedPassportElement> data;
@@ -1655,6 +2096,10 @@ class PassportData {
   Map<String, dynamic> toJson() => _$PassportDataToJson(this);
 }
 
+/// This object represents a file uploaded to Telegram Passport.
+/// Currently all Telegram Passport files are in JPEG format when decrypted and don't exceed 10MB.
+///
+/// https://core.telegram.org/bots/api#passportfile
 @JsonSerializable()
 class PassportFile {
   String file_id;
@@ -1666,6 +2111,9 @@ class PassportFile {
   Map<String, dynamic> toJson() => _$PassportFileToJson(this);
 }
 
+/// Contains information about documents or other Telegram Passport elements shared with the bot by the user.
+///
+/// https://core.telegram.org/bots/api#encryptedpassportelement
 @JsonSerializable()
 class EncryptedPassportElement {
   String type;
@@ -1694,6 +2142,13 @@ class EncryptedPassportElement {
   Map<String, dynamic> toJson() => _$EncryptedPassportElementToJson(this);
 }
 
+/// Contains data required for decrypting and authenticating [EncryptedPassportElement].
+/// See the [Telegram Passport Documentation] for a complete description of the data decryption and authentication processes.
+///
+/// https://core.telegram.org/bots/api#encryptedcredentials
+///
+/// [EncryptedPassportElement]: https://core.telegram.org/bots/api#encryptedpassportelement
+/// [Telegram Passport Documentation]: https://core.telegram.org/passport#receiving-information
 @JsonSerializable()
 class EncryptedCredentials {
   String data;
@@ -1705,6 +2160,19 @@ class EncryptedCredentials {
   Map<String, dynamic> toJson() => _$EncryptedCredentialsToJson(this);
 }
 
+/// This object represents an error in the Telegram Passport element which was submitted that should be resolved by the user.
+/// It should be one of:
+/// * [PassportElementErrorDataField](https://core.telegram.org/bots/api#passportelementerrordatafield)
+/// * [PassportElementErrorFrontSide](https://core.telegram.org/bots/api#passportelementerrorfrontside)
+/// * [PassportElementErrorReverseSide](https://core.telegram.org/bots/api#passportelementerrorreverseside)
+/// * [PassportElementErrorSelfie](https://core.telegram.org/bots/api#passportelementerrorselfie)
+/// * [PassportElementErrorFile](https://core.telegram.org/bots/api#passportelementerrorfile)
+/// * [PassportElementErrorFiles](https://core.telegram.org/bots/api#passportelementerrorfiles)
+/// * [PassportElementErrorTranslationFile](https://core.telegram.org/bots/api#passportelementerrortranslationfile)
+/// * [PassportElementErrorTranslationFiles](https://core.telegram.org/bots/api#passportelementerrortranslationfiles)
+/// * [PassportElementErrorUnspecified](https://core.telegram.org/bots/api#passportelementerrorunspecified)
+///
+/// https://core.telegram.org/bots/api#passportelementerror
 @JsonSerializable()
 // abstract class PassportElementError {}
 class PassportElementError {
@@ -1717,6 +2185,10 @@ class PassportElementError {
   Map<String, dynamic> toJson() => _$PassportElementErrorToJson(this);
 }
 
+/// Represents an issue in one of the data fields that was provided by the user.
+/// The error is considered resolved when the field's value changes.
+///
+/// https://core.telegram.org/bots/api#passportelementerrordatafield
 @JsonSerializable()
 class PassportElementErrorDataField implements PassportElementError {
   @override
@@ -1735,6 +2207,10 @@ class PassportElementErrorDataField implements PassportElementError {
   Map<String, dynamic> toJson() => _$PassportElementErrorDataFieldToJson(this);
 }
 
+/// Represents an issue with the front side of a document.
+/// The error is considered resolved when the file with the front side of the document changes.
+///
+/// https://core.telegram.org/bots/api#passportelementerrorfrontside
 @JsonSerializable()
 class PassportElementErrorFrontSide implements PassportElementError {
   @override
@@ -1752,6 +2228,10 @@ class PassportElementErrorFrontSide implements PassportElementError {
   Map<String, dynamic> toJson() => _$PassportElementErrorFrontSideToJson(this);
 }
 
+/// Represents an issue with the reverse side of a document.
+/// The error is considered resolved when the file with reverse side of the document changes.
+///
+/// https://core.telegram.org/bots/api#passportelementerrorreverseside
 @JsonSerializable()
 class PassportElementErrorReverseSide implements PassportElementError {
   @override
@@ -1770,6 +2250,10 @@ class PassportElementErrorReverseSide implements PassportElementError {
       _$PassportElementErrorReverseSideToJson(this);
 }
 
+/// Represents an issue with the selfie with a document.
+/// The error is considered resolved when the file with the selfie changes.
+///
+/// https://core.telegram.org/bots/api#passportelementerrorselfie
 @JsonSerializable()
 class PassportElementErrorSelfie implements PassportElementError {
   @override
@@ -1787,6 +2271,10 @@ class PassportElementErrorSelfie implements PassportElementError {
   Map<String, dynamic> toJson() => _$PassportElementErrorSelfieToJson(this);
 }
 
+/// Represents an issue with a document scan.
+/// The error is considered resolved when the file with the document scan changes.
+///
+/// https://core.telegram.org/bots/api#passportelementerrorfile
 @JsonSerializable()
 class PassportElementErrorFile implements PassportElementError {
   @override
@@ -1804,6 +2292,10 @@ class PassportElementErrorFile implements PassportElementError {
   Map<String, dynamic> toJson() => _$PassportElementErrorFileToJson(this);
 }
 
+/// Represents an issue with a list of scans.
+/// The error is considered resolved when the list of files containing the scans changes.
+///
+/// https://core.telegram.org/bots/api#passportelementerrorfiles
 @JsonSerializable()
 class PassportElementErrorFiles implements PassportElementError {
   @override
@@ -1821,6 +2313,10 @@ class PassportElementErrorFiles implements PassportElementError {
   Map<String, dynamic> toJson() => _$PassportElementErrorFilesToJson(this);
 }
 
+/// Represents an issue with one of the files that constitute the translation of a document.
+/// The error is considered resolved when the file changes.
+///
+/// https://core.telegram.org/bots/api#passportelementerrortranslationfile
 @JsonSerializable()
 class PassportElementErrorTranslationFile implements PassportElementError {
   @override
@@ -1840,6 +2336,10 @@ class PassportElementErrorTranslationFile implements PassportElementError {
       _$PassportElementErrorTranslationFileToJson(this);
 }
 
+/// Represents an issue with the translated version of a document.
+/// The error is considered resolved when a file with the document translation change.
+///
+/// https://core.telegram.org/bots/api#passportelementerrortranslationfiles
 @JsonSerializable()
 class PassportElementErrorTranslationFiles implements PassportElementError {
   @override
@@ -1859,6 +2359,10 @@ class PassportElementErrorTranslationFiles implements PassportElementError {
       _$PassportElementErrorTranslationFilesToJson(this);
 }
 
+/// Represents an issue in an unspecified place.
+/// The error is considered resolved when new data is added.
+///
+/// https://core.telegram.org/bots/api#passportelementerrorunspecified
 @JsonSerializable()
 class PassportElementErrorUnspecified implements PassportElementError {
   @override
@@ -1877,6 +2381,10 @@ class PassportElementErrorUnspecified implements PassportElementError {
       _$PassportElementErrorUnspecifiedToJson(this);
 }
 
+/// This object represents a game.
+/// Use BotFather to create and edit games, their short names will act as unique identifiers.
+///
+/// https://core.telegram.org/bots/api#game
 @JsonSerializable()
 class Game {
   String title;
@@ -1896,6 +2404,12 @@ class Game {
   Map<String, dynamic> toJson() => _$GameToJson(this);
 }
 
+/// A placeholder, currently holds no information.
+/// Use [BotFather] to set up your game.
+///
+/// https://core.telegram.org/bots/api#callbackgame
+///
+/// [BotFather]: https://t.me/botfather
 @JsonSerializable()
 class CallbackGame {
   CallbackGame();
@@ -1904,6 +2418,9 @@ class CallbackGame {
   Map<String, dynamic> toJson() => _$CallbackGameToJson(this);
 }
 
+/// This object represents one row of the high scores table for a game.
+///
+/// https://core.telegram.org/bots/api#gamehighscore
 @JsonSerializable()
 class GameHighScore {
   int position;

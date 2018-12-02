@@ -21,10 +21,8 @@ import 'dart:async';
 import '../../telegram/model.dart';
 
 class Event {
-  /// User object of bot.
+  // User object of bot.
   User me;
-
-//  StreamController<Update> _updateStreamController;
 
   StreamController<Message> _messageStreamController;
   StreamController<Message> _editedMessageStreamController;
@@ -36,9 +34,8 @@ class Event {
   StreamController<ShippingQuery> _shippingQueryStreamController;
   StreamController<PreCheckoutQuery> _preCheckoutQueryStreamController;
 
+  /// Constructor
   Event({bool sync: false}) {
-//    _updateStreamController = new StreamController.broadcast(sync: sync);
-
     _messageStreamController = new StreamController.broadcast(sync: sync);
     _editedMessageStreamController = new StreamController.broadcast(sync: sync);
     _channelPostStreamController = new StreamController.broadcast(sync: sync);
