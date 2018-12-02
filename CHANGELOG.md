@@ -1,3 +1,6 @@
+## 0.0.22
+- Better dartdoc
+
 ## 0.0.21
 - Hot fix #36, toJSON() passing null values explicitly
 

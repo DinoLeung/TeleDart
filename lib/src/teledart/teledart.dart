@@ -75,7 +75,7 @@ class TeleDart {
 
   /// Configures long polling method
   ///
-  /// See: [https://core.telegram.org/bots/api#getupdates](https://core.telegram.org/bots/api#getupdates)
+  /// See: https://core.telegram.org/bots/api#getupdates
   void setupLongPolling(
       {int offset: 0,
       int limit: 100,
@@ -98,7 +98,7 @@ class TeleDart {
   /// Default [port] is `443`, Telegram API supports `443`, `80`, `88`, `8443`.
   /// Provide [privateKey] and [certificate] pair for HTTPS configuration
   ///
-  /// See: [https://core.telegram.org/bots/api#setwebhook](https://core.telegram.org/bots/api#setwebhook)
+  /// See: https://core.telegram.org/bots/api#setwebhook
   Future<void> setupWebhook(String url, String secretPath,
       {int port: 443,
       io.File privateKey,
