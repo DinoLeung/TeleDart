@@ -80,7 +80,7 @@ class LongPolling {
               timeout: timeout,
               allowed_updates: allowed_updates)
           .then((updates) {
-        if (updates.length > 0) {
+        if (updates.isNotEmpty) {
           for (Update update in updates) {
             emitUpdate(update);
             offset = update.update_id + 1;

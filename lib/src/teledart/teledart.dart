@@ -54,9 +54,9 @@ class TeleDart {
   /// Setup desired configurations using [setupLongPolling] or [setupWebhook]
   ///
   /// Throws [TeleDartException]
-  void startFetching({bool webhook = false}) async {
+  Future<void> startFetching({bool webhook = false}) async {
     // initialise bot info before getting updates
-    _initBotInfo().then((_) {
+    await _initBotInfo().then((_) {
       if (webhook) {
         if (_webhook == null)
           throw new TeleDartException('Webhook has not been set up yet');
