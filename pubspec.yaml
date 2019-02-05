@@ -1,6 +1,6 @@
 name: teledart
 description: A Dart library interfacing with the latest Telegram Bot API.
-version: 0.0.23
+version: 0.0.24
 homepage: https://github.com/DinoLeung/TeleDart
 author: Dino Leung <dino@330z.net>
 
@@ -15,4 +15,5 @@ dev_dependencies:
   test: ^1.5.3
   build_runner: ^1.2.5
   json_serializable: ^2.0.0
+  pedantic: '1.1.0'
 

@@ -1,3 +1,6 @@
+##0.0.24
+- Added pedantic package to dev dependencies
+
 ## 0.0.23
 - Fixes #40
 - Fixes #41
