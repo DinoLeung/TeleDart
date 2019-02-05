@@ -35,7 +35,7 @@ class Event {
   StreamController<PreCheckoutQuery> _preCheckoutQueryStreamController;
 
   /// Constructor
-  Event({bool sync: false}) {
+  Event({bool sync = false}) {
     _messageStreamController = new StreamController.broadcast(sync: sync);
     _editedMessageStreamController = new StreamController.broadcast(sync: sync);
     _channelPostStreamController = new StreamController.broadcast(sync: sync);
@@ -54,23 +54,29 @@ class Event {
   Stream<Message> onMessage({String entityType, String keyword}) {
     if (entityType == null) {
       if (keyword == null) // no entityType and keyword
-        return _messageStreamController.stream;
+        return _messageStreamController.stream.where((Message message) =>
+            (message.entities ?? message.caption_entities) == null);
       else {
         // no entityType but keyword
         // with regular expressions
-        return _messageStreamController.stream.where((Message message) =>
-            (message.text ?? message.caption ?? '')
+        return _messageStreamController.stream
+            .where((Message message) =>
+                (message.entities ?? message.caption_entities) == null)
+            .where((Message message) => (message.text ?? message.caption ?? '')
                 .contains(new RegExp(keyword)));
       }
     } else {
       // with entityType but no keyword
       if (keyword == null)
-        return _messageStreamController.stream
-            .where((Message message) => message.entityOf(entityType) != null);
+        return _messageStreamController.stream.where((Message message) =>
+            entityType == '*' || message.entityOf(entityType) != null);
       else {
         // with entityType and keyword
         return _messageStreamController.stream.where((Message message) {
           switch (entityType) {
+            case '*': // Any entityType
+              return (message.text ?? message.caption ?? '')
+                  .contains(new RegExp(keyword));
             case 'mention':
               return message.getEntity(entityType) == '\@${keyword}';
               break;
@@ -101,9 +107,9 @@ class Event {
                       keyword ||
                   message.entityOf(entityType).user.first_name == keyword;
               break;
-            default: //entityType not exist
-              throw new TeleDartEventException(
-                  'Update Type ${entityType} not exist');
+            default: // Dynamically listen to message types.
+              return (message.getEntity(entityType) ?? '')
+                  .contains(new RegExp(keyword));
               break;
           }
         });
