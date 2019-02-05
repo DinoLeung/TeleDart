@@ -5,7 +5,9 @@ import 'package:teledart/telegram.dart';
 import 'package:teledart/model.dart';
 
 void main() {
-  TeleDart teledart = new TeleDart(new Telegram('YOUR_BOT_TOKEN'), new Event());
+  TeleDart teledart = new TeleDart(
+      new Telegram('405338616:AAE5CTkx3Pht9VCkc1oCzt1P1zY1aCL-41Q'),
+      new Event());
 
   teledart.startFetching();
 
@@ -27,6 +29,7 @@ void main() {
       .onMessage(keyword: 'dart')
       .where((Message message) => message.text.contains('telegram'))
       .listen((message) {
+    print(message.entities);
     teledart.replyPhoto(
         message,
 //            new io.File('example/dart_bird_catchs_telegram.png'),

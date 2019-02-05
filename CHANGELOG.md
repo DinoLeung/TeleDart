@@ -1,3 +1,8 @@
+## 0.0.23
+- Fixes #40
+- Fixes #41
+- Follow new styling guide
+
 ## 0.0.22
 - Better dartdoc
 

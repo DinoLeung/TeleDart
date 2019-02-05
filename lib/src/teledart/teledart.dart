@@ -54,7 +54,7 @@ class TeleDart {
   /// Setup desired configurations using [setupLongPolling] or [setupWebhook]
   ///
   /// Throws [TeleDartException]
-  Future<void> startFetching({bool webhook: false}) async {
+  void startFetching({bool webhook = false}) async {
     // initialise bot info before getting updates
     _initBotInfo().then((_) {
       if (webhook) {
@@ -77,9 +77,9 @@ class TeleDart {
   ///
   /// See: https://core.telegram.org/bots/api#getupdates
   void setupLongPolling(
-      {int offset: 0,
-      int limit: 100,
-      int timeout: 30,
+      {int offset = 0,
+      int limit = 100,
+      int timeout = 30,
       List<String> allowed_updates}) {
     _longPolling = new LongPolling(telegram)
       ..offset = offset
@@ -100,10 +100,10 @@ class TeleDart {
   ///
   /// See: https://core.telegram.org/bots/api#setwebhook
   Future<void> setupWebhook(String url, String secretPath,
-      {int port: 443,
+      {int port = 443,
       io.File privateKey,
       io.File certificate,
-      int max_connections: 40,
+      int max_connections = 40,
       List<String> allowed_updates}) async {
     _webhook = new Webhook(telegram, url, secretPath)
       ..port = port
@@ -129,10 +129,13 @@ class TeleDart {
 
   /// Listens to message events with [entityType] and [keyword] in text and caption
   ///
-  /// entityType include `mention` (@username), `hashtag`, `cashtag`, `bot_command`,
+  /// [entityType] include `mention` (@username), `hashtag`, `cashtag`, `bot_command`,
   /// `url`, `email`, `phone_number`, `bold` (bold text), `italic` (italic text),
   /// `code` (monowidth string), `pre` (monowidth block), `text_link` (for
   /// clickable text URLs), `text_mention` (for users without usernames)
+  ///
+  /// Omitting [entityType] or passing null will results listening to messages with no [entityType].
+  /// To listen to messages of all [entityType], pass `*` as [entityType].
   ///
   /// **Normal message has NO [entityType]**
   ///
@@ -227,7 +230,7 @@ class TeleDart {
 
   /// Short-cut to reply with a text message
   Future<Message> replyMessage(Message orgMsg, String text,
-          {bool withQuote: false,
+          {bool withQuote = false,
           String parse_mode,
           bool disable_web_page_preview,
           bool disable_notification,
@@ -241,7 +244,7 @@ class TeleDart {
 
   /// Short-cut to reply with a photo message
   Future<Message> replyPhoto(Message orgMsg, dynamic photo,
-          {bool withQuote: false,
+          {bool withQuote = false,
           String caption,
           String parse_mode,
           bool disable_notification,
@@ -255,7 +258,7 @@ class TeleDart {
 
   /// Short-cut to reply with a audio message
   Future<Message> replyAudio(Message orgMsg, dynamic audio,
-          {bool withQuote: false,
+          {bool withQuote = false,
           String caption,
           String parse_mode,
           int duration,
@@ -277,7 +280,7 @@ class TeleDart {
 
   /// Short-cut to reply with a document message
   Future<Message> replyDocument(Message orgMsg, dynamic document,
-          {bool withQuote: false,
+          {bool withQuote = false,
           dynamic thumb,
           String caption,
           String parse_mode,
@@ -293,7 +296,7 @@ class TeleDart {
 
   /// Short-cut to reply with a video message
   Future<Message> replyVideo(Message orgMsg, dynamic video,
-          {bool withQuote: false,
+          {bool withQuote = false,
           int duration,
           int width,
           int height,
@@ -317,7 +320,7 @@ class TeleDart {
 
   /// Short-cut to reply with a animation message
   Future<Message> replyAnimation(Message orgMsg, dynamic animation,
-          {bool withQuote: false,
+          {bool withQuote = false,
           int duration,
           int width,
           int height,
@@ -340,7 +343,7 @@ class TeleDart {
 
   /// Short-cut to reply with a voice message
   Future<Message> replyVoice(Message orgMsg, dynamic voice,
-          {bool withQuote: false,
+          {bool withQuote = false,
           String caption,
           String parse_mode,
           bool disable_notification,
@@ -354,7 +357,7 @@ class TeleDart {
 
   /// Short-cut to reply with a video note message
   Future<Message> replyVideoNote(Message orgMsg, dynamic video_note,
-          {bool withQuote: false,
+          {bool withQuote = false,
           int duration,
           int length,
           dynamic thumb,
@@ -370,7 +373,7 @@ class TeleDart {
 
   /// Short-cut to reply with a media group message
   Future<List<Message>> replyMediaGroup(Message orgMsg, List<InputMedia> media,
-          {bool withQuote: false, bool disable_notification}) =>
+          {bool withQuote = false, bool disable_notification}) =>
       telegram.sendMediaGroup(orgMsg.from.id, media,
           disable_notification: disable_notification,
           reply_to_message_id: withQuote ? orgMsg.message_id : null);
@@ -378,7 +381,7 @@ class TeleDart {
   /// Short-cut to reply with a location message
   Future<Message> replyLocation(
           Message orgMsg, double latitude, double longitude,
-          {bool withQuote: false,
+          {bool withQuote = false,
           int live_period,
           bool disable_notification,
           ReplyMarkup reply_markup}) =>
@@ -415,7 +418,7 @@ class TeleDart {
   /// Short-cut to reply with a venue message
   Future<Message> replyVenue(Message orgMsg, double latitude, double longitude,
           String title, String address,
-          {bool withQuote: false,
+          {bool withQuote = false,
           String foursquare_id,
           String foursquare_type,
           bool disable_notification,
@@ -430,7 +433,7 @@ class TeleDart {
   /// Short-cut to reply with a contact message
   Future<Message> replyContact(
           Message orgMsg, String phone_number, String first_name,
-          {bool withQuote: false,
+          {bool withQuote = false,
           String last_name,
           String vcard,
           bool disable_notification,
@@ -446,7 +449,7 @@ class TeleDart {
   // ! just put it here for now for the sake of providing functionality
   /// Short-cut to reply with a contact message
   Future<Message> replySticker(Message orgMsg, dynamic sticker,
-          {bool withQuote: false,
+          {bool withQuote = false,
           bool disable_notification,
           int reply_to_message_id,
           ReplyMarkup reply_markup}) =>
