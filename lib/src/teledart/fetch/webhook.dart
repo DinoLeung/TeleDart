@@ -50,7 +50,7 @@ class Webhook {
       this.certificate,
       this.max_connections = 40,
       this.allowed_updates}) {
-    if ([443, 80, 88, 8443].indexOf(this.port) < 0)
+    if (![443, 80, 88, 8443].contains(this.port))
       throw new WebhookException(
           'Ports currently supported for Webhooks: 443, 80, 88, 8443.');
     if (max_connections > 100 || max_connections < 1)
@@ -79,7 +79,7 @@ class Webhook {
         : io.HttpServer.bindSecure(
             io.InternetAddress.loopbackIPv4.address, port, _context);
 
-    serverFuture.then((server) => _server = server).then((_) {
+    await serverFuture.then((server) => _server = server).then((_) {
       telegram.setWebhook('${this.url}:${this.port}${this.secretPath}',
           certificate: certificate,
           max_connections: max_connections,
@@ -111,7 +111,7 @@ class Webhook {
 
   /// Remove webhook from telegram server
   Future<void> deleteWebhook() async {
-    telegram.deleteWebhook().catchError(
+    await telegram.deleteWebhook().catchError(
         (error) => new Future.error(new WebhookException(error.toString())));
   }
 
