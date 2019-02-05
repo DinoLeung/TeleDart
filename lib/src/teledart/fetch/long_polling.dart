@@ -42,9 +42,9 @@ class LongPolling {
   /// Throws [LongPollingException] if [limit] is less than 1 or greater than 100
   /// or [timeout] is greater than 50.
   LongPolling(this.telegram,
-      {this.offset: 0,
-      this.limit: 100,
-      this.timeout: 30,
+      {this.offset = 0,
+      this.limit = 100,
+      this.timeout = 30,
       this.allowed_updates}) {
     if (limit > 100 || limit < 1)
       throw new LongPollingException('Limit must between 1 and 100.');
