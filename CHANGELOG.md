@@ -1,3 +1,6 @@
+##0.0.25
+- Downgrade http package to ^0.11.3, to be compatible with firebase
+
 ##0.0.24
 - Added pedantic package to dev dependencies
 
