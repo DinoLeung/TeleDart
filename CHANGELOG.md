@@ -1,3 +1,6 @@
+##0.0.26
+- Fixed #46
+
 ##0.0.25
 - Downgrade http package to ^0.11.3, to be compatible with firebase
 

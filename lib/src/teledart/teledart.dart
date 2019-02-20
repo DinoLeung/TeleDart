@@ -144,7 +144,7 @@ class TeleDart {
   /// To listen to `/start`
   ///  ```
   ///  onMessage(entityType: 'bot_command', keyword: 'start').listen((message) =>
-  ///    teledart.telegram.sendMessage(message.from.id, 'hello world!'));
+  ///    teledart.telegram.sendMessage(message.chat.id, 'hello world!'));
   ///  ```
   Stream<Message> onMessage({String entityType, String keyword}) =>
       _event.onMessage(entityType: entityType, keyword: keyword);
@@ -235,7 +235,7 @@ class TeleDart {
           bool disable_web_page_preview,
           bool disable_notification,
           ReplyMarkup reply_markup}) =>
-      telegram.sendMessage(orgMsg.from.id, text,
+      telegram.sendMessage(orgMsg.chat.id, text,
           parse_mode: parse_mode,
           disable_web_page_preview: disable_web_page_preview,
           disable_notification: disable_notification,
@@ -249,7 +249,7 @@ class TeleDart {
           String parse_mode,
           bool disable_notification,
           ReplyMarkup reply_markup}) =>
-      telegram.sendPhoto(orgMsg.from.id, photo,
+      telegram.sendPhoto(orgMsg.chat.id, photo,
           caption: caption,
           parse_mode: parse_mode,
           disable_notification: disable_notification,
@@ -267,7 +267,7 @@ class TeleDart {
           dynamic thumb,
           bool disable_notification,
           ReplyMarkup reply_markup}) =>
-      telegram.sendAudio(orgMsg.from.id, audio,
+      telegram.sendAudio(orgMsg.chat.id, audio,
           caption: caption,
           parse_mode: parse_mode,
           duration: duration,
@@ -286,7 +286,7 @@ class TeleDart {
           String parse_mode,
           bool disable_notification,
           ReplyMarkup reply_markup}) =>
-      telegram.sendDocument(orgMsg.from.id, document,
+      telegram.sendDocument(orgMsg.chat.id, document,
           thumb: thumb,
           caption: caption,
           parse_mode: parse_mode,
@@ -306,7 +306,7 @@ class TeleDart {
           bool supports_streaming,
           bool disable_notification,
           ReplyMarkup reply_markup}) =>
-      telegram.sendVideo(orgMsg.from.id, video,
+      telegram.sendVideo(orgMsg.chat.id, video,
           duration: duration,
           width: width,
           height: height,
@@ -330,7 +330,7 @@ class TeleDart {
           bool disable_notification,
           int reply_to_message_id,
           ReplyMarkup reply_markup}) =>
-      telegram.sendAnimation(orgMsg.from.id, animation,
+      telegram.sendAnimation(orgMsg.chat.id, animation,
           duration: duration,
           width: width,
           height: height,
@@ -348,7 +348,7 @@ class TeleDart {
           String parse_mode,
           bool disable_notification,
           ReplyMarkup reply_markup}) =>
-      telegram.sendVoice(orgMsg.from.id, voice,
+      telegram.sendVoice(orgMsg.chat.id, voice,
           caption: caption,
           parse_mode: parse_mode,
           disable_notification: disable_notification,
@@ -363,7 +363,7 @@ class TeleDart {
           dynamic thumb,
           bool disable_notification,
           ReplyMarkup reply_markup}) =>
-      telegram.sendVideoNote(orgMsg.from.id, video_note,
+      telegram.sendVideoNote(orgMsg.chat.id, video_note,
           duration: duration,
           length: length,
           thumb: thumb,
@@ -374,7 +374,7 @@ class TeleDart {
   /// Short-cut to reply with a media group message
   Future<List<Message>> replyMediaGroup(Message orgMsg, List<InputMedia> media,
           {bool withQuote = false, bool disable_notification}) =>
-      telegram.sendMediaGroup(orgMsg.from.id, media,
+      telegram.sendMediaGroup(orgMsg.chat.id, media,
           disable_notification: disable_notification,
           reply_to_message_id: withQuote ? orgMsg.message_id : null);
 
@@ -385,7 +385,7 @@ class TeleDart {
           int live_period,
           bool disable_notification,
           ReplyMarkup reply_markup}) =>
-      telegram.sendLocation(orgMsg.from.id, latitude, longitude,
+      telegram.sendLocation(orgMsg.chat.id, latitude, longitude,
           live_period: live_period,
           disable_notification: disable_notification,
           reply_to_message_id: withQuote ? orgMsg.message_id : null,
@@ -423,7 +423,7 @@ class TeleDart {
           String foursquare_type,
           bool disable_notification,
           ReplyMarkup reply_markup}) =>
-      telegram.sendVenue(orgMsg.from.id, latitude, longitude, title, address,
+      telegram.sendVenue(orgMsg.chat.id, latitude, longitude, title, address,
           foursquare_id: foursquare_id,
           foursquare_type: foursquare_type,
           disable_notification: disable_notification,
@@ -438,7 +438,7 @@ class TeleDart {
           String vcard,
           bool disable_notification,
           ReplyMarkup reply_markup}) =>
-      telegram.sendContact(orgMsg.from.id, phone_number, first_name,
+      telegram.sendContact(orgMsg.chat.id, phone_number, first_name,
           last_name: last_name,
           vcard: vcard,
           disable_notification: disable_notification,
@@ -453,7 +453,7 @@ class TeleDart {
           bool disable_notification,
           int reply_to_message_id,
           ReplyMarkup reply_markup}) =>
-      telegram.sendSticker(orgMsg.from.id, sticker,
+      telegram.sendSticker(orgMsg.chat.id, sticker,
           disable_notification: disable_notification,
           reply_to_message_id: withQuote ? orgMsg.message_id : null,
           reply_markup: reply_markup);
