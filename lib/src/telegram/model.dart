@@ -1070,7 +1070,7 @@ class InlineQueryResultArticle implements InlineQueryResult {
   String thumb_height;
   InlineQueryResultArticle(
       {this.id,
-      this.type,
+      this.type = 'article',
       this.title,
       this.input_message_content,
       this.reply_markup,
@@ -1110,7 +1110,7 @@ class InlineQueryResultPhoto implements InlineQueryResult {
   InputMessageContent input_message_content;
   InlineQueryResultPhoto(
       {this.id,
-      this.type,
+      this.type = 'photo',
       this.photo_url,
       this.thumb_url,
       this.photo_width,
@@ -1151,7 +1151,7 @@ class InlineQueryResultGif implements InlineQueryResult {
   InputMessageContent input_message_content;
   InlineQueryResultGif(
       {this.id,
-      this.type,
+      this.type = 'gif',
       this.gif_url,
       this.gif_width,
       this.gif_height,
@@ -1192,7 +1192,7 @@ class InlineQueryResultMpeg4Gif implements InlineQueryResult {
   InputMessageContent input_message_content;
   InlineQueryResultMpeg4Gif(
       {this.id,
-      this.type,
+      this.type = 'mpeg4_gif',
       this.mpeg4_url,
       this.mpeg4_width,
       this.mpeg4_height,
@@ -1238,7 +1238,7 @@ class InlineQueryResultVideo implements InlineQueryResult {
   InputMessageContent input_message_content;
   InlineQueryResultVideo(
       {this.id,
-      this.type,
+      this.type = 'video',
       this.video_url,
       this.mime_type,
       this.thumb_url,
@@ -1282,7 +1282,7 @@ class InlineQueryResultAudio implements InlineQueryResult {
   InputMessageContent input_message_content;
   InlineQueryResultAudio(
       {this.id,
-      this.type,
+      this.type = 'audio',
       this.audio_url,
       this.title,
       this.caption,
@@ -1321,7 +1321,7 @@ class InlineQueryResultVoice implements InlineQueryResult {
   InputMessageContent input_message_content;
   InlineQueryResultVoice(
       {this.id,
-      this.type,
+      this.type = 'voice',
       this.voice_url,
       this.title,
       this.caption,
@@ -1363,7 +1363,7 @@ class InlineQueryResultDocument implements InlineQueryResult {
   int thumb_height;
   InlineQueryResultDocument(
       {this.id,
-      this.type,
+      this.type = 'document',
       this.title,
       this.caption,
       this.parse_mode,
@@ -1407,7 +1407,7 @@ class InlineQueryResultLocation implements InlineQueryResult {
   int thumb_height;
   InlineQueryResultLocation(
       {this.id,
-      this.type,
+      this.type = 'location',
       this.latitude,
       this.longitude,
       this.title,
@@ -1451,7 +1451,7 @@ class InlineQueryResultVenue implements InlineQueryResult {
   int thumb_height;
   InlineQueryResultVenue(
       {this.id,
-      this.type,
+      this.type = 'venue',
       this.latitude,
       this.longitude,
       this.title,
@@ -1495,7 +1495,7 @@ class InlineQueryResultContact implements InlineQueryResult {
   int thumb_height;
   InlineQueryResultContact(
       {this.id,
-      this.type,
+      this.type = 'contact',
       this.phone_number,
       this.first_name,
       this.last_name,
@@ -1528,7 +1528,7 @@ class InlineQueryResultGame implements InlineQueryResult {
   String game_short_name;
   InlineKeyboardMarkup reply_markup;
   InlineQueryResultGame(
-      {this.id, this.type, this.game_short_name, this.reply_markup});
+      {this.id, this.type = 'game', this.game_short_name, this.reply_markup});
   factory InlineQueryResultGame.fromJson(Map<String, dynamic> json) =>
       _$InlineQueryResultGameFromJson(json);
   @override
@@ -1556,7 +1556,7 @@ class InlineQueryResultCachedPhoto implements InlineQueryResult {
   InputMessageContent input_message_content;
   InlineQueryResultCachedPhoto(
       {this.id,
-      this.type,
+      this.type = 'photo',
       this.photo_file_id,
       this.title,
       this.description,
@@ -1590,7 +1590,7 @@ class InlineQueryResultCachedGif implements InlineQueryResult {
   InputMessageContent input_message_content;
   InlineQueryResultCachedGif(
       {this.id,
-      this.type,
+      this.type = 'gif',
       this.gif_file_id,
       this.title,
       this.caption,
@@ -1623,7 +1623,7 @@ class InlineQueryResultCachedMpeg4Gif implements InlineQueryResult {
   InputMessageContent input_message_content;
   InlineQueryResultCachedMpeg4Gif(
       {this.id,
-      this.type,
+      this.type = 'mpeg4_gif',
       this.mpeg4_file_id,
       this.title,
       this.caption,
@@ -1657,7 +1657,7 @@ class InlineQueryResultCachedSticker implements InlineQueryResult {
   InputMessageContent input_message_content;
   InlineQueryResultCachedSticker(
       {this.id,
-      this.type,
+      this.type = 'sticker',
       this.sticker_file_id,
       this.reply_markup,
       this.input_message_content});
@@ -1691,7 +1691,7 @@ class InlineQueryResultCachedDocument implements InlineQueryResult {
   InputMessageContent input_message_content;
   InlineQueryResultCachedDocument(
       {this.id,
-      this.type,
+      this.type = 'document',
       this.title,
       this.document_file_id,
       this.description,
@@ -1727,7 +1727,7 @@ class InlineQueryResultCachedVideo implements InlineQueryResult {
   InputMessageContent input_message_content;
   InlineQueryResultCachedVideo(
       {this.id,
-      this.type,
+      this.type = 'video',
       this.video_file_id,
       this.title,
       this.description,
@@ -1764,7 +1764,7 @@ class InlineQueryResultCachedVoice implements InlineQueryResult {
   InputMessageContent input_message_content;
   InlineQueryResultCachedVoice(
       {this.id,
-      this.type,
+      this.type = 'voice',
       this.voice_file_id,
       this.title,
       this.caption,
@@ -1799,7 +1799,7 @@ class InlineQueryResultCachedAudio implements InlineQueryResult {
   InputMessageContent input_message_content;
   InlineQueryResultCachedAudio(
       {this.id,
-      this.type,
+      this.type = 'audio',
       this.audio_file_id,
       this.caption,
       this.parse_mode,
