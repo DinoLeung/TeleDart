@@ -23,7 +23,7 @@ import 'dart:io' as io;
 import 'package:http/http.dart' as http;
 
 import 'model.dart';
-import 'http_client.dart';
+import '../util/http_client.dart';
 
 class Telegram {
   final HttpClient _client = new HttpClient();

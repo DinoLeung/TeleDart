@@ -1,3 +1,7 @@
+##0.0.28
+- Modulised model files
+- Updated examples
+
 ##0.0.27
 - Fixed #48
 

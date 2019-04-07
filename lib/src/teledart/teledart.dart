@@ -32,8 +32,6 @@ class TeleDart {
   LongPolling _longPolling;
   Webhook _webhook;
 
-  final int maxTimeout = 50;
-
   /// Constructor in dependency injection manner
   TeleDart(this.telegram, this._event);
 
