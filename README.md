@@ -9,7 +9,7 @@ allowing you to create your own bot easily.
 ![TeleDart](https://raw.githubusercontent.com/DinoLeung/TeleDart/master/example/dart_bird_catchs_telegram.svg?sanitize=true)
 
 [![Bot API Version](https://img.shields.io/badge/Bot%20API-4.1-blue.svg?style=flat-square)](https://core.telegram.org/bots/api)
-[![Dart Version](https://img.shields.io/badge/Dart-2.1.0-blue.svg?style=flat-square)](https://www.dartlang.org/dart-2)
+[![Dart Version](https://img.shields.io/badge/Dart-2-blue.svg?style=flat-square)](https://www.dartlang.org/dart-2)
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg?style=flat-square)](https://www.gnu.org/licenses/gpl-3.0)
 ## Features
 
@@ -30,7 +30,7 @@ import 'package:teledart/telegram.dart';
 import 'package:teledart/model.dart';
 
 void main() {
-  TeleDart teledart = new TeleDart(new Telegram('YOUR_BOT_TOKEN'), new Event());
+  TeleDart teledart = TeleDart(Telegram('YOUR_BOT_TOKEN'), Event());
 
   teledart.startFetching();
 
@@ -45,35 +45,33 @@ Modifying [Stream](https://www.dartlang.org/tutorials/language/streams#methods-t
 ```
 teledart
       .onMessage(keyword: 'dart')
-      .where((Message message) => message.text.contains('telegram'))
-      .listen((message) {
-    teledart.replyPhoto(
-        message,
-        'https://raw.githubusercontent.com/DinoLeung/TeleDart/master/example/dart_bird_catchs_telegram.png',
-        caption: 'This is how the Dart Bird and Telegram are met');
-  });
+      .where((message) => message.text.contains('telegram'))
+      .listen((message) => teledart.replyPhoto(
+          message,
+          //  io.File('example/dart_bird_catchs_telegram.png'),
+          'https://raw.githubusercontent.com/DinoLeung/TeleDart/master/example/dart_bird_catchs_telegram.png',
+          caption: 'This is how the Dart Bird and Telegram are met'));
 ```
 
 [Inline mode](https://core.telegram.org/bots/api#inline-mode) example:
 
 ```
-teledart.onInlineQuery().listen((inlineQuery) {
-    List<InlineQueryResult> results = [
-      new InlineQueryResultArticle()
-        ..id = 'ping'
-        ..title = 'ping'
-        ..input_message_content = (new InputTextMessageContent()
-          ..message_text = '*pong*'
-          ..parse_mode = 'markdown'),
-      new InlineQueryResultArticle()
-        ..id = 'ding'
-        ..title = 'ding'
-        ..input_message_content = (new InputTextMessageContent()
-          ..message_text = '_dong_'
-          ..parse_mode = 'markdown')
-    ];
-    teledart.answerInlineQuery(inlineQuery, results);
-  });
+teledart
+      .onInlineQuery()
+      .listen((inlineQuery) => teledart.answerInlineQuery(inlineQuery, [
+            InlineQueryResultArticle()
+              ..id = 'ping'
+              ..title = 'ping'
+              ..input_message_content = (InputTextMessageContent()
+                ..message_text = '*pong*'
+                ..parse_mode = 'markdown'),
+            InlineQueryResultArticle()
+              ..id = 'ding'
+              ..title = 'ding'
+              ..input_message_content = (InputTextMessageContent()
+                ..message_text = '_dong_'
+                ..parse_mode = 'markdown')
+          ]));
 ```
 
 ## Bugs and feature requests

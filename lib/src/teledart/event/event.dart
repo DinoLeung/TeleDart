@@ -54,25 +54,25 @@ class Event {
   Stream<Message> onMessage({String entityType, String keyword}) {
     if (entityType == null) {
       if (keyword == null) // no entityType and keyword
-        return _messageStreamController.stream.where((Message message) =>
+        return _messageStreamController.stream.where((message) =>
             (message.entities ?? message.caption_entities) == null);
       else {
         // no entityType but keyword
         // with regular expressions
         return _messageStreamController.stream
-            .where((Message message) =>
+            .where((message) =>
                 (message.entities ?? message.caption_entities) == null)
-            .where((Message message) => (message.text ?? message.caption ?? '')
+            .where((message) => (message.text ?? message.caption ?? '')
                 .contains(new RegExp(keyword)));
       }
     } else {
       // with entityType but no keyword
       if (keyword == null)
-        return _messageStreamController.stream.where((Message message) =>
+        return _messageStreamController.stream.where((message) =>
             entityType == '*' || message.entityOf(entityType) != null);
       else {
         // with entityType and keyword
-        return _messageStreamController.stream.where((Message message) {
+        return _messageStreamController.stream.where((message) {
           switch (entityType) {
             case '*': // Any entityType
               return (message.text ?? message.caption ?? '')
