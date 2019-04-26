@@ -94,16 +94,18 @@ class Webhook {
           'Please use setWebhook() to initialise webhook before start webhook.');
     _server.listen((io.HttpRequest request) {
       if (request.method == 'POST' && request.uri.path == this.secretPath) {
-        request
-            .transform(utf8.decoder)
-            .join()
-            .then((data) => emitUpdate(new Update.fromJson(jsonDecode(data))));
-        request.response.write(jsonEncode({'ok': true}));
+        request.transform(utf8.decoder).join().then((data) {
+          emitUpdate(new Update.fromJson(jsonDecode(data)));
+          request.response
+            ..write(jsonEncode({'ok': true}))
+            ..close();
+        });
       } else {
-        request.response.statusCode = io.HttpStatus.methodNotAllowed;
-        request.response.write(jsonEncode({'ok': false}));
+        request.response
+          ..statusCode = io.HttpStatus.methodNotAllowed
+          ..write(jsonEncode({'ok': false}))
+          ..close();
       }
-      request.response.close();
     }).onError(
         (error) => new Future.error(new WebhookException(error.toString())));
   }
