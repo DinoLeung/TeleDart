@@ -64,20 +64,15 @@ class Webhook {
       this.secretPath = '\/' + this.secretPath;
 
     // serup SecurityContext
-    if (privateKey != null && certificate != null) {
-      _context = new io.SecurityContext();
-      _context.usePrivateKeyBytes(privateKey.readAsBytesSync());
-      _context.useCertificateChainBytes(certificate.readAsBytesSync());
-    }
+    _context = new io.SecurityContext();
+    _context.usePrivateKeyBytes(privateKey.readAsBytesSync());
+    _context.useCertificateChainBytes(certificate.readAsBytesSync());
   }
 
   /// Set webhook on telegram server.
   Future<void> setWebhook() async {
-    // initialise server
-    Future<dynamic> serverFuture = _context == null
-        ? io.HttpServer.bind(io.InternetAddress.loopbackIPv4.address, port)
-        : io.HttpServer.bindSecure(
-            io.InternetAddress.loopbackIPv4.address, port, _context);
+    Future<dynamic> serverFuture = io.HttpServer.bindSecure(
+        io.InternetAddress.anyIPv4.address, port, _context);
 
     await serverFuture.then((server) => _server = server).then((_) {
       telegram.setWebhook('${this.url}:${this.port}${this.secretPath}',
@@ -99,10 +94,10 @@ class Webhook {
             .transform(utf8.decoder)
             .join()
             .then((data) => emitUpdate(new Update.fromJson(jsonDecode(data))));
-        request.response.write({'ok': true});
+        request.response.write(jsonEncode({'ok': true}));
       } else {
         request.response.statusCode = io.HttpStatus.methodNotAllowed;
-        request.response.write({'ok': false});
+        request.response.write(jsonEncode({'ok': false}));
       }
       request.response.close();
     }).onError(
