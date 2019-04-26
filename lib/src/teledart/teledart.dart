@@ -104,13 +104,15 @@ class TeleDart {
       io.File privateKey,
       io.File certificate,
       int max_connections = 40,
-      List<String> allowed_updates}) async {
-    _webhook = new Webhook(telegram, url, secretPath,
+      List<String> allowed_updates,
+      io.File selfSignedPublicKeyCert,
+      String privateKeyPassword}) async {
+    _webhook = new Webhook(telegram, url, secretPath, certificate, privateKey,
         port: port,
-        privateKey: privateKey,
-        certificate: certificate,
         max_connections: max_connections,
-        allowed_updates: allowed_updates);
+        allowed_updates: allowed_updates,
+        selfSignedPublicKeyCert: selfSignedPublicKeyCert,
+        privateKeyPassword: privateKeyPassword);
 
     return _webhook.setWebhook();
   }

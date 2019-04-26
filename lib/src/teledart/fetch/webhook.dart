@@ -30,13 +30,15 @@ class Webhook {
   io.SecurityContext _context;
 
   String url;
-  io.File certificate;
+  String secretPath;
+  int port;
   int max_connections;
   List<String> allowed_updates;
 
-  String secretPath;
-  int port;
+  io.File certificate;
   io.File privateKey;
+  String privateKeyPassword;
+  io.File selfSignedPublicKeyCert;
 
   StreamController<Update> _updateStreamController;
 
@@ -44,12 +46,13 @@ class Webhook {
   ///
   /// Throws [WebhookException] if [port] is not supported by Telegram
   /// or [max_connections] is less than 1 or greater than 100.
-  Webhook(this.telegram, this.url, this.secretPath,
-      {this.port = 443,
+  Webhook(this.telegram, this.url, this.secretPath, this.certificate,
       this.privateKey,
-      this.certificate,
+      {this.port = 443,
       this.max_connections = 40,
-      this.allowed_updates}) {
+      this.allowed_updates,
+      this.selfSignedPublicKeyCert,
+      this.privateKeyPassword}) {
     if (![443, 80, 88, 8443].contains(this.port))
       throw new WebhookException(
           'Ports currently supported for Webhooks: 443, 80, 88, 8443.');
@@ -65,8 +68,9 @@ class Webhook {
 
     // serup SecurityContext
     _context = new io.SecurityContext();
-    _context.usePrivateKeyBytes(privateKey.readAsBytesSync());
     _context.useCertificateChainBytes(certificate.readAsBytesSync());
+    _context.usePrivateKeyBytes(privateKey.readAsBytesSync(),
+        password: privateKeyPassword);
   }
 
   /// Set webhook on telegram server.
@@ -76,7 +80,7 @@ class Webhook {
 
     await serverFuture.then((server) => _server = server).then((_) {
       telegram.setWebhook('${this.url}:${this.port}${this.secretPath}',
-          certificate: certificate,
+          certificate: selfSignedPublicKeyCert,
           max_connections: max_connections,
           allowed_updates: allowed_updates);
     }).catchError(

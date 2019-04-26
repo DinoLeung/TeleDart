@@ -16,8 +16,6 @@ void main() {
       privateKey: new io.File(envVars['KEY_PATH']),
       certificate: new io.File(envVars['CERT_PATH']));
 
-  teledart.telegram.getWebhookInfo().then((webhook) => print(webhook.toJson()));
-
   teledart.startFetching(webhook: true);
 
   // You can listen to messages like this
