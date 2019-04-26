@@ -59,13 +59,14 @@ class TeleDart {
         if (_webhook == null)
           throw new TeleDartException('Webhook has not been set up yet');
         else {
-          _webhook.startWebhook();
-          _webhook.onUpdate().listen((update) => _updatesHandler(update));
+          _webhook
+            ..startWebhook()
+            ..onUpdate().listen((update) => _updatesHandler(update));
         }
       } else {
-        _longPolling ??= new LongPolling(telegram);
-        _longPolling.startPolling();
-        _longPolling.onUpdate().listen((update) => _updatesHandler(update));
+        _longPolling ??= new LongPolling(telegram)
+          ..startPolling()
+          ..onUpdate().listen((update) => _updatesHandler(update));
       }
     }).catchError(
         ((exception) => throw new TeleDartException(exception.toString())));
