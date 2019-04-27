@@ -1,33 +1,47 @@
+## 0.0.30
+
+### Breaking change
+- Changed `startFetching()` into `start()`, and it returns a `User` object which represents the bot.
+
 ## 0.0.29
+
 - Fixed up webhook workflow
 - Added example to setup webhook
 - Support API 4.2
 
 ## 0.0.28
+
 - Modulised model files
 - Updated examples
 
 ## 0.0.27
+
 - Fixed #48
 
 ## 0.0.26
+
 - Fixed #46
 
 ## 0.0.25
+
 - Downgrade http package to ^0.11.3, to be compatible with firebase
 
 ## 0.0.24
+
 - Added pedantic package to dev dependencies
 
 ## 0.0.23
+
 - Fixes #40
 - Fixes #41
 - Follow new styling guide
 
 ## 0.0.22
+
 - Better dartdoc
 
 ## 0.0.21
+
 - Hot fix #36, toJSON() passing null values explicitly
 
 ## 0.0.20
