@@ -174,6 +174,9 @@ class TeleDart {
   /// Listens to pre checkout query events
   Stream<PreCheckoutQuery> onPreCheckoutQuery() => _event.onPreCheckoutQuery();
 
+  /// Listens to poll events
+  Stream<Poll> onPoll() => _event.onPoll();
+
   // Short-cuts revolution
 
   /// Short-cut for onMessage handling entityType `mention` (@username)

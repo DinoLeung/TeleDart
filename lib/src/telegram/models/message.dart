@@ -31,6 +31,7 @@ class Message {
   Chat forward_from_chat;
   int forward_from_message_id;
   String forward_signature;
+  String forward_sender_name;
   int forward_date;
   Message reply_to_message;
   int edit_date;
@@ -78,6 +79,7 @@ class Message {
       this.forward_from_chat,
       this.forward_from_message_id,
       this.forward_signature,
+      this.forward_sender_name,
       this.forward_date,
       this.reply_to_message,
       this.edit_date,

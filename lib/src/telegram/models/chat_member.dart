@@ -35,6 +35,7 @@ class ChatMember {
   bool can_restrict_members;
   bool can_pin_messages;
   bool can_promote_members;
+  bool is_member;
   bool can_send_messages;
   bool can_send_media_messages;
   bool can_send_other_messages;
@@ -52,6 +53,7 @@ class ChatMember {
       this.can_restrict_members,
       this.can_pin_messages,
       this.can_promote_members,
+      this.is_member,
       this.can_send_messages,
       this.can_send_media_messages,
       this.can_send_other_messages,
