@@ -52,6 +52,7 @@ class Message {
   Contact contact;
   Location location;
   Venue venue;
+  Poll poll;
   List<User> new_chat_members;
   User left_chat_member;
   String new_chat_title;
@@ -98,6 +99,7 @@ class Message {
       this.contact,
       this.location,
       this.venue,
+      this.poll,
       this.new_chat_members,
       this.left_chat_member,
       this.new_chat_title,

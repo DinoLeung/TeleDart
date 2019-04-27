@@ -40,7 +40,10 @@ Update _$UpdateFromJson(Map<String, dynamic> json) {
       pre_checkout_query: json['pre_checkout_query'] == null
           ? null
           : PreCheckoutQuery.fromJson(
-              json['pre_checkout_query'] as Map<String, dynamic>));
+              json['pre_checkout_query'] as Map<String, dynamic>),
+      poll: json['poll'] == null
+          ? null
+          : Poll.fromJson(json['poll'] as Map<String, dynamic>));
 }
 
 Map<String, dynamic> _$UpdateToJson(Update instance) {
@@ -62,6 +65,7 @@ Map<String, dynamic> _$UpdateToJson(Update instance) {
   writeNotNull('callback_query', instance.callback_query);
   writeNotNull('shipping_query', instance.shipping_query);
   writeNotNull('pre_checkout_query', instance.pre_checkout_query);
+  writeNotNull('poll', instance.poll);
   return val;
 }
 
@@ -246,6 +250,9 @@ Message _$MessageFromJson(Map<String, dynamic> json) {
       venue: json['venue'] == null
           ? null
           : Venue.fromJson(json['venue'] as Map<String, dynamic>),
+      poll: json['poll'] == null
+          ? null
+          : Poll.fromJson(json['poll'] as Map<String, dynamic>),
       new_chat_members: (json['new_chat_members'] as List)
           ?.map((e) =>
               e == null ? null : User.fromJson(e as Map<String, dynamic>))
@@ -318,6 +325,7 @@ Map<String, dynamic> _$MessageToJson(Message instance) {
   writeNotNull('contact', instance.contact);
   writeNotNull('location', instance.location);
   writeNotNull('venue', instance.venue);
+  writeNotNull('poll', instance.poll);
   writeNotNull('new_chat_members', instance.new_chat_members);
   writeNotNull('left_chat_member', instance.left_chat_member);
   writeNotNull('new_chat_title', instance.new_chat_title);
@@ -637,6 +645,52 @@ Map<String, dynamic> _$VenueToJson(Venue instance) {
   writeNotNull('address', instance.address);
   writeNotNull('foursquare_id', instance.foursquare_id);
   writeNotNull('foursquare_type', instance.foursquare_type);
+  return val;
+}
+
+PollOption _$PollOptionFromJson(Map<String, dynamic> json) {
+  return PollOption(
+      text: json['text'] as String, voter_count: json['voter_count'] as int);
+}
+
+Map<String, dynamic> _$PollOptionToJson(PollOption instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('text', instance.text);
+  writeNotNull('voter_count', instance.voter_count);
+  return val;
+}
+
+Poll _$PollFromJson(Map<String, dynamic> json) {
+  return Poll(
+      id: json['id'] as String,
+      question: json['question'] as String,
+      options: (json['options'] as List)
+          ?.map((e) =>
+              e == null ? null : PollOption.fromJson(e as Map<String, dynamic>))
+          ?.toList(),
+      is_closed: json['is_closed'] as bool);
+}
+
+Map<String, dynamic> _$PollToJson(Poll instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('question', instance.question);
+  writeNotNull('options', instance.options);
+  writeNotNull('is_closed', instance.is_closed);
   return val;
 }
 

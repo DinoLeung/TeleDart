@@ -36,6 +36,8 @@ part 'models/video_note.dart';
 part 'models/contact.dart';
 part 'models/location.dart';
 part 'models/venue.dart';
+part 'models/poll_option.dart';
+part 'models/poll.dart';
 part 'models/user_profile_photos.dart';
 part 'models/file.dart';
 part 'models/reply_markup.dart';
