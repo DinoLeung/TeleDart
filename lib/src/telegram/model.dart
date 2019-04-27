@@ -1,6 +1,6 @@
 /**
  * TeleDart - Telegram Bot API for Dart
- * Copyright (C) 2018  Dino PH Leung
+ * Copyright (C) 2019  Dino PH Leung
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -36,6 +36,8 @@ part 'models/video_note.dart';
 part 'models/contact.dart';
 part 'models/location.dart';
 part 'models/venue.dart';
+part 'models/poll_option.dart';
+part 'models/poll.dart';
 part 'models/user_profile_photos.dart';
 part 'models/file.dart';
 part 'models/reply_markup.dart';

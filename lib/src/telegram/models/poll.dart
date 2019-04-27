@@ -16,9 +16,21 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-/// Telegram bot API methods
-///
-/// https://core.telegram.org/bots/api#available-methods
-library telegram;
+part of '../model.dart';
 
-export 'package:teledart/src/telegram/telegram.dart';
+/// This object represents one size of a photo or a [file] / [sticker] thumbnail.
+///
+/// https://core.telegram.org/bots/api#poll
+///
+/// [file]: https://core.telegram.org/bots/api#document
+/// [sticker]: https://core.telegram.org/bots/api#sticker
+@JsonSerializable()
+class Poll {
+  String id;
+  String question;
+  List<PollOption> options;
+  bool is_closed;
+  Poll({this.id, this.question, this.options, this.is_closed});
+  factory Poll.fromJson(Map<String, dynamic> json) => _$PollFromJson(json);
+  Map<String, dynamic> toJson() => _$PollToJson(this);
+}

@@ -1,17 +1,22 @@
-##0.0.28
+## 0.0.29
+- Fixed up webhook workflow
+- Added example to setup webhook
+- Support API 4.2
+
+## 0.0.28
 - Modulised model files
 - Updated examples
 
-##0.0.27
+## 0.0.27
 - Fixed #48
 
-##0.0.26
+## 0.0.26
 - Fixed #46
 
-##0.0.25
+## 0.0.25
 - Downgrade http package to ^0.11.3, to be compatible with firebase
 
-##0.0.24
+## 0.0.24
 - Added pedantic package to dev dependencies
 
 ## 0.0.23

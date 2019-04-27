@@ -1,6 +1,6 @@
 /**
  * TeleDart - Telegram Bot API for Dart
- * Copyright (C) 2018  Dino PH Leung
+ * Copyright (C) 2019  Dino PH Leung
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -33,21 +33,21 @@ class Event {
   StreamController<CallbackQuery> _callbackQueryStreamController;
   StreamController<ShippingQuery> _shippingQueryStreamController;
   StreamController<PreCheckoutQuery> _preCheckoutQueryStreamController;
+  StreamController<Poll> _pollStreamController;
 
   /// Constructor
   Event({bool sync = false}) {
-    _messageStreamController = new StreamController.broadcast(sync: sync);
-    _editedMessageStreamController = new StreamController.broadcast(sync: sync);
-    _channelPostStreamController = new StreamController.broadcast(sync: sync);
-    _editedChannelPostStreamController =
-        new StreamController.broadcast(sync: sync);
-    _inlineQueryStreamController = new StreamController.broadcast(sync: sync);
+    _messageStreamController = StreamController.broadcast(sync: sync);
+    _editedMessageStreamController = StreamController.broadcast(sync: sync);
+    _channelPostStreamController = StreamController.broadcast(sync: sync);
+    _editedChannelPostStreamController = StreamController.broadcast(sync: sync);
+    _inlineQueryStreamController = StreamController.broadcast(sync: sync);
     _chosenInlineResultStreamController =
-        new StreamController.broadcast(sync: sync);
-    _callbackQueryStreamController = new StreamController.broadcast(sync: sync);
-    _shippingQueryStreamController = new StreamController.broadcast(sync: sync);
-    _preCheckoutQueryStreamController =
-        new StreamController.broadcast(sync: sync);
+        StreamController.broadcast(sync: sync);
+    _callbackQueryStreamController = StreamController.broadcast(sync: sync);
+    _shippingQueryStreamController = StreamController.broadcast(sync: sync);
+    _preCheckoutQueryStreamController = StreamController.broadcast(sync: sync);
+    _pollStreamController = StreamController.broadcast(sync: sync);
   }
 
   /// Listens to message events
@@ -63,7 +63,7 @@ class Event {
             .where((message) =>
                 (message.entities ?? message.caption_entities) == null)
             .where((message) => (message.text ?? message.caption ?? '')
-                .contains(new RegExp(keyword)));
+                .contains(RegExp(keyword)));
       }
     } else {
       // with entityType but no keyword
@@ -76,7 +76,7 @@ class Event {
           switch (entityType) {
             case '*': // Any entityType
               return (message.text ?? message.caption ?? '')
-                  .contains(new RegExp(keyword));
+                  .contains(RegExp(keyword));
             case 'mention':
               return message.getEntity(entityType) == '\@${keyword}';
               break;
@@ -109,7 +109,7 @@ class Event {
               break;
             default: // Dynamically listen to message types.
               return (message.getEntity(entityType) ?? '')
-                  .contains(new RegExp(keyword));
+                  .contains(RegExp(keyword));
               break;
           }
         });
@@ -120,7 +120,7 @@ class Event {
   /// Emits update events
   void emitUpdate(Update update) {
     if (update == null)
-      throw new TeleDartEventException('Update cannot not be null');
+      throw TeleDartEventException('Update cannot not be null');
     else if (update.message != null)
       _messageStreamController.add(update.message);
     else if (update.edited_message != null)
@@ -139,49 +139,43 @@ class Event {
       _shippingQueryStreamController.add(update.shipping_query);
     else if (update.pre_checkout_query != null)
       _preCheckoutQueryStreamController.add(update.pre_checkout_query);
+    else if (update.poll != null)
+      _pollStreamController.add(update.poll);
     else
-      throw new TeleDartEventException('Object in Update cannot be null');
+      throw TeleDartEventException('Object in Update cannot be null');
   }
 
   /// Listens to edited message events
-  Stream<Message> onEditedMessage() {
-    return _editedMessageStreamController.stream;
-  }
+  Stream<Message> onEditedMessage() => _editedMessageStreamController.stream;
 
   /// Listens to channel post events
-  Stream<Message> onChannelPost() {
-    return _channelPostStreamController.stream;
-  }
+  Stream<Message> onChannelPost() => _channelPostStreamController.stream;
 
   /// Listens to edited channel post events
-  Stream<Message> onEditedChannelPost() {
-    return _editedChannelPostStreamController.stream;
-  }
+  Stream<Message> onEditedChannelPost() =>
+      _editedChannelPostStreamController.stream;
 
   /// Listens to inline query events
-  Stream<InlineQuery> onInlineQuery() {
-    return _inlineQueryStreamController.stream;
-  }
+  Stream<InlineQuery> onInlineQuery() => _inlineQueryStreamController.stream;
 
   /// Listens to chosen inline query events
-  Stream<ChosenInlineResult> onChosenInlineResult() {
-    return _chosenInlineResultStreamController.stream;
-  }
+  Stream<ChosenInlineResult> onChosenInlineResult() =>
+      _chosenInlineResultStreamController.stream;
 
   /// Listens to callback query events
-  Stream<CallbackQuery> onCallbackQuery() {
-    return _callbackQueryStreamController.stream;
-  }
+  Stream<CallbackQuery> onCallbackQuery() =>
+      _callbackQueryStreamController.stream;
 
   /// Listens to shipping query events
-  Stream<ShippingQuery> onShippingQuery() {
-    return _shippingQueryStreamController.stream;
-  }
+  Stream<ShippingQuery> onShippingQuery() =>
+      _shippingQueryStreamController.stream;
 
   /// Listens to pre checkout query events
-  Stream<PreCheckoutQuery> onPreCheckoutQuery() {
-    return _preCheckoutQueryStreamController.stream;
-  }
+  Stream<PreCheckoutQuery> onPreCheckoutQuery() =>
+      _preCheckoutQueryStreamController.stream;
+
+  /// Listen to poll events
+  Stream<Poll> onPoll() => _pollStreamController.stream;
 }
 
 class TeleDartEventException implements Exception {

@@ -1,6 +1,6 @@
 /**
  * TeleDart - Telegram Bot API for Dart
- * Copyright (C) 2018  Dino PH Leung
+ * Copyright (C) 2019  Dino PH Leung
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -31,6 +31,7 @@ class Message {
   Chat forward_from_chat;
   int forward_from_message_id;
   String forward_signature;
+  String forward_sender_name;
   int forward_date;
   Message reply_to_message;
   int edit_date;
@@ -52,6 +53,7 @@ class Message {
   Contact contact;
   Location location;
   Venue venue;
+  Poll poll;
   List<User> new_chat_members;
   User left_chat_member;
   String new_chat_title;
@@ -77,6 +79,7 @@ class Message {
       this.forward_from_chat,
       this.forward_from_message_id,
       this.forward_signature,
+      this.forward_sender_name,
       this.forward_date,
       this.reply_to_message,
       this.edit_date,
@@ -98,6 +101,7 @@ class Message {
       this.contact,
       this.location,
       this.venue,
+      this.poll,
       this.new_chat_members,
       this.left_chat_member,
       this.new_chat_title,

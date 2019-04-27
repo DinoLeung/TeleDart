@@ -1,6 +1,6 @@
 /**
  * TeleDart - Telegram Bot API for Dart
- * Copyright (C) 2018  Dino PH Leung
+ * Copyright (C) 2019  Dino PH Leung
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -34,6 +34,7 @@ class Update {
   CallbackQuery callback_query;
   ShippingQuery shipping_query;
   PreCheckoutQuery pre_checkout_query;
+  Poll poll;
   Update(
       {this.update_id,
       this.message,
@@ -44,7 +45,8 @@ class Update {
       this.chosen_inline_result,
       this.callback_query,
       this.shipping_query,
-      this.pre_checkout_query});
+      this.pre_checkout_query,
+      this.poll});
   factory Update.fromJson(Map<String, dynamic> json) => _$UpdateFromJson(json);
   Map<String, dynamic> toJson() => _$UpdateToJson(this);
 }
