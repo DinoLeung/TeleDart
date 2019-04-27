@@ -1,6 +1,7 @@
-## unreleased
+## 0.0.29
 - Fixed up webhook workflow
 - Added example to setup webhook
+- Support API 4.2
 
 ## 0.0.28
 - Modulised model files

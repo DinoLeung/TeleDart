@@ -1,6 +1,6 @@
 /**
  * TeleDart - Telegram Bot API for Dart
- * Copyright (C) 2018  Dino PH Leung
+ * Copyright (C) 2019  Dino PH Leung
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -26,7 +26,7 @@ import 'model.dart';
 import '../util/http_client.dart';
 
 class Telegram {
-  final HttpClient _client = new HttpClient();
+  final HttpClient _client = HttpClient();
   final String _baseUrl = 'https://api.telegram.org/bot';
   final String _token;
 
@@ -93,7 +93,7 @@ class Telegram {
     };
     if (certificate != null) {
       // filename cannot be empty to post to Telegram server
-      List<http.MultipartFile> files = new List();
+      List<http.MultipartFile> files = List();
       files.add(http.MultipartFile(
           'certificate', certificate.openRead(), certificate.lengthSync(),
           filename: '${certificate.lengthSync()}'));
@@ -202,8 +202,8 @@ class Telegram {
 
     if (photo is io.File) {
       // filename cannot be empty to post to Telegram server
-      List<http.MultipartFile> files = new List();
-      files.add(new http.MultipartFile(
+      List<http.MultipartFile> files = List();
+      files.add(http.MultipartFile(
           'photo', photo.openRead(), photo.lengthSync(),
           filename: '${photo.lengthSync()}'));
       return Message.fromJson(
@@ -212,7 +212,7 @@ class Telegram {
       body.addAll({'photo': photo});
       return Message.fromJson(await _client.httpPost(requestUrl, body: body));
     } else {
-      return new Future.error(new TelegramException(
+      return Future.error(TelegramException(
           'Attribute \'photo\' can only be either io.File or String (Telegram file_id or image url)'));
     }
   }
@@ -254,19 +254,19 @@ class Telegram {
 
     if (audio is io.File) {
       // filename cannot be empty to post to Telegram server
-      List<http.MultipartFile> files = new List.filled(
+      List<http.MultipartFile> files = List.filled(
           1,
-          new http.MultipartFile('audio', audio.openRead(), audio.lengthSync(),
+          http.MultipartFile('audio', audio.openRead(), audio.lengthSync(),
               filename: '${audio.lengthSync()}'));
       if (thumb != null) {
         if (thumb is io.File)
-          files.add(new http.MultipartFile(
+          files.add(http.MultipartFile(
               'thumb', thumb.openRead(), thumb.lengthSync(),
               filename: '${thumb.lengthSync()}'));
         else if (thumb is String)
           body.addAll({'thumb': thumb});
         else
-          return new Future.error(new TelegramException(
+          return Future.error(TelegramException(
               'Attribute \'thumb\' can only be either io.File or String (Telegram file_id or image url)'));
       }
       return Message.fromJson(
@@ -277,21 +277,21 @@ class Telegram {
         if (thumb is io.File)
           return Message.fromJson(await _client.httpMultipartPost(
               requestUrl,
-              new List.filled(
+              List.filled(
                   1,
-                  new http.MultipartFile(
+                  http.MultipartFile(
                       'thumb', thumb.openRead(), thumb.lengthSync(),
                       filename: '${thumb.lengthSync()}')),
               body: body));
         else if (thumb is String) {
           body.addAll({'thumb': thumb});
         } else
-          return new Future.error(new TelegramException(
+          return Future.error(TelegramException(
               'Attribute \'thumb\' can only be either io.File or String (Telegram file_id or image url)'));
       }
       return Message.fromJson(await _client.httpPost(requestUrl, body: body));
     } else {
-      return new Future.error(new TelegramException(
+      return Future.error(TelegramException(
           'Attribute \'audio\' can only be either io.File or String (Telegram file_id or image url)'));
     }
   }
@@ -322,20 +322,20 @@ class Telegram {
 
     if (document is io.File) {
       // filename cannot be empty to post to Telegram server
-      List<http.MultipartFile> files = new List.filled(
+      List<http.MultipartFile> files = List.filled(
           1,
-          new http.MultipartFile(
+          http.MultipartFile(
               'document', document.openRead(), document.lengthSync(),
               filename: '${document.lengthSync()}'));
       if (thumb != null) {
         if (thumb is io.File)
-          files.add(new http.MultipartFile(
+          files.add(http.MultipartFile(
               'thumb', thumb.openRead(), thumb.lengthSync(),
               filename: '${thumb.lengthSync()}'));
         else if (thumb is String)
           body.addAll({'thumb': thumb});
         else
-          return new Future.error(new TelegramException(
+          return Future.error(TelegramException(
               'Attribute \'thumb\' can only be either io.File or String (Telegram file_id or image url)'));
       }
       return Message.fromJson(
@@ -346,21 +346,21 @@ class Telegram {
         if (thumb is io.File)
           return Message.fromJson(await _client.httpMultipartPost(
               requestUrl,
-              new List.filled(
+              List.filled(
                   1,
-                  new http.MultipartFile(
+                  http.MultipartFile(
                       'thumb', thumb.openRead(), thumb.lengthSync(),
                       filename: '${thumb.lengthSync()}')),
               body: body));
         else if (thumb is String) {
           body.addAll({'thumb': thumb});
         } else
-          return new Future.error(new TelegramException(
+          return Future.error(TelegramException(
               'Attribute \'thumb\' can only be either io.File or String (Telegram file_id or image url)'));
       }
       return Message.fromJson(await _client.httpPost(requestUrl, body: body));
     } else {
-      return new Future.error(new TelegramException(
+      return Future.error(TelegramException(
           'Attribute \'document\' can only be either io.File or String (Telegram file_id or image url)'));
     }
   }
@@ -402,19 +402,19 @@ class Telegram {
 
     if (video is io.File) {
       // filename cannot be empty to post to Telegram server
-      List<http.MultipartFile> files = new List.filled(
+      List<http.MultipartFile> files = List.filled(
           1,
-          new http.MultipartFile('video', video.openRead(), video.lengthSync(),
+          http.MultipartFile('video', video.openRead(), video.lengthSync(),
               filename: '${video.lengthSync()}'));
       if (thumb != null) {
         if (thumb is io.File)
-          files.add(new http.MultipartFile(
+          files.add(http.MultipartFile(
               'thumb', thumb.openRead(), thumb.lengthSync(),
               filename: '${thumb.lengthSync()}'));
         else if (thumb is String)
           body.addAll({'thumb': thumb});
         else
-          return new Future.error(new TelegramException(
+          return Future.error(TelegramException(
               'Attribute \'thumb\' can only be either io.File or String (Telegram file_id or image url)'));
       }
       return Message.fromJson(
@@ -425,21 +425,21 @@ class Telegram {
         if (thumb is io.File)
           return Message.fromJson(await _client.httpMultipartPost(
               requestUrl,
-              new List.filled(
+              List.filled(
                   1,
-                  new http.MultipartFile(
+                  http.MultipartFile(
                       'thumb', thumb.openRead(), thumb.lengthSync(),
                       filename: '${thumb.lengthSync()}')),
               body: body));
         else if (thumb is String) {
           body.addAll({'thumb': thumb});
         } else
-          return new Future.error(new TelegramException(
+          return Future.error(TelegramException(
               'Attribute \'thumb\' can only be either io.File or String (Telegram file_id or image url)'));
       }
       return Message.fromJson(await _client.httpPost(requestUrl, body: body));
     } else {
-      return new Future.error(new TelegramException(
+      return Future.error(TelegramException(
           'Attribute \'video\' can only be either io.File or String (Telegram file_id or image url)'));
     }
   }
@@ -477,20 +477,20 @@ class Telegram {
 
     if (animation is io.File) {
       // filename cannot be empty to post to Telegram server
-      List<http.MultipartFile> files = new List.filled(
+      List<http.MultipartFile> files = List.filled(
           1,
-          new http.MultipartFile(
+          http.MultipartFile(
               'animation', animation.openRead(), animation.lengthSync(),
               filename: '${animation.lengthSync()}'));
       if (thumb != null) {
         if (thumb is io.File)
-          files.add(new http.MultipartFile(
+          files.add(http.MultipartFile(
               'thumb', thumb.openRead(), thumb.lengthSync(),
               filename: '${thumb.lengthSync()}'));
         else if (thumb is String)
           body.addAll({'thumb': thumb});
         else
-          return new Future.error(new TelegramException(
+          return Future.error(TelegramException(
               'Attribute \'thumb\' can only be either io.File or String (Telegram file_id or image url)'));
       }
       return Message.fromJson(
@@ -501,21 +501,21 @@ class Telegram {
         if (thumb is io.File)
           return Message.fromJson(await _client.httpMultipartPost(
               requestUrl,
-              new List.filled(
+              List.filled(
                   1,
-                  new http.MultipartFile(
+                  http.MultipartFile(
                       'thumb', thumb.openRead(), thumb.lengthSync(),
                       filename: '${thumb.lengthSync()}')),
               body: body));
         else if (thumb is String) {
           body.addAll({'thumb': thumb});
         } else
-          return new Future.error(new TelegramException(
+          return Future.error(TelegramException(
               'Attribute \'thumb\' can only be either io.File or String (Telegram file_id or image url)'));
       }
       return Message.fromJson(await _client.httpPost(requestUrl, body: body));
     } else {
-      return new Future.error(new TelegramException(
+      return Future.error(TelegramException(
           'Attribute \'animation\' can only be either io.File or String (Telegram file_id or image url)'));
     }
   }
@@ -553,9 +553,9 @@ class Telegram {
 
     if (voice is io.File) {
       // filename cannot be empty to post to Telegram server
-      List<http.MultipartFile> files = new List.filled(
+      List<http.MultipartFile> files = List.filled(
           1,
-          new http.MultipartFile('voice', voice.openRead(), voice.lengthSync(),
+          http.MultipartFile('voice', voice.openRead(), voice.lengthSync(),
               filename: '${voice.lengthSync()}'));
       return Message.fromJson(
           await _client.httpMultipartPost(requestUrl, files, body: body));
@@ -563,7 +563,7 @@ class Telegram {
       body.addAll({'voice': voice});
       return Message.fromJson(await _client.httpPost(requestUrl, body: body));
     } else {
-      return new Future.error(new TelegramException(
+      return Future.error(TelegramException(
           'Attribute \'voice\' can only be either io.File or String (Telegram file_id or image url)'));
     }
   }
@@ -594,20 +594,20 @@ class Telegram {
 
     if (video_note is io.File) {
       // filename cannot be empty to post to Telegram server
-      List<http.MultipartFile> files = new List.filled(
+      List<http.MultipartFile> files = List.filled(
           1,
-          new http.MultipartFile(
+          http.MultipartFile(
               'video_note', video_note.openRead(), video_note.lengthSync(),
               filename: '${video_note.lengthSync()}'));
       if (thumb != null) {
         if (thumb is io.File)
-          files.add(new http.MultipartFile(
+          files.add(http.MultipartFile(
               'thumb', thumb.openRead(), thumb.lengthSync(),
               filename: '${thumb.lengthSync()}'));
         else if (thumb is String)
           body.addAll({'thumb': thumb});
         else
-          return new Future.error(new TelegramException(
+          return Future.error(TelegramException(
               'Attribute \'thumb\' can only be either io.File or String (Telegram file_id or image url)'));
       }
       return Message.fromJson(
@@ -618,21 +618,21 @@ class Telegram {
         if (thumb is io.File)
           return Message.fromJson(await _client.httpMultipartPost(
               requestUrl,
-              new List.filled(
+              List.filled(
                   1,
-                  new http.MultipartFile(
+                  http.MultipartFile(
                       'thumb', thumb.openRead(), thumb.lengthSync(),
                       filename: '${thumb.lengthSync()}')),
               body: body));
         else if (thumb is String) {
           body.addAll({'thumb': thumb});
         } else
-          return new Future.error(new TelegramException(
+          return Future.error(TelegramException(
               'Attribute \'thumb\' can only be either io.File or String (Telegram file_id or image url)'));
       }
       return Message.fromJson(await _client.httpPost(requestUrl, body: body));
     } else {
-      return new Future.error(new TelegramException(
+      return Future.error(TelegramException(
           'Attribute \'video_note\' can only be either io.File or String (Telegram file_id or image url)'));
     }
   }
@@ -701,7 +701,7 @@ class Telegram {
       String inline_message_id,
       ReplyMarkup reply_markup}) async {
     if (inline_message_id == null && (chat_id == null || message_id == null))
-      return new Future.error(new TelegramException(
+      return Future.error(TelegramException(
           'Require either \'chat_id\' and \'message_id\', or \'inline_message_id\''));
     String requestUrl = '${_baseUrl}${_token}/editMessageLiveLocation';
     Map<String, dynamic> body = {
@@ -730,7 +730,7 @@ class Telegram {
       String inline_message_id,
       ReplyMarkup reply_markup}) async {
     if (inline_message_id == null && (chat_id == null || message_id == null))
-      return new Future.error(new TelegramException(
+      return Future.error(TelegramException(
           'Require either \'chat_id\' and \'message_id\', or \'inline_message_id\''));
     String requestUrl = '${_baseUrl}${_token}/stopMessageLiveLocation';
     Map<String, dynamic> body = {
@@ -796,6 +796,28 @@ class Telegram {
     return Message.fromJson(await _client.httpPost(requestUrl, body: body));
   }
 
+  /// Use this method to send a native poll. A native poll can't be sent to a private chat.
+  /// On success, the sent [Message] is returned.
+  ///
+  /// https://core.telegram.org/bots/api#sendpoll
+  ///
+  /// [Message]: https://core.telegram.org/bots/api#message
+  Future<Message> sendPoll(int chat_id, String question, List<String> options,
+      {bool disable_notification,
+      int reply_to_message_id,
+      ReplyMarkup reply_markup}) async {
+    String requestUrl = '${_baseUrl}${_token}/sendPoll';
+    Map<String, dynamic> body = {
+      'chat_id': chat_id,
+      'question': question,
+      'options': options,
+      'disable_notification': disable_notification ?? '',
+      'reply_to_message_id': reply_to_message_id ?? '',
+      'reply_markup': reply_markup == null ? '' : jsonEncode(reply_markup)
+    };
+    return Message.fromJson(await _client.httpPost(requestUrl, body: body));
+  }
+
   /// Use this method when you need to tell the user that something is happening on the bot's side.
   /// The status is set for 5 seconds or less
   /// (when a message arrives from your bot, Telegram clients clear its typing status).
@@ -842,7 +864,7 @@ class Telegram {
   /// `https://api.telegram.org/file/bot<token>/<file_path>`,
   /// where [<file_path>] is taken from the response.
   /// It is guaranteed that the link will be valid for at least 1 hour.
-  /// When the link expires, a new one can be requested by calling [getFile] again.
+  /// When the link expires, a one can be requested by calling [getFile] again.
   ///
   /// **Note:** This function may not preserve the original file name and MIME type.
   /// You should save the file's MIME type and name (if available) when the File object is received.
@@ -951,10 +973,10 @@ class Telegram {
     return await _client.httpPost(requestUrl, body: body);
   }
 
-  /// Use this method to generate a new invite link for a chat;
+  /// Use this method to generate a invite link for a chat;
   /// any previously generated link is revoked.
   /// The bot must be an administrator in the chat for this to work and must have the appropriate
-  /// admin rights. Returns the new invite link as *String* on success.
+  /// admin rights. Returns the invite link as *String* on success.
   ///
   /// https://core.telegram.org/bots/api#exportchatinvitelink
   Future<String> exportChatInviteLink(int chat_id) async {
@@ -963,7 +985,7 @@ class Telegram {
     return await _client.httpPost(requestUrl, body: body);
   }
 
-  /// Use this method to set a new profile photo for the chat.
+  /// Use this method to set a profile photo for the chat.
   /// Photos can't be changed for private chats.
   /// The bot must be an administrator in the chat for this to work and must have the appropriate
   /// admin rights. Returns *True* on success.
@@ -976,9 +998,9 @@ class Telegram {
     String requestUrl = '${_baseUrl}${_token}/setChatPhoto';
     Map<String, dynamic> body = {'chat_id': chat_id};
     // filename cannot be empty to post to Telegram server
-    List<http.MultipartFile> files = new List.filled(
+    List<http.MultipartFile> files = List.filled(
         1,
-        new http.MultipartFile('photo', photo.openRead(), photo.lengthSync(),
+        http.MultipartFile('photo', photo.openRead(), photo.lengthSync(),
             filename: '${photo.lengthSync()}'));
     return await _client.httpMultipartPost(requestUrl, files, body: body);
   }
@@ -1117,7 +1139,7 @@ class Telegram {
     return ChatMember.fromJson(await _client.httpPost(requestUrl, body: body));
   }
 
-  /// Use this method to set a new group sticker set for a supergroup.
+  /// Use this method to set a group sticker set for a supergroup.
   /// The bot must be an administrator in the chat for this to work and must have the appropriate
   /// admin rights.
   /// Use the field *can_set_sticker_set* optionally returned in [getChat] requests to check if the
@@ -1196,7 +1218,7 @@ class Telegram {
       bool disable_web_page_preview,
       InlineKeyboardMarkup reply_markup}) async {
     if (inline_message_id == null && (chat_id == null || message_id == null))
-      return new Future.error(new TelegramException(
+      return Future.error(TelegramException(
           'Require either \'chat_id\' and \'message_id\', or \'inline_message_id\''));
     String requestUrl = '${_baseUrl}${_token}/editMessageText';
     Map<String, dynamic> body = {
@@ -1210,8 +1232,8 @@ class Telegram {
     };
     var res = await _client.httpPost(requestUrl, body: body);
     if (res == true)
-      return new Future.error(
-          new TelegramException('Edited message is NOT sent by the bot'));
+      return Future.error(
+          TelegramException('Edited message is NOT sent by the bot'));
     else
       return Message.fromJson(res);
   }
@@ -1233,7 +1255,7 @@ class Telegram {
       String parse_mode,
       InlineKeyboardMarkup reply_markup}) async {
     if (inline_message_id == null && (chat_id == null || message_id == null))
-      return new Future.error(new TelegramException(
+      return Future.error(TelegramException(
           'Require either \'chat_id\' and \'message_id\', or \'inline_message_id\''));
     String requestUrl = '${_baseUrl}${_token}/editMessageCaption';
     Map<String, dynamic> body = {
@@ -1246,8 +1268,8 @@ class Telegram {
     };
     var res = await _client.httpPost(requestUrl, body: body);
     if (res == true)
-      return new Future.error(
-          new TelegramException('Edited message is NOT sent by the bot'));
+      return Future.error(
+          TelegramException('Edited message is NOT sent by the bot'));
     else
       return Message.fromJson(res);
   }
@@ -1255,7 +1277,7 @@ class Telegram {
   /// Use this method to edit audio, document, photo, or video messages.
   /// If a message is a part of a message album, then it can be edited only to a photo or a video.
   /// Otherwise, message type can be changed arbitrarily.
-  /// When inline message is edited, new file can't be uploaded.
+  /// When inline message is edited, file can't be uploaded.
   /// Use previously uploaded file via its file_id or specify a URL.
   /// On success, if the edited message was sent by the bot, the edited [Message] is returned,
   /// otherwise *True* is returned.
@@ -1271,7 +1293,7 @@ class Telegram {
       String parse_mode,
       InlineKeyboardMarkup reply_markup}) async {
     if (inline_message_id == null && (chat_id == null || message_id == null))
-      return new Future.error(new TelegramException(
+      return Future.error(TelegramException(
           'Require either \'chat_id\' and \'message_id\', or \'inline_message_id\''));
     String requestUrl = '${_baseUrl}${_token}/editMessageMedia';
     Map<String, dynamic> body = {
@@ -1284,8 +1306,8 @@ class Telegram {
     };
     var res = await _client.httpPost(requestUrl, body: body);
     if (res == true)
-      return new Future.error(
-          new TelegramException('Edited message is NOT sent by the bot'));
+      return Future.error(
+          TelegramException('Edited message is NOT sent by the bot'));
     else
       return Message.fromJson(res);
   }
@@ -1305,7 +1327,7 @@ class Telegram {
       String inline_message_id,
       InlineKeyboardMarkup reply_markup}) async {
     if (inline_message_id == null && (chat_id == null || message_id == null))
-      return new Future.error(new TelegramException(
+      return Future.error(TelegramException(
           'Require either \'chat_id\' and \'message_id\', or \'inline_message_id\''));
     String requestUrl = '${_baseUrl}${_token}/editMessageReplyMarkup';
     Map<String, dynamic> body = {
@@ -1316,15 +1338,33 @@ class Telegram {
     };
     var res = await _client.httpPost(requestUrl, body: body);
     if (res == true)
-      return new Future.error(
-          new TelegramException('Edited message is NOT sent by the bot'));
+      return Future.error(
+          TelegramException('Edited message is NOT sent by the bot'));
     else
       return Message.fromJson(res);
+  }
+
+  /// Use this method to stop a poll which was sent by the bot.
+  /// On success, the stopped [Poll] with the final results is returned.
+  ///
+  /// https://core.telegram.org/bots/api#stoppoll
+  ///
+  /// [Poll]: https://core.telegram.org/bots/api#poll
+  Future<Poll> stopPoll(
+      int chat_id, int message_id, InlineKeyboardMarkup reply_markup) async {
+    String requestUrl = '${_baseUrl}${_token}/stopPoll';
+    Map<String, dynamic> body = {
+      'chat_id': chat_id,
+      'message_id': message_id,
+      'reply_markup': reply_markup
+    };
+    return Poll.fromJson(await _client.httpPost(requestUrl, body: body));
   }
 
   /// Use this method to delete a message, including service messages, with the following limitations:
   /// * A message can only be deleted if it was sent less than 48 hours ago.
   /// * Bots can delete outgoing messages in groups and supergroups.
+  /// * Bots can delete incoming messages in private chats.
   /// * Bots granted can_post_messages permissions can delete outgoing messages in channels.
   /// * If the bot is an administrator of a group, it can delete any message there.
   /// * If the bot has can_delete_messages permission in a supergroup or a channel, it can delete any message there.
@@ -1356,9 +1396,9 @@ class Telegram {
 
     if (sticker is io.File) {
       // filename cannot be empty to post to Telegram server
-      List<http.MultipartFile> files = new List.filled(
+      List<http.MultipartFile> files = List.filled(
           1,
-          new http.MultipartFile(
+          http.MultipartFile(
               'sticker', sticker.openRead(), sticker.lengthSync(),
               filename: '${sticker.lengthSync()}'));
       return Message.fromJson(
@@ -1367,7 +1407,7 @@ class Telegram {
       body.addAll({'sticker': sticker});
       return Message.fromJson(await _client.httpPost(requestUrl, body: body));
     } else {
-      return new Future.error(new TelegramException(
+      return Future.error(TelegramException(
           'Attribute \'sticker\' can only be either io.File or String (Telegram file_id or image url)'));
     }
   }
@@ -1394,16 +1434,16 @@ class Telegram {
     String requestUrl = '${_baseUrl}${_token}/uploadStickerFile';
     Map<String, dynamic> body = {'user_id': user_id};
     // filename cannot be empty to post to Telegram server
-    List<http.MultipartFile> files = new List.filled(
+    List<http.MultipartFile> files = List.filled(
         1,
-        new http.MultipartFile(
+        http.MultipartFile(
             'png_sticker', png_sticker.openRead(), png_sticker.lengthSync(),
             filename: '${png_sticker.lengthSync()}'));
     return File.fromJson(
         await _client.httpMultipartPost(requestUrl, files, body: body));
   }
 
-  /// Use this method to create new sticker set owned by a user.
+  /// Use this method to create sticker set owned by a user.
   /// The bot will be able to edit the created sticker set.
   /// Returns *True* on success.
   ///
@@ -1424,9 +1464,9 @@ class Telegram {
 
     if (png_sticker is io.File) {
       // filename cannot be empty to post to Telegram server
-      List<http.MultipartFile> files = new List.filled(
+      List<http.MultipartFile> files = List.filled(
           1,
-          new http.MultipartFile(
+          http.MultipartFile(
               'png_sticker', png_sticker.openRead(), png_sticker.lengthSync(),
               filename: '${png_sticker.lengthSync()}'));
       return await _client.httpMultipartPost(requestUrl, files, body: body);
@@ -1434,12 +1474,12 @@ class Telegram {
       body.addAll({'png_sticker': png_sticker});
       return await _client.httpPost(requestUrl, body: body);
     } else {
-      return new Future.error(new TelegramException(
+      return Future.error(TelegramException(
           'Attribute \'png_sticker\' can only be either io.File or String (Telegram file_id or image url)'));
     }
   }
 
-  /// Use this method to add a new sticker to a set created by the bot.
+  /// Use this method to add a sticker to a set created by the bot.
   /// Returns *True* on success.
   ///
   /// https://core.telegram.org/bots/api#addstickertoset
@@ -1456,9 +1496,9 @@ class Telegram {
 
     if (png_sticker is io.File) {
       // filename cannot be empty to post to Telegram server
-      List<http.MultipartFile> files = new List.filled(
+      List<http.MultipartFile> files = List.filled(
           1,
-          new http.MultipartFile(
+          http.MultipartFile(
               'png_sticker', png_sticker.openRead(), png_sticker.lengthSync(),
               filename: '${png_sticker.lengthSync()}'));
       return await _client.httpMultipartPost(requestUrl, files, body: body);
@@ -1466,7 +1506,7 @@ class Telegram {
       body.addAll({'png_sticker': png_sticker});
       return await _client.httpPost(requestUrl, body: body);
     } else {
-      return new Future.error(new TelegramException(
+      return Future.error(TelegramException(
           'Attribute \'png_sticker\' can only be either io.File or String (Telegram file_id or image url)'));
     }
   }
@@ -1584,7 +1624,7 @@ class Telegram {
   Future<bool> answerShippingQuery(String shipping_query_id, bool ok,
       {List<ShippingOption> shipping_options, String error_message}) async {
     if (!ok && (shipping_options == null || error_message == null))
-      return new Future.error(new TelegramException(
+      return Future.error(TelegramException(
           'Attribute \'shipping_options\' and \'error_message\' can not be null when \'ok\' = false'));
     String requestUrl = '${_baseUrl}${_token}/answerShippingQuery';
     Map<String, dynamic> body = {
@@ -1610,7 +1650,7 @@ class Telegram {
   Future<bool> answerPreCheckoutQuery(String pre_checkout_query_id, bool ok,
       {String error_message}) async {
     if (!ok && error_message == null)
-      return new Future.error(new TelegramException(
+      return Future.error(TelegramException(
           'Attribute \'error_message\' can not be null when \'ok\' = false'));
     String requestUrl = '${_baseUrl}${_token}/answerShippingQuery';
     Map<String, dynamic> body = {
@@ -1662,7 +1702,7 @@ class Telegram {
   /// Use this method to set the score of the specified user in a game.
   /// On success, if the message was sent by the bot, returns the edited [Message],
   /// otherwise returns *True*. Returns an error,
-  /// if the new score is not greater than the user's current score in the chat and force is *False*.
+  /// if the score is not greater than the user's current score in the chat and force is *False*.
   ///
   /// https://core.telegram.org/bots/api#setgamescore
   ///
@@ -1674,7 +1714,7 @@ class Telegram {
       int message_id,
       String inline_message_id}) async {
     if (inline_message_id == null && (chat_id == null || message_id == null))
-      return new Future.error(new TelegramException(
+      return Future.error(TelegramException(
           'Require either \'chat_id\' and \'message_id\', or \'inline_message_id\''));
     String requestUrl = '${_baseUrl}${_token}/setGameScore';
     Map<String, dynamic> body = {
@@ -1704,7 +1744,7 @@ class Telegram {
   Future<List<GameHighScore>> getGameHighScores(int user_id,
       {int chat_id, int message_id, String inline_message_id}) async {
     if (inline_message_id == null && (chat_id == null || message_id == null))
-      return new Future.error(new TelegramException(
+      return Future.error(TelegramException(
           'Require either \'chat_id\' and \'message_id\', or \'inline_message_id\''));
     String requestUrl = '${_baseUrl}${_token}/getGameHighScores';
     Map<String, dynamic> body = {

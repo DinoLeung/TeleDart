@@ -1,5 +1,5 @@
-import 'dart:io' as io;
 import 'dart:io' show Platform;
+// import 'dart:io' as io;
 
 import 'package:teledart/teledart.dart';
 import 'package:teledart/telegram.dart';
@@ -14,9 +14,9 @@ void main() {
   teledart.startFetching();
 
   // In case you decided to use webhook.
-  teledart.setupWebhook(envVars['HOST_URL'], envVars['BOT_TOKEN'],
-      io.File(envVars['CERT_PATH']), io.File(envVars['KEY_PATH']));
-  teledart.startFetching(webhook: true);
+  // teledart.setupWebhook(envVars['HOST_URL'], envVars['BOT_TOKEN'],
+  //     io.File(envVars['CERT_PATH']), io.File(envVars['KEY_PATH']));
+  // teledart.startFetching(webhook: true);
 
   // You can listen to messages like this
   teledart.onMessage(entityType: 'bot_command', keyword: 'start').listen(
@@ -35,9 +35,9 @@ void main() {
       .where((message) => message.text.contains('telegram'))
       .listen((message) => teledart.replyPhoto(
           message,
-          //  io.File('example/dart_bird_catchs_telegram.png'),
-          'https://raw.githubusercontent.com/DinoLeung/TeleDart/master/example/dart_bird_catchs_telegram.png',
-          caption: 'This is how the Dart Bird and Telegram are met'));
+          //  io.File('example/dash_paper_plane.png'),
+          'https://raw.githubusercontent.com/DinoLeung/TeleDart/master/example/dash_paper_plane.png',
+          caption: 'This is how Dash found the paper plane'));
 
   // Inline mode.
   teledart

@@ -40,7 +40,10 @@ Update _$UpdateFromJson(Map<String, dynamic> json) {
       pre_checkout_query: json['pre_checkout_query'] == null
           ? null
           : PreCheckoutQuery.fromJson(
-              json['pre_checkout_query'] as Map<String, dynamic>));
+              json['pre_checkout_query'] as Map<String, dynamic>),
+      poll: json['poll'] == null
+          ? null
+          : Poll.fromJson(json['poll'] as Map<String, dynamic>));
 }
 
 Map<String, dynamic> _$UpdateToJson(Update instance) {
@@ -62,6 +65,7 @@ Map<String, dynamic> _$UpdateToJson(Update instance) {
   writeNotNull('callback_query', instance.callback_query);
   writeNotNull('shipping_query', instance.shipping_query);
   writeNotNull('pre_checkout_query', instance.pre_checkout_query);
+  writeNotNull('poll', instance.poll);
   return val;
 }
 
@@ -190,6 +194,7 @@ Message _$MessageFromJson(Map<String, dynamic> json) {
           : Chat.fromJson(json['forward_from_chat'] as Map<String, dynamic>),
       forward_from_message_id: json['forward_from_message_id'] as int,
       forward_signature: json['forward_signature'] as String,
+      forward_sender_name: json['forward_sender_name'] as String,
       forward_date: json['forward_date'] as int,
       reply_to_message: json['reply_to_message'] == null
           ? null
@@ -246,6 +251,9 @@ Message _$MessageFromJson(Map<String, dynamic> json) {
       venue: json['venue'] == null
           ? null
           : Venue.fromJson(json['venue'] as Map<String, dynamic>),
+      poll: json['poll'] == null
+          ? null
+          : Poll.fromJson(json['poll'] as Map<String, dynamic>),
       new_chat_members: (json['new_chat_members'] as List)
           ?.map((e) =>
               e == null ? null : User.fromJson(e as Map<String, dynamic>))
@@ -297,6 +305,7 @@ Map<String, dynamic> _$MessageToJson(Message instance) {
   writeNotNull('forward_from_chat', instance.forward_from_chat);
   writeNotNull('forward_from_message_id', instance.forward_from_message_id);
   writeNotNull('forward_signature', instance.forward_signature);
+  writeNotNull('forward_sender_name', instance.forward_sender_name);
   writeNotNull('forward_date', instance.forward_date);
   writeNotNull('reply_to_message', instance.reply_to_message);
   writeNotNull('edit_date', instance.edit_date);
@@ -318,6 +327,7 @@ Map<String, dynamic> _$MessageToJson(Message instance) {
   writeNotNull('contact', instance.contact);
   writeNotNull('location', instance.location);
   writeNotNull('venue', instance.venue);
+  writeNotNull('poll', instance.poll);
   writeNotNull('new_chat_members', instance.new_chat_members);
   writeNotNull('left_chat_member', instance.left_chat_member);
   writeNotNull('new_chat_title', instance.new_chat_title);
@@ -640,6 +650,52 @@ Map<String, dynamic> _$VenueToJson(Venue instance) {
   return val;
 }
 
+PollOption _$PollOptionFromJson(Map<String, dynamic> json) {
+  return PollOption(
+      text: json['text'] as String, voter_count: json['voter_count'] as int);
+}
+
+Map<String, dynamic> _$PollOptionToJson(PollOption instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('text', instance.text);
+  writeNotNull('voter_count', instance.voter_count);
+  return val;
+}
+
+Poll _$PollFromJson(Map<String, dynamic> json) {
+  return Poll(
+      id: json['id'] as String,
+      question: json['question'] as String,
+      options: (json['options'] as List)
+          ?.map((e) =>
+              e == null ? null : PollOption.fromJson(e as Map<String, dynamic>))
+          ?.toList(),
+      is_closed: json['is_closed'] as bool);
+}
+
+Map<String, dynamic> _$PollToJson(Poll instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('question', instance.question);
+  writeNotNull('options', instance.options);
+  writeNotNull('is_closed', instance.is_closed);
+  return val;
+}
+
 UserProfilePhotos _$UserProfilePhotosFromJson(Map<String, dynamic> json) {
   return UserProfilePhotos(
       total_count: json['total_count'] as int,
@@ -918,6 +974,7 @@ ChatMember _$ChatMemberFromJson(Map<String, dynamic> json) {
       can_restrict_members: json['can_restrict_members'] as bool,
       can_pin_messages: json['can_pin_messages'] as bool,
       can_promote_members: json['can_promote_members'] as bool,
+      is_member: json['is_member'] as bool,
       can_send_messages: json['can_send_messages'] as bool,
       can_send_media_messages: json['can_send_media_messages'] as bool,
       can_send_other_messages: json['can_send_other_messages'] as bool,
@@ -945,6 +1002,7 @@ Map<String, dynamic> _$ChatMemberToJson(ChatMember instance) {
   writeNotNull('can_restrict_members', instance.can_restrict_members);
   writeNotNull('can_pin_messages', instance.can_pin_messages);
   writeNotNull('can_promote_members', instance.can_promote_members);
+  writeNotNull('is_member', instance.is_member);
   writeNotNull('can_send_messages', instance.can_send_messages);
   writeNotNull('can_send_media_messages', instance.can_send_media_messages);
   writeNotNull('can_send_other_messages', instance.can_send_other_messages);

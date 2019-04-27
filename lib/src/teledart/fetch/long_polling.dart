@@ -1,6 +1,6 @@
 /**
  * TeleDart - Telegram Bot API for Dart
- * Copyright (C) 2018  Dino PH Leung
+ * Copyright (C) 2019  Dino PH Leung
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -47,12 +47,12 @@ class LongPolling {
       this.timeout = 30,
       this.allowed_updates}) {
     if (limit > 100 || limit < 1)
-      throw new LongPollingException('Limit must between 1 and 100.');
+      throw LongPollingException('Limit must between 1 and 100.');
     if (timeout > MAX_TIMEOUT)
-      throw new LongPollingException(
+      throw LongPollingException(
           'Timeout may not greater than ${MAX_TIMEOUT}.');
 
-    _updateStreamController = new StreamController();
+    _updateStreamController = StreamController();
   }
 
   /// Stop the long poll.
@@ -67,7 +67,7 @@ class LongPolling {
       _isPolling = true;
       _recursivePolling();
     } else
-      throw new LongPollingException('A long poll is aleady inplace');
+      throw LongPollingException('A long poll is aleady inplace');
   }
 
   /// Private long polling loop, throws [LongPollingException] on error.
@@ -91,7 +91,7 @@ class LongPolling {
               // TODO: find out what exceptions can be ignored
               error is io.HandshakeException
                   ? _recursivePolling()
-                  : throw new LongPollingException(error.toString()));
+                  : throw LongPollingException(error.toString()));
   }
 
   /// Add [update] to the stream.
