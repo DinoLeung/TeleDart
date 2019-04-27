@@ -42,7 +42,7 @@ class TeleDart {
         .then((user) => _event.me = user)
         .then((_) => print('${_event.me.username} is initialised'))
         .catchError(
-            (exception) => throw new TeleDartException(exception.toString()));
+            (exception) => throw TeleDartException(exception.toString()));
   }
 
   /// Starts listening to messages
@@ -57,19 +57,19 @@ class TeleDart {
     await _initBotInfo().then((_) {
       if (webhook) {
         if (_webhook == null)
-          throw new TeleDartException('Webhook has not been set up yet');
+          throw TeleDartException('Webhook has not been set up yet');
         else {
           _webhook
             ..startWebhook()
             ..onUpdate().listen((update) => _updatesHandler(update));
         }
       } else {
-        _longPolling ??= new LongPolling(telegram)
+        _longPolling ??= LongPolling(telegram)
           ..startPolling()
           ..onUpdate().listen((update) => _updatesHandler(update));
       }
     }).catchError(
-        ((exception) => throw new TeleDartException(exception.toString())));
+        ((exception) => throw TeleDartException(exception.toString())));
   }
 
   /// Configures long polling method
@@ -80,7 +80,7 @@ class TeleDart {
       int limit = 100,
       int timeout = 30,
       List<String> allowed_updates}) {
-    _longPolling = new LongPolling(telegram,
+    _longPolling = LongPolling(telegram,
         offset: offset,
         limit: limit,
         timeout: timeout,
@@ -106,7 +106,7 @@ class TeleDart {
       bool uploadCertificate = false,
       int max_connections = 40,
       List<String> allowed_updates}) async {
-    _webhook = new Webhook(telegram, url, secretPath, certificate, privateKey,
+    _webhook = Webhook(telegram, url, secretPath, certificate, privateKey,
         port: port,
         uploadCertificate: uploadCertificate,
         max_connections: max_connections,
