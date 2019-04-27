@@ -796,6 +796,28 @@ class Telegram {
     return Message.fromJson(await _client.httpPost(requestUrl, body: body));
   }
 
+  /// Use this method to send a native poll. A native poll can't be sent to a private chat.
+  /// On success, the sent [Message] is returned.
+  ///
+  /// https://core.telegram.org/bots/api#sendpoll
+  ///
+  /// [Message]: https://core.telegram.org/bots/api#message
+  Future<Message> sendPoll(int chat_id, String question, List<String> options,
+      {bool disable_notification,
+      int reply_to_message_id,
+      ReplyMarkup reply_markup}) async {
+    String requestUrl = '${_baseUrl}${_token}/sendPoll';
+    Map<String, dynamic> body = {
+      'chat_id': chat_id,
+      'question': question,
+      'options': options,
+      'disable_notification': disable_notification ?? '',
+      'reply_to_message_id': reply_to_message_id ?? '',
+      'reply_markup': reply_markup == null ? '' : jsonEncode(reply_markup)
+    };
+    return Message.fromJson(await _client.httpPost(requestUrl, body: body));
+  }
+
   /// Use this method when you need to tell the user that something is happening on the bot's side.
   /// The status is set for 5 seconds or less
   /// (when a message arrives from your bot, Telegram clients clear its typing status).
@@ -1322,9 +1344,27 @@ class Telegram {
       return Message.fromJson(res);
   }
 
+  /// Use this method to stop a poll which was sent by the bot.
+  /// On success, the stopped [Poll] with the final results is returned.
+  ///
+  /// https://core.telegram.org/bots/api#stoppoll
+  ///
+  /// [Poll]: https://core.telegram.org/bots/api#poll
+  Future<Poll> stopPoll(
+      int chat_id, int message_id, InlineKeyboardMarkup reply_markup) async {
+    String requestUrl = '${_baseUrl}${_token}/stopPoll';
+    Map<String, dynamic> body = {
+      'chat_id': chat_id,
+      'message_id': message_id,
+      'reply_markup': reply_markup
+    };
+    return Poll.fromJson(await _client.httpPost(requestUrl, body: body));
+  }
+
   /// Use this method to delete a message, including service messages, with the following limitations:
   /// * A message can only be deleted if it was sent less than 48 hours ago.
   /// * Bots can delete outgoing messages in groups and supergroups.
+  /// * Bots can delete incoming messages in private chats.
   /// * Bots granted can_post_messages permissions can delete outgoing messages in channels.
   /// * If the bot is an administrator of a group, it can delete any message there.
   /// * If the bot has can_delete_messages permission in a supergroup or a channel, it can delete any message there.
