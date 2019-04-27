@@ -36,14 +36,11 @@ class TeleDart {
   TeleDart(this.telegram, this._event);
 
   /// Private method to get bot info
-  Future<void> _initBotInfo() async {
-    await telegram
-        .getMe()
-        .then((user) => _event.me = user)
-        .then((_) => print('${_event.me.username} is initialised'))
-        .catchError(
-            (exception) => throw TeleDartException(exception.toString()));
-  }
+  Future<User> _initBotInfo() async => telegram.getMe().then((user) {
+        _event.me = user;
+        return user;
+      }).catchError(
+          (exception) => throw TeleDartException(exception.toString()));
 
   /// Starts listening to messages
   ///
@@ -52,25 +49,25 @@ class TeleDart {
   /// Setup desired configurations using [setupLongPolling] or [setupWebhook]
   ///
   /// Throws [TeleDartException]
-  Future<void> startFetching({bool webhook = false}) async {
-    // initialise bot info before getting updates
-    await _initBotInfo().then((_) {
-      if (webhook) {
-        if (_webhook == null)
-          throw TeleDartException('Webhook has not been set up yet');
-        else {
-          _webhook
-            ..startWebhook()
+  Future<User> start({bool webhook = false}) async =>
+      await _initBotInfo().then((me) {
+        if (webhook) {
+          if (_webhook == null)
+            throw TeleDartException('Webhook has not been set up yet');
+          else {
+            _webhook
+              ..startWebhook()
+              ..onUpdate().listen((update) => _updatesHandler(update));
+            return me;
+          }
+        } else {
+          _longPolling ??= LongPolling(telegram)
+            ..startPolling()
             ..onUpdate().listen((update) => _updatesHandler(update));
+          return me;
         }
-      } else {
-        _longPolling ??= LongPolling(telegram)
-          ..startPolling()
-          ..onUpdate().listen((update) => _updatesHandler(update));
-      }
-    }).catchError(
-        ((exception) => throw TeleDartException(exception.toString())));
-  }
+      }).catchError(
+          ((exception) => throw TeleDartException(exception.toString())));
 
   /// Configures long polling method
   ///

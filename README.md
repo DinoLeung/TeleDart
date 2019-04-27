@@ -32,7 +32,7 @@ import 'package:teledart/model.dart';
 void main() {
   TeleDart teledart = TeleDart(Telegram('YOUR_BOT_TOKEN'), Event());
 
-  teledart.startFetching();
+  teledart.start().then((me) => print('${me.username} is initialised'));
 
   teledart
         .onCommand('hello')
