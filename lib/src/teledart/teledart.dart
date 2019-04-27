@@ -59,13 +59,14 @@ class TeleDart {
         if (_webhook == null)
           throw new TeleDartException('Webhook has not been set up yet');
         else {
-          _webhook.startWebhook();
-          _webhook.onUpdate().listen((update) => _updatesHandler(update));
+          _webhook
+            ..startWebhook()
+            ..onUpdate().listen((update) => _updatesHandler(update));
         }
       } else {
-        _longPolling ??= new LongPolling(telegram);
-        _longPolling.startPolling();
-        _longPolling.onUpdate().listen((update) => _updatesHandler(update));
+        _longPolling ??= new LongPolling(telegram)
+          ..startPolling()
+          ..onUpdate().listen((update) => _updatesHandler(update));
       }
     }).catchError(
         ((exception) => throw new TeleDartException(exception.toString())));
@@ -79,11 +80,11 @@ class TeleDart {
       int limit = 100,
       int timeout = 30,
       List<String> allowed_updates}) {
-    _longPolling = new LongPolling(telegram)
-      ..offset = offset
-      ..limit = limit
-      ..timeout = timeout
-      ..allowed_updates = allowed_updates;
+    _longPolling = new LongPolling(telegram,
+        offset: offset,
+        limit: limit,
+        timeout: timeout,
+        allowed_updates: allowed_updates);
   }
 
   /// Removes and stops long polling
@@ -93,22 +94,23 @@ class TeleDart {
 
   /// Configures webhook method
   ///
+  /// Set [url] as host name e.g. `https://example.com`, suggested to use bot tokan as [secretPath].
+  ///
   /// Default [port] is `443`, Telegram API supports `443`, `80`, `88`, `8443`.
   /// Provide [privateKey] and [certificate] pair for HTTPS configuration
   ///
   /// See: https://core.telegram.org/bots/api#setwebhook
-  Future<void> setupWebhook(String url, String secretPath,
+  Future<void> setupWebhook(
+      String url, String secretPath, io.File certificate, io.File privateKey,
       {int port = 443,
-      io.File privateKey,
-      io.File certificate,
+      bool uploadCertificate = false,
       int max_connections = 40,
       List<String> allowed_updates}) async {
-    _webhook = new Webhook(telegram, url, secretPath)
-      ..port = port
-      ..privateKey = privateKey
-      ..certificate = certificate
-      ..max_connections = max_connections
-      ..allowed_updates = allowed_updates;
+    _webhook = new Webhook(telegram, url, secretPath, certificate, privateKey,
+        port: port,
+        uploadCertificate: uploadCertificate,
+        max_connections: max_connections,
+        allowed_updates: allowed_updates);
 
     return _webhook.setWebhook();
   }

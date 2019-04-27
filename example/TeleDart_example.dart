@@ -1,4 +1,4 @@
-//import 'dart:io' as io;
+import 'dart:io' as io;
 import 'dart:io' show Platform;
 
 import 'package:teledart/teledart.dart';
@@ -10,7 +10,13 @@ void main() {
 
   TeleDart teledart = TeleDart(Telegram(envVars['BOT_TOKEN']), Event());
 
+  // TeleDart uses longpull by default.
   teledart.startFetching();
+
+  // In case you decided to use webhook.
+  teledart.setupWebhook(envVars['HOST_URL'], envVars['BOT_TOKEN'],
+      io.File(envVars['CERT_PATH']), io.File(envVars['KEY_PATH']));
+  teledart.startFetching(webhook: true);
 
   // You can listen to messages like this
   teledart.onMessage(entityType: 'bot_command', keyword: 'start').listen(
