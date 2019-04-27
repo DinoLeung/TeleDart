@@ -1,6 +1,6 @@
 /**
  * TeleDart - Telegram Bot API for Dart
- * Copyright (C) 2018  Dino PH Leung
+ * Copyright (C) 2019  Dino PH Leung
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -80,8 +80,7 @@ class Webhook {
           certificate: uploadCertificate ? certificate : null,
           max_connections: max_connections,
           allowed_updates: allowed_updates);
-    }).catchError(
-        (error) => Future.error(WebhookException(error.toString())));
+    }).catchError((error) => Future.error(WebhookException(error.toString())));
   }
 
   /// Start the webhook.
@@ -103,8 +102,7 @@ class Webhook {
           ..write(jsonEncode({'ok': false}))
           ..close();
       }
-    }).onError(
-        (error) => Future.error(WebhookException(error.toString())));
+    }).onError((error) => Future.error(WebhookException(error.toString())));
   }
 
   /// Remove webhook from telegram server
