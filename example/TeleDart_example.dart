@@ -1,5 +1,5 @@
-import 'dart:io' as io;
 import 'dart:io' show Platform;
+// import 'dart:io' as io;
 
 import 'package:teledart/teledart.dart';
 import 'package:teledart/telegram.dart';

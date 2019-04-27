@@ -30,10 +30,9 @@ class HttpClient {
       if (body['ok'])
         return body['result'];
       else
-        return new Future.error(new HttpClientException(
+        return Future.error(HttpClientException(
             '${body['error_code']} ${body['description']}'));
-    }).catchError(
-        (error) => new Future.error(new HttpClientException('${error}')));
+    }).catchError((error) => Future.error(HttpClientException('${error}')));
   }
 
   /// HTTP post method (x-www-form-urlencoded)
@@ -47,10 +46,9 @@ class HttpClient {
       if (responseBody['ok'])
         return responseBody['result'];
       else
-        return new Future.error(new HttpClientException(
+        return Future.error(HttpClientException(
             '${responseBody['error_code']} ${responseBody['description']}'));
-    }).catchError(
-            (error) => new Future.error(new HttpClientException('${error}')));
+    }).catchError((error) => Future.error(HttpClientException('${error}')));
   }
 
   /// HTTP post method (multipart/form-data)
@@ -60,7 +58,7 @@ class HttpClient {
   Future<dynamic> httpMultipartPost(String url, List<http.MultipartFile> files,
       {Map<String, dynamic> body}) async {
     http.MultipartRequest request =
-        new http.MultipartRequest('POST', Uri.parse(url))
+        http.MultipartRequest('POST', Uri.parse(url))
           ..headers.addAll({'Content-Type': 'multipart/form-data'})
           ..fields.addAll(body.map((k, v) => MapEntry(k, '${v}')))
           ..files.addAll(files);
@@ -72,10 +70,9 @@ class HttpClient {
       if (responseBody['ok'])
         return responseBody['result'];
       else
-        return new Future.error(new HttpClientException(
+        return Future.error(HttpClientException(
             '${responseBody['error_code']} ${responseBody['description']}'));
-    }).catchError(
-            (error) => new Future.error(new HttpClientException('${error}')));
+    }).catchError((error) => Future.error(HttpClientException('${error}')));
   }
 }
 
