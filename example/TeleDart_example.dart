@@ -35,9 +35,9 @@ void main() {
       .where((message) => message.text.contains('telegram'))
       .listen((message) => teledart.replyPhoto(
           message,
-          //  io.File('example/dart_bird_catchs_telegram.png'),
-          'https://raw.githubusercontent.com/DinoLeung/TeleDart/master/example/dart_bird_catchs_telegram.png',
-          caption: 'This is how the Dart Bird and Telegram are met'));
+          //  io.File('example/dash_paper_plane.png'),
+          'https://raw.githubusercontent.com/DinoLeung/TeleDart/master/example/dash_paper_plane.png',
+          caption: 'This is how Dash found the paper plane'));
 
   // Inline mode.
   teledart

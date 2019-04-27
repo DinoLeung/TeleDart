@@ -6,7 +6,7 @@ this package is a [Dart](https://www.dartlang.org/)
 implementation of their [bot API](https://core.telegram.org/bots/api)
 allowing you to create your own bot easily.
 
-![TeleDart](https://raw.githubusercontent.com/DinoLeung/TeleDart/master/example/dart_bird_catchs_telegram.svg?sanitize=true)
+![TeleDart](https://raw.githubusercontent.com/DinoLeung/TeleDart/master/example/dash_paper_plane.svg?sanitize=true)
 
 [![Bot API Version](https://img.shields.io/badge/Bot%20API-4.2-blue.svg?style=flat-square)](https://core.telegram.org/bots/api)
 [![Dart Version](https://img.shields.io/badge/Dart-2.2-blue.svg?style=flat-square)](https://www.dartlang.org/dart-2)
@@ -48,8 +48,8 @@ teledart
       .where((message) => message.text.contains('telegram'))
       .listen((message) => teledart.replyPhoto(
           message,
-          //  io.File('example/dart_bird_catchs_telegram.png'),
-          'https://raw.githubusercontent.com/DinoLeung/TeleDart/master/example/dart_bird_catchs_telegram.png',
+          //  io.File('example/dash_paper_plane.png'),
+          'https://raw.githubusercontent.com/DinoLeung/TeleDart/master/example/dash_paper_plane.png',
           caption: 'This is how the Dart Bird and Telegram are met'));
 ```
 
