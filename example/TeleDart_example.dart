@@ -31,7 +31,7 @@ void main() {
       .onCommand('short')
       .listen(((message) => teledart.replyMessage(message, 'This works too!')));
 
-  // You can even filter streams even more diverse with stream processing methods
+  // You can even filter streams with stream processing methods
   // See: https://www.dartlang.org/tutorials/language/streams#methods-that-modify-a-stream
   teledart
       .onMessage(keyword: 'dart')
