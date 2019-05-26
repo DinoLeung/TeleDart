@@ -1,3 +1,8 @@
+## 0.0.31
+
+- Fixed styling with if statments
+- Updated readme and example
+
 ## 0.0.30
 
 ### Breaking change

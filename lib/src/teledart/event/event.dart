@@ -53,10 +53,11 @@ class Event {
   /// Listens to message events
   Stream<Message> onMessage({String entityType, String keyword}) {
     if (entityType == null) {
-      if (keyword == null) // no entityType and keyword
+      // no entityType and keyword
+      if (keyword == null) {
         return _messageStreamController.stream.where((message) =>
             (message.entities ?? message.caption_entities) == null);
-      else {
+      } else {
         // no entityType but keyword
         // with regular expressions
         return _messageStreamController.stream
@@ -67,10 +68,10 @@ class Event {
       }
     } else {
       // with entityType but no keyword
-      if (keyword == null)
+      if (keyword == null) {
         return _messageStreamController.stream.where((message) =>
             entityType == '*' || message.entityOf(entityType) != null);
-      else {
+      } else {
         // with entityType and keyword
         return _messageStreamController.stream.where((message) {
           switch (entityType) {
@@ -119,30 +120,31 @@ class Event {
 
   /// Emits update events
   void emitUpdate(Update update) {
-    if (update == null)
+    if (update == null) {
       throw TeleDartEventException('Update cannot not be null');
-    else if (update.message != null)
+    } else if (update.message != null) {
       _messageStreamController.add(update.message);
-    else if (update.edited_message != null)
+    } else if (update.edited_message != null) {
       _editedMessageStreamController.add(update.edited_message);
-    else if (update.channel_post != null)
+    } else if (update.channel_post != null) {
       _channelPostStreamController.add(update.channel_post);
-    else if (update.edited_channel_post != null)
+    } else if (update.edited_channel_post != null) {
       _editedChannelPostStreamController.add(update.edited_channel_post);
-    else if (update.inline_query != null)
+    } else if (update.inline_query != null) {
       _inlineQueryStreamController.add(update.inline_query);
-    else if (update.chosen_inline_result != null)
+    } else if (update.chosen_inline_result != null) {
       _chosenInlineResultStreamController.add(update.chosen_inline_result);
-    else if (update.callback_query != null)
+    } else if (update.callback_query != null) {
       _callbackQueryStreamController.add(update.callback_query);
-    else if (update.shipping_query != null)
+    } else if (update.shipping_query != null) {
       _shippingQueryStreamController.add(update.shipping_query);
-    else if (update.pre_checkout_query != null)
+    } else if (update.pre_checkout_query != null) {
       _preCheckoutQueryStreamController.add(update.pre_checkout_query);
-    else if (update.poll != null)
+    } else if (update.poll != null) {
       _pollStreamController.add(update.poll);
-    else
+    } else {
       throw TeleDartEventException('Object in Update cannot be null');
+    }
   }
 
   /// Listens to edited message events

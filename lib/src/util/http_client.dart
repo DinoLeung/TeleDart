@@ -27,11 +27,12 @@ class HttpClient {
   Future<dynamic> httpGet(String url) async {
     return http.get(url).then((response) {
       Map<String, dynamic> body = jsonDecode(response.body);
-      if (body['ok'])
+      if (body['ok']) {
         return body['result'];
-      else
+      } else {
         return Future.error(HttpClientException(
             '${body['error_code']} ${body['description']}'));
+      }
     }).catchError((error) => Future.error(HttpClientException('${error}')));
   }
 
@@ -43,11 +44,12 @@ class HttpClient {
         .post(url, body: body.map((k, v) => MapEntry(k, '${v}')))
         .then((response) {
       Map<String, dynamic> responseBody = jsonDecode(response.body);
-      if (responseBody['ok'])
+      if (responseBody['ok']) {
         return responseBody['result'];
-      else
+      } else {
         return Future.error(HttpClientException(
             '${responseBody['error_code']} ${responseBody['description']}'));
+      }
     }).catchError((error) => Future.error(HttpClientException('${error}')));
   }
 
@@ -67,11 +69,12 @@ class HttpClient {
         .then((response) => http.Response.fromStream(response))
         .then((response) {
       Map<String, dynamic> responseBody = jsonDecode(response.body);
-      if (responseBody['ok'])
+      if (responseBody['ok']) {
         return responseBody['result'];
-      else
+      } else {
         return Future.error(HttpClientException(
             '${responseBody['error_code']} ${responseBody['description']}'));
+      }
     }).catchError((error) => Future.error(HttpClientException('${error}')));
   }
 }

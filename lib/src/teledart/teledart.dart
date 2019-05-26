@@ -52,9 +52,9 @@ class TeleDart {
   Future<User> start({bool webhook = false}) async =>
       await _initBotInfo().then((me) {
         if (webhook) {
-          if (_webhook == null)
+          if (_webhook == null) {
             throw TeleDartException('Webhook has not been set up yet');
-          else {
+          } else {
             _webhook
               ..startWebhook()
               ..onUpdate().listen((update) => _updatesHandler(update));
@@ -114,11 +114,12 @@ class TeleDart {
 
   /// Removes and stops webhook
   void removeWebhook() {
-    if (_webhook != null)
+    if (_webhook != null) {
       _webhook.deleteWebhook().then((_) {
         _webhook.stopWebhook();
         _webhook = null;
       });
+    }
   }
 
   /// Private method to add updates into events queue

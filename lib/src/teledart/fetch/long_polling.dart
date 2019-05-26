@@ -46,11 +46,13 @@ class LongPolling {
       this.limit = 100,
       this.timeout = 30,
       this.allowed_updates}) {
-    if (limit > 100 || limit < 1)
+    if (limit > 100 || limit < 1) {
       throw LongPollingException('Limit must between 1 and 100.');
-    if (timeout > MAX_TIMEOUT)
+    }
+    if (timeout > MAX_TIMEOUT) {
       throw LongPollingException(
           'Timeout may not greater than ${MAX_TIMEOUT}.');
+    }
 
     _updateStreamController = StreamController();
   }
@@ -66,13 +68,14 @@ class LongPolling {
     if (!_isPolling) {
       _isPolling = true;
       _recursivePolling();
-    } else
+    } else {
       throw LongPollingException('A long poll is aleady inplace');
+    }
   }
 
   /// Private long polling loop, throws [LongPollingException] on error.
   void _recursivePolling() {
-    if (_isPolling)
+    if (_isPolling) {
       telegram
           .getUpdates(
               offset: offset,
@@ -92,6 +95,7 @@ class LongPolling {
               error is io.HandshakeException
                   ? _recursivePolling()
                   : throw LongPollingException(error.toString()));
+    }
   }
 
   /// Add [update] to the stream.
