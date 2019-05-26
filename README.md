@@ -24,7 +24,7 @@ allowing you to create your own bot easily.
 
 A simple usage example:
 
-```
+```dart
 import 'package:teledart/teledart.dart';
 import 'package:teledart/telegram.dart';
 import 'package:teledart/model.dart';
@@ -42,7 +42,7 @@ void main() {
 
 Modifying [Stream](https://www.dartlang.org/tutorials/language/streams#methods-that-modify-a-stream): 
 
-```
+```dart
 teledart
       .onMessage(keyword: 'dart')
       .where((message) => message.text.contains('telegram'))
@@ -55,7 +55,7 @@ teledart
 
 [Inline mode](https://core.telegram.org/bots/api#inline-mode) example:
 
-```
+```dart
 teledart
       .onInlineQuery()
       .listen((inlineQuery) => teledart.answerInlineQuery(inlineQuery, [
