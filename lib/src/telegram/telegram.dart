@@ -259,22 +259,23 @@ class Telegram {
           http.MultipartFile('audio', audio.openRead(), audio.lengthSync(),
               filename: '${audio.lengthSync()}'));
       if (thumb != null) {
-        if (thumb is io.File)
+        if (thumb is io.File) {
           files.add(http.MultipartFile(
               'thumb', thumb.openRead(), thumb.lengthSync(),
               filename: '${thumb.lengthSync()}'));
-        else if (thumb is String)
+        } else if (thumb is String) {
           body.addAll({'thumb': thumb});
-        else
+        } else {
           return Future.error(TelegramException(
               'Attribute \'thumb\' can only be either io.File or String (Telegram file_id or image url)'));
+        }
       }
       return Message.fromJson(
           await _client.httpMultipartPost(requestUrl, files, body: body));
     } else if (audio is String) {
       body.addAll({'audio': audio});
       if (thumb != null) {
-        if (thumb is io.File)
+        if (thumb is io.File) {
           return Message.fromJson(await _client.httpMultipartPost(
               requestUrl,
               List.filled(
@@ -283,11 +284,12 @@ class Telegram {
                       'thumb', thumb.openRead(), thumb.lengthSync(),
                       filename: '${thumb.lengthSync()}')),
               body: body));
-        else if (thumb is String) {
+        } else if (thumb is String) {
           body.addAll({'thumb': thumb});
-        } else
+        } else {
           return Future.error(TelegramException(
               'Attribute \'thumb\' can only be either io.File or String (Telegram file_id or image url)'));
+        }
       }
       return Message.fromJson(await _client.httpPost(requestUrl, body: body));
     } else {
@@ -328,22 +330,23 @@ class Telegram {
               'document', document.openRead(), document.lengthSync(),
               filename: '${document.lengthSync()}'));
       if (thumb != null) {
-        if (thumb is io.File)
+        if (thumb is io.File) {
           files.add(http.MultipartFile(
               'thumb', thumb.openRead(), thumb.lengthSync(),
               filename: '${thumb.lengthSync()}'));
-        else if (thumb is String)
+        } else if (thumb is String) {
           body.addAll({'thumb': thumb});
-        else
+        } else {
           return Future.error(TelegramException(
               'Attribute \'thumb\' can only be either io.File or String (Telegram file_id or image url)'));
+        }
       }
       return Message.fromJson(
           await _client.httpMultipartPost(requestUrl, files, body: body));
     } else if (document is String) {
       body.addAll({'document': document});
       if (thumb != null) {
-        if (thumb is io.File)
+        if (thumb is io.File) {
           return Message.fromJson(await _client.httpMultipartPost(
               requestUrl,
               List.filled(
@@ -352,11 +355,12 @@ class Telegram {
                       'thumb', thumb.openRead(), thumb.lengthSync(),
                       filename: '${thumb.lengthSync()}')),
               body: body));
-        else if (thumb is String) {
+        } else if (thumb is String) {
           body.addAll({'thumb': thumb});
-        } else
+        } else {
           return Future.error(TelegramException(
               'Attribute \'thumb\' can only be either io.File or String (Telegram file_id or image url)'));
+        }
       }
       return Message.fromJson(await _client.httpPost(requestUrl, body: body));
     } else {
@@ -407,22 +411,23 @@ class Telegram {
           http.MultipartFile('video', video.openRead(), video.lengthSync(),
               filename: '${video.lengthSync()}'));
       if (thumb != null) {
-        if (thumb is io.File)
+        if (thumb is io.File) {
           files.add(http.MultipartFile(
               'thumb', thumb.openRead(), thumb.lengthSync(),
               filename: '${thumb.lengthSync()}'));
-        else if (thumb is String)
+        } else if (thumb is String) {
           body.addAll({'thumb': thumb});
-        else
+        } else {
           return Future.error(TelegramException(
               'Attribute \'thumb\' can only be either io.File or String (Telegram file_id or image url)'));
+        }
       }
       return Message.fromJson(
           await _client.httpMultipartPost(requestUrl, files, body: body));
     } else if (video is String) {
       body.addAll({'video': video});
       if (thumb != null) {
-        if (thumb is io.File)
+        if (thumb is io.File) {
           return Message.fromJson(await _client.httpMultipartPost(
               requestUrl,
               List.filled(
@@ -431,11 +436,12 @@ class Telegram {
                       'thumb', thumb.openRead(), thumb.lengthSync(),
                       filename: '${thumb.lengthSync()}')),
               body: body));
-        else if (thumb is String) {
+        } else if (thumb is String) {
           body.addAll({'thumb': thumb});
-        } else
+        } else {
           return Future.error(TelegramException(
               'Attribute \'thumb\' can only be either io.File or String (Telegram file_id or image url)'));
+        }
       }
       return Message.fromJson(await _client.httpPost(requestUrl, body: body));
     } else {
@@ -483,22 +489,23 @@ class Telegram {
               'animation', animation.openRead(), animation.lengthSync(),
               filename: '${animation.lengthSync()}'));
       if (thumb != null) {
-        if (thumb is io.File)
+        if (thumb is io.File) {
           files.add(http.MultipartFile(
               'thumb', thumb.openRead(), thumb.lengthSync(),
               filename: '${thumb.lengthSync()}'));
-        else if (thumb is String)
+        } else if (thumb is String) {
           body.addAll({'thumb': thumb});
-        else
+        } else {
           return Future.error(TelegramException(
               'Attribute \'thumb\' can only be either io.File or String (Telegram file_id or image url)'));
+        }
       }
       return Message.fromJson(
           await _client.httpMultipartPost(requestUrl, files, body: body));
     } else if (animation is String) {
       body.addAll({'video': animation});
       if (thumb != null) {
-        if (thumb is io.File)
+        if (thumb is io.File) {
           return Message.fromJson(await _client.httpMultipartPost(
               requestUrl,
               List.filled(
@@ -507,11 +514,12 @@ class Telegram {
                       'thumb', thumb.openRead(), thumb.lengthSync(),
                       filename: '${thumb.lengthSync()}')),
               body: body));
-        else if (thumb is String) {
+        } else if (thumb is String) {
           body.addAll({'thumb': thumb});
-        } else
+        } else {
           return Future.error(TelegramException(
               'Attribute \'thumb\' can only be either io.File or String (Telegram file_id or image url)'));
+        }
       }
       return Message.fromJson(await _client.httpPost(requestUrl, body: body));
     } else {
@@ -600,22 +608,23 @@ class Telegram {
               'video_note', video_note.openRead(), video_note.lengthSync(),
               filename: '${video_note.lengthSync()}'));
       if (thumb != null) {
-        if (thumb is io.File)
+        if (thumb is io.File) {
           files.add(http.MultipartFile(
               'thumb', thumb.openRead(), thumb.lengthSync(),
               filename: '${thumb.lengthSync()}'));
-        else if (thumb is String)
+        } else if (thumb is String) {
           body.addAll({'thumb': thumb});
-        else
+        } else {
           return Future.error(TelegramException(
               'Attribute \'thumb\' can only be either io.File or String (Telegram file_id or image url)'));
+        }
       }
       return Message.fromJson(
           await _client.httpMultipartPost(requestUrl, files, body: body));
     } else if (video_note is String) {
       body.addAll({'video_note': video_note});
       if (thumb != null) {
-        if (thumb is io.File)
+        if (thumb is io.File) {
           return Message.fromJson(await _client.httpMultipartPost(
               requestUrl,
               List.filled(
@@ -624,11 +633,12 @@ class Telegram {
                       'thumb', thumb.openRead(), thumb.lengthSync(),
                       filename: '${thumb.lengthSync()}')),
               body: body));
-        else if (thumb is String) {
+        } else if (thumb is String) {
           body.addAll({'thumb': thumb});
-        } else
+        } else {
           return Future.error(TelegramException(
               'Attribute \'thumb\' can only be either io.File or String (Telegram file_id or image url)'));
+        }
       }
       return Message.fromJson(await _client.httpPost(requestUrl, body: body));
     } else {
@@ -700,9 +710,10 @@ class Telegram {
       int message_id,
       String inline_message_id,
       ReplyMarkup reply_markup}) async {
-    if (inline_message_id == null && (chat_id == null || message_id == null))
+    if (inline_message_id == null && (chat_id == null || message_id == null)) {
       return Future.error(TelegramException(
           'Require either \'chat_id\' and \'message_id\', or \'inline_message_id\''));
+    }
     String requestUrl = '${_baseUrl}${_token}/editMessageLiveLocation';
     Map<String, dynamic> body = {
       'latitude': latitude,
@@ -729,9 +740,10 @@ class Telegram {
       int message_id,
       String inline_message_id,
       ReplyMarkup reply_markup}) async {
-    if (inline_message_id == null && (chat_id == null || message_id == null))
+    if (inline_message_id == null && (chat_id == null || message_id == null)) {
       return Future.error(TelegramException(
           'Require either \'chat_id\' and \'message_id\', or \'inline_message_id\''));
+    }
     String requestUrl = '${_baseUrl}${_token}/stopMessageLiveLocation';
     Map<String, dynamic> body = {
       'chat_id': chat_id ?? '',
@@ -1217,9 +1229,10 @@ class Telegram {
       String parse_mode,
       bool disable_web_page_preview,
       InlineKeyboardMarkup reply_markup}) async {
-    if (inline_message_id == null && (chat_id == null || message_id == null))
+    if (inline_message_id == null && (chat_id == null || message_id == null)) {
       return Future.error(TelegramException(
           'Require either \'chat_id\' and \'message_id\', or \'inline_message_id\''));
+    }
     String requestUrl = '${_baseUrl}${_token}/editMessageText';
     Map<String, dynamic> body = {
       'chat_id': chat_id ?? '',
@@ -1231,11 +1244,12 @@ class Telegram {
       'reply_markup': reply_markup == null ? '' : jsonEncode(reply_markup)
     };
     var res = await _client.httpPost(requestUrl, body: body);
-    if (res == true)
+    if (res == true) {
       return Future.error(
           TelegramException('Edited message is NOT sent by the bot'));
-    else
+    } else {
       return Message.fromJson(res);
+    }
   }
 
   /// Use this method to edit captions of messages sent by the bot or via the bot
@@ -1254,9 +1268,10 @@ class Telegram {
       String caption,
       String parse_mode,
       InlineKeyboardMarkup reply_markup}) async {
-    if (inline_message_id == null && (chat_id == null || message_id == null))
+    if (inline_message_id == null && (chat_id == null || message_id == null)) {
       return Future.error(TelegramException(
           'Require either \'chat_id\' and \'message_id\', or \'inline_message_id\''));
+    }
     String requestUrl = '${_baseUrl}${_token}/editMessageCaption';
     Map<String, dynamic> body = {
       'chat_id': chat_id ?? '',
@@ -1267,11 +1282,12 @@ class Telegram {
       'reply_markup': reply_markup == null ? '' : jsonEncode(reply_markup)
     };
     var res = await _client.httpPost(requestUrl, body: body);
-    if (res == true)
+    if (res == true) {
       return Future.error(
           TelegramException('Edited message is NOT sent by the bot'));
-    else
+    } else {
       return Message.fromJson(res);
+    }
   }
 
   /// Use this method to edit audio, document, photo, or video messages.
@@ -1292,9 +1308,10 @@ class Telegram {
       InputMedia media,
       String parse_mode,
       InlineKeyboardMarkup reply_markup}) async {
-    if (inline_message_id == null && (chat_id == null || message_id == null))
+    if (inline_message_id == null && (chat_id == null || message_id == null)) {
       return Future.error(TelegramException(
           'Require either \'chat_id\' and \'message_id\', or \'inline_message_id\''));
+    }
     String requestUrl = '${_baseUrl}${_token}/editMessageMedia';
     Map<String, dynamic> body = {
       'chat_id': chat_id ?? '',
@@ -1305,11 +1322,12 @@ class Telegram {
       'reply_markup': reply_markup == null ? '' : jsonEncode(reply_markup)
     };
     var res = await _client.httpPost(requestUrl, body: body);
-    if (res == true)
+    if (res == true) {
       return Future.error(
           TelegramException('Edited message is NOT sent by the bot'));
-    else
+    } else {
       return Message.fromJson(res);
+    }
   }
 
   /// Use this method to edit only the reply markup of messages sent by the bot or via the bot
@@ -1326,9 +1344,10 @@ class Telegram {
       int message_id,
       String inline_message_id,
       InlineKeyboardMarkup reply_markup}) async {
-    if (inline_message_id == null && (chat_id == null || message_id == null))
+    if (inline_message_id == null && (chat_id == null || message_id == null)) {
       return Future.error(TelegramException(
           'Require either \'chat_id\' and \'message_id\', or \'inline_message_id\''));
+    }
     String requestUrl = '${_baseUrl}${_token}/editMessageReplyMarkup';
     Map<String, dynamic> body = {
       'chat_id': chat_id ?? '',
@@ -1337,11 +1356,12 @@ class Telegram {
       'reply_markup': reply_markup == null ? '' : jsonEncode(reply_markup)
     };
     var res = await _client.httpPost(requestUrl, body: body);
-    if (res == true)
+    if (res == true) {
       return Future.error(
           TelegramException('Edited message is NOT sent by the bot'));
-    else
+    } else {
       return Message.fromJson(res);
+    }
   }
 
   /// Use this method to stop a poll which was sent by the bot.
@@ -1623,9 +1643,10 @@ class Telegram {
   /// [Update]: https://core.telegram.org/bots/api#update
   Future<bool> answerShippingQuery(String shipping_query_id, bool ok,
       {List<ShippingOption> shipping_options, String error_message}) async {
-    if (!ok && (shipping_options == null || error_message == null))
+    if (!ok && (shipping_options == null || error_message == null)) {
       return Future.error(TelegramException(
           'Attribute \'shipping_options\' and \'error_message\' can not be null when \'ok\' = false'));
+    }
     String requestUrl = '${_baseUrl}${_token}/answerShippingQuery';
     Map<String, dynamic> body = {
       'shipping_query_id': shipping_query_id,
@@ -1649,9 +1670,10 @@ class Telegram {
   /// [Update]: https://core.telegram.org/bots/api#update
   Future<bool> answerPreCheckoutQuery(String pre_checkout_query_id, bool ok,
       {String error_message}) async {
-    if (!ok && error_message == null)
+    if (!ok && error_message == null) {
       return Future.error(TelegramException(
           'Attribute \'error_message\' can not be null when \'ok\' = false'));
+    }
     String requestUrl = '${_baseUrl}${_token}/answerShippingQuery';
     Map<String, dynamic> body = {
       'pre_checkout_query_id': pre_checkout_query_id,
@@ -1713,9 +1735,10 @@ class Telegram {
       int chat_id,
       int message_id,
       String inline_message_id}) async {
-    if (inline_message_id == null && (chat_id == null || message_id == null))
+    if (inline_message_id == null && (chat_id == null || message_id == null)) {
       return Future.error(TelegramException(
           'Require either \'chat_id\' and \'message_id\', or \'inline_message_id\''));
+    }
     String requestUrl = '${_baseUrl}${_token}/setGameScore';
     Map<String, dynamic> body = {
       'user_id': user_id,
@@ -1743,9 +1766,10 @@ class Telegram {
   /// [GameHighScore]: https://core.telegram.org/bots/api#gamehighscore
   Future<List<GameHighScore>> getGameHighScores(int user_id,
       {int chat_id, int message_id, String inline_message_id}) async {
-    if (inline_message_id == null && (chat_id == null || message_id == null))
+    if (inline_message_id == null && (chat_id == null || message_id == null)) {
       return Future.error(TelegramException(
           'Require either \'chat_id\' and \'message_id\', or \'inline_message_id\''));
+    }
     String requestUrl = '${_baseUrl}${_token}/getGameHighScores';
     Map<String, dynamic> body = {
       'user_id': user_id,

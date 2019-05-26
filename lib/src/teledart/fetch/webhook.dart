@@ -51,18 +51,21 @@ class Webhook {
       this.uploadCertificate = false,
       this.max_connections = 40,
       this.allowed_updates}) {
-    if (![443, 80, 88, 8443].contains(this.port))
+    if (![443, 80, 88, 8443].contains(this.port)) {
       throw WebhookException(
           'Ports currently supported for Webhooks: 443, 80, 88, 8443.');
-    if (max_connections > 100 || max_connections < 1)
+    }
+    if (max_connections > 100 || max_connections < 1) {
       throw WebhookException('Connection limit must between 1 and 100.');
+    }
 
     _updateStreamController = StreamController();
 
     // prefix url and secret path
     if (this.url.endsWith('\/')) this.url.substring(0, this.url.length - 1);
-    if (!this.secretPath.startsWith('\/'))
+    if (!this.secretPath.startsWith('\/')) {
       this.secretPath = '\/' + this.secretPath;
+    }
 
     // serup SecurityContext
     _context = io.SecurityContext();
@@ -85,9 +88,10 @@ class Webhook {
 
   /// Start the webhook.
   Future<void> startWebhook() async {
-    if (_server == null)
+    if (_server == null) {
       throw WebhookException(
           'Please use setWebhook() to initialise webhook before start webhook.');
+    }
     _server.listen((io.HttpRequest request) {
       if (request.method == 'POST' && request.uri.path == this.secretPath) {
         request.transform(utf8.decoder).join().then((data) {
