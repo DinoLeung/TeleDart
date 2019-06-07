@@ -29,7 +29,7 @@ class InlineQueryResultCachedVideo implements InlineQueryResult {
   @override
   String id;
   @override
-  String type = 'video';
+  String type;
   String video_file_id;
   String title;
   String description;

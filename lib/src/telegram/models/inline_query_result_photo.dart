@@ -29,7 +29,7 @@ class InlineQueryResultPhoto implements InlineQueryResult {
   @override
   String id;
   @override
-  String type = 'photo';
+  String type;
   String photo_url;
   String thumb_url;
   int photo_width;

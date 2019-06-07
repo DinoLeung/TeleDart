@@ -32,7 +32,7 @@ class InlineQueryResultCachedDocument implements InlineQueryResult {
   @override
   String id;
   @override
-  String type = 'document';
+  String type;
   String title;
   String document_file_id;
   String description;

@@ -32,7 +32,7 @@ class InlineQueryResultAudio implements InlineQueryResult {
   @override
   String id;
   @override
-  String type = 'audio';
+  String type;
   String audio_url;
   String title;
   String caption;

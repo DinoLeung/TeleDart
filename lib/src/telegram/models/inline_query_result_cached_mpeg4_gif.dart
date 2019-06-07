@@ -29,7 +29,7 @@ class InlineQueryResultCachedMpeg4Gif implements InlineQueryResult {
   @override
   String id;
   @override
-  String type = 'mpeg4_gif';
+  String type;
   String mpeg4_file_id;
   String title;
   String caption;

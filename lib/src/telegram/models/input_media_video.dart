@@ -30,22 +30,23 @@ class InputMediaVideo implements InputMedia {
   @override
   String parse_mode;
   @override
-  String type = 'video';
+  String type;
   dynamic thumb; // InputFile or String
   int width;
   int height;
   int duration;
   bool supports_streaming;
-  InputMediaVideo(
-      {this.type,
-      this.media,
-      this.caption,
-      this.parse_mode,
-      this.thumb,
-      this.width,
-      this.height,
-      this.duration,
-      this.supports_streaming});
+  InputMediaVideo({
+    this.type = 'video',
+    this.media,
+    this.caption,
+    this.parse_mode,
+    this.thumb,
+    this.width,
+    this.height,
+    this.duration,
+    this.supports_streaming,
+  });
   factory InputMediaVideo.fromJson(Map<String, dynamic> json) =>
       _$InputMediaVideoFromJson(json);
   @override

@@ -26,7 +26,7 @@ class InlineQueryResultArticle implements InlineQueryResult {
   @override
   String id;
   @override
-  String type = 'article';
+  String type;
   String title;
   InputMessageContent input_message_content;
   InlineKeyboardMarkup reply_markup;

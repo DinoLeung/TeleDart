@@ -30,13 +30,13 @@ class InputMediaAudio implements InputMedia {
   @override
   String parse_mode;
   @override
-  String type = 'audio';
+  String type;
   dynamic thumb; // InputFile or String
   int duration;
   String performer;
   String title;
   InputMediaAudio(
-      {this.type,
+      {this.type = 'audio',
       this.media,
       this.thumb,
       this.caption,

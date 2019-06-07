@@ -32,7 +32,7 @@ class InlineQueryResultLocation implements InlineQueryResult {
   @override
   String id;
   @override
-  String type = 'location';
+  String type;
   double latitude;
   double longitude;
   String title;

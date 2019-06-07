@@ -24,7 +24,7 @@ void main() {
   // You can listen to messages like this
   teledart.onMessage(entityType: 'bot_command', keyword: 'start').listen(
       (message) =>
-          teledart.telegram.sendMessage(message.from.id, 'Hello TeleDart!'));
+          teledart.telegram.sendMessage(message.chat.id, 'Hello TeleDart!'));
 
   // Or using short cuts
   teledart

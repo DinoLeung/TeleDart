@@ -32,7 +32,7 @@ class InlineQueryResultCachedAudio implements InlineQueryResult {
   @override
   String id;
   @override
-  String type = 'audio';
+  String type;
   String audio_file_id;
   String caption;
   String parse_mode;

@@ -32,7 +32,7 @@ class InlineQueryResultCachedVoice implements InlineQueryResult {
   @override
   String id;
   @override
-  String type = 'voice';
+  String type;
   String voice_file_id;
   String title;
   String caption;

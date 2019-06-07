@@ -29,7 +29,7 @@ class InlineQueryResultCachedGif implements InlineQueryResult {
   @override
   String id;
   @override
-  String type = 'gif';
+  String type;
   String gif_file_id;
   String title;
   String caption;
