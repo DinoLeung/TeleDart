@@ -94,7 +94,7 @@ class Webhook {
     }
     _server.listen((io.HttpRequest request) {
       if (request.method == 'POST' && request.uri.path == this.secretPath) {
-        request.transform(utf8.decoder).join().then((data) {
+        request.cast<List<int>>().transform(utf8.decoder).join().then((data) {
           emitUpdate(Update.fromJson(jsonDecode(data)));
           request.response
             ..write(jsonEncode({'ok': true}))
