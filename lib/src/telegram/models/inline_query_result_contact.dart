@@ -32,7 +32,7 @@ class InlineQueryResultContact implements InlineQueryResult {
   @override
   String id;
   @override
-  String type = 'contact';
+  String type;
   String phone_number;
   String first_name;
   String last_name;

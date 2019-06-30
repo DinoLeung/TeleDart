@@ -32,7 +32,7 @@ class InlineQueryResultVenue implements InlineQueryResult {
   @override
   String id;
   @override
-  String type = 'venue';
+  String type;
   double latitude;
   double longitude;
   String title;

@@ -32,7 +32,7 @@ class InlineQueryResultDocument implements InlineQueryResult {
   @override
   String id;
   @override
-  String type = 'document';
+  String type;
   String title;
   String caption;
   String parse_mode;

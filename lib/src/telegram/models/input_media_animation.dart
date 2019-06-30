@@ -30,13 +30,13 @@ class InputMediaAnimation implements InputMedia {
   @override
   String parse_mode;
   @override
-  String type = 'animation';
+  String type;
   dynamic thumb; // InputFile or String
   int width;
   int height;
   int duration;
   InputMediaAnimation(
-      {this.type,
+      {this.type = 'animation',
       this.media,
       this.thumb,
       this.caption,

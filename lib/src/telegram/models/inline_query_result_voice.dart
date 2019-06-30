@@ -32,7 +32,7 @@ class InlineQueryResultVoice implements InlineQueryResult {
   @override
   String id;
   @override
-  String type = 'voice';
+  String type;
   String voice_url;
   String title;
   String caption;

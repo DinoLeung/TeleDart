@@ -32,7 +32,7 @@ class InlineQueryResultVideo implements InlineQueryResult {
   @override
   String id;
   @override
-  String type = 'video';
+  String type;
   String video_url;
   String mime_type;
   String thumb_url;

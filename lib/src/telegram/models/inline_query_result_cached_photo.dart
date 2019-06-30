@@ -29,7 +29,7 @@ class InlineQueryResultCachedPhoto implements InlineQueryResult {
   @override
   String id;
   @override
-  String type = 'photo';
+  String type;
   String photo_file_id;
   String title;
   String description;
