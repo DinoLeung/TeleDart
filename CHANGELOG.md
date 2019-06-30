@@ -1,3 +1,7 @@
+## 0.032
+
+- Prepare for upcoming change to HttpRequest and HttpClientResponse
+
 ## 0.0.31
 
 - Fixed styling with if statments
