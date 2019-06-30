@@ -1,4 +1,4 @@
-## 0.032
+## 0.0.32
 
 - Prepare for upcoming change to HttpRequest and HttpClientResponse
 
