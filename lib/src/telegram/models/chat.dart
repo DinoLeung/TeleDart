@@ -21,6 +21,10 @@ part of '../model.dart';
 /// This object represents a chat.
 ///
 /// https://core.telegram.org/bots/api#chat
+///
+/// The field `all_members_are_administrators` is deprecated.
+/// The field is still returned in the object for backward compatibility, but new bots should use the `permissions` field instead.
+/// See: https://core.telegram.org/bots/api#july-29-2019
 @JsonSerializable()
 class Chat {
   int id;
@@ -34,6 +38,7 @@ class Chat {
   String description;
   String invite_link;
   Message pinned_message;
+  ChatPermissions permissions;
   String sticker_set_name;
   bool can_set_sticker_set;
   Chat(
@@ -48,6 +53,7 @@ class Chat {
       this.description,
       this.invite_link,
       this.pinned_message,
+      this.permissions,
       this.sticker_set_name,
       this.can_set_sticker_set});
   factory Chat.fromJson(Map<String, dynamic> json) => _$ChatFromJson(json);

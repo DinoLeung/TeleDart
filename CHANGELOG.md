@@ -1,3 +1,8 @@
+## 0.0.34
+
+- Support API 4.3
+- Sypport API 4.4
+
 ## 0.0.33
 
 - Fixed #70

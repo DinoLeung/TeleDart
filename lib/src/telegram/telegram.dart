@@ -936,8 +936,12 @@ class Telegram {
   /// Returns *True* on success.
   ///
   /// https://core.telegram.org/bots/api#restrictchatmember
+  ///
+  /// This method now takes the new user permissions in a single argument of the type *ChatPermissions*.
+  /// The old way of passing parameters will keep working for a while for backward compatibility.
   Future<bool> restrictChatMember(int chat_id, int user_id,
-      {int until_date,
+      {ChatPermissions permissions,
+      int until_date,
       bool can_send_messages,
       bool can_send_media_messages,
       bool can_send_other_messages,
@@ -946,6 +950,7 @@ class Telegram {
     Map<String, dynamic> body = {
       'chat_id': chat_id,
       'user_id': user_id,
+      'permissions': permissions == null ? '' : jsonEncode(permissions),
       'until_date': until_date ?? '',
       'can_send_messages': can_send_messages ?? '',
       'can_send_media_messages': can_send_media_messages ?? '',
@@ -984,6 +989,19 @@ class Telegram {
       'can_promote_members': can_promote_members ?? ''
     };
     return await _client.httpPost(requestUrl, body: body);
+  }
+
+  /// Use this method to set default chat permissions for all members.
+  /// The bot must be an administrator in the group or a supergroup for this to work and must have the can_restrict_members admin rights.
+  /// Returns *True* on success.
+  Future<bool> setChatPermissions(
+      int chat_id, ChatPermissions permissions) async {
+    String requestUrl = '${_baseUrl}${_token}/setChatPermissions';
+    Map<String, dynamic> body = {
+      'chat_id': chat_id,
+      'permissions': jsonEncode(permissions)
+    };
+    return _client.httpPost(requestUrl, body: body);
   }
 
   /// Use this method to generate a invite link for a chat;

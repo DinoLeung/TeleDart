@@ -26,6 +26,7 @@ part of '../model.dart';
 class InlineKeyboardButton {
   String text;
   String url;
+  LoginUrl login_url;
   String callback_data;
   String switch_inline_query;
   String switch_inline_query_current_chat;
@@ -34,6 +35,7 @@ class InlineKeyboardButton {
   InlineKeyboardButton(
       {this.text,
       this.url,
+      this.login_url,
       this.callback_data,
       this.switch_inline_query,
       this.switch_inline_query_current_chat,
