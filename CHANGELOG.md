@@ -2,6 +2,11 @@
 
 - Support API 4.3
 
+## 0.0.33
+
+- Fixed #70
+- Update dependencies
+
 ## 0.0.32
 
 - Prepare for upcoming change to HttpRequest and HttpClientResponse
@@ -14,7 +19,7 @@
 ## 0.0.30
 
 ### Breaking change
-- Changed `startFetching()` into `start()`, and it returns a `User` object which represents the bot.
+- Changed `startFetching()` into `start()`, and it returns a `User` object which represents the bot
 
 ## 0.0.29
 
