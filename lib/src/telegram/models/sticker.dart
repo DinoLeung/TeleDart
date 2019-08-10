@@ -26,6 +26,7 @@ class Sticker {
   String file_id;
   int width;
   int height;
+  bool is_animated;
   PhotoSize thumb;
   String emoji;
   String set_name;
@@ -35,6 +36,7 @@ class Sticker {
       {this.file_id,
       this.width,
       this.height,
+      this.is_animated,
       this.thumb,
       this.emoji,
       this.set_name,
