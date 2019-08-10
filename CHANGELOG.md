@@ -1,3 +1,7 @@
+## unreleased
+
+- Support API 4.3
+
 ## 0.0.33
 
 - Fixed #70

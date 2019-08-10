@@ -34,6 +34,7 @@ part 'models/animation.dart';
 part 'models/voice.dart';
 part 'models/video_note.dart';
 part 'models/contact.dart';
+part 'models/login_url.dart';
 part 'models/location.dart';
 part 'models/venue.dart';
 part 'models/poll_option.dart';
