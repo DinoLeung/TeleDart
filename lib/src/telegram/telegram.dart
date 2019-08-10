@@ -89,7 +89,8 @@ class Telegram {
     Map<String, dynamic> body = {
       'url': url,
       'max_connections': max_connections ?? '',
-      'allowed_updates': allowed_updates ?? ''
+      'allowed_updates':
+          allowed_updates == null ? '' : jsonEncode(allowed_updates),
     };
     if (certificate != null) {
       // filename cannot be empty to post to Telegram server
@@ -822,7 +823,7 @@ class Telegram {
     Map<String, dynamic> body = {
       'chat_id': chat_id,
       'question': question,
-      'options': options,
+      'options': jsonEncode(options),
       'disable_notification': disable_notification ?? '',
       'reply_to_message_id': reply_to_message_id ?? '',
       'reply_markup': reply_markup == null ? '' : jsonEncode(reply_markup)
@@ -1697,7 +1698,10 @@ class Telegram {
   Future<bool> setPassportDataErrors(
       int user_id, List<PassportElementError> errors) async {
     String requestUrl = '${_baseUrl}${_token}/setPassportDataErrors';
-    Map<String, dynamic> body = {'user_id': user_id, 'errors': errors};
+    Map<String, dynamic> body = {
+      'user_id': user_id,
+      'errors': jsonEncode(errors)
+    };
     return await _client.httpPost(requestUrl, body: body);
   }
 
