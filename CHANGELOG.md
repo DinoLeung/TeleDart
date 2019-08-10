@@ -1,6 +1,7 @@
 ## unreleased
 
 - Support API 4.3
+- Sypport API 4.4
 
 ## 0.0.33
 
