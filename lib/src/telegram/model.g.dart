@@ -289,6 +289,10 @@ Message _$MessageFromJson(Map<String, dynamic> json) {
     passport_data: json['passport_data'] == null
         ? null
         : PassportData.fromJson(json['passport_data'] as Map<String, dynamic>),
+    reply_markup: json['reply_markup'] == null
+        ? null
+        : InlineKeyboardMarkup.fromJson(
+            json['reply_markup'] as Map<String, dynamic>),
   );
 }
 
@@ -347,6 +351,7 @@ Map<String, dynamic> _$MessageToJson(Message instance) {
   writeNotNull('successful_payment', instance.successful_payment);
   writeNotNull('connected_website', instance.connected_website);
   writeNotNull('passport_data', instance.passport_data);
+  writeNotNull('reply_markup', instance.reply_markup);
   return val;
 }
 
@@ -901,6 +906,9 @@ InlineKeyboardButton _$InlineKeyboardButtonFromJson(Map<String, dynamic> json) {
   return InlineKeyboardButton(
     text: json['text'] as String,
     url: json['url'] as String,
+    login_url: json['login_url'] == null
+        ? null
+        : LoginUrl.fromJson(json['login_url'] as Map<String, dynamic>),
     callback_data: json['callback_data'] as String,
     switch_inline_query: json['switch_inline_query'] as String,
     switch_inline_query_current_chat:
@@ -924,6 +932,7 @@ Map<String, dynamic> _$InlineKeyboardButtonToJson(
 
   writeNotNull('text', instance.text);
   writeNotNull('url', instance.url);
+  writeNotNull('login_url', instance.login_url);
   writeNotNull('callback_data', instance.callback_data);
   writeNotNull('switch_inline_query', instance.switch_inline_query);
   writeNotNull('switch_inline_query_current_chat',

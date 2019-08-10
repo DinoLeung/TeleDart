@@ -69,6 +69,7 @@ class Message {
   SuccessfulPayment successful_payment;
   String connected_website;
   PassportData passport_data;
+  InlineKeyboardMarkup reply_markup;
 
   Message(
       {this.message_id,
@@ -116,7 +117,8 @@ class Message {
       this.invoice,
       this.successful_payment,
       this.connected_website,
-      this.passport_data});
+      this.passport_data,
+      this.reply_markup});
 
   factory Message.fromJson(Map<String, dynamic> json) =>
       _$MessageFromJson(json);
