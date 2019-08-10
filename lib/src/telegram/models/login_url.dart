@@ -18,30 +18,19 @@
 
 part of '../model.dart';
 
-/// This object represents one button of an inline keyboard.
-/// You **must** use exactly one of the optional fields.
+/// This object represents a point on the map.
 ///
-/// https://core.telegram.org/bots/api#inlinekeyboardbutton
+/// https://core.telegram.org/bots/api#location
 @JsonSerializable()
-class InlineKeyboardButton {
-  String text;
+class LoginUrl {
   String url;
-  LoginUrl login_url;
-  String callback_data;
-  String switch_inline_query;
-  String switch_inline_query_current_chat;
-  CallbackGame callback_game;
-  bool pay;
-  InlineKeyboardButton(
-      {this.text,
-      this.url,
-      this.login_url,
-      this.callback_data,
-      this.switch_inline_query,
-      this.switch_inline_query_current_chat,
-      this.callback_game,
-      this.pay});
-  factory InlineKeyboardButton.fromJson(Map<String, dynamic> json) =>
-      _$InlineKeyboardButtonFromJson(json);
-  Map<String, dynamic> toJson() => _$InlineKeyboardButtonToJson(this);
+  String forward_text;
+  String bot_username;
+  bool request_write_access;
+  LoginUrl(url,
+      {this.forward_text, this.bot_username, this.request_write_access});
+  factory LoginUrl.fromJson(Map<String, dynamic> json) =>
+      _$LoginUrlFromJson(json);
+  Map<String, dynamic> toJson(Map<String, dynamic> json) =>
+      _$LoginUrlToJson(this);
 }
