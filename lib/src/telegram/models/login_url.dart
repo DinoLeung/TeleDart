@@ -24,6 +24,8 @@ part of '../model.dart';
 ///
 /// Telegram apps support these buttons as of [version 5.7].
 ///
+/// https://core.telegram.org/bots/api#loginurl
+///
 /// [Telegram Login Widget]: https://core.telegram.org/widgets/login
 /// [version 5.7]: https://telegram.org/blog/privacy-discussions-web-bots#meet-seamless-web-bots
 @JsonSerializable()

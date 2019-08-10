@@ -148,6 +148,9 @@ Chat _$ChatFromJson(Map<String, dynamic> json) {
     pinned_message: json['pinned_message'] == null
         ? null
         : Message.fromJson(json['pinned_message'] as Map<String, dynamic>),
+    permissions: json['permissions'] == null
+        ? null
+        : ChatPermissions.fromJson(json['permissions'] as Map<String, dynamic>),
     sticker_set_name: json['sticker_set_name'] as String,
     can_set_sticker_set: json['can_set_sticker_set'] as bool,
   );
@@ -174,6 +177,7 @@ Map<String, dynamic> _$ChatToJson(Chat instance) {
   writeNotNull('description', instance.description);
   writeNotNull('invite_link', instance.invite_link);
   writeNotNull('pinned_message', instance.pinned_message);
+  writeNotNull('permissions', instance.permissions);
   writeNotNull('sticker_set_name', instance.sticker_set_name);
   writeNotNull('can_set_sticker_set', instance.can_set_sticker_set);
   return val;
@@ -1072,6 +1076,39 @@ Map<String, dynamic> _$ChatMemberToJson(ChatMember instance) {
   return val;
 }
 
+ChatPermissions _$ChatPermissionsFromJson(Map<String, dynamic> json) {
+  return ChatPermissions(
+    can_send_messages: json['can_send_messages'] as bool,
+    can_send_media_messages: json['can_send_media_messages'] as bool,
+    can_send_polls: json['can_send_polls'] as bool,
+    can_send_other_messages: json['can_send_other_messages'] as bool,
+    can_add_web_page_previews: json['can_add_web_page_previews'] as bool,
+    can_change_info: json['can_change_info'] as bool,
+    can_invite_users: json['can_invite_users'] as bool,
+    can_pin_messages: json['can_pin_messages'] as bool,
+  );
+}
+
+Map<String, dynamic> _$ChatPermissionsToJson(ChatPermissions instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('can_send_messages', instance.can_send_messages);
+  writeNotNull('can_send_media_messages', instance.can_send_media_messages);
+  writeNotNull('can_send_polls', instance.can_send_polls);
+  writeNotNull('can_send_other_messages', instance.can_send_other_messages);
+  writeNotNull('can_add_web_page_previews', instance.can_add_web_page_previews);
+  writeNotNull('can_change_info', instance.can_change_info);
+  writeNotNull('can_invite_users', instance.can_invite_users);
+  writeNotNull('can_pin_messages', instance.can_pin_messages);
+  return val;
+}
+
 ResponseParameters _$ResponseParametersFromJson(Map<String, dynamic> json) {
   return ResponseParameters(
     migrate_to_chat_id: json['migrate_to_chat_id'] as int,
@@ -1276,6 +1313,7 @@ Sticker _$StickerFromJson(Map<String, dynamic> json) {
     file_id: json['file_id'] as String,
     width: json['width'] as int,
     height: json['height'] as int,
+    is_animated: json['is_animated'] as bool,
     thumb: json['thumb'] == null
         ? null
         : PhotoSize.fromJson(json['thumb'] as Map<String, dynamic>),
@@ -1300,6 +1338,7 @@ Map<String, dynamic> _$StickerToJson(Sticker instance) {
   writeNotNull('file_id', instance.file_id);
   writeNotNull('width', instance.width);
   writeNotNull('height', instance.height);
+  writeNotNull('is_animated', instance.is_animated);
   writeNotNull('thumb', instance.thumb);
   writeNotNull('emoji', instance.emoji);
   writeNotNull('set_name', instance.set_name);
@@ -1312,6 +1351,7 @@ StickerSet _$StickerSetFromJson(Map<String, dynamic> json) {
   return StickerSet(
     name: json['name'] as String,
     title: json['title'] as String,
+    is_animated: json['is_animated'] as bool,
     contains_masks: json['contains_masks'] as bool,
     stickers: (json['stickers'] as List)
         ?.map((e) =>
@@ -1331,6 +1371,7 @@ Map<String, dynamic> _$StickerSetToJson(StickerSet instance) {
 
   writeNotNull('name', instance.name);
   writeNotNull('title', instance.title);
+  writeNotNull('is_animated', instance.is_animated);
   writeNotNull('contains_masks', instance.contains_masks);
   writeNotNull('stickers', instance.stickers);
   return val;

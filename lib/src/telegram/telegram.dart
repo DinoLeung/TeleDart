@@ -986,6 +986,19 @@ class Telegram {
     return await _client.httpPost(requestUrl, body: body);
   }
 
+  /// Use this method to set default chat permissions for all members.
+  /// The bot must be an administrator in the group or a supergroup for this to work and must have the can_restrict_members admin rights.
+  /// Returns *True* on success.
+  Future<bool> setChatPermissions(
+      int chat_id, ChatPermissions permissions) async {
+    String requestUrl = '${_baseUrl}${_token}/setChatPermissions';
+    Map<String, dynamic> body = {
+      'chat_id': chat_id,
+      'permissions': jsonEncode(permissions)
+    };
+    return _client.httpPost(requestUrl, body: body);
+  }
+
   /// Use this method to generate a invite link for a chat;
   /// any previously generated link is revoked.
   /// The bot must be an administrator in the chat for this to work and must have the appropriate

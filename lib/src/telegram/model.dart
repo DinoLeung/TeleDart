@@ -51,6 +51,7 @@ part 'models/callback_query.dart';
 part 'models/force_reply.dart';
 part 'models/chat_photo.dart';
 part 'models/chat_member.dart';
+part 'models/chat_permissions.dart';
 part 'models/response_parameters.dart';
 part 'models/input_media.dart';
 part 'models/input_media_photo.dart';
