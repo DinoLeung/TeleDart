@@ -6,9 +6,9 @@ import 'package:teledart/telegram.dart';
 import 'package:teledart/model.dart';
 
 void main() {
-  final Map<String, String> envVars = Platform.environment;
+  final envVars = Platform.environment;
 
-  TeleDart teledart = TeleDart(Telegram(envVars['BOT_TOKEN']), Event());
+  var teledart = TeleDart(Telegram(envVars['BOT_TOKEN']), Event());
 
   // TeleDart uses longpull by default.
   teledart.start().then((me) => print('${me.username} is initialised'));

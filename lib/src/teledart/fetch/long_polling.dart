@@ -84,7 +84,7 @@ class LongPolling {
               allowed_updates: allowed_updates)
           .then((updates) {
         if (updates.isNotEmpty) {
-          for (Update update in updates) {
+          for (var update in updates) {
             emitUpdate(update);
             offset = update.update_id + 1;
           }
@@ -108,5 +108,6 @@ class LongPolling {
 class LongPollingException implements Exception {
   String cause;
   LongPollingException(this.cause);
+  @override
   String toString() => 'LongPollingException: ${cause}';
 }
