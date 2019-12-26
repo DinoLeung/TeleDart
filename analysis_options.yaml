@@ -5,12 +5,10 @@ analyzer:
 # Lint rules and documentation, see http://dart-lang.github.io/linter/lints
 linter:
   rules:
+    - always_declare_return_types
     - cancel_subscriptions
     - hash_and_equals
     - iterable_contains_unrelated_type
     - list_remove_unrelated_type
+    - prefer_expression_function_bodies
     - test_types_in_equals
-    - unrelated_type_equality_checks
-    - valid_regexps
-    - always_declare_return_types
-    - prefer_single_quotes

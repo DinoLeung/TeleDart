@@ -13,7 +13,6 @@ dependencies:
 
 dev_dependencies:
   test: ^1.6.5
-  build_runner: ^1.6.5
-  json_serializable: ^3.1.0
-  pedantic: ^1.8.0
-
+  build_runner: ^1.7.2
+  json_serializable: ^3.2.5
+  pedantic: ^1.9.0
