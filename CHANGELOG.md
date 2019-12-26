@@ -1,6 +1,7 @@
 ## 0.0.35
 
 - Follow new styling guide
+- Update analysis_options file
 
 ## 0.0.34
 
