@@ -56,7 +56,7 @@ class HttpClient {
   /// [body] - parameters in map
   Future<dynamic> httpMultipartPost(String url, List<http.MultipartFile> files,
       {Map<String, dynamic> body}) async {
-    http.MultipartRequest request =
+    var request =
         http.MultipartRequest('POST', Uri.parse(url))
           ..headers.addAll({'Content-Type': 'multipart/form-data'})
           ..fields.addAll(body.map((k, v) => MapEntry(k, '${v}')))
@@ -79,5 +79,6 @@ class HttpClient {
 class HttpClientException implements Exception {
   String cause;
   HttpClientException(this.cause);
+  @override
   String toString() => 'HttpClientException: ${cause}';
 }

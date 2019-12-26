@@ -40,5 +40,6 @@ class InputVenueMessageContent implements InputMessageContent {
       this.foursquare_type});
   factory InputVenueMessageContent.fromJson(Map<String, dynamic> json) =>
       _$InputVenueMessageContentFromJson(json);
+  @override
   Map<String, dynamic> toJson() => _$InputVenueMessageContentToJson(this);
 }

@@ -32,5 +32,6 @@ class InputLocationMessageContent implements InputMessageContent {
       {this.latitude, this.longitude, this.live_period});
   factory InputLocationMessageContent.fromJson(Map<String, dynamic> json) =>
       _$InputLocationMessageContentFromJson(json);
+  @override
   Map<String, dynamic> toJson() => _$InputLocationMessageContentToJson(this);
 }

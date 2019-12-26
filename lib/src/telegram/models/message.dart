@@ -125,9 +125,9 @@ class Message {
   Map<String, dynamic> toJson() => _$MessageToJson(this);
 
   int indexOfEntity(String type) {
-    List<MessageEntity> etts = entities ?? caption_entities;
+    var etts = entities ?? caption_entities;
     if (etts != null) {
-      for (MessageEntity ett in etts) {
+      for (var ett in etts) {
         if (ett.type == type) return etts.indexOf(ett);
       }
     }
@@ -135,7 +135,7 @@ class Message {
   }
 
   MessageEntity entityOf(String type) {
-    int i = indexOfEntity(type);
+    var i = indexOfEntity(type);
     if (i >= 0) {
       return (entities ?? caption_entities)[i];
     } else {
@@ -144,7 +144,7 @@ class Message {
   }
 
   String getEntity(String type) {
-    MessageEntity ett = entityOf(type);
+    var ett = entityOf(type);
     if (ett != null) {
       return (text ?? caption).substring(ett.offset, ett.offset + ett.length);
     } else {

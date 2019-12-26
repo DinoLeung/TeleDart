@@ -38,5 +38,6 @@ class ReplyKeyboardMarkup implements ReplyMarkup {
       this.selective});
   factory ReplyKeyboardMarkup.fromJson(Map<String, dynamic> json) =>
       _$ReplyKeyboardMarkupFromJson(json);
+  @override
   Map<String, dynamic> toJson() => _$ReplyKeyboardMarkupToJson(this);
 }

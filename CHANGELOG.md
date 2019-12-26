@@ -1,3 +1,7 @@
+## 0.0.35
+
+- Follow new styling guide
+
 ## 0.0.34
 
 - Support API 4.3
