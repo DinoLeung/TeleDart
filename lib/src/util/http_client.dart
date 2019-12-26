@@ -24,34 +24,31 @@ import 'package:http/http.dart' as http;
 class HttpClient {
   /// HTTP get method
   /// [url] request url with query string (required)
-  Future<dynamic> httpGet(String url) async {
-    return http.get(url).then((response) {
-      Map<String, dynamic> body = jsonDecode(response.body);
-      if (body['ok']) {
-        return body['result'];
-      } else {
-        return Future.error(HttpClientException(
-            '${body['error_code']} ${body['description']}'));
-      }
-    }).catchError((error) => Future.error(HttpClientException('${error}')));
-  }
+  Future<dynamic> httpGet(String url) async => http.get(url).then((response) {
+        Map<String, dynamic> body = jsonDecode(response.body);
+        if (body['ok']) {
+          return body['result'];
+        } else {
+          return Future.error(HttpClientException(
+              '${body['error_code']} ${body['description']}'));
+        }
+      }).catchError((error) => Future.error(HttpClientException('${error}')));
 
   /// HTTP post method (x-www-form-urlencoded)
   /// [url] - request url (required)
   /// [body] - parameters in map
-  Future<dynamic> httpPost(String url, {Map<String, dynamic> body}) async {
-    return http
-        .post(url, body: body.map((k, v) => MapEntry(k, '${v}')))
-        .then((response) {
-      Map<String, dynamic> responseBody = jsonDecode(response.body);
-      if (responseBody['ok']) {
-        return responseBody['result'];
-      } else {
-        return Future.error(HttpClientException(
-            '${responseBody['error_code']} ${responseBody['description']}'));
-      }
-    }).catchError((error) => Future.error(HttpClientException('${error}')));
-  }
+  Future<dynamic> httpPost(String url, {Map<String, dynamic> body}) async =>
+      http
+          .post(url, body: body.map((k, v) => MapEntry(k, '${v}')))
+          .then((response) {
+        Map<String, dynamic> responseBody = jsonDecode(response.body);
+        if (responseBody['ok']) {
+          return responseBody['result'];
+        } else {
+          return Future.error(HttpClientException(
+              '${responseBody['error_code']} ${responseBody['description']}'));
+        }
+      }).catchError((error) => Future.error(HttpClientException('${error}')));
 
   /// HTTP post method (multipart/form-data)
   /// [url] - request url (required)
@@ -59,11 +56,10 @@ class HttpClient {
   /// [body] - parameters in map
   Future<dynamic> httpMultipartPost(String url, List<http.MultipartFile> files,
       {Map<String, dynamic> body}) async {
-    http.MultipartRequest request =
-        http.MultipartRequest('POST', Uri.parse(url))
-          ..headers.addAll({'Content-Type': 'multipart/form-data'})
-          ..fields.addAll(body.map((k, v) => MapEntry(k, '${v}')))
-          ..files.addAll(files);
+    var request = http.MultipartRequest('POST', Uri.parse(url))
+      ..headers.addAll({'Content-Type': 'multipart/form-data'})
+      ..fields.addAll(body.map((k, v) => MapEntry(k, '${v}')))
+      ..files.addAll(files);
     return request
         .send()
         .then((response) => http.Response.fromStream(response))
@@ -82,5 +78,6 @@ class HttpClient {
 class HttpClientException implements Exception {
   String cause;
   HttpClientException(this.cause);
+  @override
   String toString() => 'HttpClientException: ${cause}';
 }

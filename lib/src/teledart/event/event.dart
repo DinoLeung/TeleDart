@@ -183,5 +183,6 @@ class Event {
 class TeleDartEventException implements Exception {
   String cause;
   TeleDartEventException(this.cause);
+  @override
   String toString() => 'TeleDartEventException: ${cause}';
 }

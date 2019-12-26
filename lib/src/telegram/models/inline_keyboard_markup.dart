@@ -32,5 +32,6 @@ class InlineKeyboardMarkup implements ReplyMarkup {
   InlineKeyboardMarkup({this.inline_keyboard});
   factory InlineKeyboardMarkup.fromJson(Map<String, dynamic> json) =>
       _$InlineKeyboardMarkupFromJson(json);
+  @override
   Map<String, dynamic> toJson() => _$InlineKeyboardMarkupToJson(this);
 }

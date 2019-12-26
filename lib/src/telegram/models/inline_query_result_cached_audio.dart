@@ -48,5 +48,6 @@ class InlineQueryResultCachedAudio implements InlineQueryResult {
       this.input_message_content});
   factory InlineQueryResultCachedAudio.fromJson(Map<String, dynamic> json) =>
       _$InlineQueryResultCachedAudioFromJson(json);
+  @override
   Map<String, dynamic> toJson() => _$InlineQueryResultCachedAudioToJson(this);
 }

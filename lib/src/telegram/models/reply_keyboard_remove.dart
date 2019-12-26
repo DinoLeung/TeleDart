@@ -34,5 +34,6 @@ class ReplyKeyboardRemove implements ReplyMarkup {
   ReplyKeyboardRemove({this.remove_keyboard, this.selective});
   factory ReplyKeyboardRemove.fromJson(Map<String, dynamic> json) =>
       _$ReplyKeyboardRemoveFromJson(json);
+  @override
   Map<String, dynamic> toJson() => _$ReplyKeyboardRemoveToJson(this);
 }

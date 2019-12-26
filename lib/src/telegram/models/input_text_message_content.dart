@@ -32,5 +32,6 @@ class InputTextMessageContent implements InputMessageContent {
       {this.message_text, this.parse_mode, this.disable_web_page_preview});
   factory InputTextMessageContent.fromJson(Map<String, dynamic> json) =>
       _$InputTextMessageContentFromJson(json);
+  @override
   Map<String, dynamic> toJson() => _$InputTextMessageContentToJson(this);
 }

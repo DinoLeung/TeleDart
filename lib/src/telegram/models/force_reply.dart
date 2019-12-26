@@ -50,5 +50,6 @@ class ForceReply implements ReplyMarkup {
   ForceReply({this.force_reply, this.selective});
   factory ForceReply.fromJson(Map<String, dynamic> json) =>
       _$ForceReplyFromJson(json);
+  @override
   Map<String, dynamic> toJson() => _$ForceReplyToJson(this);
 }
