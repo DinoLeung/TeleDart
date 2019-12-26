@@ -86,7 +86,7 @@ class Telegram {
       int max_connections,
       List<String> allowed_updates}) async {
     var requestUrl = '${_baseUrl}${_token}/setWebhook';
-    var body = {
+    var body = <String, dynamic>{
       'url': url,
       'max_connections': max_connections ?? '',
       'allowed_updates':
@@ -94,7 +94,7 @@ class Telegram {
     };
     if (certificate != null) {
       // filename cannot be empty to post to Telegram server
-      var files = [];
+      var files = <http.MultipartFile>[];
       files.add(http.MultipartFile(
           'certificate', certificate.openRead(), certificate.lengthSync(),
           filename: '${certificate.lengthSync()}'));
@@ -151,7 +151,7 @@ class Telegram {
       int reply_to_message_id,
       ReplyMarkup reply_markup}) async {
     var requestUrl = '${_baseUrl}${_token}/sendMessage';
-    var body = {
+    var body = <String, dynamic>{
       'chat_id': chat_id,
       'text': text,
       'parse_mode': parse_mode ?? '',
@@ -171,7 +171,7 @@ class Telegram {
   Future<Message> forwardMessage(int chat_id, int from_char_id, int message_id,
       {bool disable_notification}) async {
     var requestUrl = '${_baseUrl}${_token}/forwardMessage';
-    var body = {
+    var body = <String, dynamic>{
       'chat_id': chat_id,
       'from_char_id': from_char_id,
       'message_id': message_id,
@@ -192,7 +192,7 @@ class Telegram {
       int reply_to_message_id,
       ReplyMarkup reply_markup}) async {
     var requestUrl = '${_baseUrl}${_token}/sendPhoto';
-    var body = {
+    var body = <String, dynamic>{
       'chat_id': chat_id,
       'caption': caption ?? '',
       'parse_mode': parse_mode ?? '',
@@ -203,7 +203,7 @@ class Telegram {
 
     if (photo is io.File) {
       // filename cannot be empty to post to Telegram server
-      var files = [];
+      var files = <http.MultipartFile>[];
       files.add(http.MultipartFile(
           'photo', photo.openRead(), photo.lengthSync(),
           filename: '${photo.lengthSync()}'));
@@ -241,7 +241,7 @@ class Telegram {
       int reply_to_message_id,
       ReplyMarkup reply_markup}) async {
     var requestUrl = '${_baseUrl}${_token}/sendAudio';
-    var body = {
+    var body = <String, dynamic>{
       'chat_id': chat_id,
       'caption': caption ?? '',
       'parse_mode': parse_mode ?? '',
@@ -255,7 +255,7 @@ class Telegram {
 
     if (audio is io.File) {
       // filename cannot be empty to post to Telegram server
-      var files = List.filled(
+      var files = List<http.MultipartFile>.filled(
           1,
           http.MultipartFile('audio', audio.openRead(), audio.lengthSync(),
               filename: '${audio.lengthSync()}'));
@@ -314,7 +314,7 @@ class Telegram {
       int reply_to_message_id,
       ReplyMarkup reply_markup}) async {
     var requestUrl = '${_baseUrl}${_token}/sendDocument';
-    var body = {
+    var body = <String, dynamic>{
       'chat_id': chat_id,
       'caption': caption ?? '',
       'parse_mode': parse_mode ?? '',
@@ -325,7 +325,7 @@ class Telegram {
 
     if (document is io.File) {
       // filename cannot be empty to post to Telegram server
-      var files = List.filled(
+      var files = List<http.MultipartFile>.filled(
           1,
           http.MultipartFile(
               'document', document.openRead(), document.lengthSync(),
@@ -392,7 +392,7 @@ class Telegram {
       int reply_to_message_id,
       ReplyMarkup reply_markup}) async {
     var requestUrl = '${_baseUrl}${_token}/sendVideo';
-    var body = {
+    var body = <String, dynamic>{
       'chat_id': chat_id,
       'duration': duration ?? '',
       'width': width ?? '',
@@ -407,7 +407,7 @@ class Telegram {
 
     if (video is io.File) {
       // filename cannot be empty to post to Telegram server
-      var files = List.filled(
+      var files = List<http.MultipartFile>.filled(
           1,
           http.MultipartFile('video', video.openRead(), video.lengthSync(),
               filename: '${video.lengthSync()}'));
@@ -470,7 +470,7 @@ class Telegram {
       int reply_to_message_id,
       ReplyMarkup reply_markup}) async {
     var requestUrl = '${_baseUrl}${_token}/sendAnimation';
-    var body = {
+    var body = <String, dynamic>{
       'chat_id': chat_id,
       'duration': duration ?? '',
       'width': width ?? '',
@@ -484,7 +484,7 @@ class Telegram {
 
     if (animation is io.File) {
       // filename cannot be empty to post to Telegram server
-      var files = List.filled(
+      var files = List<http.MultipartFile>.filled(
           1,
           http.MultipartFile(
               'animation', animation.openRead(), animation.lengthSync(),
@@ -550,7 +550,7 @@ class Telegram {
       int reply_to_message_id,
       ReplyMarkup reply_markup}) async {
     var requestUrl = '${_baseUrl}${_token}/sendVoice';
-    var body = {
+    var body = <String, dynamic>{
       'chat_id': chat_id,
       'caption': caption ?? '',
       'parse_mode': parse_mode ?? '',
@@ -562,7 +562,7 @@ class Telegram {
 
     if (voice is io.File) {
       // filename cannot be empty to post to Telegram server
-      var files = List.filled(
+      var files = List<http.MultipartFile>.filled(
           1,
           http.MultipartFile('voice', voice.openRead(), voice.lengthSync(),
               filename: '${voice.lengthSync()}'));
@@ -592,7 +592,7 @@ class Telegram {
       int reply_to_message_id,
       ReplyMarkup reply_markup}) async {
     var requestUrl = '${_baseUrl}${_token}/sendVideoNote';
-    var body = {
+    var body = <String, dynamic>{
       'chat_id': chat_id,
       'duration': duration ?? '',
       'length': length ?? '',
@@ -603,7 +603,7 @@ class Telegram {
 
     if (video_note is io.File) {
       // filename cannot be empty to post to Telegram server
-      var files = List.filled(
+      var files = List<http.MultipartFile>.filled(
           1,
           http.MultipartFile(
               'video_note', video_note.openRead(), video_note.lengthSync(),
@@ -661,7 +661,7 @@ class Telegram {
   Future<List<Message>> sendMediaGroup(int chat_id, List<InputMedia> media,
       {bool disable_notification, int reply_to_message_id}) async {
     var requestUrl = '${_baseUrl}${_token}/sendMediaGroup';
-    var body = {
+    var body = <String, dynamic>{
       'chat_id': chat_id,
       'media': jsonEncode(media),
       'disable_notification': disable_notification ?? '',
@@ -683,7 +683,7 @@ class Telegram {
       int reply_to_message_id,
       ReplyMarkup reply_markup}) async {
     var requestUrl = '${_baseUrl}${_token}/sendLocation';
-    var body = {
+    var body = <String, dynamic>{
       'chat_id': chat_id,
       'latitude': latitude,
       'longitude': longitude,
@@ -716,7 +716,7 @@ class Telegram {
           'Require either \'chat_id\' and \'message_id\', or \'inline_message_id\''));
     }
     var requestUrl = '${_baseUrl}${_token}/editMessageLiveLocation';
-    var body = {
+    var body = <String, dynamic>{
       'latitude': latitude,
       'longitude': longitude,
       'chat_id': chat_id ?? '',
@@ -746,7 +746,7 @@ class Telegram {
           'Require either \'chat_id\' and \'message_id\', or \'inline_message_id\''));
     }
     var requestUrl = '${_baseUrl}${_token}/stopMessageLiveLocation';
-    var body = {
+    var body = <String, dynamic>{
       'chat_id': chat_id ?? '',
       'message_id': message_id ?? '',
       'inline_message_id': inline_message_id ?? '',
@@ -768,7 +768,7 @@ class Telegram {
       int reply_to_message_id,
       ReplyMarkup reply_markup}) async {
     var requestUrl = '${_baseUrl}${_token}/sendVenue';
-    var body = {
+    var body = <String, dynamic>{
       'chat_id': chat_id,
       'latitude': latitude,
       'longitude': longitude,
@@ -796,7 +796,7 @@ class Telegram {
       int reply_to_message_id,
       ReplyMarkup reply_markup}) async {
     var requestUrl = '${_baseUrl}${_token}/sendContact';
-    var body = {
+    var body = <String, dynamic>{
       'chat_id': chat_id,
       'phone_number': phone_number,
       'first_name': first_name,
@@ -820,7 +820,7 @@ class Telegram {
       int reply_to_message_id,
       ReplyMarkup reply_markup}) async {
     var requestUrl = '${_baseUrl}${_token}/sendPoll';
-    var body = {
+    var body = <String, dynamic>{
       'chat_id': chat_id,
       'question': question,
       'options': jsonEncode(options),
@@ -850,7 +850,7 @@ class Telegram {
   /// [sendChatAction]: https://core.telegram.org/bots/api#sendchataction
   Future<bool> sendChatAction(int chat_id, String action) async {
     var requestUrl = '${_baseUrl}${_token}/sendChatAction';
-    var body = {'chat_id': chat_id, 'action': action};
+    var body = <String, dynamic>{'chat_id': chat_id, 'action': action};
     return await _client.httpPost(requestUrl, body: body);
   }
 
@@ -862,7 +862,7 @@ class Telegram {
   Future<UserProfilePhotos> getUserProfilePhotos(int user_id,
       {int offset, int limit}) async {
     var requestUrl = '${_baseUrl}${_token}/getUserProfilePhotos';
-    var body = {
+    var body = <String, dynamic>{
       'user_id': user_id,
       'offset': offset ?? '',
       'limit': limit ?? ''
@@ -888,7 +888,7 @@ class Telegram {
   /// [getFile]: https://core.telegram.org/bots/api#getfile
   Future<File> getFile(String file_id) async {
     var requestUrl = '${_baseUrl}${_token}/getFile';
-    var body = {'file_id': file_id};
+    var body = <String, dynamic>{'file_id': file_id};
     return File.fromJson(await _client.httpPost(requestUrl, body: body));
   }
 
@@ -909,7 +909,7 @@ class Telegram {
   Future<bool> kickChatMember(int chat_id, int user_id,
       {int until_date}) async {
     var requestUrl = '${_baseUrl}${_token}/kickChatMember';
-    var body = {
+    var body = <String, dynamic>{
       'chat_id': chat_id,
       'user_id': user_id,
       'until_date': until_date ?? ''
@@ -925,7 +925,7 @@ class Telegram {
   /// https://core.telegram.org/bots/api#unbanchatmember
   Future<bool> unbanChatMember(int chat_id, int user_id) async {
     var requestUrl = '${_baseUrl}${_token}/unbanChatMember';
-    var body = {'chat_id': chat_id, 'user_id': user_id};
+    var body = <String, dynamic>{'chat_id': chat_id, 'user_id': user_id};
     return await _client.httpPost(requestUrl, body: body);
   }
 
@@ -947,7 +947,7 @@ class Telegram {
       bool can_send_other_messages,
       bool can_add_web_page_previews}) async {
     var requestUrl = '${_baseUrl}${_token}/unbanChatMember';
-    var body = {
+    var body = <String, dynamic>{
       'chat_id': chat_id,
       'user_id': user_id,
       'permissions': permissions == null ? '' : jsonEncode(permissions),
@@ -976,7 +976,7 @@ class Telegram {
       bool can_pin_messages,
       bool can_promote_members}) async {
     var requestUrl = '${_baseUrl}${_token}/promoteChatMember';
-    var body = {
+    var body = <String, dynamic>{
       'chat_id': chat_id,
       'user_id': user_id,
       'can_change_info': can_change_info ?? '',
@@ -997,7 +997,7 @@ class Telegram {
   Future<bool> setChatPermissions(
       int chat_id, ChatPermissions permissions) async {
     var requestUrl = '${_baseUrl}${_token}/setChatPermissions';
-    var body = {
+    var body = <String, dynamic>{
       'chat_id': chat_id,
       'permissions': jsonEncode(permissions)
     };
@@ -1012,7 +1012,7 @@ class Telegram {
   /// https://core.telegram.org/bots/api#exportchatinvitelink
   Future<String> exportChatInviteLink(int chat_id) async {
     var requestUrl = '${_baseUrl}${_token}/exportChatInviteLink';
-    var body = {'chat_id': chat_id};
+    var body = <String, dynamic>{'chat_id': chat_id};
     return await _client.httpPost(requestUrl, body: body);
   }
 
@@ -1027,7 +1027,7 @@ class Telegram {
   /// https://core.telegram.org/bots/api#setchatphoto
   Future<bool> setChatPhoto(int chat_id, io.File photo) async {
     var requestUrl = '${_baseUrl}${_token}/setChatPhoto';
-    var body = {'chat_id': chat_id};
+    var body = <String, dynamic>{'chat_id': chat_id};
     // filename cannot be empty to post to Telegram server
     var files = List.filled(
         1,
@@ -1047,7 +1047,7 @@ class Telegram {
   /// https://core.telegram.org/bots/api#deletechatphoto
   Future<bool> deleteChatPhoto(int chat_id) async {
     var requestUrl = '${_baseUrl}${_token}/deleteChatPhoto';
-    var body = {'chat_id': chat_id};
+    var body = <String, dynamic>{'chat_id': chat_id};
     return await _client.httpPost(requestUrl, body: body);
   }
 
@@ -1062,7 +1062,7 @@ class Telegram {
   /// https://core.telegram.org/bots/api#setchattitle
   Future<bool> setChatTitle(int chat_id, String title) async {
     var requestUrl = '${_baseUrl}${_token}/setChatTitle';
-    var body = {'chat_id': chat_id, 'title': title};
+    var body = <String, dynamic>{'chat_id': chat_id, 'title': title};
     return await _client.httpPost(requestUrl, body: body);
   }
 
@@ -1073,7 +1073,7 @@ class Telegram {
   /// https://core.telegram.org/bots/api#setchatdescription
   Future<bool> setChatDescription(int chat_id, {String description}) async {
     var requestUrl = '${_baseUrl}${_token}/setChatDescription';
-    var body = {
+    var body = <String, dynamic>{
       'chat_id': chat_id,
       'description': description ?? ''
     };
@@ -1089,7 +1089,7 @@ class Telegram {
   Future<bool> pinChatMessage(int chat_id, int message_id,
       {bool disable_notification}) async {
     var requestUrl = '${_baseUrl}${_token}/pinChatMessage';
-    var body = {
+    var body = <String, dynamic>{
       'chat_id': chat_id,
       'message_id': message_id,
       'disable_notification': disable_notification ?? ''
@@ -1105,7 +1105,7 @@ class Telegram {
   /// https://core.telegram.org/bots/api#unpinchatmessage
   Future<bool> unpinChatMessage(int chat_id) async {
     var requestUrl = '${_baseUrl}${_token}/unpinChatMessage';
-    var body = {'chat_id': chat_id};
+    var body = <String, dynamic>{'chat_id': chat_id};
     return await _client.httpPost(requestUrl, body: body);
   }
 
@@ -1114,7 +1114,7 @@ class Telegram {
   /// https://core.telegram.org/bots/api#leavechat
   Future<bool> leaveChat(int chat_id) async {
     var requestUrl = '${_baseUrl}${_token}/leaveChat';
-    var body = {'chat_id': chat_id};
+    var body = <String, dynamic>{'chat_id': chat_id};
     return await _client.httpPost(requestUrl, body: body);
   }
 
@@ -1128,7 +1128,7 @@ class Telegram {
   /// [Chat]: https://core.telegram.org/bots/api#chat
   Future<Chat> getChat(int chat_id) async {
     var requestUrl = '${_baseUrl}${_token}/getChat';
-    var body = {'chat_id': chat_id};
+    var body = <String, dynamic>{'chat_id': chat_id};
     return Chat.fromJson(await _client.httpPost(requestUrl, body: body));
   }
 
@@ -1143,7 +1143,7 @@ class Telegram {
   /// [ChatMember]: https://core.telegram.org/bots/api#chatmember
   Future<List<ChatMember>> getChatAdministrators(int chat_id) async {
     var requestUrl = '${_baseUrl}${_token}/getChatAdministrators';
-    var body = {'chat_id': chat_id};
+    var body = <String, dynamic>{'chat_id': chat_id};
     return (await _client.httpPost(requestUrl, body: body))
         .map<ChatMember>((member) => ChatMember.fromJson(member))
         .toList();
@@ -1154,7 +1154,7 @@ class Telegram {
   /// https://core.telegram.org/bots/api#getchatmemberscount
   Future<int> getChatMembersCount(int chat_id) async {
     var requestUrl = '${_baseUrl}${_token}/getChatMembersCount';
-    var body = {'chat_id': chat_id};
+    var body = <String, dynamic>{'chat_id': chat_id};
     return await _client.httpPost(requestUrl, body: body);
   }
 
@@ -1166,7 +1166,7 @@ class Telegram {
   /// [ChatMember]: https://core.telegram.org/bots/api#chatmember
   Future<ChatMember> getChatMember(int chat_id, int user_id) async {
     var requestUrl = '${_baseUrl}${_token}/getChatMember';
-    var body = {'chat_id': chat_id, 'user_id': user_id};
+    var body = <String, dynamic>{'chat_id': chat_id, 'user_id': user_id};
     return ChatMember.fromJson(await _client.httpPost(requestUrl, body: body));
   }
 
@@ -1182,7 +1182,7 @@ class Telegram {
   /// [getChat]: https://core.telegram.org/bots/api#getchat
   Future<bool> setChatStickerSet(int chat_id, String sticker_set_name) async {
     var requestUrl = '${_baseUrl}${_token}/setChatStickerSet';
-    var body = {
+    var body = <String, dynamic>{
       'chat_id': chat_id,
       'sticker_set_name': sticker_set_name
     };
@@ -1201,7 +1201,7 @@ class Telegram {
   /// [getChat]: https://core.telegram.org/bots/api#getchat
   Future<bool> deleteChatStickerSet(int chat_id) async {
     var requestUrl = '${_baseUrl}${_token}/deleteChatStickerSet';
-    var body = {'chat_id': chat_id};
+    var body = <String, dynamic>{'chat_id': chat_id};
     return await _client.httpPost(requestUrl, body: body);
   }
 
@@ -1221,7 +1221,7 @@ class Telegram {
   Future<bool> answerCallbackQuery(String callback_query_id,
       {String text, bool show_alert, String url, int cache_time}) async {
     var requestUrl = '${_baseUrl}${_token}/answerCallbackQuery';
-    var body = {
+    var body = <String, dynamic>{
       'callback_query_id': callback_query_id,
       'text': text ?? '',
       'show_alert': show_alert ?? '',
@@ -1253,7 +1253,7 @@ class Telegram {
           'Require either \'chat_id\' and \'message_id\', or \'inline_message_id\''));
     }
     var requestUrl = '${_baseUrl}${_token}/editMessageText';
-    var body = {
+    var body = <String, dynamic>{
       'chat_id': chat_id ?? '',
       'message_id': message_id ?? '',
       'inline_message_id': inline_message_id ?? '',
@@ -1292,7 +1292,7 @@ class Telegram {
           'Require either \'chat_id\' and \'message_id\', or \'inline_message_id\''));
     }
     var requestUrl = '${_baseUrl}${_token}/editMessageCaption';
-    var body = {
+    var body = <String, dynamic>{
       'chat_id': chat_id ?? '',
       'message_id': message_id ?? '',
       'inline_message_id': inline_message_id ?? '',
@@ -1332,7 +1332,7 @@ class Telegram {
           'Require either \'chat_id\' and \'message_id\', or \'inline_message_id\''));
     }
     var requestUrl = '${_baseUrl}${_token}/editMessageMedia';
-    var body = {
+    var body = <String, dynamic>{
       'chat_id': chat_id ?? '',
       'message_id': message_id ?? '',
       'inline_message_id': inline_message_id ?? '',
@@ -1368,7 +1368,7 @@ class Telegram {
           'Require either \'chat_id\' and \'message_id\', or \'inline_message_id\''));
     }
     var requestUrl = '${_baseUrl}${_token}/editMessageReplyMarkup';
-    var body = {
+    var body = <String, dynamic>{
       'chat_id': chat_id ?? '',
       'message_id': message_id ?? '',
       'inline_message_id': inline_message_id ?? '',
@@ -1392,7 +1392,7 @@ class Telegram {
   Future<Poll> stopPoll(
       int chat_id, int message_id, InlineKeyboardMarkup reply_markup) async {
     var requestUrl = '${_baseUrl}${_token}/stopPoll';
-    var body = {
+    var body = <String, dynamic>{
       'chat_id': chat_id,
       'message_id': message_id,
       'reply_markup': reply_markup
@@ -1412,7 +1412,7 @@ class Telegram {
   /// https://core.telegram.org/bots/api#deletemessage
   Future<bool> deleteMessage(int chat_id, int message_id) async {
     var requestUrl = '${_baseUrl}${_token}/deleteMessage';
-    var body = {'chat_id': chat_id, 'message_id': message_id};
+    var body = <String, dynamic>{'chat_id': chat_id, 'message_id': message_id};
     return await _client.httpPost(requestUrl, body: body);
   }
 
@@ -1426,7 +1426,7 @@ class Telegram {
       int reply_to_message_id,
       ReplyMarkup reply_markup}) async {
     var requestUrl = '${_baseUrl}${_token}/sendSticker';
-    var body = {
+    var body = <String, dynamic>{
       'chat_id': chat_id,
       'disable_notification': disable_notification ?? '',
       'reply_to_message_id': reply_to_message_id ?? '',
@@ -1458,7 +1458,7 @@ class Telegram {
   /// [StickerSet]: https://core.telegram.org/bots/api#stickerset
   Future<StickerSet> getStickerSet(String name) async {
     var requestUrl = '${_baseUrl}${_token}/getStickerSet';
-    var body = {'name': name};
+    var body = <String, dynamic>{'name': name};
     return StickerSet.fromJson(await _client.httpPost(requestUrl, body: body));
   }
 
@@ -1471,7 +1471,7 @@ class Telegram {
   /// [File]: https://core.telegram.org/bots/api#file
   Future<File> uploadStickerFile(int user_id, io.File png_sticker) async {
     var requestUrl = '${_baseUrl}${_token}/uploadStickerFile';
-    var body = {'user_id': user_id};
+    var body = <String, dynamic>{'user_id': user_id};
     // filename cannot be empty to post to Telegram server
     var files = List.filled(
         1,
@@ -1492,7 +1492,7 @@ class Telegram {
       {bool contains_masks, MaskPosition mask_position}) async {
     var requestUrl = '${_baseUrl}${_token}/createNewStickerSet';
     var botInfo = await getMe();
-    var body = {
+    var body = <String, dynamic>{
       'user_id': user_id,
       'name': '${name}_by_${botInfo.username}',
       'title': title,
@@ -1503,7 +1503,7 @@ class Telegram {
 
     if (png_sticker is io.File) {
       // filename cannot be empty to post to Telegram server
-      var files = List.filled(
+      var files = List<http.MultipartFile>.filled(
           1,
           http.MultipartFile(
               'png_sticker', png_sticker.openRead(), png_sticker.lengthSync(),
@@ -1526,7 +1526,7 @@ class Telegram {
       int user_id, String name, io.File png_sticker, String emojis,
       {MaskPosition mask_position}) async {
     var requestUrl = '${_baseUrl}${_token}/addStickerToSet';
-    var body = {
+    var body = <String, dynamic>{
       'user_id': user_id,
       'name': name,
       'emojis': emojis,
@@ -1535,7 +1535,7 @@ class Telegram {
 
     if (png_sticker is io.File) {
       // filename cannot be empty to post to Telegram server
-      var files = List.filled(
+      var files = List<http.MultipartFile>.filled(
           1,
           http.MultipartFile(
               'png_sticker', png_sticker.openRead(), png_sticker.lengthSync(),
@@ -1556,7 +1556,7 @@ class Telegram {
   /// https://core.telegram.org/bots/api#setstickerpositioninset
   Future<bool> setStickerPositionInSet(String sticker, int position) async {
     var requestUrl = '${_baseUrl}${_token}/setStickerPositionInSet';
-    var body = {'sticker': sticker, 'position': position};
+    var body = <String, dynamic>{'sticker': sticker, 'position': position};
     return await _client.httpPost(requestUrl, body: body);
   }
 
@@ -1566,7 +1566,7 @@ class Telegram {
   /// https://core.telegram.org/bots/api#deletestickerfromset
   Future<bool> deleteStickerFromSet(String sticker) async {
     var requestUrl = '${_baseUrl}${_token}/deleteStickerFromSet';
-    var body = {'sticker': sticker};
+    var body = <String, dynamic>{'sticker': sticker};
     return await _client.httpPost(requestUrl, body: body);
   }
 
@@ -1583,7 +1583,7 @@ class Telegram {
       String switch_pm_text,
       String switch_pm_parameter}) async {
     var requestUrl = '${_baseUrl}${_token}/answerInlineQuery';
-    var body = {
+    var body = <String, dynamic>{
       'inline_query_id': inline_query_id,
       'results': jsonEncode(results),
       'cache_time': cache_time ?? '',
@@ -1625,7 +1625,7 @@ class Telegram {
       int reply_to_message_id,
       InlineKeyboardMarkup reply_markup}) async {
     var requestUrl = '${_baseUrl}${_token}/sendInvoice';
-    var body = {
+    var body = <String, dynamic>{
       'chat_id': chat_id,
       'title': title,
       'description': description,
@@ -1667,7 +1667,7 @@ class Telegram {
           'Attribute \'shipping_options\' and \'error_message\' can not be null when \'ok\' = false'));
     }
     var requestUrl = '${_baseUrl}${_token}/answerShippingQuery';
-    var body = {
+    var body = <String, dynamic>{
       'shipping_query_id': shipping_query_id,
       'ok': ok,
       'shipping_options':
@@ -1694,7 +1694,7 @@ class Telegram {
           'Attribute \'error_message\' can not be null when \'ok\' = false'));
     }
     var requestUrl = '${_baseUrl}${_token}/answerShippingQuery';
-    var body = {
+    var body = <String, dynamic>{
       'pre_checkout_query_id': pre_checkout_query_id,
       'ok': ok,
       'error_message': error_message ?? ''
@@ -1716,7 +1716,7 @@ class Telegram {
   Future<bool> setPassportDataErrors(
       int user_id, List<PassportElementError> errors) async {
     var requestUrl = '${_baseUrl}${_token}/setPassportDataErrors';
-    var body = {
+    var body = <String, dynamic>{
       'user_id': user_id,
       'errors': jsonEncode(errors)
     };
@@ -1733,7 +1733,7 @@ class Telegram {
       int reply_to_message_id,
       InlineKeyboardMarkup reply_markup}) async {
     var requestUrl = '${_baseUrl}${_token}/sendGame';
-    var body = {
+    var body = <String, dynamic>{
       'chat_id': chat_id,
       'game_short_name': game_short_name,
       'disable_notification': disable_notification ?? '',
@@ -1762,7 +1762,7 @@ class Telegram {
           'Require either \'chat_id\' and \'message_id\', or \'inline_message_id\''));
     }
     var requestUrl = '${_baseUrl}${_token}/setGameScore';
-    var body = {
+    var body = <String, dynamic>{
       'user_id': user_id,
       'score': score,
       'force': force ?? '',
@@ -1793,7 +1793,7 @@ class Telegram {
           'Require either \'chat_id\' and \'message_id\', or \'inline_message_id\''));
     }
     var requestUrl = '${_baseUrl}${_token}/getGameHighScores';
-    var body = {
+    var body = <String, dynamic>{
       'user_id': user_id,
       'chat_id': chat_id ?? '',
       'message_id': message_id ?? '',
