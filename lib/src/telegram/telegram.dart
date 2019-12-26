@@ -110,9 +110,8 @@ class Telegram {
   /// https://core.telegram.org/bots/api#deletewebhook
   ///
   /// [getUpdates]: https://core.telegram.org/bots/api#getupdates
-  Future<bool> deleteWebhook() async {
-    return await _client.httpGet('${_baseUrl}${_token}/deleteWebhook');
-  }
+  Future<bool> deleteWebhook() async =>
+      await _client.httpGet('${_baseUrl}${_token}/deleteWebhook');
 
   /// Use this method to get current webhook status. Requires no parameters.
   /// On success, returns a [WebhookInfo] object.
@@ -122,10 +121,8 @@ class Telegram {
   ///
   /// [WebhookInfo]: https://core.telegram.org/bots/api#webhookinfo
   /// [getUpdates]: https://core.telegram.org/bots/api#getupdates
-  Future<WebhookInfo> getWebhookInfo() async {
-    return WebhookInfo.fromJson(
-        await _client.httpGet('${_baseUrl}${_token}/getWebhookInfo'));
-  }
+  Future<WebhookInfo> getWebhookInfo() async => WebhookInfo.fromJson(
+      await _client.httpGet('${_baseUrl}${_token}/getWebhookInfo'));
 
   /// A simple method for testing your bot's auth token. Requires no parameters.
   /// Returns basic information about the bot in form of a [User] object.
@@ -133,9 +130,8 @@ class Telegram {
   /// https://core.telegram.org/bots/api#getme
   ///
   /// [User]: https://core.telegram.org/bots/api#user
-  Future<User> getMe() async {
-    return User.fromJson(await _client.httpGet('${_baseUrl}${_token}/getMe'));
-  }
+  Future<User> getMe() async =>
+      User.fromJson(await _client.httpGet('${_baseUrl}${_token}/getMe'));
 
   /// Use this method to send text messages. On success, the sent [Message] is returned.
   ///
