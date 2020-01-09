@@ -25,6 +25,7 @@ part of '../model.dart';
 class ChatMember {
   User user;
   String status;
+  String custom_title;
   int until_date;
   bool can_be_edited;
   bool can_post_messages;
@@ -44,6 +45,7 @@ class ChatMember {
   ChatMember(
       {this.user,
       this.status,
+      this.custom_title,
       this.until_date,
       this.can_be_edited,
       this.can_post_messages,

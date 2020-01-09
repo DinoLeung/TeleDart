@@ -39,6 +39,7 @@ class Chat {
   String invite_link;
   Message pinned_message;
   ChatPermissions permissions;
+  int slow_mode_delay;
   String sticker_set_name;
   bool can_set_sticker_set;
   Chat(
@@ -54,6 +55,7 @@ class Chat {
       this.invite_link,
       this.pinned_message,
       this.permissions,
+      this.slow_mode_delay,
       this.sticker_set_name,
       this.can_set_sticker_set});
   factory Chat.fromJson(Map<String, dynamic> json) => _$ChatFromJson(json);
