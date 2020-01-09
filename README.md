@@ -2,14 +2,14 @@
 
 [Telegram](https://telegram.org/) is a popular secured instant messenger. 
 They have an open [bot platform](https://telegram.org/blog/bot-revolution),
-this package is a [Dart](https://www.dartlang.org/) 
+this package is a [Dart](https://dart.dev) 
 implementation of their [bot API](https://core.telegram.org/bots/api)
 allowing you to create your own bot easily.
 
 ![TeleDart](https://raw.githubusercontent.com/DinoLeung/TeleDart/master/example/dash_paper_plane.svg?sanitize=true)
 
 [![Bot API Version](https://img.shields.io/badge/Bot%20API-4.4-blue.svg?style=flat-square)](https://core.telegram.org/bots/api)
-[![Dart Version](https://img.shields.io/badge/Dart-2.2-blue.svg?style=flat-square)](https://www.dartlang.org/dart-2)
+[![Dart Version](https://img.shields.io/badge/Dart-2.7-blue.svg?style=flat-square)](https://dart.dev)
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg?style=flat-square)](https://www.gnu.org/licenses/gpl-3.0)
 
 ## Usage
@@ -22,7 +22,7 @@ import 'package:teledart/telegram.dart';
 import 'package:teledart/model.dart';
 
 void main() {
-  TeleDart teledart = TeleDart(Telegram('YOUR_BOT_TOKEN'), Event());
+  var teledart = TeleDart(Telegram('YOUR_BOT_TOKEN'), Event());
 
   teledart.start().then((me) => print('${me.username} is initialised'));
 

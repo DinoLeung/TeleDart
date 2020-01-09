@@ -1,0 +1,15 @@
+name: Package Analyzer
+
+on: [push, pull_request]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2 # required
+    - uses: axel-op/dart-package-analyzer/with-full-sdk@stable
+      with:
+        # Required:
+        githubToken: ${{ secrets.GITHUB_TOKEN }}
