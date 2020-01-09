@@ -51,12 +51,12 @@ void main() {
               ..title = 'ping'
               ..input_message_content = (InputTextMessageContent()
                 ..message_text = '*pong*'
-                ..parse_mode = 'markdown'),
+                ..parse_mode = 'MarkdownV2'),
             InlineQueryResultArticle()
               ..id = 'ding'
               ..title = 'ding'
               ..input_message_content = (InputTextMessageContent()
                 ..message_text = '_dong_'
-                ..parse_mode = 'markdown')
+                ..parse_mode = 'MarkdownV2')
           ]));
 }

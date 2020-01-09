@@ -987,6 +987,17 @@ class Telegram {
     return await _client.httpPost(requestUrl, body: body);
   }
 
+  Future<bool> setChatAdministratorCustomTitle(
+      int chat_id, int user_id, String custom_title) {
+    var requestUrl = '${_baseUrl}${_token}/setChatAdministratorCustomTitle';
+    var body = <String, dynamic>{
+      'chat_id': chat_id,
+      'user_id': user_id,
+      'custom_title': custom_title
+    };
+    return _client.httpPost(requestUrl, body: body);
+  }
+
   /// Use this method to set default chat permissions for all members.
   /// The bot must be an administrator in the group or a supergroup for this to work and must have the can_restrict_members admin rights.
   /// Returns *True* on success.

@@ -24,6 +24,7 @@ part of '../model.dart';
 @JsonSerializable()
 class Animation {
   String file_id;
+  String file_unique_id;
   int width;
   int height;
   int duration;
@@ -33,6 +34,7 @@ class Animation {
   int file_size;
   Animation(
       {this.file_id,
+      this.file_unique_id,
       this.width,
       this.height,
       this.duration,
