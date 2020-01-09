@@ -1,3 +1,6 @@
+## 0.0.36
+- Support API 4.5
+
 ## 0.0.35
 
 - Follow new styling guide
@@ -6,7 +9,7 @@
 ## 0.0.34
 
 - Support API 4.3
-- Sypport API 4.4
+- Support API 4.4
 
 ## 0.0.33
 
