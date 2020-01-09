@@ -28,12 +28,14 @@ part of '../model.dart';
 @JsonSerializable()
 class Document {
   String file_id;
+  String file_unique_id;
   PhotoSize thumb;
   String file_name;
   String mime_type;
   int file_size;
   Document(
       {this.file_id,
+      this.file_unique_id,
       this.thumb,
       this.file_name,
       this.mime_type,

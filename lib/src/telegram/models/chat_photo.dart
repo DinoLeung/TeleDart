@@ -24,8 +24,14 @@ part of '../model.dart';
 @JsonSerializable()
 class ChatPhoto {
   String small_file_id;
+  String small_file_unique_id;
   String big_file_id;
-  ChatPhoto({this.small_file_id, this.big_file_id});
+  String big_file_unique_id;
+  ChatPhoto(
+      {this.small_file_id,
+      this.small_file_unique_id,
+      this.big_file_id,
+      this.big_file_unique_id});
   factory ChatPhoto.fromJson(Map<String, dynamic> json) =>
       _$ChatPhotoFromJson(json);
   Map<String, dynamic> toJson() => _$ChatPhotoToJson(this);

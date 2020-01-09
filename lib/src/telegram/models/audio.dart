@@ -24,6 +24,7 @@ part of '../model.dart';
 @JsonSerializable()
 class Audio {
   String file_id;
+  String file_unique_id;
   int duration;
   String performer;
   String title;
@@ -32,6 +33,7 @@ class Audio {
   PhotoSize thumb;
   Audio(
       {this.file_id,
+      this.file_unique_id,
       this.duration,
       this.performer,
       this.title,

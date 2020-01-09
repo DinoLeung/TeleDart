@@ -98,6 +98,8 @@ class Event {
             case 'italic':
             case 'code':
             case 'pre':
+            case 'underline':
+            case 'strikethrough':
               return message.getEntity(entityType) == '${keyword}';
               break;
             case 'text_link':
