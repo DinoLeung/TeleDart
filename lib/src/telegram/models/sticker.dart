@@ -24,6 +24,7 @@ part of '../model.dart';
 @JsonSerializable()
 class Sticker {
   String file_id;
+  String file_unique_id;
   int width;
   int height;
   bool is_animated;
@@ -34,6 +35,7 @@ class Sticker {
   int file_size;
   Sticker(
       {this.file_id,
+      this.file_unique_id,
       this.width,
       this.height,
       this.is_animated,

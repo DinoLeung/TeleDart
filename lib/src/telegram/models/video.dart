@@ -24,6 +24,7 @@ part of '../model.dart';
 @JsonSerializable()
 class Video {
   String file_id;
+  String file_unique_id;
   int width;
   int height;
   int duration;
@@ -32,6 +33,7 @@ class Video {
   int file_size;
   Video(
       {this.file_id,
+      this.file_unique_id,
       this.width,
       this.height,
       this.duration,
