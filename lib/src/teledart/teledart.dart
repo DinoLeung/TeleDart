@@ -127,8 +127,10 @@ class TeleDart {
 
   /// Listens to message events with [entityType] and [keyword] in text and caption
   ///
-  /// [entityType] include `mention` (@username), `hashtag`, `cashtag`, `bot_command`,
-  /// `url`, `email`, `phone_number`, `bold` (bold text), `italic` (italic text),
+  /// [entityType] include `mention` (@username), `hashtag` (#hashtag), `cashtag`($USD),
+  /// `bot_command` (/start@jobs_bot), `url` (https://telegram.org),
+  /// `email`(do-not-reply@telegram.org), `phone_number` (+1-212-555-0123), `bold` (bold text),
+  /// `italic` (italic text), `underline` (underlined text), `strikethrough` (strikethrough text),
   /// `code` (monowidth string), `pre` (monowidth block), `text_link` (for
   /// clickable text URLs), `text_mention` (for users without usernames)
   ///
