@@ -151,6 +151,7 @@ Chat _$ChatFromJson(Map<String, dynamic> json) {
     permissions: json['permissions'] == null
         ? null
         : ChatPermissions.fromJson(json['permissions'] as Map<String, dynamic>),
+    slow_mode_delay: json['slow_mode_delay'] as int,
     sticker_set_name: json['sticker_set_name'] as String,
     can_set_sticker_set: json['can_set_sticker_set'] as bool,
   );
@@ -178,6 +179,7 @@ Map<String, dynamic> _$ChatToJson(Chat instance) {
   writeNotNull('invite_link', instance.invite_link);
   writeNotNull('pinned_message', instance.pinned_message);
   writeNotNull('permissions', instance.permissions);
+  writeNotNull('slow_mode_delay', instance.slow_mode_delay);
   writeNotNull('sticker_set_name', instance.sticker_set_name);
   writeNotNull('can_set_sticker_set', instance.can_set_sticker_set);
   return val;
@@ -391,6 +393,7 @@ Map<String, dynamic> _$MessageEntityToJson(MessageEntity instance) {
 PhotoSize _$PhotoSizeFromJson(Map<String, dynamic> json) {
   return PhotoSize(
     file_id: json['file_id'] as String,
+    file_unique_id: json['file_unique_id'] as String,
     width: json['width'] as int,
     height: json['height'] as int,
     file_size: json['file_size'] as int,
@@ -407,6 +410,7 @@ Map<String, dynamic> _$PhotoSizeToJson(PhotoSize instance) {
   }
 
   writeNotNull('file_id', instance.file_id);
+  writeNotNull('file_unique_id', instance.file_unique_id);
   writeNotNull('width', instance.width);
   writeNotNull('height', instance.height);
   writeNotNull('file_size', instance.file_size);
@@ -416,6 +420,7 @@ Map<String, dynamic> _$PhotoSizeToJson(PhotoSize instance) {
 Audio _$AudioFromJson(Map<String, dynamic> json) {
   return Audio(
     file_id: json['file_id'] as String,
+    file_unique_id: json['file_unique_id'] as String,
     duration: json['duration'] as int,
     performer: json['performer'] as String,
     title: json['title'] as String,
@@ -437,6 +442,7 @@ Map<String, dynamic> _$AudioToJson(Audio instance) {
   }
 
   writeNotNull('file_id', instance.file_id);
+  writeNotNull('file_unique_id', instance.file_unique_id);
   writeNotNull('duration', instance.duration);
   writeNotNull('performer', instance.performer);
   writeNotNull('title', instance.title);
@@ -449,6 +455,7 @@ Map<String, dynamic> _$AudioToJson(Audio instance) {
 Document _$DocumentFromJson(Map<String, dynamic> json) {
   return Document(
     file_id: json['file_id'] as String,
+    file_unique_id: json['file_unique_id'] as String,
     thumb: json['thumb'] == null
         ? null
         : PhotoSize.fromJson(json['thumb'] as Map<String, dynamic>),
@@ -468,6 +475,7 @@ Map<String, dynamic> _$DocumentToJson(Document instance) {
   }
 
   writeNotNull('file_id', instance.file_id);
+  writeNotNull('file_unique_id', instance.file_unique_id);
   writeNotNull('thumb', instance.thumb);
   writeNotNull('file_name', instance.file_name);
   writeNotNull('mime_type', instance.mime_type);
@@ -478,6 +486,7 @@ Map<String, dynamic> _$DocumentToJson(Document instance) {
 Video _$VideoFromJson(Map<String, dynamic> json) {
   return Video(
     file_id: json['file_id'] as String,
+    file_unique_id: json['file_unique_id'] as String,
     width: json['width'] as int,
     height: json['height'] as int,
     duration: json['duration'] as int,
@@ -499,6 +508,7 @@ Map<String, dynamic> _$VideoToJson(Video instance) {
   }
 
   writeNotNull('file_id', instance.file_id);
+  writeNotNull('file_unique_id', instance.file_unique_id);
   writeNotNull('width', instance.width);
   writeNotNull('height', instance.height);
   writeNotNull('duration', instance.duration);
@@ -511,6 +521,7 @@ Map<String, dynamic> _$VideoToJson(Video instance) {
 Animation _$AnimationFromJson(Map<String, dynamic> json) {
   return Animation(
     file_id: json['file_id'] as String,
+    file_unique_id: json['file_unique_id'] as String,
     width: json['width'] as int,
     height: json['height'] as int,
     duration: json['duration'] as int,
@@ -533,6 +544,7 @@ Map<String, dynamic> _$AnimationToJson(Animation instance) {
   }
 
   writeNotNull('file_id', instance.file_id);
+  writeNotNull('file_unique_id', instance.file_unique_id);
   writeNotNull('width', instance.width);
   writeNotNull('height', instance.height);
   writeNotNull('duration', instance.duration);
@@ -546,6 +558,7 @@ Map<String, dynamic> _$AnimationToJson(Animation instance) {
 Voice _$VoiceFromJson(Map<String, dynamic> json) {
   return Voice(
     file_id: json['file_id'] as String,
+    file_unique_id: json['file_unique_id'] as String,
     duration: json['duration'] as int,
     mime_type: json['mime_type'] as String,
     file_size: json['file_size'] as int,
@@ -562,6 +575,7 @@ Map<String, dynamic> _$VoiceToJson(Voice instance) {
   }
 
   writeNotNull('file_id', instance.file_id);
+  writeNotNull('file_unique_id', instance.file_unique_id);
   writeNotNull('duration', instance.duration);
   writeNotNull('mime_type', instance.mime_type);
   writeNotNull('file_size', instance.file_size);
@@ -571,6 +585,7 @@ Map<String, dynamic> _$VoiceToJson(Voice instance) {
 VideoNote _$VideoNoteFromJson(Map<String, dynamic> json) {
   return VideoNote(
     file_id: json['file_id'] as String,
+    file_unique_id: json['file_unique_id'] as String,
     length: json['length'] as int,
     duration: json['duration'] as int,
     thumb: json['thumb'] == null
@@ -590,6 +605,7 @@ Map<String, dynamic> _$VideoNoteToJson(VideoNote instance) {
   }
 
   writeNotNull('file_id', instance.file_id);
+  writeNotNull('file_unique_id', instance.file_unique_id);
   writeNotNull('length', instance.length);
   writeNotNull('duration', instance.duration);
   writeNotNull('thumb', instance.thumb);
@@ -778,6 +794,7 @@ Map<String, dynamic> _$UserProfilePhotosToJson(UserProfilePhotos instance) {
 File _$FileFromJson(Map<String, dynamic> json) {
   return File(
     file_id: json['file_id'] as String,
+    file_unique_id: json['file_unique_id'] as String,
     file_size: json['file_size'] as int,
     file_path: json['file_path'] as String,
   );
@@ -793,6 +810,7 @@ Map<String, dynamic> _$FileToJson(File instance) {
   }
 
   writeNotNull('file_id', instance.file_id);
+  writeNotNull('file_unique_id', instance.file_unique_id);
   writeNotNull('file_size', instance.file_size);
   writeNotNull('file_path', instance.file_path);
   return val;
@@ -1005,7 +1023,9 @@ Map<String, dynamic> _$ForceReplyToJson(ForceReply instance) {
 ChatPhoto _$ChatPhotoFromJson(Map<String, dynamic> json) {
   return ChatPhoto(
     small_file_id: json['small_file_id'] as String,
+    small_file_unique_id: json['small_file_unique_id'] as String,
     big_file_id: json['big_file_id'] as String,
+    big_file_unique_id: json['big_file_unique_id'] as String,
   );
 }
 
@@ -1019,7 +1039,9 @@ Map<String, dynamic> _$ChatPhotoToJson(ChatPhoto instance) {
   }
 
   writeNotNull('small_file_id', instance.small_file_id);
+  writeNotNull('small_file_unique_id', instance.small_file_unique_id);
   writeNotNull('big_file_id', instance.big_file_id);
+  writeNotNull('big_file_unique_id', instance.big_file_unique_id);
   return val;
 }
 
@@ -1029,6 +1051,7 @@ ChatMember _$ChatMemberFromJson(Map<String, dynamic> json) {
         ? null
         : User.fromJson(json['user'] as Map<String, dynamic>),
     status: json['status'] as String,
+    custom_title: json['custom_title'] as String,
     until_date: json['until_date'] as int,
     can_be_edited: json['can_be_edited'] as bool,
     can_post_messages: json['can_post_messages'] as bool,
@@ -1059,6 +1082,7 @@ Map<String, dynamic> _$ChatMemberToJson(ChatMember instance) {
 
   writeNotNull('user', instance.user);
   writeNotNull('status', instance.status);
+  writeNotNull('custom_title', instance.custom_title);
   writeNotNull('until_date', instance.until_date);
   writeNotNull('can_be_edited', instance.can_be_edited);
   writeNotNull('can_post_messages', instance.can_post_messages);
@@ -1313,6 +1337,7 @@ Map<String, dynamic> _$InputMediaDocumentToJson(InputMediaDocument instance) {
 Sticker _$StickerFromJson(Map<String, dynamic> json) {
   return Sticker(
     file_id: json['file_id'] as String,
+    file_unique_id: json['file_unique_id'] as String,
     width: json['width'] as int,
     height: json['height'] as int,
     is_animated: json['is_animated'] as bool,
@@ -1338,6 +1363,7 @@ Map<String, dynamic> _$StickerToJson(Sticker instance) {
   }
 
   writeNotNull('file_id', instance.file_id);
+  writeNotNull('file_unique_id', instance.file_unique_id);
   writeNotNull('width', instance.width);
   writeNotNull('height', instance.height);
   writeNotNull('is_animated', instance.is_animated);
@@ -2751,6 +2777,7 @@ Map<String, dynamic> _$PassportDataToJson(PassportData instance) {
 PassportFile _$PassportFileFromJson(Map<String, dynamic> json) {
   return PassportFile(
     file_id: json['file_id'] as String,
+    file_unique_id: json['file_unique_id'] as String,
     file_size: json['file_size'] as int,
     file_date: json['file_date'] as int,
   );
@@ -2766,6 +2793,7 @@ Map<String, dynamic> _$PassportFileToJson(PassportFile instance) {
   }
 
   writeNotNull('file_id', instance.file_id);
+  writeNotNull('file_unique_id', instance.file_unique_id);
   writeNotNull('file_size', instance.file_size);
   writeNotNull('file_date', instance.file_date);
   return val;
