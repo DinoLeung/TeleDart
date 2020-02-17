@@ -164,12 +164,12 @@ class Telegram {
   /// https://core.telegram.org/bots/api#forwardmessage
   ///
   /// [Message]: https://core.telegram.org/bots/api#message
-  Future<Message> forwardMessage(int chat_id, int from_char_id, int message_id,
+  Future<Message> forwardMessage(int chat_id, int from_chat_id, int message_id,
       {bool disable_notification}) async {
     var requestUrl = '${_baseUrl}${_token}/forwardMessage';
     var body = <String, dynamic>{
       'chat_id': chat_id,
-      'from_char_id': from_char_id,
+      'from_chat_id': from_chat_id,
       'message_id': message_id,
       'disable_notification': disable_notification ?? ''
     };
