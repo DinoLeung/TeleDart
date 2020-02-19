@@ -500,7 +500,7 @@ class Telegram {
       return Message.fromJson(
           await _client.httpMultipartPost(requestUrl, files, body: body));
     } else if (animation is String) {
-      body.addAll({'video': animation});
+      body.addAll({'animation': animation});
       if (thumb != null) {
         if (thumb is io.File) {
           return Message.fromJson(await _client.httpMultipartPost(
