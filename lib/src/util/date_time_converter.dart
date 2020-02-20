@@ -16,14 +16,12 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-class DateTimeConverter {
-  DateTime toDateTime(int unixTime) =>
-      DateTime.fromMillisecondsSinceEpoch((unixTime * 1000), isUtc: true);
+DateTime toDateTime(int unixTime) =>
+    DateTime.fromMillisecondsSinceEpoch((unixTime * 1000), isUtc: true);
 
-  int toUnixTime(DateTime datetime) =>
-      (datetime.millisecondsSinceEpoch / 1000).round();
+int toUnixTime(DateTime datetime) =>
+    (datetime.millisecondsSinceEpoch / 1000).round();
 
-  Duration toDuration(int seconds) => Duration(seconds: seconds);
+Duration toDuration(int seconds) => Duration(seconds: seconds);
 
-  int toSeconds(Duration duration) => duration.inSeconds;
-}
+int toSeconds(Duration duration) => duration.inSeconds;
