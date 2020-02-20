@@ -50,6 +50,9 @@ class InlineQueryResultVoice implements InlineQueryResult {
       this.voice_duration,
       this.reply_markup,
       this.input_message_content});
+  Duration get voice_duration_ => toDuration(voice_duration);
+  set voice_duration_(Duration duration) =>
+      voice_duration = toSeconds(duration);
   factory InlineQueryResultVoice.fromJson(Map<String, dynamic> json) =>
       _$InlineQueryResultVoiceFromJson(json);
   @override

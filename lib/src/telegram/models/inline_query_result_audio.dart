@@ -52,6 +52,9 @@ class InlineQueryResultAudio implements InlineQueryResult {
       this.audio_duration,
       this.reply_markup,
       this.input_message_content});
+  Duration get audio_duration_ => toDuration(audio_duration);
+  set audio_duration_(Duration duration) =>
+      audio_duration = toSeconds(duration);
   factory InlineQueryResultAudio.fromJson(Map<String, dynamic> json) =>
       _$InlineQueryResultAudioFromJson(json);
   @override

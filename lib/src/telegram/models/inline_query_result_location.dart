@@ -54,6 +54,8 @@ class InlineQueryResultLocation implements InlineQueryResult {
       this.thumb_url,
       this.thumb_width,
       this.thumb_height});
+  Duration get live_period_ => toDuration(live_period);
+  set live_period_(Duration duration) => live_period = toSeconds(duration);
   factory InlineQueryResultLocation.fromJson(Map<String, dynamic> json) =>
       _$InlineQueryResultLocationFromJson(json);
   @override

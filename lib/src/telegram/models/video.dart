@@ -40,6 +40,8 @@ class Video {
       this.thumb,
       this.mime_type,
       this.file_size});
+  Duration get duration_ => toDuration(duration);
+  set duration_(Duration duration) => this.duration = toSeconds(duration);
   factory Video.fromJson(Map<String, dynamic> json) => _$VideoFromJson(json);
   Map<String, dynamic> toJson() => _$VideoToJson(this);
 }

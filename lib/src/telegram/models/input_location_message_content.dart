@@ -30,6 +30,8 @@ class InputLocationMessageContent implements InputMessageContent {
   int live_period;
   InputLocationMessageContent(
       {this.latitude, this.longitude, this.live_period});
+  Duration get live_period_ => toDuration(live_period);
+  set live_period_(Duration duration) => live_period = toSeconds(duration);
   factory InputLocationMessageContent.fromJson(Map<String, dynamic> json) =>
       _$InputLocationMessageContentFromJson(json);
   @override

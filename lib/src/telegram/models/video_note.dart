@@ -39,6 +39,8 @@ class VideoNote {
       this.duration,
       this.thumb,
       this.file_size});
+  Duration get duration_ => toDuration(duration);
+  set duration_(Duration duration) => this.duration = toSeconds(duration);
   factory VideoNote.fromJson(Map<String, dynamic> json) =>
       _$VideoNoteFromJson(json);
   Map<String, dynamic> toJson() => _$VideoNoteToJson(this);
