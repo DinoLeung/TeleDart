@@ -121,15 +121,12 @@ class Message {
       this.reply_markup});
 
   DateTime get date_ => toDateTime(date);
-
   set date_(DateTime dateTime) => date = toUnixTime(dateTime);
 
   DateTime get forward_date_ => toDateTime(forward_date);
-
   set forward_date_(DateTime dateTime) => forward_date = toUnixTime(dateTime);
 
   DateTime get edit_date_ => toDateTime(edit_date);
-
   set edit_date_(DateTime dateTime) => edit_date = toUnixTime(dateTime);
 
   factory Message.fromJson(Map<String, dynamic> json) =>
