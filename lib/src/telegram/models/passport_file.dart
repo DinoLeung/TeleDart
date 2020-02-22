@@ -30,6 +30,7 @@ class PassportFile {
   int file_date;
   PassportFile(
       {this.file_id, this.file_unique_id, this.file_size, this.file_date});
+  @JsonKey(ignore: true)
   DateTime get file_date_ => toDateTime(file_date);
   set file_date_(DateTime dateTime) => file_date = toUnixTime(dateTime);
   factory PassportFile.fromJson(Map<String, dynamic> json) =>

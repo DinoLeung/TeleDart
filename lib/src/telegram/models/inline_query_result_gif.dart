@@ -53,6 +53,9 @@ class InlineQueryResultGif implements InlineQueryResult {
       this.parse_mode,
       this.reply_markup,
       this.input_message_content});
+  @JsonKey(ignore: true)
+  Duration get gif_duration_ => toDuration(gif_duration);
+  set gif_duration_(Duration duration) => gif_duration = toSeconds(duration);
   factory InlineQueryResultGif.fromJson(Map<String, dynamic> json) =>
       _$InlineQueryResultGifFromJson(json);
   @override

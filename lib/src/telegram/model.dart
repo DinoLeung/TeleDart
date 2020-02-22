@@ -17,7 +17,7 @@
  */
 
 import 'package:json_annotation/json_annotation.dart';
-import '../util/date_time_converter.dart';
+import '../util/datetime_duration_converter.dart';
 
 part 'model.g.dart';
 

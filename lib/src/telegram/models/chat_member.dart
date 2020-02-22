@@ -62,6 +62,7 @@ class ChatMember {
       this.can_send_polls,
       this.can_send_other_messages,
       this.can_add_web_page_previews});
+  @JsonKey(ignore: true)
   DateTime get until_date_ => toDateTime(until_date);
   set until_date_(DateTime dateTime) => until_date = toUnixTime(dateTime);
   factory ChatMember.fromJson(Map<String, dynamic> json) =>

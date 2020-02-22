@@ -42,6 +42,7 @@ class Animation {
       this.file_name,
       this.mime_type,
       this.file_size});
+  @JsonKey(ignore: true)
   Duration get duration_ => toDuration(duration);
   set duration_(Duration duration) => this.duration = toSeconds(duration);
   factory Animation.fromJson(Map<String, dynamic> json) =>

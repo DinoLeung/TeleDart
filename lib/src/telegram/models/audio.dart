@@ -40,6 +40,7 @@ class Audio {
       this.mime_type,
       this.file_size,
       this.thumb});
+  @JsonKey(ignore: true)
   Duration get duration_ => toDuration(duration);
   set duration_(Duration duration) => this.duration = toSeconds(duration);
   factory Audio.fromJson(Map<String, dynamic> json) => _$AudioFromJson(json);
