@@ -28,12 +28,13 @@ class Venue {
   String address;
   String foursquare_id;
   String foursquare_type;
-  Venue(
-      {this.location,
-      this.title,
-      this.address,
-      this.foursquare_id,
-      this.foursquare_type});
+  Venue({
+    this.location,
+    this.title,
+    this.address,
+    this.foursquare_id,
+    this.foursquare_type,
+  });
   factory Venue.fromJson(Map<String, dynamic> json) => _$VenueFromJson(json);
   Map<String, dynamic> toJson() => _$VenueToJson(this);
 }

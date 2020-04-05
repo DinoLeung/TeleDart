@@ -1,6 +1,6 @@
 /**
  * TeleDart - Telegram Bot API for Dart
- * Copyright (C) 2019  Dino PH Leung
+ * Copyright (C) 2020  Dino PH Leung
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,23 +18,18 @@
 
 part of '../model.dart';
 
-/// Represents the [content] of a text message to be sent as the result of an inline query.
+/// This object represents a dice with random value from 1 to 6. (Yes, we're aware of the “proper” singular of die. But it's awkward, and we decided to help it change. One dice at a time!)
 ///
-/// https://core.telegram.org/bots/api#inputtextmessagecontent
-///
-/// [content]: https://core.telegram.org/bots/api#inputmessagecontent
+/// https://core.telegram.org/bots/api#dice
 @JsonSerializable()
-class InputTextMessageContent implements InputMessageContent {
-  String message_text;
-  String parse_mode;
-  bool disable_web_page_preview;
-  InputTextMessageContent({
-    this.message_text,
-    this.parse_mode,
-    this.disable_web_page_preview,
+class BotCommand {
+  String command;
+  String description;
+  BotCommand({
+    this.command,
+    this.description,
   });
-  factory InputTextMessageContent.fromJson(Map<String, dynamic> json) =>
-      _$InputTextMessageContentFromJson(json);
-  @override
-  Map<String, dynamic> toJson() => _$InputTextMessageContentToJson(this);
+  factory BotCommand.fromJson(Map<String, dynamic> json) =>
+      _$BotCommandFromJson(json);
+  Map<String, dynamic> toJson() => _$BotCommandToJson(this);
 }

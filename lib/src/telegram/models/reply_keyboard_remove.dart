@@ -31,7 +31,10 @@ part of '../model.dart';
 class ReplyKeyboardRemove implements ReplyMarkup {
   bool remove_keyboard;
   bool selective;
-  ReplyKeyboardRemove({this.remove_keyboard, this.selective});
+  ReplyKeyboardRemove({
+    this.remove_keyboard,
+    this.selective,
+  });
   factory ReplyKeyboardRemove.fromJson(Map<String, dynamic> json) =>
       _$ReplyKeyboardRemoveFromJson(json);
   @override

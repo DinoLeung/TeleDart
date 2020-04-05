@@ -40,19 +40,20 @@ class InlineQueryResultPhoto implements InlineQueryResult {
   String parse_mode;
   InlineKeyboardMarkup reply_markup;
   InputMessageContent input_message_content;
-  InlineQueryResultPhoto(
-      {this.id,
-      this.type = 'photo',
-      this.photo_url,
-      this.thumb_url,
-      this.photo_width,
-      this.photo_height,
-      this.title,
-      this.description,
-      this.caption,
-      this.parse_mode,
-      this.reply_markup,
-      this.input_message_content});
+  InlineQueryResultPhoto({
+    this.id,
+    this.type = 'photo',
+    this.photo_url,
+    this.thumb_url,
+    this.photo_width,
+    this.photo_height,
+    this.title,
+    this.description,
+    this.caption,
+    this.parse_mode,
+    this.reply_markup,
+    this.input_message_content,
+  });
   factory InlineQueryResultPhoto.fromJson(Map<String, dynamic> json) =>
       _$InlineQueryResultPhotoFromJson(json);
   @override

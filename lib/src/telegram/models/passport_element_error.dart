@@ -36,7 +36,11 @@ class PassportElementError {
   String source;
   String type;
   String message;
-  PassportElementError({this.source, this.type, this.message});
+  PassportElementError({
+    this.source,
+    this.type,
+    this.message,
+  });
   factory PassportElementError.fromJson(Map<String, dynamic> json) =>
       _$PassportElementErrorFromJson(json);
   Map<String, dynamic> toJson() => _$PassportElementErrorToJson(this);

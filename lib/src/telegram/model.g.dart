@@ -43,6 +43,9 @@ Update _$UpdateFromJson(Map<String, dynamic> json) {
     poll: json['poll'] == null
         ? null
         : Poll.fromJson(json['poll'] as Map<String, dynamic>),
+    poll_answer: json['poll_answer'] == null
+        ? null
+        : PollAnswer.fromJson(json['poll_answer'] as Map<String, dynamic>),
   );
 }
 
@@ -66,6 +69,7 @@ Map<String, dynamic> _$UpdateToJson(Update instance) {
   writeNotNull('shipping_query', instance.shipping_query);
   writeNotNull('pre_checkout_query', instance.pre_checkout_query);
   writeNotNull('poll', instance.poll);
+  writeNotNull('poll_answer', instance.poll_answer);
   return val;
 }
 
@@ -109,6 +113,9 @@ User _$UserFromJson(Map<String, dynamic> json) {
     last_name: json['last_name'] as String,
     username: json['username'] as String,
     language_code: json['language_code'] as String,
+    can_join_groups: json['can_join_groups'] as bool,
+    can_read_all_group_messages: json['can_read_all_group_messages'] as bool,
+    supports_inline_queries: json['supports_inline_queries'] as bool,
   );
 }
 
@@ -127,6 +134,10 @@ Map<String, dynamic> _$UserToJson(User instance) {
   writeNotNull('last_name', instance.last_name);
   writeNotNull('username', instance.username);
   writeNotNull('language_code', instance.language_code);
+  writeNotNull('can_join_groups', instance.can_join_groups);
+  writeNotNull(
+      'can_read_all_group_messages', instance.can_read_all_group_messages);
+  writeNotNull('supports_inline_queries', instance.supports_inline_queries);
   return val;
 }
 
@@ -260,6 +271,9 @@ Message _$MessageFromJson(Map<String, dynamic> json) {
     venue: json['venue'] == null
         ? null
         : Venue.fromJson(json['venue'] as Map<String, dynamic>),
+    dice: json['dice'] == null
+        ? null
+        : Dice.fromJson(json['dice'] as Map<String, dynamic>),
     poll: json['poll'] == null
         ? null
         : Poll.fromJson(json['poll'] as Map<String, dynamic>),
@@ -342,6 +356,7 @@ Map<String, dynamic> _$MessageToJson(Message instance) {
   writeNotNull('location', instance.location);
   writeNotNull('venue', instance.venue);
   writeNotNull('poll', instance.poll);
+  writeNotNull('dice', instance.dice);
   writeNotNull('new_chat_members', instance.new_chat_members);
   writeNotNull('left_chat_member', instance.left_chat_member);
   writeNotNull('new_chat_title', instance.new_chat_title);
@@ -370,6 +385,7 @@ MessageEntity _$MessageEntityFromJson(Map<String, dynamic> json) {
     user: json['user'] == null
         ? null
         : User.fromJson(json['user'] as Map<String, dynamic>),
+    language: json['language'] as String,
   );
 }
 
@@ -387,6 +403,7 @@ Map<String, dynamic> _$MessageEntityToJson(MessageEntity instance) {
   writeNotNull('length', instance.length);
   writeNotNull('url', instance.url);
   writeNotNull('user', instance.user);
+  writeNotNull('language', instance.language);
   return val;
 }
 
@@ -642,7 +659,7 @@ Map<String, dynamic> _$ContactToJson(Contact instance) {
 
 LoginUrl _$LoginUrlFromJson(Map<String, dynamic> json) {
   return LoginUrl(
-    json['url'],
+    url: json['url'] as String,
     forward_text: json['forward_text'] as String,
     bot_username: json['bot_username'] as String,
     request_write_access: json['request_write_access'] as bool,
@@ -736,6 +753,31 @@ Map<String, dynamic> _$PollOptionToJson(PollOption instance) {
   return val;
 }
 
+PollAnswer _$PollAnswerFromJson(Map<String, dynamic> json) {
+  return PollAnswer(
+    poll_id: json['poll_id'] as String,
+    user: json['user'] == null
+        ? null
+        : User.fromJson(json['user'] as Map<String, dynamic>),
+    option_ids: (json['option_ids'] as List)?.map((e) => e as int)?.toList(),
+  );
+}
+
+Map<String, dynamic> _$PollAnswerToJson(PollAnswer instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('poll_id', instance.poll_id);
+  writeNotNull('user', instance.user);
+  writeNotNull('option_ids', instance.option_ids);
+  return val;
+}
+
 Poll _$PollFromJson(Map<String, dynamic> json) {
   return Poll(
     id: json['id'] as String,
@@ -744,7 +786,12 @@ Poll _$PollFromJson(Map<String, dynamic> json) {
         ?.map((e) =>
             e == null ? null : PollOption.fromJson(e as Map<String, dynamic>))
         ?.toList(),
+    total_voter_count: json['total_voter_count'] as int,
     is_closed: json['is_closed'] as bool,
+    is_anonymous: json['is_anonymous'] as bool,
+    type: json['type'] as String,
+    allows_multiple_answers: json['allows_multiple_answers'] as bool,
+    correct_option_id: json['correct_option_id'] as int,
   );
 }
 
@@ -760,7 +807,31 @@ Map<String, dynamic> _$PollToJson(Poll instance) {
   writeNotNull('id', instance.id);
   writeNotNull('question', instance.question);
   writeNotNull('options', instance.options);
+  writeNotNull('total_voter_count', instance.total_voter_count);
   writeNotNull('is_closed', instance.is_closed);
+  writeNotNull('is_anonymous', instance.is_anonymous);
+  writeNotNull('type', instance.type);
+  writeNotNull('allows_multiple_answers', instance.allows_multiple_answers);
+  writeNotNull('correct_option_id', instance.correct_option_id);
+  return val;
+}
+
+Dice _$DiceFromJson(Map<String, dynamic> json) {
+  return Dice(
+    value: json['value'] as int,
+  );
+}
+
+Map<String, dynamic> _$DiceToJson(Dice instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('value', instance.value);
   return val;
 }
 
@@ -859,6 +930,10 @@ KeyboardButton _$KeyboardButtonFromJson(Map<String, dynamic> json) {
     text: json['text'] as String,
     request_contact: json['request_contact'] as bool,
     request_location: json['request_location'] as bool,
+    request_poll: json['request_poll'] == null
+        ? null
+        : KeyboardButtonPollType.fromJson(
+            json['request_poll'] as Map<String, dynamic>),
   );
 }
 
@@ -874,6 +949,28 @@ Map<String, dynamic> _$KeyboardButtonToJson(KeyboardButton instance) {
   writeNotNull('text', instance.text);
   writeNotNull('request_contact', instance.request_contact);
   writeNotNull('request_location', instance.request_location);
+  writeNotNull('request_poll', instance.request_poll);
+  return val;
+}
+
+KeyboardButtonPollType _$KeyboardButtonPollTypeFromJson(
+    Map<String, dynamic> json) {
+  return KeyboardButtonPollType(
+    type: json['type'] as String,
+  );
+}
+
+Map<String, dynamic> _$KeyboardButtonPollTypeToJson(
+    KeyboardButtonPollType instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('type', instance.type);
   return val;
 }
 
@@ -1135,6 +1232,27 @@ Map<String, dynamic> _$ChatPermissionsToJson(ChatPermissions instance) {
   return val;
 }
 
+BotCommand _$BotCommandFromJson(Map<String, dynamic> json) {
+  return BotCommand(
+    command: json['command'] as String,
+    description: json['description'] as String,
+  );
+}
+
+Map<String, dynamic> _$BotCommandToJson(BotCommand instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('command', instance.command);
+  writeNotNull('description', instance.description);
+  return val;
+}
+
 ResponseParameters _$ResponseParametersFromJson(Map<String, dynamic> json) {
   return ResponseParameters(
     migrate_to_chat_id: json['migrate_to_chat_id'] as int,
@@ -1385,6 +1503,9 @@ StickerSet _$StickerSetFromJson(Map<String, dynamic> json) {
         ?.map((e) =>
             e == null ? null : Sticker.fromJson(e as Map<String, dynamic>))
         ?.toList(),
+    thumb: json['thumb'] == null
+        ? null
+        : PhotoSize.fromJson(json['thumb'] as Map<String, dynamic>),
   );
 }
 
@@ -1402,6 +1523,7 @@ Map<String, dynamic> _$StickerSetToJson(StickerSet instance) {
   writeNotNull('is_animated', instance.is_animated);
   writeNotNull('contains_masks', instance.contains_masks);
   writeNotNull('stickers', instance.stickers);
+  writeNotNull('thumb', instance.thumb);
   return val;
 }
 

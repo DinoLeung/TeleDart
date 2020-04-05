@@ -35,15 +35,16 @@ class InputMediaAnimation implements InputMedia {
   int width;
   int height;
   int duration;
-  InputMediaAnimation(
-      {this.type = 'animation',
-      this.media,
-      this.thumb,
-      this.caption,
-      this.parse_mode,
-      this.width,
-      this.height,
-      this.duration});
+  InputMediaAnimation({
+    this.type = 'animation',
+    this.media,
+    this.thumb,
+    this.caption,
+    this.parse_mode,
+    this.width,
+    this.height,
+    this.duration,
+  });
   factory InputMediaAnimation.fromJson(Map<String, dynamic> json) =>
       _$InputMediaAnimationFromJson(json);
   @override

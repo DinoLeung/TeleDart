@@ -25,7 +25,10 @@ part of '../model.dart';
 class LabeledPrice {
   String label;
   int amount;
-  LabeledPrice({this.label, this.amount});
+  LabeledPrice({
+    this.label,
+    this.amount,
+  });
   factory LabeledPrice.fromJson(Map<String, dynamic> json) =>
       _$LabeledPriceFromJson(json);
   Map<String, dynamic> toJson() => _$LabeledPriceToJson(this);

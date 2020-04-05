@@ -32,8 +32,13 @@ class PassportElementErrorDataField implements PassportElementError {
   String message;
   String field_name;
   String data_hash;
-  PassportElementErrorDataField(
-      {this.source, this.type, this.message, this.field_name, this.data_hash});
+  PassportElementErrorDataField({
+    this.source,
+    this.type,
+    this.message,
+    this.field_name,
+    this.data_hash,
+  });
   factory PassportElementErrorDataField.fromJson(Map<String, dynamic> json) =>
       _$PassportElementErrorDataFieldFromJson(json);
   @override

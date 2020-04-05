@@ -31,8 +31,12 @@ class PassportElementErrorUnspecified implements PassportElementError {
   @override
   String message;
   String file_hash;
-  PassportElementErrorUnspecified(
-      {this.source, this.type, this.message, this.file_hash});
+  PassportElementErrorUnspecified({
+    this.source,
+    this.type,
+    this.message,
+    this.file_hash,
+  });
   factory PassportElementErrorUnspecified.fromJson(Map<String, dynamic> json) =>
       _$PassportElementErrorUnspecifiedFromJson(json);
   @override

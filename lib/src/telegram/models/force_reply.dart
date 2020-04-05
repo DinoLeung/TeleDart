@@ -47,7 +47,10 @@ part of '../model.dart';
 class ForceReply implements ReplyMarkup {
   bool force_reply;
   bool selective;
-  ForceReply({this.force_reply, this.selective});
+  ForceReply({
+    this.force_reply,
+    this.selective,
+  });
   factory ForceReply.fromJson(Map<String, dynamic> json) =>
       _$ForceReplyFromJson(json);
   @override

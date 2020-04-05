@@ -30,13 +30,14 @@ class Game {
   String text;
   List<MessageEntity> text_entities;
   Animation animation;
-  Game(
-      {this.title,
-      this.description,
-      this.photo,
-      this.text,
-      this.text_entities,
-      this.animation});
+  Game({
+    this.title,
+    this.description,
+    this.photo,
+    this.text,
+    this.text_entities,
+    this.animation,
+  });
   factory Game.fromJson(Map<String, dynamic> json) => _$GameFromJson(json);
   Map<String, dynamic> toJson() => _$GameToJson(this);
 }

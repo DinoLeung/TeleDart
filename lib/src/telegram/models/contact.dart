@@ -28,12 +28,13 @@ class Contact {
   String last_name;
   int user_id;
   String vcard;
-  Contact(
-      {this.phone_number,
-      this.first_name,
-      this.last_name,
-      this.user_id,
-      this.vcard});
+  Contact({
+    this.phone_number,
+    this.first_name,
+    this.last_name,
+    this.user_id,
+    this.vcard,
+  });
   factory Contact.fromJson(Map<String, dynamic> json) =>
       _$ContactFromJson(json);
   Map<String, dynamic> toJson() => _$ContactToJson(this);

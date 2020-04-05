@@ -31,8 +31,12 @@ class PassportElementErrorSelfie implements PassportElementError {
   @override
   String message;
   String file_hash;
-  PassportElementErrorSelfie(
-      {this.source, this.type, this.message, this.file_hash});
+  PassportElementErrorSelfie({
+    this.source,
+    this.type,
+    this.message,
+    this.file_hash,
+  });
   factory PassportElementErrorSelfie.fromJson(Map<String, dynamic> json) =>
       _$PassportElementErrorSelfieFromJson(json);
   @override

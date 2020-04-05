@@ -25,7 +25,10 @@ part of '../model.dart';
 class Location {
   double longitude;
   double latitude;
-  Location({this.longitude, this.latitude});
+  Location({
+    this.longitude,
+    this.latitude,
+  });
   factory Location.fromJson(Map<String, dynamic> json) =>
       _$LocationFromJson(json);
   Map<String, dynamic> toJson(Map<String, dynamic> json) =>

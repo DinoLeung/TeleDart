@@ -64,7 +64,7 @@ class Telegram {
   /// Whenever there is an update for the bot, we will send an HTTPS POST request to the
   /// specified url, containing a JSON-serialized [Update].
   /// In case of an unsuccessful request, we will give up after a reasonable amount of attempts.
-  /// Returns True on success.
+  /// Returns *True* on success.
   /// If you'd like to make sure that the Webhook request comes from Telegram,
   /// we recommend using a secret path in the URL, e.g. `https://www.example.com/<token>`.
   /// Since nobody else knows your bot‘s token, you can be pretty sure it’s us.
@@ -105,7 +105,7 @@ class Telegram {
   }
 
   /// Use this method to remove webhook integration if you decide to switch back to [getUpdates].
-  /// Returns True on success. Requires no parameters.
+  /// Returns *True* on success. Requires no parameters.
   ///
   /// https://core.telegram.org/bots/api#deletewebhook
   ///
@@ -154,7 +154,7 @@ class Telegram {
       'disable_web_page_preview': disable_web_page_preview ?? '',
       'disable_notification': disable_notification ?? '',
       'reply_to_message_id': reply_to_message_id ?? '',
-      'reply_markup': reply_markup == null ? '' : jsonEncode(reply_markup)
+      'reply_markup': reply_markup == null ? '' : jsonEncode(reply_markup),
     };
     return Message.fromJson(await _client.httpPost(requestUrl, body: body));
   }
@@ -171,7 +171,7 @@ class Telegram {
       'chat_id': chat_id,
       'from_chat_id': from_chat_id,
       'message_id': message_id,
-      'disable_notification': disable_notification ?? ''
+      'disable_notification': disable_notification ?? '',
     };
     return Message.fromJson(await _client.httpPost(requestUrl, body: body));
   }
@@ -194,7 +194,7 @@ class Telegram {
       'parse_mode': parse_mode ?? '',
       'disable_notification': disable_notification ?? '',
       'reply_to_message_id': reply_to_message_id ?? '',
-      'reply_markup': reply_markup == null ? '' : jsonEncode(reply_markup)
+      'reply_markup': reply_markup == null ? '' : jsonEncode(reply_markup),
     };
 
     if (photo is io.File) {
@@ -246,7 +246,7 @@ class Telegram {
       'title': title ?? '',
       'disable_notification': disable_notification ?? '',
       'reply_to_message_id': reply_to_message_id ?? '',
-      'reply_markup': reply_markup == null ? '' : jsonEncode(reply_markup)
+      'reply_markup': reply_markup == null ? '' : jsonEncode(reply_markup),
     };
 
     if (audio is io.File) {
@@ -316,7 +316,7 @@ class Telegram {
       'parse_mode': parse_mode ?? '',
       'disable_notification': disable_notification ?? '',
       'reply_to_message_id': reply_to_message_id ?? '',
-      'reply_markup': reply_markup == null ? '' : jsonEncode(reply_markup)
+      'reply_markup': reply_markup == null ? '' : jsonEncode(reply_markup),
     };
 
     if (document is io.File) {
@@ -398,7 +398,7 @@ class Telegram {
       'supports_streaming': supports_streaming ?? '',
       'disable_notification': disable_notification ?? '',
       'reply_to_message_id': reply_to_message_id ?? '',
-      'reply_markup': reply_markup == null ? '' : jsonEncode(reply_markup)
+      'reply_markup': reply_markup == null ? '' : jsonEncode(reply_markup),
     };
 
     if (video is io.File) {
@@ -475,7 +475,7 @@ class Telegram {
       'parse_mode': parse_mode ?? '',
       'disable_notification': disable_notification ?? '',
       'reply_to_message_id': reply_to_message_id ?? '',
-      'reply_markup': reply_markup == null ? '' : jsonEncode(reply_markup)
+      'reply_markup': reply_markup == null ? '' : jsonEncode(reply_markup),
     };
 
     if (animation is io.File) {
@@ -553,7 +553,7 @@ class Telegram {
       'duration': duration ?? '',
       'disable_notification': disable_notification ?? '',
       'reply_to_message_id': reply_to_message_id ?? '',
-      'reply_markup': reply_markup == null ? '' : jsonEncode(reply_markup)
+      'reply_markup': reply_markup == null ? '' : jsonEncode(reply_markup),
     };
 
     if (voice is io.File) {
@@ -594,7 +594,7 @@ class Telegram {
       'length': length ?? '',
       'disable_notification': disable_notification ?? '',
       'reply_to_message_id': reply_to_message_id ?? '',
-      'reply_markup': reply_markup == null ? '' : jsonEncode(reply_markup)
+      'reply_markup': reply_markup == null ? '' : jsonEncode(reply_markup),
     };
 
     if (video_note is io.File) {
@@ -661,7 +661,7 @@ class Telegram {
       'chat_id': chat_id,
       'media': jsonEncode(media),
       'disable_notification': disable_notification ?? '',
-      'reply_to_message_id': reply_to_message_id ?? ''
+      'reply_to_message_id': reply_to_message_id ?? '',
     };
     return (await _client.httpPost(requestUrl, body: body))
         .map<Message>((message) => Message.fromJson(message))
@@ -685,7 +685,7 @@ class Telegram {
       'longitude': longitude,
       'disable_notification': disable_notification ?? '',
       'reply_to_message_id': reply_to_message_id ?? '',
-      'reply_markup': reply_markup == null ? '' : jsonEncode(reply_markup)
+      'reply_markup': reply_markup == null ? '' : jsonEncode(reply_markup),
     };
     return Message.fromJson(await _client.httpPost(requestUrl, body: body));
   }
@@ -718,7 +718,7 @@ class Telegram {
       'chat_id': chat_id ?? '',
       'message_id': message_id ?? '',
       'inline_message_id': inline_message_id ?? '',
-      'reply_markup': reply_markup == null ? '' : jsonEncode(reply_markup)
+      'reply_markup': reply_markup == null ? '' : jsonEncode(reply_markup),
     };
     return Message.fromJson(await _client.httpPost(requestUrl, body: body));
   }
@@ -746,7 +746,7 @@ class Telegram {
       'chat_id': chat_id ?? '',
       'message_id': message_id ?? '',
       'inline_message_id': inline_message_id ?? '',
-      'reply_markup': reply_markup == null ? '' : jsonEncode(reply_markup)
+      'reply_markup': reply_markup == null ? '' : jsonEncode(reply_markup),
     };
     return Message.fromJson(await _client.httpPost(requestUrl, body: body));
   }
@@ -774,7 +774,7 @@ class Telegram {
       'foursquare_type': foursquare_type ?? '',
       'disable_notification': disable_notification ?? '',
       'reply_to_message_id': reply_to_message_id ?? '',
-      'reply_markup': reply_markup == null ? '' : jsonEncode(reply_markup)
+      'reply_markup': reply_markup == null ? '' : jsonEncode(reply_markup),
     };
     return Message.fromJson(await _client.httpPost(requestUrl, body: body));
   }
@@ -800,7 +800,7 @@ class Telegram {
       'vcard': vcard ?? '',
       'disable_notification': disable_notification ?? '',
       'reply_to_message_id': reply_to_message_id ?? '',
-      'reply_markup': reply_markup == null ? '' : jsonEncode(reply_markup)
+      'reply_markup': reply_markup == null ? '' : jsonEncode(reply_markup),
     };
     return Message.fromJson(await _client.httpPost(requestUrl, body: body));
   }
@@ -812,7 +812,12 @@ class Telegram {
   ///
   /// [Message]: https://core.telegram.org/bots/api#message
   Future<Message> sendPoll(int chat_id, String question, List<String> options,
-      {bool disable_notification,
+      {bool is_anonymous,
+      String type,
+      bool allows_multiple_answers,
+      int correct_option_id,
+      bool is_closed,
+      bool disable_notification,
       int reply_to_message_id,
       ReplyMarkup reply_markup}) async {
     var requestUrl = '${_baseUrl}${_token}/sendPoll';
@@ -820,9 +825,31 @@ class Telegram {
       'chat_id': chat_id,
       'question': question,
       'options': jsonEncode(options),
+      'is_anonymous': is_anonymous ?? '',
+      'type': type ?? '',
+      'allows_multiple_answers': allows_multiple_answers ?? '',
+      'correct_option_id': correct_option_id ?? '',
+      'is_closed': is_closed ?? '',
       'disable_notification': disable_notification ?? '',
       'reply_to_message_id': reply_to_message_id ?? '',
-      'reply_markup': reply_markup == null ? '' : jsonEncode(reply_markup)
+      'reply_markup': reply_markup == null ? '' : jsonEncode(reply_markup),
+    };
+    return Message.fromJson(await _client.httpPost(requestUrl, body: body));
+  }
+
+  /// Use this method to send a dice, which will have a random value from 1 to 6. On success,
+  /// the sent Message is returned. (Yes, we're aware of the “proper” singular of die.
+  /// But it's awkward, and we decided to help it change. One dice at a time!)
+  Future<Message> sendDice(int chat_id,
+      {bool disable_notification,
+      int reply_to_message_id,
+      ReplyMarkup reply_markup}) async {
+    var requestUrl = '${_baseUrl}${_token}/sendDice';
+    var body = <String, dynamic>{
+      'chat_id': chat_id,
+      'disable_notification': disable_notification ?? '',
+      'reply_to_message_id': reply_to_message_id ?? '',
+      'reply_markup': reply_markup == null ? '' : jsonEncode(reply_markup),
     };
     return Message.fromJson(await _client.httpPost(requestUrl, body: body));
   }
@@ -861,7 +888,7 @@ class Telegram {
     var body = <String, dynamic>{
       'user_id': user_id,
       'offset': offset ?? '',
-      'limit': limit ?? ''
+      'limit': limit ?? '',
     };
     return UserProfilePhotos.fromJson(
         await _client.httpPost(requestUrl, body: body));
@@ -908,7 +935,7 @@ class Telegram {
     var body = <String, dynamic>{
       'chat_id': chat_id,
       'user_id': user_id,
-      'until_date': until_date ?? ''
+      'until_date': until_date ?? '',
     };
     return await _client.httpPost(requestUrl, body: body);
   }
@@ -921,7 +948,10 @@ class Telegram {
   /// https://core.telegram.org/bots/api#unbanchatmember
   Future<bool> unbanChatMember(int chat_id, int user_id) async {
     var requestUrl = '${_baseUrl}${_token}/unbanChatMember';
-    var body = <String, dynamic>{'chat_id': chat_id, 'user_id': user_id};
+    var body = <String, dynamic>{
+      'chat_id': chat_id,
+      'user_id': user_id,
+    };
     return await _client.httpPost(requestUrl, body: body);
   }
 
@@ -951,7 +981,7 @@ class Telegram {
       'can_send_messages': can_send_messages ?? '',
       'can_send_media_messages': can_send_media_messages ?? '',
       'can_send_other_messages': can_send_other_messages ?? '',
-      'can_add_web_page_previews': can_add_web_page_previews ?? ''
+      'can_add_web_page_previews': can_add_web_page_previews ?? '',
     };
     return await _client.httpPost(requestUrl, body: body);
   }
@@ -982,7 +1012,7 @@ class Telegram {
       'can_invite_users': can_invite_users ?? '',
       'can_restrict_members': can_restrict_members ?? '',
       'can_pin_messages': can_pin_messages ?? '',
-      'can_promote_members': can_promote_members ?? ''
+      'can_promote_members': can_promote_members ?? '',
     };
     return await _client.httpPost(requestUrl, body: body);
   }
@@ -993,7 +1023,7 @@ class Telegram {
     var body = <String, dynamic>{
       'chat_id': chat_id,
       'user_id': user_id,
-      'custom_title': custom_title
+      'custom_title': custom_title,
     };
     return _client.httpPost(requestUrl, body: body);
   }
@@ -1006,7 +1036,7 @@ class Telegram {
     var requestUrl = '${_baseUrl}${_token}/setChatPermissions';
     var body = <String, dynamic>{
       'chat_id': chat_id,
-      'permissions': jsonEncode(permissions)
+      'permissions': jsonEncode(permissions),
     };
     return _client.httpPost(requestUrl, body: body);
   }
@@ -1069,7 +1099,10 @@ class Telegram {
   /// https://core.telegram.org/bots/api#setchattitle
   Future<bool> setChatTitle(int chat_id, String title) async {
     var requestUrl = '${_baseUrl}${_token}/setChatTitle';
-    var body = <String, dynamic>{'chat_id': chat_id, 'title': title};
+    var body = <String, dynamic>{
+      'chat_id': chat_id,
+      'title': title,
+    };
     return await _client.httpPost(requestUrl, body: body);
   }
 
@@ -1082,7 +1115,7 @@ class Telegram {
     var requestUrl = '${_baseUrl}${_token}/setChatDescription';
     var body = <String, dynamic>{
       'chat_id': chat_id,
-      'description': description ?? ''
+      'description': description ?? '',
     };
     return await _client.httpPost(requestUrl, body: body);
   }
@@ -1099,7 +1132,7 @@ class Telegram {
     var body = <String, dynamic>{
       'chat_id': chat_id,
       'message_id': message_id,
-      'disable_notification': disable_notification ?? ''
+      'disable_notification': disable_notification ?? '',
     };
     return await _client.httpPost(requestUrl, body: body);
   }
@@ -1173,7 +1206,10 @@ class Telegram {
   /// [ChatMember]: https://core.telegram.org/bots/api#chatmember
   Future<ChatMember> getChatMember(int chat_id, int user_id) async {
     var requestUrl = '${_baseUrl}${_token}/getChatMember';
-    var body = <String, dynamic>{'chat_id': chat_id, 'user_id': user_id};
+    var body = <String, dynamic>{
+      'chat_id': chat_id,
+      'user_id': user_id,
+    };
     return ChatMember.fromJson(await _client.httpPost(requestUrl, body: body));
   }
 
@@ -1191,7 +1227,7 @@ class Telegram {
     var requestUrl = '${_baseUrl}${_token}/setChatStickerSet';
     var body = <String, dynamic>{
       'chat_id': chat_id,
-      'sticker_set_name': sticker_set_name
+      'sticker_set_name': sticker_set_name,
     };
     return await _client.httpPost(requestUrl, body: body);
   }
@@ -1233,10 +1269,26 @@ class Telegram {
       'text': text ?? '',
       'show_alert': show_alert ?? '',
       'url': url ?? '',
-      'cache_time': cache_time ?? ''
+      'cache_time': cache_time ?? '',
     };
     return await _client.httpPost(requestUrl, body: body);
   }
+
+  /// Use this method to change the list of the bot's commands. Returns *True* on success.
+  Future<bool> setMyCommands(List<BotCommand> commands) async {
+    var requestUrl = '${_baseUrl}${_token}/setMyCommands';
+    var body = <String, dynamic>{'commands': jsonEncode(commands)};
+    return await _client.httpPost(requestUrl, body: body);
+  }
+
+  /// Use this method to get the current list of the bot's commands. Requires no parameters.
+  /// Returns Array of [BotCommand] on success.
+  ///
+  /// [BotCommand]: https://core.telegram.org/bots/api#botcommand
+  Future<List<BotCommand>> getMyCommands() async =>
+      (await _client.httpGet('${_baseUrl}${_token}/getMyCommands'))
+          .map<BotCommand>((botCommand) => BotCommand.fromJson(botCommand))
+          .toList();
 
   /// Use this method to edit text and [game] messages sent by the bot or via the bot
   /// (for [inline bots]).
@@ -1267,7 +1319,7 @@ class Telegram {
       'text': text,
       'parse_mode': parse_mode ?? '',
       'disable_web_page_preview': disable_web_page_preview ?? '',
-      'reply_markup': reply_markup == null ? '' : jsonEncode(reply_markup)
+      'reply_markup': reply_markup == null ? '' : jsonEncode(reply_markup),
     };
     var res = await _client.httpPost(requestUrl, body: body);
     if (res == true) {
@@ -1305,7 +1357,7 @@ class Telegram {
       'inline_message_id': inline_message_id ?? '',
       'caption': caption ?? '',
       'parse_mode': parse_mode ?? '',
-      'reply_markup': reply_markup == null ? '' : jsonEncode(reply_markup)
+      'reply_markup': reply_markup == null ? '' : jsonEncode(reply_markup),
     };
     var res = await _client.httpPost(requestUrl, body: body);
     if (res == true) {
@@ -1345,7 +1397,7 @@ class Telegram {
       'inline_message_id': inline_message_id ?? '',
       'media': media == null ? '' : jsonEncode(media),
       'parse_mode': parse_mode ?? '',
-      'reply_markup': reply_markup == null ? '' : jsonEncode(reply_markup)
+      'reply_markup': reply_markup == null ? '' : jsonEncode(reply_markup),
     };
     var res = await _client.httpPost(requestUrl, body: body);
     if (res == true) {
@@ -1379,7 +1431,7 @@ class Telegram {
       'chat_id': chat_id ?? '',
       'message_id': message_id ?? '',
       'inline_message_id': inline_message_id ?? '',
-      'reply_markup': reply_markup == null ? '' : jsonEncode(reply_markup)
+      'reply_markup': reply_markup == null ? '' : jsonEncode(reply_markup),
     };
     var res = await _client.httpPost(requestUrl, body: body);
     if (res == true) {
@@ -1402,7 +1454,7 @@ class Telegram {
     var body = <String, dynamic>{
       'chat_id': chat_id,
       'message_id': message_id,
-      'reply_markup': reply_markup
+      'reply_markup': reply_markup,
     };
     return Poll.fromJson(await _client.httpPost(requestUrl, body: body));
   }
@@ -1419,7 +1471,10 @@ class Telegram {
   /// https://core.telegram.org/bots/api#deletemessage
   Future<bool> deleteMessage(int chat_id, int message_id) async {
     var requestUrl = '${_baseUrl}${_token}/deleteMessage';
-    var body = <String, dynamic>{'chat_id': chat_id, 'message_id': message_id};
+    var body = <String, dynamic>{
+      'chat_id': chat_id,
+      'message_id': message_id,
+    };
     return await _client.httpPost(requestUrl, body: body);
   }
 
@@ -1437,7 +1492,7 @@ class Telegram {
       'chat_id': chat_id,
       'disable_notification': disable_notification ?? '',
       'reply_to_message_id': reply_to_message_id ?? '',
-      'reply_markup': reply_markup == null ? '' : jsonEncode(reply_markup)
+      'reply_markup': reply_markup == null ? '' : jsonEncode(reply_markup),
     };
 
     if (sticker is io.File) {
@@ -1491,12 +1546,16 @@ class Telegram {
 
   /// Use this method to create sticker set owned by a user.
   /// The bot will be able to edit the created sticker set.
+  /// You must use exactly one of the fields png_sticker or tgs_sticker.
   /// Returns *True* on success.
   ///
   /// https://core.telegram.org/bots/api#createnewstickerset
-  Future<bool> createNewStickerSet(int user_id, String name, String title,
-      dynamic png_sticker, String emojis,
-      {bool contains_masks, MaskPosition mask_position}) async {
+  Future<bool> createNewStickerSet(
+      int user_id, String name, String title, String emojis,
+      {dynamic png_sticker,
+      io.File tgs_sticker,
+      bool contains_masks,
+      MaskPosition mask_position}) async {
     var requestUrl = '${_baseUrl}${_token}/createNewStickerSet';
     var botInfo = await getMe();
     var body = <String, dynamic>{
@@ -1505,10 +1564,21 @@ class Telegram {
       'title': title,
       'emojis': emojis,
       'contains_masks': contains_masks ?? '',
-      'mask_position': mask_position == null ? '' : jsonEncode(mask_position)
+      'mask_position': mask_position == null ? '' : jsonEncode(mask_position),
     };
 
-    if (png_sticker is io.File) {
+    if (tgs_sticker == null && png_sticker == null) {
+      return Future.error(TelegramException(
+          'You must use exactly one of the fields \`png_sticker\` or \`tgs_sticker\`.'));
+    } else if (tgs_sticker != null) {
+      // filename cannot be empty to post to Telegram server
+      var files = List<http.MultipartFile>.filled(
+          1,
+          http.MultipartFile(
+              'tgs_sticker', tgs_sticker.openRead(), tgs_sticker.lengthSync(),
+              filename: '${tgs_sticker.lengthSync()}'));
+      return await _client.httpMultipartPost(requestUrl, files, body: body);
+    } else if (png_sticker is io.File) {
       // filename cannot be empty to post to Telegram server
       var files = List<http.MultipartFile>.filled(
           1,
@@ -1525,22 +1595,38 @@ class Telegram {
     }
   }
 
-  /// Use this method to add a sticker to a set created by the bot.
+  /// Use this method to add a new sticker to a set created by the bot.
+  /// You must use exactly one of the fields png_sticker or tgs_sticker.
+  /// Animated stickers can be added to animated sticker sets and only to them.
+  /// Animated sticker sets can have up to 50 stickers.
+  /// Static sticker sets can have up to 120 stickers.
   /// Returns *True* on success.
   ///
   /// https://core.telegram.org/bots/api#addstickertoset
-  Future<bool> addStickerToSet(
-      int user_id, String name, io.File png_sticker, String emojis,
-      {MaskPosition mask_position}) async {
+  Future<bool> addStickerToSet(int user_id, String name, String emojis,
+      {dynamic png_sticker,
+      io.File tgs_sticker,
+      MaskPosition mask_position}) async {
     var requestUrl = '${_baseUrl}${_token}/addStickerToSet';
     var body = <String, dynamic>{
       'user_id': user_id,
       'name': name,
       'emojis': emojis,
-      'mask_position': mask_position == null ? '' : jsonEncode(mask_position)
+      'mask_position': mask_position == null ? '' : jsonEncode(mask_position),
     };
 
-    if (png_sticker is io.File) {
+    if (tgs_sticker == null && png_sticker == null) {
+      return Future.error(TelegramException(
+          'You must use exactly one of the fields \`png_sticker\` or \`tgs_sticker\`.'));
+    } else if (tgs_sticker != null) {
+      // filename cannot be empty to post to Telegram server
+      var files = List<http.MultipartFile>.filled(
+          1,
+          http.MultipartFile(
+              'tgs_sticker', tgs_sticker.openRead(), tgs_sticker.lengthSync(),
+              filename: '${tgs_sticker.lengthSync()}'));
+      return await _client.httpMultipartPost(requestUrl, files, body: body);
+    } else if (png_sticker is io.File) {
       // filename cannot be empty to post to Telegram server
       var files = List<http.MultipartFile>.filled(
           1,
@@ -1563,7 +1649,10 @@ class Telegram {
   /// https://core.telegram.org/bots/api#setstickerpositioninset
   Future<bool> setStickerPositionInSet(String sticker, int position) async {
     var requestUrl = '${_baseUrl}${_token}/setStickerPositionInSet';
-    var body = <String, dynamic>{'sticker': sticker, 'position': position};
+    var body = <String, dynamic>{
+      'sticker': sticker,
+      'position': position,
+    };
     return await _client.httpPost(requestUrl, body: body);
   }
 
@@ -1575,6 +1664,34 @@ class Telegram {
     var requestUrl = '${_baseUrl}${_token}/deleteStickerFromSet';
     var body = <String, dynamic>{'sticker': sticker};
     return await _client.httpPost(requestUrl, body: body);
+  }
+
+  /// Use this method to set the thumbnail of a sticker set.
+  /// Animated thumbnails can be set for animated sticker sets only.
+  /// Returns *True* on success.
+  Future<bool> setStickerSetThumb(String name, int user_id,
+      {dynamic thumb}) async {
+    var requestUrl = '${_baseUrl}${_token}/setStickerSetThumb';
+    var body = <String, dynamic>{
+      'name': name,
+      'user_id': user_id,
+    };
+    if (thumb == null) {
+      return await _client.httpPost(requestUrl, body: body);
+    } else if (thumb is io.File) {
+      // filename cannot be empty to post to Telegram server
+      var files = List<http.MultipartFile>.filled(
+          1,
+          http.MultipartFile('thumb', thumb.openRead(), thumb.lengthSync(),
+              filename: '${thumb.lengthSync()}'));
+      return await _client.httpMultipartPost(requestUrl, files, body: body);
+    } else if (thumb is String) {
+      body.addAll({'thumb': thumb});
+      return await _client.httpPost(requestUrl, body: body);
+    } else {
+      return Future.error(TelegramException(
+          'Attribute \'thumb\' can only be either io.File or String (Telegram file_id or image url)'));
+    }
   }
 
   /// Use this method to send answers to an inline query.
@@ -1597,7 +1714,7 @@ class Telegram {
       'is_personal': is_personal ?? '',
       'next_offset': next_offset ?? '',
       'switch_pm_text': switch_pm_text ?? '',
-      'switch_pm_parameter': switch_pm_parameter ?? ''
+      'switch_pm_parameter': switch_pm_parameter ?? '',
     };
     return await _client.httpPost(requestUrl, body: body);
   }
@@ -1655,7 +1772,7 @@ class Telegram {
       'is_flexible': is_flexible ?? '',
       'disable_notification': disable_notification ?? '',
       'reply_to_message_id': reply_to_message_id ?? '',
-      'reply_markup': reply_markup == null ? '' : jsonEncode(reply_markup)
+      'reply_markup': reply_markup == null ? '' : jsonEncode(reply_markup),
     };
     return Message.fromJson(await _client.httpPost(requestUrl, body: body));
   }
@@ -1679,7 +1796,7 @@ class Telegram {
       'ok': ok,
       'shipping_options':
           shipping_options == null ? '' : jsonEncode(shipping_options),
-      'error_message': error_message ?? ''
+      'error_message': error_message ?? '',
     };
     return await _client.httpPost(requestUrl, body: body);
   }
@@ -1704,7 +1821,7 @@ class Telegram {
     var body = <String, dynamic>{
       'pre_checkout_query_id': pre_checkout_query_id,
       'ok': ok,
-      'error_message': error_message ?? ''
+      'error_message': error_message ?? '',
     };
     return await _client.httpPost(requestUrl, body: body);
   }
@@ -1725,7 +1842,7 @@ class Telegram {
     var requestUrl = '${_baseUrl}${_token}/setPassportDataErrors';
     var body = <String, dynamic>{
       'user_id': user_id,
-      'errors': jsonEncode(errors)
+      'errors': jsonEncode(errors),
     };
     return await _client.httpPost(requestUrl, body: body);
   }
@@ -1745,7 +1862,7 @@ class Telegram {
       'game_short_name': game_short_name,
       'disable_notification': disable_notification ?? '',
       'reply_to_message_id': reply_to_message_id ?? '',
-      'reply_markup': reply_markup == null ? '' : jsonEncode(reply_markup)
+      'reply_markup': reply_markup == null ? '' : jsonEncode(reply_markup),
     };
     return Message.fromJson(await _client.httpPost(requestUrl, body: body));
   }
@@ -1776,7 +1893,7 @@ class Telegram {
       'disable_edit_message': disable_edit_message ?? '',
       'chat_id': chat_id ?? '',
       'message_id': message_id ?? '',
-      'inline_message_id': inline_message_id ?? ''
+      'inline_message_id': inline_message_id ?? '',
     };
     return Message.fromJson(await _client.httpPost(requestUrl, body: body));
   }
@@ -1804,7 +1921,7 @@ class Telegram {
       'user_id': user_id,
       'chat_id': chat_id ?? '',
       'message_id': message_id ?? '',
-      'inline_message_id': inline_message_id ?? ''
+      'inline_message_id': inline_message_id ?? '',
     };
     return (await _client.httpPost(requestUrl, body: body))
         .map<GameHighScore>(

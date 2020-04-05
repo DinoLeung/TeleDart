@@ -31,15 +31,16 @@ class ChatPermissions {
   bool can_change_info;
   bool can_invite_users;
   bool can_pin_messages;
-  ChatPermissions(
-      {this.can_send_messages,
-      this.can_send_media_messages,
-      this.can_send_polls,
-      this.can_send_other_messages,
-      this.can_add_web_page_previews,
-      this.can_change_info,
-      this.can_invite_users,
-      this.can_pin_messages});
+  ChatPermissions({
+    this.can_send_messages,
+    this.can_send_media_messages,
+    this.can_send_polls,
+    this.can_send_other_messages,
+    this.can_add_web_page_previews,
+    this.can_change_info,
+    this.can_invite_users,
+    this.can_pin_messages,
+  });
   factory ChatPermissions.fromJson(Map<String, dynamic> json) =>
       _$ChatPermissionsFromJson(json);
   Map<String, dynamic> toJson(Map<String, dynamic> json) =>

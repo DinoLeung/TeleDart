@@ -38,14 +38,15 @@ class InlineQueryResultCachedAudio implements InlineQueryResult {
   String parse_mode;
   InlineKeyboardMarkup reply_markup;
   InputMessageContent input_message_content;
-  InlineQueryResultCachedAudio(
-      {this.id,
-      this.type = 'audio',
-      this.audio_file_id,
-      this.caption,
-      this.parse_mode,
-      this.reply_markup,
-      this.input_message_content});
+  InlineQueryResultCachedAudio({
+    this.id,
+    this.type = 'audio',
+    this.audio_file_id,
+    this.caption,
+    this.parse_mode,
+    this.reply_markup,
+    this.input_message_content,
+  });
   factory InlineQueryResultCachedAudio.fromJson(Map<String, dynamic> json) =>
       _$InlineQueryResultCachedAudioFromJson(json);
   @override

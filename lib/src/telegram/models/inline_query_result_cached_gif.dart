@@ -36,15 +36,16 @@ class InlineQueryResultCachedGif implements InlineQueryResult {
   String parse_mode;
   InlineKeyboardMarkup reply_markup;
   InputMessageContent input_message_content;
-  InlineQueryResultCachedGif(
-      {this.id,
-      this.type = 'gif',
-      this.gif_file_id,
-      this.title,
-      this.caption,
-      this.parse_mode,
-      this.reply_markup,
-      this.input_message_content});
+  InlineQueryResultCachedGif({
+    this.id,
+    this.type = 'gif',
+    this.gif_file_id,
+    this.title,
+    this.caption,
+    this.parse_mode,
+    this.reply_markup,
+    this.input_message_content,
+  });
   factory InlineQueryResultCachedGif.fromJson(Map<String, dynamic> json) =>
       _$InlineQueryResultCachedGifFromJson(json);
   @override
