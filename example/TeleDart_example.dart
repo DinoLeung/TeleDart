@@ -31,6 +31,10 @@ void main() {
       .onCommand('short')
       .listen(((message) => teledart.replyMessage(message, 'This works too!')));
 
+  // You can also utilise regular expressions
+  teledart.onCommand(RegExp('hello', caseSensitive: false)).listen(
+      (message) => teledart.telegram.sendMessage(message.chat.id, 'hi!'));
+
   // You can even filter streams with stream processing methods
   // See: https://www.dartlang.org/tutorials/language/streams#methods-that-modify-a-stream
   teledart
