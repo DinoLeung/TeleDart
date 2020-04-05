@@ -41,17 +41,18 @@ class InlineQueryResultAudio implements InlineQueryResult {
   int audio_duration;
   InlineKeyboardMarkup reply_markup;
   InputMessageContent input_message_content;
-  InlineQueryResultAudio(
-      {this.id,
-      this.type = 'audio',
-      this.audio_url,
-      this.title,
-      this.caption,
-      this.parse_mode,
-      this.performer,
-      this.audio_duration,
-      this.reply_markup,
-      this.input_message_content});
+  InlineQueryResultAudio({
+    this.id,
+    this.type = 'audio',
+    this.audio_url,
+    this.title,
+    this.caption,
+    this.parse_mode,
+    this.performer,
+    this.audio_duration,
+    this.reply_markup,
+    this.input_message_content,
+  });
   factory InlineQueryResultAudio.fromJson(Map<String, dynamic> json) =>
       _$InlineQueryResultAudioFromJson(json);
   @override

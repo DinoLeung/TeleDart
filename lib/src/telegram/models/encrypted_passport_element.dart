@@ -33,17 +33,18 @@ class EncryptedPassportElement {
   PassportFile selfie;
   List<PassportFile> translation;
   String hash;
-  EncryptedPassportElement(
-      {this.type,
-      this.data,
-      this.phone_number,
-      this.email,
-      this.files,
-      this.front_side,
-      this.reverse_side,
-      this.selfie,
-      this.translation,
-      this.hash});
+  EncryptedPassportElement({
+    this.type,
+    this.data,
+    this.phone_number,
+    this.email,
+    this.files,
+    this.front_side,
+    this.reverse_side,
+    this.selfie,
+    this.translation,
+    this.hash,
+  });
   factory EncryptedPassportElement.fromJson(Map<String, dynamic> json) =>
       _$EncryptedPassportElementFromJson(json);
   Map<String, dynamic> toJson() => _$EncryptedPassportElementToJson(this);

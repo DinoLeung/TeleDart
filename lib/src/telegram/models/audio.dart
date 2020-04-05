@@ -31,15 +31,16 @@ class Audio {
   String mime_type;
   int file_size;
   PhotoSize thumb;
-  Audio(
-      {this.file_id,
-      this.file_unique_id,
-      this.duration,
-      this.performer,
-      this.title,
-      this.mime_type,
-      this.file_size,
-      this.thumb});
+  Audio({
+    this.file_id,
+    this.file_unique_id,
+    this.duration,
+    this.performer,
+    this.title,
+    this.mime_type,
+    this.file_size,
+    this.thumb,
+  });
   factory Audio.fromJson(Map<String, dynamic> json) => _$AudioFromJson(json);
   Map<String, dynamic> toJson() => _$AudioToJson(this);
 }

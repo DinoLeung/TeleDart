@@ -26,7 +26,11 @@ class PollAnswer {
   String poll_id;
   User user;
   List<int> option_ids;
-  PollAnswer({this.poll_id, this.user, this.option_ids});
+  PollAnswer({
+    this.poll_id,
+    this.user,
+    this.option_ids,
+  });
   factory PollAnswer.fromJson(Map<String, dynamic> json) =>
       _$PollAnswerFromJson(json);
   Map<String, dynamic> toJson() => _$PollAnswerToJson(this);

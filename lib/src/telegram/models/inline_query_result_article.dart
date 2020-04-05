@@ -36,18 +36,19 @@ class InlineQueryResultArticle implements InlineQueryResult {
   String thumb_url;
   String thumb_width;
   String thumb_height;
-  InlineQueryResultArticle(
-      {this.id,
-      this.type = 'article',
-      this.title,
-      this.input_message_content,
-      this.reply_markup,
-      this.url,
-      this.hide_url,
-      this.description,
-      this.thumb_url,
-      this.thumb_width,
-      this.thumb_height});
+  InlineQueryResultArticle({
+    this.id,
+    this.type = 'article',
+    this.title,
+    this.input_message_content,
+    this.reply_markup,
+    this.url,
+    this.hide_url,
+    this.description,
+    this.thumb_url,
+    this.thumb_width,
+    this.thumb_height,
+  });
   factory InlineQueryResultArticle.fromJson(Map<String, dynamic> json) =>
       _$InlineQueryResultArticleFromJson(json);
   @override

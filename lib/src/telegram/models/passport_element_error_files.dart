@@ -31,8 +31,12 @@ class PassportElementErrorFiles implements PassportElementError {
   @override
   String message;
   List<String> file_hashes;
-  PassportElementErrorFiles(
-      {this.source, this.type, this.message, this.file_hashes});
+  PassportElementErrorFiles({
+    this.source,
+    this.type,
+    this.message,
+    this.file_hashes,
+  });
   factory PassportElementErrorFiles.fromJson(Map<String, dynamic> json) =>
       _$PassportElementErrorFilesFromJson(json);
   @override

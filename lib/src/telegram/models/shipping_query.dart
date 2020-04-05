@@ -27,8 +27,12 @@ class ShippingQuery {
   User from;
   String invoice_payload;
   ShippingAddress shipping_address;
-  ShippingQuery(
-      {this.id, this.from, this.invoice_payload, this.shipping_address});
+  ShippingQuery({
+    this.id,
+    this.from,
+    this.invoice_payload,
+    this.shipping_address,
+  });
   factory ShippingQuery.fromJson(Map<String, dynamic> json) =>
       _$ShippingQueryFromJson(json);
   Map<String, dynamic> toJson() => _$ShippingQueryToJson(this);

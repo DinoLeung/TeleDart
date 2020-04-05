@@ -32,16 +32,17 @@ class Animation {
   String file_name;
   String mime_type;
   int file_size;
-  Animation(
-      {this.file_id,
-      this.file_unique_id,
-      this.width,
-      this.height,
-      this.duration,
-      this.thumb,
-      this.file_name,
-      this.mime_type,
-      this.file_size});
+  Animation({
+    this.file_id,
+    this.file_unique_id,
+    this.width,
+    this.height,
+    this.duration,
+    this.thumb,
+    this.file_name,
+    this.mime_type,
+    this.file_size,
+  });
   factory Animation.fromJson(Map<String, dynamic> json) =>
       _$AnimationFromJson(json);
   Map<String, dynamic> toJson() => _$AnimationToJson(this);

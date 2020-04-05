@@ -30,14 +30,15 @@ class WebhookInfo {
   String last_error_message;
   int max_connections;
   List<String> allowed_updates;
-  WebhookInfo(
-      {this.url,
-      this.has_custom_certificate,
-      this.pending_update_count,
-      this.last_error_date,
-      this.last_error_message,
-      this.max_connections,
-      this.allowed_updates});
+  WebhookInfo({
+    this.url,
+    this.has_custom_certificate,
+    this.pending_update_count,
+    this.last_error_date,
+    this.last_error_message,
+    this.max_connections,
+    this.allowed_updates,
+  });
   factory WebhookInfo.fromJson(Map<String, dynamic> json) =>
       _$WebhookInfoFromJson(json);
   Map<String, dynamic> toJson() => _$WebhookInfoToJson(this);

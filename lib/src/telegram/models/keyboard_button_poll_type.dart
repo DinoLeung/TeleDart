@@ -24,7 +24,9 @@ part of '../model.dart';
 @JsonSerializable()
 class KeyboardButtonPollType {
   String type;
-  KeyboardButtonPollType({this.type});
+  KeyboardButtonPollType({
+    this.type,
+  });
   factory KeyboardButtonPollType.fromJson(Map<String, dynamic> json) =>
       _$KeyboardButtonPollTypeFromJson(json);
   Map<String, dynamic> toJson() => _$KeyboardButtonPollTypeToJson(this);
