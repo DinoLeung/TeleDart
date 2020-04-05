@@ -33,13 +33,14 @@ class Document {
   String file_name;
   String mime_type;
   int file_size;
-  Document(
-      {this.file_id,
-      this.file_unique_id,
-      this.thumb,
-      this.file_name,
-      this.mime_type,
-      this.file_size});
+  Document({
+    this.file_id,
+    this.file_unique_id,
+    this.thumb,
+    this.file_name,
+    this.mime_type,
+    this.file_size,
+  });
   factory Document.fromJson(Map<String, dynamic> json) =>
       _$DocumentFromJson(json);
   Map<String, dynamic> toJson() => _$DocumentToJson(this);

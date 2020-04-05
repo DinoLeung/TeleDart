@@ -37,16 +37,17 @@ class InlineQueryResultCachedVideo implements InlineQueryResult {
   String parse_mode;
   InlineKeyboardMarkup reply_markup;
   InputMessageContent input_message_content;
-  InlineQueryResultCachedVideo(
-      {this.id,
-      this.type = 'video',
-      this.video_file_id,
-      this.title,
-      this.description,
-      this.caption,
-      this.parse_mode,
-      this.reply_markup,
-      this.input_message_content});
+  InlineQueryResultCachedVideo({
+    this.id,
+    this.type = 'video',
+    this.video_file_id,
+    this.title,
+    this.description,
+    this.caption,
+    this.parse_mode,
+    this.reply_markup,
+    this.input_message_content,
+  });
   factory InlineQueryResultCachedVideo.fromJson(Map<String, dynamic> json) =>
       _$InlineQueryResultCachedVideoFromJson(json);
   @override

@@ -30,14 +30,15 @@ class PreCheckoutQuery {
   String invoice_payload;
   String shipping_option_id;
   OrderInfo order_info;
-  PreCheckoutQuery(
-      {this.id,
-      this.from,
-      this.currency,
-      this.total_amount,
-      this.invoice_payload,
-      this.shipping_option_id,
-      this.order_info});
+  PreCheckoutQuery({
+    this.id,
+    this.from,
+    this.currency,
+    this.total_amount,
+    this.invoice_payload,
+    this.shipping_option_id,
+    this.order_info,
+  });
   factory PreCheckoutQuery.fromJson(Map<String, dynamic> json) =>
       _$PreCheckoutQueryFromJson(json);
   Map<String, dynamic> toJson() => _$PreCheckoutQueryToJson(this);

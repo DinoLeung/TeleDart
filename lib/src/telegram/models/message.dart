@@ -54,6 +54,7 @@ class Message {
   Location location;
   Venue venue;
   Poll poll;
+  Dice dice;
   List<User> new_chat_members;
   User left_chat_member;
   String new_chat_title;
@@ -71,54 +72,68 @@ class Message {
   PassportData passport_data;
   InlineKeyboardMarkup reply_markup;
 
-  Message(
-      {this.message_id,
-      this.from,
-      this.date,
-      this.chat,
-      this.forward_from,
-      this.forward_from_chat,
-      this.forward_from_message_id,
-      this.forward_signature,
-      this.forward_sender_name,
-      this.forward_date,
-      this.reply_to_message,
-      this.edit_date,
-      this.media_group_id,
-      this.author_signature,
-      this.text,
-      this.entities,
-      this.caption_entities,
-      this.audio,
-      this.document,
-      this.animation,
-      this.game,
-      this.photo,
-      this.sticker,
-      this.video,
-      this.voice,
-      this.video_note,
-      this.caption,
-      this.contact,
-      this.location,
-      this.venue,
-      this.poll,
-      this.new_chat_members,
-      this.left_chat_member,
-      this.new_chat_title,
-      this.new_chat_photo,
-      this.delete_chat_photo,
-      this.group_chat_created,
-      this.supergroup_chat_created,
-      this.channel_chat_created,
-      this.migrate_to_chat_id,
-      this.migrate_from_chat_id,
-      this.pinned_message,
-      this.invoice,
-      this.successful_payment,
-      this.connected_website,
-      this.passport_data,
-      this.reply_markup});
+  Message({
+    this.message_id,
+    this.from,
+    this.date,
+    this.chat,
+    this.forward_from,
+    this.forward_from_chat,
+    this.forward_from_message_id,
+    this.forward_signature,
+    this.forward_sender_name,
+    this.forward_date,
+    this.reply_to_message,
+    this.edit_date,
+    this.media_group_id,
+    this.author_signature,
+    this.text,
+    this.entities,
+    this.caption_entities,
+    this.audio,
+    this.document,
+    this.animation,
+    this.game,
+    this.photo,
+    this.sticker,
+    this.video,
+    this.voice,
+    this.video_note,
+    this.caption,
+    this.contact,
+    this.location,
+    this.venue,
+    this.dice,
+    this.poll,
+    this.new_chat_members,
+    this.left_chat_member,
+    this.new_chat_title,
+    this.new_chat_photo,
+    this.delete_chat_photo,
+    this.group_chat_created,
+    this.supergroup_chat_created,
+    this.channel_chat_created,
+    this.migrate_to_chat_id,
+    this.migrate_from_chat_id,
+    this.pinned_message,
+    this.invoice,
+    this.successful_payment,
+    this.connected_website,
+    this.passport_data,
+    this.reply_markup,
+  });
+
+  @JsonKey(ignore: true)
+  DateTime get date_ => toDateTime(date);
+  set date_(DateTime dateTime) => date = toUnixTime(dateTime);
+
+  @JsonKey(ignore: true)
+  DateTime get forward_date_ => toDateTime(forward_date);
+  set forward_date_(DateTime dateTime) => forward_date = toUnixTime(dateTime);
+
+  @JsonKey(ignore: true)
+  DateTime get edit_date_ => toDateTime(edit_date);
+  set edit_date_(DateTime dateTime) => edit_date = toUnixTime(dateTime);
 
   factory Message.fromJson(Map<String, dynamic> json) =>
       _$MessageFromJson(json);

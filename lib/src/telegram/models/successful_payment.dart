@@ -30,14 +30,15 @@ class SuccessfulPayment {
   OrderInfo order_info;
   String telegram_payment_charge_id;
   String provider_payment_charge_id;
-  SuccessfulPayment(
-      {this.currency,
-      this.total_amount,
-      this.invoice_payload,
-      this.shipping_option_id,
-      this.order_info,
-      this.telegram_payment_charge_id,
-      this.provider_payment_charge_id});
+  SuccessfulPayment({
+    this.currency,
+    this.total_amount,
+    this.invoice_payload,
+    this.shipping_option_id,
+    this.order_info,
+    this.telegram_payment_charge_id,
+    this.provider_payment_charge_id,
+  });
   factory SuccessfulPayment.fromJson(Map<String, dynamic> json) =>
       _$SuccessfulPaymentFromJson(json);
   Map<String, dynamic> toJson() => _$SuccessfulPaymentToJson(this);

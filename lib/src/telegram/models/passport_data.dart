@@ -25,7 +25,10 @@ part of '../model.dart';
 class PassportData {
   List<EncryptedPassportElement> data;
   EncryptedCredentials credentials;
-  PassportData({this.data, this.credentials});
+  PassportData({
+    this.data,
+    this.credentials,
+  });
   factory PassportData.fromJson(Map<String, dynamic> json) =>
       _$PassportDataFromJson(json);
   Map<String, dynamic> toJson() => _$PassportDataToJson(this);

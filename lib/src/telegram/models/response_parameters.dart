@@ -25,7 +25,16 @@ part of '../model.dart';
 class ResponseParameters {
   int migrate_to_chat_id;
   int retry_after;
-  ResponseParameters({this.migrate_to_chat_id, this.retry_after});
+
+  ResponseParameters({
+    this.migrate_to_chat_id,
+    this.retry_after,
+  });
+
+  @JsonKey(ignore: true)
+  Duration get retry_after_ => toDuration(retry_after);
+  set retry_after_(Duration duration) => retry_after = toSeconds(duration);
+
   factory ResponseParameters.fromJson(Map<String, dynamic> json) =>
       _$ResponseParametersFromJson(json);
   Map<String, dynamic> toJson() => _$ResponseParametersToJson(this);

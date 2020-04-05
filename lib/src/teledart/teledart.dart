@@ -146,7 +146,7 @@ class TeleDart {
   ///  onMessage(entityType: 'bot_command', keyword: 'start').listen((message) =>
   ///    teledart.telegram.sendMessage(message.chat.id, 'hello world!'));
   ///  ```
-  Stream<Message> onMessage({String entityType, String keyword}) =>
+  Stream<Message> onMessage({String entityType, dynamic keyword}) =>
       _event.onMessage(entityType: entityType, keyword: keyword);
 
   /// Listens to edited message events
@@ -180,55 +180,55 @@ class TeleDart {
   // Short-cuts revolution
 
   /// Short-cut for onMessage handling entityType `mention` (@username)
-  Stream<Message> onMention([String keyword]) =>
+  Stream<Message> onMention([dynamic keyword]) =>
       _event.onMessage(entityType: 'mention', keyword: keyword);
 
   /// Short-cut for onMessage handling entityType `cashtag`
-  Stream<Message> onCashtag([String keyword]) =>
+  Stream<Message> onCashtag([dynamic keyword]) =>
       _event.onMessage(entityType: 'cashtag', keyword: keyword);
 
   /// Short-cut for onMessage handling entityType `hashtag`
-  Stream<Message> onHashtag([String keyword]) =>
+  Stream<Message> onHashtag([dynamic keyword]) =>
       _event.onMessage(entityType: 'hashtag', keyword: keyword);
 
   /// Short-cut for onMessage handling entityType `bot_command`
-  Stream<Message> onCommand([String keyword]) =>
+  Stream<Message> onCommand([dynamic keyword]) =>
       _event.onMessage(entityType: 'bot_command', keyword: keyword);
 
   /// Short-cut for onMessage handling entityType `url`
-  Stream<Message> onUrl([String keyword]) =>
+  Stream<Message> onUrl([dynamic keyword]) =>
       _event.onMessage(entityType: 'url', keyword: keyword);
 
   /// Short-cut for onMessage handling entityType `email`
-  Stream<Message> onEmail([String keyword]) =>
+  Stream<Message> onEmail([dynamic keyword]) =>
       _event.onMessage(entityType: 'email', keyword: keyword);
 
   /// Short-cut for onMessage handling entityType `phone_number`
-  Stream<Message> onPhoneNumber([String keyword]) =>
+  Stream<Message> onPhoneNumber([dynamic keyword]) =>
       _event.onMessage(entityType: 'phone_number', keyword: keyword);
 
   /// Short-cut for onMessage handling entityType `bold`
-  Stream<Message> onBold([String keyword]) =>
+  Stream<Message> onBold([dynamic keyword]) =>
       _event.onMessage(entityType: 'bold', keyword: keyword);
 
   /// Short-cut for onMessage handling entityType `italic`
-  Stream<Message> onItalic([String keyword]) =>
+  Stream<Message> onItalic([dynamic keyword]) =>
       _event.onMessage(entityType: 'italic', keyword: keyword);
 
   /// Short-cut for onMessage handling entityType `code`
-  Stream<Message> onCode([String keyword]) =>
+  Stream<Message> onCode([dynamic keyword]) =>
       _event.onMessage(entityType: 'code', keyword: keyword);
 
   /// Short-cut for onMessage handling entityType `pre`
-  Stream<Message> onPre([String keyword]) =>
+  Stream<Message> onPre([dynamic keyword]) =>
       _event.onMessage(entityType: 'pre', keyword: keyword);
 
   /// Short-cut for onMessage handling entityType `text_link`
-  Stream<Message> onTextLink([String keyword]) =>
+  Stream<Message> onTextLink([dynamic keyword]) =>
       _event.onMessage(entityType: 'text_link', keyword: keyword);
 
   /// Short-cut for onMessage handling entityType `text_mention`
-  Stream<Message> onTextMention([String keyword]) =>
+  Stream<Message> onTextMention([dynamic keyword]) =>
       _event.onMessage(entityType: 'text_mention', keyword: keyword);
 
   /// Short-cut to reply with a text message

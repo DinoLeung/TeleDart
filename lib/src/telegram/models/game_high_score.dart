@@ -26,7 +26,11 @@ class GameHighScore {
   int position;
   User user;
   int score;
-  GameHighScore({this.position, this.user, this.score});
+  GameHighScore({
+    this.position,
+    this.user,
+    this.score,
+  });
   factory GameHighScore.fromJson(Map<String, dynamic> json) =>
       _$GameHighScoreFromJson(json);
   Map<String, dynamic> toJson() => _$GameHighScoreToJson(this);

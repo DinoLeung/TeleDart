@@ -31,13 +31,14 @@ class InputVenueMessageContent implements InputMessageContent {
   String address;
   String foursquare_id;
   String foursquare_type;
-  InputVenueMessageContent(
-      {this.latitude,
-      this.longitude,
-      this.title,
-      this.address,
-      this.foursquare_id,
-      this.foursquare_type});
+  InputVenueMessageContent({
+    this.latitude,
+    this.longitude,
+    this.title,
+    this.address,
+    this.foursquare_id,
+    this.foursquare_type,
+  });
   factory InputVenueMessageContent.fromJson(Map<String, dynamic> json) =>
       _$InputVenueMessageContentFromJson(json);
   @override

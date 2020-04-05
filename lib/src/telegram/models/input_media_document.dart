@@ -32,12 +32,13 @@ class InputMediaDocument implements InputMedia {
   @override
   String type;
   dynamic thumb;
-  InputMediaDocument(
-      {this.type = 'document',
-      this.media,
-      this.thumb,
-      this.caption,
-      this.parse_mode});
+  InputMediaDocument({
+    this.type = 'document',
+    this.media,
+    this.thumb,
+    this.caption,
+    this.parse_mode,
+  });
   factory InputMediaDocument.fromJson(Map<String, dynamic> json) =>
       _$InputMediaDocumentFromJson(json);
   @override

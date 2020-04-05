@@ -40,16 +40,17 @@ class InlineQueryResultCachedDocument implements InlineQueryResult {
   String parse_mode;
   InlineKeyboardMarkup reply_markup;
   InputMessageContent input_message_content;
-  InlineQueryResultCachedDocument(
-      {this.id,
-      this.type = 'document',
-      this.title,
-      this.document_file_id,
-      this.description,
-      this.caption,
-      this.parse_mode,
-      this.reply_markup,
-      this.input_message_content});
+  InlineQueryResultCachedDocument({
+    this.id,
+    this.type = 'document',
+    this.title,
+    this.document_file_id,
+    this.description,
+    this.caption,
+    this.parse_mode,
+    this.reply_markup,
+    this.input_message_content,
+  });
   factory InlineQueryResultCachedDocument.fromJson(Map<String, dynamic> json) =>
       _$InlineQueryResultCachedDocumentFromJson(json);
   @override

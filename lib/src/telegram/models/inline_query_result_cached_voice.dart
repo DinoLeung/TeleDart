@@ -39,15 +39,16 @@ class InlineQueryResultCachedVoice implements InlineQueryResult {
   String parse_mode;
   InlineKeyboardMarkup reply_markup;
   InputMessageContent input_message_content;
-  InlineQueryResultCachedVoice(
-      {this.id,
-      this.type = 'voice',
-      this.voice_file_id,
-      this.title,
-      this.caption,
-      this.parse_mode,
-      this.reply_markup,
-      this.input_message_content});
+  InlineQueryResultCachedVoice({
+    this.id,
+    this.type = 'voice',
+    this.voice_file_id,
+    this.title,
+    this.caption,
+    this.parse_mode,
+    this.reply_markup,
+    this.input_message_content,
+  });
   factory InlineQueryResultCachedVoice.fromJson(Map<String, dynamic> json) =>
       _$InlineQueryResultCachedVoiceFromJson(json);
   @override

@@ -1,6 +1,6 @@
 /**
  * TeleDart - Telegram Bot API for Dart
- * Copyright (C) 2019  Dino PH Leung
+ * Copyright (C) 2020  Dino PH Leung
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,23 +18,16 @@
 
 part of '../model.dart';
 
-/// Represents the [content] of a text message to be sent as the result of an inline query.
+/// This object represents type of a poll, which is allowed to be created and sent when the corresponding button is pressed.
 ///
-/// https://core.telegram.org/bots/api#inputtextmessagecontent
-///
-/// [content]: https://core.telegram.org/bots/api#inputmessagecontent
+/// https://core.telegram.org/bots/api#keyboardbuttonpolltype
 @JsonSerializable()
-class InputTextMessageContent implements InputMessageContent {
-  String message_text;
-  String parse_mode;
-  bool disable_web_page_preview;
-  InputTextMessageContent({
-    this.message_text,
-    this.parse_mode,
-    this.disable_web_page_preview,
+class KeyboardButtonPollType {
+  String type;
+  KeyboardButtonPollType({
+    this.type,
   });
-  factory InputTextMessageContent.fromJson(Map<String, dynamic> json) =>
-      _$InputTextMessageContentFromJson(json);
-  @override
-  Map<String, dynamic> toJson() => _$InputTextMessageContentToJson(this);
+  factory KeyboardButtonPollType.fromJson(Map<String, dynamic> json) =>
+      _$KeyboardButtonPollTypeFromJson(json);
+  Map<String, dynamic> toJson() => _$KeyboardButtonPollTypeToJson(this);
 }

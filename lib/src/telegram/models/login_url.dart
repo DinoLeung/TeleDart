@@ -34,8 +34,12 @@ class LoginUrl {
   String forward_text;
   String bot_username;
   bool request_write_access;
-  LoginUrl(url,
-      {this.forward_text, this.bot_username, this.request_write_access});
+  LoginUrl({
+    this.url,
+    this.forward_text,
+    this.bot_username,
+    this.request_write_access,
+  });
   factory LoginUrl.fromJson(Map<String, dynamic> json) =>
       _$LoginUrlFromJson(json);
   Map<String, dynamic> toJson(Map<String, dynamic> json) =>

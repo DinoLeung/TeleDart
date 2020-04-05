@@ -36,15 +36,16 @@ class InlineQueryResultCachedMpeg4Gif implements InlineQueryResult {
   String parse_mode;
   InlineKeyboardMarkup reply_markup;
   InputMessageContent input_message_content;
-  InlineQueryResultCachedMpeg4Gif(
-      {this.id,
-      this.type = 'mpeg4_gif',
-      this.mpeg4_file_id,
-      this.title,
-      this.caption,
-      this.parse_mode,
-      this.reply_markup,
-      this.input_message_content});
+  InlineQueryResultCachedMpeg4Gif({
+    this.id,
+    this.type = 'mpeg4_gif',
+    this.mpeg4_file_id,
+    this.title,
+    this.caption,
+    this.parse_mode,
+    this.reply_markup,
+    this.input_message_content,
+  });
   factory InlineQueryResultCachedMpeg4Gif.fromJson(Map<String, dynamic> json) =>
       _$InlineQueryResultCachedMpeg4GifFromJson(json);
   @override

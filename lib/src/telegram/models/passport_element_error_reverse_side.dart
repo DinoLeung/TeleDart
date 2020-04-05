@@ -31,8 +31,12 @@ class PassportElementErrorReverseSide implements PassportElementError {
   @override
   String message;
   String file_hash;
-  PassportElementErrorReverseSide(
-      {this.source, this.type, this.message, this.file_hash});
+  PassportElementErrorReverseSide({
+    this.source,
+    this.type,
+    this.message,
+    this.file_hash,
+  });
   factory PassportElementErrorReverseSide.fromJson(Map<String, dynamic> json) =>
       _$PassportElementErrorReverseSideFromJson(json);
   @override
