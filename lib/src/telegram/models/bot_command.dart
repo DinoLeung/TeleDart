@@ -1,6 +1,6 @@
 /**
  * TeleDart - Telegram Bot API for Dart
- * Copyright (C) 2019  Dino PH Leung
+ * Copyright (C) 2020  Dino PH Leung
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,26 +18,18 @@
 
 part of '../model.dart';
 
-/// This object represents a sticker set.
+/// This object represents a dice with random value from 1 to 6. (Yes, we're aware of the “proper” singular of die. But it's awkward, and we decided to help it change. One dice at a time!)
 ///
-/// https://core.telegram.org/bots/api#stickerset
+/// https://core.telegram.org/bots/api#dice
 @JsonSerializable()
-class StickerSet {
-  String name;
-  String title;
-  bool is_animated;
-  bool contains_masks;
-  List<Sticker> stickers;
-  PhotoSize thumb;
-  StickerSet({
-    this.name,
-    this.title,
-    this.is_animated,
-    this.contains_masks,
-    this.stickers,
-    this.thumb,
+class BotCommand {
+  String command;
+  String description;
+  BotCommand({
+    this.command,
+    this.description,
   });
-  factory StickerSet.fromJson(Map<String, dynamic> json) =>
-      _$StickerSetFromJson(json);
-  Map<String, dynamic> toJson() => _$StickerSetToJson(this);
+  factory BotCommand.fromJson(Map<String, dynamic> json) =>
+      _$BotCommandFromJson(json);
+  Map<String, dynamic> toJson() => _$BotCommandToJson(this);
 }

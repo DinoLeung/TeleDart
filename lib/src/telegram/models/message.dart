@@ -54,6 +54,7 @@ class Message {
   Location location;
   Venue venue;
   Poll poll;
+  Dice dice;
   List<User> new_chat_members;
   User left_chat_member;
   String new_chat_title;
@@ -102,6 +103,7 @@ class Message {
     this.contact,
     this.location,
     this.venue,
+    this.dice,
     this.poll,
     this.new_chat_members,
     this.left_chat_member,
