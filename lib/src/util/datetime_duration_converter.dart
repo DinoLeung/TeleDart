@@ -1,6 +1,6 @@
 /**
  * TeleDart - Telegram Bot API for Dart
- * Copyright (C) 2019  Dino PH Leung
+ * Copyright (C) 2020  Dino PH Leung
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,31 +16,12 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-part of '../model.dart';
+DateTime toDateTime(int unixTime) =>
+    DateTime.fromMillisecondsSinceEpoch((unixTime * 1000), isUtc: true);
 
-///This object represents a voice note.
-///
-/// https://core.telegram.org/bots/api#voice
-@JsonSerializable()
-class Voice {
-  String file_id;
-  String file_unique_id;
-  int duration;
-  String mime_type;
-  int file_size;
+int toUnixTime(DateTime datetime) =>
+    (datetime.millisecondsSinceEpoch / 1000).round();
 
-  Voice({
-    this.file_id,
-    this.file_unique_id,
-    this.duration,
-    this.mime_type,
-    this.file_size,
-  });
+Duration toDuration(int seconds) => Duration(seconds: seconds);
 
-  @JsonKey(ignore: true)
-  Duration get duration_ => toDuration(duration);
-  set duration_(Duration duration) => this.duration = toSeconds(duration);
-
-  factory Voice.fromJson(Map<String, dynamic> json) => _$VoiceFromJson(json);
-  Map<String, dynamic> toJson() => _$VoiceToJson(this);
-}
+int toSeconds(Duration duration) => duration.inSeconds;

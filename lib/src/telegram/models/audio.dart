@@ -31,6 +31,7 @@ class Audio {
   String mime_type;
   int file_size;
   PhotoSize thumb;
+
   Audio({
     this.file_id,
     this.file_unique_id,
@@ -41,6 +42,11 @@ class Audio {
     this.file_size,
     this.thumb,
   });
+
+  @JsonKey(ignore: true)
+  Duration get duration_ => toDuration(duration);
+  set duration_(Duration duration) => this.duration = toSeconds(duration);
+
   factory Audio.fromJson(Map<String, dynamic> json) => _$AudioFromJson(json);
   Map<String, dynamic> toJson() => _$AudioToJson(this);
 }

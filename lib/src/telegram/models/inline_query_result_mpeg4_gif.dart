@@ -40,6 +40,7 @@ class InlineQueryResultMpeg4Gif implements InlineQueryResult {
   String parse_mode;
   InlineKeyboardMarkup reply_markup;
   InputMessageContent input_message_content;
+
   InlineQueryResultMpeg4Gif({
     this.id,
     this.type = 'mpeg4_gif',
@@ -54,6 +55,12 @@ class InlineQueryResultMpeg4Gif implements InlineQueryResult {
     this.reply_markup,
     this.input_message_content,
   });
+
+  @JsonKey(ignore: true)
+  Duration get mpeg4_duration_ => toDuration(mpeg4_duration);
+  set mpeg4_duration_(Duration duration) =>
+      mpeg4_duration = toSeconds(duration);
+
   factory InlineQueryResultMpeg4Gif.fromJson(Map<String, dynamic> json) =>
       _$InlineQueryResultMpeg4GifFromJson(json);
   @override

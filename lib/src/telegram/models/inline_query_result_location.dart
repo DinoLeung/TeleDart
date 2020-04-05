@@ -42,6 +42,7 @@ class InlineQueryResultLocation implements InlineQueryResult {
   String thumb_url;
   int thumb_width;
   int thumb_height;
+
   InlineQueryResultLocation({
     this.id,
     this.type = 'location',
@@ -55,6 +56,11 @@ class InlineQueryResultLocation implements InlineQueryResult {
     this.thumb_width,
     this.thumb_height,
   });
+
+  @JsonKey(ignore: true)
+  Duration get live_period_ => toDuration(live_period);
+  set live_period_(Duration duration) => live_period = toSeconds(duration);
+
   factory InlineQueryResultLocation.fromJson(Map<String, dynamic> json) =>
       _$InlineQueryResultLocationFromJson(json);
   @override
