@@ -35,18 +35,21 @@ class Update {
   ShippingQuery shipping_query;
   PreCheckoutQuery pre_checkout_query;
   Poll poll;
-  Update(
-      {this.update_id,
-      this.message,
-      this.edited_message,
-      this.channel_post,
-      this.edited_channel_post,
-      this.inline_query,
-      this.chosen_inline_result,
-      this.callback_query,
-      this.shipping_query,
-      this.pre_checkout_query,
-      this.poll});
+  PollAnswer poll_answer;
+  Update({
+    this.update_id,
+    this.message,
+    this.edited_message,
+    this.channel_post,
+    this.edited_channel_post,
+    this.inline_query,
+    this.chosen_inline_result,
+    this.callback_query,
+    this.shipping_query,
+    this.pre_checkout_query,
+    this.poll,
+    this.poll_answer,
+  });
   factory Update.fromJson(Map<String, dynamic> json) => _$UpdateFromJson(json);
   Map<String, dynamic> toJson() => _$UpdateToJson(this);
 }

@@ -1,6 +1,6 @@
 /**
  * TeleDart - Telegram Bot API for Dart
- * Copyright (C) 2019  Dino PH Leung
+ * Copyright (C) 2020  Dino PH Leung
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,26 +18,16 @@
 
 part of '../model.dart';
 
-/// This object represents one special entity in a text message. For example, hashtags, usernames, URLs, etc.
+/// This object represents type of a poll, which is allowed to be created and sent when the corresponding button is pressed.
 ///
-/// https://core.telegram.org/bots/api#messageentity
+/// https://core.telegram.org/bots/api#pollanswer
 @JsonSerializable()
-class MessageEntity {
-  String type;
-  int offset;
-  int length;
-  String url;
+class PollAnswer {
+  String poll_id;
   User user;
-  String language;
-  MessageEntity({
-    this.type,
-    this.offset,
-    this.length,
-    this.url,
-    this.user,
-    this.language,
-  });
-  factory MessageEntity.fromJson(Map<String, dynamic> json) =>
-      _$MessageEntityFromJson(json);
-  Map<String, dynamic> toJson() => _$MessageEntityToJson(this);
+  List<int> option_ids;
+  PollAnswer({this.poll_id, this.user, this.option_ids});
+  factory PollAnswer.fromJson(Map<String, dynamic> json) =>
+      _$PollAnswerFromJson(json);
+  Map<String, dynamic> toJson() => _$PollAnswerToJson(this);
 }

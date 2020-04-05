@@ -29,13 +29,20 @@ class User {
   String last_name;
   String username;
   String language_code;
-  User(
-      {this.id,
-      this.is_bot,
-      this.first_name,
-      this.last_name,
-      this.username,
-      this.language_code});
+  bool can_join_groups;
+  bool can_read_all_group_messages;
+  bool supports_inline_queries;
+  User({
+    this.id,
+    this.is_bot,
+    this.first_name,
+    this.last_name,
+    this.username,
+    this.language_code,
+    this.can_join_groups,
+    this.can_read_all_group_messages,
+    this.supports_inline_queries,
+  });
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
   Map<String, dynamic> toJson() => _$UserToJson(this);
 }

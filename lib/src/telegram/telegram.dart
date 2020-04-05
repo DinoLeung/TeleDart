@@ -812,7 +812,12 @@ class Telegram {
   ///
   /// [Message]: https://core.telegram.org/bots/api#message
   Future<Message> sendPoll(int chat_id, String question, List<String> options,
-      {bool disable_notification,
+      {bool is_anonymous,
+      String type,
+      bool allows_multiple_answers,
+      int correct_option_id,
+      bool is_closed,
+      bool disable_notification,
       int reply_to_message_id,
       ReplyMarkup reply_markup}) async {
     var requestUrl = '${_baseUrl}${_token}/sendPoll';
@@ -820,6 +825,11 @@ class Telegram {
       'chat_id': chat_id,
       'question': question,
       'options': jsonEncode(options),
+      'is_anonymous': is_anonymous ?? '',
+      'type': type ?? '',
+      'allows_multiple_answers': allows_multiple_answers ?? '',
+      'correct_option_id': correct_option_id ?? '',
+      'is_closed': is_closed ?? '',
       'disable_notification': disable_notification ?? '',
       'reply_to_message_id': reply_to_message_id ?? '',
       'reply_markup': reply_markup == null ? '' : jsonEncode(reply_markup)
