@@ -37,16 +37,17 @@ class InlineQueryResultCachedPhoto implements InlineQueryResult {
   String parse_mode;
   InlineKeyboardMarkup reply_markup;
   InputMessageContent input_message_content;
-  InlineQueryResultCachedPhoto(
-      {this.id,
-      this.type = 'photo',
-      this.photo_file_id,
-      this.title,
-      this.description,
-      this.caption,
-      this.parse_mode,
-      this.reply_markup,
-      this.input_message_content});
+  InlineQueryResultCachedPhoto({
+    this.id,
+    this.type = 'photo',
+    this.photo_file_id,
+    this.title,
+    this.description,
+    this.caption,
+    this.parse_mode,
+    this.reply_markup,
+    this.input_message_content,
+  });
   factory InlineQueryResultCachedPhoto.fromJson(Map<String, dynamic> json) =>
       _$InlineQueryResultCachedPhotoFromJson(json);
   @override

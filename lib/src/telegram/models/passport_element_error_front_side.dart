@@ -31,8 +31,12 @@ class PassportElementErrorFrontSide implements PassportElementError {
   @override
   String message;
   String file_hash;
-  PassportElementErrorFrontSide(
-      {this.source, this.type, this.message, this.file_hash});
+  PassportElementErrorFrontSide({
+    this.source,
+    this.type,
+    this.message,
+    this.file_hash,
+  });
   factory PassportElementErrorFrontSide.fromJson(Map<String, dynamic> json) =>
       _$PassportElementErrorFrontSideFromJson(json);
   @override

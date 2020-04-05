@@ -30,7 +30,13 @@ class InlineQuery {
   Location location;
   String query;
   String offset;
-  InlineQuery({this.id, this.from, this.location, this.query, this.offset});
+  InlineQuery({
+    this.id,
+    this.from,
+    this.location,
+    this.query,
+    this.offset,
+  });
   factory InlineQuery.fromJson(Map<String, dynamic> json) =>
       _$InlineQueryFromJson(json);
   Map<String, dynamic> toJson() => _$InlineQueryToJson(this);

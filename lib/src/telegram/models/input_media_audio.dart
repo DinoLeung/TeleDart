@@ -35,15 +35,22 @@ class InputMediaAudio implements InputMedia {
   int duration;
   String performer;
   String title;
-  InputMediaAudio(
-      {this.type = 'audio',
-      this.media,
-      this.thumb,
-      this.caption,
-      this.parse_mode,
-      this.duration,
-      this.performer,
-      this.title});
+
+  InputMediaAudio({
+    this.type = 'audio',
+    this.media,
+    this.thumb,
+    this.caption,
+    this.parse_mode,
+    this.duration,
+    this.performer,
+    this.title,
+  });
+
+  @JsonKey(ignore: true)
+  Duration get duration_ => toDuration(duration);
+  set duration_(Duration duration) => this.duration = toSeconds(duration);
+
   factory InputMediaAudio.fromJson(Map<String, dynamic> json) =>
       _$InputMediaAudioFromJson(json);
   @override

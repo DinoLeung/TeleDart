@@ -1,6 +1,6 @@
 /**
  * TeleDart - Telegram Bot API for Dart
- * Copyright (C) 2019  Dino PH Leung
+ * Copyright (C) 2020  Dino PH Leung
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,28 +16,12 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-part of '../model.dart';
+DateTime toDateTime(int unixTime) =>
+    DateTime.fromMillisecondsSinceEpoch((unixTime * 1000), isUtc: true);
 
-/// This object represents a game.
-/// Use BotFather to create and edit games, their short names will act as unique identifiers.
-///
-/// https://core.telegram.org/bots/api#game
-@JsonSerializable()
-class Game {
-  String title;
-  String description;
-  List<PhotoSize> photo;
-  String text;
-  List<MessageEntity> text_entities;
-  Animation animation;
-  Game({
-    this.title,
-    this.description,
-    this.photo,
-    this.text,
-    this.text_entities,
-    this.animation,
-  });
-  factory Game.fromJson(Map<String, dynamic> json) => _$GameFromJson(json);
-  Map<String, dynamic> toJson() => _$GameToJson(this);
-}
+int toUnixTime(DateTime datetime) =>
+    (datetime.millisecondsSinceEpoch / 1000).round();
+
+Duration toDuration(int seconds) => Duration(seconds: seconds);
+
+int toSeconds(Duration duration) => duration.inSeconds;

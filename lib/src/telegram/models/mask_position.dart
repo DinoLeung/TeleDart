@@ -27,7 +27,12 @@ class MaskPosition {
   double x_shift;
   double y_shift;
   double scale;
-  MaskPosition({this.point, this.x_shift, this.y_shift, this.scale});
+  MaskPosition({
+    this.point,
+    this.x_shift,
+    this.y_shift,
+    this.scale,
+  });
   factory MaskPosition.fromJson(Map<String, dynamic> json) =>
       _$MaskPositionFromJson(json);
   Map<String, dynamic> toJson() => _$MaskPositionToJson(this);

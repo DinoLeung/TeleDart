@@ -46,7 +46,10 @@ part of '../model.dart';
 class InlineQueryResult {
   String type;
   String id;
-  InlineQueryResult({this.type, this.id});
+  InlineQueryResult({
+    this.type,
+    this.id,
+  });
   factory InlineQueryResult.fromJson(Map<String, dynamic> json) =>
       _$InlineQueryResultFromJson(json);
   Map<String, dynamic> toJson() => _$InlineQueryResultToJson(this);

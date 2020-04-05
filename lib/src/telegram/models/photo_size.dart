@@ -31,12 +31,13 @@ class PhotoSize {
   int width;
   int height;
   int file_size;
-  PhotoSize(
-      {this.file_id,
-      this.file_unique_id,
-      this.width,
-      this.height,
-      this.file_size});
+  PhotoSize({
+    this.file_id,
+    this.file_unique_id,
+    this.width,
+    this.height,
+    this.file_size,
+  });
   factory PhotoSize.fromJson(Map<String, dynamic> json) =>
       _$PhotoSizeFromJson(json);
   Map<String, dynamic> toJson() => _$PhotoSizeToJson(this);

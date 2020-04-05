@@ -17,6 +17,7 @@
  */
 
 import 'package:json_annotation/json_annotation.dart';
+import '../util/datetime_duration_converter.dart';
 
 part 'model.g.dart';
 
@@ -38,12 +39,15 @@ part 'models/login_url.dart';
 part 'models/location.dart';
 part 'models/venue.dart';
 part 'models/poll_option.dart';
+part 'models/poll_answer.dart';
 part 'models/poll.dart';
+part 'models/dice.dart';
 part 'models/user_profile_photos.dart';
 part 'models/file.dart';
 part 'models/reply_markup.dart';
 part 'models/reply_keyboard_markup.dart';
 part 'models/keyboard_button.dart';
+part 'models/keyboard_button_poll_type.dart';
 part 'models/reply_keyboard_remove.dart';
 part 'models/inline_keyboard_markup.dart';
 part 'models/inline_keyboard_button.dart';
@@ -52,6 +56,7 @@ part 'models/force_reply.dart';
 part 'models/chat_photo.dart';
 part 'models/chat_member.dart';
 part 'models/chat_permissions.dart';
+part 'models/bot_command.dart';
 part 'models/response_parameters.dart';
 part 'models/input_media.dart';
 part 'models/input_media_photo.dart';

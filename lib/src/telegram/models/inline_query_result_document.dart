@@ -44,20 +44,21 @@ class InlineQueryResultDocument implements InlineQueryResult {
   String thumb_url;
   int thumb_width;
   int thumb_height;
-  InlineQueryResultDocument(
-      {this.id,
-      this.type = 'document',
-      this.title,
-      this.caption,
-      this.parse_mode,
-      this.document_url,
-      this.mime_type,
-      this.description,
-      this.reply_markup,
-      this.input_message_content,
-      this.thumb_url,
-      this.thumb_width,
-      this.thumb_height});
+  InlineQueryResultDocument({
+    this.id,
+    this.type = 'document',
+    this.title,
+    this.caption,
+    this.parse_mode,
+    this.document_url,
+    this.mime_type,
+    this.description,
+    this.reply_markup,
+    this.input_message_content,
+    this.thumb_url,
+    this.thumb_width,
+    this.thumb_height,
+  });
   factory InlineQueryResultDocument.fromJson(Map<String, dynamic> json) =>
       _$InlineQueryResultDocumentFromJson(json);
   @override

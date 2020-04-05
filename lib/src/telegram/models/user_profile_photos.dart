@@ -25,7 +25,10 @@ part of '../model.dart';
 class UserProfilePhotos {
   int total_count;
   List<List<PhotoSize>> photos;
-  UserProfilePhotos({this.total_count, this.photos});
+  UserProfilePhotos({
+    this.total_count,
+    this.photos,
+  });
   factory UserProfilePhotos.fromJson(Map<String, dynamic> json) =>
       _$UserProfilePhotosFromJson(json);
   Map<String, dynamic> toJson() => _$UserProfilePhotosToJson(this);

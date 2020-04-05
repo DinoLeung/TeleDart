@@ -32,15 +32,16 @@ class InlineKeyboardButton {
   String switch_inline_query_current_chat;
   CallbackGame callback_game;
   bool pay;
-  InlineKeyboardButton(
-      {this.text,
-      this.url,
-      this.login_url,
-      this.callback_data,
-      this.switch_inline_query,
-      this.switch_inline_query_current_chat,
-      this.callback_game,
-      this.pay});
+  InlineKeyboardButton({
+    this.text,
+    this.url,
+    this.login_url,
+    this.callback_data,
+    this.switch_inline_query,
+    this.switch_inline_query_current_chat,
+    this.callback_game,
+    this.pay,
+  });
   factory InlineKeyboardButton.fromJson(Map<String, dynamic> json) =>
       _$InlineKeyboardButtonFromJson(json);
   Map<String, dynamic> toJson() => _$InlineKeyboardButtonToJson(this);

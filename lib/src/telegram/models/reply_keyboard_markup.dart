@@ -31,11 +31,12 @@ class ReplyKeyboardMarkup implements ReplyMarkup {
   bool resize_keyboard;
   bool one_time_keyboard;
   bool selective;
-  ReplyKeyboardMarkup(
-      {this.keyboard,
-      this.resize_keyboard,
-      this.one_time_keyboard,
-      this.selective});
+  ReplyKeyboardMarkup({
+    this.keyboard,
+    this.resize_keyboard,
+    this.one_time_keyboard,
+    this.selective,
+  });
   factory ReplyKeyboardMarkup.fromJson(Map<String, dynamic> json) =>
       _$ReplyKeyboardMarkupFromJson(json);
   @override

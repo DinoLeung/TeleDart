@@ -36,6 +36,7 @@ class InputMediaVideo implements InputMedia {
   int height;
   int duration;
   bool supports_streaming;
+
   InputMediaVideo({
     this.type = 'video',
     this.media,
@@ -47,6 +48,11 @@ class InputMediaVideo implements InputMedia {
     this.duration,
     this.supports_streaming,
   });
+
+  @JsonKey(ignore: true)
+  Duration get duration_ => toDuration(duration);
+  set duration_(Duration duration) => this.duration = toSeconds(duration);
+
   factory InputMediaVideo.fromJson(Map<String, dynamic> json) =>
       _$InputMediaVideoFromJson(json);
   @override

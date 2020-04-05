@@ -45,21 +45,29 @@ class InlineQueryResultVideo implements InlineQueryResult {
   String description;
   InlineKeyboardMarkup reply_markup;
   InputMessageContent input_message_content;
-  InlineQueryResultVideo(
-      {this.id,
-      this.type = 'video',
-      this.video_url,
-      this.mime_type,
-      this.thumb_url,
-      this.title,
-      this.caption,
-      this.parse_mode,
-      this.video_width,
-      this.video_height,
-      this.video_duration,
-      this.description,
-      this.reply_markup,
-      this.input_message_content});
+
+  InlineQueryResultVideo({
+    this.id,
+    this.type = 'video',
+    this.video_url,
+    this.mime_type,
+    this.thumb_url,
+    this.title,
+    this.caption,
+    this.parse_mode,
+    this.video_width,
+    this.video_height,
+    this.video_duration,
+    this.description,
+    this.reply_markup,
+    this.input_message_content,
+  });
+
+  @JsonKey(ignore: true)
+  Duration get video_duration_ => toDuration(video_duration);
+  set video_duration_(Duration duration) =>
+      video_duration = toSeconds(duration);
+
   factory InlineQueryResultVideo.fromJson(Map<String, dynamic> json) =>
       _$InlineQueryResultVideoFromJson(json);
   @override
