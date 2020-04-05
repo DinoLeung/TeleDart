@@ -51,74 +51,77 @@ class Event {
   }
 
   /// Listens to message events
-  Stream<Message> onMessage({String entityType, String keyword}) {
-    if (entityType == null) {
-      // no entityType and keyword
-      if (keyword == null) {
-        return _messageStreamController.stream.where((message) =>
-            (message.entities ?? message.caption_entities) == null);
-      } else {
-        // no entityType but keyword
-        // with regular expressions
-        return _messageStreamController.stream
-            .where((message) =>
-                (message.entities ?? message.caption_entities) == null)
-            .where((message) => (message.text ?? message.caption ?? '')
-                .contains(RegExp(keyword)));
-      }
-    } else {
-      // with entityType but no keyword
-      if (keyword == null) {
-        return _messageStreamController.stream.where((message) =>
-            entityType == '*' || message.entityOf(entityType) != null);
-      } else {
-        // with entityType and keyword
-        return _messageStreamController.stream.where((message) {
-          switch (entityType) {
-            case '*': // Any entityType
-              return (message.text ?? message.caption ?? '')
-                  .contains(RegExp(keyword));
-            case 'mention':
-              return message.getEntity(entityType) == '\@${keyword}';
-              break;
-            case 'cashtag':
-              return message.getEntity(entityType) == '\$${keyword}';
-            case 'hashtag':
-              return message.getEntity(entityType) == '\#${keyword}';
-              break;
-            case 'bot_command':
-              return message.getEntity(entityType) == '\/${keyword}' ||
-                  message.getEntity(entityType) ==
-                      '\/${keyword}\@${me.username}';
-              break;
-            case 'url':
-            case 'email':
-            case 'phone_number':
-            case 'bold':
-            case 'italic':
-            case 'code':
-            case 'pre':
-            case 'underline':
-            case 'strikethrough':
-              return message.getEntity(entityType) == '${keyword}';
-              break;
-            case 'text_link':
-              return message.entityOf(entityType).url == '${keyword}';
-              break;
-            case 'text_mention':
-              return message.entityOf(entityType).user.id as String ==
-                      keyword ||
-                  message.entityOf(entityType).user.first_name == keyword;
-              break;
-            default: // Dynamically listen to message types.
-              return (message.getEntity(entityType) ?? '')
-                  .contains(RegExp(keyword));
-              break;
+  Stream<Message> onMessage({String entityType, dynamic keyword}) =>
+      _messageStreamController.stream.where((message) {
+        if (keyword == null) {
+          if (entityType == null) {
+            // no keyword and entityType
+            return (message.entities ?? message.caption_entities) == null;
+          } else {
+            // no keyword but entityType
+            return entityType == '*' || message.entityOf(entityType) != null;
           }
-        });
-      }
-    }
-  }
+        } else {
+          if (!(keyword is String) && !(keyword is RegExp)) {
+            throw TeleDartEventException(
+                'Attribute \'keyword\' accepts type of String or RegExp');
+          } else if (entityType == null) {
+            // has keyword but no entityType
+            return (message.entities ?? message.caption_entities) == null &&
+                (message.text ?? message.caption ?? '').contains(keyword);
+          } else if (entityType == 'text_mention') {
+            var userId = message.entityOf(entityType).user.id as String;
+            var userName = message.entityOf(entityType).user.first_name;
+            if (keyword is RegExp) {
+              return keyword.hasMatch(userName) || keyword.hasMatch(userId);
+            } else {
+              return keyword == userName || keyword == userId;
+            }
+          } else {
+            var entityText = '';
+
+            switch (entityType) {
+              case '*': // Any entityType
+                entityText = (message.text ?? message.caption ?? '');
+                break;
+              case 'mention': //'\@${keyword}'
+              case 'cashtag': //'\$${keyword}'
+              case 'hashtag': //'\#${keyword}'
+                entityText = message.getEntity(entityType).substring(1);
+                break;
+              case 'bot_command': //'\/${keyword}' or '\/${keyword}\@${me.username}'
+                entityText = message
+                    .getEntity(entityType)
+                    .substring(1)
+                    .replaceAll('\@${me.username}', '');
+                break;
+              case 'url':
+              case 'email':
+              case 'phone_number':
+              case 'bold':
+              case 'italic':
+              case 'code':
+              case 'pre':
+              case 'underline':
+              case 'strikethrough':
+                entityText = message.getEntity(entityType);
+                break;
+              case 'text_link':
+                entityText = message.entityOf(entityType).url;
+                break;
+              default: // Dynamically listen to message types.
+                entityText = message.getEntity(entityType) ?? '';
+                break;
+            }
+
+            if (keyword is RegExp) {
+              return keyword.hasMatch(entityText);
+            } else {
+              return keyword == entityText;
+            }
+          }
+        }
+      });
 
   /// Emits update events
   void emitUpdate(Update update) {
