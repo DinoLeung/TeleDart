@@ -1,4 +1,12 @@
+## 0.0.37
+
+- Support API 4.6
+- Support API 4.7
+- Utilised native objects for date/time related objects (#91)
+- Updated onMessage (and related functions) to accept String as well as RegExp (#92)
+
 ## 0.0.36
+
 - Support API 4.5
 
 ## 0.0.35
