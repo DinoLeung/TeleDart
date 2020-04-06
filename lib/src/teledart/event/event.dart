@@ -66,9 +66,10 @@ class Event {
             throw TeleDartEventException(
                 'Attribute \'keyword\' accepts type of String or RegExp');
           } else if (entityType == null) {
-            // has keyword but no entityType
             return (message.entities ?? message.caption_entities) == null &&
                 (message.text ?? message.caption ?? '').contains(keyword);
+          } else if (message.entityOf(entityType) == null) {
+            return false;
           } else if (entityType == 'text_mention') {
             var userId = message.entityOf(entityType).user.id as String;
             var userName = message.entityOf(entityType).user.first_name;
@@ -87,13 +88,17 @@ class Event {
               case 'mention': //'\@${keyword}'
               case 'cashtag': //'\$${keyword}'
               case 'hashtag': //'\#${keyword}'
-                entityText = message.getEntity(entityType).substring(1);
+                entityText = message.getEntity(entityType).isNotEmpty
+                    ? message.getEntity(entityType).substring(1)
+                    : '';
                 break;
               case 'bot_command': //'\/${keyword}' or '\/${keyword}\@${me.username}'
-                entityText = message
-                    .getEntity(entityType)
-                    .substring(1)
-                    .replaceAll('\@${me.username}', '');
+                entityText = message.getEntity(entityType).isNotEmpty
+                    ? message
+                        .getEntity(entityType)
+                        .substring(1)
+                        .replaceAll('\@${me.username}', '')
+                    : '';
                 break;
               case 'url':
               case 'email':
@@ -104,10 +109,10 @@ class Event {
               case 'pre':
               case 'underline':
               case 'strikethrough':
-                entityText = message.getEntity(entityType);
+                entityText = message.getEntity(entityType) ?? '';
                 break;
               case 'text_link':
-                entityText = message.entityOf(entityType).url;
+                entityText = message.entityOf(entityType).url ?? '';
                 break;
               default: // Dynamically listen to message types.
                 entityText = message.getEntity(entityType) ?? '';
