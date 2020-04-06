@@ -32,8 +32,9 @@ class ResponseParameters {
   });
 
   @JsonKey(ignore: true)
-  Duration get retry_after_ => toDuration(retry_after);
-  set retry_after_(Duration duration) => retry_after = toSeconds(duration);
+  Duration get retry_after_ => TimeHelper.toDuration(retry_after);
+  set retry_after_(Duration duration) =>
+      retry_after = TimeHelper.toSeconds(duration);
 
   factory ResponseParameters.fromJson(Map<String, dynamic> json) =>
       _$ResponseParametersFromJson(json);

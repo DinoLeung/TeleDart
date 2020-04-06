@@ -44,8 +44,9 @@ class Video {
   });
 
   @JsonKey(ignore: true)
-  Duration get duration_ => toDuration(duration);
-  set duration_(Duration duration) => this.duration = toSeconds(duration);
+  Duration get duration_ => TimeHelper.toDuration(duration);
+  set duration_(Duration duration) =>
+      this.duration = TimeHelper.toSeconds(duration);
 
   factory Video.fromJson(Map<String, dynamic> json) => _$VideoFromJson(json);
   Map<String, dynamic> toJson() => _$VideoToJson(this);

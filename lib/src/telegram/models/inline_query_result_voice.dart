@@ -54,9 +54,9 @@ class InlineQueryResultVoice implements InlineQueryResult {
   });
 
   @JsonKey(ignore: true)
-  Duration get voice_duration_ => toDuration(voice_duration);
+  Duration get voice_duration_ => TimeHelper.toDuration(voice_duration);
   set voice_duration_(Duration duration) =>
-      voice_duration = toSeconds(duration);
+      voice_duration = TimeHelper.toSeconds(duration);
 
   factory InlineQueryResultVoice.fromJson(Map<String, dynamic> json) =>
       _$InlineQueryResultVoiceFromJson(json);

@@ -16,12 +16,16 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-DateTime toDateTime(int unixTime) =>
-    DateTime.fromMillisecondsSinceEpoch((unixTime * 1000), isUtc: true);
+import 'dart:core';
 
-int toUnixTime(DateTime datetime) =>
-    (datetime.millisecondsSinceEpoch / 1000).round();
+class TimeHelper {
+  static DateTime toDateTime(int unixTime) =>
+      DateTime.fromMillisecondsSinceEpoch((unixTime * 1000), isUtc: true);
 
-Duration toDuration(int seconds) => Duration(seconds: seconds);
+  static int toUnixTime(DateTime datetime) =>
+      (datetime.millisecondsSinceEpoch / 1000).round();
 
-int toSeconds(Duration duration) => duration.inSeconds;
+  static Duration toDuration(int seconds) => Duration(seconds: seconds);
+
+  static int toSeconds(Duration duration) => duration.inSeconds;
+}
