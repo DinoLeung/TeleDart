@@ -1,3 +1,8 @@
+## 0.0.39
+
+- Renamed `datetime_duration_converter.dart` into `time_helper.dart`
+- Converted `time_helper` into a class
+
 ## 0.0.38
 
 - Fixed #98
