@@ -66,8 +66,9 @@ class ChatMember {
   });
 
   @JsonKey(ignore: true)
-  DateTime get until_date_ => toDateTime(until_date);
-  set until_date_(DateTime dateTime) => until_date = toUnixTime(dateTime);
+  DateTime get until_date_ => TimeHelper.toDateTime(until_date);
+  set until_date_(DateTime dateTime) =>
+      until_date = TimeHelper.toUnixTime(dateTime);
 
   factory ChatMember.fromJson(Map<String, dynamic> json) =>
       _$ChatMemberFromJson(json);

@@ -124,16 +124,18 @@ class Message {
   });
 
   @JsonKey(ignore: true)
-  DateTime get date_ => toDateTime(date);
-  set date_(DateTime dateTime) => date = toUnixTime(dateTime);
+  DateTime get date_ => TimeHelper.toDateTime(date);
+  set date_(DateTime dateTime) => date = TimeHelper.toUnixTime(dateTime);
 
   @JsonKey(ignore: true)
-  DateTime get forward_date_ => toDateTime(forward_date);
-  set forward_date_(DateTime dateTime) => forward_date = toUnixTime(dateTime);
+  DateTime get forward_date_ => TimeHelper.toDateTime(forward_date);
+  set forward_date_(DateTime dateTime) =>
+      forward_date = TimeHelper.toUnixTime(dateTime);
 
   @JsonKey(ignore: true)
-  DateTime get edit_date_ => toDateTime(edit_date);
-  set edit_date_(DateTime dateTime) => edit_date = toUnixTime(dateTime);
+  DateTime get edit_date_ => TimeHelper.toDateTime(edit_date);
+  set edit_date_(DateTime dateTime) =>
+      edit_date = TimeHelper.toUnixTime(dateTime);
 
   factory Message.fromJson(Map<String, dynamic> json) =>
       _$MessageFromJson(json);

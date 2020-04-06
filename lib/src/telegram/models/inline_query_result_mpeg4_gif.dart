@@ -57,9 +57,9 @@ class InlineQueryResultMpeg4Gif implements InlineQueryResult {
   });
 
   @JsonKey(ignore: true)
-  Duration get mpeg4_duration_ => toDuration(mpeg4_duration);
+  Duration get mpeg4_duration_ => TimeHelper.toDuration(mpeg4_duration);
   set mpeg4_duration_(Duration duration) =>
-      mpeg4_duration = toSeconds(duration);
+      mpeg4_duration = TimeHelper.toSeconds(duration);
 
   factory InlineQueryResultMpeg4Gif.fromJson(Map<String, dynamic> json) =>
       _$InlineQueryResultMpeg4GifFromJson(json);

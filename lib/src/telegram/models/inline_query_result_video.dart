@@ -64,9 +64,9 @@ class InlineQueryResultVideo implements InlineQueryResult {
   });
 
   @JsonKey(ignore: true)
-  Duration get video_duration_ => toDuration(video_duration);
+  Duration get video_duration_ => TimeHelper.toDuration(video_duration);
   set video_duration_(Duration duration) =>
-      video_duration = toSeconds(duration);
+      video_duration = TimeHelper.toSeconds(duration);
 
   factory InlineQueryResultVideo.fromJson(Map<String, dynamic> json) =>
       _$InlineQueryResultVideoFromJson(json);

@@ -43,8 +43,9 @@ class VideoNote {
   });
 
   @JsonKey(ignore: true)
-  Duration get duration_ => toDuration(duration);
-  set duration_(Duration duration) => this.duration = toSeconds(duration);
+  Duration get duration_ => TimeHelper.toDuration(duration);
+  set duration_(Duration duration) =>
+      this.duration = TimeHelper.toSeconds(duration);
 
   factory VideoNote.fromJson(Map<String, dynamic> json) =>
       _$VideoNoteFromJson(json);
