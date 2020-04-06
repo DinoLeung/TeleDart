@@ -37,8 +37,9 @@ class PassportFile {
   });
 
   @JsonKey(ignore: true)
-  DateTime get file_date_ => toDateTime(file_date);
-  set file_date_(DateTime dateTime) => file_date = toUnixTime(dateTime);
+  DateTime get file_date_ => TimeHelper.toDateTime(file_date);
+  set file_date_(DateTime dateTime) =>
+      file_date = TimeHelper.toUnixTime(dateTime);
 
   factory PassportFile.fromJson(Map<String, dynamic> json) =>
       _$PassportFileFromJson(json);

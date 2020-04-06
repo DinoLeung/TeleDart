@@ -48,8 +48,9 @@ class InputMediaAudio implements InputMedia {
   });
 
   @JsonKey(ignore: true)
-  Duration get duration_ => toDuration(duration);
-  set duration_(Duration duration) => this.duration = toSeconds(duration);
+  Duration get duration_ => TimeHelper.toDuration(duration);
+  set duration_(Duration duration) =>
+      this.duration = TimeHelper.toSeconds(duration);
 
   factory InputMediaAudio.fromJson(Map<String, dynamic> json) =>
       _$InputMediaAudioFromJson(json);

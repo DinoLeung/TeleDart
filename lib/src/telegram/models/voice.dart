@@ -38,8 +38,9 @@ class Voice {
   });
 
   @JsonKey(ignore: true)
-  Duration get duration_ => toDuration(duration);
-  set duration_(Duration duration) => this.duration = toSeconds(duration);
+  Duration get duration_ => TimeHelper.toDuration(duration);
+  set duration_(Duration duration) =>
+      this.duration = TimeHelper.toSeconds(duration);
 
   factory Voice.fromJson(Map<String, dynamic> json) => _$VoiceFromJson(json);
   Map<String, dynamic> toJson() => _$VoiceToJson(this);
