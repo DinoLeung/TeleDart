@@ -22,6 +22,8 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class HttpClient {
+  bool _nullFilter(_, value) => value == null || value == 'null';
+
   /// HTTP get method
   /// [url] request url with query string (required)
   Future<dynamic> httpGet(String url) async => http.get(url).then((response) {
@@ -37,18 +39,20 @@ class HttpClient {
   /// HTTP post method (x-www-form-urlencoded)
   /// [url] - request url (required)
   /// [body] - parameters in map
-  Future<dynamic> httpPost(String url, {Map<String, dynamic> body}) async =>
-      http
-          .post(url, body: body.map((k, v) => MapEntry(k, '${v}')))
-          .then((response) {
-        Map<String, dynamic> responseBody = jsonDecode(response.body);
-        if (responseBody['ok']) {
-          return responseBody['result'];
-        } else {
-          return Future.error(HttpClientException(
-              '${responseBody['error_code']} ${responseBody['description']}'));
-        }
-      }).catchError((error) => Future.error(HttpClientException('${error}')));
+  Future<dynamic> httpPost(String url, {Map<String, dynamic> body}) async {
+    body.removeWhere(_nullFilter);
+    return http
+        .post(url, body: body.map((k, v) => MapEntry(k, '${v}')))
+        .then((response) {
+      Map<String, dynamic> responseBody = jsonDecode(response.body);
+      if (responseBody['ok']) {
+        return responseBody['result'];
+      } else {
+        return Future.error(HttpClientException(
+            '${responseBody['error_code']} ${responseBody['description']}'));
+      }
+    }).catchError((error) => Future.error(HttpClientException('${error}')));
+  }
 
   /// HTTP post method (multipart/form-data)
   /// [url] - request url (required)
@@ -56,6 +60,7 @@ class HttpClient {
   /// [body] - parameters in map
   Future<dynamic> httpMultipartPost(String url, List<http.MultipartFile> files,
       {Map<String, dynamic> body}) async {
+    body.removeWhere(_nullFilter);
     var request = http.MultipartRequest('POST', Uri.parse(url))
       ..headers.addAll({'Content-Type': 'multipart/form-data'})
       ..fields.addAll(body.map((k, v) => MapEntry(k, '${v}')))

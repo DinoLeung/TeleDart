@@ -88,9 +88,8 @@ class Telegram {
     var requestUrl = '${_baseUrl}${_token}/setWebhook';
     var body = <String, dynamic>{
       'url': url,
-      'max_connections': max_connections ?? '',
-      'allowed_updates':
-          allowed_updates == null ? '' : jsonEncode(allowed_updates),
+      'max_connections': max_connections,
+      'allowed_updates': jsonEncode(allowed_updates),
     };
     if (certificate != null) {
       // filename cannot be empty to post to Telegram server
@@ -150,11 +149,11 @@ class Telegram {
     var body = <String, dynamic>{
       'chat_id': chat_id,
       'text': text,
-      'parse_mode': parse_mode ?? '',
-      'disable_web_page_preview': disable_web_page_preview ?? '',
-      'disable_notification': disable_notification ?? '',
-      'reply_to_message_id': reply_to_message_id ?? '',
-      'reply_markup': reply_markup == null ? '' : jsonEncode(reply_markup),
+      'parse_mode': parse_mode,
+      'disable_web_page_preview': disable_web_page_preview,
+      'disable_notification': disable_notification,
+      'reply_to_message_id': reply_to_message_id,
+      'reply_markup': jsonEncode(reply_markup),
     };
     return Message.fromJson(await _client.httpPost(requestUrl, body: body));
   }
@@ -171,7 +170,7 @@ class Telegram {
       'chat_id': chat_id,
       'from_chat_id': from_chat_id,
       'message_id': message_id,
-      'disable_notification': disable_notification ?? '',
+      'disable_notification': disable_notification,
     };
     return Message.fromJson(await _client.httpPost(requestUrl, body: body));
   }
@@ -190,11 +189,11 @@ class Telegram {
     var requestUrl = '${_baseUrl}${_token}/sendPhoto';
     var body = <String, dynamic>{
       'chat_id': chat_id,
-      'caption': caption ?? '',
-      'parse_mode': parse_mode ?? '',
-      'disable_notification': disable_notification ?? '',
-      'reply_to_message_id': reply_to_message_id ?? '',
-      'reply_markup': reply_markup == null ? '' : jsonEncode(reply_markup),
+      'caption': caption,
+      'parse_mode': parse_mode,
+      'disable_notification': disable_notification,
+      'reply_to_message_id': reply_to_message_id,
+      'reply_markup': jsonEncode(reply_markup),
     };
 
     if (photo is io.File) {
@@ -239,14 +238,14 @@ class Telegram {
     var requestUrl = '${_baseUrl}${_token}/sendAudio';
     var body = <String, dynamic>{
       'chat_id': chat_id,
-      'caption': caption ?? '',
-      'parse_mode': parse_mode ?? '',
-      'duration': duration ?? '',
-      'performer': performer ?? '',
-      'title': title ?? '',
-      'disable_notification': disable_notification ?? '',
-      'reply_to_message_id': reply_to_message_id ?? '',
-      'reply_markup': reply_markup == null ? '' : jsonEncode(reply_markup),
+      'caption': caption,
+      'parse_mode': parse_mode,
+      'duration': duration,
+      'performer': performer,
+      'title': title,
+      'disable_notification': disable_notification,
+      'reply_to_message_id': reply_to_message_id,
+      'reply_markup': jsonEncode(reply_markup),
     };
 
     if (audio is io.File) {
@@ -312,11 +311,11 @@ class Telegram {
     var requestUrl = '${_baseUrl}${_token}/sendDocument';
     var body = <String, dynamic>{
       'chat_id': chat_id,
-      'caption': caption ?? '',
-      'parse_mode': parse_mode ?? '',
-      'disable_notification': disable_notification ?? '',
-      'reply_to_message_id': reply_to_message_id ?? '',
-      'reply_markup': reply_markup == null ? '' : jsonEncode(reply_markup),
+      'caption': caption,
+      'parse_mode': parse_mode,
+      'disable_notification': disable_notification,
+      'reply_to_message_id': reply_to_message_id,
+      'reply_markup': jsonEncode(reply_markup),
     };
 
     if (document is io.File) {
@@ -390,15 +389,15 @@ class Telegram {
     var requestUrl = '${_baseUrl}${_token}/sendVideo';
     var body = <String, dynamic>{
       'chat_id': chat_id,
-      'duration': duration ?? '',
-      'width': width ?? '',
-      'height': height ?? '',
-      'caption': caption ?? '',
-      'parse_mode': parse_mode ?? '',
-      'supports_streaming': supports_streaming ?? '',
-      'disable_notification': disable_notification ?? '',
-      'reply_to_message_id': reply_to_message_id ?? '',
-      'reply_markup': reply_markup == null ? '' : jsonEncode(reply_markup),
+      'duration': duration,
+      'width': width,
+      'height': height,
+      'caption': caption,
+      'parse_mode': parse_mode,
+      'supports_streaming': supports_streaming,
+      'disable_notification': disable_notification,
+      'reply_to_message_id': reply_to_message_id,
+      'reply_markup': jsonEncode(reply_markup),
     };
 
     if (video is io.File) {
@@ -468,14 +467,14 @@ class Telegram {
     var requestUrl = '${_baseUrl}${_token}/sendAnimation';
     var body = <String, dynamic>{
       'chat_id': chat_id,
-      'duration': duration ?? '',
-      'width': width ?? '',
-      'height': height ?? '',
-      'caption': caption ?? '',
-      'parse_mode': parse_mode ?? '',
-      'disable_notification': disable_notification ?? '',
-      'reply_to_message_id': reply_to_message_id ?? '',
-      'reply_markup': reply_markup == null ? '' : jsonEncode(reply_markup),
+      'duration': duration,
+      'width': width,
+      'height': height,
+      'caption': caption,
+      'parse_mode': parse_mode,
+      'disable_notification': disable_notification,
+      'reply_to_message_id': reply_to_message_id,
+      'reply_markup': jsonEncode(reply_markup),
     };
 
     if (animation is io.File) {
@@ -548,12 +547,12 @@ class Telegram {
     var requestUrl = '${_baseUrl}${_token}/sendVoice';
     var body = <String, dynamic>{
       'chat_id': chat_id,
-      'caption': caption ?? '',
-      'parse_mode': parse_mode ?? '',
-      'duration': duration ?? '',
-      'disable_notification': disable_notification ?? '',
-      'reply_to_message_id': reply_to_message_id ?? '',
-      'reply_markup': reply_markup == null ? '' : jsonEncode(reply_markup),
+      'caption': caption,
+      'parse_mode': parse_mode,
+      'duration': duration,
+      'disable_notification': disable_notification,
+      'reply_to_message_id': reply_to_message_id,
+      'reply_markup': jsonEncode(reply_markup),
     };
 
     if (voice is io.File) {
@@ -590,11 +589,11 @@ class Telegram {
     var requestUrl = '${_baseUrl}${_token}/sendVideoNote';
     var body = <String, dynamic>{
       'chat_id': chat_id,
-      'duration': duration ?? '',
-      'length': length ?? '',
-      'disable_notification': disable_notification ?? '',
-      'reply_to_message_id': reply_to_message_id ?? '',
-      'reply_markup': reply_markup == null ? '' : jsonEncode(reply_markup),
+      'duration': duration,
+      'length': length,
+      'disable_notification': disable_notification,
+      'reply_to_message_id': reply_to_message_id,
+      'reply_markup': jsonEncode(reply_markup),
     };
 
     if (video_note is io.File) {
@@ -660,8 +659,8 @@ class Telegram {
     var body = <String, dynamic>{
       'chat_id': chat_id,
       'media': jsonEncode(media),
-      'disable_notification': disable_notification ?? '',
-      'reply_to_message_id': reply_to_message_id ?? '',
+      'disable_notification': disable_notification,
+      'reply_to_message_id': reply_to_message_id,
     };
     return (await _client.httpPost(requestUrl, body: body))
         .map<Message>((message) => Message.fromJson(message))
@@ -683,9 +682,9 @@ class Telegram {
       'chat_id': chat_id,
       'latitude': latitude,
       'longitude': longitude,
-      'disable_notification': disable_notification ?? '',
-      'reply_to_message_id': reply_to_message_id ?? '',
-      'reply_markup': reply_markup == null ? '' : jsonEncode(reply_markup),
+      'disable_notification': disable_notification,
+      'reply_to_message_id': reply_to_message_id,
+      'reply_markup': jsonEncode(reply_markup),
     };
     return Message.fromJson(await _client.httpPost(requestUrl, body: body));
   }
@@ -715,10 +714,10 @@ class Telegram {
     var body = <String, dynamic>{
       'latitude': latitude,
       'longitude': longitude,
-      'chat_id': chat_id ?? '',
-      'message_id': message_id ?? '',
-      'inline_message_id': inline_message_id ?? '',
-      'reply_markup': reply_markup == null ? '' : jsonEncode(reply_markup),
+      'chat_id': chat_id,
+      'message_id': message_id,
+      'inline_message_id': inline_message_id,
+      'reply_markup': jsonEncode(reply_markup),
     };
     return Message.fromJson(await _client.httpPost(requestUrl, body: body));
   }
@@ -743,10 +742,10 @@ class Telegram {
     }
     var requestUrl = '${_baseUrl}${_token}/stopMessageLiveLocation';
     var body = <String, dynamic>{
-      'chat_id': chat_id ?? '',
-      'message_id': message_id ?? '',
-      'inline_message_id': inline_message_id ?? '',
-      'reply_markup': reply_markup == null ? '' : jsonEncode(reply_markup),
+      'chat_id': chat_id,
+      'message_id': message_id,
+      'inline_message_id': inline_message_id,
+      'reply_markup': jsonEncode(reply_markup),
     };
     return Message.fromJson(await _client.httpPost(requestUrl, body: body));
   }
@@ -770,11 +769,11 @@ class Telegram {
       'longitude': longitude,
       'title': title,
       'address': address,
-      'foursquare_id': foursquare_id ?? '',
-      'foursquare_type': foursquare_type ?? '',
-      'disable_notification': disable_notification ?? '',
-      'reply_to_message_id': reply_to_message_id ?? '',
-      'reply_markup': reply_markup == null ? '' : jsonEncode(reply_markup),
+      'foursquare_id': foursquare_id,
+      'foursquare_type': foursquare_type,
+      'disable_notification': disable_notification,
+      'reply_to_message_id': reply_to_message_id,
+      'reply_markup': jsonEncode(reply_markup),
     };
     return Message.fromJson(await _client.httpPost(requestUrl, body: body));
   }
@@ -796,11 +795,11 @@ class Telegram {
       'chat_id': chat_id,
       'phone_number': phone_number,
       'first_name': first_name,
-      'last_name': last_name ?? '',
-      'vcard': vcard ?? '',
-      'disable_notification': disable_notification ?? '',
-      'reply_to_message_id': reply_to_message_id ?? '',
-      'reply_markup': reply_markup == null ? '' : jsonEncode(reply_markup),
+      'last_name': last_name,
+      'vcard': vcard,
+      'disable_notification': disable_notification,
+      'reply_to_message_id': reply_to_message_id,
+      'reply_markup': jsonEncode(reply_markup),
     };
     return Message.fromJson(await _client.httpPost(requestUrl, body: body));
   }
@@ -829,18 +828,18 @@ class Telegram {
       'chat_id': chat_id,
       'question': question,
       'options': jsonEncode(options),
-      'is_anonymous': is_anonymous ?? '',
-      'type': type ?? '',
-      'allows_multiple_answers': allows_multiple_answers ?? '',
-      'correct_option_id': correct_option_id ?? '',
-      'explanation': explanation ?? '',
-      'explanation_parse_mode': explanation_parse_mode ?? '',
-      'open_period': open_period ?? '',
-      'close_date': close_date ?? '',
-      'is_closed': is_closed ?? '',
-      'disable_notification': disable_notification ?? '',
-      'reply_to_message_id': reply_to_message_id ?? '',
-      'reply_markup': reply_markup == null ? '' : jsonEncode(reply_markup),
+      'is_anonymous': is_anonymous,
+      'type': type,
+      'allows_multiple_answers': allows_multiple_answers,
+      'correct_option_id': correct_option_id,
+      'explanation': explanation,
+      'explanation_parse_mode': explanation_parse_mode,
+      'open_period': open_period,
+      'close_date': close_date,
+      'is_closed': is_closed,
+      'disable_notification': disable_notification,
+      'reply_to_message_id': reply_to_message_id,
+      'reply_markup': jsonEncode(reply_markup),
     };
     return Message.fromJson(await _client.httpPost(requestUrl, body: body));
   }
@@ -856,10 +855,10 @@ class Telegram {
     var requestUrl = '${_baseUrl}${_token}/sendDice';
     var body = <String, dynamic>{
       'chat_id': chat_id,
-      'emoji': emoji ?? '',
-      'disable_notification': disable_notification ?? '',
-      'reply_to_message_id': reply_to_message_id ?? '',
-      'reply_markup': reply_markup == null ? '' : jsonEncode(reply_markup),
+      'emoji': emoji,
+      'disable_notification': disable_notification,
+      'reply_to_message_id': reply_to_message_id,
+      'reply_markup': jsonEncode(reply_markup),
     };
     return Message.fromJson(await _client.httpPost(requestUrl, body: body));
   }
@@ -897,8 +896,8 @@ class Telegram {
     var requestUrl = '${_baseUrl}${_token}/getUserProfilePhotos';
     var body = <String, dynamic>{
       'user_id': user_id,
-      'offset': offset ?? '',
-      'limit': limit ?? '',
+      'offset': offset,
+      'limit': limit,
     };
     return UserProfilePhotos.fromJson(
         await _client.httpPost(requestUrl, body: body));
@@ -945,7 +944,7 @@ class Telegram {
     var body = <String, dynamic>{
       'chat_id': chat_id,
       'user_id': user_id,
-      'until_date': until_date ?? '',
+      'until_date': until_date,
     };
     return await _client.httpPost(requestUrl, body: body);
   }
@@ -986,12 +985,12 @@ class Telegram {
     var body = <String, dynamic>{
       'chat_id': chat_id,
       'user_id': user_id,
-      'permissions': permissions == null ? '' : jsonEncode(permissions),
-      'until_date': until_date ?? '',
-      'can_send_messages': can_send_messages ?? '',
-      'can_send_media_messages': can_send_media_messages ?? '',
-      'can_send_other_messages': can_send_other_messages ?? '',
-      'can_add_web_page_previews': can_add_web_page_previews ?? '',
+      'permissions': jsonEncode(permissions),
+      'until_date': until_date,
+      'can_send_messages': can_send_messages,
+      'can_send_media_messages': can_send_media_messages,
+      'can_send_other_messages': can_send_other_messages,
+      'can_add_web_page_previews': can_add_web_page_previews,
     };
     return await _client.httpPost(requestUrl, body: body);
   }
@@ -1015,14 +1014,14 @@ class Telegram {
     var body = <String, dynamic>{
       'chat_id': chat_id,
       'user_id': user_id,
-      'can_change_info': can_change_info ?? '',
-      'can_post_messages': can_post_messages ?? '',
-      'can_edit_messages': can_edit_messages ?? '',
-      'can_delete_messages': can_delete_messages ?? '',
-      'can_invite_users': can_invite_users ?? '',
-      'can_restrict_members': can_restrict_members ?? '',
-      'can_pin_messages': can_pin_messages ?? '',
-      'can_promote_members': can_promote_members ?? '',
+      'can_change_info': can_change_info,
+      'can_post_messages': can_post_messages,
+      'can_edit_messages': can_edit_messages,
+      'can_delete_messages': can_delete_messages,
+      'can_invite_users': can_invite_users,
+      'can_restrict_members': can_restrict_members,
+      'can_pin_messages': can_pin_messages,
+      'can_promote_members': can_promote_members,
     };
     return await _client.httpPost(requestUrl, body: body);
   }
@@ -1125,7 +1124,7 @@ class Telegram {
     var requestUrl = '${_baseUrl}${_token}/setChatDescription';
     var body = <String, dynamic>{
       'chat_id': chat_id,
-      'description': description ?? '',
+      'description': description,
     };
     return await _client.httpPost(requestUrl, body: body);
   }
@@ -1142,7 +1141,7 @@ class Telegram {
     var body = <String, dynamic>{
       'chat_id': chat_id,
       'message_id': message_id,
-      'disable_notification': disable_notification ?? '',
+      'disable_notification': disable_notification,
     };
     return await _client.httpPost(requestUrl, body: body);
   }
@@ -1276,10 +1275,10 @@ class Telegram {
     var requestUrl = '${_baseUrl}${_token}/answerCallbackQuery';
     var body = <String, dynamic>{
       'callback_query_id': callback_query_id,
-      'text': text ?? '',
-      'show_alert': show_alert ?? '',
-      'url': url ?? '',
-      'cache_time': cache_time ?? '',
+      'text': text,
+      'show_alert': show_alert,
+      'url': url,
+      'cache_time': cache_time,
     };
     return await _client.httpPost(requestUrl, body: body);
   }
@@ -1323,13 +1322,13 @@ class Telegram {
     }
     var requestUrl = '${_baseUrl}${_token}/editMessageText';
     var body = <String, dynamic>{
-      'chat_id': chat_id ?? '',
-      'message_id': message_id ?? '',
-      'inline_message_id': inline_message_id ?? '',
+      'chat_id': chat_id,
+      'message_id': message_id,
+      'inline_message_id': inline_message_id,
       'text': text,
-      'parse_mode': parse_mode ?? '',
-      'disable_web_page_preview': disable_web_page_preview ?? '',
-      'reply_markup': reply_markup == null ? '' : jsonEncode(reply_markup),
+      'parse_mode': parse_mode,
+      'disable_web_page_preview': disable_web_page_preview,
+      'reply_markup': jsonEncode(reply_markup),
     };
     var res = await _client.httpPost(requestUrl, body: body);
     if (res == true) {
@@ -1362,12 +1361,12 @@ class Telegram {
     }
     var requestUrl = '${_baseUrl}${_token}/editMessageCaption';
     var body = <String, dynamic>{
-      'chat_id': chat_id ?? '',
-      'message_id': message_id ?? '',
-      'inline_message_id': inline_message_id ?? '',
-      'caption': caption ?? '',
-      'parse_mode': parse_mode ?? '',
-      'reply_markup': reply_markup == null ? '' : jsonEncode(reply_markup),
+      'chat_id': chat_id,
+      'message_id': message_id,
+      'inline_message_id': inline_message_id,
+      'caption': caption,
+      'parse_mode': parse_mode,
+      'reply_markup': jsonEncode(reply_markup),
     };
     var res = await _client.httpPost(requestUrl, body: body);
     if (res == true) {
@@ -1402,12 +1401,12 @@ class Telegram {
     }
     var requestUrl = '${_baseUrl}${_token}/editMessageMedia';
     var body = <String, dynamic>{
-      'chat_id': chat_id ?? '',
-      'message_id': message_id ?? '',
-      'inline_message_id': inline_message_id ?? '',
-      'media': media == null ? '' : jsonEncode(media),
-      'parse_mode': parse_mode ?? '',
-      'reply_markup': reply_markup == null ? '' : jsonEncode(reply_markup),
+      'chat_id': chat_id,
+      'message_id': message_id,
+      'inline_message_id': inline_message_id,
+      'media': jsonEncode(media),
+      'parse_mode': parse_mode,
+      'reply_markup': jsonEncode(reply_markup),
     };
     var res = await _client.httpPost(requestUrl, body: body);
     if (res == true) {
@@ -1438,10 +1437,10 @@ class Telegram {
     }
     var requestUrl = '${_baseUrl}${_token}/editMessageReplyMarkup';
     var body = <String, dynamic>{
-      'chat_id': chat_id ?? '',
-      'message_id': message_id ?? '',
-      'inline_message_id': inline_message_id ?? '',
-      'reply_markup': reply_markup == null ? '' : jsonEncode(reply_markup),
+      'chat_id': chat_id,
+      'message_id': message_id,
+      'inline_message_id': inline_message_id,
+      'reply_markup': jsonEncode(reply_markup),
     };
     var res = await _client.httpPost(requestUrl, body: body);
     if (res == true) {
@@ -1500,9 +1499,9 @@ class Telegram {
     var requestUrl = '${_baseUrl}${_token}/sendSticker';
     var body = <String, dynamic>{
       'chat_id': chat_id,
-      'disable_notification': disable_notification ?? '',
-      'reply_to_message_id': reply_to_message_id ?? '',
-      'reply_markup': reply_markup == null ? '' : jsonEncode(reply_markup),
+      'disable_notification': disable_notification,
+      'reply_to_message_id': reply_to_message_id,
+      'reply_markup': jsonEncode(reply_markup),
     };
 
     if (sticker is io.File) {
@@ -1573,8 +1572,8 @@ class Telegram {
       'name': '${name}_by_${botInfo.username}',
       'title': title,
       'emojis': emojis,
-      'contains_masks': contains_masks ?? '',
-      'mask_position': mask_position == null ? '' : jsonEncode(mask_position),
+      'contains_masks': contains_masks,
+      'mask_position': jsonEncode(mask_position),
     };
 
     if (tgs_sticker == null && png_sticker == null) {
@@ -1622,7 +1621,7 @@ class Telegram {
       'user_id': user_id,
       'name': name,
       'emojis': emojis,
-      'mask_position': mask_position == null ? '' : jsonEncode(mask_position),
+      'mask_position': jsonEncode(mask_position),
     };
 
     if (tgs_sticker == null && png_sticker == null) {
@@ -1720,11 +1719,11 @@ class Telegram {
     var body = <String, dynamic>{
       'inline_query_id': inline_query_id,
       'results': jsonEncode(results),
-      'cache_time': cache_time ?? '',
-      'is_personal': is_personal ?? '',
-      'next_offset': next_offset ?? '',
-      'switch_pm_text': switch_pm_text ?? '',
-      'switch_pm_parameter': switch_pm_parameter ?? '',
+      'cache_time': cache_time,
+      'is_personal': is_personal,
+      'next_offset': next_offset,
+      'switch_pm_text': switch_pm_text,
+      'switch_pm_parameter': switch_pm_parameter,
     };
     return await _client.httpPost(requestUrl, body: body);
   }
@@ -1768,21 +1767,21 @@ class Telegram {
       'start_parameter': start_parameter,
       'currency': currency,
       'prices': jsonEncode(prices),
-      'provider_data': provider_data ?? '',
-      'photo_url': photo_url ?? '',
-      'photo_size': photo_size ?? '',
-      'photo_width': photo_width ?? '',
-      'photo_height': photo_height ?? '',
-      'need_name': need_name ?? '',
-      'need_phone_number': need_phone_number ?? '',
-      'need_email': need_email ?? '',
-      'need_shipping_address': need_shipping_address ?? '',
-      'send_phone_number_to_provider': send_phone_number_to_provider ?? '',
-      'send_email_to_provider': send_email_to_provider ?? '',
-      'is_flexible': is_flexible ?? '',
-      'disable_notification': disable_notification ?? '',
-      'reply_to_message_id': reply_to_message_id ?? '',
-      'reply_markup': reply_markup == null ? '' : jsonEncode(reply_markup),
+      'provider_data': provider_data,
+      'photo_url': photo_url,
+      'photo_size': photo_size,
+      'photo_width': photo_width,
+      'photo_height': photo_height,
+      'need_name': need_name,
+      'need_phone_number': need_phone_number,
+      'need_email': need_email,
+      'need_shipping_address': need_shipping_address,
+      'send_phone_number_to_provider': send_phone_number_to_provider,
+      'send_email_to_provider': send_email_to_provider,
+      'is_flexible': is_flexible,
+      'disable_notification': disable_notification,
+      'reply_to_message_id': reply_to_message_id,
+      'reply_markup': jsonEncode(reply_markup),
     };
     return Message.fromJson(await _client.httpPost(requestUrl, body: body));
   }
@@ -1804,9 +1803,8 @@ class Telegram {
     var body = <String, dynamic>{
       'shipping_query_id': shipping_query_id,
       'ok': ok,
-      'shipping_options':
-          shipping_options == null ? '' : jsonEncode(shipping_options),
-      'error_message': error_message ?? '',
+      'shipping_options': jsonEncode(shipping_options),
+      'error_message': error_message,
     };
     return await _client.httpPost(requestUrl, body: body);
   }
@@ -1831,7 +1829,7 @@ class Telegram {
     var body = <String, dynamic>{
       'pre_checkout_query_id': pre_checkout_query_id,
       'ok': ok,
-      'error_message': error_message ?? '',
+      'error_message': error_message,
     };
     return await _client.httpPost(requestUrl, body: body);
   }
@@ -1870,9 +1868,9 @@ class Telegram {
     var body = <String, dynamic>{
       'chat_id': chat_id,
       'game_short_name': game_short_name,
-      'disable_notification': disable_notification ?? '',
-      'reply_to_message_id': reply_to_message_id ?? '',
-      'reply_markup': reply_markup == null ? '' : jsonEncode(reply_markup),
+      'disable_notification': disable_notification,
+      'reply_to_message_id': reply_to_message_id,
+      'reply_markup': jsonEncode(reply_markup),
     };
     return Message.fromJson(await _client.httpPost(requestUrl, body: body));
   }
@@ -1899,11 +1897,11 @@ class Telegram {
     var body = <String, dynamic>{
       'user_id': user_id,
       'score': score,
-      'force': force ?? '',
-      'disable_edit_message': disable_edit_message ?? '',
-      'chat_id': chat_id ?? '',
-      'message_id': message_id ?? '',
-      'inline_message_id': inline_message_id ?? '',
+      'force': force,
+      'disable_edit_message': disable_edit_message,
+      'chat_id': chat_id,
+      'message_id': message_id,
+      'inline_message_id': inline_message_id,
     };
     return Message.fromJson(await _client.httpPost(requestUrl, body: body));
   }
@@ -1929,9 +1927,9 @@ class Telegram {
     var requestUrl = '${_baseUrl}${_token}/getGameHighScores';
     var body = <String, dynamic>{
       'user_id': user_id,
-      'chat_id': chat_id ?? '',
-      'message_id': message_id ?? '',
-      'inline_message_id': inline_message_id ?? '',
+      'chat_id': chat_id,
+      'message_id': message_id,
+      'inline_message_id': inline_message_id,
     };
     return (await _client.httpPost(requestUrl, body: body))
         .map<GameHighScore>(
