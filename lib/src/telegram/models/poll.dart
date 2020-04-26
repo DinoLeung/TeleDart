@@ -35,6 +35,10 @@ class Poll {
   String type;
   bool allows_multiple_answers;
   int correct_option_id;
+  String explanation;
+  List<MessageEntity> explanation_entities;
+  int open_period;
+  int close_date;
   Poll({
     this.id,
     this.question,
@@ -45,7 +49,18 @@ class Poll {
     this.type,
     this.allows_multiple_answers,
     this.correct_option_id,
+    this.explanation,
+    this.explanation_entities,
+    this.open_period,
+    this.close_date,
   });
   factory Poll.fromJson(Map<String, dynamic> json) => _$PollFromJson(json);
   Map<String, dynamic> toJson() => _$PollToJson(this);
+
+  Duration get open_period_ => TimeHelper.toDuration(open_period);
+  set open_period_(Duration duration) =>
+      open_period = TimeHelper.toSeconds(duration);
+  DateTime get close_date_ => TimeHelper.toDateTime(close_date);
+  set close_date_(DateTime dateTime) =>
+      close_date = TimeHelper.toUnixTime(dateTime);
 }

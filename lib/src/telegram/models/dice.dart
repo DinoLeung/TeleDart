@@ -24,8 +24,10 @@ part of '../model.dart';
 @JsonSerializable()
 class Dice {
   int value;
+  String emoji;
   Dice({
     this.value,
+    this.emoji,
   });
   factory Dice.fromJson(Map<String, dynamic> json) => _$DiceFromJson(json);
   Map<String, dynamic> toJson() => _$DiceToJson(this);

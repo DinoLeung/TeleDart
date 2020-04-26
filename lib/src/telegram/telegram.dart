@@ -816,6 +816,10 @@ class Telegram {
       String type,
       bool allows_multiple_answers,
       int correct_option_id,
+      String explanation,
+      String explanation_parse_mode,
+      int open_period,
+      int close_date,
       bool is_closed,
       bool disable_notification,
       int reply_to_message_id,
@@ -829,6 +833,10 @@ class Telegram {
       'type': type ?? '',
       'allows_multiple_answers': allows_multiple_answers ?? '',
       'correct_option_id': correct_option_id ?? '',
+      'explanation': explanation ?? '',
+      'explanation_parse_mode': explanation_parse_mode ?? '',
+      'open_period': open_period ?? '',
+      'close_date': close_date ?? '',
       'is_closed': is_closed ?? '',
       'disable_notification': disable_notification ?? '',
       'reply_to_message_id': reply_to_message_id ?? '',
@@ -841,12 +849,14 @@ class Telegram {
   /// the sent Message is returned. (Yes, we're aware of the “proper” singular of die.
   /// But it's awkward, and we decided to help it change. One dice at a time!)
   Future<Message> sendDice(int chat_id,
-      {bool disable_notification,
+      {String emoji,
+      bool disable_notification,
       int reply_to_message_id,
       ReplyMarkup reply_markup}) async {
     var requestUrl = '${_baseUrl}${_token}/sendDice';
     var body = <String, dynamic>{
       'chat_id': chat_id,
+      'emoji': emoji ?? '',
       'disable_notification': disable_notification ?? '',
       'reply_to_message_id': reply_to_message_id ?? '',
       'reply_markup': reply_markup == null ? '' : jsonEncode(reply_markup),
