@@ -792,6 +792,14 @@ Poll _$PollFromJson(Map<String, dynamic> json) {
     type: json['type'] as String,
     allows_multiple_answers: json['allows_multiple_answers'] as bool,
     correct_option_id: json['correct_option_id'] as int,
+    explanation: json['explanation'] as String,
+    explanation_entities: (json['explanation_entities'] as List)
+        ?.map((e) => e == null
+            ? null
+            : MessageEntity.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
+    open_period: json['open_period'] as int,
+    close_date: json['close_date'] as int,
   );
 }
 
@@ -813,12 +821,17 @@ Map<String, dynamic> _$PollToJson(Poll instance) {
   writeNotNull('type', instance.type);
   writeNotNull('allows_multiple_answers', instance.allows_multiple_answers);
   writeNotNull('correct_option_id', instance.correct_option_id);
+  writeNotNull('explanation', instance.explanation);
+  writeNotNull('explanation_entities', instance.explanation_entities);
+  writeNotNull('open_period', instance.open_period);
+  writeNotNull('close_date', instance.close_date);
   return val;
 }
 
 Dice _$DiceFromJson(Map<String, dynamic> json) {
   return Dice(
     value: json['value'] as int,
+    emoji: json['emoji'] as String,
   );
 }
 
@@ -832,6 +845,7 @@ Map<String, dynamic> _$DiceToJson(Dice instance) {
   }
 
   writeNotNull('value', instance.value);
+  writeNotNull('emoji', instance.emoji);
   return val;
 }
 
