@@ -1,3 +1,8 @@
+## 0.0.40
+
+- Support API 4.8
+- Fixed disclaimer doc block warnings
+
 ## 0.0.39
 
 - Renamed `datetime_duration_converter.dart` into `time_helper.dart`
