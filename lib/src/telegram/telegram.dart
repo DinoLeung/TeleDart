@@ -1823,7 +1823,7 @@ class Telegram {
       return Future.error(TelegramException(
           'Attribute \'error_message\' can not be null when \'ok\' = false'));
     }
-    var requestUrl = '${_baseUrl}${_token}/answerShippingQuery';
+    var requestUrl = '${_baseUrl}${_token}/answerPreCheckoutQuery';
     var body = <String, dynamic>{
       'pre_checkout_query_id': pre_checkout_query_id,
       'ok': ok,
