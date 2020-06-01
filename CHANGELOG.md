@@ -1,3 +1,7 @@
+## 0.0.41
+
+- Fix answerPreCheckoutQuery typo
+
 ## 0.0.40
 
 - Support API 4.8
