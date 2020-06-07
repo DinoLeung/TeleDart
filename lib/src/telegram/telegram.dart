@@ -842,9 +842,8 @@ class Telegram {
     return Message.fromJson(await _client.httpPost(requestUrl, body: body));
   }
 
-  /// Use this method to send a dice, which will have a random value from 1 to 6. On success,
-  /// the sent Message is returned. (Yes, we're aware of the “proper” singular of die.
-  /// But it's awkward, and we decided to help it change. One dice at a time!)
+  /// Use this method to send an animated emoji that will display a random value. On success,
+  /// the sent Message is returned.
   Future<Message> sendDice(int chat_id,
       {String emoji,
       bool disable_notification,
