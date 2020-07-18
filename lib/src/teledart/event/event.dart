@@ -32,6 +32,7 @@ class Event {
   StreamController<ShippingQuery> _shippingQueryStreamController;
   StreamController<PreCheckoutQuery> _preCheckoutQueryStreamController;
   StreamController<Poll> _pollStreamController;
+  StreamController<PollAnswer> _pollAnswerStreamController;
 
   /// Constructor
   Event({bool sync = false}) {
@@ -46,6 +47,7 @@ class Event {
     _shippingQueryStreamController = StreamController.broadcast(sync: sync);
     _preCheckoutQueryStreamController = StreamController.broadcast(sync: sync);
     _pollStreamController = StreamController.broadcast(sync: sync);
+    _pollAnswerStreamController = StreamController.broadcast(sync: sync);
   }
 
   /// Listens to message events
@@ -150,6 +152,8 @@ class Event {
       _preCheckoutQueryStreamController.add(update.pre_checkout_query);
     } else if (update.poll != null) {
       _pollStreamController.add(update.poll);
+    } else if (update.poll_answer != null) {
+      _pollAnswerStreamController.add(update.poll_answer);
     } else {
       throw TeleDartEventException('Object in Update cannot be null');
     }
@@ -186,6 +190,9 @@ class Event {
 
   /// Listen to poll events
   Stream<Poll> onPoll() => _pollStreamController.stream;
+
+  /// Listen to poll answer events
+  Stream<PollAnswer> onPollAnswer() => _pollAnswerStreamController.stream;
 }
 
 class TeleDartEventException implements Exception {
