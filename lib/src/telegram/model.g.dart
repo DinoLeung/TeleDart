@@ -219,6 +219,9 @@ Message _$MessageFromJson(Map<String, dynamic> json) {
     reply_to_message: json['reply_to_message'] == null
         ? null
         : Message.fromJson(json['reply_to_message'] as Map<String, dynamic>),
+    via_bot: json['via_bot'] == null
+        ? null
+        : User.fromJson(json['via_bot'] as Map<String, dynamic>),
     edit_date: json['edit_date'] as int,
     media_group_id: json['media_group_id'] as String,
     author_signature: json['author_signature'] as String,
@@ -336,6 +339,7 @@ Map<String, dynamic> _$MessageToJson(Message instance) {
   writeNotNull('forward_sender_name', instance.forward_sender_name);
   writeNotNull('forward_date', instance.forward_date);
   writeNotNull('reply_to_message', instance.reply_to_message);
+  writeNotNull('via_bot', instance.via_bot);
   writeNotNull('edit_date', instance.edit_date);
   writeNotNull('media_group_id', instance.media_group_id);
   writeNotNull('author_signature', instance.author_signature);

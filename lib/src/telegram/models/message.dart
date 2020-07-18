@@ -32,6 +32,7 @@ class Message {
   String forward_sender_name;
   int forward_date;
   Message reply_to_message;
+  User via_bot;
   int edit_date;
   String media_group_id;
   String author_signature;
@@ -82,6 +83,7 @@ class Message {
     this.forward_sender_name,
     this.forward_date,
     this.reply_to_message,
+    this.via_bot,
     this.edit_date,
     this.media_group_id,
     this.author_signature,
