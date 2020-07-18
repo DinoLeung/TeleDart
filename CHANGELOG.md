@@ -1,4 +1,4 @@
-## unreleased
+## 0.0.42
 
 - Support API 4.9
 - Added poll answer event
