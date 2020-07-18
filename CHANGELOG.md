@@ -1,3 +1,7 @@
+## 0.0.43
+
+- Added onPollAnswer teledart shorthand
+
 ## 0.0.42
 
 - Support API 4.9
