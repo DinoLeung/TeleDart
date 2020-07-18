@@ -174,6 +174,9 @@ class TeleDart {
 
   /// Listens to poll events
   Stream<Poll> onPoll() => _event.onPoll();
+  
+  /// Listen to poll answer events
+  Stream<PollAnswer> onPollAnswer() => _event.onPollAnswer();
 
   // Short-cuts revolution
 
