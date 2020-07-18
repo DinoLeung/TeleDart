@@ -1,3 +1,7 @@
+## unreleased
+
+- Support API 4.9
+
 ## 0.0.40
 
 - Support API 4.8
