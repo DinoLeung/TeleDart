@@ -1,6 +1,10 @@
+## unreleased
+
+- Added poll answer event
+
 ## 0.0.41
 
-- Fix answerPreCheckoutQuery typo
+- Fixed answerPreCheckoutQuery typo
 
 ## 0.0.40
 
