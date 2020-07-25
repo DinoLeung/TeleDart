@@ -1,3 +1,7 @@
+## unreleased
+
+- Added reply shortcuts to Message object
+
 ## 0.0.43
 
 - Added onPollAnswer teledart shorthand

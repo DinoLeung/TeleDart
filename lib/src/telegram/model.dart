@@ -14,10 +14,8 @@
 /// You should have received a copy of the GNU General Public License
 /// along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-import 'dart:async';
 import 'package:json_annotation/json_annotation.dart';
 import '../util/time_helper.dart';
-import '../teledart/teledart.dart';
 
 part 'model.g.dart';
 

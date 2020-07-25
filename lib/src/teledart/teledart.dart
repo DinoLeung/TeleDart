@@ -17,6 +17,8 @@
 import 'dart:async';
 import 'dart:io' as io;
 
+import 'package:teledart/src/teledart/models/message.dart';
+
 import 'event/event.dart';
 import 'fetch/long_polling.dart';
 import 'fetch/webhook.dart';
@@ -123,9 +125,11 @@ class TeleDart {
   /// Private method to add updates into events queue
   void _updatesHandler(Update update) => _event.emitUpdate(update);
 
-  Message _messageStreamMapper(Message msg) {
-    msg.setTeledart(this);
-    return msg;
+  TeleDartMessage _messageStreamMapper(Message msg) {
+    // var t_message = TeleDartMessage(msg);
+    // var t_message = msg as TeleDartMessage;
+    // t_message.setTeledart(this);
+    return TeleDartMessage(this, msg);
   }
 
   /// Listens to message events with [entityType] and [keyword] in text and caption
@@ -149,20 +153,21 @@ class TeleDart {
   ///  onMessage(entityType: 'bot_command', keyword: 'start').listen((message) =>
   ///    teledart.telegram.sendMessage(message.chat.id, 'hello world!'));
   ///  ```
-  Stream<Message> onMessage({String entityType, dynamic keyword}) => _event
-      .onMessage(entityType: entityType, keyword: keyword)
-      .map(_messageStreamMapper);
+  Stream<TeleDartMessage> onMessage({String entityType, dynamic keyword}) =>
+      _event
+          .onMessage(entityType: entityType, keyword: keyword)
+          .map(_messageStreamMapper);
 
   /// Listens to edited message events
-  Stream<Message> onEditedMessage() =>
+  Stream<TeleDartMessage> onEditedMessage() =>
       _event.onEditedMessage().map(_messageStreamMapper);
 
   /// Listens to channel post events
-  Stream<Message> onChannelPost() =>
+  Stream<TeleDartMessage> onChannelPost() =>
       _event.onChannelPost().map(_messageStreamMapper);
 
   /// Listens to edited channel post events
-  Stream<Message> onEditedChannelPost() =>
+  Stream<TeleDartMessage> onEditedChannelPost() =>
       _event.onEditedChannelPost().map(_messageStreamMapper);
 
   /// Listens to inline query events
@@ -190,55 +195,55 @@ class TeleDart {
   // Short-cuts revolution
 
   /// Short-cut for onMessage handling entityType `mention` (@username)
-  Stream<Message> onMention([dynamic keyword]) =>
+  Stream<TeleDartMessage> onMention([dynamic keyword]) =>
       onMessage(entityType: 'mention', keyword: keyword);
 
   /// Short-cut for onMessage handling entityType `cashtag`
-  Stream<Message> onCashtag([dynamic keyword]) =>
+  Stream<TeleDartMessage> onCashtag([dynamic keyword]) =>
       onMessage(entityType: 'cashtag', keyword: keyword);
 
   /// Short-cut for onMessage handling entityType `hashtag`
-  Stream<Message> onHashtag([dynamic keyword]) =>
+  Stream<TeleDartMessage> onHashtag([dynamic keyword]) =>
       onMessage(entityType: 'hashtag', keyword: keyword);
 
   /// Short-cut for onMessage handling entityType `bot_command`
-  Stream<Message> onCommand([dynamic keyword]) =>
+  Stream<TeleDartMessage> onCommand([dynamic keyword]) =>
       onMessage(entityType: 'bot_command', keyword: keyword);
 
   /// Short-cut for onMessage handling entityType `url`
-  Stream<Message> onUrl([dynamic keyword]) =>
+  Stream<TeleDartMessage> onUrl([dynamic keyword]) =>
       onMessage(entityType: 'url', keyword: keyword);
 
   /// Short-cut for onMessage handling entityType `email`
-  Stream<Message> onEmail([dynamic keyword]) =>
+  Stream<TeleDartMessage> onEmail([dynamic keyword]) =>
       onMessage(entityType: 'email', keyword: keyword);
 
   /// Short-cut for onMessage handling entityType `phone_number`
-  Stream<Message> onPhoneNumber([dynamic keyword]) =>
+  Stream<TeleDartMessage> onPhoneNumber([dynamic keyword]) =>
       onMessage(entityType: 'phone_number', keyword: keyword);
 
   /// Short-cut for onMessage handling entityType `bold`
-  Stream<Message> onBold([dynamic keyword]) =>
+  Stream<TeleDartMessage> onBold([dynamic keyword]) =>
       onMessage(entityType: 'bold', keyword: keyword);
 
   /// Short-cut for onMessage handling entityType `italic`
-  Stream<Message> onItalic([dynamic keyword]) =>
+  Stream<TeleDartMessage> onItalic([dynamic keyword]) =>
       onMessage(entityType: 'italic', keyword: keyword);
 
   /// Short-cut for onMessage handling entityType `code`
-  Stream<Message> onCode([dynamic keyword]) =>
+  Stream<TeleDartMessage> onCode([dynamic keyword]) =>
       onMessage(entityType: 'code', keyword: keyword);
 
   /// Short-cut for onMessage handling entityType `pre`
-  Stream<Message> onPre([dynamic keyword]) =>
+  Stream<TeleDartMessage> onPre([dynamic keyword]) =>
       onMessage(entityType: 'pre', keyword: keyword);
 
   /// Short-cut for onMessage handling entityType `text_link`
-  Stream<Message> onTextLink([dynamic keyword]) =>
+  Stream<TeleDartMessage> onTextLink([dynamic keyword]) =>
       onMessage(entityType: 'text_link', keyword: keyword);
 
   /// Short-cut for onMessage handling entityType `text_mention`
-  Stream<Message> onTextMention([dynamic keyword]) =>
+  Stream<TeleDartMessage> onTextMention([dynamic keyword]) =>
       onMessage(entityType: 'text_mention', keyword: keyword);
 
   /// Short-cut to reply with a text message
