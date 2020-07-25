@@ -46,6 +46,10 @@ void main() {
           'https://raw.githubusercontent.com/DinoLeung/TeleDart/master/example/dash_paper_plane.png',
           caption: 'This is how Dash found the paper plane'));
 
+  teledart
+      .onMessage(keyword: 'Fight for freedom')
+      .listen((message) => message.replyMessage('Stand with Hong Kong'));
+
   // Inline mode.
   teledart
       .onInlineQuery()
