@@ -30,6 +30,7 @@ class Webhook {
   String url;
   String secretPath;
   int port;
+  int serverPort;
   int max_connections;
   List<String> allowed_updates;
 
@@ -41,11 +42,14 @@ class Webhook {
 
   /// Setup webhook
   ///
+  /// Webhook server listens to [port] by default, set [serverPort] to override.
+  ///
   /// Throws [WebhookException] if [port] is not supported by Telegram
   /// or [max_connections] is less than 1 or greater than 100.
   Webhook(this.telegram, this.url, this.secretPath, this.certificate,
       this.privateKey,
       {this.port = 443,
+      this.serverPort,
       this.uploadCertificate = false,
       this.max_connections = 40,
       this.allowed_updates}) {
@@ -74,7 +78,7 @@ class Webhook {
   /// Set webhook on telegram server.
   Future<void> setWebhook() async {
     Future<dynamic> serverFuture = io.HttpServer.bindSecure(
-        io.InternetAddress.anyIPv4.address, port, _context);
+        io.InternetAddress.anyIPv4.address, serverPort ?? port, _context);
 
     await serverFuture.then((server) => _server = server).then((_) {
       telegram.setWebhook('${url}:${port}${secretPath}',
