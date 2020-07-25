@@ -1,6 +1,8 @@
 ## unreleased
 
 - Allow overriding webhook server port
+- Added reply shortcuts to message
+- Added answer shortcuts to callback, inline, pre-checkout and shipping queries
 
 ## 0.0.43
 

@@ -17,11 +17,16 @@
 import 'dart:async';
 import 'dart:io' as io;
 
+import '../telegram/model.dart';
+import '../telegram/telegram.dart';
 import 'event/event.dart';
 import 'fetch/long_polling.dart';
 import 'fetch/webhook.dart';
-import '../telegram/telegram.dart';
-import '../telegram/model.dart';
+import 'models/callback_query.dart';
+import 'models/inline_query.dart';
+import 'models/message.dart';
+import 'models/pre_checkout_query.dart';
+import 'models/shipping_query.dart';
 
 class TeleDart {
   final Telegram telegram;
@@ -123,6 +128,9 @@ class TeleDart {
   /// Private method to add updates into events queue
   void _updatesHandler(Update update) => _event.emitUpdate(update);
 
+  TeleDartMessage _messageStreamMapper(Message msg) =>
+      TeleDartMessage(this, msg);
+
   /// Listens to message events with [entityType] and [keyword] in text and caption
   ///
   /// [entityType] include `mention` (@username), `hashtag` (#hashtag), `cashtag`($USD),
@@ -144,93 +152,106 @@ class TeleDart {
   ///  onMessage(entityType: 'bot_command', keyword: 'start').listen((message) =>
   ///    teledart.telegram.sendMessage(message.chat.id, 'hello world!'));
   ///  ```
-  Stream<Message> onMessage({String entityType, dynamic keyword}) =>
-      _event.onMessage(entityType: entityType, keyword: keyword);
+  Stream<TeleDartMessage> onMessage({String entityType, dynamic keyword}) =>
+      _event
+          .onMessage(entityType: entityType, keyword: keyword)
+          .map(_messageStreamMapper);
 
   /// Listens to edited message events
-  Stream<Message> onEditedMessage() => _event.onEditedMessage();
+  Stream<TeleDartMessage> onEditedMessage() =>
+      _event.onEditedMessage().map(_messageStreamMapper);
 
   /// Listens to channel post events
-  Stream<Message> onChannelPost() => _event.onChannelPost();
+  Stream<TeleDartMessage> onChannelPost() =>
+      _event.onChannelPost().map(_messageStreamMapper);
 
   /// Listens to edited channel post events
-  Stream<Message> onEditedChannelPost() => _event.onEditedChannelPost();
+  Stream<TeleDartMessage> onEditedChannelPost() =>
+      _event.onEditedChannelPost().map(_messageStreamMapper);
 
   /// Listens to inline query events
-  Stream<InlineQuery> onInlineQuery() => _event.onInlineQuery();
+  Stream<TeleDartInlineQuery> onInlineQuery() => _event
+      .onInlineQuery()
+      .map((inlineQuery) => TeleDartInlineQuery(this, inlineQuery));
 
   /// Listens to chosen inline query events
   Stream<ChosenInlineResult> onChosenInlineResult() =>
       _event.onChosenInlineResult();
 
   /// Listens to callback query events
-  Stream<CallbackQuery> onCallbackQuery() => _event.onCallbackQuery();
+  Stream<CallbackQuery> onCallbackQuery() => _event
+      .onCallbackQuery()
+      .map((callbackQuery) => TeleDartCallbackQuery(this, callbackQuery));
 
   /// Listens to shipping query events
-  Stream<ShippingQuery> onShippingQuery() => _event.onShippingQuery();
+  Stream<ShippingQuery> onShippingQuery() => _event
+      .onShippingQuery()
+      .map((shippingQuery) => TeleDartShippingQuery(this, shippingQuery));
 
   /// Listens to pre checkout query events
-  Stream<PreCheckoutQuery> onPreCheckoutQuery() => _event.onPreCheckoutQuery();
+  Stream<PreCheckoutQuery> onPreCheckoutQuery() =>
+      _event.onPreCheckoutQuery().map((preCheckoutQuery) =>
+          TeleDartPreCheckoutQuery(this, preCheckoutQuery));
 
   /// Listens to poll events
   Stream<Poll> onPoll() => _event.onPoll();
-  
+
   /// Listen to poll answer events
   Stream<PollAnswer> onPollAnswer() => _event.onPollAnswer();
 
   // Short-cuts revolution
 
   /// Short-cut for onMessage handling entityType `mention` (@username)
-  Stream<Message> onMention([dynamic keyword]) =>
-      _event.onMessage(entityType: 'mention', keyword: keyword);
+  Stream<TeleDartMessage> onMention([dynamic keyword]) =>
+      onMessage(entityType: 'mention', keyword: keyword);
 
   /// Short-cut for onMessage handling entityType `cashtag`
-  Stream<Message> onCashtag([dynamic keyword]) =>
-      _event.onMessage(entityType: 'cashtag', keyword: keyword);
+  Stream<TeleDartMessage> onCashtag([dynamic keyword]) =>
+      onMessage(entityType: 'cashtag', keyword: keyword);
 
   /// Short-cut for onMessage handling entityType `hashtag`
-  Stream<Message> onHashtag([dynamic keyword]) =>
-      _event.onMessage(entityType: 'hashtag', keyword: keyword);
+  Stream<TeleDartMessage> onHashtag([dynamic keyword]) =>
+      onMessage(entityType: 'hashtag', keyword: keyword);
 
   /// Short-cut for onMessage handling entityType `bot_command`
-  Stream<Message> onCommand([dynamic keyword]) =>
-      _event.onMessage(entityType: 'bot_command', keyword: keyword);
+  Stream<TeleDartMessage> onCommand([dynamic keyword]) =>
+      onMessage(entityType: 'bot_command', keyword: keyword);
 
   /// Short-cut for onMessage handling entityType `url`
-  Stream<Message> onUrl([dynamic keyword]) =>
-      _event.onMessage(entityType: 'url', keyword: keyword);
+  Stream<TeleDartMessage> onUrl([dynamic keyword]) =>
+      onMessage(entityType: 'url', keyword: keyword);
 
   /// Short-cut for onMessage handling entityType `email`
-  Stream<Message> onEmail([dynamic keyword]) =>
-      _event.onMessage(entityType: 'email', keyword: keyword);
+  Stream<TeleDartMessage> onEmail([dynamic keyword]) =>
+      onMessage(entityType: 'email', keyword: keyword);
 
   /// Short-cut for onMessage handling entityType `phone_number`
-  Stream<Message> onPhoneNumber([dynamic keyword]) =>
-      _event.onMessage(entityType: 'phone_number', keyword: keyword);
+  Stream<TeleDartMessage> onPhoneNumber([dynamic keyword]) =>
+      onMessage(entityType: 'phone_number', keyword: keyword);
 
   /// Short-cut for onMessage handling entityType `bold`
-  Stream<Message> onBold([dynamic keyword]) =>
-      _event.onMessage(entityType: 'bold', keyword: keyword);
+  Stream<TeleDartMessage> onBold([dynamic keyword]) =>
+      onMessage(entityType: 'bold', keyword: keyword);
 
   /// Short-cut for onMessage handling entityType `italic`
-  Stream<Message> onItalic([dynamic keyword]) =>
-      _event.onMessage(entityType: 'italic', keyword: keyword);
+  Stream<TeleDartMessage> onItalic([dynamic keyword]) =>
+      onMessage(entityType: 'italic', keyword: keyword);
 
   /// Short-cut for onMessage handling entityType `code`
-  Stream<Message> onCode([dynamic keyword]) =>
-      _event.onMessage(entityType: 'code', keyword: keyword);
+  Stream<TeleDartMessage> onCode([dynamic keyword]) =>
+      onMessage(entityType: 'code', keyword: keyword);
 
   /// Short-cut for onMessage handling entityType `pre`
-  Stream<Message> onPre([dynamic keyword]) =>
-      _event.onMessage(entityType: 'pre', keyword: keyword);
+  Stream<TeleDartMessage> onPre([dynamic keyword]) =>
+      onMessage(entityType: 'pre', keyword: keyword);
 
   /// Short-cut for onMessage handling entityType `text_link`
-  Stream<Message> onTextLink([dynamic keyword]) =>
-      _event.onMessage(entityType: 'text_link', keyword: keyword);
+  Stream<TeleDartMessage> onTextLink([dynamic keyword]) =>
+      onMessage(entityType: 'text_link', keyword: keyword);
 
   /// Short-cut for onMessage handling entityType `text_mention`
-  Stream<Message> onTextMention([dynamic keyword]) =>
-      _event.onMessage(entityType: 'text_mention', keyword: keyword);
+  Stream<TeleDartMessage> onTextMention([dynamic keyword]) =>
+      onMessage(entityType: 'text_mention', keyword: keyword);
 
   /// Short-cut to reply with a text message
   Future<Message> replyMessage(Message orgMsg, String text,
@@ -332,7 +353,6 @@ class TeleDart {
           String caption,
           String parse_mode,
           bool disable_notification,
-          int reply_to_message_id,
           ReplyMarkup reply_markup}) =>
       telegram.sendAnimation(orgMsg.chat.id, animation,
           duration: duration,
@@ -455,7 +475,6 @@ class TeleDart {
   Future<Message> replySticker(Message orgMsg, dynamic sticker,
           {bool withQuote = false,
           bool disable_notification,
-          int reply_to_message_id,
           ReplyMarkup reply_markup}) =>
       telegram.sendSticker(orgMsg.chat.id, sticker,
           disable_notification: disable_notification,
@@ -474,7 +493,27 @@ class TeleDart {
           cache_time: cache_time,
           is_personal: is_personal,
           next_offset: next_offset,
-          switch_pm_text: switch_pm_text);
+          switch_pm_text: switch_pm_text,
+          switch_pm_parameter: switch_pm_parameter);
+
+  /// Short-cut to answer callback query
+  Future<bool> answerCallbackQuery(CallbackQuery callback_query,
+          {String text, bool show_alert, String url, int cache_time}) =>
+      telegram.answerCallbackQuery(callback_query.id,
+          text: text, show_alert: show_alert, url: url, cache_time: cache_time);
+
+  /// Short-cut to answer shipping query
+  Future<bool> answerShippingQuery(ShippingQuery shipping_query, bool ok,
+          {List<ShippingOption> shipping_options, String error_message}) =>
+      telegram.answerShippingQuery(shipping_query.id, ok,
+          shipping_options: shipping_options, error_message: error_message);
+
+  /// Short-cut to answer pre-checkout query
+  Future<bool> answerPreCheckoutQuery(
+          PreCheckoutQuery pre_checkout_query, bool ok,
+          {String error_message}) =>
+      telegram.answerPreCheckoutQuery(pre_checkout_query.id, ok,
+          error_message: error_message);
 }
 
 class TeleDartException implements Exception {
