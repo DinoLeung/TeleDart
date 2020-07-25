@@ -125,12 +125,8 @@ class TeleDart {
   /// Private method to add updates into events queue
   void _updatesHandler(Update update) => _event.emitUpdate(update);
 
-  TeleDartMessage _messageStreamMapper(Message msg) {
-    // var t_message = TeleDartMessage(msg);
-    // var t_message = msg as TeleDartMessage;
-    // t_message.setTeledart(this);
-    return TeleDartMessage(this, msg);
-  }
+  TeleDartMessage _messageStreamMapper(Message msg) =>
+      TeleDartMessage(this, msg);
 
   /// Listens to message events with [entityType] and [keyword] in text and caption
   ///
