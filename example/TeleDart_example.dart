@@ -46,21 +46,24 @@ void main() {
           'https://raw.githubusercontent.com/DinoLeung/TeleDart/master/example/dash_paper_plane.png',
           caption: 'This is how Dash found the paper plane'));
 
-  // Inline mode.
+  // Sick of boilerplates? Reply messages like below, nice and tidy
   teledart
-      .onInlineQuery()
-      .listen((inlineQuery) => teledart.answerInlineQuery(inlineQuery, [
-            InlineQueryResultArticle()
-              ..id = 'ping'
-              ..title = 'ping'
-              ..input_message_content = (InputTextMessageContent()
-                ..message_text = '*pong*'
-                ..parse_mode = 'MarkdownV2'),
-            InlineQueryResultArticle()
-              ..id = 'ding'
-              ..title = 'ding'
-              ..input_message_content = (InputTextMessageContent()
-                ..message_text = '_dong_'
-                ..parse_mode = 'MarkdownV2')
-          ]));
+      .onMessage(keyword: 'Fight for freedom')
+      .listen((message) => message.replyMessage('Stand with Hong Kong'));
+
+  // Inline mode.
+  teledart.onInlineQuery().listen((inlineQuery) => inlineQuery.answer([
+        InlineQueryResultArticle()
+          ..id = 'ping'
+          ..title = 'ping'
+          ..input_message_content = (InputTextMessageContent()
+            ..message_text = '*pong*'
+            ..parse_mode = 'MarkdownV2'),
+        InlineQueryResultArticle()
+          ..id = 'ding'
+          ..title = 'ding'
+          ..input_message_content = (InputTextMessageContent()
+            ..message_text = '_dong_'
+            ..parse_mode = 'MarkdownV2')
+      ]));
 }

@@ -27,8 +27,9 @@ void main() {
   teledart.start().then((me) => print('${me.username} is initialised'));
 
   teledart
-        .onCommand('hello')
-        .listen(((message) => teledart.replyMessage(message, 'world')));
+      .onMessage(keyword: 'Fight for freedom')
+      .listen((message) => message.replyMessage('Stand with Hong Kong'));
+  
 }
 ```
 
@@ -38,8 +39,7 @@ Modifying [Stream](https://www.dartlang.org/tutorials/language/streams#methods-t
 teledart
       .onMessage(keyword: 'dart')
       .where((message) => message.text.contains('telegram'))
-      .listen((message) => teledart.replyPhoto(
-          message,
+      .listen((message) => message.replyPhoto(
           //  io.File('example/dash_paper_plane.png'),
           'https://raw.githubusercontent.com/DinoLeung/TeleDart/master/example/dash_paper_plane.png',
           caption: 'This is how the Dart Bird and Telegram are met'));
@@ -48,22 +48,20 @@ teledart
 [Inline mode](https://core.telegram.org/bots/api#inline-mode) example:
 
 ```dart
-teledart
-      .onInlineQuery()
-      .listen((inlineQuery) => teledart.answerInlineQuery(inlineQuery, [
-            InlineQueryResultArticle()
-              ..id = 'ping'
-              ..title = 'ping'
-              ..input_message_content = (InputTextMessageContent()
-                ..message_text = '*pong*'
-                ..parse_mode = 'MarkdownV2'),
-            InlineQueryResultArticle()
-              ..id = 'ding'
-              ..title = 'ding'
-              ..input_message_content = (InputTextMessageContent()
-                ..message_text = '_dong_'
-                ..parse_mode = 'MarkdownV2')
-          ]));
+teledart.onInlineQuery().listen((inlineQuery) => inlineQuery.answer([
+        InlineQueryResultArticle()
+          ..id = 'ping'
+          ..title = 'ping'
+          ..input_message_content = (InputTextMessageContent()
+            ..message_text = '*pong*'
+            ..parse_mode = 'MarkdownV2'),
+        InlineQueryResultArticle()
+          ..id = 'ding'
+          ..title = 'ding'
+          ..input_message_content = (InputTextMessageContent()
+            ..message_text = '_dong_'
+            ..parse_mode = 'MarkdownV2')
+      ]));
 ```
 
 ## Bugs and feature requests
