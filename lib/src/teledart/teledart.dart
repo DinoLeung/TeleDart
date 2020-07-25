@@ -22,8 +22,8 @@ import 'fetch/long_polling.dart';
 import 'fetch/webhook.dart';
 import '../telegram/telegram.dart';
 import '../telegram/model.dart';
-import 'models/Message.dart';
-import 'models/InlineQuery.dart';
+import 'models/message.dart';
+import 'models/inline_query.dart';
 
 class TeleDart {
   final Telegram telegram;
@@ -486,6 +486,12 @@ class TeleDart {
           next_offset: next_offset,
           switch_pm_text: switch_pm_text,
           switch_pm_parameter: switch_pm_parameter);
+
+  /// Short-cut to answer callback query
+  Future<bool> answerCallbackQuery(CallbackQuery callback_query,
+          {String text, bool show_alert, String url, int cache_time}) =>
+      telegram.answerCallbackQuery(callback_query.id,
+          text: text, show_alert: show_alert, url: url, cache_time: cache_time);
 }
 
 class TeleDartException implements Exception {
