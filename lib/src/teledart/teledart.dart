@@ -17,13 +17,13 @@
 import 'dart:async';
 import 'dart:io' as io;
 
-import 'package:teledart/src/teledart/models/message.dart';
-
 import 'event/event.dart';
 import 'fetch/long_polling.dart';
 import 'fetch/webhook.dart';
 import '../telegram/telegram.dart';
 import '../telegram/model.dart';
+import 'models/Message.dart';
+import 'models/InlineQuery.dart';
 
 class TeleDart {
   final Telegram telegram;
@@ -167,7 +167,9 @@ class TeleDart {
       _event.onEditedChannelPost().map(_messageStreamMapper);
 
   /// Listens to inline query events
-  Stream<InlineQuery> onInlineQuery() => _event.onInlineQuery();
+  Stream<TeleDartInlineQuery> onInlineQuery() => _event
+      .onInlineQuery()
+      .map((inlineQuery) => TeleDartInlineQuery(this, inlineQuery));
 
   /// Listens to chosen inline query events
   Stream<ChosenInlineResult> onChosenInlineResult() =>
@@ -482,7 +484,8 @@ class TeleDart {
           cache_time: cache_time,
           is_personal: is_personal,
           next_offset: next_offset,
-          switch_pm_text: switch_pm_text);
+          switch_pm_text: switch_pm_text,
+          switch_pm_parameter: switch_pm_parameter);
 }
 
 class TeleDartException implements Exception {
