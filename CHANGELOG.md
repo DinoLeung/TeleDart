@@ -1,4 +1,4 @@
-## unreleased
+## 0.0.44
 
 - Allow overriding webhook server port
 - Added reply shortcuts to message

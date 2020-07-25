@@ -52,20 +52,18 @@ void main() {
       .listen((message) => message.replyMessage('Stand with Hong Kong'));
 
   // Inline mode.
-  teledart
-      .onInlineQuery()
-      .listen((inlineQuery) => teledart.answerInlineQuery(inlineQuery, [
-            InlineQueryResultArticle()
-              ..id = 'ping'
-              ..title = 'ping'
-              ..input_message_content = (InputTextMessageContent()
-                ..message_text = '*pong*'
-                ..parse_mode = 'MarkdownV2'),
-            InlineQueryResultArticle()
-              ..id = 'ding'
-              ..title = 'ding'
-              ..input_message_content = (InputTextMessageContent()
-                ..message_text = '_dong_'
-                ..parse_mode = 'MarkdownV2')
-          ]));
+  teledart.onInlineQuery().listen((inlineQuery) => inlineQuery.answer([
+        InlineQueryResultArticle()
+          ..id = 'ping'
+          ..title = 'ping'
+          ..input_message_content = (InputTextMessageContent()
+            ..message_text = '*pong*'
+            ..parse_mode = 'MarkdownV2'),
+        InlineQueryResultArticle()
+          ..id = 'ding'
+          ..title = 'ding'
+          ..input_message_content = (InputTextMessageContent()
+            ..message_text = '_dong_'
+            ..parse_mode = 'MarkdownV2')
+      ]));
 }
