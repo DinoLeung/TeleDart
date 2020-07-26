@@ -75,7 +75,7 @@ class TeleDartMessage extends Message {
   }
 
   /// Short-cut to reply with a text message
-  Future<Message> replyMessage(String text,
+  Future<Message> reply(String text,
           {bool withQuote = false,
           String parse_mode,
           bool disable_web_page_preview,
@@ -264,7 +264,7 @@ class TeleDartMessage extends Message {
           disable_notification: disable_notification,
           reply_markup: reply_markup);
 
-  /// Short-cut to reply with a contact message
+  /// Short-cut to reply with a sticker
   Future<Message> replySticker(dynamic sticker,
           {bool withQuote = false,
           bool disable_notification,

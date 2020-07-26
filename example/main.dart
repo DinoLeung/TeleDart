@@ -47,9 +47,10 @@ void main() {
           caption: 'This is how Dash found the paper plane'));
 
   // Sick of boilerplates? Reply messages like below, nice and tidy
+  // Short hands also available for answer query methods
   teledart
       .onMessage(keyword: 'Fight for freedom')
-      .listen((message) => message.replyMessage('Stand with Hong Kong'));
+      .listen((message) => message.reply('Stand with Hong Kong'));
 
   // Inline mode.
   teledart.onInlineQuery().listen((inlineQuery) => inlineQuery.answer([

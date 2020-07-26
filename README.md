@@ -28,7 +28,7 @@ void main() {
 
   teledart
       .onMessage(keyword: 'Fight for freedom')
-      .listen((message) => message.replyMessage('Stand with Hong Kong'));
+      .listen((message) => message.reply('Stand with Hong Kong'));
   
 }
 ```
