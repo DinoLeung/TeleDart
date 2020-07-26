@@ -1,3 +1,8 @@
+## 0.0.45
+
+- Updated example file structure
+- Renamed `TeleDartMessage.replyMesasge` into `TeleDartMessage.reply`
+
 ## 0.0.44
 
 - Allow overriding webhook server port
