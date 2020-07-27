@@ -64,7 +64,8 @@ class TeleDart {
             return me;
           }
         } else {
-          _longPolling ??= LongPolling(telegram)
+          _longPolling ??= LongPolling(telegram);
+          _longPolling
             ..startPolling()
             ..onUpdate().listen((update) => _updatesHandler(update));
           return me;
