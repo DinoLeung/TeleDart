@@ -33,6 +33,7 @@ class InlineQueryResultGif implements InlineQueryResult {
   int gif_height;
   int gif_duration;
   String thumb_url;
+  String thumb_mime_type;
   String title;
   String caption;
   String parse_mode;
@@ -47,6 +48,7 @@ class InlineQueryResultGif implements InlineQueryResult {
     this.gif_height,
     this.gif_duration,
     this.thumb_url,
+    this.thumb_mime_type,
     this.title,
     this.caption,
     this.parse_mode,
