@@ -33,6 +33,7 @@ class InlineQueryResultMpeg4Gif implements InlineQueryResult {
   int mpeg4_height;
   int mpeg4_duration;
   String thumb_url;
+  String thumb_mime_type;
   String title;
   String caption;
   String parse_mode;
@@ -47,6 +48,7 @@ class InlineQueryResultMpeg4Gif implements InlineQueryResult {
     this.mpeg4_height,
     this.mpeg4_duration,
     this.thumb_url,
+    this.thumb_mime_type,
     this.title,
     this.caption,
     this.parse_mode,
