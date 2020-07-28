@@ -1,3 +1,8 @@
+## unreleased
+
+- Fixed missing fields/typos in InlineQueryResultGif, InlineQueryResultMpeg4Gif and PassportElementErrorUnspecified
+- updated restrictChatMember
+
 ## 0.0.45
 
 - Updated example file structure

@@ -972,22 +972,13 @@ class Telegram {
   /// This method now takes the new user permissions in a single argument of the type *ChatPermissions*.
   /// The old way of passing parameters will keep working for a while for backward compatibility.
   Future<bool> restrictChatMember(int chat_id, int user_id,
-      {ChatPermissions permissions,
-      int until_date,
-      bool can_send_messages,
-      bool can_send_media_messages,
-      bool can_send_other_messages,
-      bool can_add_web_page_previews}) async {
+      {ChatPermissions permissions, int until_date}) async {
     var requestUrl = '${_baseUrl}${_token}/unbanChatMember';
     var body = <String, dynamic>{
       'chat_id': chat_id,
       'user_id': user_id,
       'permissions': jsonEncode(permissions),
       'until_date': until_date,
-      'can_send_messages': can_send_messages,
-      'can_send_media_messages': can_send_media_messages,
-      'can_send_other_messages': can_send_other_messages,
-      'can_add_web_page_previews': can_add_web_page_previews,
     };
     return await _client.httpPost(requestUrl, body: body);
   }
