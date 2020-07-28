@@ -22,11 +22,11 @@ import '../telegram/telegram.dart';
 import 'event/event.dart';
 import 'fetch/long_polling.dart';
 import 'fetch/webhook.dart';
-import 'models/callback_query.dart';
-import 'models/inline_query.dart';
-import 'models/message.dart';
-import 'models/pre_checkout_query.dart';
-import 'models/shipping_query.dart';
+import 'model/callback_query.dart';
+import 'model/inline_query.dart';
+import 'model/message.dart';
+import 'model/pre_checkout_query.dart';
+import 'model/shipping_query.dart';
 
 class TeleDart {
   final Telegram telegram;
@@ -90,7 +90,10 @@ class TeleDart {
 
   /// Removes and stops long polling
   void removeLongPolling() {
-    if (_longPolling != null) _longPolling = null;
+    if (_longPolling != null) {
+      _longPolling.stopPolling();
+      _longPolling = null;
+    }
   }
 
   /// Configures webhook method

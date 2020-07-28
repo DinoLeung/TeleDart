@@ -1,5 +1,7 @@
 ## unreleased
 
+- Fixed removeLongPolling not stopping recursive long poll
+- Fixed long poll not starting with custom long poll configuration
 - Fixed missing fields/typos in InlineQueryResultGif, InlineQueryResultMpeg4Gif and PassportElementErrorUnspecified
 - updated restrictChatMember
 

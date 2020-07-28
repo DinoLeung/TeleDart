@@ -1727,6 +1727,7 @@ InlineQueryResultGif _$InlineQueryResultGifFromJson(Map<String, dynamic> json) {
     gif_height: json['gif_height'] as int,
     gif_duration: json['gif_duration'] as int,
     thumb_url: json['thumb_url'] as String,
+    thumb_mime_type: json['thumb_mime_type'] as String,
     title: json['title'] as String,
     caption: json['caption'] as String,
     parse_mode: json['parse_mode'] as String,
@@ -1758,6 +1759,7 @@ Map<String, dynamic> _$InlineQueryResultGifToJson(
   writeNotNull('gif_height', instance.gif_height);
   writeNotNull('gif_duration', instance.gif_duration);
   writeNotNull('thumb_url', instance.thumb_url);
+  writeNotNull('thumb_mime_type', instance.thumb_mime_type);
   writeNotNull('title', instance.title);
   writeNotNull('caption', instance.caption);
   writeNotNull('parse_mode', instance.parse_mode);
@@ -1776,6 +1778,7 @@ InlineQueryResultMpeg4Gif _$InlineQueryResultMpeg4GifFromJson(
     mpeg4_height: json['mpeg4_height'] as int,
     mpeg4_duration: json['mpeg4_duration'] as int,
     thumb_url: json['thumb_url'] as String,
+    thumb_mime_type: json['thumb_mime_type'] as String,
     title: json['title'] as String,
     caption: json['caption'] as String,
     parse_mode: json['parse_mode'] as String,
@@ -1807,6 +1810,7 @@ Map<String, dynamic> _$InlineQueryResultMpeg4GifToJson(
   writeNotNull('mpeg4_height', instance.mpeg4_height);
   writeNotNull('mpeg4_duration', instance.mpeg4_duration);
   writeNotNull('thumb_url', instance.thumb_url);
+  writeNotNull('thumb_mime_type', instance.thumb_mime_type);
   writeNotNull('title', instance.title);
   writeNotNull('caption', instance.caption);
   writeNotNull('parse_mode', instance.parse_mode);
@@ -3264,7 +3268,7 @@ PassportElementErrorUnspecified _$PassportElementErrorUnspecifiedFromJson(
     source: json['source'] as String,
     type: json['type'] as String,
     message: json['message'] as String,
-    file_hash: json['file_hash'] as String,
+    element_hash: json['element_hash'] as String,
   );
 }
 
@@ -3281,7 +3285,7 @@ Map<String, dynamic> _$PassportElementErrorUnspecifiedToJson(
   writeNotNull('source', instance.source);
   writeNotNull('type', instance.type);
   writeNotNull('message', instance.message);
-  writeNotNull('file_hash', instance.file_hash);
+  writeNotNull('element_hash', instance.element_hash);
   return val;
 }
 
