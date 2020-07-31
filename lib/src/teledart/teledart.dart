@@ -107,7 +107,7 @@ class TeleDart {
   Future<void> setupWebhook(
       String url, String secretPath, io.File certificate, io.File privateKey,
       {int port = 443,
-       int server_port = 80,
+       int serverPort = 443,
       bool uploadCertificate = false,
       int max_connections = 40,
       List<String> allowed_updates}) async {
@@ -116,7 +116,7 @@ class TeleDart {
         uploadCertificate: uploadCertificate,
         max_connections: max_connections,
         allowed_updates: allowed_updates,
-        serverPort: server_port);
+        serverPort: serverPort);
 
     return _webhook.setWebhook();
   }
