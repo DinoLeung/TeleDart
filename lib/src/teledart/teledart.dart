@@ -113,7 +113,7 @@ class TeleDart {
       List<String> allowed_updates}) async {
     _webhook = Webhook(telegram, url, secretPath, certificate, privateKey,
         port: port,
-        serverPort: serverPort
+        serverPort: serverPort,
         uploadCertificate: uploadCertificate,
         max_connections: max_connections,
         allowed_updates: allowed_updates);
