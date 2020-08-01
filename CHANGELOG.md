@@ -1,4 +1,4 @@
-## unreleased
+## 0.0.46
 
 - Fixed removeLongPolling not stopping recursive long poll
 - Fixed long poll not starting with custom long poll configuration

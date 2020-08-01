@@ -107,11 +107,13 @@ class TeleDart {
   Future<void> setupWebhook(
       String url, String secretPath, io.File certificate, io.File privateKey,
       {int port = 443,
+       int serverPort,
       bool uploadCertificate = false,
       int max_connections = 40,
       List<String> allowed_updates}) async {
     _webhook = Webhook(telegram, url, secretPath, certificate, privateKey,
         port: port,
+        serverPort: serverPort,
         uploadCertificate: uploadCertificate,
         max_connections: max_connections,
         allowed_updates: allowed_updates);
