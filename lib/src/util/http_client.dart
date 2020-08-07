@@ -29,10 +29,10 @@ class HttpClient {
         if (body['ok']) {
           return body['result'];
         } else {
-          return Future.error(HttpClientException(
-              '${body['error_code']} ${body['description']}'));
+          return Future.error(
+              HttpClientException(body['error_code'], body['description']));
         }
-      }).catchError((error) => Future.error(HttpClientException('${error}')));
+      }).catchError((error) => Future.error(error));
 
   /// HTTP post method (x-www-form-urlencoded)
   /// [url] - request url (required)
@@ -46,10 +46,10 @@ class HttpClient {
       if (responseBody['ok']) {
         return responseBody['result'];
       } else {
-        return Future.error(HttpClientException(
-            '${responseBody['error_code']} ${responseBody['description']}'));
+        return Future.error(
+            HttpClientException(body['error_code'], body['description']));
       }
-    }).catchError((error) => Future.error(HttpClientException('${error}')));
+    }).catchError((error) => Future.error(error));
   }
 
   /// HTTP post method (multipart/form-data)
@@ -71,16 +71,17 @@ class HttpClient {
       if (responseBody['ok']) {
         return responseBody['result'];
       } else {
-        return Future.error(HttpClientException(
-            '${responseBody['error_code']} ${responseBody['description']}'));
+        return Future.error(
+            HttpClientException(body['error_code'], body['description']));
       }
-    }).catchError((error) => Future.error(HttpClientException('${error}')));
+    }).catchError((error) => Future.error(error));
   }
 }
 
 class HttpClientException implements Exception {
-  String cause;
-  HttpClientException(this.cause);
+  int code;
+  String description;
+  HttpClientException(this.code, this.description);
   @override
-  String toString() => 'HttpClientException: ${cause}';
+  String toString() => 'HttpClientException: ${code} ${description}';
 }

@@ -17,6 +17,8 @@
 import 'dart:async';
 import 'dart:io' as io;
 
+import 'package:teledart/src/util/http_client.dart';
+
 import '../../telegram/telegram.dart';
 import '../../telegram/model.dart';
 
@@ -88,11 +90,16 @@ class LongPolling {
           }
         }
         _recursivePolling();
-      }).catchError((error) =>
-              // TODO: find out what exceptions can be ignored
-              error is io.HandshakeException
-                  ? _recursivePolling()
-                  : throw LongPollingException(error.toString()));
+      }).catchError((error) {
+        // TODO: find out what exceptions can be ignored
+        if (error is HttpClientException) {
+          if (error.code >= 400 && error.code < 500) {
+            throw LongPollingException(error.toString());
+          }
+        }
+        print('${DateTime.now()} ${error}');
+        _recursivePolling();
+      });
     }
   }
 
