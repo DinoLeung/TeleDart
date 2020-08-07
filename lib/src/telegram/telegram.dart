@@ -53,7 +53,9 @@ class Telegram {
         (allowed_updates == null
             ? ''
             : 'allowed_updates=${jsonEncode(allowed_updates)}');
-    return (await _client.httpGet(requestUrl))
+    return (await _client
+            .httpGet(requestUrl)
+            .timeout(Duration(milliseconds: (limit * 1.1 * 1000).round())))
         .map<Update>((update) => Update.fromJson(update))
         .toList();
   }
