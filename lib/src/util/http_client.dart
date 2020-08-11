@@ -82,6 +82,7 @@ class HttpClientException implements Exception {
   int code;
   String description;
   HttpClientException(this.code, this.description);
+  bool isHttpClientError() => code >= 400 && code < 500;
   @override
   String toString() => 'HttpClientException: ${code} ${description}';
 }

@@ -74,6 +74,8 @@ class LongPolling {
   }
 
   /// Private long polling loop, throws [LongPollingException] on error.
+  /// Automatically retry on exception except HTTP Client error (400).
+  /// Double the retry delay timeout on each error, resets timeout on success.
   void _recursivePolling() {
     if (_isPolling) {
       telegram
@@ -93,7 +95,7 @@ class LongPolling {
         _recursivePolling();
       }).catchError((error) {
         if (error is HttpClientException) {
-          if (error.code >= 400 && error.code < 500) {
+          if (error.isHttpClientError()) {
             _isPolling = false;
             throw LongPollingException(error.toString());
           }

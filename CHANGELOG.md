@@ -1,5 +1,9 @@
 ## unreleased
- - Added  missing teledart custom webhook server port implementation
+ - Added custom server port to webhook implementation
+ - Added auto-retry to long poll implementation
+    - Gradually increase retry timeout on each retry, initial timeout is 1 minute
+    - Automatically retry on exception except HTTP Client error (400)
+- 
 
 ## 0.0.46
 
