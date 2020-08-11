@@ -16,11 +16,16 @@
 
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io' as io;
 
 import 'package:http/http.dart' as http;
 
 class HttpClient {
-  bool _nullFilter(_, value) => value == null || value == 'null';
+  static bool _nullFilter(_, value) => value == null || value == 'null';
+
+  static http.MultipartFile toMultiPartFile(io.File file, String fieldName) =>
+      http.MultipartFile(fieldName, file.openRead(), file.lengthSync(),
+          filename: '${file.path.split(io.Platform.pathSeparator).last}');
 
   /// HTTP get method
   /// [url] request url with query string (required)
@@ -29,10 +34,10 @@ class HttpClient {
         if (body['ok']) {
           return body['result'];
         } else {
-          return Future.error(HttpClientException(
-              '${body['error_code']} ${body['description']}'));
+          return Future.error(
+              HttpClientException(body['error_code'], body['description']));
         }
-      }).catchError((error) => Future.error(HttpClientException('${error}')));
+      }).catchError((error) => Future.error(error));
 
   /// HTTP post method (x-www-form-urlencoded)
   /// [url] - request url (required)
@@ -46,10 +51,10 @@ class HttpClient {
       if (responseBody['ok']) {
         return responseBody['result'];
       } else {
-        return Future.error(HttpClientException(
-            '${responseBody['error_code']} ${responseBody['description']}'));
+        return Future.error(
+            HttpClientException(body['error_code'], body['description']));
       }
-    }).catchError((error) => Future.error(HttpClientException('${error}')));
+    }).catchError((error) => Future.error(error));
   }
 
   /// HTTP post method (multipart/form-data)
@@ -71,16 +76,18 @@ class HttpClient {
       if (responseBody['ok']) {
         return responseBody['result'];
       } else {
-        return Future.error(HttpClientException(
-            '${responseBody['error_code']} ${responseBody['description']}'));
+        return Future.error(
+            HttpClientException(body['error_code'], body['description']));
       }
-    }).catchError((error) => Future.error(HttpClientException('${error}')));
+    }).catchError((error) => Future.error(error));
   }
 }
 
 class HttpClientException implements Exception {
-  String cause;
-  HttpClientException(this.cause);
+  int code;
+  String description;
+  HttpClientException(this.code, this.description);
+  bool isHttpClientError() => code >= 400 && code < 500;
   @override
-  String toString() => 'HttpClientException: ${cause}';
+  String toString() => 'HttpClientException: ${code} ${description}';
 }

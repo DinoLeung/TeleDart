@@ -53,7 +53,9 @@ class Telegram {
         (allowed_updates == null
             ? ''
             : 'allowed_updates=${jsonEncode(allowed_updates)}');
-    return (await _client.httpGet(requestUrl))
+    return (await _client
+            .httpGet(requestUrl)
+            .timeout(Duration(milliseconds: (limit * 1.1 * 1000).round())))
         .map<Update>((update) => Update.fromJson(update))
         .toList();
   }
@@ -194,21 +196,21 @@ class Telegram {
       'reply_markup': jsonEncode(reply_markup),
     };
 
+    var multiPartFiles = <http.MultipartFile>[];
+
     if (photo is io.File) {
-      // filename cannot be empty to post to Telegram server
-      var files = <http.MultipartFile>[];
-      files.add(http.MultipartFile(
-          'photo', photo.openRead(), photo.lengthSync(),
-          filename: '${photo.lengthSync()}'));
-      return Message.fromJson(
-          await _client.httpMultipartPost(requestUrl, files, body: body));
+      multiPartFiles.add(HttpClient.toMultiPartFile(photo, 'photo'));
     } else if (photo is String) {
       body.addAll({'photo': photo});
-      return Message.fromJson(await _client.httpPost(requestUrl, body: body));
     } else {
       return Future.error(TelegramException(
           'Attribute \'photo\' can only be either io.File or String (Telegram file_id or image url)'));
     }
+
+    return multiPartFiles.isEmpty
+        ? Message.fromJson(await _client.httpPost(requestUrl, body: body))
+        : Message.fromJson(await _client
+            .httpMultipartPost(requestUrl, multiPartFiles, body: body));
   }
 
   /// Use this method to send audio files,
@@ -246,50 +248,32 @@ class Telegram {
       'reply_markup': jsonEncode(reply_markup),
     };
 
+    var multiPartFiles = <http.MultipartFile>[];
+
     if (audio is io.File) {
-      // filename cannot be empty to post to Telegram server
-      var files = List<http.MultipartFile>.filled(
-          1,
-          http.MultipartFile('audio', audio.openRead(), audio.lengthSync(),
-              filename: '${audio.lengthSync()}'));
-      if (thumb != null) {
-        if (thumb is io.File) {
-          files.add(http.MultipartFile(
-              'thumb', thumb.openRead(), thumb.lengthSync(),
-              filename: '${thumb.lengthSync()}'));
-        } else if (thumb is String) {
-          body.addAll({'thumb': thumb});
-        } else {
-          return Future.error(TelegramException(
-              'Attribute \'thumb\' can only be either io.File or String (Telegram file_id or image url)'));
-        }
-      }
-      return Message.fromJson(
-          await _client.httpMultipartPost(requestUrl, files, body: body));
+      multiPartFiles.add(HttpClient.toMultiPartFile(audio, 'audio'));
     } else if (audio is String) {
       body.addAll({'audio': audio});
-      if (thumb != null) {
-        if (thumb is io.File) {
-          return Message.fromJson(await _client.httpMultipartPost(
-              requestUrl,
-              List.filled(
-                  1,
-                  http.MultipartFile(
-                      'thumb', thumb.openRead(), thumb.lengthSync(),
-                      filename: '${thumb.lengthSync()}')),
-              body: body));
-        } else if (thumb is String) {
-          body.addAll({'thumb': thumb});
-        } else {
-          return Future.error(TelegramException(
-              'Attribute \'thumb\' can only be either io.File or String (Telegram file_id or image url)'));
-        }
-      }
-      return Message.fromJson(await _client.httpPost(requestUrl, body: body));
     } else {
       return Future.error(TelegramException(
           'Attribute \'audio\' can only be either io.File or String (Telegram file_id or image url)'));
     }
+
+    if (thumb != null) {
+      if (thumb is io.File) {
+        multiPartFiles.add(HttpClient.toMultiPartFile(thumb, 'thumb'));
+      } else if (thumb is String) {
+        body.addAll({'thumb': thumb});
+      } else {
+        return Future.error(TelegramException(
+            'Attribute \'thumb\' can only be either io.File or String (Telegram file_id or image url)'));
+      }
+    }
+
+    return multiPartFiles.isEmpty
+        ? Message.fromJson(await _client.httpPost(requestUrl, body: body))
+        : Message.fromJson(await _client
+            .httpMultipartPost(requestUrl, multiPartFiles, body: body));
   }
 
   /// Use this method to send general files. On success, the sent [Message] is returned.
@@ -316,51 +300,32 @@ class Telegram {
       'reply_markup': jsonEncode(reply_markup),
     };
 
+    var multiPartFiles = <http.MultipartFile>[];
+
     if (document is io.File) {
-      // filename cannot be empty to post to Telegram server
-      var files = List<http.MultipartFile>.filled(
-          1,
-          http.MultipartFile(
-              'document', document.openRead(), document.lengthSync(),
-              filename: '${document.lengthSync()}'));
-      if (thumb != null) {
-        if (thumb is io.File) {
-          files.add(http.MultipartFile(
-              'thumb', thumb.openRead(), thumb.lengthSync(),
-              filename: '${thumb.lengthSync()}'));
-        } else if (thumb is String) {
-          body.addAll({'thumb': thumb});
-        } else {
-          return Future.error(TelegramException(
-              'Attribute \'thumb\' can only be either io.File or String (Telegram file_id or image url)'));
-        }
-      }
-      return Message.fromJson(
-          await _client.httpMultipartPost(requestUrl, files, body: body));
+      multiPartFiles.add(HttpClient.toMultiPartFile(document, 'document'));
     } else if (document is String) {
       body.addAll({'document': document});
-      if (thumb != null) {
-        if (thumb is io.File) {
-          return Message.fromJson(await _client.httpMultipartPost(
-              requestUrl,
-              List.filled(
-                  1,
-                  http.MultipartFile(
-                      'thumb', thumb.openRead(), thumb.lengthSync(),
-                      filename: '${thumb.lengthSync()}')),
-              body: body));
-        } else if (thumb is String) {
-          body.addAll({'thumb': thumb});
-        } else {
-          return Future.error(TelegramException(
-              'Attribute \'thumb\' can only be either io.File or String (Telegram file_id or image url)'));
-        }
-      }
-      return Message.fromJson(await _client.httpPost(requestUrl, body: body));
     } else {
       return Future.error(TelegramException(
           'Attribute \'document\' can only be either io.File or String (Telegram file_id or image url)'));
     }
+
+    if (thumb != null) {
+      if (thumb is io.File) {
+        multiPartFiles.add(HttpClient.toMultiPartFile(thumb, 'thumb'));
+      } else if (thumb is String) {
+        body.addAll({'thumb': thumb});
+      } else {
+        return Future.error(TelegramException(
+            'Attribute \'thumb\' can only be either io.File or String (Telegram file_id or image url)'));
+      }
+    }
+
+    return multiPartFiles.isEmpty
+        ? Message.fromJson(await _client.httpPost(requestUrl, body: body))
+        : Message.fromJson(await _client
+            .httpMultipartPost(requestUrl, multiPartFiles, body: body));
   }
 
   /// Use this method to send video files,
@@ -398,50 +363,32 @@ class Telegram {
       'reply_markup': jsonEncode(reply_markup),
     };
 
+    var multiPartFiles = <http.MultipartFile>[];
+
     if (video is io.File) {
-      // filename cannot be empty to post to Telegram server
-      var files = List<http.MultipartFile>.filled(
-          1,
-          http.MultipartFile('video', video.openRead(), video.lengthSync(),
-              filename: '${video.lengthSync()}'));
-      if (thumb != null) {
-        if (thumb is io.File) {
-          files.add(http.MultipartFile(
-              'thumb', thumb.openRead(), thumb.lengthSync(),
-              filename: '${thumb.lengthSync()}'));
-        } else if (thumb is String) {
-          body.addAll({'thumb': thumb});
-        } else {
-          return Future.error(TelegramException(
-              'Attribute \'thumb\' can only be either io.File or String (Telegram file_id or image url)'));
-        }
-      }
-      return Message.fromJson(
-          await _client.httpMultipartPost(requestUrl, files, body: body));
+      multiPartFiles.add(HttpClient.toMultiPartFile(video, 'video'));
     } else if (video is String) {
       body.addAll({'video': video});
-      if (thumb != null) {
-        if (thumb is io.File) {
-          return Message.fromJson(await _client.httpMultipartPost(
-              requestUrl,
-              List.filled(
-                  1,
-                  http.MultipartFile(
-                      'thumb', thumb.openRead(), thumb.lengthSync(),
-                      filename: '${thumb.lengthSync()}')),
-              body: body));
-        } else if (thumb is String) {
-          body.addAll({'thumb': thumb});
-        } else {
-          return Future.error(TelegramException(
-              'Attribute \'thumb\' can only be either io.File or String (Telegram file_id or image url)'));
-        }
-      }
-      return Message.fromJson(await _client.httpPost(requestUrl, body: body));
     } else {
       return Future.error(TelegramException(
           'Attribute \'video\' can only be either io.File or String (Telegram file_id or image url)'));
     }
+
+    if (thumb != null) {
+      if (thumb is io.File) {
+        multiPartFiles.add(HttpClient.toMultiPartFile(thumb, 'thumb'));
+      } else if (thumb is String) {
+        body.addAll({'thumb': thumb});
+      } else {
+        return Future.error(TelegramException(
+            'Attribute \'thumb\' can only be either io.File or String (Telegram file_id or image url)'));
+      }
+    }
+
+    return multiPartFiles.isEmpty
+        ? Message.fromJson(await _client.httpPost(requestUrl, body: body))
+        : Message.fromJson(await _client
+            .httpMultipartPost(requestUrl, multiPartFiles, body: body));
   }
 
   /// Use this method to send animation files (GIF or H.264/MPEG-4 AVC video without sound).
@@ -475,51 +422,32 @@ class Telegram {
       'reply_markup': jsonEncode(reply_markup),
     };
 
+    var multiPartFiles = <http.MultipartFile>[];
+
     if (animation is io.File) {
-      // filename cannot be empty to post to Telegram server
-      var files = List<http.MultipartFile>.filled(
-          1,
-          http.MultipartFile(
-              'animation', animation.openRead(), animation.lengthSync(),
-              filename: '${animation.lengthSync()}'));
-      if (thumb != null) {
-        if (thumb is io.File) {
-          files.add(http.MultipartFile(
-              'thumb', thumb.openRead(), thumb.lengthSync(),
-              filename: '${thumb.lengthSync()}'));
-        } else if (thumb is String) {
-          body.addAll({'thumb': thumb});
-        } else {
-          return Future.error(TelegramException(
-              'Attribute \'thumb\' can only be either io.File or String (Telegram file_id or image url)'));
-        }
-      }
-      return Message.fromJson(
-          await _client.httpMultipartPost(requestUrl, files, body: body));
+      multiPartFiles.add(HttpClient.toMultiPartFile(animation, 'animation'));
     } else if (animation is String) {
       body.addAll({'animation': animation});
-      if (thumb != null) {
-        if (thumb is io.File) {
-          return Message.fromJson(await _client.httpMultipartPost(
-              requestUrl,
-              List.filled(
-                  1,
-                  http.MultipartFile(
-                      'thumb', thumb.openRead(), thumb.lengthSync(),
-                      filename: '${thumb.lengthSync()}')),
-              body: body));
-        } else if (thumb is String) {
-          body.addAll({'thumb': thumb});
-        } else {
-          return Future.error(TelegramException(
-              'Attribute \'thumb\' can only be either io.File or String (Telegram file_id or image url)'));
-        }
-      }
-      return Message.fromJson(await _client.httpPost(requestUrl, body: body));
     } else {
       return Future.error(TelegramException(
           'Attribute \'animation\' can only be either io.File or String (Telegram file_id or image url)'));
     }
+
+    if (thumb != null) {
+      if (thumb is io.File) {
+        multiPartFiles.add(HttpClient.toMultiPartFile(thumb, 'thumb'));
+      } else if (thumb is String) {
+        body.addAll({'thumb': thumb});
+      } else {
+        return Future.error(TelegramException(
+            'Attribute \'thumb\' can only be either io.File or String (Telegram file_id or image url)'));
+      }
+    }
+
+    return multiPartFiles.isEmpty
+        ? Message.fromJson(await _client.httpPost(requestUrl, body: body))
+        : Message.fromJson(await _client
+            .httpMultipartPost(requestUrl, multiPartFiles, body: body));
   }
 
   /// Use this method to send audio files,
@@ -553,21 +481,21 @@ class Telegram {
       'reply_markup': jsonEncode(reply_markup),
     };
 
+    var multiPartFiles = <http.MultipartFile>[];
+
     if (voice is io.File) {
-      // filename cannot be empty to post to Telegram server
-      var files = List<http.MultipartFile>.filled(
-          1,
-          http.MultipartFile('voice', voice.openRead(), voice.lengthSync(),
-              filename: '${voice.lengthSync()}'));
-      return Message.fromJson(
-          await _client.httpMultipartPost(requestUrl, files, body: body));
+      multiPartFiles.add(HttpClient.toMultiPartFile(voice, 'voice'));
     } else if (voice is String) {
       body.addAll({'voice': voice});
-      return Message.fromJson(await _client.httpPost(requestUrl, body: body));
     } else {
       return Future.error(TelegramException(
           'Attribute \'voice\' can only be either io.File or String (Telegram file_id or image url)'));
     }
+
+    return multiPartFiles.isEmpty
+        ? Message.fromJson(await _client.httpPost(requestUrl, body: body))
+        : Message.fromJson(await _client
+            .httpMultipartPost(requestUrl, multiPartFiles, body: body));
   }
 
   /// As of [v.4.0], Telegram clients support rounded square mp4 videos of up to 1 minute long.
@@ -594,51 +522,32 @@ class Telegram {
       'reply_markup': jsonEncode(reply_markup),
     };
 
+    var multiPartFiles = <http.MultipartFile>[];
+
     if (video_note is io.File) {
-      // filename cannot be empty to post to Telegram server
-      var files = List<http.MultipartFile>.filled(
-          1,
-          http.MultipartFile(
-              'video_note', video_note.openRead(), video_note.lengthSync(),
-              filename: '${video_note.lengthSync()}'));
-      if (thumb != null) {
-        if (thumb is io.File) {
-          files.add(http.MultipartFile(
-              'thumb', thumb.openRead(), thumb.lengthSync(),
-              filename: '${thumb.lengthSync()}'));
-        } else if (thumb is String) {
-          body.addAll({'thumb': thumb});
-        } else {
-          return Future.error(TelegramException(
-              'Attribute \'thumb\' can only be either io.File or String (Telegram file_id or image url)'));
-        }
-      }
-      return Message.fromJson(
-          await _client.httpMultipartPost(requestUrl, files, body: body));
+      multiPartFiles.add(HttpClient.toMultiPartFile(video_note, 'video_note'));
     } else if (video_note is String) {
       body.addAll({'video_note': video_note});
-      if (thumb != null) {
-        if (thumb is io.File) {
-          return Message.fromJson(await _client.httpMultipartPost(
-              requestUrl,
-              List.filled(
-                  1,
-                  http.MultipartFile(
-                      'thumb', thumb.openRead(), thumb.lengthSync(),
-                      filename: '${thumb.lengthSync()}')),
-              body: body));
-        } else if (thumb is String) {
-          body.addAll({'thumb': thumb});
-        } else {
-          return Future.error(TelegramException(
-              'Attribute \'thumb\' can only be either io.File or String (Telegram file_id or image url)'));
-        }
-      }
-      return Message.fromJson(await _client.httpPost(requestUrl, body: body));
     } else {
       return Future.error(TelegramException(
           'Attribute \'video_note\' can only be either io.File or String (Telegram file_id or image url)'));
     }
+
+    if (thumb != null) {
+      if (thumb is io.File) {
+        multiPartFiles.add(HttpClient.toMultiPartFile(thumb, 'thumb'));
+      } else if (thumb is String) {
+        body.addAll({'thumb': thumb});
+      } else {
+        return Future.error(TelegramException(
+            'Attribute \'thumb\' can only be either io.File or String (Telegram file_id or image url)'));
+      }
+    }
+
+    return multiPartFiles.isEmpty
+        ? Message.fromJson(await _client.httpPost(requestUrl, body: body))
+        : Message.fromJson(await _client
+            .httpMultipartPost(requestUrl, multiPartFiles, body: body));
   }
 
   // TODO: #9
