@@ -207,12 +207,10 @@ class Telegram {
           'Attribute \'photo\' can only be either io.File or String (Telegram file_id or image url)'));
     }
 
-    if (multiPartFiles.isNotEmpty) {
-      return Message.fromJson(await _client
-          .httpMultipartPost(requestUrl, multiPartFiles, body: body));
-    } else {
-      return Message.fromJson(await _client.httpPost(requestUrl, body: body));
-    }
+    return multiPartFiles.isEmpty
+        ? Message.fromJson(await _client.httpPost(requestUrl, body: body))
+        : Message.fromJson(await _client
+            .httpMultipartPost(requestUrl, multiPartFiles, body: body));
   }
 
   /// Use this method to send audio files,
@@ -272,12 +270,10 @@ class Telegram {
       }
     }
 
-    if (multiPartFiles.isNotEmpty) {
-      return Message.fromJson(await _client
-          .httpMultipartPost(requestUrl, multiPartFiles, body: body));
-    } else {
-      return Message.fromJson(await _client.httpPost(requestUrl, body: body));
-    }
+    return multiPartFiles.isEmpty
+        ? Message.fromJson(await _client.httpPost(requestUrl, body: body))
+        : Message.fromJson(await _client
+            .httpMultipartPost(requestUrl, multiPartFiles, body: body));
   }
 
   /// Use this method to send general files. On success, the sent [Message] is returned.
@@ -326,12 +322,10 @@ class Telegram {
       }
     }
 
-    if (multiPartFiles.isNotEmpty) {
-      return Message.fromJson(await _client
-          .httpMultipartPost(requestUrl, multiPartFiles, body: body));
-    } else {
-      return Message.fromJson(await _client.httpPost(requestUrl, body: body));
-    }
+    return multiPartFiles.isEmpty
+        ? Message.fromJson(await _client.httpPost(requestUrl, body: body))
+        : Message.fromJson(await _client
+            .httpMultipartPost(requestUrl, multiPartFiles, body: body));
   }
 
   /// Use this method to send video files,
@@ -391,12 +385,10 @@ class Telegram {
       }
     }
 
-    if (multiPartFiles.isNotEmpty) {
-      return Message.fromJson(await _client
-          .httpMultipartPost(requestUrl, multiPartFiles, body: body));
-    } else {
-      return Message.fromJson(await _client.httpPost(requestUrl, body: body));
-    }
+    return multiPartFiles.isEmpty
+        ? Message.fromJson(await _client.httpPost(requestUrl, body: body))
+        : Message.fromJson(await _client
+            .httpMultipartPost(requestUrl, multiPartFiles, body: body));
   }
 
   /// Use this method to send animation files (GIF or H.264/MPEG-4 AVC video without sound).
@@ -452,12 +444,10 @@ class Telegram {
       }
     }
 
-    if (multiPartFiles.isNotEmpty) {
-      return Message.fromJson(await _client
-          .httpMultipartPost(requestUrl, multiPartFiles, body: body));
-    } else {
-      return Message.fromJson(await _client.httpPost(requestUrl, body: body));
-    }
+    return multiPartFiles.isEmpty
+        ? Message.fromJson(await _client.httpPost(requestUrl, body: body))
+        : Message.fromJson(await _client
+            .httpMultipartPost(requestUrl, multiPartFiles, body: body));
   }
 
   /// Use this method to send audio files,
@@ -502,12 +492,10 @@ class Telegram {
           'Attribute \'voice\' can only be either io.File or String (Telegram file_id or image url)'));
     }
 
-    if (multiPartFiles.isNotEmpty) {
-      return Message.fromJson(await _client
-          .httpMultipartPost(requestUrl, multiPartFiles, body: body));
-    } else {
-      return Message.fromJson(await _client.httpPost(requestUrl, body: body));
-    }
+    return multiPartFiles.isEmpty
+        ? Message.fromJson(await _client.httpPost(requestUrl, body: body))
+        : Message.fromJson(await _client
+            .httpMultipartPost(requestUrl, multiPartFiles, body: body));
   }
 
   /// As of [v.4.0], Telegram clients support rounded square mp4 videos of up to 1 minute long.
@@ -556,12 +544,10 @@ class Telegram {
       }
     }
 
-    if (multiPartFiles.isNotEmpty) {
-      return Message.fromJson(await _client
-          .httpMultipartPost(requestUrl, multiPartFiles, body: body));
-    } else {
-      return Message.fromJson(await _client.httpPost(requestUrl, body: body));
-    }
+    return multiPartFiles.isEmpty
+        ? Message.fromJson(await _client.httpPost(requestUrl, body: body))
+        : Message.fromJson(await _client
+            .httpMultipartPost(requestUrl, multiPartFiles, body: body));
   }
 
   // TODO: #9
