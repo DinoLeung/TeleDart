@@ -15,10 +15,11 @@
 /// along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import 'dart:async';
-import 'dart:io' as io;
+import 'dart:io';
 
 import '../../telegram/telegram.dart';
 import '../../telegram/model.dart';
+import '../../util/http_client.dart';
 
 class LongPolling {
   final Telegram telegram;
@@ -34,6 +35,7 @@ class LongPolling {
   bool get isPolling => _isPolling;
 
   StreamController<Update> _updateStreamController;
+  Duration retryDelay = Duration(minutes: 1);
 
   /// Setup long polling
   ///
@@ -72,6 +74,8 @@ class LongPolling {
   }
 
   /// Private long polling loop, throws [LongPollingException] on error.
+  /// Automatically retry on exception except HTTP Client error (400).
+  /// Double the retry delay timeout on each error, resets timeout on success.
   void _recursivePolling() {
     if (_isPolling) {
       telegram
@@ -87,12 +91,21 @@ class LongPolling {
             offset = update.update_id + 1;
           }
         }
+        _resetRetryDelay();
         _recursivePolling();
-      }).catchError((error) =>
-              // TODO: find out what exceptions can be ignored
-              error is io.HandshakeException
-                  ? _recursivePolling()
-                  : throw LongPollingException(error.toString()));
+      }).catchError((error) {
+        if (error is HttpClientException) {
+          if (error.isHttpClientError()) {
+            _isPolling = false;
+            throw LongPollingException(error.toString());
+          }
+        }
+        print('${DateTime.now()} ${error}');
+        print('Retrying in ${retryDelay.inMinutes} minute(s)...');
+        _delayRetry();
+        _doubleRetryDelay();
+        _recursivePolling();
+      });
     }
   }
 
@@ -101,6 +114,10 @@ class LongPolling {
 
   /// When [update] is added to stream.
   Stream<Update> onUpdate() => _updateStreamController.stream;
+
+  void _resetRetryDelay() => retryDelay = Duration(minutes: 1);
+  void _doubleRetryDelay() => retryDelay *= 2;
+  void _delayRetry() => sleep(retryDelay);
 }
 
 class LongPollingException implements Exception {
