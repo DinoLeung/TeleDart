@@ -16,11 +16,16 @@
 
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io' as io;
 
 import 'package:http/http.dart' as http;
 
 class HttpClient {
-  bool _nullFilter(_, value) => value == null || value == 'null';
+  static bool _nullFilter(_, value) => value == null || value == 'null';
+
+  static http.MultipartFile toMultiPartFile(io.File file, String fieldName) =>
+      http.MultipartFile(fieldName, file.openRead(), file.lengthSync(),
+          filename: '${file.path.split(io.Platform.pathSeparator).last}');
 
   /// HTTP get method
   /// [url] request url with query string (required)
