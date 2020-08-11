@@ -3,7 +3,7 @@
  - Added auto-retry to long poll implementation
     - Gradually increase retry timeout on each retry, initial timeout is 1 minute
     - Automatically retry on exception except HTTP Client error (400)
-- Updated multipart file upload to imclude original file name
+- Updated multipart file upload to include original file name
 
 ## 0.0.46
 
