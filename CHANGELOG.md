@@ -1,4 +1,4 @@
-## unreleased
+## 0.0.47
  - Added custom server port to webhook implementation
  - Added auto-retry to long poll implementation
     - Gradually increase retry timeout on each retry, initial timeout is 1 minute
