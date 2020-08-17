@@ -882,7 +882,7 @@ class Telegram {
   /// The old way of passing parameters will keep working for a while for backward compatibility.
   Future<bool> restrictChatMember(int chat_id, int user_id,
       {ChatPermissions permissions, int until_date}) async {
-    var requestUrl = '${_baseUrl}${_token}/unbanChatMember';
+    var requestUrl = '${_baseUrl}${_token}/restrictChatMember';
     var body = <String, dynamic>{
       'chat_id': chat_id,
       'user_id': user_id,
