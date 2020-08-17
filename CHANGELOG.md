@@ -1,5 +1,7 @@
 ## 0.0.48
 - Fixed restrictChatMember API URL
+- Fixed `toJson` methods in `chat_permissions`, `location` and `login_url` models
+- Enabled `explicit_to_json` in `json_serializable` so nested objects can be parsed
 
 ## 0.0.47
 - Added custom server port to webhook implementation
