@@ -73,6 +73,19 @@ class TeleDart {
       }).catchError(
           ((exception) => throw TeleDartException(exception.toString())));
 
+  /// Stops listening to messages
+  ///
+  /// Throws [TeleDartException]
+  void stop() {
+    if (_webhook != null) {
+      _webook.stopWebhook();
+    } else if (_longPolling != null) {
+      _longPolling.stopPolling();
+    } else {
+      throw TeleDartException('Bot is not running');
+    }
+  }
+
   /// Configures long polling method
   ///
   /// See: https://core.telegram.org/bots/api#getupdates
