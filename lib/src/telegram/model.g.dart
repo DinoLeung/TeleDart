@@ -59,17 +59,17 @@ Map<String, dynamic> _$UpdateToJson(Update instance) {
   }
 
   writeNotNull('update_id', instance.update_id);
-  writeNotNull('message', instance.message);
-  writeNotNull('edited_message', instance.edited_message);
-  writeNotNull('channel_post', instance.channel_post);
-  writeNotNull('edited_channel_post', instance.edited_channel_post);
-  writeNotNull('inline_query', instance.inline_query);
-  writeNotNull('chosen_inline_result', instance.chosen_inline_result);
-  writeNotNull('callback_query', instance.callback_query);
-  writeNotNull('shipping_query', instance.shipping_query);
-  writeNotNull('pre_checkout_query', instance.pre_checkout_query);
-  writeNotNull('poll', instance.poll);
-  writeNotNull('poll_answer', instance.poll_answer);
+  writeNotNull('message', instance.message?.toJson());
+  writeNotNull('edited_message', instance.edited_message?.toJson());
+  writeNotNull('channel_post', instance.channel_post?.toJson());
+  writeNotNull('edited_channel_post', instance.edited_channel_post?.toJson());
+  writeNotNull('inline_query', instance.inline_query?.toJson());
+  writeNotNull('chosen_inline_result', instance.chosen_inline_result?.toJson());
+  writeNotNull('callback_query', instance.callback_query?.toJson());
+  writeNotNull('shipping_query', instance.shipping_query?.toJson());
+  writeNotNull('pre_checkout_query', instance.pre_checkout_query?.toJson());
+  writeNotNull('poll', instance.poll?.toJson());
+  writeNotNull('poll_answer', instance.poll_answer?.toJson());
   return val;
 }
 
@@ -185,11 +185,11 @@ Map<String, dynamic> _$ChatToJson(Chat instance) {
   writeNotNull('last_name', instance.last_name);
   writeNotNull('all_members_are_administrators',
       instance.all_members_are_administrators);
-  writeNotNull('photo', instance.photo);
+  writeNotNull('photo', instance.photo?.toJson());
   writeNotNull('description', instance.description);
   writeNotNull('invite_link', instance.invite_link);
-  writeNotNull('pinned_message', instance.pinned_message);
-  writeNotNull('permissions', instance.permissions);
+  writeNotNull('pinned_message', instance.pinned_message?.toJson());
+  writeNotNull('permissions', instance.permissions?.toJson());
   writeNotNull('slow_mode_delay', instance.slow_mode_delay);
   writeNotNull('sticker_set_name', instance.sticker_set_name);
   writeNotNull('can_set_sticker_set', instance.can_set_sticker_set);
@@ -329,54 +329,58 @@ Map<String, dynamic> _$MessageToJson(Message instance) {
   }
 
   writeNotNull('message_id', instance.message_id);
-  writeNotNull('from', instance.from);
+  writeNotNull('from', instance.from?.toJson());
   writeNotNull('date', instance.date);
-  writeNotNull('chat', instance.chat);
-  writeNotNull('forward_from', instance.forward_from);
-  writeNotNull('forward_from_chat', instance.forward_from_chat);
+  writeNotNull('chat', instance.chat?.toJson());
+  writeNotNull('forward_from', instance.forward_from?.toJson());
+  writeNotNull('forward_from_chat', instance.forward_from_chat?.toJson());
   writeNotNull('forward_from_message_id', instance.forward_from_message_id);
   writeNotNull('forward_signature', instance.forward_signature);
   writeNotNull('forward_sender_name', instance.forward_sender_name);
   writeNotNull('forward_date', instance.forward_date);
-  writeNotNull('reply_to_message', instance.reply_to_message);
-  writeNotNull('via_bot', instance.via_bot);
+  writeNotNull('reply_to_message', instance.reply_to_message?.toJson());
+  writeNotNull('via_bot', instance.via_bot?.toJson());
   writeNotNull('edit_date', instance.edit_date);
   writeNotNull('media_group_id', instance.media_group_id);
   writeNotNull('author_signature', instance.author_signature);
   writeNotNull('text', instance.text);
-  writeNotNull('entities', instance.entities);
-  writeNotNull('caption_entities', instance.caption_entities);
-  writeNotNull('audio', instance.audio);
-  writeNotNull('document', instance.document);
-  writeNotNull('animation', instance.animation);
-  writeNotNull('game', instance.game);
-  writeNotNull('photo', instance.photo);
-  writeNotNull('sticker', instance.sticker);
-  writeNotNull('video', instance.video);
-  writeNotNull('voice', instance.voice);
-  writeNotNull('video_note', instance.video_note);
+  writeNotNull(
+      'entities', instance.entities?.map((e) => e?.toJson())?.toList());
+  writeNotNull('caption_entities',
+      instance.caption_entities?.map((e) => e?.toJson())?.toList());
+  writeNotNull('audio', instance.audio?.toJson());
+  writeNotNull('document', instance.document?.toJson());
+  writeNotNull('animation', instance.animation?.toJson());
+  writeNotNull('game', instance.game?.toJson());
+  writeNotNull('photo', instance.photo?.map((e) => e?.toJson())?.toList());
+  writeNotNull('sticker', instance.sticker?.toJson());
+  writeNotNull('video', instance.video?.toJson());
+  writeNotNull('voice', instance.voice?.toJson());
+  writeNotNull('video_note', instance.video_note?.toJson());
   writeNotNull('caption', instance.caption);
-  writeNotNull('contact', instance.contact);
-  writeNotNull('location', instance.location);
-  writeNotNull('venue', instance.venue);
-  writeNotNull('poll', instance.poll);
-  writeNotNull('dice', instance.dice);
-  writeNotNull('new_chat_members', instance.new_chat_members);
-  writeNotNull('left_chat_member', instance.left_chat_member);
+  writeNotNull('contact', instance.contact?.toJson());
+  writeNotNull('location', instance.location?.toJson());
+  writeNotNull('venue', instance.venue?.toJson());
+  writeNotNull('poll', instance.poll?.toJson());
+  writeNotNull('dice', instance.dice?.toJson());
+  writeNotNull('new_chat_members',
+      instance.new_chat_members?.map((e) => e?.toJson())?.toList());
+  writeNotNull('left_chat_member', instance.left_chat_member?.toJson());
   writeNotNull('new_chat_title', instance.new_chat_title);
-  writeNotNull('new_chat_photo', instance.new_chat_photo);
+  writeNotNull('new_chat_photo',
+      instance.new_chat_photo?.map((e) => e?.toJson())?.toList());
   writeNotNull('delete_chat_photo', instance.delete_chat_photo);
   writeNotNull('group_chat_created', instance.group_chat_created);
   writeNotNull('supergroup_chat_created', instance.supergroup_chat_created);
   writeNotNull('channel_chat_created', instance.channel_chat_created);
   writeNotNull('migrate_to_chat_id', instance.migrate_to_chat_id);
   writeNotNull('migrate_from_chat_id', instance.migrate_from_chat_id);
-  writeNotNull('pinned_message', instance.pinned_message);
-  writeNotNull('invoice', instance.invoice);
-  writeNotNull('successful_payment', instance.successful_payment);
+  writeNotNull('pinned_message', instance.pinned_message?.toJson());
+  writeNotNull('invoice', instance.invoice?.toJson());
+  writeNotNull('successful_payment', instance.successful_payment?.toJson());
   writeNotNull('connected_website', instance.connected_website);
-  writeNotNull('passport_data', instance.passport_data);
-  writeNotNull('reply_markup', instance.reply_markup);
+  writeNotNull('passport_data', instance.passport_data?.toJson());
+  writeNotNull('reply_markup', instance.reply_markup?.toJson());
   return val;
 }
 
@@ -406,7 +410,7 @@ Map<String, dynamic> _$MessageEntityToJson(MessageEntity instance) {
   writeNotNull('offset', instance.offset);
   writeNotNull('length', instance.length);
   writeNotNull('url', instance.url);
-  writeNotNull('user', instance.user);
+  writeNotNull('user', instance.user?.toJson());
   writeNotNull('language', instance.language);
   return val;
 }
@@ -469,7 +473,7 @@ Map<String, dynamic> _$AudioToJson(Audio instance) {
   writeNotNull('title', instance.title);
   writeNotNull('mime_type', instance.mime_type);
   writeNotNull('file_size', instance.file_size);
-  writeNotNull('thumb', instance.thumb);
+  writeNotNull('thumb', instance.thumb?.toJson());
   return val;
 }
 
@@ -497,7 +501,7 @@ Map<String, dynamic> _$DocumentToJson(Document instance) {
 
   writeNotNull('file_id', instance.file_id);
   writeNotNull('file_unique_id', instance.file_unique_id);
-  writeNotNull('thumb', instance.thumb);
+  writeNotNull('thumb', instance.thumb?.toJson());
   writeNotNull('file_name', instance.file_name);
   writeNotNull('mime_type', instance.mime_type);
   writeNotNull('file_size', instance.file_size);
@@ -533,7 +537,7 @@ Map<String, dynamic> _$VideoToJson(Video instance) {
   writeNotNull('width', instance.width);
   writeNotNull('height', instance.height);
   writeNotNull('duration', instance.duration);
-  writeNotNull('thumb', instance.thumb);
+  writeNotNull('thumb', instance.thumb?.toJson());
   writeNotNull('mime_type', instance.mime_type);
   writeNotNull('file_size', instance.file_size);
   return val;
@@ -569,7 +573,7 @@ Map<String, dynamic> _$AnimationToJson(Animation instance) {
   writeNotNull('width', instance.width);
   writeNotNull('height', instance.height);
   writeNotNull('duration', instance.duration);
-  writeNotNull('thumb', instance.thumb);
+  writeNotNull('thumb', instance.thumb?.toJson());
   writeNotNull('file_name', instance.file_name);
   writeNotNull('mime_type', instance.mime_type);
   writeNotNull('file_size', instance.file_size);
@@ -629,7 +633,7 @@ Map<String, dynamic> _$VideoNoteToJson(VideoNote instance) {
   writeNotNull('file_unique_id', instance.file_unique_id);
   writeNotNull('length', instance.length);
   writeNotNull('duration', instance.duration);
-  writeNotNull('thumb', instance.thumb);
+  writeNotNull('thumb', instance.thumb?.toJson());
   writeNotNull('file_size', instance.file_size);
   return val;
 }
@@ -728,7 +732,7 @@ Map<String, dynamic> _$VenueToJson(Venue instance) {
     }
   }
 
-  writeNotNull('location', instance.location);
+  writeNotNull('location', instance.location?.toJson());
   writeNotNull('title', instance.title);
   writeNotNull('address', instance.address);
   writeNotNull('foursquare_id', instance.foursquare_id);
@@ -777,7 +781,7 @@ Map<String, dynamic> _$PollAnswerToJson(PollAnswer instance) {
   }
 
   writeNotNull('poll_id', instance.poll_id);
-  writeNotNull('user', instance.user);
+  writeNotNull('user', instance.user?.toJson());
   writeNotNull('option_ids', instance.option_ids);
   return val;
 }
@@ -818,7 +822,7 @@ Map<String, dynamic> _$PollToJson(Poll instance) {
 
   writeNotNull('id', instance.id);
   writeNotNull('question', instance.question);
-  writeNotNull('options', instance.options);
+  writeNotNull('options', instance.options?.map((e) => e?.toJson())?.toList());
   writeNotNull('total_voter_count', instance.total_voter_count);
   writeNotNull('is_closed', instance.is_closed);
   writeNotNull('is_anonymous', instance.is_anonymous);
@@ -826,7 +830,8 @@ Map<String, dynamic> _$PollToJson(Poll instance) {
   writeNotNull('allows_multiple_answers', instance.allows_multiple_answers);
   writeNotNull('correct_option_id', instance.correct_option_id);
   writeNotNull('explanation', instance.explanation);
-  writeNotNull('explanation_entities', instance.explanation_entities);
+  writeNotNull('explanation_entities',
+      instance.explanation_entities?.map((e) => e?.toJson())?.toList());
   writeNotNull('open_period', instance.open_period);
   writeNotNull('close_date', instance.close_date);
   return val;
@@ -876,7 +881,11 @@ Map<String, dynamic> _$UserProfilePhotosToJson(UserProfilePhotos instance) {
   }
 
   writeNotNull('total_count', instance.total_count);
-  writeNotNull('photos', instance.photos);
+  writeNotNull(
+      'photos',
+      instance.photos
+          ?.map((e) => e?.map((e) => e?.toJson())?.toList())
+          ?.toList());
   return val;
 }
 
@@ -936,7 +945,11 @@ Map<String, dynamic> _$ReplyKeyboardMarkupToJson(ReplyKeyboardMarkup instance) {
     }
   }
 
-  writeNotNull('keyboard', instance.keyboard);
+  writeNotNull(
+      'keyboard',
+      instance.keyboard
+          ?.map((e) => e?.map((e) => e?.toJson())?.toList())
+          ?.toList());
   writeNotNull('resize_keyboard', instance.resize_keyboard);
   writeNotNull('one_time_keyboard', instance.one_time_keyboard);
   writeNotNull('selective', instance.selective);
@@ -967,7 +980,7 @@ Map<String, dynamic> _$KeyboardButtonToJson(KeyboardButton instance) {
   writeNotNull('text', instance.text);
   writeNotNull('request_contact', instance.request_contact);
   writeNotNull('request_location', instance.request_location);
-  writeNotNull('request_poll', instance.request_poll);
+  writeNotNull('request_poll', instance.request_poll?.toJson());
   return val;
 }
 
@@ -1035,7 +1048,11 @@ Map<String, dynamic> _$InlineKeyboardMarkupToJson(
     }
   }
 
-  writeNotNull('inline_keyboard', instance.inline_keyboard);
+  writeNotNull(
+      'inline_keyboard',
+      instance.inline_keyboard
+          ?.map((e) => e?.map((e) => e?.toJson())?.toList())
+          ?.toList());
   return val;
 }
 
@@ -1069,12 +1086,12 @@ Map<String, dynamic> _$InlineKeyboardButtonToJson(
 
   writeNotNull('text', instance.text);
   writeNotNull('url', instance.url);
-  writeNotNull('login_url', instance.login_url);
+  writeNotNull('login_url', instance.login_url?.toJson());
   writeNotNull('callback_data', instance.callback_data);
   writeNotNull('switch_inline_query', instance.switch_inline_query);
   writeNotNull('switch_inline_query_current_chat',
       instance.switch_inline_query_current_chat);
-  writeNotNull('callback_game', instance.callback_game);
+  writeNotNull('callback_game', instance.callback_game?.toJson());
   writeNotNull('pay', instance.pay);
   return val;
 }
@@ -1105,8 +1122,8 @@ Map<String, dynamic> _$CallbackQueryToJson(CallbackQuery instance) {
   }
 
   writeNotNull('id', instance.id);
-  writeNotNull('from', instance.from);
-  writeNotNull('message', instance.message);
+  writeNotNull('from', instance.from?.toJson());
+  writeNotNull('message', instance.message?.toJson());
   writeNotNull('inline_message_id', instance.inline_message_id);
   writeNotNull('chat_instance', instance.chat_instance);
   writeNotNull('data', instance.data);
@@ -1195,7 +1212,7 @@ Map<String, dynamic> _$ChatMemberToJson(ChatMember instance) {
     }
   }
 
-  writeNotNull('user', instance.user);
+  writeNotNull('user', instance.user?.toJson());
   writeNotNull('status', instance.status);
   writeNotNull('custom_title', instance.custom_title);
   writeNotNull('until_date', instance.until_date);
@@ -1503,10 +1520,10 @@ Map<String, dynamic> _$StickerToJson(Sticker instance) {
   writeNotNull('width', instance.width);
   writeNotNull('height', instance.height);
   writeNotNull('is_animated', instance.is_animated);
-  writeNotNull('thumb', instance.thumb);
+  writeNotNull('thumb', instance.thumb?.toJson());
   writeNotNull('emoji', instance.emoji);
   writeNotNull('set_name', instance.set_name);
-  writeNotNull('mask_position', instance.mask_position);
+  writeNotNull('mask_position', instance.mask_position?.toJson());
   writeNotNull('file_size', instance.file_size);
   return val;
 }
@@ -1540,8 +1557,9 @@ Map<String, dynamic> _$StickerSetToJson(StickerSet instance) {
   writeNotNull('title', instance.title);
   writeNotNull('is_animated', instance.is_animated);
   writeNotNull('contains_masks', instance.contains_masks);
-  writeNotNull('stickers', instance.stickers);
-  writeNotNull('thumb', instance.thumb);
+  writeNotNull(
+      'stickers', instance.stickers?.map((e) => e?.toJson())?.toList());
+  writeNotNull('thumb', instance.thumb?.toJson());
   return val;
 }
 
@@ -1594,8 +1612,8 @@ Map<String, dynamic> _$InlineQueryToJson(InlineQuery instance) {
   }
 
   writeNotNull('id', instance.id);
-  writeNotNull('from', instance.from);
-  writeNotNull('location', instance.location);
+  writeNotNull('from', instance.from?.toJson());
+  writeNotNull('location', instance.location?.toJson());
   writeNotNull('query', instance.query);
   writeNotNull('offset', instance.offset);
   return val;
@@ -1658,8 +1676,9 @@ Map<String, dynamic> _$InlineQueryResultArticleToJson(
   writeNotNull('id', instance.id);
   writeNotNull('type', instance.type);
   writeNotNull('title', instance.title);
-  writeNotNull('input_message_content', instance.input_message_content);
-  writeNotNull('reply_markup', instance.reply_markup);
+  writeNotNull(
+      'input_message_content', instance.input_message_content?.toJson());
+  writeNotNull('reply_markup', instance.reply_markup?.toJson());
   writeNotNull('url', instance.url);
   writeNotNull('hide_url', instance.hide_url);
   writeNotNull('description', instance.description);
@@ -1713,8 +1732,9 @@ Map<String, dynamic> _$InlineQueryResultPhotoToJson(
   writeNotNull('description', instance.description);
   writeNotNull('caption', instance.caption);
   writeNotNull('parse_mode', instance.parse_mode);
-  writeNotNull('reply_markup', instance.reply_markup);
-  writeNotNull('input_message_content', instance.input_message_content);
+  writeNotNull('reply_markup', instance.reply_markup?.toJson());
+  writeNotNull(
+      'input_message_content', instance.input_message_content?.toJson());
   return val;
 }
 
@@ -1763,8 +1783,9 @@ Map<String, dynamic> _$InlineQueryResultGifToJson(
   writeNotNull('title', instance.title);
   writeNotNull('caption', instance.caption);
   writeNotNull('parse_mode', instance.parse_mode);
-  writeNotNull('reply_markup', instance.reply_markup);
-  writeNotNull('input_message_content', instance.input_message_content);
+  writeNotNull('reply_markup', instance.reply_markup?.toJson());
+  writeNotNull(
+      'input_message_content', instance.input_message_content?.toJson());
   return val;
 }
 
@@ -1814,8 +1835,9 @@ Map<String, dynamic> _$InlineQueryResultMpeg4GifToJson(
   writeNotNull('title', instance.title);
   writeNotNull('caption', instance.caption);
   writeNotNull('parse_mode', instance.parse_mode);
-  writeNotNull('reply_markup', instance.reply_markup);
-  writeNotNull('input_message_content', instance.input_message_content);
+  writeNotNull('reply_markup', instance.reply_markup?.toJson());
+  writeNotNull(
+      'input_message_content', instance.input_message_content?.toJson());
   return val;
 }
 
@@ -1867,8 +1889,9 @@ Map<String, dynamic> _$InlineQueryResultVideoToJson(
   writeNotNull('video_height', instance.video_height);
   writeNotNull('video_duration', instance.video_duration);
   writeNotNull('description', instance.description);
-  writeNotNull('reply_markup', instance.reply_markup);
-  writeNotNull('input_message_content', instance.input_message_content);
+  writeNotNull('reply_markup', instance.reply_markup?.toJson());
+  writeNotNull(
+      'input_message_content', instance.input_message_content?.toJson());
   return val;
 }
 
@@ -1912,8 +1935,9 @@ Map<String, dynamic> _$InlineQueryResultAudioToJson(
   writeNotNull('parse_mode', instance.parse_mode);
   writeNotNull('performer', instance.performer);
   writeNotNull('audio_duration', instance.audio_duration);
-  writeNotNull('reply_markup', instance.reply_markup);
-  writeNotNull('input_message_content', instance.input_message_content);
+  writeNotNull('reply_markup', instance.reply_markup?.toJson());
+  writeNotNull(
+      'input_message_content', instance.input_message_content?.toJson());
   return val;
 }
 
@@ -1955,8 +1979,9 @@ Map<String, dynamic> _$InlineQueryResultVoiceToJson(
   writeNotNull('caption', instance.caption);
   writeNotNull('parse_mode', instance.parse_mode);
   writeNotNull('voice_duration', instance.voice_duration);
-  writeNotNull('reply_markup', instance.reply_markup);
-  writeNotNull('input_message_content', instance.input_message_content);
+  writeNotNull('reply_markup', instance.reply_markup?.toJson());
+  writeNotNull(
+      'input_message_content', instance.input_message_content?.toJson());
   return val;
 }
 
@@ -2003,8 +2028,9 @@ Map<String, dynamic> _$InlineQueryResultDocumentToJson(
   writeNotNull('document_url', instance.document_url);
   writeNotNull('mime_type', instance.mime_type);
   writeNotNull('description', instance.description);
-  writeNotNull('reply_markup', instance.reply_markup);
-  writeNotNull('input_message_content', instance.input_message_content);
+  writeNotNull('reply_markup', instance.reply_markup?.toJson());
+  writeNotNull(
+      'input_message_content', instance.input_message_content?.toJson());
   writeNotNull('thumb_url', instance.thumb_url);
   writeNotNull('thumb_width', instance.thumb_width);
   writeNotNull('thumb_height', instance.thumb_height);
@@ -2050,8 +2076,9 @@ Map<String, dynamic> _$InlineQueryResultLocationToJson(
   writeNotNull('longitude', instance.longitude);
   writeNotNull('title', instance.title);
   writeNotNull('live_period', instance.live_period);
-  writeNotNull('reply_markup', instance.reply_markup);
-  writeNotNull('input_message_content', instance.input_message_content);
+  writeNotNull('reply_markup', instance.reply_markup?.toJson());
+  writeNotNull(
+      'input_message_content', instance.input_message_content?.toJson());
   writeNotNull('thumb_url', instance.thumb_url);
   writeNotNull('thumb_width', instance.thumb_width);
   writeNotNull('thumb_height', instance.thumb_height);
@@ -2101,8 +2128,9 @@ Map<String, dynamic> _$InlineQueryResultVenueToJson(
   writeNotNull('address', instance.address);
   writeNotNull('foursquare_id', instance.foursquare_id);
   writeNotNull('foursquare_type', instance.foursquare_type);
-  writeNotNull('reply_markup', instance.reply_markup);
-  writeNotNull('input_message_content', instance.input_message_content);
+  writeNotNull('reply_markup', instance.reply_markup?.toJson());
+  writeNotNull(
+      'input_message_content', instance.input_message_content?.toJson());
   writeNotNull('thumb_url', instance.thumb_url);
   writeNotNull('thumb_width', instance.thumb_width);
   writeNotNull('thumb_height', instance.thumb_height);
@@ -2148,8 +2176,9 @@ Map<String, dynamic> _$InlineQueryResultContactToJson(
   writeNotNull('first_name', instance.first_name);
   writeNotNull('last_name', instance.last_name);
   writeNotNull('vcard', instance.vcard);
-  writeNotNull('reply_markup', instance.reply_markup);
-  writeNotNull('input_message_content', instance.input_message_content);
+  writeNotNull('reply_markup', instance.reply_markup?.toJson());
+  writeNotNull(
+      'input_message_content', instance.input_message_content?.toJson());
   writeNotNull('thumb_url', instance.thumb_url);
   writeNotNull('thumb_width', instance.thumb_width);
   writeNotNull('thumb_height', instance.thumb_height);
@@ -2182,7 +2211,7 @@ Map<String, dynamic> _$InlineQueryResultGameToJson(
   writeNotNull('id', instance.id);
   writeNotNull('type', instance.type);
   writeNotNull('game_short_name', instance.game_short_name);
-  writeNotNull('reply_markup', instance.reply_markup);
+  writeNotNull('reply_markup', instance.reply_markup?.toJson());
   return val;
 }
 
@@ -2224,8 +2253,9 @@ Map<String, dynamic> _$InlineQueryResultCachedPhotoToJson(
   writeNotNull('description', instance.description);
   writeNotNull('caption', instance.caption);
   writeNotNull('parse_mode', instance.parse_mode);
-  writeNotNull('reply_markup', instance.reply_markup);
-  writeNotNull('input_message_content', instance.input_message_content);
+  writeNotNull('reply_markup', instance.reply_markup?.toJson());
+  writeNotNull(
+      'input_message_content', instance.input_message_content?.toJson());
   return val;
 }
 
@@ -2265,8 +2295,9 @@ Map<String, dynamic> _$InlineQueryResultCachedGifToJson(
   writeNotNull('title', instance.title);
   writeNotNull('caption', instance.caption);
   writeNotNull('parse_mode', instance.parse_mode);
-  writeNotNull('reply_markup', instance.reply_markup);
-  writeNotNull('input_message_content', instance.input_message_content);
+  writeNotNull('reply_markup', instance.reply_markup?.toJson());
+  writeNotNull(
+      'input_message_content', instance.input_message_content?.toJson());
   return val;
 }
 
@@ -2306,8 +2337,9 @@ Map<String, dynamic> _$InlineQueryResultCachedMpeg4GifToJson(
   writeNotNull('title', instance.title);
   writeNotNull('caption', instance.caption);
   writeNotNull('parse_mode', instance.parse_mode);
-  writeNotNull('reply_markup', instance.reply_markup);
-  writeNotNull('input_message_content', instance.input_message_content);
+  writeNotNull('reply_markup', instance.reply_markup?.toJson());
+  writeNotNull(
+      'input_message_content', instance.input_message_content?.toJson());
   return val;
 }
 
@@ -2341,8 +2373,9 @@ Map<String, dynamic> _$InlineQueryResultCachedStickerToJson(
   writeNotNull('id', instance.id);
   writeNotNull('type', instance.type);
   writeNotNull('sticker_file_id', instance.sticker_file_id);
-  writeNotNull('reply_markup', instance.reply_markup);
-  writeNotNull('input_message_content', instance.input_message_content);
+  writeNotNull('reply_markup', instance.reply_markup?.toJson());
+  writeNotNull(
+      'input_message_content', instance.input_message_content?.toJson());
   return val;
 }
 
@@ -2384,8 +2417,9 @@ Map<String, dynamic> _$InlineQueryResultCachedDocumentToJson(
   writeNotNull('description', instance.description);
   writeNotNull('caption', instance.caption);
   writeNotNull('parse_mode', instance.parse_mode);
-  writeNotNull('reply_markup', instance.reply_markup);
-  writeNotNull('input_message_content', instance.input_message_content);
+  writeNotNull('reply_markup', instance.reply_markup?.toJson());
+  writeNotNull(
+      'input_message_content', instance.input_message_content?.toJson());
   return val;
 }
 
@@ -2427,8 +2461,9 @@ Map<String, dynamic> _$InlineQueryResultCachedVideoToJson(
   writeNotNull('description', instance.description);
   writeNotNull('caption', instance.caption);
   writeNotNull('parse_mode', instance.parse_mode);
-  writeNotNull('reply_markup', instance.reply_markup);
-  writeNotNull('input_message_content', instance.input_message_content);
+  writeNotNull('reply_markup', instance.reply_markup?.toJson());
+  writeNotNull(
+      'input_message_content', instance.input_message_content?.toJson());
   return val;
 }
 
@@ -2468,8 +2503,9 @@ Map<String, dynamic> _$InlineQueryResultCachedVoiceToJson(
   writeNotNull('title', instance.title);
   writeNotNull('caption', instance.caption);
   writeNotNull('parse_mode', instance.parse_mode);
-  writeNotNull('reply_markup', instance.reply_markup);
-  writeNotNull('input_message_content', instance.input_message_content);
+  writeNotNull('reply_markup', instance.reply_markup?.toJson());
+  writeNotNull(
+      'input_message_content', instance.input_message_content?.toJson());
   return val;
 }
 
@@ -2507,8 +2543,9 @@ Map<String, dynamic> _$InlineQueryResultCachedAudioToJson(
   writeNotNull('audio_file_id', instance.audio_file_id);
   writeNotNull('caption', instance.caption);
   writeNotNull('parse_mode', instance.parse_mode);
-  writeNotNull('reply_markup', instance.reply_markup);
-  writeNotNull('input_message_content', instance.input_message_content);
+  writeNotNull('reply_markup', instance.reply_markup?.toJson());
+  writeNotNull(
+      'input_message_content', instance.input_message_content?.toJson());
   return val;
 }
 
@@ -2652,8 +2689,8 @@ Map<String, dynamic> _$ChosenInlineResultToJson(ChosenInlineResult instance) {
   }
 
   writeNotNull('result_id', instance.result_id);
-  writeNotNull('from', instance.from);
-  writeNotNull('location', instance.location);
+  writeNotNull('from', instance.from?.toJson());
+  writeNotNull('location', instance.location?.toJson());
   writeNotNull('inline_message_id', instance.inline_message_id);
   writeNotNull('query', instance.query);
   return val;
@@ -2760,7 +2797,7 @@ Map<String, dynamic> _$OrderInfoToJson(OrderInfo instance) {
   writeNotNull('name', instance.name);
   writeNotNull('phone_number', instance.phone_number);
   writeNotNull('email', instance.email);
-  writeNotNull('shippingAddress', instance.shippingAddress);
+  writeNotNull('shippingAddress', instance.shippingAddress?.toJson());
   return val;
 }
 
@@ -2786,7 +2823,7 @@ Map<String, dynamic> _$ShippingOptionToJson(ShippingOption instance) {
 
   writeNotNull('id', instance.id);
   writeNotNull('title', instance.title);
-  writeNotNull('prices', instance.prices);
+  writeNotNull('prices', instance.prices?.map((e) => e?.toJson())?.toList());
   return val;
 }
 
@@ -2817,7 +2854,7 @@ Map<String, dynamic> _$SuccessfulPaymentToJson(SuccessfulPayment instance) {
   writeNotNull('total_amount', instance.total_amount);
   writeNotNull('invoice_payload', instance.invoice_payload);
   writeNotNull('shipping_option_id', instance.shipping_option_id);
-  writeNotNull('order_info', instance.order_info);
+  writeNotNull('order_info', instance.order_info?.toJson());
   writeNotNull(
       'telegram_payment_charge_id', instance.telegram_payment_charge_id);
   writeNotNull(
@@ -2849,9 +2886,9 @@ Map<String, dynamic> _$ShippingQueryToJson(ShippingQuery instance) {
   }
 
   writeNotNull('id', instance.id);
-  writeNotNull('from', instance.from);
+  writeNotNull('from', instance.from?.toJson());
   writeNotNull('invoice_payload', instance.invoice_payload);
-  writeNotNull('shipping_address', instance.shipping_address);
+  writeNotNull('shipping_address', instance.shipping_address?.toJson());
   return val;
 }
 
@@ -2881,12 +2918,12 @@ Map<String, dynamic> _$PreCheckoutQueryToJson(PreCheckoutQuery instance) {
   }
 
   writeNotNull('id', instance.id);
-  writeNotNull('from', instance.from);
+  writeNotNull('from', instance.from?.toJson());
   writeNotNull('currency', instance.currency);
   writeNotNull('total_amount', instance.total_amount);
   writeNotNull('invoice_payload', instance.invoice_payload);
   writeNotNull('shipping_option_id', instance.shipping_option_id);
-  writeNotNull('order_info', instance.order_info);
+  writeNotNull('order_info', instance.order_info?.toJson());
   return val;
 }
 
@@ -2913,8 +2950,8 @@ Map<String, dynamic> _$PassportDataToJson(PassportData instance) {
     }
   }
 
-  writeNotNull('data', instance.data);
-  writeNotNull('credentials', instance.credentials);
+  writeNotNull('data', instance.data?.map((e) => e?.toJson())?.toList());
+  writeNotNull('credentials', instance.credentials?.toJson());
   return val;
 }
 
@@ -2985,11 +3022,12 @@ Map<String, dynamic> _$EncryptedPassportElementToJson(
   writeNotNull('data', instance.data);
   writeNotNull('phone_number', instance.phone_number);
   writeNotNull('email', instance.email);
-  writeNotNull('files', instance.files);
-  writeNotNull('front_side', instance.front_side);
-  writeNotNull('reverse_side', instance.reverse_side);
-  writeNotNull('selfie', instance.selfie);
-  writeNotNull('translation', instance.translation);
+  writeNotNull('files', instance.files?.map((e) => e?.toJson())?.toList());
+  writeNotNull('front_side', instance.front_side?.toJson());
+  writeNotNull('reverse_side', instance.reverse_side?.toJson());
+  writeNotNull('selfie', instance.selfie?.toJson());
+  writeNotNull(
+      'translation', instance.translation?.map((e) => e?.toJson())?.toList());
   writeNotNull('hash', instance.hash);
   return val;
 }
@@ -3320,10 +3358,11 @@ Map<String, dynamic> _$GameToJson(Game instance) {
 
   writeNotNull('title', instance.title);
   writeNotNull('description', instance.description);
-  writeNotNull('photo', instance.photo);
+  writeNotNull('photo', instance.photo?.map((e) => e?.toJson())?.toList());
   writeNotNull('text', instance.text);
-  writeNotNull('text_entities', instance.text_entities);
-  writeNotNull('animation', instance.animation);
+  writeNotNull('text_entities',
+      instance.text_entities?.map((e) => e?.toJson())?.toList());
+  writeNotNull('animation', instance.animation?.toJson());
   return val;
 }
 
@@ -3354,7 +3393,7 @@ Map<String, dynamic> _$GameHighScoreToJson(GameHighScore instance) {
   }
 
   writeNotNull('position', instance.position);
-  writeNotNull('user', instance.user);
+  writeNotNull('user', instance.user?.toJson());
   writeNotNull('score', instance.score);
   return val;
 }
