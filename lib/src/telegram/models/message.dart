@@ -19,7 +19,7 @@ part of '../model.dart';
 /// This object represents a message.
 ///
 /// https://core.telegram.org/bots/api#message
-@JsonSerializable(explicitToJson: true)
+@JsonSerializable()
 class Message {
   int message_id;
   User from;
