@@ -1,6 +1,9 @@
+## 0.0.48
+- Fixed restrictChatMember API URL
+
 ## 0.0.47
- - Added custom server port to webhook implementation
- - Added auto-retry to long poll implementation
+- Added custom server port to webhook implementation
+- Added auto-retry to long poll implementation
     - Gradually increase retry timeout on each retry, initial timeout is 1 minute
     - Automatically retry on exception except HTTP Client error (400)
 - Updated multipart file upload to include original file name
