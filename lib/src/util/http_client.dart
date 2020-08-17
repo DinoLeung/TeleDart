@@ -29,7 +29,8 @@ class HttpClient {
 
   /// HTTP get method
   /// [url] request url with query string (required)
-  Future<dynamic> httpGet(String url) async => http.get(url).then((response) {
+  static Future<dynamic> httpGet(String url) async =>
+      http.get(url).then((response) {
         Map<String, dynamic> body = jsonDecode(response.body);
         if (body['ok']) {
           return body['result'];
@@ -42,7 +43,8 @@ class HttpClient {
   /// HTTP post method (x-www-form-urlencoded)
   /// [url] - request url (required)
   /// [body] - parameters in map
-  Future<dynamic> httpPost(String url, {Map<String, dynamic> body}) async {
+  static Future<dynamic> httpPost(String url,
+      {Map<String, dynamic> body}) async {
     body.removeWhere(_nullFilter);
     return http
         .post(url, body: body.map((k, v) => MapEntry(k, '${v}')))
@@ -61,7 +63,8 @@ class HttpClient {
   /// [url] - request url (required)
   /// [file] - file to upload (required)
   /// [body] - parameters in map
-  Future<dynamic> httpMultipartPost(String url, List<http.MultipartFile> files,
+  static Future<dynamic> httpMultipartPost(
+      String url, List<http.MultipartFile> files,
       {Map<String, dynamic> body}) async {
     body.removeWhere(_nullFilter);
     var request = http.MultipartRequest('POST', Uri.parse(url))
