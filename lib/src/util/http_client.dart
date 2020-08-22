@@ -54,7 +54,7 @@ class HttpClient {
         return responseBody['result'];
       } else {
         return Future.error(
-            HttpClientException(body['error_code'], body['description']));
+            HttpClientException(responseBody['error_code'], responseBody['description']));
       }
     }).catchError((error) => Future.error(error));
   }
@@ -80,7 +80,7 @@ class HttpClient {
         return responseBody['result'];
       } else {
         return Future.error(
-            HttpClientException(body['error_code'], body['description']));
+            HttpClientException(responseBody['error_code'], responseBody['description']));
       }
     }).catchError((error) => Future.error(error));
   }
