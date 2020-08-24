@@ -31,12 +31,12 @@ class HttpClient {
   /// [url] request url with query string (required)
   static Future<dynamic> httpGet(String url) async =>
       http.get(url).then((response) {
-        Map<String, dynamic> body = jsonDecode(response.body);
-        if (body['ok']) {
-          return body['result'];
+        Map<String, dynamic> responseBody = jsonDecode(response.body);
+        if (responseBody['ok']) {
+          return responseBody['result'];
         } else {
-          return Future.error(
-              HttpClientException(body['error_code'], body['description']));
+          return Future.error(HttpClientException(
+              responseBody['error_code'], responseBody['description']));
         }
       }).catchError((error) => Future.error(error));
 
@@ -53,8 +53,8 @@ class HttpClient {
       if (responseBody['ok']) {
         return responseBody['result'];
       } else {
-        return Future.error(
-            HttpClientException(body['error_code'], body['description']));
+        return Future.error(HttpClientException(
+            responseBody['error_code'], responseBody['description']));
       }
     }).catchError((error) => Future.error(error));
   }
@@ -79,8 +79,8 @@ class HttpClient {
       if (responseBody['ok']) {
         return responseBody['result'];
       } else {
-        return Future.error(
-            HttpClientException(body['error_code'], body['description']));
+        return Future.error(HttpClientException(
+            responseBody['error_code'], responseBody['description']));
       }
     }).catchError((error) => Future.error(error));
   }

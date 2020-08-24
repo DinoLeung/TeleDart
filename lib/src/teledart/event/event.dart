@@ -155,7 +155,7 @@ class Event {
     } else if (update.poll_answer != null) {
       _pollAnswerStreamController.add(update.poll_answer);
     } else {
-      throw TeleDartEventException('Object in Update cannot be null');
+      throw TeleDartEventException('Update is not recognised.');
     }
   }
 

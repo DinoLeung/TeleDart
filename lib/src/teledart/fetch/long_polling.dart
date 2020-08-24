@@ -15,6 +15,7 @@
 /// along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import 'dart:async';
+import 'dart:core';
 import 'dart:io';
 
 import '../../telegram/telegram.dart';
@@ -85,28 +86,36 @@ class LongPolling {
               timeout: timeout,
               allowed_updates: allowed_updates)
           .then((updates) {
-        if (updates.isNotEmpty) {
-          for (var update in updates) {
-            emitUpdate(update);
-            offset = update.update_id + 1;
-          }
-        }
-        _resetRetryDelay();
-        _recursivePolling();
-      }).catchError((error) {
-        if (error is HttpClientException) {
-          if (error.isHttpClientError()) {
-            _isPolling = false;
-            throw LongPollingException(error.toString());
-          }
-        }
-        print('${DateTime.now()} ${error}');
-        print('Retrying in ${retryDelay.inMinutes} minute(s)...');
-        _delayRetry();
-        _doubleRetryDelay();
-        _recursivePolling();
-      });
+            if (updates.isNotEmpty) {
+              for (var update in updates) {
+                emitUpdate(update);
+                offset = update.update_id + 1;
+              }
+            }
+            _resetRetryDelay();
+            _recursivePolling();
+          })
+          .catchError(_onRecursivePollingHttpError,
+              test: (error) => error is HttpClientException)
+          .catchError(_onRecursivePollingError);
     }
+  }
+
+  void _onRecursivePollingHttpError(HttpClientException error) {
+    if (error.isHttpClientError()) {
+      _isPolling = false;
+      throw LongPollingException(error.toString());
+    } else {
+      _onRecursivePollingError(error);
+    }
+  }
+
+  void _onRecursivePollingError(Exception error) {
+    print('${DateTime.now()} ${error}');
+    print('Retrying in ${retryDelay.inMinutes} minute(s)...');
+    _delayRetry();
+    _doubleRetryDelay();
+    _recursivePolling();
   }
 
   /// Add [update] to the stream.
