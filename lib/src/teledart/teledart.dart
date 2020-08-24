@@ -119,12 +119,11 @@ class TeleDart {
   }
 
   /// Removes and stops webhook
-  void removeWebhook() {
+  Future<void> removeWebhook() async {
+    await telegram.deleteWebhook();
     if (_webhook != null) {
-      _webhook.deleteWebhook().then((_) {
-        _webhook.stopWebhook();
-        _webhook = null;
-      });
+      _webhook.stopWebhook();
+      _webhook = null;
     }
   }
 
