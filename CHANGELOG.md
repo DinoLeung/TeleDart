@@ -1,3 +1,8 @@
+## 0.0.49
+- fixed http client exception bug
+- removed redundant error catch
+- temporary accept dynamic `chat_id`
+
 ## 0.0.48
 - Fixed restrictChatMember API URL
 - Fixed `toJson` methods in `chat_permissions`, `location` and `login_url` models

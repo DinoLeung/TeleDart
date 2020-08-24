@@ -85,7 +85,7 @@ class Webhook {
           certificate: uploadCertificate ? certificate : null,
           max_connections: max_connections,
           allowed_updates: allowed_updates);
-    }).catchError((error) => Future.error(WebhookException(error.toString())));
+    });
   }
 
   /// Start the webhook.
@@ -108,14 +108,11 @@ class Webhook {
           ..write(jsonEncode({'ok': false}))
           ..close();
       }
-    }).onError((error) => Future.error(WebhookException(error.toString())));
+    });
   }
 
   /// Remove webhook from telegram server
-  Future<void> deleteWebhook() async {
-    await telegram.deleteWebhook().catchError(
-        (error) => Future.error(WebhookException(error.toString())));
-  }
+  Future<void> deleteWebhook() => telegram.deleteWebhook();
 
   /// Stop the webhook
   void stopWebhook() {

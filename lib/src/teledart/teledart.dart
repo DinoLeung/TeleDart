@@ -42,21 +42,19 @@ class TeleDart {
   Future<User> _initBotInfo() async => telegram.getMe().then((user) {
         _event.me = user;
         return user;
-      }).catchError(
-          (exception) => throw TeleDartException(exception.toString()));
+      });
 
   /// Starts listening to messages
   ///
   /// Use long polling by default.
   ///
   /// Setup desired configurations using [setupLongPolling] or [setupWebhook]
-  ///
-  /// Throws [TeleDartException]
   Future<User> start({bool webhook = false}) async =>
       await _initBotInfo().then((me) {
         if (webhook) {
           if (_webhook == null) {
-            throw TeleDartException('Webhook has not been set up yet');
+            return Future.error(
+                TeleDartException('Webhook has not been set up yet'));
           } else {
             _webhook
               ..startWebhook()
@@ -70,8 +68,7 @@ class TeleDart {
             ..onUpdate().listen((update) => _updatesHandler(update));
           return me;
         }
-      }).catchError(
-          ((exception) => throw TeleDartException(exception.toString())));
+      });
 
   /// Configures long polling method
   ///
@@ -423,7 +420,7 @@ class TeleDart {
 
   /// Short-cut to edit a live location message
   Future<Message> editLiveLocation(double latitude, double longitude,
-          {int chat_id,
+          {dynamic chat_id,
           int message_id,
           String inline_message_id,
           ReplyMarkup reply_markup}) =>
@@ -435,7 +432,7 @@ class TeleDart {
 
   /// Short-cut to stop a live location message
   Future<Message> stopLiveLocation(
-          {int chat_id,
+          {dynamic chat_id,
           int message_id,
           String inline_message_id,
           ReplyMarkup reply_markup}) =>
