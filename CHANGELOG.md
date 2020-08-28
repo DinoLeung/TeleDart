@@ -1,7 +1,11 @@
+## 0.0.50
+- Fixed long poll onError type mismatch bug
+- Enabled Teledart to remove webhook without setting up a webhook
+
 ## 0.0.49
-- fixed http client exception bug
-- removed redundant error catch
-- temporary accept dynamic `chat_id`
+- Fixed http client exception bug
+- Femoved redundant error catch
+- Temporary accept dynamic `chat_id`
 
 ## 0.0.48
 - Fixed restrictChatMember API URL
