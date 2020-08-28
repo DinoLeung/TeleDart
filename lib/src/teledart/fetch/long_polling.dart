@@ -86,18 +86,17 @@ class LongPolling {
               timeout: timeout,
               allowed_updates: allowed_updates)
           .then((updates) {
-            if (updates.isNotEmpty) {
-              for (var update in updates) {
-                emitUpdate(update);
-                offset = update.update_id + 1;
-              }
-            }
-            _resetRetryDelay();
-            _recursivePolling();
-          })
-          .catchError(_onRecursivePollingHttpError,
-              test: (error) => error is HttpClientException)
-          .catchError(_onRecursivePollingError);
+        if (updates.isNotEmpty) {
+          for (var update in updates) {
+            emitUpdate(update);
+            offset = update.update_id + 1;
+          }
+        }
+        _resetRetryDelay();
+        _recursivePolling();
+      }).catchError((error) => error is HttpClientException
+              ? _onRecursivePollingHttpError(error)
+              : _onRecursivePollingError(error));
     }
   }
 
@@ -110,7 +109,7 @@ class LongPolling {
     }
   }
 
-  void _onRecursivePollingError(Exception error) {
+  void _onRecursivePollingError(Object error) {
     print('${DateTime.now()} ${error}');
     print('Retrying in ${retryDelay.inMinutes} minute(s)...');
     _delayRetry();
