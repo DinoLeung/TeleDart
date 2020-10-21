@@ -21,9 +21,35 @@ import 'dart:convert';
 import '../../telegram/telegram.dart';
 import '../../telegram/model.dart';
 
-class Webhook {
+/// Common superclass for Webhooks.
+///
+/// This library can manage webhooks with a standalone http server from
+/// `dart:io` by using the [Webhook] implementation.
+///
+/// Alternatively, you can implement your own webhook by creating a subclass of
+/// [BaseWebhook] and registering it through [Teledart.setCustomWebhook].
+abstract class BaseWebhook {
   final Telegram telegram;
 
+  BaseWebhook(this.telegram);
+
+  /// Returns a stream emitting updates received by this webhook.
+  Stream<Update> onUpdate();
+
+  /// Registers the webhook on telegram servers.
+  Future<void> setWebhook();
+
+  /// Unregisters the current webhook from telegram servers.
+  Future<void> deleteWebhook() => telegram.deleteWebhook();
+
+  /// Starts listening on the webhook.
+  Future<void> startWebhook();
+
+  /// Stops listening on the webhook.
+  Future<void> stopWebhook();
+}
+
+class Webhook extends BaseWebhook {
   io.HttpServer _server;
   io.SecurityContext _context;
 
@@ -46,13 +72,14 @@ class Webhook {
   ///
   /// Throws [WebhookException] if [port] is not supported by Telegram
   /// or [max_connections] is less than 1 or greater than 100.
-  Webhook(this.telegram, this.url, this.secretPath, this.certificate,
+  Webhook(Telegram telegram, this.url, this.secretPath, this.certificate,
       this.privateKey,
       {this.port = 443,
       this.serverPort,
       this.uploadCertificate = false,
       this.max_connections = 40,
-      this.allowed_updates}) {
+      this.allowed_updates})
+      : super(telegram) {
     if (![443, 80, 88, 8443].contains(port)) {
       throw WebhookException(
           'Ports currently supported for Webhooks: 443, 80, 88, 8443.');
@@ -75,7 +102,7 @@ class Webhook {
     _context.usePrivateKeyBytes(privateKey.readAsBytesSync());
   }
 
-  /// Set webhook on telegram server.
+  @override
   Future<void> setWebhook() async {
     Future<dynamic> serverFuture = io.HttpServer.bindSecure(
         io.InternetAddress.anyIPv4.address, serverPort ?? port, _context);
@@ -88,7 +115,7 @@ class Webhook {
     });
   }
 
-  /// Start the webhook.
+  @override
   Future<void> startWebhook() async {
     if (_server == null) {
       throw WebhookException(
@@ -111,18 +138,14 @@ class Webhook {
     });
   }
 
-  /// Remove webhook from telegram server
-  Future<void> deleteWebhook() => telegram.deleteWebhook();
-
-  /// Stop the webhook
-  void stopWebhook() {
-    if (_server != null) _server.close();
-  }
+  @override
+  Future<void> stopWebhook() => _server?.close() ?? Future.value();
 
   /// Add [update] to the stream.
   void emitUpdate(Update update) => _updateStreamController.add(update);
 
   /// When [update] is added to stream.
+  @override
   Stream<Update> onUpdate() => _updateStreamController.stream;
 }
 

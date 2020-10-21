@@ -33,7 +33,7 @@ class TeleDart {
   final Event _event;
 
   LongPolling _longPolling;
-  Webhook _webhook;
+  BaseWebhook _webhook;
 
   /// Constructor in dependency injection manner
   TeleDart(this.telegram, this._event);
@@ -46,9 +46,13 @@ class TeleDart {
 
   /// Starts listening to messages
   ///
-  /// Use long polling by default.
+  /// Uses long polling by default.
   ///
-  /// Setup desired configurations using [setupLongPolling] or [setupWebhook]
+  /// To configure long polling support, call [setupLongPolling] before calling
+  /// [start].
+  /// To use webhooks, first call [setupWebhook] or [setupCustomWebhook] before
+  /// calling [start]. Also, set the [webhook] parameter to `true` if you want
+  /// to use webhooks.
   Future<User> start({bool webhook = false}) async =>
       await _initBotInfo().then((me) {
         if (webhook) {
@@ -58,14 +62,14 @@ class TeleDart {
           } else {
             _webhook
               ..startWebhook()
-              ..onUpdate().listen((update) => _updatesHandler(update));
+              ..onUpdate().listen(_updatesHandler);
             return me;
           }
         } else {
           _longPolling ??= LongPolling(telegram);
           _longPolling
             ..startPolling()
-            ..onUpdate().listen((update) => _updatesHandler(update));
+            ..onUpdate().listen((_updatesHandler));
           return me;
         }
       });
@@ -108,13 +112,21 @@ class TeleDart {
       bool uploadCertificate = false,
       int max_connections = 40,
       List<String> allowed_updates}) async {
-    _webhook = Webhook(telegram, url, secretPath, certificate, privateKey,
+    final webhook = Webhook(telegram, url, secretPath, certificate, privateKey,
         port: port,
         serverPort: serverPort,
         uploadCertificate: uploadCertificate,
         max_connections: max_connections,
         allowed_updates: allowed_updates);
 
+    return setupCustomWebhook(webhook);
+  }
+
+  /// Configures a custom webhook not necessarily managed by this library.
+  ///
+  /// For more information on custom webhooks, see [BaseWebhook].
+  Future<void> setupCustomWebhook(BaseWebhook webhook) {
+    _webhook = webhook;
     return _webhook.setWebhook();
   }
 
@@ -122,7 +134,7 @@ class TeleDart {
   Future<void> removeWebhook() async {
     await telegram.deleteWebhook();
     if (_webhook != null) {
-      _webhook.stopWebhook();
+      await _webhook.stopWebhook();
       _webhook = null;
     }
   }
