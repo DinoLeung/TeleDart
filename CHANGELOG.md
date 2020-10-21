@@ -1,3 +1,7 @@
+## 0.0.51
+
+- Support custom webhook implementations through `BaseWebhook`
+
 ## 0.0.50
 - Fixed long poll onError type mismatch bug
 - Enabled Teledart to remove webhook without setting up a webhook
