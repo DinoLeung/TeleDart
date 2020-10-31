@@ -1,6 +1,8 @@
 ## 0.0.51
 
 - Support custom webhook implementations through `BaseWebhook`
+- __Breaking__: The `setupWebhook` method now takes a `Webhook` instead of
+  the underlying parameters.
 
 ## 0.0.50
 - Fixed long poll onError type mismatch bug

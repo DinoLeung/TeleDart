@@ -50,9 +50,8 @@ class TeleDart {
   ///
   /// To configure long polling support, call [setupLongPolling] before calling
   /// [start].
-  /// To use webhooks, first call [setupWebhook] or [setupCustomWebhook] before
-  /// calling [start]. Also, set the [webhook] parameter to `true` if you want
-  /// to use webhooks.
+  /// To use webhooks, call [setupWebhook] before calling [start]. Also, set the
+  /// [webhook] parameter to `true` if you want to use webhooks.
   Future<User> start({bool webhook = false}) async =>
       await _initBotInfo().then((me) {
         if (webhook) {
@@ -97,35 +96,14 @@ class TeleDart {
     }
   }
 
-  /// Configures webhook method
+  /// Configures a webhook used by this bot to receive updates.
   ///
-  /// Set [url] as host name e.g. `https://example.com`, suggested to use bot tokan as [secretPath].
-  ///
-  /// Default [port] is `443`, Telegram API supports `443`, `80`, `88`, `8443`.
-  /// Provide [privateKey] and [certificate] pair for HTTPS configuration
+  /// For a default webhook managed by this library, you can use a [Webhook].
+  /// Alternatively, you can manage webhooks yourself by implementing a
+  /// [BaseWebhook].
   ///
   /// See: https://core.telegram.org/bots/api#setwebhook
-  Future<void> setupWebhook(
-      String url, String secretPath, io.File certificate, io.File privateKey,
-      {int port = 443,
-      int serverPort,
-      bool uploadCertificate = false,
-      int max_connections = 40,
-      List<String> allowed_updates}) async {
-    final webhook = Webhook(telegram, url, secretPath, certificate, privateKey,
-        port: port,
-        serverPort: serverPort,
-        uploadCertificate: uploadCertificate,
-        max_connections: max_connections,
-        allowed_updates: allowed_updates);
-
-    return setupCustomWebhook(webhook);
-  }
-
-  /// Configures a custom webhook not necessarily managed by this library.
-  ///
-  /// For more information on custom webhooks, see [BaseWebhook].
-  Future<void> setupCustomWebhook(BaseWebhook webhook) {
+  Future<void> setupWebhook(BaseWebhook webhook) {
     _webhook = webhook;
     return _webhook.setWebhook();
   }

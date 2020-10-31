@@ -27,7 +27,7 @@ import '../../telegram/model.dart';
 /// `dart:io` by using the [Webhook] implementation.
 ///
 /// Alternatively, you can implement your own webhook by creating a subclass of
-/// [BaseWebhook] and registering it through [Teledart.setCustomWebhook].
+/// [BaseWebhook] and registering it through [Teledart.setupWebhook].
 abstract class BaseWebhook {
   final Telegram telegram;
 
@@ -49,6 +49,7 @@ abstract class BaseWebhook {
   Future<void> stopWebhook();
 }
 
+/// A standalone webhook, backed by a server managed by this library.
 class Webhook extends BaseWebhook {
   io.HttpServer _server;
   io.SecurityContext _context;
@@ -69,6 +70,11 @@ class Webhook extends BaseWebhook {
   /// Setup webhook
   ///
   /// Webhook server listens to [port] by default, set [serverPort] to override.
+  ///
+  /// Set [url] as host name e.g. `https://example.com`, suggested to use bot tokan as [secretPath].
+  ///
+  /// Default [port] is `443`, Telegram API supports `443`, `80`, `88`, `8443`.
+  /// Provide [privateKey] and [certificate] pair for HTTPS configuration
   ///
   /// Throws [WebhookException] if [port] is not supported by Telegram
   /// or [max_connections] is less than 1 or greater than 100.
