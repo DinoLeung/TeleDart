@@ -21,3 +21,6 @@ library teledart;
 
 export 'package:teledart/src/teledart/teledart.dart';
 export 'package:teledart/src/teledart/event/event.dart';
+export 'package:teledart/src/teledart/fetch/abstract_update_fetcher.dart';
+export 'package:teledart/src/teledart/fetch/long_polling.dart';
+export 'package:teledart/src/teledart/fetch/webhook.dart';

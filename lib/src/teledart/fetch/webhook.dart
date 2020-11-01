@@ -20,37 +20,11 @@ import 'dart:convert';
 
 import '../../telegram/telegram.dart';
 import '../../telegram/model.dart';
+import 'abstract_update_fetcher.dart';
 
-/// Common superclass for Webhooks.
-///
-/// This library can manage webhooks with a standalone http server from
-/// `dart:io` by using the [Webhook] implementation.
-///
-/// Alternatively, you can implement your own webhook by creating a subclass of
-/// [BaseWebhook] and registering it through [Teledart.setupWebhook].
-abstract class BaseWebhook {
+class Webhook extends AbstractUpdateFetcher {
   final Telegram telegram;
 
-  BaseWebhook(this.telegram);
-
-  /// Returns a stream emitting updates received by this webhook.
-  Stream<Update> onUpdate();
-
-  /// Registers the webhook on telegram servers.
-  Future<void> setWebhook();
-
-  /// Unregisters the current webhook from telegram servers.
-  Future<void> deleteWebhook() => telegram.deleteWebhook();
-
-  /// Starts listening on the webhook.
-  Future<void> startWebhook();
-
-  /// Stops listening on the webhook.
-  Future<void> stopWebhook();
-}
-
-/// A standalone webhook, backed by a server managed by this library.
-class Webhook extends BaseWebhook {
   io.HttpServer _server;
   io.SecurityContext _context;
 
@@ -65,8 +39,6 @@ class Webhook extends BaseWebhook {
   io.File privateKey;
   bool uploadCertificate;
 
-  StreamController<Update> _updateStreamController;
-
   /// Setup webhook
   ///
   /// Webhook server listens to [port] by default, set [serverPort] to override.
@@ -78,14 +50,13 @@ class Webhook extends BaseWebhook {
   ///
   /// Throws [WebhookException] if [port] is not supported by Telegram
   /// or [max_connections] is less than 1 or greater than 100.
-  Webhook(Telegram telegram, this.url, this.secretPath, this.certificate,
+  Webhook(this.telegram, this.url, this.secretPath, this.certificate,
       this.privateKey,
       {this.port = 443,
       this.serverPort,
       this.uploadCertificate = false,
       this.max_connections = 40,
-      this.allowed_updates})
-      : super(telegram) {
+      this.allowed_updates}) {
     if (![443, 80, 88, 8443].contains(port)) {
       throw WebhookException(
           'Ports currently supported for Webhooks: 443, 80, 88, 8443.');
@@ -93,8 +64,6 @@ class Webhook extends BaseWebhook {
     if (max_connections > 100 || max_connections < 1) {
       throw WebhookException('Connection limit must between 1 and 100.');
     }
-
-    _updateStreamController = StreamController();
 
     // prefix url and secret path
     if (url.endsWith('\/')) url.substring(0, url.length - 1);
@@ -108,7 +77,6 @@ class Webhook extends BaseWebhook {
     _context.usePrivateKeyBytes(privateKey.readAsBytesSync());
   }
 
-  @override
   Future<void> setWebhook() async {
     Future<dynamic> serverFuture = io.HttpServer.bindSecure(
         io.InternetAddress.anyIPv4.address, serverPort ?? port, _context);
@@ -121,12 +89,11 @@ class Webhook extends BaseWebhook {
     });
   }
 
+  /// Start the webhook.
   @override
-  Future<void> startWebhook() async {
-    if (_server == null) {
-      throw WebhookException(
-          'Please use setWebhook() to initialise webhook before start webhook.');
-    }
+  Future<void> start() async {
+    await setWebhook();
+
     _server.listen((io.HttpRequest request) {
       if (request.method == 'POST' && request.uri.path == secretPath) {
         request.cast<List<int>>().transform(utf8.decoder).join().then((data) {
@@ -144,15 +111,9 @@ class Webhook extends BaseWebhook {
     });
   }
 
+  /// Stop the webhook
   @override
-  Future<void> stopWebhook() => _server?.close() ?? Future.value();
-
-  /// Add [update] to the stream.
-  void emitUpdate(Update update) => _updateStreamController.add(update);
-
-  /// When [update] is added to stream.
-  @override
-  Stream<Update> onUpdate() => _updateStreamController.stream;
+  Future<void> stop() => _server?.close() ?? Future.value();
 }
 
 class WebhookException implements Exception {
