@@ -24,7 +24,7 @@ import 'abstract_update_fetcher.dart';
 
 class Webhook extends AbstractUpdateFetcher {
   final Telegram telegram;
-
+  
   io.HttpServer _server;
   io.SecurityContext _context;
 
@@ -43,15 +43,21 @@ class Webhook extends AbstractUpdateFetcher {
   ///
   /// Webhook server listens to [port] by default, set [serverPort] to override.
   ///
+  /// Set [url] as host name e.g. `https://example.com`, suggested to use bot tokan as [secretPath].
+  ///
+  /// Default [port] is `443`, Telegram API supports `443`, `80`, `88`, `8443`.
+  /// Provide [privateKey] and [certificate] pair for HTTPS configuration
+  ///
   /// Throws [WebhookException] if [port] is not supported by Telegram
   /// or [max_connections] is less than 1 or greater than 100.
-  Webhook(this.telegram, this.url, this.secretPath, this.certificate,
+  Webhook(Telegram telegram, this.url, this.secretPath, this.certificate,
       this.privateKey,
       {this.port = 443,
       this.serverPort,
       this.uploadCertificate = false,
       this.max_connections = 40,
-      this.allowed_updates}) {
+      this.allowed_updates})
+      : super(telegram) {
     if (![443, 80, 88, 8443].contains(port)) {
       throw WebhookException(
           'Ports currently supported for Webhooks: 443, 80, 88, 8443.');
@@ -72,7 +78,6 @@ class Webhook extends AbstractUpdateFetcher {
     _context.usePrivateKeyBytes(privateKey.readAsBytesSync());
   }
 
-  /// Set webhook on telegram server.
   Future<void> setWebhook() async {
     Future<dynamic> serverFuture = io.HttpServer.bindSecure(
         io.InternetAddress.anyIPv4.address, serverPort ?? port, _context);
@@ -89,7 +94,7 @@ class Webhook extends AbstractUpdateFetcher {
   @override
   Future<void> start() async {
     await setWebhook();
-
+  
     _server.listen((io.HttpRequest request) {
       if (request.method == 'POST' && request.uri.path == secretPath) {
         request.cast<List<int>>().transform(utf8.decoder).join().then((data) {
