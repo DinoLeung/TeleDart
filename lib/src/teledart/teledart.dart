@@ -15,11 +15,11 @@
 /// along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import 'dart:async';
-import 'dart:io' as io;
 
 import '../telegram/model.dart';
 import '../telegram/telegram.dart';
 import 'event/event.dart';
+import 'fetch/abstract_update_fetcher.dart';
 import 'fetch/long_polling.dart';
 import 'fetch/webhook.dart';
 import 'model/callback_query.dart';
@@ -32,11 +32,10 @@ class TeleDart {
   final Telegram telegram;
   final Event _event;
 
-  LongPolling _longPolling;
-  Webhook _webhook;
+  AbstractUpdateFetcher fetcher;
 
   /// Constructor in dependency injection manner
-  TeleDart(this.telegram, this._event);
+  TeleDart(this.telegram, this._event, {this.fetcher});
 
   /// Private method to get bot info
   Future<User> _initBotInfo() async => telegram.getMe().then((user) {
@@ -46,84 +45,40 @@ class TeleDart {
 
   /// Starts listening to messages
   ///
-  /// Use long polling by default.
+  /// Uses long polling by default.
   ///
-  /// Setup desired configurations using [setupLongPolling] or [setupWebhook]
-  Future<User> start({bool webhook = false}) async =>
-      await _initBotInfo().then((me) {
-        if (webhook) {
-          if (_webhook == null) {
-            return Future.error(
-                TeleDartException('Webhook has not been set up yet'));
-          } else {
-            _webhook
-              ..startWebhook()
-              ..onUpdate().listen((update) => _updatesHandler(update));
-            return me;
-          }
-        } else {
-          _longPolling ??= LongPolling(telegram);
-          _longPolling
-            ..startPolling()
-            ..onUpdate().listen((update) => _updatesHandler(update));
-          return me;
-        }
+  /// To configure long polling, inject a [LongPolling] object as [fetcher] when
+  /// instantiating [Teledart].
+  /// To use webhooks, inject a [Webhook] object as [fetcher] when instantiating
+  /// [Teledart].
+  Future<User> start() async => await _initBotInfo().then((me) {
+        fetcher ??= LongPolling(telegram)
+          ..start()
+          ..onUpdate().listen((_updatesHandler));
+        return me;
       });
 
-  /// Configures long polling method
-  ///
-  /// See: https://core.telegram.org/bots/api#getupdates
-  void setupLongPolling(
-      {int offset = 0,
-      int limit = 100,
-      int timeout = 30,
-      List<String> allowed_updates}) {
-    _longPolling = LongPolling(telegram,
-        offset: offset,
-        limit: limit,
-        timeout: timeout,
-        allowed_updates: allowed_updates);
-  }
+  /// Stops fetching updates
+  void stop() => fetcher?.stop();
 
-  /// Removes and stops long polling
-  void removeLongPolling() {
-    if (_longPolling != null) {
-      _longPolling.stopPolling();
-      _longPolling = null;
-    }
-  }
-
-  /// Configures webhook method
+  /// Configures a webhook used by this bot to receive updates.
   ///
-  /// Set [url] as host name e.g. `https://example.com`, suggested to use bot tokan as [secretPath].
-  ///
-  /// Default [port] is `443`, Telegram API supports `443`, `80`, `88`, `8443`.
-  /// Provide [privateKey] and [certificate] pair for HTTPS configuration
+  /// For a default webhook managed by this library, you can use a [Webhook].
+  /// Alternatively, you can manage webhooks yourself by implementing a
+  /// [BaseWebhook].
   ///
   /// See: https://core.telegram.org/bots/api#setwebhook
-  Future<void> setupWebhook(
-      String url, String secretPath, io.File certificate, io.File privateKey,
-      {int port = 443,
-      int serverPort,
-      bool uploadCertificate = false,
-      int max_connections = 40,
-      List<String> allowed_updates}) async {
-    _webhook = Webhook(telegram, url, secretPath, certificate, privateKey,
-        port: port,
-        serverPort: serverPort,
-        uploadCertificate: uploadCertificate,
-        max_connections: max_connections,
-        allowed_updates: allowed_updates);
-
-    return _webhook.setWebhook();
-  }
+  Future<void> setWebhook() => fetcher != null && fetcher is Webhook
+      ? (fetcher as Webhook).setWebhook()
+      : throw TeleDartException(
+          'Injected update fetcher is type of ${fetcher.runtimeType.toString()} instead of Webhook.');
 
   /// Removes and stops webhook
   Future<void> removeWebhook() async {
     await telegram.deleteWebhook();
-    if (_webhook != null) {
-      _webhook.stopWebhook();
-      _webhook = null;
+    if (fetcher is Webhook) {
+      await fetcher.stop();
+      fetcher = null;
     }
   }
 
