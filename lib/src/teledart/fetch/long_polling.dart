@@ -19,10 +19,10 @@ import 'dart:core';
 import 'dart:io';
 
 import '../../telegram/telegram.dart';
-import '../../telegram/model.dart';
 import '../../util/http_client.dart';
+import 'abstract_update_fetcher.dart';
 
-class LongPolling {
+class LongPolling extends AbstractUpdateFetcher {
   final Telegram telegram;
 
   final MAX_TIMEOUT = 50;
@@ -35,7 +35,6 @@ class LongPolling {
   bool _isPolling = false;
   bool get isPolling => _isPolling;
 
-  StreamController<Update> _updateStreamController;
   Duration retryDelay = Duration(minutes: 1);
 
   /// Setup long polling
@@ -54,21 +53,22 @@ class LongPolling {
       throw LongPollingException(
           'Timeout may not greater than ${MAX_TIMEOUT}.');
     }
-
-    _updateStreamController = StreamController();
   }
 
   /// Stop the long poll.
-  void stopPolling() {
+  @override
+  Future<void> stop() {
     if (_isPolling) _isPolling = false;
+    return Future.value();
   }
 
   /// Start the long poll, throws [LongPollingException] on error
   /// or a long poll is already in place.
-  void startPolling() {
+  @override
+  Future<void> start() {
     if (!_isPolling) {
       _isPolling = true;
-      _recursivePolling();
+      return _recursivePolling();
     } else {
       throw LongPollingException('A long poll is aleady inplace');
     }
@@ -77,7 +77,7 @@ class LongPolling {
   /// Private long polling loop, throws [LongPollingException] on error.
   /// Automatically retry on exception except HTTP Client error (400).
   /// Double the retry delay timeout on each error, resets timeout on success.
-  void _recursivePolling() {
+  Future<void> _recursivePolling() {
     if (_isPolling) {
       telegram
           .getUpdates(
@@ -98,6 +98,7 @@ class LongPolling {
               ? _onRecursivePollingHttpError(error)
               : _onRecursivePollingError(error));
     }
+    return Future.value();
   }
 
   void _onRecursivePollingHttpError(HttpClientException error) {
@@ -116,12 +117,6 @@ class LongPolling {
     _doubleRetryDelay();
     _recursivePolling();
   }
-
-  /// Add [update] to the stream.
-  void emitUpdate(Update update) => _updateStreamController.add(update);
-
-  /// When [update] is added to stream.
-  Stream<Update> onUpdate() => _updateStreamController.stream;
 
   void _resetRetryDelay() => retryDelay = Duration(minutes: 1);
   void _doubleRetryDelay() => retryDelay *= 2;
