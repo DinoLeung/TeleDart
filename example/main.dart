@@ -8,18 +8,17 @@ import 'package:teledart/model.dart';
 void main() {
   final envVars = Platform.environment;
 
-  var teledart = TeleDart(Telegram(envVars['BOT_TOKEN']), Event());
-
-  // TeleDart uses longpull by default.
-  teledart.start().then((me) => print('${me.username} is initialised'));
+  var telegram = Telegram(envVars['BOT_TOKEN']);
+  var teledart = TeleDart(telegram, Event());
 
   // In case you decided to use webhook.
-  // teledart.setupWebhook(envVars['HOST_URL'], envVars['BOT_TOKEN'],
+  // var webhook = Webhook(telegram, envVars['HOST_URL'], envVars['BOT_TOKEN'],
   //     io.File(envVars['CERT_PATH']), io.File(envVars['KEY_PATH']),
   //     port: int.parse(envVars['BOT_PORT']));
-  // teledart
-  //     .start(webhook: true)
-  //     .then((me) => print('${me.username} is initialised'));
+  // var teledart = TeleDart(telegram, Event(), fetcher: webhook);
+
+  // TeleDart uses longpoll by default if no update fetcher is specified.
+  teledart.start().then((me) => print('${me.username} is initialised'));
 
   // You can listen to messages like this
   teledart.onMessage(entityType: 'bot_command', keyword: 'start').listen(

@@ -1,3 +1,15 @@
+## 0.1.0
+
+- Inrtoduced `AbstractUpdateFetcher`, and now `Webhook` and `LongPoll` extends this class.
+- Support custom update fetcher implementations through `AbstractUpdateFetcher`
+- Introduced `stop` function to `Teledart` to stop fetching updates.
+- Introduced `setWebhook` to `Teledart`, which is an alias to `setWebhook` function in `Webhook`, and it is not required to call this function before starting webhook.
+- __Breaking__: Removed `setupLongPolling`, `removeLongPolling` and `setupWebhook` functions from `Teledart`.
+- __Breaking__: To setup webhook or custom implementations of update fetcher, 
+- __Breaking__: The `setupWebhook` method in `Teledart` now takes no parameters.
+- __Breaking__: `startWebhook` and `stopWebhook` in `Webhook` has renamed into `start` and `stop`.
+- __Breaking__: `startPolling` and `stopPolling` in `LongPoll` has renamed into `start` and `stop`.
+
 ## 0.0.50
 - Fixed long poll onError type mismatch bug
 - Enabled Teledart to remove webhook without setting up a webhook
