@@ -41,6 +41,5 @@ class ChatPermissions {
   });
   factory ChatPermissions.fromJson(Map<String, dynamic> json) =>
       _$ChatPermissionsFromJson(json);
-  Map<String, dynamic> toJson() =>
-      _$ChatPermissionsToJson(this);
+  Map<String, dynamic> toJson() => _$ChatPermissionsToJson(this);
 }

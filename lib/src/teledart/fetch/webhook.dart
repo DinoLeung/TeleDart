@@ -50,9 +50,10 @@ class Webhook extends AbstractUpdateFetcher {
   ///
   /// Throws [WebhookException] if [port] is not supported by Telegram
   /// or [max_connections] is less than 1 or greater than 100.
-  Webhook(this.telegram, this.url, this.secretPath, this.certificate,
+  Webhook(this.telegram, this.url, this.secretPath,
+      {this.certificate,
       this.privateKey,
-      {this.port = 443,
+      this.port = 443,
       this.serverPort,
       this.uploadCertificate = false,
       this.max_connections = 40,
@@ -72,14 +73,19 @@ class Webhook extends AbstractUpdateFetcher {
     }
 
     // serup SecurityContext
-    _context = io.SecurityContext();
-    _context.useCertificateChainBytes(certificate.readAsBytesSync());
-    _context.usePrivateKeyBytes(privateKey.readAsBytesSync());
+    if (certificate != null && privateKey != null) {
+      _context = io.SecurityContext();
+      _context.useCertificateChainBytes(certificate.readAsBytesSync());
+      _context.usePrivateKeyBytes(privateKey.readAsBytesSync());
+    }
   }
 
   Future<void> setWebhook() async {
-    Future<dynamic> serverFuture = io.HttpServer.bindSecure(
-        io.InternetAddress.anyIPv4.address, serverPort ?? port, _context);
+    Future<dynamic> serverFuture = _context != null
+        ? io.HttpServer.bind(
+            io.InternetAddress.anyIPv4.address, serverPort ?? port)
+        : io.HttpServer.bindSecure(
+            io.InternetAddress.anyIPv4.address, serverPort ?? port, _context);
 
     await serverFuture.then((server) => _server = server).then((_) {
       telegram.setWebhook('${url}:${port}${secretPath}',
