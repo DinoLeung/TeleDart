@@ -1,34 +1,42 @@
+## 0.1.1
+
+- Allowed create webook without key pair
+
 ## 0.1.0
 
 - Inrtoduced `AbstractUpdateFetcher`, and now `Webhook` and `LongPoll` extends this class.
 - Support custom update fetcher implementations through `AbstractUpdateFetcher`
 - Introduced `stop` function to `Teledart` to stop fetching updates.
 - Introduced `setWebhook` to `Teledart`, which is an alias to `setWebhook` function in `Webhook`, and it is not required to call this function before starting webhook.
-- __Breaking__: Removed `setupLongPolling`, `removeLongPolling` and `setupWebhook` functions from `Teledart`.
-- __Breaking__: To setup webhook or custom implementations of update fetcher, 
-- __Breaking__: The `setupWebhook` method in `Teledart` now takes no parameters.
-- __Breaking__: `startWebhook` and `stopWebhook` in `Webhook` has renamed into `start` and `stop`.
-- __Breaking__: `startPolling` and `stopPolling` in `LongPoll` has renamed into `start` and `stop`.
+- **Breaking**: Removed `setupLongPolling`, `removeLongPolling` and `setupWebhook` functions from `Teledart`.
+- **Breaking**: To setup webhook or custom implementations of update fetcher,
+- **Breaking**: The `setupWebhook` method in `Teledart` now takes no parameters.
+- **Breaking**: `startWebhook` and `stopWebhook` in `Webhook` has renamed into `start` and `stop`.
+- **Breaking**: `startPolling` and `stopPolling` in `LongPoll` has renamed into `start` and `stop`.
 
 ## 0.0.50
+
 - Fixed long poll onError type mismatch bug
 - Enabled Teledart to remove webhook without setting up a webhook
 
 ## 0.0.49
+
 - Fixed http client exception bug
 - Femoved redundant error catch
 - Temporary accept dynamic `chat_id`
 
 ## 0.0.48
+
 - Fixed restrictChatMember API URL
 - Fixed `toJson` methods in `chat_permissions`, `location` and `login_url` models
 - Enabled `explicit_to_json` in `json_serializable` so nested objects can be parsed
 
 ## 0.0.47
+
 - Added custom server port to webhook implementation
 - Added auto-retry to long poll implementation
-    - Gradually increase retry timeout on each retry, initial timeout is 1 minute
-    - Automatically retry on exception except HTTP Client error (400)
+  - Gradually increase retry timeout on each retry, initial timeout is 1 minute
+  - Automatically retry on exception except HTTP Client error (400)
 - Updated multipart file upload to include original file name
 
 ## 0.0.46
@@ -114,6 +122,7 @@
 ## 0.0.30
 
 ### Breaking change
+
 - Changed `startFetching()` into `start()`, and it returns a `User` object which represents the bot
 
 ## 0.0.29
@@ -174,7 +183,7 @@
 ## 0.0.17
 
 - Added Bot API 4.1 support
-- Update dependencies 
+- Update dependencies
 
 ## 0.0.16
 
