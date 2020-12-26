@@ -1206,18 +1206,36 @@ class Telegram {
     return await HttpClient.httpPost(requestUrl, body: body);
   }
 
-  /// Use this method to unpin a message in a supergroup or a channel.
-  /// The bot must be an administrator in the chat for this to work and must have the
-  /// ‘can_pin_messages’ admin right in the supergroup or ‘can_edit_messages’ admin right
-  /// in the channel. Returns *True* on success.
+  /// Use this method to remove a message from the list of pinned messages in a chat.
+  /// If the chat is not a private chat, the bot must be an administrator in the chat for
+  /// this to work and must have the 'can_pin_messages' admin right in a supergroup or
+  /// 'can_edit_messages' admin right in a channel. Returns *True* on success.
+  /// 
+  /// If `message_id` not specified, the most recent pinned message (by sending date) will be unpinned.
   ///
   /// https://core.telegram.org/bots/api#unpinchatmessage
-  Future<bool> unpinChatMessage(dynamic chat_id) async {
+  Future<bool> unpinChatMessage(dynamic chat_id, {int message_id}) async {
     if (chat_id is! String && chat_id is! int) {
       return Future.error(TelegramException(
           'Attribute \'chat_id\' can only be either type of String or int'));
     }
     var requestUrl = '${_baseUrl}${_token}/unpinChatMessage';
+    var body = <String, dynamic>{'chat_id': chat_id, 'message_id': message_id};
+    return await HttpClient.httpPost(requestUrl, body: body);
+  }
+
+  /// Use this method to clear the list of pinned messages in a chat.
+  /// If the chat is not a private chat, the bot must be an administrator in the chat for
+  /// this to work and must have the 'can_pin_messages' admin right in a supergroup or
+  /// 'can_edit_messages' admin right in a channel. Returns *True* on success.
+  ///
+  /// https://core.telegram.org/bots/api#unpinallchatmessages
+  Future<bool> unpinAllChatMessages(dynamic chat_id) async {
+    if (chat_id is! String && chat_id is! int) {
+      return Future.error(TelegramException(
+          'Attribute \'chat_id\' can only be either type of String or int'));
+    }
+    var requestUrl = '${_baseUrl}${_token}/unpinAllChatMessages';
     var body = <String, dynamic>{'chat_id': chat_id};
     return await HttpClient.httpPost(requestUrl, body: body);
   }
