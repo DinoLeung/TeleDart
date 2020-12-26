@@ -973,7 +973,7 @@ class Telegram {
   /// Returns *True* on success.
   ///
   /// https://core.telegram.org/bots/api#unbanchatmember
-  Future<bool> unbanChatMember(dynamic chat_id, int user_id) async {
+  Future<bool> unbanChatMember(dynamic chat_id, int user_id, {bool only_if_banned}) async {
     if (chat_id is! String && chat_id is! int) {
       return Future.error(TelegramException(
           'Attribute \'chat_id\' can only be either type of String or int'));
@@ -982,6 +982,7 @@ class Telegram {
     var body = <String, dynamic>{
       'chat_id': chat_id,
       'user_id': user_id,
+      'only_if_banned': only_if_banned,
     };
     return await HttpClient.httpPost(requestUrl, body: body);
   }

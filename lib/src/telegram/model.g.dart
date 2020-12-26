@@ -78,6 +78,7 @@ WebhookInfo _$WebhookInfoFromJson(Map<String, dynamic> json) {
     url: json['url'] as String,
     has_custom_certificate: json['has_custom_certificate'] as bool,
     pending_update_count: json['pending_update_count'] as int,
+    ip_address: json['ip_address'] as String,
     last_error_date: json['last_error_date'] as int,
     last_error_message: json['last_error_message'] as String,
     max_connections: json['max_connections'] as int,
@@ -98,6 +99,7 @@ Map<String, dynamic> _$WebhookInfoToJson(WebhookInfo instance) {
   writeNotNull('url', instance.url);
   writeNotNull('has_custom_certificate', instance.has_custom_certificate);
   writeNotNull('pending_update_count', instance.pending_update_count);
+  writeNotNull('ip_address', instance.ip_address);
   writeNotNull('last_error_date', instance.last_error_date);
   writeNotNull('last_error_message', instance.last_error_message);
   writeNotNull('max_connections', instance.max_connections);
@@ -149,11 +151,10 @@ Chat _$ChatFromJson(Map<String, dynamic> json) {
     username: json['username'] as String,
     first_name: json['first_name'] as String,
     last_name: json['last_name'] as String,
-    all_members_are_administrators:
-        json['all_members_are_administrators'] as bool,
     photo: json['photo'] == null
         ? null
         : ChatPhoto.fromJson(json['photo'] as Map<String, dynamic>),
+    bio: json['bio'] as String,
     description: json['description'] as String,
     invite_link: json['invite_link'] as String,
     pinned_message: json['pinned_message'] == null
@@ -165,6 +166,10 @@ Chat _$ChatFromJson(Map<String, dynamic> json) {
     slow_mode_delay: json['slow_mode_delay'] as int,
     sticker_set_name: json['sticker_set_name'] as String,
     can_set_sticker_set: json['can_set_sticker_set'] as bool,
+    linked_chat_id: json['linked_chat_id'] as int,
+    location: json['location'] == null
+        ? null
+        : ChatLocation.fromJson(json['location'] as Map<String, dynamic>),
   );
 }
 
@@ -183,9 +188,8 @@ Map<String, dynamic> _$ChatToJson(Chat instance) {
   writeNotNull('username', instance.username);
   writeNotNull('first_name', instance.first_name);
   writeNotNull('last_name', instance.last_name);
-  writeNotNull('all_members_are_administrators',
-      instance.all_members_are_administrators);
   writeNotNull('photo', instance.photo?.toJson());
+  writeNotNull('bio', instance.bio);
   writeNotNull('description', instance.description);
   writeNotNull('invite_link', instance.invite_link);
   writeNotNull('pinned_message', instance.pinned_message?.toJson());
@@ -193,6 +197,8 @@ Map<String, dynamic> _$ChatToJson(Chat instance) {
   writeNotNull('slow_mode_delay', instance.slow_mode_delay);
   writeNotNull('sticker_set_name', instance.sticker_set_name);
   writeNotNull('can_set_sticker_set', instance.can_set_sticker_set);
+  writeNotNull('linked_chat_id', instance.linked_chat_id);
+  writeNotNull('location', instance.location?.toJson());
   return val;
 }
 
@@ -1264,6 +1270,29 @@ Map<String, dynamic> _$ChatPermissionsToJson(ChatPermissions instance) {
   writeNotNull('can_change_info', instance.can_change_info);
   writeNotNull('can_invite_users', instance.can_invite_users);
   writeNotNull('can_pin_messages', instance.can_pin_messages);
+  return val;
+}
+
+ChatLocation _$ChatLocationFromJson(Map<String, dynamic> json) {
+  return ChatLocation(
+    location: json['location'] == null
+        ? null
+        : Location.fromJson(json['location'] as Map<String, dynamic>),
+    address: json['address'] as String,
+  );
+}
+
+Map<String, dynamic> _$ChatLocationToJson(ChatLocation instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('location', instance.location?.toJson());
+  writeNotNull('address', instance.address);
   return val;
 }
 

@@ -54,6 +54,7 @@ part 'models/force_reply.dart';
 part 'models/chat_photo.dart';
 part 'models/chat_member.dart';
 part 'models/chat_permissions.dart';
+part 'models/chat_location.dart';
 part 'models/bot_command.dart';
 part 'models/response_parameters.dart';
 part 'models/input_media.dart';
