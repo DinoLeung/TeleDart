@@ -40,6 +40,7 @@ part 'models/poll_option.dart';
 part 'models/poll_answer.dart';
 part 'models/poll.dart';
 part 'models/dice.dart';
+part 'models/proximity_alert_triggered.dart';
 part 'models/user_profile_photos.dart';
 part 'models/file.dart';
 part 'models/reply_markup.dart';

@@ -1,5 +1,5 @@
 /// TeleDart - Telegram Bot API for Dart
-/// Copyright (C) 2019  Dino PH Leung
+/// Copyright (C) 2020  Dino PH Leung
 ///
 /// This program is free software: you can redistribute it and/or modify
 /// it under the terms of the GNU General Public License as published by
@@ -16,26 +16,21 @@
 
 part of '../model.dart';
 
-/// This object represents a point on the map.
+/// This object represents the content of a service message,
+/// sent whenever a user in the chat triggers a proximity alert set by another user.
 ///
-/// https://core.telegram.org/bots/api#location
+/// https://core.telegram.org/bots/api#proximityalerttriggered
 @JsonSerializable()
-class Location {
-  double longitude;
-  double latitude;
-  double horizontal_accuracy;
-  int live_period;
-  int heading;
-  int proximity_alert_radius;
-  Location({
-    this.longitude,
-    this.latitude,
-    this.horizontal_accuracy,
-    this.live_period,
-    this.heading,
-    this.proximity_alert_radius,
+class ProximityAlertTriggered {
+  User traveler;
+  User watcher;
+  int distance;
+  ProximityAlertTriggered({
+    this.traveler,
+    this.watcher,
+    this.distance,
   });
-  factory Location.fromJson(Map<String, dynamic> json) =>
-      _$LocationFromJson(json);
-  Map<String, dynamic> toJson() => _$LocationToJson(this);
+  factory ProximityAlertTriggered.fromJson(Map<String, dynamic> json) =>
+      _$ProximityAlertTriggeredFromJson(json);
+  Map<String, dynamic> toJson() => _$ProximityAlertTriggeredToJson(this);
 }

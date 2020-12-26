@@ -40,22 +40,22 @@ class TeleDartMessage extends Message {
     super.author_signature = message.author_signature;
     super.text = message.text;
     super.entities = message.entities;
-    super.caption_entities = message.caption_entities;
+    super.animation = message.animation;
     super.audio = message.audio;
     super.document = message.document;
-    super.animation = message.animation;
-    super.game = message.game;
     super.photo = message.photo;
     super.sticker = message.sticker;
     super.video = message.video;
-    super.voice = message.voice;
     super.video_note = message.video_note;
+    super.voice = message.voice;
     super.caption = message.caption;
+    super.caption_entities = message.caption_entities;
     super.contact = message.contact;
-    super.location = message.location;
-    super.venue = message.venue;
     super.dice = message.dice;
+    super.game = message.game;
     super.poll = message.poll;
+    super.venue = message.venue;
+    super.location = message.location;
     super.new_chat_members = message.new_chat_members;
     super.left_chat_member = message.left_chat_member;
     super.new_chat_title = message.new_chat_title;
@@ -71,6 +71,7 @@ class TeleDartMessage extends Message {
     super.successful_payment = message.successful_payment;
     super.connected_website = message.connected_website;
     super.passport_data = message.passport_data;
+    super.proximity_alert_triggered = message.proximity_alert_triggered;
     super.reply_markup = message.reply_markup;
   }
 

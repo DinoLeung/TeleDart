@@ -237,23 +237,15 @@ Message _$MessageFromJson(Map<String, dynamic> json) {
             ? null
             : MessageEntity.fromJson(e as Map<String, dynamic>))
         ?.toList(),
-    caption_entities: (json['caption_entities'] as List)
-        ?.map((e) => e == null
-            ? null
-            : MessageEntity.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
+    animation: json['animation'] == null
+        ? null
+        : Animation.fromJson(json['animation'] as Map<String, dynamic>),
     audio: json['audio'] == null
         ? null
         : Audio.fromJson(json['audio'] as Map<String, dynamic>),
     document: json['document'] == null
         ? null
         : Document.fromJson(json['document'] as Map<String, dynamic>),
-    animation: json['animation'] == null
-        ? null
-        : Animation.fromJson(json['animation'] as Map<String, dynamic>),
-    game: json['game'] == null
-        ? null
-        : Game.fromJson(json['game'] as Map<String, dynamic>),
     photo: (json['photo'] as List)
         ?.map((e) =>
             e == null ? null : PhotoSize.fromJson(e as Map<String, dynamic>))
@@ -264,28 +256,36 @@ Message _$MessageFromJson(Map<String, dynamic> json) {
     video: json['video'] == null
         ? null
         : Video.fromJson(json['video'] as Map<String, dynamic>),
-    voice: json['voice'] == null
-        ? null
-        : Voice.fromJson(json['voice'] as Map<String, dynamic>),
     video_note: json['video_note'] == null
         ? null
         : VideoNote.fromJson(json['video_note'] as Map<String, dynamic>),
+    voice: json['voice'] == null
+        ? null
+        : Voice.fromJson(json['voice'] as Map<String, dynamic>),
     caption: json['caption'] as String,
+    caption_entities: (json['caption_entities'] as List)
+        ?.map((e) => e == null
+            ? null
+            : MessageEntity.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
     contact: json['contact'] == null
         ? null
         : Contact.fromJson(json['contact'] as Map<String, dynamic>),
-    location: json['location'] == null
-        ? null
-        : Location.fromJson(json['location'] as Map<String, dynamic>),
-    venue: json['venue'] == null
-        ? null
-        : Venue.fromJson(json['venue'] as Map<String, dynamic>),
     dice: json['dice'] == null
         ? null
         : Dice.fromJson(json['dice'] as Map<String, dynamic>),
+    game: json['game'] == null
+        ? null
+        : Game.fromJson(json['game'] as Map<String, dynamic>),
     poll: json['poll'] == null
         ? null
         : Poll.fromJson(json['poll'] as Map<String, dynamic>),
+    venue: json['venue'] == null
+        ? null
+        : Venue.fromJson(json['venue'] as Map<String, dynamic>),
+    location: json['location'] == null
+        ? null
+        : Location.fromJson(json['location'] as Map<String, dynamic>),
     new_chat_members: (json['new_chat_members'] as List)
         ?.map(
             (e) => e == null ? null : User.fromJson(e as Map<String, dynamic>))
@@ -318,6 +318,10 @@ Message _$MessageFromJson(Map<String, dynamic> json) {
     passport_data: json['passport_data'] == null
         ? null
         : PassportData.fromJson(json['passport_data'] as Map<String, dynamic>),
+    proximity_alert_triggered: json['proximity_alert_triggered'] == null
+        ? null
+        : ProximityAlertTriggered.fromJson(
+            json['proximity_alert_triggered'] as Map<String, dynamic>),
     reply_markup: json['reply_markup'] == null
         ? null
         : InlineKeyboardMarkup.fromJson(
@@ -352,23 +356,23 @@ Map<String, dynamic> _$MessageToJson(Message instance) {
   writeNotNull('text', instance.text);
   writeNotNull(
       'entities', instance.entities?.map((e) => e?.toJson())?.toList());
-  writeNotNull('caption_entities',
-      instance.caption_entities?.map((e) => e?.toJson())?.toList());
+  writeNotNull('animation', instance.animation?.toJson());
   writeNotNull('audio', instance.audio?.toJson());
   writeNotNull('document', instance.document?.toJson());
-  writeNotNull('animation', instance.animation?.toJson());
-  writeNotNull('game', instance.game?.toJson());
   writeNotNull('photo', instance.photo?.map((e) => e?.toJson())?.toList());
   writeNotNull('sticker', instance.sticker?.toJson());
   writeNotNull('video', instance.video?.toJson());
-  writeNotNull('voice', instance.voice?.toJson());
   writeNotNull('video_note', instance.video_note?.toJson());
+  writeNotNull('voice', instance.voice?.toJson());
   writeNotNull('caption', instance.caption);
+  writeNotNull('caption_entities',
+      instance.caption_entities?.map((e) => e?.toJson())?.toList());
   writeNotNull('contact', instance.contact?.toJson());
-  writeNotNull('location', instance.location?.toJson());
-  writeNotNull('venue', instance.venue?.toJson());
-  writeNotNull('poll', instance.poll?.toJson());
   writeNotNull('dice', instance.dice?.toJson());
+  writeNotNull('game', instance.game?.toJson());
+  writeNotNull('poll', instance.poll?.toJson());
+  writeNotNull('venue', instance.venue?.toJson());
+  writeNotNull('location', instance.location?.toJson());
   writeNotNull('new_chat_members',
       instance.new_chat_members?.map((e) => e?.toJson())?.toList());
   writeNotNull('left_chat_member', instance.left_chat_member?.toJson());
@@ -386,6 +390,8 @@ Map<String, dynamic> _$MessageToJson(Message instance) {
   writeNotNull('successful_payment', instance.successful_payment?.toJson());
   writeNotNull('connected_website', instance.connected_website);
   writeNotNull('passport_data', instance.passport_data?.toJson());
+  writeNotNull('proximity_alert_triggered',
+      instance.proximity_alert_triggered?.toJson());
   writeNotNull('reply_markup', instance.reply_markup?.toJson());
   return val;
 }
@@ -704,6 +710,10 @@ Location _$LocationFromJson(Map<String, dynamic> json) {
   return Location(
     longitude: (json['longitude'] as num)?.toDouble(),
     latitude: (json['latitude'] as num)?.toDouble(),
+    horizontal_accuracy: (json['horizontal_accuracy'] as num)?.toDouble(),
+    live_period: json['live_period'] as int,
+    heading: json['heading'] as int,
+    proximity_alert_radius: json['proximity_alert_radius'] as int,
   );
 }
 
@@ -718,6 +728,10 @@ Map<String, dynamic> _$LocationToJson(Location instance) {
 
   writeNotNull('longitude', instance.longitude);
   writeNotNull('latitude', instance.latitude);
+  writeNotNull('horizontal_accuracy', instance.horizontal_accuracy);
+  writeNotNull('live_period', instance.live_period);
+  writeNotNull('heading', instance.heading);
+  writeNotNull('proximity_alert_radius', instance.proximity_alert_radius);
   return val;
 }
 
@@ -865,6 +879,35 @@ Map<String, dynamic> _$DiceToJson(Dice instance) {
 
   writeNotNull('value', instance.value);
   writeNotNull('emoji', instance.emoji);
+  return val;
+}
+
+ProximityAlertTriggered _$ProximityAlertTriggeredFromJson(
+    Map<String, dynamic> json) {
+  return ProximityAlertTriggered(
+    traveler: json['traveler'] == null
+        ? null
+        : User.fromJson(json['traveler'] as Map<String, dynamic>),
+    watcher: json['watcher'] == null
+        ? null
+        : User.fromJson(json['watcher'] as Map<String, dynamic>),
+    distance: json['distance'] as int,
+  );
+}
+
+Map<String, dynamic> _$ProximityAlertTriggeredToJson(
+    ProximityAlertTriggered instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('traveler', instance.traveler?.toJson());
+  writeNotNull('watcher', instance.watcher?.toJson());
+  writeNotNull('distance', instance.distance);
   return val;
 }
 
@@ -2124,7 +2167,10 @@ InlineQueryResultLocation _$InlineQueryResultLocationFromJson(
     latitude: (json['latitude'] as num)?.toDouble(),
     longitude: (json['longitude'] as num)?.toDouble(),
     title: json['title'] as String,
+    horizontal_accuracy: (json['horizontal_accuracy'] as num)?.toDouble(),
     live_period: json['live_period'] as int,
+    heading: json['heading'] as int,
+    proximity_alert_radius: json['proximity_alert_radius'] as int,
     reply_markup: json['reply_markup'] == null
         ? null
         : InlineKeyboardMarkup.fromJson(
@@ -2154,7 +2200,10 @@ Map<String, dynamic> _$InlineQueryResultLocationToJson(
   writeNotNull('latitude', instance.latitude);
   writeNotNull('longitude', instance.longitude);
   writeNotNull('title', instance.title);
+  writeNotNull('horizontal_accuracy', instance.horizontal_accuracy);
   writeNotNull('live_period', instance.live_period);
+  writeNotNull('heading', instance.heading);
+  writeNotNull('proximity_alert_radius', instance.proximity_alert_radius);
   writeNotNull('reply_markup', instance.reply_markup?.toJson());
   writeNotNull(
       'input_message_content', instance.input_message_content?.toJson());
@@ -2666,7 +2715,10 @@ InputLocationMessageContent _$InputLocationMessageContentFromJson(
   return InputLocationMessageContent(
     latitude: (json['latitude'] as num)?.toDouble(),
     longitude: (json['longitude'] as num)?.toDouble(),
+    horizontal_accuracy: (json['horizontal_accuracy'] as num)?.toDouble(),
     live_period: json['live_period'] as int,
+    heading: json['heading'] as int,
+    proximity_alert_radius: json['proximity_alert_radius'] as int,
   );
 }
 
@@ -2682,7 +2734,10 @@ Map<String, dynamic> _$InputLocationMessageContentToJson(
 
   writeNotNull('latitude', instance.latitude);
   writeNotNull('longitude', instance.longitude);
+  writeNotNull('horizontal_accuracy', instance.horizontal_accuracy);
   writeNotNull('live_period', instance.live_period);
+  writeNotNull('heading', instance.heading);
+  writeNotNull('proximity_alert_radius', instance.proximity_alert_radius);
   return val;
 }
 

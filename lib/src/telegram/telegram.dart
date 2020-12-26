@@ -667,9 +667,13 @@ class Telegram {
   /// [messages]: https://core.telegram.org/bots/api#message
   Future<Message> sendLocation(
       dynamic chat_id, double latitude, double longitude,
-      {int live_period,
+      {double horizontal_accuracy,
+      int live_period,
+      int heading,
+      int proximity_alert_radius,
       bool disable_notification,
       int reply_to_message_id,
+      bool allow_sending_without_reply,
       ReplyMarkup reply_markup}) async {
     if (chat_id is! String && chat_id is! int) {
       return Future.error(TelegramException(
@@ -680,8 +684,13 @@ class Telegram {
       'chat_id': chat_id,
       'latitude': latitude,
       'longitude': longitude,
+      'horizontal_accuracy': horizontal_accuracy,
+      'live_period': live_period,
+      'heading': heading,
+      'proximity_alert_radius': proximity_alert_radius,
       'disable_notification': disable_notification,
       'reply_to_message_id': reply_to_message_id,
+      'allow_sending_without_reply': allow_sending_without_reply,
       'reply_markup': jsonEncode(reply_markup),
     };
     return Message.fromJson(await HttpClient.httpPost(requestUrl, body: body));
@@ -703,6 +712,9 @@ class Telegram {
       {dynamic chat_id,
       int message_id,
       String inline_message_id,
+      double horizontal_accuracy,
+      int heading,
+      int proximity_alert_radius,
       ReplyMarkup reply_markup}) async {
     if (inline_message_id == null && (chat_id == null || message_id == null)) {
       return Future.error(TelegramException(
@@ -719,6 +731,9 @@ class Telegram {
       'chat_id': chat_id,
       'message_id': message_id,
       'inline_message_id': inline_message_id,
+      'horizontal_accuracy': horizontal_accuracy,
+      'heading': heading,
+      'proximity_alert_radius': proximity_alert_radius,
       'reply_markup': jsonEncode(reply_markup),
     };
     return Message.fromJson(await HttpClient.httpPost(requestUrl, body: body));
