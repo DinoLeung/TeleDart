@@ -332,8 +332,11 @@ class Telegram {
       {dynamic thumb,
       String caption,
       String parse_mode,
+      List<MessageEntity> caption_entities,
+      bool disable_content_type_detection,
       bool disable_notification,
       int reply_to_message_id,
+      bool allow_sending_without_reply,
       ReplyMarkup reply_markup}) async {
     if (chat_id is! String && chat_id is! int) {
       return Future.error(TelegramException(
@@ -344,8 +347,11 @@ class Telegram {
       'chat_id': chat_id,
       'caption': caption,
       'parse_mode': parse_mode,
+      'caption_entities': jsonEncode(caption_entities),
+      'disable_content_type_detection': disable_content_type_detection,
       'disable_notification': disable_notification,
       'reply_to_message_id': reply_to_message_id,
+      'allow_sending_without_reply': allow_sending_without_reply,
       'reply_markup': jsonEncode(reply_markup),
     };
 

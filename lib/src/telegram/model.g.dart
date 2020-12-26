@@ -455,6 +455,7 @@ Audio _$AudioFromJson(Map<String, dynamic> json) {
     duration: json['duration'] as int,
     performer: json['performer'] as String,
     title: json['title'] as String,
+    file_name: json['file_name'] as String,
     mime_type: json['mime_type'] as String,
     file_size: json['file_size'] as int,
     thumb: json['thumb'] == null
@@ -477,6 +478,7 @@ Map<String, dynamic> _$AudioToJson(Audio instance) {
   writeNotNull('duration', instance.duration);
   writeNotNull('performer', instance.performer);
   writeNotNull('title', instance.title);
+  writeNotNull('file_name', instance.file_name);
   writeNotNull('mime_type', instance.mime_type);
   writeNotNull('file_size', instance.file_size);
   writeNotNull('thumb', instance.thumb?.toJson());
@@ -524,6 +526,7 @@ Video _$VideoFromJson(Map<String, dynamic> json) {
     thumb: json['thumb'] == null
         ? null
         : PhotoSize.fromJson(json['thumb'] as Map<String, dynamic>),
+    file_name: json['file_name'] as String,
     mime_type: json['mime_type'] as String,
     file_size: json['file_size'] as int,
   );
@@ -544,6 +547,7 @@ Map<String, dynamic> _$VideoToJson(Video instance) {
   writeNotNull('height', instance.height);
   writeNotNull('duration', instance.duration);
   writeNotNull('thumb', instance.thumb?.toJson());
+  writeNotNull('file_name', instance.file_name);
   writeNotNull('mime_type', instance.mime_type);
   writeNotNull('file_size', instance.file_size);
   return val;
@@ -1344,6 +1348,11 @@ InputMedia _$InputMediaFromJson(Map<String, dynamic> json) {
     media: json['media'] as String,
     caption: json['caption'] as String,
     parse_mode: json['parse_mode'] as String,
+    caption_entities: (json['caption_entities'] as List)
+        ?.map((e) => e == null
+            ? null
+            : MessageEntity.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
   );
 }
 
@@ -1360,6 +1369,8 @@ Map<String, dynamic> _$InputMediaToJson(InputMedia instance) {
   writeNotNull('media', instance.media);
   writeNotNull('caption', instance.caption);
   writeNotNull('parse_mode', instance.parse_mode);
+  writeNotNull('caption_entities',
+      instance.caption_entities?.map((e) => e?.toJson())?.toList());
   return val;
 }
 
@@ -1369,6 +1380,11 @@ InputMediaPhoto _$InputMediaPhotoFromJson(Map<String, dynamic> json) {
     media: json['media'] as String,
     caption: json['caption'] as String,
     parse_mode: json['parse_mode'] as String,
+    caption_entities: (json['caption_entities'] as List)
+        ?.map((e) => e == null
+            ? null
+            : MessageEntity.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
   );
 }
 
@@ -1381,10 +1397,12 @@ Map<String, dynamic> _$InputMediaPhotoToJson(InputMediaPhoto instance) {
     }
   }
 
-  writeNotNull('caption', instance.caption);
-  writeNotNull('media', instance.media);
-  writeNotNull('parse_mode', instance.parse_mode);
   writeNotNull('type', instance.type);
+  writeNotNull('media', instance.media);
+  writeNotNull('caption', instance.caption);
+  writeNotNull('parse_mode', instance.parse_mode);
+  writeNotNull('caption_entities',
+      instance.caption_entities?.map((e) => e?.toJson())?.toList());
   return val;
 }
 
@@ -1394,6 +1412,11 @@ InputMediaVideo _$InputMediaVideoFromJson(Map<String, dynamic> json) {
     media: json['media'] as String,
     caption: json['caption'] as String,
     parse_mode: json['parse_mode'] as String,
+    caption_entities: (json['caption_entities'] as List)
+        ?.map((e) => e == null
+            ? null
+            : MessageEntity.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
     thumb: json['thumb'],
     width: json['width'] as int,
     height: json['height'] as int,
@@ -1411,10 +1434,12 @@ Map<String, dynamic> _$InputMediaVideoToJson(InputMediaVideo instance) {
     }
   }
 
-  writeNotNull('caption', instance.caption);
-  writeNotNull('media', instance.media);
-  writeNotNull('parse_mode', instance.parse_mode);
   writeNotNull('type', instance.type);
+  writeNotNull('media', instance.media);
+  writeNotNull('caption', instance.caption);
+  writeNotNull('parse_mode', instance.parse_mode);
+  writeNotNull('caption_entities',
+      instance.caption_entities?.map((e) => e?.toJson())?.toList());
   writeNotNull('thumb', instance.thumb);
   writeNotNull('width', instance.width);
   writeNotNull('height', instance.height);
@@ -1430,6 +1455,11 @@ InputMediaAnimation _$InputMediaAnimationFromJson(Map<String, dynamic> json) {
     thumb: json['thumb'],
     caption: json['caption'] as String,
     parse_mode: json['parse_mode'] as String,
+    caption_entities: (json['caption_entities'] as List)
+        ?.map((e) => e == null
+            ? null
+            : MessageEntity.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
     width: json['width'] as int,
     height: json['height'] as int,
     duration: json['duration'] as int,
@@ -1445,10 +1475,12 @@ Map<String, dynamic> _$InputMediaAnimationToJson(InputMediaAnimation instance) {
     }
   }
 
-  writeNotNull('caption', instance.caption);
-  writeNotNull('media', instance.media);
-  writeNotNull('parse_mode', instance.parse_mode);
   writeNotNull('type', instance.type);
+  writeNotNull('media', instance.media);
+  writeNotNull('caption', instance.caption);
+  writeNotNull('parse_mode', instance.parse_mode);
+  writeNotNull('caption_entities',
+      instance.caption_entities?.map((e) => e?.toJson())?.toList());
   writeNotNull('thumb', instance.thumb);
   writeNotNull('width', instance.width);
   writeNotNull('height', instance.height);
@@ -1463,6 +1495,11 @@ InputMediaAudio _$InputMediaAudioFromJson(Map<String, dynamic> json) {
     thumb: json['thumb'],
     caption: json['caption'] as String,
     parse_mode: json['parse_mode'] as String,
+    caption_entities: (json['caption_entities'] as List)
+        ?.map((e) => e == null
+            ? null
+            : MessageEntity.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
     duration: json['duration'] as int,
     performer: json['performer'] as String,
     title: json['title'] as String,
@@ -1478,10 +1515,12 @@ Map<String, dynamic> _$InputMediaAudioToJson(InputMediaAudio instance) {
     }
   }
 
-  writeNotNull('caption', instance.caption);
-  writeNotNull('media', instance.media);
-  writeNotNull('parse_mode', instance.parse_mode);
   writeNotNull('type', instance.type);
+  writeNotNull('media', instance.media);
+  writeNotNull('caption', instance.caption);
+  writeNotNull('parse_mode', instance.parse_mode);
+  writeNotNull('caption_entities',
+      instance.caption_entities?.map((e) => e?.toJson())?.toList());
   writeNotNull('thumb', instance.thumb);
   writeNotNull('duration', instance.duration);
   writeNotNull('performer', instance.performer);
@@ -1496,6 +1535,13 @@ InputMediaDocument _$InputMediaDocumentFromJson(Map<String, dynamic> json) {
     thumb: json['thumb'],
     caption: json['caption'] as String,
     parse_mode: json['parse_mode'] as String,
+    caption_entities: (json['caption_entities'] as List)
+        ?.map((e) => e == null
+            ? null
+            : MessageEntity.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
+    disable_content_type_detection:
+        json['disable_content_type_detection'] as bool,
   );
 }
 
@@ -1508,11 +1554,15 @@ Map<String, dynamic> _$InputMediaDocumentToJson(InputMediaDocument instance) {
     }
   }
 
-  writeNotNull('caption', instance.caption);
-  writeNotNull('media', instance.media);
-  writeNotNull('parse_mode', instance.parse_mode);
   writeNotNull('type', instance.type);
+  writeNotNull('media', instance.media);
+  writeNotNull('caption', instance.caption);
+  writeNotNull('parse_mode', instance.parse_mode);
+  writeNotNull('caption_entities',
+      instance.caption_entities?.map((e) => e?.toJson())?.toList());
   writeNotNull('thumb', instance.thumb);
+  writeNotNull('disable_content_type_detection',
+      instance.disable_content_type_detection);
   return val;
 }
 

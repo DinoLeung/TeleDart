@@ -22,20 +22,25 @@ part of '../model.dart';
 @JsonSerializable()
 class InputMediaDocument implements InputMedia {
   @override
-  String caption;
+  String type;
   @override
   String media;
   @override
+  String caption;
+  @override
   String parse_mode;
   @override
-  String type;
-  dynamic thumb;
+  List<MessageEntity> caption_entities;
+  dynamic thumb; // InputFile or String
+  bool disable_content_type_detection;
   InputMediaDocument({
     this.type = 'document',
     this.media,
     this.thumb,
     this.caption,
     this.parse_mode,
+    this.caption_entities,
+    this.disable_content_type_detection,
   });
   factory InputMediaDocument.fromJson(Map<String, dynamic> json) =>
       _$InputMediaDocumentFromJson(json);
