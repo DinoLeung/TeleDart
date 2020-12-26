@@ -24,6 +24,7 @@ part 'models/webhook_info.dart';
 part 'models/user.dart';
 part 'models/chat.dart';
 part 'models/message.dart';
+part 'models/message_id.dart';
 part 'models/message_entity.dart';
 part 'models/photo_size.dart';
 part 'models/audio.dart';

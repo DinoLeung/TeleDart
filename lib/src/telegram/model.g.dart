@@ -400,6 +400,25 @@ Map<String, dynamic> _$MessageToJson(Message instance) {
   return val;
 }
 
+MessageId _$MessageIdFromJson(Map<String, dynamic> json) {
+  return MessageId(
+    message_id: json['message_id'] as int,
+  );
+}
+
+Map<String, dynamic> _$MessageIdToJson(MessageId instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('message_id', instance.message_id);
+  return val;
+}
+
 MessageEntity _$MessageEntityFromJson(Map<String, dynamic> json) {
   return MessageEntity(
     type: json['type'] as String,

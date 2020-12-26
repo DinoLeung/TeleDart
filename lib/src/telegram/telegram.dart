@@ -221,7 +221,7 @@ class Telegram {
   ///
   /// [forwardMessage]: https://core.telegram.org/bots/api#forwardmessage
   /// [MessageId]: https://core.telegram.org/bots/api#messageid
-  Future<Message> copyMessage(
+  Future<MessageId> copyMessage(
     dynamic chat_id,
     int from_chat_id,
     int message_id, {
@@ -250,7 +250,8 @@ class Telegram {
       'allow_sending_without_reply': allow_sending_without_reply,
       'reply_markup': jsonEncode(reply_markup)
     };
-    return Message.fromJson(await HttpClient.httpPost(requestUrl, body: body));
+    return MessageId.fromJson(
+        await HttpClient.httpPost(requestUrl, body: body));
   }
 
   /// Use this method to send photos. On success, the sent [Message] is returned.
