@@ -12,9 +12,10 @@ void main() {
   var teledart = TeleDart(telegram, Event());
 
   // In case you decided to use webhook.
-  // var webhook = Webhook(telegram, envVars['HOST_URL'], envVars['BOT_TOKEN'],
-  //     io.File(envVars['CERT_PATH']), io.File(envVars['KEY_PATH']),
-  //     port: int.parse(envVars['BOT_PORT']));
+  // var webhook = Webhook(telegram, envVars['HOST_URL'], envVars['BOT_TOKEN'])
+  //   ..certificate = io.File(envVars['CERT_PATH'])
+  //   ..privateKey = io.File(envVars['KEY_PATH'])
+  //   ..port = int.parse(envVars['BOT_PORT']);
   // var teledart = TeleDart(telegram, Event(), fetcher: webhook);
 
   // TeleDart uses longpoll by default if no update fetcher is specified.
