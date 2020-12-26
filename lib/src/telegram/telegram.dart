@@ -81,13 +81,17 @@ class Telegram {
   /// [public key certificate]: https://core.telegram.org/bots/self-signed
   Future<bool> setWebhook(String url,
       {io.File certificate,
+      String ip_address,
       int max_connections,
-      List<String> allowed_updates}) async {
+      List<String> allowed_updates,
+      bool drop_pending_updates}) async {
     var requestUrl = '${_baseUrl}${_token}/setWebhook';
     var body = <String, dynamic>{
       'url': url,
+      'ip_address': ip_address,
       'max_connections': max_connections,
       'allowed_updates': jsonEncode(allowed_updates),
+      'drop_pending_updates': drop_pending_updates,
     };
     if (certificate != null) {
       // filename cannot be empty to post to Telegram server
@@ -107,8 +111,11 @@ class Telegram {
   /// https://core.telegram.org/bots/api#deletewebhook
   ///
   /// [getUpdates]: https://core.telegram.org/bots/api#getupdates
-  Future<bool> deleteWebhook() async =>
-      await HttpClient.httpGet('${_baseUrl}${_token}/deleteWebhook');
+  Future<bool> deleteWebhook({bool drop_pending_updates}) async {
+    var requestUrl = '${_baseUrl}${_token}/deleteWebhook';
+    var body = <String, dynamic>{'drop_pending_updates': drop_pending_updates};
+    return await HttpClient.httpPost(requestUrl, body: body);
+  }
 
   /// Use this method to get current webhook status. Requires no parameters.
   /// On success, returns a [WebhookInfo] object.
@@ -146,7 +153,7 @@ class Telegram {
   /// launched again after server restart.
   /// The method will return error 429 in the first 10 minutes after the bot is launched.
   /// Returns True on success. Requires no parameters.
-  /// 
+  ///
   /// https://core.telegram.org/bots/api#close
   Future<bool> close() async =>
       await HttpClient.httpGet('${_baseUrl}${_token}/close');

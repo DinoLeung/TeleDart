@@ -24,6 +24,7 @@ class WebhookInfo {
   String url;
   bool has_custom_certificate;
   int pending_update_count;
+  String ip_address;
   int last_error_date;
   String last_error_message;
   int max_connections;
@@ -33,6 +34,7 @@ class WebhookInfo {
     this.url,
     this.has_custom_certificate,
     this.pending_update_count,
+    this.ip_address,
     this.last_error_date,
     this.last_error_message,
     this.max_connections,
