@@ -40,6 +40,5 @@ class LoginUrl {
   });
   factory LoginUrl.fromJson(Map<String, dynamic> json) =>
       _$LoginUrlFromJson(json);
-  Map<String, dynamic> toJson() =>
-      _$LoginUrlToJson(this);
+  Map<String, dynamic> toJson() => _$LoginUrlToJson(this);
 }
