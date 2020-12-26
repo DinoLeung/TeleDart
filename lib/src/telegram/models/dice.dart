@@ -21,11 +21,11 @@ part of '../model.dart';
 /// https://core.telegram.org/bots/api#dice
 @JsonSerializable()
 class Dice {
-  static String DICE = '🎲';
-  static String DART = '🎯';
-  static String BASKETBALL = '🏀';
-  static String FOOTBALL = '⚽';
-  static String SLOT_MACHINE = '🎰';
+  static const String DICE = '🎲';
+  static const String DART = '🎯';
+  static const String BASKETBALL = '🏀';
+  static const String FOOTBALL = '⚽';
+  static const String SLOT_MACHINE = '🎰';
 
   int value;
   String emoji;

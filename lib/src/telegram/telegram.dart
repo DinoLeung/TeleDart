@@ -963,7 +963,7 @@ class Telegram {
   ///  and values 1-64 for “🎰”.
   /// Defaults to “🎲”
   Future<Message> sendDice(dynamic chat_id,
-      {String emoji,
+      {String emoji = Dice.DICE,
       bool disable_notification,
       int reply_to_message_id,
       bool allow_sending_without_reply,
