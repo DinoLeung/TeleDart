@@ -37,6 +37,8 @@ class InlineQueryResultVenue implements InlineQueryResult {
   String address;
   String foursquare_id;
   String foursquare_type;
+  String google_place_id;
+  String google_place_type;
   @override
   InlineKeyboardMarkup reply_markup;
   InputMessageContent input_message_content;
@@ -52,6 +54,8 @@ class InlineQueryResultVenue implements InlineQueryResult {
     this.address,
     this.foursquare_id,
     this.foursquare_type,
+    this.google_place_id,
+    this.google_place_type,
     this.reply_markup,
     this.input_message_content,
     this.thumb_url,

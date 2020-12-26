@@ -748,6 +748,8 @@ Venue _$VenueFromJson(Map<String, dynamic> json) {
     address: json['address'] as String,
     foursquare_id: json['foursquare_id'] as String,
     foursquare_type: json['foursquare_type'] as String,
+    google_place_id: json['google_place_id'] as String,
+    google_place_type: json['google_place_type'] as String,
   );
 }
 
@@ -765,6 +767,8 @@ Map<String, dynamic> _$VenueToJson(Venue instance) {
   writeNotNull('address', instance.address);
   writeNotNull('foursquare_id', instance.foursquare_id);
   writeNotNull('foursquare_type', instance.foursquare_type);
+  writeNotNull('google_place_id', instance.google_place_id);
+  writeNotNull('google_place_type', instance.google_place_type);
   return val;
 }
 
@@ -2284,6 +2288,8 @@ InlineQueryResultVenue _$InlineQueryResultVenueFromJson(
     address: json['address'] as String,
     foursquare_id: json['foursquare_id'] as String,
     foursquare_type: json['foursquare_type'] as String,
+    google_place_id: json['google_place_id'] as String,
+    google_place_type: json['google_place_type'] as String,
     reply_markup: json['reply_markup'] == null
         ? null
         : InlineKeyboardMarkup.fromJson(
@@ -2316,6 +2322,8 @@ Map<String, dynamic> _$InlineQueryResultVenueToJson(
   writeNotNull('address', instance.address);
   writeNotNull('foursquare_id', instance.foursquare_id);
   writeNotNull('foursquare_type', instance.foursquare_type);
+  writeNotNull('google_place_id', instance.google_place_id);
+  writeNotNull('google_place_type', instance.google_place_type);
   writeNotNull('reply_markup', instance.reply_markup?.toJson());
   writeNotNull(
       'input_message_content', instance.input_message_content?.toJson());
@@ -2859,6 +2867,8 @@ InputVenueMessageContent _$InputVenueMessageContentFromJson(
     address: json['address'] as String,
     foursquare_id: json['foursquare_id'] as String,
     foursquare_type: json['foursquare_type'] as String,
+    google_place_id: json['google_place_id'] as String,
+    google_place_type: json['google_place_type'] as String,
   );
 }
 
@@ -2878,6 +2888,8 @@ Map<String, dynamic> _$InputVenueMessageContentToJson(
   writeNotNull('address', instance.address);
   writeNotNull('foursquare_id', instance.foursquare_id);
   writeNotNull('foursquare_type', instance.foursquare_type);
+  writeNotNull('google_place_id', instance.google_place_id);
+  writeNotNull('google_place_type', instance.google_place_type);
   return val;
 }
 
