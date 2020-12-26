@@ -958,11 +958,6 @@ class Telegram {
 
   /// Use this method to send an animated emoji that will display a random value.
   /// On success, the sent Message is returned.
-  ///
-  /// Currently, `emoji` must be one of “🎲”, “🎯”, “🏀”, “⚽”, or “🎰”.
-  /// Dice can have values 1-6 for “🎲” and “🎯”, values 1-5 for “🏀” and “⚽”
-  ///  and values 1-64 for “🎰”.
-  /// Defaults to “🎲”
   Future<Message> sendDice(dynamic chat_id,
       {String emoji = Dice.DICE,
       bool disable_notification,
