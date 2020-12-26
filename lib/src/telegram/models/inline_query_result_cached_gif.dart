@@ -32,6 +32,8 @@ class InlineQueryResultCachedGif implements InlineQueryResult {
   String title;
   String caption;
   String parse_mode;
+  List<MessageEntity> caption_entities;
+  @override
   InlineKeyboardMarkup reply_markup;
   InputMessageContent input_message_content;
   InlineQueryResultCachedGif({
@@ -41,6 +43,7 @@ class InlineQueryResultCachedGif implements InlineQueryResult {
     this.title,
     this.caption,
     this.parse_mode,
+    this.caption_entities,
     this.reply_markup,
     this.input_message_content,
   });

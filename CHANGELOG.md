@@ -1,3 +1,8 @@
+## 0.1.2
+
+- Support API 5.0
+- Added emoji static constants to Dice object
+
 ## 0.1.1
 
 - Allowed create webook without key pair

@@ -34,6 +34,8 @@ class InlineQueryResultCachedAudio implements InlineQueryResult {
   String audio_file_id;
   String caption;
   String parse_mode;
+  List<MessageEntity> caption_entities;
+  @override
   InlineKeyboardMarkup reply_markup;
   InputMessageContent input_message_content;
   InlineQueryResultCachedAudio({
@@ -42,6 +44,7 @@ class InlineQueryResultCachedAudio implements InlineQueryResult {
     this.audio_file_id,
     this.caption,
     this.parse_mode,
+    this.caption_entities,
     this.reply_markup,
     this.input_message_content,
   });

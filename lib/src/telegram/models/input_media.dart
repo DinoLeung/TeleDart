@@ -31,11 +31,13 @@ class InputMedia {
   String media;
   String caption;
   String parse_mode;
+  List<MessageEntity> caption_entities;
   InputMedia({
     this.type,
     this.media,
     this.caption,
     this.parse_mode,
+    this.caption_entities,
   });
   factory InputMedia.fromJson(Map<String, dynamic> json) =>
       _$InputMediaFromJson(json);

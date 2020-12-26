@@ -41,6 +41,8 @@ class InlineQueryResultVideo implements InlineQueryResult {
   int video_height;
   int video_duration;
   String description;
+  List<MessageEntity> caption_entities;
+  @override
   InlineKeyboardMarkup reply_markup;
   InputMessageContent input_message_content;
 
@@ -57,6 +59,7 @@ class InlineQueryResultVideo implements InlineQueryResult {
     this.video_height,
     this.video_duration,
     this.description,
+    this.caption_entities,
     this.reply_markup,
     this.input_message_content,
   });

@@ -16,23 +16,21 @@
 
 part of '../model.dart';
 
-/// This object represents an animated emoji that displays a random value.
+/// This object represents the content of a service message,
+/// sent whenever a user in the chat triggers a proximity alert set by another user.
 ///
-/// https://core.telegram.org/bots/api#dice
+/// https://core.telegram.org/bots/api#proximityalerttriggered
 @JsonSerializable()
-class Dice {
-  static const String DICE = '🎲';
-  static const String DART = '🎯';
-  static const String BASKETBALL = '🏀';
-  static const String FOOTBALL = '⚽';
-  static const String SLOT_MACHINE = '🎰';
-
-  int value;
-  String emoji;
-  Dice({
-    this.value,
-    this.emoji,
+class ProximityAlertTriggered {
+  User traveler;
+  User watcher;
+  int distance;
+  ProximityAlertTriggered({
+    this.traveler,
+    this.watcher,
+    this.distance,
   });
-  factory Dice.fromJson(Map<String, dynamic> json) => _$DiceFromJson(json);
-  Map<String, dynamic> toJson() => _$DiceToJson(this);
+  factory ProximityAlertTriggered.fromJson(Map<String, dynamic> json) =>
+      _$ProximityAlertTriggeredFromJson(json);
+  Map<String, dynamic> toJson() => _$ProximityAlertTriggeredToJson(this);
 }

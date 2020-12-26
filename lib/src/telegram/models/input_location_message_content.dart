@@ -25,12 +25,18 @@ part of '../model.dart';
 class InputLocationMessageContent implements InputMessageContent {
   double latitude;
   double longitude;
+  double horizontal_accuracy;
   int live_period;
+  int heading;
+  int proximity_alert_radius;
 
   InputLocationMessageContent({
     this.latitude,
     this.longitude,
+    this.horizontal_accuracy,
     this.live_period,
+    this.heading,
+    this.proximity_alert_radius,
   });
 
   @JsonKey(ignore: true)

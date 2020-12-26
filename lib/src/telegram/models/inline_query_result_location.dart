@@ -34,7 +34,11 @@ class InlineQueryResultLocation implements InlineQueryResult {
   double latitude;
   double longitude;
   String title;
+  double horizontal_accuracy;
   int live_period;
+  int heading;
+  int proximity_alert_radius;
+  @override
   InlineKeyboardMarkup reply_markup;
   InputMessageContent input_message_content;
   String thumb_url;
@@ -47,7 +51,10 @@ class InlineQueryResultLocation implements InlineQueryResult {
     this.latitude,
     this.longitude,
     this.title,
+    this.horizontal_accuracy,
     this.live_period,
+    this.heading,
+    this.proximity_alert_radius,
     this.reply_markup,
     this.input_message_content,
     this.thumb_url,

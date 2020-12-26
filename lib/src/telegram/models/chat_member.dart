@@ -24,7 +24,7 @@ class ChatMember {
   User user;
   String status;
   String custom_title;
-  int until_date;
+  bool is_anonymous;
   bool can_be_edited;
   bool can_post_messages;
   bool can_edit_messages;
@@ -40,12 +40,13 @@ class ChatMember {
   bool can_send_polls;
   bool can_send_other_messages;
   bool can_add_web_page_previews;
+  int until_date;
 
   ChatMember({
     this.user,
     this.status,
     this.custom_title,
-    this.until_date,
+    this.is_anonymous,
     this.can_be_edited,
     this.can_post_messages,
     this.can_edit_messages,
@@ -61,6 +62,7 @@ class ChatMember {
     this.can_send_polls,
     this.can_send_other_messages,
     this.can_add_web_page_previews,
+    this.until_date,
   });
 
   @JsonKey(ignore: true)

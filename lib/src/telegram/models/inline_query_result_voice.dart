@@ -36,6 +36,8 @@ class InlineQueryResultVoice implements InlineQueryResult {
   String caption;
   String parse_mode;
   int voice_duration;
+  List<MessageEntity> caption_entities;
+  @override
   InlineKeyboardMarkup reply_markup;
   InputMessageContent input_message_content;
 
@@ -47,6 +49,7 @@ class InlineQueryResultVoice implements InlineQueryResult {
     this.caption,
     this.parse_mode,
     this.voice_duration,
+    this.caption_entities,
     this.reply_markup,
     this.input_message_content,
   });

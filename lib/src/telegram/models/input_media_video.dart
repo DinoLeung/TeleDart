@@ -22,13 +22,15 @@ part of '../model.dart';
 @JsonSerializable()
 class InputMediaVideo implements InputMedia {
   @override
-  String caption;
+  String type;
   @override
   String media;
   @override
+  String caption;
+  @override
   String parse_mode;
   @override
-  String type;
+  List<MessageEntity> caption_entities;
   dynamic thumb; // InputFile or String
   int width;
   int height;
@@ -40,6 +42,7 @@ class InputMediaVideo implements InputMedia {
     this.media,
     this.caption,
     this.parse_mode,
+    this.caption_entities,
     this.thumb,
     this.width,
     this.height,
