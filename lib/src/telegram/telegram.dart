@@ -210,6 +210,47 @@ class Telegram {
     return Message.fromJson(await HttpClient.httpPost(requestUrl, body: body));
   }
 
+  /// se this method to copy messages of any kind.
+  /// The method is analogous to the method [forwardMessage],
+  /// but the copied message doesn't have a link to the original message.
+  /// Returns the [MessageId] of the sent message on success.
+  ///
+  /// https://core.telegram.org/bots/api#copyMessage
+  ///
+  /// [forwardMessage]: https://core.telegram.org/bots/api#forwardmessage
+  /// [MessageId]: https://core.telegram.org/bots/api#messageid
+  Future<Message> copyMessage(
+    dynamic chat_id,
+    int from_chat_id,
+    int message_id, {
+    String caption,
+    String parse_mode,
+    List<MessageEntity> caption_entities,
+    bool disable_notification,
+    int reply_to_message_id,
+    bool allow_sending_without_reply,
+    ReplyMarkup reply_markup,
+  }) async {
+    if (chat_id is! String && chat_id is! int) {
+      return Future.error(TelegramException(
+          'Attribute \'chat_id\' can only be either type of String or int'));
+    }
+    var requestUrl = '${_baseUrl}${_token}/copyMessage';
+    var body = <String, dynamic>{
+      'chat_id': chat_id,
+      'from_chat_id': from_chat_id,
+      'message_id': message_id,
+      'caption': caption,
+      'parse_mode': parse_mode,
+      'caption_entities': jsonEncode(caption_entities),
+      'disable_notification': disable_notification,
+      'reply_to_message_id': reply_to_message_id,
+      'allow_sending_without_reply': allow_sending_without_reply,
+      'reply_markup': jsonEncode(reply_markup)
+    };
+    return Message.fromJson(await HttpClient.httpPost(requestUrl, body: body));
+  }
+
   /// Use this method to send photos. On success, the sent [Message] is returned.
   ///
   /// https://core.telegram.org/bots/api#sendphoto
