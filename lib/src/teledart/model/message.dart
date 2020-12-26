@@ -26,6 +26,7 @@ class TeleDartMessage extends Message {
     super.message_id = message.message_id;
     super.from = message.from;
     super.date = message.date;
+    super.sender_chat = message.sender_chat;
     super.chat = message.chat;
     super.forward_from = message.forward_from;
     super.forward_from_chat = message.forward_from_chat;

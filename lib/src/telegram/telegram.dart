@@ -880,7 +880,7 @@ class Telegram {
 
   /// Use this method to send an animated emoji that will display a random value.
   /// On success, the sent Message is returned.
-  /// 
+  ///
   /// Currently, `emoji` must be one of “🎲”, “🎯”, “🏀”, “⚽”, or “🎰”.
   /// Dice can have values 1-6 for “🎲” and “🎯”, values 1-5 for “🏀” and “⚽”
   ///  and values 1-64 for “🎰”.
@@ -1053,7 +1053,8 @@ class Telegram {
   ///
   /// https://core.telegram.org/bots/api#promotechatmember
   Future<bool> promoteChatMember(dynamic chat_id, int user_id,
-      {bool can_change_info,
+      {bool is_anonymous,
+      bool can_change_info,
       bool can_post_messages,
       bool can_edit_messages,
       bool can_delete_messages,
@@ -1069,6 +1070,7 @@ class Telegram {
     var body = <String, dynamic>{
       'chat_id': chat_id,
       'user_id': user_id,
+      'is_anonymous': is_anonymous,
       'can_change_info': can_change_info,
       'can_post_messages': can_post_messages,
       'can_edit_messages': can_edit_messages,

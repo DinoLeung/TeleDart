@@ -208,6 +208,9 @@ Message _$MessageFromJson(Map<String, dynamic> json) {
     from: json['from'] == null
         ? null
         : User.fromJson(json['from'] as Map<String, dynamic>),
+    sender_chat: json['sender_chat'] == null
+        ? null
+        : Chat.fromJson(json['sender_chat'] as Map<String, dynamic>),
     date: json['date'] as int,
     chat: json['chat'] == null
         ? null
@@ -340,6 +343,7 @@ Map<String, dynamic> _$MessageToJson(Message instance) {
 
   writeNotNull('message_id', instance.message_id);
   writeNotNull('from', instance.from?.toJson());
+  writeNotNull('sender_chat', instance.sender_chat?.toJson());
   writeNotNull('date', instance.date);
   writeNotNull('chat', instance.chat?.toJson());
   writeNotNull('forward_from', instance.forward_from?.toJson());
@@ -1237,7 +1241,7 @@ ChatMember _$ChatMemberFromJson(Map<String, dynamic> json) {
         : User.fromJson(json['user'] as Map<String, dynamic>),
     status: json['status'] as String,
     custom_title: json['custom_title'] as String,
-    until_date: json['until_date'] as int,
+    is_anonymous: json['is_anonymous'] as bool,
     can_be_edited: json['can_be_edited'] as bool,
     can_post_messages: json['can_post_messages'] as bool,
     can_edit_messages: json['can_edit_messages'] as bool,
@@ -1253,6 +1257,7 @@ ChatMember _$ChatMemberFromJson(Map<String, dynamic> json) {
     can_send_polls: json['can_send_polls'] as bool,
     can_send_other_messages: json['can_send_other_messages'] as bool,
     can_add_web_page_previews: json['can_add_web_page_previews'] as bool,
+    until_date: json['until_date'] as int,
   );
 }
 
@@ -1268,7 +1273,7 @@ Map<String, dynamic> _$ChatMemberToJson(ChatMember instance) {
   writeNotNull('user', instance.user?.toJson());
   writeNotNull('status', instance.status);
   writeNotNull('custom_title', instance.custom_title);
-  writeNotNull('until_date', instance.until_date);
+  writeNotNull('is_anonymous', instance.is_anonymous);
   writeNotNull('can_be_edited', instance.can_be_edited);
   writeNotNull('can_post_messages', instance.can_post_messages);
   writeNotNull('can_edit_messages', instance.can_edit_messages);
@@ -1284,6 +1289,7 @@ Map<String, dynamic> _$ChatMemberToJson(ChatMember instance) {
   writeNotNull('can_send_polls', instance.can_send_polls);
   writeNotNull('can_send_other_messages', instance.can_send_other_messages);
   writeNotNull('can_add_web_page_previews', instance.can_add_web_page_previews);
+  writeNotNull('until_date', instance.until_date);
   return val;
 }
 

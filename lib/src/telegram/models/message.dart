@@ -23,6 +23,7 @@ part of '../model.dart';
 class Message {
   int message_id;
   User from;
+  Chat sender_chat;
   int date;
   Chat chat;
   User forward_from;
@@ -75,6 +76,7 @@ class Message {
   Message({
     this.message_id,
     this.from,
+    this.sender_chat,
     this.date,
     this.chat,
     this.forward_from,
