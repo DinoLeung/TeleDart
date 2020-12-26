@@ -25,6 +25,7 @@ class MessageId {
   MessageId({
     this.message_id,
   });
-  factory MessageId.fromJson(Map<String, dynamic> json) => _$MessageIdFromJson(json);
+  factory MessageId.fromJson(Map<String, dynamic> json) =>
+      _$MessageIdFromJson(json);
   Map<String, dynamic> toJson() => _$MessageIdToJson(this);
 }
