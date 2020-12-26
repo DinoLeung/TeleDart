@@ -636,8 +636,13 @@ class Telegram {
   /// https://core.telegram.org/bots/api#sendmediagroup
   ///
   /// [messages]: https://core.telegram.org/bots/api#message
-  Future<List<Message>> sendMediaGroup(dynamic chat_id, List<InputMedia> media,
-      {bool disable_notification, int reply_to_message_id}) async {
+  Future<List<Message>> sendMediaGroup(
+    dynamic chat_id,
+    List<InputMedia> media, {
+    bool disable_notification,
+    int reply_to_message_id,
+    bool allow_sending_without_reply,
+  }) async {
     if (chat_id is! String && chat_id is! int) {
       return Future.error(TelegramException(
           'Attribute \'chat_id\' can only be either type of String or int'));
@@ -648,6 +653,7 @@ class Telegram {
       'media': jsonEncode(media),
       'disable_notification': disable_notification,
       'reply_to_message_id': reply_to_message_id,
+      'allow_sending_without_reply': allow_sending_without_reply,
     };
     return (await HttpClient.httpPost(requestUrl, body: body))
         .map<Message>((message) => Message.fromJson(message))
@@ -979,7 +985,8 @@ class Telegram {
   /// Returns *True* on success.
   ///
   /// https://core.telegram.org/bots/api#unbanchatmember
-  Future<bool> unbanChatMember(dynamic chat_id, int user_id, {bool only_if_banned}) async {
+  Future<bool> unbanChatMember(dynamic chat_id, int user_id,
+      {bool only_if_banned}) async {
     if (chat_id is! String && chat_id is! int) {
       return Future.error(TelegramException(
           'Attribute \'chat_id\' can only be either type of String or int'));
@@ -1210,7 +1217,7 @@ class Telegram {
   /// If the chat is not a private chat, the bot must be an administrator in the chat for
   /// this to work and must have the 'can_pin_messages' admin right in a supergroup or
   /// 'can_edit_messages' admin right in a channel. Returns *True* on success.
-  /// 
+  ///
   /// If `message_id` not specified, the most recent pinned message (by sending date) will be unpinned.
   ///
   /// https://core.telegram.org/bots/api#unpinchatmessage
