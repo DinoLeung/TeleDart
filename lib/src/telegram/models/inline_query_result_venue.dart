@@ -37,6 +37,7 @@ class InlineQueryResultVenue implements InlineQueryResult {
   String address;
   String foursquare_id;
   String foursquare_type;
+  @override
   InlineKeyboardMarkup reply_markup;
   InputMessageContent input_message_content;
   String thumb_url;

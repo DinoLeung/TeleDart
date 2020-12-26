@@ -1,15 +1,15 @@
 # TeleDart
 
-[Telegram](https://telegram.org/) is a popular secured instant messenger. 
+[Telegram](https://telegram.org/) is a popular secured instant messenger.
 They have an open [bot platform](https://telegram.org/blog/bot-revolution),
-this package is a [Dart](https://dart.dev) 
+this package is a [Dart](https://dart.dev)
 implementation of their [bot API](https://core.telegram.org/bots/api)
 allowing you to create your own bot easily.
 
 ![TeleDart](https://raw.githubusercontent.com/DinoLeung/TeleDart/master/example/dash_paper_plane.svg?sanitize=true)
 
-[![Bot API Version](https://img.shields.io/badge/Bot%20API-4.9-blue.svg?style=flat-square)](https://core.telegram.org/bots/api)
-[![Dart Version](https://img.shields.io/badge/Dart-2.7-blue.svg?style=flat-square)](https://dart.dev)
+[![Bot API Version](https://img.shields.io/badge/Bot%20API-5.0-blue.svg?style=flat-square)](https://core.telegram.org/bots/api)
+[![Dart Version](https://img.shields.io/badge/Dart-2.10-blue.svg?style=flat-square)](https://dart.dev)
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg?style=flat-square)](https://www.gnu.org/licenses/gpl-3.0)
 
 ## Usage
@@ -29,11 +29,11 @@ void main() {
   teledart
       .onMessage(keyword: 'Fight for freedom')
       .listen((message) => message.reply('Stand with Hong Kong'));
-  
+
 }
 ```
 
-Modifying [Stream](https://www.dartlang.org/tutorials/language/streams#methods-that-modify-a-stream): 
+Modifying [Stream](https://www.dartlang.org/tutorials/language/streams#methods-that-modify-a-stream):
 
 ```dart
 teledart

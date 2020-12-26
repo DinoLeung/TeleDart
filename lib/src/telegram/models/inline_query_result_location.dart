@@ -38,6 +38,7 @@ class InlineQueryResultLocation implements InlineQueryResult {
   int live_period;
   int heading;
   int proximity_alert_radius;
+  @override
   InlineKeyboardMarkup reply_markup;
   InputMessageContent input_message_content;
   String thumb_url;

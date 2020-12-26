@@ -1751,6 +1751,10 @@ InlineQueryResult _$InlineQueryResultFromJson(Map<String, dynamic> json) {
   return InlineQueryResult(
     type: json['type'] as String,
     id: json['id'] as String,
+    reply_markup: json['reply_markup'] == null
+        ? null
+        : InlineKeyboardMarkup.fromJson(
+            json['reply_markup'] as Map<String, dynamic>),
   );
 }
 
@@ -1765,6 +1769,7 @@ Map<String, dynamic> _$InlineQueryResultToJson(InlineQueryResult instance) {
 
   writeNotNull('type', instance.type);
   writeNotNull('id', instance.id);
+  writeNotNull('reply_markup', instance.reply_markup?.toJson());
   return val;
 }
 
@@ -1829,6 +1834,11 @@ InlineQueryResultPhoto _$InlineQueryResultPhotoFromJson(
     description: json['description'] as String,
     caption: json['caption'] as String,
     parse_mode: json['parse_mode'] as String,
+    caption_entities: (json['caption_entities'] as List)
+        ?.map((e) => e == null
+            ? null
+            : MessageEntity.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
     reply_markup: json['reply_markup'] == null
         ? null
         : InlineKeyboardMarkup.fromJson(
@@ -1860,6 +1870,8 @@ Map<String, dynamic> _$InlineQueryResultPhotoToJson(
   writeNotNull('description', instance.description);
   writeNotNull('caption', instance.caption);
   writeNotNull('parse_mode', instance.parse_mode);
+  writeNotNull('caption_entities',
+      instance.caption_entities?.map((e) => e?.toJson())?.toList());
   writeNotNull('reply_markup', instance.reply_markup?.toJson());
   writeNotNull(
       'input_message_content', instance.input_message_content?.toJson());
@@ -1879,6 +1891,11 @@ InlineQueryResultGif _$InlineQueryResultGifFromJson(Map<String, dynamic> json) {
     title: json['title'] as String,
     caption: json['caption'] as String,
     parse_mode: json['parse_mode'] as String,
+    caption_entities: (json['caption_entities'] as List)
+        ?.map((e) => e == null
+            ? null
+            : MessageEntity.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
     reply_markup: json['reply_markup'] == null
         ? null
         : InlineKeyboardMarkup.fromJson(
@@ -1911,6 +1928,8 @@ Map<String, dynamic> _$InlineQueryResultGifToJson(
   writeNotNull('title', instance.title);
   writeNotNull('caption', instance.caption);
   writeNotNull('parse_mode', instance.parse_mode);
+  writeNotNull('caption_entities',
+      instance.caption_entities?.map((e) => e?.toJson())?.toList());
   writeNotNull('reply_markup', instance.reply_markup?.toJson());
   writeNotNull(
       'input_message_content', instance.input_message_content?.toJson());
@@ -1931,6 +1950,11 @@ InlineQueryResultMpeg4Gif _$InlineQueryResultMpeg4GifFromJson(
     title: json['title'] as String,
     caption: json['caption'] as String,
     parse_mode: json['parse_mode'] as String,
+    caption_entities: (json['caption_entities'] as List)
+        ?.map((e) => e == null
+            ? null
+            : MessageEntity.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
     reply_markup: json['reply_markup'] == null
         ? null
         : InlineKeyboardMarkup.fromJson(
@@ -1963,6 +1987,8 @@ Map<String, dynamic> _$InlineQueryResultMpeg4GifToJson(
   writeNotNull('title', instance.title);
   writeNotNull('caption', instance.caption);
   writeNotNull('parse_mode', instance.parse_mode);
+  writeNotNull('caption_entities',
+      instance.caption_entities?.map((e) => e?.toJson())?.toList());
   writeNotNull('reply_markup', instance.reply_markup?.toJson());
   writeNotNull(
       'input_message_content', instance.input_message_content?.toJson());
@@ -1984,6 +2010,11 @@ InlineQueryResultVideo _$InlineQueryResultVideoFromJson(
     video_height: json['video_height'] as int,
     video_duration: json['video_duration'] as int,
     description: json['description'] as String,
+    caption_entities: (json['caption_entities'] as List)
+        ?.map((e) => e == null
+            ? null
+            : MessageEntity.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
     reply_markup: json['reply_markup'] == null
         ? null
         : InlineKeyboardMarkup.fromJson(
@@ -2017,6 +2048,8 @@ Map<String, dynamic> _$InlineQueryResultVideoToJson(
   writeNotNull('video_height', instance.video_height);
   writeNotNull('video_duration', instance.video_duration);
   writeNotNull('description', instance.description);
+  writeNotNull('caption_entities',
+      instance.caption_entities?.map((e) => e?.toJson())?.toList());
   writeNotNull('reply_markup', instance.reply_markup?.toJson());
   writeNotNull(
       'input_message_content', instance.input_message_content?.toJson());
@@ -2034,6 +2067,11 @@ InlineQueryResultAudio _$InlineQueryResultAudioFromJson(
     parse_mode: json['parse_mode'] as String,
     performer: json['performer'] as String,
     audio_duration: json['audio_duration'] as int,
+    caption_entities: (json['caption_entities'] as List)
+        ?.map((e) => e == null
+            ? null
+            : MessageEntity.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
     reply_markup: json['reply_markup'] == null
         ? null
         : InlineKeyboardMarkup.fromJson(
@@ -2063,6 +2101,8 @@ Map<String, dynamic> _$InlineQueryResultAudioToJson(
   writeNotNull('parse_mode', instance.parse_mode);
   writeNotNull('performer', instance.performer);
   writeNotNull('audio_duration', instance.audio_duration);
+  writeNotNull('caption_entities',
+      instance.caption_entities?.map((e) => e?.toJson())?.toList());
   writeNotNull('reply_markup', instance.reply_markup?.toJson());
   writeNotNull(
       'input_message_content', instance.input_message_content?.toJson());
@@ -2079,6 +2119,11 @@ InlineQueryResultVoice _$InlineQueryResultVoiceFromJson(
     caption: json['caption'] as String,
     parse_mode: json['parse_mode'] as String,
     voice_duration: json['voice_duration'] as int,
+    caption_entities: (json['caption_entities'] as List)
+        ?.map((e) => e == null
+            ? null
+            : MessageEntity.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
     reply_markup: json['reply_markup'] == null
         ? null
         : InlineKeyboardMarkup.fromJson(
@@ -2107,6 +2152,8 @@ Map<String, dynamic> _$InlineQueryResultVoiceToJson(
   writeNotNull('caption', instance.caption);
   writeNotNull('parse_mode', instance.parse_mode);
   writeNotNull('voice_duration', instance.voice_duration);
+  writeNotNull('caption_entities',
+      instance.caption_entities?.map((e) => e?.toJson())?.toList());
   writeNotNull('reply_markup', instance.reply_markup?.toJson());
   writeNotNull(
       'input_message_content', instance.input_message_content?.toJson());
@@ -2121,6 +2168,11 @@ InlineQueryResultDocument _$InlineQueryResultDocumentFromJson(
     title: json['title'] as String,
     caption: json['caption'] as String,
     parse_mode: json['parse_mode'] as String,
+    caption_entities: (json['caption_entities'] as List)
+        ?.map((e) => e == null
+            ? null
+            : MessageEntity.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
     document_url: json['document_url'] as String,
     mime_type: json['mime_type'] as String,
     description: json['description'] as String,
@@ -2153,6 +2205,8 @@ Map<String, dynamic> _$InlineQueryResultDocumentToJson(
   writeNotNull('title', instance.title);
   writeNotNull('caption', instance.caption);
   writeNotNull('parse_mode', instance.parse_mode);
+  writeNotNull('caption_entities',
+      instance.caption_entities?.map((e) => e?.toJson())?.toList());
   writeNotNull('document_url', instance.document_url);
   writeNotNull('mime_type', instance.mime_type);
   writeNotNull('description', instance.description);
@@ -2359,6 +2413,11 @@ InlineQueryResultCachedPhoto _$InlineQueryResultCachedPhotoFromJson(
     description: json['description'] as String,
     caption: json['caption'] as String,
     parse_mode: json['parse_mode'] as String,
+    caption_entities: (json['caption_entities'] as List)
+        ?.map((e) => e == null
+            ? null
+            : MessageEntity.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
     reply_markup: json['reply_markup'] == null
         ? null
         : InlineKeyboardMarkup.fromJson(
@@ -2387,6 +2446,8 @@ Map<String, dynamic> _$InlineQueryResultCachedPhotoToJson(
   writeNotNull('description', instance.description);
   writeNotNull('caption', instance.caption);
   writeNotNull('parse_mode', instance.parse_mode);
+  writeNotNull('caption_entities',
+      instance.caption_entities?.map((e) => e?.toJson())?.toList());
   writeNotNull('reply_markup', instance.reply_markup?.toJson());
   writeNotNull(
       'input_message_content', instance.input_message_content?.toJson());
@@ -2402,6 +2463,11 @@ InlineQueryResultCachedGif _$InlineQueryResultCachedGifFromJson(
     title: json['title'] as String,
     caption: json['caption'] as String,
     parse_mode: json['parse_mode'] as String,
+    caption_entities: (json['caption_entities'] as List)
+        ?.map((e) => e == null
+            ? null
+            : MessageEntity.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
     reply_markup: json['reply_markup'] == null
         ? null
         : InlineKeyboardMarkup.fromJson(
@@ -2429,6 +2495,8 @@ Map<String, dynamic> _$InlineQueryResultCachedGifToJson(
   writeNotNull('title', instance.title);
   writeNotNull('caption', instance.caption);
   writeNotNull('parse_mode', instance.parse_mode);
+  writeNotNull('caption_entities',
+      instance.caption_entities?.map((e) => e?.toJson())?.toList());
   writeNotNull('reply_markup', instance.reply_markup?.toJson());
   writeNotNull(
       'input_message_content', instance.input_message_content?.toJson());
@@ -2444,6 +2512,11 @@ InlineQueryResultCachedMpeg4Gif _$InlineQueryResultCachedMpeg4GifFromJson(
     title: json['title'] as String,
     caption: json['caption'] as String,
     parse_mode: json['parse_mode'] as String,
+    caption_entities: (json['caption_entities'] as List)
+        ?.map((e) => e == null
+            ? null
+            : MessageEntity.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
     reply_markup: json['reply_markup'] == null
         ? null
         : InlineKeyboardMarkup.fromJson(
@@ -2471,6 +2544,8 @@ Map<String, dynamic> _$InlineQueryResultCachedMpeg4GifToJson(
   writeNotNull('title', instance.title);
   writeNotNull('caption', instance.caption);
   writeNotNull('parse_mode', instance.parse_mode);
+  writeNotNull('caption_entities',
+      instance.caption_entities?.map((e) => e?.toJson())?.toList());
   writeNotNull('reply_markup', instance.reply_markup?.toJson());
   writeNotNull(
       'input_message_content', instance.input_message_content?.toJson());
@@ -2523,6 +2598,11 @@ InlineQueryResultCachedDocument _$InlineQueryResultCachedDocumentFromJson(
     description: json['description'] as String,
     caption: json['caption'] as String,
     parse_mode: json['parse_mode'] as String,
+    caption_entities: (json['caption_entities'] as List)
+        ?.map((e) => e == null
+            ? null
+            : MessageEntity.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
     reply_markup: json['reply_markup'] == null
         ? null
         : InlineKeyboardMarkup.fromJson(
@@ -2551,6 +2631,8 @@ Map<String, dynamic> _$InlineQueryResultCachedDocumentToJson(
   writeNotNull('description', instance.description);
   writeNotNull('caption', instance.caption);
   writeNotNull('parse_mode', instance.parse_mode);
+  writeNotNull('caption_entities',
+      instance.caption_entities?.map((e) => e?.toJson())?.toList());
   writeNotNull('reply_markup', instance.reply_markup?.toJson());
   writeNotNull(
       'input_message_content', instance.input_message_content?.toJson());
@@ -2567,6 +2649,11 @@ InlineQueryResultCachedVideo _$InlineQueryResultCachedVideoFromJson(
     description: json['description'] as String,
     caption: json['caption'] as String,
     parse_mode: json['parse_mode'] as String,
+    caption_entities: (json['caption_entities'] as List)
+        ?.map((e) => e == null
+            ? null
+            : MessageEntity.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
     reply_markup: json['reply_markup'] == null
         ? null
         : InlineKeyboardMarkup.fromJson(
@@ -2595,6 +2682,8 @@ Map<String, dynamic> _$InlineQueryResultCachedVideoToJson(
   writeNotNull('description', instance.description);
   writeNotNull('caption', instance.caption);
   writeNotNull('parse_mode', instance.parse_mode);
+  writeNotNull('caption_entities',
+      instance.caption_entities?.map((e) => e?.toJson())?.toList());
   writeNotNull('reply_markup', instance.reply_markup?.toJson());
   writeNotNull(
       'input_message_content', instance.input_message_content?.toJson());
@@ -2610,6 +2699,11 @@ InlineQueryResultCachedVoice _$InlineQueryResultCachedVoiceFromJson(
     title: json['title'] as String,
     caption: json['caption'] as String,
     parse_mode: json['parse_mode'] as String,
+    caption_entities: (json['caption_entities'] as List)
+        ?.map((e) => e == null
+            ? null
+            : MessageEntity.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
     reply_markup: json['reply_markup'] == null
         ? null
         : InlineKeyboardMarkup.fromJson(
@@ -2637,6 +2731,8 @@ Map<String, dynamic> _$InlineQueryResultCachedVoiceToJson(
   writeNotNull('title', instance.title);
   writeNotNull('caption', instance.caption);
   writeNotNull('parse_mode', instance.parse_mode);
+  writeNotNull('caption_entities',
+      instance.caption_entities?.map((e) => e?.toJson())?.toList());
   writeNotNull('reply_markup', instance.reply_markup?.toJson());
   writeNotNull(
       'input_message_content', instance.input_message_content?.toJson());
@@ -2651,6 +2747,11 @@ InlineQueryResultCachedAudio _$InlineQueryResultCachedAudioFromJson(
     audio_file_id: json['audio_file_id'] as String,
     caption: json['caption'] as String,
     parse_mode: json['parse_mode'] as String,
+    caption_entities: (json['caption_entities'] as List)
+        ?.map((e) => e == null
+            ? null
+            : MessageEntity.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
     reply_markup: json['reply_markup'] == null
         ? null
         : InlineKeyboardMarkup.fromJson(
@@ -2677,6 +2778,8 @@ Map<String, dynamic> _$InlineQueryResultCachedAudioToJson(
   writeNotNull('audio_file_id', instance.audio_file_id);
   writeNotNull('caption', instance.caption);
   writeNotNull('parse_mode', instance.parse_mode);
+  writeNotNull('caption_entities',
+      instance.caption_entities?.map((e) => e?.toJson())?.toList());
   writeNotNull('reply_markup', instance.reply_markup?.toJson());
   writeNotNull(
       'input_message_content', instance.input_message_content?.toJson());

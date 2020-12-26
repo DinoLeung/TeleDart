@@ -27,6 +27,7 @@ class InlineQueryResultArticle implements InlineQueryResult {
   String type;
   String title;
   InputMessageContent input_message_content;
+  @override
   InlineKeyboardMarkup reply_markup;
   String url;
   bool hide_url;
