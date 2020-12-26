@@ -35,6 +35,7 @@ class InlineQueryResultContact implements InlineQueryResult {
   String first_name;
   String last_name;
   String vcard;
+  @override
   InlineKeyboardMarkup reply_markup;
   InputMessageContent input_message_content;
   String thumb_url;

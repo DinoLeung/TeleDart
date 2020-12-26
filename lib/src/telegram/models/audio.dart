@@ -26,6 +26,7 @@ class Audio {
   int duration;
   String performer;
   String title;
+  String file_name;
   String mime_type;
   int file_size;
   PhotoSize thumb;
@@ -36,6 +37,7 @@ class Audio {
     this.duration,
     this.performer,
     this.title,
+    this.file_name,
     this.mime_type,
     this.file_size,
     this.thumb,

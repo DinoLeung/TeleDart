@@ -34,9 +34,11 @@ class InlineQueryResultDocument implements InlineQueryResult {
   String title;
   String caption;
   String parse_mode;
+  List<MessageEntity> caption_entities;
   String document_url;
   String mime_type;
   String description;
+  @override
   InlineKeyboardMarkup reply_markup;
   InputMessageContent input_message_content;
   String thumb_url;
@@ -48,6 +50,7 @@ class InlineQueryResultDocument implements InlineQueryResult {
     this.title,
     this.caption,
     this.parse_mode,
+    this.caption_entities,
     this.document_url,
     this.mime_type,
     this.description,

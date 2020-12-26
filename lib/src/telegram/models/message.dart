@@ -23,6 +23,7 @@ part of '../model.dart';
 class Message {
   int message_id;
   User from;
+  Chat sender_chat;
   int date;
   Chat chat;
   User forward_from;
@@ -38,22 +39,22 @@ class Message {
   String author_signature;
   String text;
   List<MessageEntity> entities;
-  List<MessageEntity> caption_entities;
+  Animation animation;
   Audio audio;
   Document document;
-  Animation animation;
-  Game game;
   List<PhotoSize> photo;
   Sticker sticker;
   Video video;
-  Voice voice;
   VideoNote video_note;
+  Voice voice;
   String caption;
+  List<MessageEntity> caption_entities;
   Contact contact;
-  Location location;
-  Venue venue;
-  Poll poll;
   Dice dice;
+  Game game;
+  Poll poll;
+  Venue venue;
+  Location location;
   List<User> new_chat_members;
   User left_chat_member;
   String new_chat_title;
@@ -69,11 +70,13 @@ class Message {
   SuccessfulPayment successful_payment;
   String connected_website;
   PassportData passport_data;
+  ProximityAlertTriggered proximity_alert_triggered;
   InlineKeyboardMarkup reply_markup;
 
   Message({
     this.message_id,
     this.from,
+    this.sender_chat,
     this.date,
     this.chat,
     this.forward_from,
@@ -89,22 +92,22 @@ class Message {
     this.author_signature,
     this.text,
     this.entities,
-    this.caption_entities,
+    this.animation,
     this.audio,
     this.document,
-    this.animation,
-    this.game,
     this.photo,
     this.sticker,
     this.video,
-    this.voice,
     this.video_note,
+    this.voice,
     this.caption,
+    this.caption_entities,
     this.contact,
-    this.location,
-    this.venue,
     this.dice,
+    this.game,
     this.poll,
+    this.venue,
+    this.location,
     this.new_chat_members,
     this.left_chat_member,
     this.new_chat_title,
@@ -120,6 +123,7 @@ class Message {
     this.successful_payment,
     this.connected_website,
     this.passport_data,
+    this.proximity_alert_triggered,
     this.reply_markup,
   });
 

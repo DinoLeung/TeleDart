@@ -29,6 +29,8 @@ class InputVenueMessageContent implements InputMessageContent {
   String address;
   String foursquare_id;
   String foursquare_type;
+  String google_place_id;
+  String google_place_type;
   InputVenueMessageContent({
     this.latitude,
     this.longitude,
@@ -36,6 +38,8 @@ class InputVenueMessageContent implements InputMessageContent {
     this.address,
     this.foursquare_id,
     this.foursquare_type,
+    this.google_place_id,
+    this.google_place_type,
   });
   factory InputVenueMessageContent.fromJson(Map<String, dynamic> json) =>
       _$InputVenueMessageContentFromJson(json);

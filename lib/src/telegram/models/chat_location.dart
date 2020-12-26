@@ -16,23 +16,18 @@
 
 part of '../model.dart';
 
-/// This object represents an animated emoji that displays a random value.
+/// Represents a location to which a chat is connected.
 ///
-/// https://core.telegram.org/bots/api#dice
+/// https://core.telegram.org/bots/api#chatlocation
 @JsonSerializable()
-class Dice {
-  static const String DICE = '🎲';
-  static const String DART = '🎯';
-  static const String BASKETBALL = '🏀';
-  static const String FOOTBALL = '⚽';
-  static const String SLOT_MACHINE = '🎰';
-
-  int value;
-  String emoji;
-  Dice({
-    this.value,
-    this.emoji,
+class ChatLocation {
+  Location location;
+  String address;
+  ChatLocation({
+    this.location,
+    this.address,
   });
-  factory Dice.fromJson(Map<String, dynamic> json) => _$DiceFromJson(json);
-  Map<String, dynamic> toJson() => _$DiceToJson(this);
+  factory ChatLocation.fromJson(Map<String, dynamic> json) =>
+      _$ChatLocationFromJson(json);
+  Map<String, dynamic> toJson() => _$ChatLocationToJson(this);
 }

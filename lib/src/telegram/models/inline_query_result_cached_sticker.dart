@@ -32,6 +32,7 @@ class InlineQueryResultCachedSticker implements InlineQueryResult {
   @override
   String type;
   String sticker_file_id;
+  @override
   InlineKeyboardMarkup reply_markup;
   InputMessageContent input_message_content;
   InlineQueryResultCachedSticker({

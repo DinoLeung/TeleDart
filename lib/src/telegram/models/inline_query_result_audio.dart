@@ -37,6 +37,8 @@ class InlineQueryResultAudio implements InlineQueryResult {
   String parse_mode;
   String performer;
   int audio_duration;
+  List<MessageEntity> caption_entities;
+  @override
   InlineKeyboardMarkup reply_markup;
   InputMessageContent input_message_content;
 
@@ -49,6 +51,7 @@ class InlineQueryResultAudio implements InlineQueryResult {
     this.parse_mode,
     this.performer,
     this.audio_duration,
+    this.caption_entities,
     this.reply_markup,
     this.input_message_content,
   });

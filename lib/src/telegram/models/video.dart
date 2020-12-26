@@ -27,6 +27,7 @@ class Video {
   int height;
   int duration;
   PhotoSize thumb;
+  String file_name;
   String mime_type;
   int file_size;
 
@@ -37,6 +38,7 @@ class Video {
     this.height,
     this.duration,
     this.thumb,
+    this.file_name,
     this.mime_type,
     this.file_size,
   });

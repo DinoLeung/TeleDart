@@ -81,13 +81,17 @@ class Telegram {
   /// [public key certificate]: https://core.telegram.org/bots/self-signed
   Future<bool> setWebhook(String url,
       {io.File certificate,
+      String ip_address,
       int max_connections,
-      List<String> allowed_updates}) async {
+      List<String> allowed_updates,
+      bool drop_pending_updates}) async {
     var requestUrl = '${_baseUrl}${_token}/setWebhook';
     var body = <String, dynamic>{
       'url': url,
+      'ip_address': ip_address,
       'max_connections': max_connections,
       'allowed_updates': jsonEncode(allowed_updates),
+      'drop_pending_updates': drop_pending_updates,
     };
     if (certificate != null) {
       // filename cannot be empty to post to Telegram server
@@ -107,8 +111,11 @@ class Telegram {
   /// https://core.telegram.org/bots/api#deletewebhook
   ///
   /// [getUpdates]: https://core.telegram.org/bots/api#getupdates
-  Future<bool> deleteWebhook() async =>
-      await HttpClient.httpGet('${_baseUrl}${_token}/deleteWebhook');
+  Future<bool> deleteWebhook({bool drop_pending_updates}) async {
+    var requestUrl = '${_baseUrl}${_token}/deleteWebhook';
+    var body = <String, dynamic>{'drop_pending_updates': drop_pending_updates};
+    return await HttpClient.httpPost(requestUrl, body: body);
+  }
 
   /// Use this method to get current webhook status. Requires no parameters.
   /// On success, returns a [WebhookInfo] object.
@@ -130,6 +137,27 @@ class Telegram {
   Future<User> getMe() async =>
       User.fromJson(await HttpClient.httpGet('${_baseUrl}${_token}/getMe'));
 
+  /// Use this method to log out from the cloud Bot API server before launching the bot locally.
+  /// You must log out the bot before running it locally,
+  /// otherwise there is no guarantee that the bot will receive updates.
+  /// After a successful call, you can immediately log in on a local server,
+  /// but will not be able to log in back to the cloud Bot API server for 10 minutes.
+  /// Returns True on success. Requires no parameters.
+  ///
+  /// https://core.telegram.org/bots/api#logout
+  Future<bool> logOut() async =>
+      await HttpClient.httpGet('${_baseUrl}${_token}/logOut');
+
+  /// Use this method to close the bot instance before moving it from one local server to another.
+  /// You need to delete the webhook before calling this method to ensure that the bot isn't
+  /// launched again after server restart.
+  /// The method will return error 429 in the first 10 minutes after the bot is launched.
+  /// Returns True on success. Requires no parameters.
+  ///
+  /// https://core.telegram.org/bots/api#close
+  Future<bool> close() async =>
+      await HttpClient.httpGet('${_baseUrl}${_token}/close');
+
   /// Use this method to send text messages. On success, the sent [Message] is returned.
   ///
   /// [**Formatting options**](https://core.telegram.org/bots/api#formatting-options)
@@ -139,6 +167,7 @@ class Telegram {
   /// [Message]: https://core.telegram.org/bots/api#message
   Future<Message> sendMessage(dynamic chat_id, String text,
       {String parse_mode,
+      List<MessageEntity> entities,
       bool disable_web_page_preview,
       bool disable_notification,
       int reply_to_message_id,
@@ -152,6 +181,7 @@ class Telegram {
       'chat_id': chat_id,
       'text': text,
       'parse_mode': parse_mode,
+      'entities': jsonEncode(entities),
       'disable_web_page_preview': disable_web_page_preview,
       'disable_notification': disable_notification,
       'reply_to_message_id': reply_to_message_id,
@@ -182,6 +212,48 @@ class Telegram {
     return Message.fromJson(await HttpClient.httpPost(requestUrl, body: body));
   }
 
+  /// se this method to copy messages of any kind.
+  /// The method is analogous to the method [forwardMessage],
+  /// but the copied message doesn't have a link to the original message.
+  /// Returns the [MessageId] of the sent message on success.
+  ///
+  /// https://core.telegram.org/bots/api#copyMessage
+  ///
+  /// [forwardMessage]: https://core.telegram.org/bots/api#forwardmessage
+  /// [MessageId]: https://core.telegram.org/bots/api#messageid
+  Future<MessageId> copyMessage(
+    dynamic chat_id,
+    int from_chat_id,
+    int message_id, {
+    String caption,
+    String parse_mode,
+    List<MessageEntity> caption_entities,
+    bool disable_notification,
+    int reply_to_message_id,
+    bool allow_sending_without_reply,
+    ReplyMarkup reply_markup,
+  }) async {
+    if (chat_id is! String && chat_id is! int) {
+      return Future.error(TelegramException(
+          'Attribute \'chat_id\' can only be either type of String or int'));
+    }
+    var requestUrl = '${_baseUrl}${_token}/copyMessage';
+    var body = <String, dynamic>{
+      'chat_id': chat_id,
+      'from_chat_id': from_chat_id,
+      'message_id': message_id,
+      'caption': caption,
+      'parse_mode': parse_mode,
+      'caption_entities': jsonEncode(caption_entities),
+      'disable_notification': disable_notification,
+      'reply_to_message_id': reply_to_message_id,
+      'allow_sending_without_reply': allow_sending_without_reply,
+      'reply_markup': jsonEncode(reply_markup)
+    };
+    return MessageId.fromJson(
+        await HttpClient.httpPost(requestUrl, body: body));
+  }
+
   /// Use this method to send photos. On success, the sent [Message] is returned.
   ///
   /// https://core.telegram.org/bots/api#sendphoto
@@ -190,8 +262,10 @@ class Telegram {
   Future<Message> sendPhoto(dynamic chat_id, dynamic photo,
       {String caption,
       String parse_mode,
+      List<MessageEntity> caption_entities,
       bool disable_notification,
       int reply_to_message_id,
+      bool allow_sending_without_reply,
       ReplyMarkup reply_markup}) async {
     if (chat_id is! String && chat_id is! int) {
       return Future.error(TelegramException(
@@ -202,8 +276,10 @@ class Telegram {
       'chat_id': chat_id,
       'caption': caption,
       'parse_mode': parse_mode,
+      'caption_entities': jsonEncode(caption_entities),
       'disable_notification': disable_notification,
       'reply_to_message_id': reply_to_message_id,
+      'allow_sending_without_reply': allow_sending_without_reply,
       'reply_markup': jsonEncode(reply_markup),
     };
 
@@ -240,12 +316,14 @@ class Telegram {
   Future<Message> sendAudio(dynamic chat_id, dynamic audio,
       {String caption,
       String parse_mode,
+      List<MessageEntity> caption_entities,
       int duration,
       String performer,
       String title,
       dynamic thumb,
       bool disable_notification,
       int reply_to_message_id,
+      bool allow_sending_without_reply,
       ReplyMarkup reply_markup}) async {
     if (chat_id is! String && chat_id is! int) {
       return Future.error(TelegramException(
@@ -256,11 +334,13 @@ class Telegram {
       'chat_id': chat_id,
       'caption': caption,
       'parse_mode': parse_mode,
+      'caption_entities': jsonEncode(caption_entities),
       'duration': duration,
       'performer': performer,
       'title': title,
       'disable_notification': disable_notification,
       'reply_to_message_id': reply_to_message_id,
+      'allow_sending_without_reply': allow_sending_without_reply,
       'reply_markup': jsonEncode(reply_markup),
     };
 
@@ -304,8 +384,11 @@ class Telegram {
       {dynamic thumb,
       String caption,
       String parse_mode,
+      List<MessageEntity> caption_entities,
+      bool disable_content_type_detection,
       bool disable_notification,
       int reply_to_message_id,
+      bool allow_sending_without_reply,
       ReplyMarkup reply_markup}) async {
     if (chat_id is! String && chat_id is! int) {
       return Future.error(TelegramException(
@@ -316,8 +399,11 @@ class Telegram {
       'chat_id': chat_id,
       'caption': caption,
       'parse_mode': parse_mode,
+      'caption_entities': jsonEncode(caption_entities),
+      'disable_content_type_detection': disable_content_type_detection,
       'disable_notification': disable_notification,
       'reply_to_message_id': reply_to_message_id,
+      'allow_sending_without_reply': allow_sending_without_reply,
       'reply_markup': jsonEncode(reply_markup),
     };
 
@@ -367,9 +453,11 @@ class Telegram {
       dynamic thumb,
       String caption,
       String parse_mode,
+      List<MessageEntity> caption_entities,
       bool supports_streaming,
       bool disable_notification,
       int reply_to_message_id,
+      bool allow_sending_without_reply,
       ReplyMarkup reply_markup}) async {
     if (chat_id is! String && chat_id is! int) {
       return Future.error(TelegramException(
@@ -383,9 +471,11 @@ class Telegram {
       'height': height,
       'caption': caption,
       'parse_mode': parse_mode,
+      'caption_entities': jsonEncode(caption_entities),
       'supports_streaming': supports_streaming,
       'disable_notification': disable_notification,
       'reply_to_message_id': reply_to_message_id,
+      'allow_sending_without_reply': allow_sending_without_reply,
       'reply_markup': jsonEncode(reply_markup),
     };
 
@@ -433,8 +523,10 @@ class Telegram {
       dynamic thumb,
       String caption,
       String parse_mode,
+      List<MessageEntity> caption_entities,
       bool disable_notification,
       int reply_to_message_id,
+      bool allow_sending_without_reply,
       ReplyMarkup reply_markup}) async {
     if (chat_id is! String && chat_id is! int) {
       return Future.error(TelegramException(
@@ -448,8 +540,10 @@ class Telegram {
       'height': height,
       'caption': caption,
       'parse_mode': parse_mode,
+      'caption_entities': jsonEncode(caption_entities),
       'disable_notification': disable_notification,
       'reply_to_message_id': reply_to_message_id,
+      'allow_sending_without_reply': allow_sending_without_reply,
       'reply_markup': jsonEncode(reply_markup),
     };
 
@@ -498,9 +592,11 @@ class Telegram {
   Future<Message> sendVoice(dynamic chat_id, dynamic voice,
       {String caption,
       String parse_mode,
+      List<MessageEntity> caption_entities,
       int duration,
       bool disable_notification,
       int reply_to_message_id,
+      bool allow_sending_without_reply,
       ReplyMarkup reply_markup}) async {
     if (chat_id is! String && chat_id is! int) {
       return Future.error(TelegramException(
@@ -511,9 +607,11 @@ class Telegram {
       'chat_id': chat_id,
       'caption': caption,
       'parse_mode': parse_mode,
+      'caption_entities': jsonEncode(caption_entities),
       'duration': duration,
       'disable_notification': disable_notification,
       'reply_to_message_id': reply_to_message_id,
+      'allow_sending_without_reply': allow_sending_without_reply,
       'reply_markup': jsonEncode(reply_markup),
     };
 
@@ -548,6 +646,7 @@ class Telegram {
       dynamic thumb,
       bool disable_notification,
       int reply_to_message_id,
+      bool allow_sending_without_reply,
       ReplyMarkup reply_markup}) async {
     if (chat_id is! String && chat_id is! int) {
       return Future.error(TelegramException(
@@ -560,6 +659,7 @@ class Telegram {
       'length': length,
       'disable_notification': disable_notification,
       'reply_to_message_id': reply_to_message_id,
+      'allow_sending_without_reply': allow_sending_without_reply,
       'reply_markup': jsonEncode(reply_markup),
     };
 
@@ -602,8 +702,13 @@ class Telegram {
   /// https://core.telegram.org/bots/api#sendmediagroup
   ///
   /// [messages]: https://core.telegram.org/bots/api#message
-  Future<List<Message>> sendMediaGroup(dynamic chat_id, List<InputMedia> media,
-      {bool disable_notification, int reply_to_message_id}) async {
+  Future<List<Message>> sendMediaGroup(
+    dynamic chat_id,
+    List<InputMedia> media, {
+    bool disable_notification,
+    int reply_to_message_id,
+    bool allow_sending_without_reply,
+  }) async {
     if (chat_id is! String && chat_id is! int) {
       return Future.error(TelegramException(
           'Attribute \'chat_id\' can only be either type of String or int'));
@@ -614,6 +719,7 @@ class Telegram {
       'media': jsonEncode(media),
       'disable_notification': disable_notification,
       'reply_to_message_id': reply_to_message_id,
+      'allow_sending_without_reply': allow_sending_without_reply,
     };
     return (await HttpClient.httpPost(requestUrl, body: body))
         .map<Message>((message) => Message.fromJson(message))
@@ -627,9 +733,13 @@ class Telegram {
   /// [messages]: https://core.telegram.org/bots/api#message
   Future<Message> sendLocation(
       dynamic chat_id, double latitude, double longitude,
-      {int live_period,
+      {double horizontal_accuracy,
+      int live_period,
+      int heading,
+      int proximity_alert_radius,
       bool disable_notification,
       int reply_to_message_id,
+      bool allow_sending_without_reply,
       ReplyMarkup reply_markup}) async {
     if (chat_id is! String && chat_id is! int) {
       return Future.error(TelegramException(
@@ -640,8 +750,13 @@ class Telegram {
       'chat_id': chat_id,
       'latitude': latitude,
       'longitude': longitude,
+      'horizontal_accuracy': horizontal_accuracy,
+      'live_period': live_period,
+      'heading': heading,
+      'proximity_alert_radius': proximity_alert_radius,
       'disable_notification': disable_notification,
       'reply_to_message_id': reply_to_message_id,
+      'allow_sending_without_reply': allow_sending_without_reply,
       'reply_markup': jsonEncode(reply_markup),
     };
     return Message.fromJson(await HttpClient.httpPost(requestUrl, body: body));
@@ -663,6 +778,9 @@ class Telegram {
       {dynamic chat_id,
       int message_id,
       String inline_message_id,
+      double horizontal_accuracy,
+      int heading,
+      int proximity_alert_radius,
       ReplyMarkup reply_markup}) async {
     if (inline_message_id == null && (chat_id == null || message_id == null)) {
       return Future.error(TelegramException(
@@ -679,6 +797,9 @@ class Telegram {
       'chat_id': chat_id,
       'message_id': message_id,
       'inline_message_id': inline_message_id,
+      'horizontal_accuracy': horizontal_accuracy,
+      'heading': heading,
+      'proximity_alert_radius': proximity_alert_radius,
       'reply_markup': jsonEncode(reply_markup),
     };
     return Message.fromJson(await HttpClient.httpPost(requestUrl, body: body));
@@ -725,8 +846,11 @@ class Telegram {
       String title, String address,
       {String foursquare_id,
       String foursquare_type,
+      String google_place_id,
+      String google_place_type,
       bool disable_notification,
       int reply_to_message_id,
+      bool allow_sending_without_reply,
       ReplyMarkup reply_markup}) async {
     if (chat_id is! String && chat_id is! int) {
       return Future.error(TelegramException(
@@ -741,8 +865,11 @@ class Telegram {
       'address': address,
       'foursquare_id': foursquare_id,
       'foursquare_type': foursquare_type,
+      'google_place_id': google_place_id,
+      'google_place_type': google_place_type,
       'disable_notification': disable_notification,
       'reply_to_message_id': reply_to_message_id,
+      'allow_sending_without_reply': allow_sending_without_reply,
       'reply_markup': jsonEncode(reply_markup),
     };
     return Message.fromJson(await HttpClient.httpPost(requestUrl, body: body));
@@ -759,6 +886,7 @@ class Telegram {
       String vcard,
       bool disable_notification,
       int reply_to_message_id,
+      bool allow_sending_without_reply,
       ReplyMarkup reply_markup}) async {
     if (chat_id is! String && chat_id is! int) {
       return Future.error(TelegramException(
@@ -773,6 +901,7 @@ class Telegram {
       'vcard': vcard,
       'disable_notification': disable_notification,
       'reply_to_message_id': reply_to_message_id,
+      'allow_sending_without_reply': allow_sending_without_reply,
       'reply_markup': jsonEncode(reply_markup),
     };
     return Message.fromJson(await HttpClient.httpPost(requestUrl, body: body));
@@ -792,11 +921,13 @@ class Telegram {
       int correct_option_id,
       String explanation,
       String explanation_parse_mode,
+      List<MessageEntity> explanation_entities,
       int open_period,
       int close_date,
       bool is_closed,
       bool disable_notification,
       int reply_to_message_id,
+      bool allow_sending_without_reply,
       ReplyMarkup reply_markup}) async {
     if (chat_id is! String && chat_id is! int) {
       return Future.error(TelegramException(
@@ -813,22 +944,25 @@ class Telegram {
       'correct_option_id': correct_option_id,
       'explanation': explanation,
       'explanation_parse_mode': explanation_parse_mode,
+      'explanation_entities': jsonEncode(explanation_entities),
       'open_period': open_period,
       'close_date': close_date,
       'is_closed': is_closed,
       'disable_notification': disable_notification,
       'reply_to_message_id': reply_to_message_id,
+      'allow_sending_without_reply': allow_sending_without_reply,
       'reply_markup': jsonEncode(reply_markup),
     };
     return Message.fromJson(await HttpClient.httpPost(requestUrl, body: body));
   }
 
-  /// Use this method to send an animated emoji that will display a random value. On success,
-  /// the sent Message is returned.
+  /// Use this method to send an animated emoji that will display a random value.
+  /// On success, the sent Message is returned.
   Future<Message> sendDice(dynamic chat_id,
-      {String emoji,
+      {String emoji = Dice.DICE,
       bool disable_notification,
       int reply_to_message_id,
+      bool allow_sending_without_reply,
       ReplyMarkup reply_markup}) async {
     if (chat_id is! String && chat_id is! int) {
       return Future.error(TelegramException(
@@ -840,6 +974,7 @@ class Telegram {
       'emoji': emoji,
       'disable_notification': disable_notification,
       'reply_to_message_id': reply_to_message_id,
+      'allow_sending_without_reply': allow_sending_without_reply,
       'reply_markup': jsonEncode(reply_markup),
     };
     return Message.fromJson(await HttpClient.httpPost(requestUrl, body: body));
@@ -945,7 +1080,8 @@ class Telegram {
   /// Returns *True* on success.
   ///
   /// https://core.telegram.org/bots/api#unbanchatmember
-  Future<bool> unbanChatMember(dynamic chat_id, int user_id) async {
+  Future<bool> unbanChatMember(dynamic chat_id, int user_id,
+      {bool only_if_banned}) async {
     if (chat_id is! String && chat_id is! int) {
       return Future.error(TelegramException(
           'Attribute \'chat_id\' can only be either type of String or int'));
@@ -954,6 +1090,7 @@ class Telegram {
     var body = <String, dynamic>{
       'chat_id': chat_id,
       'user_id': user_id,
+      'only_if_banned': only_if_banned,
     };
     return await HttpClient.httpPost(requestUrl, body: body);
   }
@@ -991,7 +1128,8 @@ class Telegram {
   ///
   /// https://core.telegram.org/bots/api#promotechatmember
   Future<bool> promoteChatMember(dynamic chat_id, int user_id,
-      {bool can_change_info,
+      {bool is_anonymous,
+      bool can_change_info,
       bool can_post_messages,
       bool can_edit_messages,
       bool can_delete_messages,
@@ -1007,6 +1145,7 @@ class Telegram {
     var body = <String, dynamic>{
       'chat_id': chat_id,
       'user_id': user_id,
+      'is_anonymous': is_anonymous,
       'can_change_info': can_change_info,
       'can_post_messages': can_post_messages,
       'can_edit_messages': can_edit_messages,
@@ -1171,18 +1310,36 @@ class Telegram {
     return await HttpClient.httpPost(requestUrl, body: body);
   }
 
-  /// Use this method to unpin a message in a supergroup or a channel.
-  /// The bot must be an administrator in the chat for this to work and must have the
-  /// ‘can_pin_messages’ admin right in the supergroup or ‘can_edit_messages’ admin right
-  /// in the channel. Returns *True* on success.
+  /// Use this method to remove a message from the list of pinned messages in a chat.
+  /// If the chat is not a private chat, the bot must be an administrator in the chat for
+  /// this to work and must have the 'can_pin_messages' admin right in a supergroup or
+  /// 'can_edit_messages' admin right in a channel. Returns *True* on success.
+  ///
+  /// If `message_id` not specified, the most recent pinned message (by sending date) will be unpinned.
   ///
   /// https://core.telegram.org/bots/api#unpinchatmessage
-  Future<bool> unpinChatMessage(dynamic chat_id) async {
+  Future<bool> unpinChatMessage(dynamic chat_id, {int message_id}) async {
     if (chat_id is! String && chat_id is! int) {
       return Future.error(TelegramException(
           'Attribute \'chat_id\' can only be either type of String or int'));
     }
     var requestUrl = '${_baseUrl}${_token}/unpinChatMessage';
+    var body = <String, dynamic>{'chat_id': chat_id, 'message_id': message_id};
+    return await HttpClient.httpPost(requestUrl, body: body);
+  }
+
+  /// Use this method to clear the list of pinned messages in a chat.
+  /// If the chat is not a private chat, the bot must be an administrator in the chat for
+  /// this to work and must have the 'can_pin_messages' admin right in a supergroup or
+  /// 'can_edit_messages' admin right in a channel. Returns *True* on success.
+  ///
+  /// https://core.telegram.org/bots/api#unpinallchatmessages
+  Future<bool> unpinAllChatMessages(dynamic chat_id) async {
+    if (chat_id is! String && chat_id is! int) {
+      return Future.error(TelegramException(
+          'Attribute \'chat_id\' can only be either type of String or int'));
+    }
+    var requestUrl = '${_baseUrl}${_token}/unpinAllChatMessages';
     var body = <String, dynamic>{'chat_id': chat_id};
     return await HttpClient.httpPost(requestUrl, body: body);
   }
@@ -1578,6 +1735,7 @@ class Telegram {
   Future<Message> sendSticker(dynamic chat_id, dynamic sticker,
       {bool disable_notification,
       int reply_to_message_id,
+      bool allow_sending_without_reply,
       ReplyMarkup reply_markup}) async {
     if (chat_id is! String && chat_id is! int) {
       return Future.error(TelegramException(
@@ -1588,6 +1746,7 @@ class Telegram {
       'chat_id': chat_id,
       'disable_notification': disable_notification,
       'reply_to_message_id': reply_to_message_id,
+      'allow_sending_without_reply': allow_sending_without_reply,
       'reply_markup': jsonEncode(reply_markup),
     };
 
@@ -1844,6 +2003,7 @@ class Telegram {
       bool is_flexible,
       bool disable_notification,
       int reply_to_message_id,
+      bool allow_sending_without_reply,
       InlineKeyboardMarkup reply_markup}) async {
     if (chat_id is! String && chat_id is! int) {
       return Future.error(TelegramException(
@@ -1873,6 +2033,7 @@ class Telegram {
       'is_flexible': is_flexible,
       'disable_notification': disable_notification,
       'reply_to_message_id': reply_to_message_id,
+      'allow_sending_without_reply': allow_sending_without_reply,
       'reply_markup': jsonEncode(reply_markup),
     };
     return Message.fromJson(await HttpClient.httpPost(requestUrl, body: body));
@@ -1955,6 +2116,7 @@ class Telegram {
   Future<Message> sendGame(dynamic chat_id, String game_short_name,
       {bool disable_notification,
       int reply_to_message_id,
+      bool allow_sending_without_reply,
       InlineKeyboardMarkup reply_markup}) async {
     if (chat_id is! String && chat_id is! int) {
       return Future.error(TelegramException(
@@ -1966,6 +2128,7 @@ class Telegram {
       'game_short_name': game_short_name,
       'disable_notification': disable_notification,
       'reply_to_message_id': reply_to_message_id,
+      'allow_sending_without_reply': allow_sending_without_reply,
       'reply_markup': jsonEncode(reply_markup),
     };
     return Message.fromJson(await HttpClient.httpPost(requestUrl, body: body));
