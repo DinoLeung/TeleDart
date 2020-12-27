@@ -23,7 +23,7 @@ jobs:
         run: dart pub get
 
       - name: Build model.g.dart file
-        run: ./build.sh
+        run: pub run build_runner build --enable-experiment non-nullable
 
       - name: Run git diff
         run: if [[ `git status --porcelain` ]]; then echo "Please re-run `build.sh`" exit 1 fi
