@@ -80,14 +80,17 @@ class TeleDartMessage extends Message {
   Future<Message> reply(String text,
           {bool withQuote = false,
           String parse_mode,
+          List<MessageEntity> entities,
           bool disable_web_page_preview,
           bool disable_notification,
+          bool allow_sending_without_reply,
           ReplyMarkup reply_markup}) =>
       _teledart.replyMessage(this, text,
           withQuote: withQuote,
-          parse_mode: parse_mode,
+          entities: entities,
           disable_web_page_preview: disable_web_page_preview,
           disable_notification: disable_notification,
+          allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
   /// Short-cut to reply with a photo message
@@ -95,13 +98,17 @@ class TeleDartMessage extends Message {
           {bool withQuote = false,
           String caption,
           String parse_mode,
+          List<MessageEntity> caption_entities,
           bool disable_notification,
+          bool allow_sending_without_reply,
           ReplyMarkup reply_markup}) =>
       _teledart.replyPhoto(this, photo,
           withQuote: withQuote,
           caption: caption,
           parse_mode: parse_mode,
+          caption_entities: caption_entities,
           disable_notification: disable_notification,
+          allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
   /// Short-cut to reply with a audio message
@@ -109,21 +116,25 @@ class TeleDartMessage extends Message {
           {bool withQuote = false,
           String caption,
           String parse_mode,
+          List<MessageEntity> caption_entities,
           int duration,
           String performer,
           String title,
           dynamic thumb,
           bool disable_notification,
+          bool allow_sending_without_reply,
           ReplyMarkup reply_markup}) =>
       _teledart.replyAudio(this, audio,
           withQuote: withQuote,
           caption: caption,
           parse_mode: parse_mode,
+          caption_entities: caption_entities,
           duration: duration,
           performer: performer,
           title: title,
           thumb: thumb,
           disable_notification: disable_notification,
+          allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
   /// Short-cut to reply with a document message
@@ -132,14 +143,18 @@ class TeleDartMessage extends Message {
           dynamic thumb,
           String caption,
           String parse_mode,
+          List<MessageEntity> caption_entities,
           bool disable_notification,
+          bool allow_sending_without_reply,
           ReplyMarkup reply_markup}) =>
       _teledart.replyDocument(this, document,
           withQuote: withQuote,
           thumb: thumb,
           caption: caption,
           parse_mode: parse_mode,
+          caption_entities: caption_entities,
           disable_notification: disable_notification,
+          allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
   /// Short-cut to reply with a video message
@@ -151,8 +166,10 @@ class TeleDartMessage extends Message {
           dynamic thumb,
           String caption,
           String parse_mode,
+          List<MessageEntity> caption_entities,
           bool supports_streaming,
           bool disable_notification,
+          bool allow_sending_without_reply,
           ReplyMarkup reply_markup}) =>
       _teledart.replyVideo(this, video,
           withQuote: withQuote,
@@ -162,8 +179,10 @@ class TeleDartMessage extends Message {
           thumb: thumb,
           caption: caption,
           parse_mode: parse_mode,
+          caption_entities: caption_entities,
           supports_streaming: supports_streaming,
           disable_notification: disable_notification,
+          allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
   /// Short-cut to reply with a animation message
@@ -175,8 +194,9 @@ class TeleDartMessage extends Message {
           dynamic thumb,
           String caption,
           String parse_mode,
+          List<MessageEntity> caption_entities,
           bool disable_notification,
-          int reply_to_message_id,
+          bool allow_sending_without_reply,
           ReplyMarkup reply_markup}) =>
       _teledart.replyAnimation(this, animation,
           withQuote: withQuote,
@@ -186,7 +206,9 @@ class TeleDartMessage extends Message {
           thumb: thumb,
           caption: caption,
           parse_mode: parse_mode,
+          caption_entities: caption_entities,
           disable_notification: disable_notification,
+          allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
   /// Short-cut to reply with a voice message
@@ -194,13 +216,17 @@ class TeleDartMessage extends Message {
           {bool withQuote = false,
           String caption,
           String parse_mode,
+          List<MessageEntity> caption_entities,
           bool disable_notification,
+          bool allow_sending_without_reply,
           ReplyMarkup reply_markup}) =>
       _teledart.replyVoice(this, voice,
           withQuote: withQuote,
           caption: caption,
           parse_mode: parse_mode,
+          caption_entities: caption_entities,
           disable_notification: disable_notification,
+          allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
   /// Short-cut to reply with a video note message
@@ -210,6 +236,7 @@ class TeleDartMessage extends Message {
           int length,
           dynamic thumb,
           bool disable_notification,
+          bool allow_sending_without_reply,
           ReplyMarkup reply_markup}) =>
       _teledart.replyVideoNote(this, video_note,
           withQuote: withQuote,
@@ -217,24 +244,37 @@ class TeleDartMessage extends Message {
           length: length,
           thumb: thumb,
           disable_notification: disable_notification,
+          allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
   /// Short-cut to reply with a media group message
   Future<List<Message>> replyMediaGroup(List<InputMedia> media,
-          {bool withQuote = false, bool disable_notification}) =>
+          {bool withQuote = false,
+          bool disable_notification,
+          bool allow_sending_without_reply}) =>
       _teledart.replyMediaGroup(this, media,
-          withQuote: withQuote, disable_notification: disable_notification);
+          withQuote: withQuote,
+          disable_notification: disable_notification,
+          allow_sending_without_reply: allow_sending_without_reply);
 
   /// Short-cut to reply with a location message
   Future<Message> replyLocation(double latitude, double longitude,
           {bool withQuote = false,
+          double horizontal_accuracy,
           int live_period,
+          int heading,
+          int proximity_alert_radius,
           bool disable_notification,
+          bool allow_sending_without_reply,
           ReplyMarkup reply_markup}) =>
       _teledart.replyLocation(this, latitude, longitude,
           withQuote: withQuote,
+          horizontal_accuracy: horizontal_accuracy,
           live_period: live_period,
+          heading: heading,
+          proximity_alert_radius: proximity_alert_radius,
           disable_notification: disable_notification,
+          allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
   /// Short-cut to reply with a venue message
@@ -243,13 +283,19 @@ class TeleDartMessage extends Message {
           {bool withQuote = false,
           String foursquare_id,
           String foursquare_type,
+          String google_place_id,
+          String google_place_type,
           bool disable_notification,
+          bool allow_sending_without_reply,
           ReplyMarkup reply_markup}) =>
       _teledart.replyVenue(this, latitude, longitude, title, address,
           withQuote: withQuote,
           foursquare_id: foursquare_id,
           foursquare_type: foursquare_type,
+          google_place_id: google_place_id,
+          google_place_type: google_place_type,
           disable_notification: disable_notification,
+          allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
   /// Short-cut to reply with a contact message
@@ -258,21 +304,70 @@ class TeleDartMessage extends Message {
           String last_name,
           String vcard,
           bool disable_notification,
+          bool allow_sending_without_reply,
           ReplyMarkup reply_markup}) =>
       _teledart.replyContact(this, phone_number, first_name,
           withQuote: withQuote,
           last_name: last_name,
           vcard: vcard,
           disable_notification: disable_notification,
+          allow_sending_without_reply: allow_sending_without_reply,
+          reply_markup: reply_markup);
+
+  /// Short-cut to reply with a poll message
+  Future<Message> replyPoll(String question, List<String> options,
+          {bool withQuote = false,
+          bool is_anonymous,
+          String type,
+          bool allows_multiple_answers,
+          int correct_option_id,
+          String explanation,
+          String explanation_parse_mode,
+          List<MessageEntity> explanation_entities,
+          int open_period,
+          int close_date,
+          bool is_closed,
+          bool disable_notification,
+          bool allow_sending_without_reply,
+          ReplyMarkup reply_markup}) =>
+      _teledart.replyPoll(this, question, options,
+          withQuote: withQuote,
+          is_anonymous: is_anonymous,
+          type: type,
+          allows_multiple_answers: allows_multiple_answers,
+          correct_option_id: correct_option_id,
+          explanation: explanation,
+          explanation_parse_mode: explanation_parse_mode,
+          explanation_entities: explanation_entities,
+          open_period: open_period,
+          close_date: close_date,
+          is_closed: is_closed,
+          disable_notification: disable_notification,
+          allow_sending_without_reply: allow_sending_without_reply,
+          reply_markup: reply_markup);
+
+  /// Short-cut to reply with a dice message
+  Future<Message> replyDice(
+          {bool withQuote = false,
+          String emoji = Dice.DICE,
+          bool disable_notification,
+          bool allow_sending_without_reply,
+          ReplyMarkup reply_markup}) =>
+      _teledart.replyDice(this,
+          withQuote: withQuote,
+          emoji: emoji,
+          disable_notification: disable_notification,
+          allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
   /// Short-cut to reply with a sticker
   Future<Message> replySticker(dynamic sticker,
           {bool withQuote = false,
           bool disable_notification,
+          bool allow_sending_without_reply,
           ReplyMarkup reply_markup}) =>
       _teledart.replySticker(this, sticker,
-          withQuote: withQuote,
           disable_notification: disable_notification,
+          allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 }

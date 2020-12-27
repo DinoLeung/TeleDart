@@ -29,11 +29,13 @@ class Webhook extends AbstractUpdateFetcher {
   io.SecurityContext _context;
 
   String url;
+  String ip_address;
   String secretPath;
   int port;
   int serverPort;
   int max_connections;
   List<String> allowed_updates;
+  bool drop_pending_updates;
 
   io.File certificate;
   io.File privateKey;
@@ -51,13 +53,15 @@ class Webhook extends AbstractUpdateFetcher {
   /// Throws [WebhookException] if [port] is not supported by Telegram
   /// or [max_connections] is less than 1 or greater than 100.
   Webhook(this.telegram, this.url, this.secretPath,
-      {this.certificate,
+      {this.ip_address,
+      this.certificate,
       this.privateKey,
       this.port = 443,
       this.serverPort,
       this.uploadCertificate = false,
       this.max_connections = 40,
-      this.allowed_updates}) {
+      this.allowed_updates,
+      this.drop_pending_updates}) {
     if (![443, 80, 88, 8443].contains(port)) {
       throw WebhookException(
           'Ports currently supported for Webhooks: 443, 80, 88, 8443.');
@@ -89,13 +93,15 @@ class Webhook extends AbstractUpdateFetcher {
 
     await serverFuture.then((server) => _server = server).then((_) {
       telegram.setWebhook('${url}:${port}${secretPath}',
+          ip_address: ip_address,
           certificate: uploadCertificate ? certificate : null,
           max_connections: max_connections,
-          allowed_updates: allowed_updates);
+          allowed_updates: allowed_updates,
+          drop_pending_updates: drop_pending_updates);
     });
   }
 
-  /// Start the webhook.
+  /// Apply webhook configuration on Telegram API, and start the webhook server.
   @override
   Future<void> start() async {
     await setWebhook();
@@ -117,9 +123,12 @@ class Webhook extends AbstractUpdateFetcher {
     });
   }
 
-  /// Stop the webhook
+  /// Remove webhook configuration from Telegram API, and stop the webhook server.
   @override
-  Future<void> stop() => _server?.close() ?? Future.value();
+  Future<void> stop({bool drop_pending_updates}) async {
+    await telegram.deleteWebhook(drop_pending_updates: drop_pending_updates);
+    return _server?.close() ?? Future.value();
+  }
 }
 
 class WebhookException implements Exception {

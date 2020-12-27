@@ -214,14 +214,18 @@ class TeleDart {
   Future<Message> replyMessage(Message orgMsg, String text,
           {bool withQuote = false,
           String parse_mode,
+          List<MessageEntity> entities,
           bool disable_web_page_preview,
           bool disable_notification,
+          bool allow_sending_without_reply,
           ReplyMarkup reply_markup}) =>
       telegram.sendMessage(orgMsg.chat.id, text,
           parse_mode: parse_mode,
+          entities: entities,
           disable_web_page_preview: disable_web_page_preview,
           disable_notification: disable_notification,
           reply_to_message_id: withQuote ? orgMsg.message_id : null,
+          allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
   /// Short-cut to reply with a photo message
@@ -229,13 +233,17 @@ class TeleDart {
           {bool withQuote = false,
           String caption,
           String parse_mode,
+          List<MessageEntity> caption_entities,
           bool disable_notification,
+          bool allow_sending_without_reply,
           ReplyMarkup reply_markup}) =>
       telegram.sendPhoto(orgMsg.chat.id, photo,
           caption: caption,
           parse_mode: parse_mode,
+          caption_entities: caption_entities,
           disable_notification: disable_notification,
           reply_to_message_id: withQuote ? orgMsg.message_id : null,
+          allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
   /// Short-cut to reply with a audio message
@@ -243,21 +251,25 @@ class TeleDart {
           {bool withQuote = false,
           String caption,
           String parse_mode,
+          List<MessageEntity> caption_entities,
           int duration,
           String performer,
           String title,
           dynamic thumb,
           bool disable_notification,
+          bool allow_sending_without_reply,
           ReplyMarkup reply_markup}) =>
       telegram.sendAudio(orgMsg.chat.id, audio,
           caption: caption,
           parse_mode: parse_mode,
+          caption_entities: caption_entities,
           duration: duration,
           performer: performer,
           title: title,
           thumb: thumb,
           disable_notification: disable_notification,
           reply_to_message_id: withQuote ? orgMsg.message_id : null,
+          allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
   /// Short-cut to reply with a document message
@@ -266,14 +278,18 @@ class TeleDart {
           dynamic thumb,
           String caption,
           String parse_mode,
+          List<MessageEntity> caption_entities,
           bool disable_notification,
+          bool allow_sending_without_reply,
           ReplyMarkup reply_markup}) =>
       telegram.sendDocument(orgMsg.chat.id, document,
           thumb: thumb,
           caption: caption,
           parse_mode: parse_mode,
+          caption_entities: caption_entities,
           disable_notification: disable_notification,
           reply_to_message_id: withQuote ? orgMsg.message_id : null,
+          allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
   /// Short-cut to reply with a video message
@@ -285,8 +301,10 @@ class TeleDart {
           dynamic thumb,
           String caption,
           String parse_mode,
+          List<MessageEntity> caption_entities,
           bool supports_streaming,
           bool disable_notification,
+          bool allow_sending_without_reply,
           ReplyMarkup reply_markup}) =>
       telegram.sendVideo(orgMsg.chat.id, video,
           duration: duration,
@@ -295,9 +313,11 @@ class TeleDart {
           thumb: thumb,
           caption: caption,
           parse_mode: parse_mode,
+          caption_entities: caption_entities,
           supports_streaming: supports_streaming,
           disable_notification: disable_notification,
           reply_to_message_id: withQuote ? orgMsg.message_id : null,
+          allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
   /// Short-cut to reply with a animation message
@@ -309,7 +329,9 @@ class TeleDart {
           dynamic thumb,
           String caption,
           String parse_mode,
+          List<MessageEntity> caption_entities,
           bool disable_notification,
+          bool allow_sending_without_reply,
           ReplyMarkup reply_markup}) =>
       telegram.sendAnimation(orgMsg.chat.id, animation,
           duration: duration,
@@ -318,8 +340,10 @@ class TeleDart {
           thumb: thumb,
           caption: caption,
           parse_mode: parse_mode,
+          caption_entities: caption_entities,
           disable_notification: disable_notification,
           reply_to_message_id: withQuote ? orgMsg.message_id : null,
+          allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
   /// Short-cut to reply with a voice message
@@ -327,13 +351,17 @@ class TeleDart {
           {bool withQuote = false,
           String caption,
           String parse_mode,
+          List<MessageEntity> caption_entities,
           bool disable_notification,
+          bool allow_sending_without_reply,
           ReplyMarkup reply_markup}) =>
       telegram.sendVoice(orgMsg.chat.id, voice,
           caption: caption,
           parse_mode: parse_mode,
+          caption_entities: caption_entities,
           disable_notification: disable_notification,
           reply_to_message_id: withQuote ? orgMsg.message_id : null,
+          allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
   /// Short-cut to reply with a video note message
@@ -343,6 +371,7 @@ class TeleDart {
           int length,
           dynamic thumb,
           bool disable_notification,
+          bool allow_sending_without_reply,
           ReplyMarkup reply_markup}) =>
       telegram.sendVideoNote(orgMsg.chat.id, video_note,
           duration: duration,
@@ -350,26 +379,38 @@ class TeleDart {
           thumb: thumb,
           disable_notification: disable_notification,
           reply_to_message_id: withQuote ? orgMsg.message_id : null,
+          allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
   /// Short-cut to reply with a media group message
   Future<List<Message>> replyMediaGroup(Message orgMsg, List<InputMedia> media,
-          {bool withQuote = false, bool disable_notification}) =>
+          {bool withQuote = false,
+          bool disable_notification,
+          bool allow_sending_without_reply}) =>
       telegram.sendMediaGroup(orgMsg.chat.id, media,
           disable_notification: disable_notification,
-          reply_to_message_id: withQuote ? orgMsg.message_id : null);
+          reply_to_message_id: withQuote ? orgMsg.message_id : null,
+          allow_sending_without_reply: allow_sending_without_reply);
 
   /// Short-cut to reply with a location message
   Future<Message> replyLocation(
           Message orgMsg, double latitude, double longitude,
           {bool withQuote = false,
+          double horizontal_accuracy,
           int live_period,
+          int heading,
+          int proximity_alert_radius,
           bool disable_notification,
+          bool allow_sending_without_reply,
           ReplyMarkup reply_markup}) =>
       telegram.sendLocation(orgMsg.chat.id, latitude, longitude,
+          horizontal_accuracy: horizontal_accuracy,
           live_period: live_period,
+          heading: heading,
+          proximity_alert_radius: proximity_alert_radius,
           disable_notification: disable_notification,
           reply_to_message_id: withQuote ? orgMsg.message_id : null,
+          allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
   /// Short-cut to edit a live location message
@@ -377,11 +418,17 @@ class TeleDart {
           {dynamic chat_id,
           int message_id,
           String inline_message_id,
+          double horizontal_accuracy,
+          int heading,
+          int proximity_alert_radius,
           ReplyMarkup reply_markup}) =>
       telegram.editMessageLiveLocation(latitude, longitude,
           chat_id: chat_id,
           message_id: message_id,
           inline_message_id: inline_message_id,
+          horizontal_accuracy: horizontal_accuracy,
+          heading: heading,
+          proximity_alert_radius: proximity_alert_radius,
           reply_markup: reply_markup);
 
   /// Short-cut to stop a live location message
@@ -402,13 +449,19 @@ class TeleDart {
           {bool withQuote = false,
           String foursquare_id,
           String foursquare_type,
+          String google_place_id,
+          String google_place_type,
           bool disable_notification,
+          bool allow_sending_without_reply,
           ReplyMarkup reply_markup}) =>
       telegram.sendVenue(orgMsg.chat.id, latitude, longitude, title, address,
           foursquare_id: foursquare_id,
           foursquare_type: foursquare_type,
+          google_place_id: google_place_id,
+          google_place_type: google_place_type,
           disable_notification: disable_notification,
           reply_to_message_id: withQuote ? orgMsg.message_id : null,
+          allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
   /// Short-cut to reply with a contact message
@@ -418,12 +471,61 @@ class TeleDart {
           String last_name,
           String vcard,
           bool disable_notification,
+          bool allow_sending_without_reply,
           ReplyMarkup reply_markup}) =>
       telegram.sendContact(orgMsg.chat.id, phone_number, first_name,
           last_name: last_name,
           vcard: vcard,
           disable_notification: disable_notification,
           reply_to_message_id: withQuote ? orgMsg.message_id : null,
+          allow_sending_without_reply: allow_sending_without_reply,
+          reply_markup: reply_markup);
+
+  /// Short-cut to reply with a poll message
+  Future<Message> replyPoll(
+          Message orgMsg, String question, List<String> options,
+          {bool withQuote = false,
+          bool is_anonymous,
+          String type,
+          bool allows_multiple_answers,
+          int correct_option_id,
+          String explanation,
+          String explanation_parse_mode,
+          List<MessageEntity> explanation_entities,
+          int open_period,
+          int close_date,
+          bool is_closed,
+          bool disable_notification,
+          bool allow_sending_without_reply,
+          ReplyMarkup reply_markup}) =>
+      telegram.sendPoll(orgMsg.chat.id, question, options,
+          is_anonymous: is_anonymous,
+          type: type,
+          allows_multiple_answers: allows_multiple_answers,
+          correct_option_id: correct_option_id,
+          explanation: explanation,
+          explanation_parse_mode: explanation_parse_mode,
+          explanation_entities: explanation_entities,
+          open_period: open_period,
+          close_date: close_date,
+          is_closed: is_closed,
+          disable_notification: disable_notification,
+          reply_to_message_id: withQuote ? orgMsg.message_id : null,
+          allow_sending_without_reply: allow_sending_without_reply,
+          reply_markup: reply_markup);
+
+  /// Short-cut to reply with a dice message
+  Future<Message> replyDice(Message orgMsg,
+          {bool withQuote = false,
+          String emoji = Dice.DICE,
+          bool disable_notification,
+          bool allow_sending_without_reply,
+          ReplyMarkup reply_markup}) =>
+      telegram.sendDice(orgMsg.chat.id,
+          emoji: emoji,
+          disable_notification: disable_notification,
+          reply_to_message_id: withQuote ? orgMsg.message_id : null,
+          allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
   // TODO: order of this block is not matching with telegram.TeleDart
@@ -432,10 +534,12 @@ class TeleDart {
   Future<Message> replySticker(Message orgMsg, dynamic sticker,
           {bool withQuote = false,
           bool disable_notification,
+          bool allow_sending_without_reply,
           ReplyMarkup reply_markup}) =>
       telegram.sendSticker(orgMsg.chat.id, sticker,
           disable_notification: disable_notification,
           reply_to_message_id: withQuote ? orgMsg.message_id : null,
+          allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
   /// Short-cut to answer inline query
