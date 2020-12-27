@@ -1,3 +1,8 @@
+## 0.1.3
+
+- Updated Teledart models and functions to comply with API 5.0
+- Added `replyPoll` and `replyDice` Teledart shortcuts
+
 ## 0.1.2
 
 - Support API 5.0
