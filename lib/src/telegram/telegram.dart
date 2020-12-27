@@ -171,6 +171,7 @@ class Telegram {
       bool disable_web_page_preview,
       bool disable_notification,
       int reply_to_message_id,
+      bool allow_sending_without_reply,
       ReplyMarkup reply_markup}) async {
     if (chat_id is! String && chat_id is! int) {
       return Future.error(TelegramException(
@@ -185,6 +186,7 @@ class Telegram {
       'disable_web_page_preview': disable_web_page_preview,
       'disable_notification': disable_notification,
       'reply_to_message_id': reply_to_message_id,
+      'allow_sending_without_reply': allow_sending_without_reply,
       'reply_markup': jsonEncode(reply_markup),
     };
     return Message.fromJson(await HttpClient.httpPost(requestUrl, body: body));
@@ -702,13 +704,10 @@ class Telegram {
   /// https://core.telegram.org/bots/api#sendmediagroup
   ///
   /// [messages]: https://core.telegram.org/bots/api#message
-  Future<List<Message>> sendMediaGroup(
-    dynamic chat_id,
-    List<InputMedia> media, {
-    bool disable_notification,
-    int reply_to_message_id,
-    bool allow_sending_without_reply,
-  }) async {
+  Future<List<Message>> sendMediaGroup(dynamic chat_id, List<InputMedia> media,
+      {bool disable_notification,
+      int reply_to_message_id,
+      bool allow_sending_without_reply}) async {
     if (chat_id is! String && chat_id is! int) {
       return Future.error(TelegramException(
           'Attribute \'chat_id\' can only be either type of String or int'));
