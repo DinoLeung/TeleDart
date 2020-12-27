@@ -26,4 +26,4 @@ jobs:
         run: ./build.sh
 
       - name: Run git diff
-        run: if [[ `git status --porcelain` ]]; then echo "Please re-run `build.sh`" exit 1 fi
+        run: if [[ `git status --porcelain` ]]; then echo "Please re-run `build.sh`" exit 1 fi;
