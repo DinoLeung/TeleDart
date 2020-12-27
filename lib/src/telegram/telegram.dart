@@ -80,8 +80,8 @@ class Telegram {
   /// [getUpdates]: https://core.telegram.org/bots/api#getupdates
   /// [public key certificate]: https://core.telegram.org/bots/self-signed
   Future<bool> setWebhook(String url,
-      {io.File certificate,
-      String ip_address,
+      {String ip_address,
+      io.File certificate,
       int max_connections,
       List<String> allowed_updates,
       bool drop_pending_updates}) async {
