@@ -1,0 +1,29 @@
+name: Verify .g Files
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master, develop]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    container:
+      image: google/dart:latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Print Dart SDK version
+        run: dart --version
+
+      - name: Install dependencies
+        run: dart pub get
+
+      - name: Build model.g.dart file
+        run: sh -c ./build.sh
+
+      - name: Run git diff
+        run: if [[ `git status --porcelain` ]]; then echo "Please re-run `build.sh`"; exit 1; else exit 0; fi;
