@@ -19,8 +19,8 @@
 /// East to use framework building Telegram bots
 library teledart;
 
-export 'package:teledart/src/teledart/teledart.dart';
-export 'package:teledart/src/teledart/event/event.dart';
-export 'package:teledart/src/teledart/fetch/abstract_update_fetcher.dart';
-export 'package:teledart/src/teledart/fetch/long_polling.dart';
-export 'package:teledart/src/teledart/fetch/webhook.dart';
+export 'src/teledart/teledart.dart';
+export 'src/teledart/event/event.dart';
+export 'src/teledart/fetch/abstract_update_fetcher.dart';
+export 'src/teledart/fetch/long_polling.dart';
+export 'src/teledart/fetch/webhook.dart';
