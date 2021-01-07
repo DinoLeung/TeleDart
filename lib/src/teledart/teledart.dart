@@ -136,17 +136,17 @@ class TeleDart {
       _event.onChosenInlineResult();
 
   /// Listens to callback query events
-  Stream<CallbackQuery> onCallbackQuery() => _event
+  Stream<TeleDartCallbackQuery> onCallbackQuery() => _event
       .onCallbackQuery()
       .map((callbackQuery) => TeleDartCallbackQuery(this, callbackQuery));
 
   /// Listens to shipping query events
-  Stream<ShippingQuery> onShippingQuery() => _event
+  Stream<TeleDartShippingQuery> onShippingQuery() => _event
       .onShippingQuery()
       .map((shippingQuery) => TeleDartShippingQuery(this, shippingQuery));
 
   /// Listens to pre checkout query events
-  Stream<PreCheckoutQuery> onPreCheckoutQuery() =>
+  Stream<TeleDartPreCheckoutQuery> onPreCheckoutQuery() =>
       _event.onPreCheckoutQuery().map((preCheckoutQuery) =>
           TeleDartPreCheckoutQuery(this, preCheckoutQuery));
 
