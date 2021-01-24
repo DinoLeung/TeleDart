@@ -24,9 +24,9 @@
 /// https://core.telegram.org/bots/api#available-types
 library model;
 
-export 'package:teledart/src/telegram/model.dart';
-export 'package:teledart/src/teledart/model/callback_query.dart';
-export 'package:teledart/src/teledart/model/inline_query.dart';
-export 'package:teledart/src/teledart/model/message.dart';
-export 'package:teledart/src/teledart/model/pre_checkout_query.dart';
-export 'package:teledart/src/teledart/model/shipping_query.dart';
+export 'src/telegram/model.dart';
+export 'src/teledart/model/callback_query.dart';
+export 'src/teledart/model/inline_query.dart';
+export 'src/teledart/model/message.dart';
+export 'src/teledart/model/pre_checkout_query.dart';
+export 'src/teledart/model/shipping_query.dart';

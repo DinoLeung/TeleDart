@@ -87,6 +87,7 @@ class TeleDartMessage extends Message {
           ReplyMarkup reply_markup}) =>
       _teledart.replyMessage(this, text,
           withQuote: withQuote,
+          parse_mode: parse_mode,
           entities: entities,
           disable_web_page_preview: disable_web_page_preview,
           disable_notification: disable_notification,

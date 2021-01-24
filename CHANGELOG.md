@@ -1,3 +1,9 @@
+## 0.1.4
+
+- Update function type hints for `onCallbackQuery`, `onShippingQuery` and `onPreCheckoutQuery`
+- Fixed Teledart message object typo
+- Fixed library export directory
+
 ## 0.1.3
 
 - Updated Teledart models and functions to comply with API 5.0
