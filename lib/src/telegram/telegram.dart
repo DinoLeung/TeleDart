@@ -27,6 +27,8 @@ class Telegram {
   final String _baseUrl = 'https://api.telegram.org/bot';
   final String _token;
 
+  String get token => _token;
+
   Telegram(this._token);
 
   /// Use this method to receive incoming updates using long polling ([wiki]).
