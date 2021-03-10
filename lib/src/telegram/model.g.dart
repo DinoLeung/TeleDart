@@ -46,6 +46,14 @@ Update _$UpdateFromJson(Map<String, dynamic> json) {
     poll_answer: json['poll_answer'] == null
         ? null
         : PollAnswer.fromJson(json['poll_answer'] as Map<String, dynamic>),
+    my_chat_member: json['my_chat_member'] == null
+        ? null
+        : ChatMemberUpdated.fromJson(
+            json['my_chat_member'] as Map<String, dynamic>),
+    chat_member: json['chat_member'] == null
+        ? null
+        : ChatMemberUpdated.fromJson(
+            json['chat_member'] as Map<String, dynamic>),
   );
 }
 
@@ -70,6 +78,8 @@ Map<String, dynamic> _$UpdateToJson(Update instance) {
   writeNotNull('pre_checkout_query', instance.pre_checkout_query?.toJson());
   writeNotNull('poll', instance.poll?.toJson());
   writeNotNull('poll_answer', instance.poll_answer?.toJson());
+  writeNotNull('my_chat_member', instance.my_chat_member?.toJson());
+  writeNotNull('chat_member', instance.chat_member?.toJson());
   return val;
 }
 
@@ -1257,6 +1267,37 @@ Map<String, dynamic> _$ChatPhotoToJson(ChatPhoto instance) {
   return val;
 }
 
+ChatInviteLink _$ChatInviteLinkFromJson(Map<String, dynamic> json) {
+  return ChatInviteLink(
+    invite_link: json['invite_link'] as String,
+    creator: json['creator'] == null
+        ? null
+        : User.fromJson(json['creator'] as Map<String, dynamic>),
+    is_primary: json['is_primary'] as bool,
+    is_revoked: json['is_revoked'] as bool,
+    expire_date: json['expire_date'] as int,
+    member_limit: json['member_limit'] as int,
+  );
+}
+
+Map<String, dynamic> _$ChatInviteLinkToJson(ChatInviteLink instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('invite_link', instance.invite_link);
+  writeNotNull('creator', instance.creator?.toJson());
+  writeNotNull('is_primary', instance.is_primary);
+  writeNotNull('is_revoked', instance.is_revoked);
+  writeNotNull('expire_date', instance.expire_date);
+  writeNotNull('member_limit', instance.member_limit);
+  return val;
+}
+
 ChatMember _$ChatMemberFromJson(Map<String, dynamic> json) {
   return ChatMember(
     user: json['user'] == null
@@ -1313,6 +1354,44 @@ Map<String, dynamic> _$ChatMemberToJson(ChatMember instance) {
   writeNotNull('can_send_other_messages', instance.can_send_other_messages);
   writeNotNull('can_add_web_page_previews', instance.can_add_web_page_previews);
   writeNotNull('until_date', instance.until_date);
+  return val;
+}
+
+ChatMemberUpdated _$ChatMemberUpdatedFromJson(Map<String, dynamic> json) {
+  return ChatMemberUpdated(
+    chat: json['chat'] == null
+        ? null
+        : Chat.fromJson(json['chat'] as Map<String, dynamic>),
+    from: json['from'] == null
+        ? null
+        : User.fromJson(json['from'] as Map<String, dynamic>),
+    old_chat_member: json['old_chat_member'] == null
+        ? null
+        : ChatMember.fromJson(json['old_chat_member'] as Map<String, dynamic>),
+    new_chat_member: json['new_chat_member'] == null
+        ? null
+        : ChatMember.fromJson(json['new_chat_member'] as Map<String, dynamic>),
+    invite_link: json['invite_link'] == null
+        ? null
+        : ChatInviteLink.fromJson(json['invite_link'] as Map<String, dynamic>),
+  )..date = json['date'] as int;
+}
+
+Map<String, dynamic> _$ChatMemberUpdatedToJson(ChatMemberUpdated instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('chat', instance.chat?.toJson());
+  writeNotNull('from', instance.from?.toJson());
+  writeNotNull('date', instance.date);
+  writeNotNull('old_chat_member', instance.old_chat_member?.toJson());
+  writeNotNull('new_chat_member', instance.new_chat_member?.toJson());
+  writeNotNull('invite_link', instance.invite_link?.toJson());
   return val;
 }
 
