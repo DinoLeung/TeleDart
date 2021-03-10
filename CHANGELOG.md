@@ -1,6 +1,6 @@
 ## 0.1.5
 
-- Unreleased
+- Fixed `http_client` `_nullFilter` to allow sending messages `"null"`
 
 ## 0.1.4
 
