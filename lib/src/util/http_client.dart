@@ -21,7 +21,7 @@ import 'dart:io' as io;
 import 'package:http/http.dart' as http;
 
 class HttpClient {
-  static bool _nullFilter(_, value) => value == null || value == 'null';
+  static bool _nullFilter(_, value) => value == null;
 
   static http.MultipartFile toMultiPartFile(io.File file, String fieldName) =>
       http.MultipartFile(fieldName, file.openRead(), file.lengthSync(),
