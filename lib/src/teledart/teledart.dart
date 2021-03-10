@@ -156,6 +156,12 @@ class TeleDart {
   /// Listen to poll answer events
   Stream<PollAnswer> onPollAnswer() => _event.onPollAnswer();
 
+  /// Listen to my chat member events
+  Stream<ChatMemberUpdated> onMyChatMember() => _event.onMyChatMember();
+
+  /// Listen to chat member events
+  Stream<ChatMemberUpdated> onChatMember() => _event.onChatMember();
+
   // Short-cuts revolution
 
   /// Short-cut for onMessage handling entityType `mention` (@username)
