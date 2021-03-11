@@ -65,6 +65,8 @@ class TeleDartMessage extends Message {
     super.group_chat_created = message.group_chat_created;
     super.supergroup_chat_created = message.supergroup_chat_created;
     super.channel_chat_created = message.channel_chat_created;
+    super.message_auto_delete_timer_changed =
+        message.message_auto_delete_timer_changed;
     super.migrate_to_chat_id = message.migrate_to_chat_id;
     super.migrate_from_chat_id = message.migrate_from_chat_id;
     super.pinned_message = message.pinned_message;
@@ -73,6 +75,10 @@ class TeleDartMessage extends Message {
     super.connected_website = message.connected_website;
     super.passport_data = message.passport_data;
     super.proximity_alert_triggered = message.proximity_alert_triggered;
+    super.voice_chat_started = message.voice_chat_started;
+    super.voice_chat_ended = message.voice_chat_ended;
+    super.voice_chat_participants_invited =
+        message.voice_chat_participants_invited;
     super.reply_markup = message.reply_markup;
   }
 

@@ -1,5 +1,5 @@
 /// TeleDart - Telegram Bot API for Dart
-/// Copyright (C) 2020  Dino PH Leung
+/// Copyright (C) 2021  Dino PH Leung
 ///
 /// This program is free software: you can redistribute it and/or modify
 /// it under the terms of the GNU General Public License as published by
@@ -16,24 +16,16 @@
 
 part of '../model.dart';
 
-/// This object represents an animated emoji that displays a random value.
+/// This object represents a service message about a voice chat started in the chat.
+/// Currently holds no information.
 ///
-/// https://core.telegram.org/bots/api#dice
+/// https://core.telegram.org/bots/api#voicechatstarted
 @JsonSerializable()
-class Dice {
-  static const String DICE = '🎲';
-  static const String DART = '🎯';
-  static const String BASKETBALL = '🏀';
-  static const String FOOTBALL = '⚽';
-  static const String BOWLING = '🎳';
-  static const String SLOT_MACHINE = '🎰';
-
-  int value;
-  String emoji;
-  Dice({
-    this.value,
-    this.emoji,
-  });
-  factory Dice.fromJson(Map<String, dynamic> json) => _$DiceFromJson(json);
-  Map<String, dynamic> toJson() => _$DiceToJson(this);
+class VoiceChatStarted {
+  VoiceChatStarted();
+  factory VoiceChatStarted.fromJson(Map<String, dynamic> json) =>
+      _$VoiceChatStartedFromJson(json);
+  Map<String, dynamic> toJson() => _$VoiceChatStartedToJson(this);
 }
+
+// VoiceChatStarted

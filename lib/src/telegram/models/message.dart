@@ -63,6 +63,7 @@ class Message {
   bool group_chat_created;
   bool supergroup_chat_created;
   bool channel_chat_created;
+  MessageAutoDeleteTimerChanged message_auto_delete_timer_changed;
   int migrate_to_chat_id;
   int migrate_from_chat_id;
   Message pinned_message;
@@ -71,6 +72,9 @@ class Message {
   String connected_website;
   PassportData passport_data;
   ProximityAlertTriggered proximity_alert_triggered;
+  VoiceChatStarted voice_chat_started;
+  VoiceChatEnded voice_chat_ended;
+  VoiceChatParticipantsInvited voice_chat_participants_invited;
   InlineKeyboardMarkup reply_markup;
 
   Message({
@@ -116,6 +120,7 @@ class Message {
     this.group_chat_created,
     this.supergroup_chat_created,
     this.channel_chat_created,
+    this.message_auto_delete_timer_changed,
     this.migrate_to_chat_id,
     this.migrate_from_chat_id,
     this.pinned_message,
@@ -124,6 +129,9 @@ class Message {
     this.connected_website,
     this.passport_data,
     this.proximity_alert_triggered,
+    this.voice_chat_started,
+    this.voice_chat_ended,
+    this.voice_chat_participants_invited,
     this.reply_markup,
   });
 
