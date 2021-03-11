@@ -46,6 +46,14 @@ Update _$UpdateFromJson(Map<String, dynamic> json) {
     poll_answer: json['poll_answer'] == null
         ? null
         : PollAnswer.fromJson(json['poll_answer'] as Map<String, dynamic>),
+    my_chat_member: json['my_chat_member'] == null
+        ? null
+        : ChatMemberUpdated.fromJson(
+            json['my_chat_member'] as Map<String, dynamic>),
+    chat_member: json['chat_member'] == null
+        ? null
+        : ChatMemberUpdated.fromJson(
+            json['chat_member'] as Map<String, dynamic>),
   );
 }
 
@@ -70,6 +78,8 @@ Map<String, dynamic> _$UpdateToJson(Update instance) {
   writeNotNull('pre_checkout_query', instance.pre_checkout_query?.toJson());
   writeNotNull('poll', instance.poll?.toJson());
   writeNotNull('poll_answer', instance.poll_answer?.toJson());
+  writeNotNull('my_chat_member', instance.my_chat_member?.toJson());
+  writeNotNull('chat_member', instance.chat_member?.toJson());
   return val;
 }
 
@@ -305,6 +315,12 @@ Message _$MessageFromJson(Map<String, dynamic> json) {
     group_chat_created: json['group_chat_created'] as bool,
     supergroup_chat_created: json['supergroup_chat_created'] as bool,
     channel_chat_created: json['channel_chat_created'] as bool,
+    message_auto_delete_timer_changed:
+        json['message_auto_delete_timer_changed'] == null
+            ? null
+            : MessageAutoDeleteTimerChanged.fromJson(
+                json['message_auto_delete_timer_changed']
+                    as Map<String, dynamic>),
     migrate_to_chat_id: json['migrate_to_chat_id'] as int,
     migrate_from_chat_id: json['migrate_from_chat_id'] as int,
     pinned_message: json['pinned_message'] == null
@@ -325,6 +341,19 @@ Message _$MessageFromJson(Map<String, dynamic> json) {
         ? null
         : ProximityAlertTriggered.fromJson(
             json['proximity_alert_triggered'] as Map<String, dynamic>),
+    voice_chat_started: json['voice_chat_started'] == null
+        ? null
+        : VoiceChatStarted.fromJson(
+            json['voice_chat_started'] as Map<String, dynamic>),
+    voice_chat_ended: json['voice_chat_ended'] == null
+        ? null
+        : VoiceChatEnded.fromJson(
+            json['voice_chat_ended'] as Map<String, dynamic>),
+    voice_chat_participants_invited: json['voice_chat_participants_invited'] ==
+            null
+        ? null
+        : VoiceChatParticipantsInvited.fromJson(
+            json['voice_chat_participants_invited'] as Map<String, dynamic>),
     reply_markup: json['reply_markup'] == null
         ? null
         : InlineKeyboardMarkup.fromJson(
@@ -387,6 +416,8 @@ Map<String, dynamic> _$MessageToJson(Message instance) {
   writeNotNull('group_chat_created', instance.group_chat_created);
   writeNotNull('supergroup_chat_created', instance.supergroup_chat_created);
   writeNotNull('channel_chat_created', instance.channel_chat_created);
+  writeNotNull('message_auto_delete_timer_changed',
+      instance.message_auto_delete_timer_changed?.toJson());
   writeNotNull('migrate_to_chat_id', instance.migrate_to_chat_id);
   writeNotNull('migrate_from_chat_id', instance.migrate_from_chat_id);
   writeNotNull('pinned_message', instance.pinned_message?.toJson());
@@ -396,6 +427,10 @@ Map<String, dynamic> _$MessageToJson(Message instance) {
   writeNotNull('passport_data', instance.passport_data?.toJson());
   writeNotNull('proximity_alert_triggered',
       instance.proximity_alert_triggered?.toJson());
+  writeNotNull('voice_chat_started', instance.voice_chat_started?.toJson());
+  writeNotNull('voice_chat_ended', instance.voice_chat_ended?.toJson());
+  writeNotNull('voice_chat_participants_invited',
+      instance.voice_chat_participants_invited?.toJson());
   writeNotNull('reply_markup', instance.reply_markup?.toJson());
   return val;
 }
@@ -938,6 +973,77 @@ Map<String, dynamic> _$ProximityAlertTriggeredToJson(
   return val;
 }
 
+MessageAutoDeleteTimerChanged _$MessageAutoDeleteTimerChangedFromJson(
+    Map<String, dynamic> json) {
+  return MessageAutoDeleteTimerChanged(
+    message_auto_delete_time: json['message_auto_delete_time'] as int,
+  );
+}
+
+Map<String, dynamic> _$MessageAutoDeleteTimerChangedToJson(
+    MessageAutoDeleteTimerChanged instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('message_auto_delete_time', instance.message_auto_delete_time);
+  return val;
+}
+
+VoiceChatStarted _$VoiceChatStartedFromJson(Map<String, dynamic> json) {
+  return VoiceChatStarted();
+}
+
+Map<String, dynamic> _$VoiceChatStartedToJson(VoiceChatStarted instance) =>
+    <String, dynamic>{};
+
+VoiceChatEnded _$VoiceChatEndedFromJson(Map<String, dynamic> json) {
+  return VoiceChatEnded(
+    duration: json['duration'] as int,
+  );
+}
+
+Map<String, dynamic> _$VoiceChatEndedToJson(VoiceChatEnded instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('duration', instance.duration);
+  return val;
+}
+
+VoiceChatParticipantsInvited _$VoiceChatParticipantsInvitedFromJson(
+    Map<String, dynamic> json) {
+  return VoiceChatParticipantsInvited(
+    users: (json['users'] as List)
+        ?.map(
+            (e) => e == null ? null : User.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
+  );
+}
+
+Map<String, dynamic> _$VoiceChatParticipantsInvitedToJson(
+    VoiceChatParticipantsInvited instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('users', instance.users?.map((e) => e?.toJson())?.toList());
+  return val;
+}
+
 UserProfilePhotos _$UserProfilePhotosFromJson(Map<String, dynamic> json) {
   return UserProfilePhotos(
     total_count: json['total_count'] as int,
@@ -1257,6 +1363,37 @@ Map<String, dynamic> _$ChatPhotoToJson(ChatPhoto instance) {
   return val;
 }
 
+ChatInviteLink _$ChatInviteLinkFromJson(Map<String, dynamic> json) {
+  return ChatInviteLink(
+    invite_link: json['invite_link'] as String,
+    creator: json['creator'] == null
+        ? null
+        : User.fromJson(json['creator'] as Map<String, dynamic>),
+    is_primary: json['is_primary'] as bool,
+    is_revoked: json['is_revoked'] as bool,
+    expire_date: json['expire_date'] as int,
+    member_limit: json['member_limit'] as int,
+  );
+}
+
+Map<String, dynamic> _$ChatInviteLinkToJson(ChatInviteLink instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('invite_link', instance.invite_link);
+  writeNotNull('creator', instance.creator?.toJson());
+  writeNotNull('is_primary', instance.is_primary);
+  writeNotNull('is_revoked', instance.is_revoked);
+  writeNotNull('expire_date', instance.expire_date);
+  writeNotNull('member_limit', instance.member_limit);
+  return val;
+}
+
 ChatMember _$ChatMemberFromJson(Map<String, dynamic> json) {
   return ChatMember(
     user: json['user'] == null
@@ -1266,9 +1403,11 @@ ChatMember _$ChatMemberFromJson(Map<String, dynamic> json) {
     custom_title: json['custom_title'] as String,
     is_anonymous: json['is_anonymous'] as bool,
     can_be_edited: json['can_be_edited'] as bool,
+    can_manage_chat: json['can_manage_chat'] as bool,
     can_post_messages: json['can_post_messages'] as bool,
     can_edit_messages: json['can_edit_messages'] as bool,
     can_delete_messages: json['can_delete_messages'] as bool,
+    can_manage_voice_chats: json['can_manage_voice_chats'] as bool,
     can_restrict_members: json['can_restrict_members'] as bool,
     can_promote_members: json['can_promote_members'] as bool,
     can_change_info: json['can_change_info'] as bool,
@@ -1298,9 +1437,11 @@ Map<String, dynamic> _$ChatMemberToJson(ChatMember instance) {
   writeNotNull('custom_title', instance.custom_title);
   writeNotNull('is_anonymous', instance.is_anonymous);
   writeNotNull('can_be_edited', instance.can_be_edited);
+  writeNotNull('can_manage_chat', instance.can_manage_chat);
   writeNotNull('can_post_messages', instance.can_post_messages);
   writeNotNull('can_edit_messages', instance.can_edit_messages);
   writeNotNull('can_delete_messages', instance.can_delete_messages);
+  writeNotNull('can_manage_voice_chats', instance.can_manage_voice_chats);
   writeNotNull('can_restrict_members', instance.can_restrict_members);
   writeNotNull('can_promote_members', instance.can_promote_members);
   writeNotNull('can_change_info', instance.can_change_info);
@@ -1313,6 +1454,44 @@ Map<String, dynamic> _$ChatMemberToJson(ChatMember instance) {
   writeNotNull('can_send_other_messages', instance.can_send_other_messages);
   writeNotNull('can_add_web_page_previews', instance.can_add_web_page_previews);
   writeNotNull('until_date', instance.until_date);
+  return val;
+}
+
+ChatMemberUpdated _$ChatMemberUpdatedFromJson(Map<String, dynamic> json) {
+  return ChatMemberUpdated(
+    chat: json['chat'] == null
+        ? null
+        : Chat.fromJson(json['chat'] as Map<String, dynamic>),
+    from: json['from'] == null
+        ? null
+        : User.fromJson(json['from'] as Map<String, dynamic>),
+    old_chat_member: json['old_chat_member'] == null
+        ? null
+        : ChatMember.fromJson(json['old_chat_member'] as Map<String, dynamic>),
+    new_chat_member: json['new_chat_member'] == null
+        ? null
+        : ChatMember.fromJson(json['new_chat_member'] as Map<String, dynamic>),
+    invite_link: json['invite_link'] == null
+        ? null
+        : ChatInviteLink.fromJson(json['invite_link'] as Map<String, dynamic>),
+  )..date = json['date'] as int;
+}
+
+Map<String, dynamic> _$ChatMemberUpdatedToJson(ChatMemberUpdated instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('chat', instance.chat?.toJson());
+  writeNotNull('from', instance.from?.toJson());
+  writeNotNull('date', instance.date);
+  writeNotNull('old_chat_member', instance.old_chat_member?.toJson());
+  writeNotNull('new_chat_member', instance.new_chat_member?.toJson());
+  writeNotNull('invite_link', instance.invite_link?.toJson());
   return val;
 }
 

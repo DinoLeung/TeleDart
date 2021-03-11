@@ -1,3 +1,9 @@
+## 0.1.5
+
+- Added function `getDownloadLink` to `File` object
+- Fixed `http_client` `_nullFilter` to allow sending messages `"null"`
+- Updated Teledart models and functions to comply with API 5.1
+
 ## 0.1.4
 
 - Update function type hints for `onCallbackQuery`, `onShippingQuery` and `onPreCheckoutQuery`

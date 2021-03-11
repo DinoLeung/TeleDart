@@ -50,8 +50,7 @@ class LongPolling extends AbstractUpdateFetcher {
       throw LongPollingException('Limit must between 1 and 100.');
     }
     if (timeout > MAX_TIMEOUT) {
-      throw LongPollingException(
-          'Timeout may not greater than ${MAX_TIMEOUT}.');
+      throw LongPollingException('Timeout may not greater than $MAX_TIMEOUT.');
     }
   }
 
@@ -111,8 +110,8 @@ class LongPolling extends AbstractUpdateFetcher {
   }
 
   void _onRecursivePollingError(Object error) {
-    print('${DateTime.now()} ${error}');
-    print('Retrying in ${retryDelay.inMinutes} minute(s)...');
+    print('$DateTime.now() $error');
+    print('Retrying in $retryDelay.inMinutes minute(s)...');
     _delayRetry();
     _doubleRetryDelay();
     _recursivePolling();
@@ -127,5 +126,5 @@ class LongPollingException implements Exception {
   String cause;
   LongPollingException(this.cause);
   @override
-  String toString() => 'LongPollingException: ${cause}';
+  String toString() => 'LongPollingException: $cause';
 }
