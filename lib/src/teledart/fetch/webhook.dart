@@ -92,7 +92,7 @@ class Webhook extends AbstractUpdateFetcher {
             io.InternetAddress.anyIPv4.address, serverPort ?? port, _context);
 
     await serverFuture.then((server) => _server = server).then((_) {
-      telegram.setWebhook('${url}:${port}${secretPath}',
+      telegram.setWebhook('$url:$port$secretPath',
           ip_address: ip_address,
           certificate: uploadCertificate ? certificate : null,
           max_connections: max_connections,
@@ -135,5 +135,5 @@ class WebhookException implements Exception {
   String cause;
   WebhookException(this.cause);
   @override
-  String toString() => 'WebhookException: ${cause}';
+  String toString() => 'WebhookException: $cause';
 }

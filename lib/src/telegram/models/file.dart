@@ -41,7 +41,7 @@ class File {
 
   String getDownloadLink(String token) => (file_path?.isEmpty ?? true)
       ? null
-      : 'https://api.telegram.org/file/bot${token}/${file_path}';
+      : 'https://api.telegram.org/file/bot$token/$file_path';
 
   factory File.fromJson(Map<String, dynamic> json) => _$FileFromJson(json);
   Map<String, dynamic> toJson() => _$FileToJson(this);

@@ -592,5 +592,5 @@ class TeleDartException implements Exception {
   String cause;
   TeleDartException(this.cause);
   @override
-  String toString() => 'TeleDartException: ${cause}';
+  String toString() => 'TeleDartException: $cause';
 }
