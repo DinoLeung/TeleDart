@@ -1128,14 +1128,16 @@ class Telegram {
   /// https://core.telegram.org/bots/api#promotechatmember
   Future<bool> promoteChatMember(dynamic chat_id, int user_id,
       {bool is_anonymous,
-      bool can_change_info,
+      bool can_manage_chat,
       bool can_post_messages,
       bool can_edit_messages,
       bool can_delete_messages,
-      bool can_invite_users,
+      bool can_manage_voice_chats,
       bool can_restrict_members,
-      bool can_pin_messages,
-      bool can_promote_members}) async {
+      bool can_promote_members,
+      bool can_change_info,
+      bool can_invite_users,
+      bool can_pin_messages}) async {
     if (chat_id is! String && chat_id is! int) {
       return Future.error(TelegramException(
           'Attribute \'chat_id\' can only be either type of String or int'));
@@ -1145,14 +1147,16 @@ class Telegram {
       'chat_id': chat_id,
       'user_id': user_id,
       'is_anonymous': is_anonymous,
-      'can_change_info': can_change_info,
+      'can_manage_chat': can_manage_chat,
       'can_post_messages': can_post_messages,
       'can_edit_messages': can_edit_messages,
       'can_delete_messages': can_delete_messages,
-      'can_invite_users': can_invite_users,
+      'can_manage_voice_chats': can_manage_voice_chats,
       'can_restrict_members': can_restrict_members,
-      'can_pin_messages': can_pin_messages,
       'can_promote_members': can_promote_members,
+      'can_change_info': can_change_info,
+      'can_invite_users': can_invite_users,
+      'can_pin_messages': can_pin_messages,
     };
     return await HttpClient.httpPost(requestUrl, body: body);
   }

@@ -1374,9 +1374,11 @@ ChatMember _$ChatMemberFromJson(Map<String, dynamic> json) {
     custom_title: json['custom_title'] as String,
     is_anonymous: json['is_anonymous'] as bool,
     can_be_edited: json['can_be_edited'] as bool,
+    can_manage_chat: json['can_manage_chat'] as bool,
     can_post_messages: json['can_post_messages'] as bool,
     can_edit_messages: json['can_edit_messages'] as bool,
     can_delete_messages: json['can_delete_messages'] as bool,
+    can_manage_voice_chats: json['can_manage_voice_chats'] as bool,
     can_restrict_members: json['can_restrict_members'] as bool,
     can_promote_members: json['can_promote_members'] as bool,
     can_change_info: json['can_change_info'] as bool,
@@ -1406,9 +1408,11 @@ Map<String, dynamic> _$ChatMemberToJson(ChatMember instance) {
   writeNotNull('custom_title', instance.custom_title);
   writeNotNull('is_anonymous', instance.is_anonymous);
   writeNotNull('can_be_edited', instance.can_be_edited);
+  writeNotNull('can_manage_chat', instance.can_manage_chat);
   writeNotNull('can_post_messages', instance.can_post_messages);
   writeNotNull('can_edit_messages', instance.can_edit_messages);
   writeNotNull('can_delete_messages', instance.can_delete_messages);
+  writeNotNull('can_manage_voice_chats', instance.can_manage_voice_chats);
   writeNotNull('can_restrict_members', instance.can_restrict_members);
   writeNotNull('can_promote_members', instance.can_promote_members);
   writeNotNull('can_change_info', instance.can_change_info);
