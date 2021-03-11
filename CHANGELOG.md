@@ -1,6 +1,6 @@
 ## 0.1.5
 
-- Unreleased
+- Added function `getDownloadLink` to `File` object
 
 ## 0.1.4
 
