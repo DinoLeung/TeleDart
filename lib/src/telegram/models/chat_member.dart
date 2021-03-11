@@ -26,9 +26,11 @@ class ChatMember {
   String custom_title;
   bool is_anonymous;
   bool can_be_edited;
+  bool can_manage_chat;
   bool can_post_messages;
   bool can_edit_messages;
   bool can_delete_messages;
+  bool can_manage_voice_chats;
   bool can_restrict_members;
   bool can_promote_members;
   bool can_change_info;
@@ -48,9 +50,11 @@ class ChatMember {
     this.custom_title,
     this.is_anonymous,
     this.can_be_edited,
+    this.can_manage_chat,
     this.can_post_messages,
     this.can_edit_messages,
     this.can_delete_messages,
+    this.can_manage_voice_chats,
     this.can_restrict_members,
     this.can_promote_members,
     this.can_change_info,

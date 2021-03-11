@@ -21,7 +21,7 @@ import 'dart:io' as io;
 import 'package:http/http.dart' as http;
 
 class HttpClient {
-  static bool _nullFilter(_, value) => value == null || value == 'null';
+  static bool _nullFilter(_, value) => value == null;
 
   static http.MultipartFile toMultiPartFile(io.File file, String fieldName) =>
       http.MultipartFile(fieldName, file.openRead(), file.lengthSync(),
@@ -47,7 +47,7 @@ class HttpClient {
       {Map<String, dynamic> body}) async {
     body.removeWhere(_nullFilter);
     return http
-        .post(url, body: body.map((k, v) => MapEntry(k, '${v}')))
+        .post(url, body: body.map((k, v) => MapEntry(k, '$v')))
         .then((response) {
       Map<String, dynamic> responseBody = jsonDecode(response.body);
       if (responseBody['ok']) {
@@ -69,7 +69,7 @@ class HttpClient {
     body.removeWhere(_nullFilter);
     var request = http.MultipartRequest('POST', Uri.parse(url))
       ..headers.addAll({'Content-Type': 'multipart/form-data'})
-      ..fields.addAll(body.map((k, v) => MapEntry(k, '${v}')))
+      ..fields.addAll(body.map((k, v) => MapEntry(k, '$v')))
       ..files.addAll(files);
     return request
         .send()
@@ -92,5 +92,5 @@ class HttpClientException implements Exception {
   HttpClientException(this.code, this.description);
   bool isHttpClientError() => code >= 400 && code < 500;
   @override
-  String toString() => 'HttpClientException: ${code} ${description}';
+  String toString() => 'HttpClientException: $code $description';
 }

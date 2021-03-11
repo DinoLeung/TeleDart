@@ -19,7 +19,7 @@ import 'dart:async';
 import '../../telegram/model.dart';
 
 class Event {
-  // User object of bot.
+  /// User object of bot.
   User me;
 
   StreamController<Message> _messageStreamController;
@@ -33,6 +33,8 @@ class Event {
   StreamController<PreCheckoutQuery> _preCheckoutQueryStreamController;
   StreamController<Poll> _pollStreamController;
   StreamController<PollAnswer> _pollAnswerStreamController;
+  StreamController<ChatMemberUpdated> _myChatMemberStreamController;
+  StreamController<ChatMemberUpdated> _chatMemberStreamController;
 
   /// Constructor
   Event({bool sync = false}) {
@@ -48,6 +50,8 @@ class Event {
     _preCheckoutQueryStreamController = StreamController.broadcast(sync: sync);
     _pollStreamController = StreamController.broadcast(sync: sync);
     _pollAnswerStreamController = StreamController.broadcast(sync: sync);
+    _myChatMemberStreamController = StreamController.broadcast(sync: sync);
+    _chatMemberStreamController = StreamController.broadcast(sync: sync);
   }
 
   /// Listens to message events
@@ -154,8 +158,12 @@ class Event {
       _pollStreamController.add(update.poll);
     } else if (update.poll_answer != null) {
       _pollAnswerStreamController.add(update.poll_answer);
+    } else if (update.my_chat_member != null) {
+      _myChatMemberStreamController.add(update.my_chat_member);
+    } else if (update.chat_member != null) {
+      _chatMemberStreamController.add(update.chat_member);
     } else {
-      throw TeleDartEventException('Update is not recognised.');
+      throw TeleDartEventException('Receieved unrecognised update');
     }
   }
 
@@ -193,11 +201,19 @@ class Event {
 
   /// Listen to poll answer events
   Stream<PollAnswer> onPollAnswer() => _pollAnswerStreamController.stream;
+
+  /// Listen to my chat member events
+  Stream<ChatMemberUpdated> onMyChatMember() =>
+      _myChatMemberStreamController.stream;
+
+  /// Listen to chat member events
+  Stream<ChatMemberUpdated> onChatMember() =>
+      _chatMemberStreamController.stream;
 }
 
 class TeleDartEventException implements Exception {
   String cause;
   TeleDartEventException(this.cause);
   @override
-  String toString() => 'TeleDartEventException: ${cause}';
+  String toString() => 'TeleDartEventException: $cause';
 }

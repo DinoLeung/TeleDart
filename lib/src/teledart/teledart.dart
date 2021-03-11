@@ -64,8 +64,7 @@ class TeleDart {
   /// Configures a webhook used by this bot to receive updates.
   ///
   /// For a default webhook managed by this library, you can use a [Webhook].
-  /// Alternatively, you can manage webhooks yourself by implementing a
-  /// [BaseWebhook].
+  /// Alternatively, you can manage webhooks yourself by extending it.
   ///
   /// See: https://core.telegram.org/bots/api#setwebhook
   Future<void> setWebhook() => fetcher != null && fetcher is Webhook
@@ -83,7 +82,13 @@ class TeleDart {
   }
 
   /// Private method to add updates into events queue
-  void _updatesHandler(Update update) => _event.emitUpdate(update);
+  void _updatesHandler(Update update) {
+    try {
+      _event.emitUpdate(update);
+    } on TeleDartEventException catch (e) {
+      print(e);
+    }
+  }
 
   TeleDartMessage _messageStreamMapper(Message msg) =>
       TeleDartMessage(this, msg);
@@ -155,6 +160,12 @@ class TeleDart {
 
   /// Listen to poll answer events
   Stream<PollAnswer> onPollAnswer() => _event.onPollAnswer();
+
+  /// Listen to my chat member events
+  Stream<ChatMemberUpdated> onMyChatMember() => _event.onMyChatMember();
+
+  /// Listen to chat member events
+  Stream<ChatMemberUpdated> onChatMember() => _event.onChatMember();
 
   // Short-cuts revolution
 
@@ -581,5 +592,5 @@ class TeleDartException implements Exception {
   String cause;
   TeleDartException(this.cause);
   @override
-  String toString() => 'TeleDartException: ${cause}';
+  String toString() => 'TeleDartException: $cause';
 }
