@@ -1210,7 +1210,7 @@ class Telegram {
   /// The link can be revoked using the method [revokeChatInviteLink].
   /// Returns the new invite link as [ChatInviteLink] object.
   ///
-  /// https://core.telegram.org/bots/api#createChatInviteLink
+  /// https://core.telegram.org/bots/api#createchatinvitelink
   ///
   /// [revokeChatInviteLink]: https://core.telegram.org/bots/api#revokechatinvitelink
   /// [ChatInviteLink]: https://core.telegram.org/bots/api#chatinvitelink
@@ -1234,7 +1234,7 @@ class Telegram {
   /// The bot must be an administrator in the chat for this to work and must have the appropriate admin rights.
   /// Returns the edited invite link as a [ChatInviteLink] object.
   ///
-  /// https://core.telegram.org/bots/api#editChatInviteLink
+  /// https://core.telegram.org/bots/api#editchatinvitelink
   ///
   /// [ChatInviteLink]: https://core.telegram.org/bots/api#chatinvitelink
   Future<ChatInviteLink> editChatInviteLink(dynamic chat_id, String invite_link,
@@ -1259,7 +1259,7 @@ class Telegram {
   /// The bot must be an administrator in the chat for this to work and must have the appropriate admin rights.
   /// Returns the revoked invite link as [ChatInviteLink] object.
   ///
-  /// https://core.telegram.org/bots/api#revokeChatInviteLink
+  /// https://core.telegram.org/bots/api#revokechatinvitelink
   ///
   /// [ChatInviteLink]: https://core.telegram.org/bots/api#chatinvitelink
   Future<ChatInviteLink> revokeChatInviteLink(
