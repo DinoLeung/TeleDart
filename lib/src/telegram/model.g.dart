@@ -315,6 +315,12 @@ Message _$MessageFromJson(Map<String, dynamic> json) {
     group_chat_created: json['group_chat_created'] as bool,
     supergroup_chat_created: json['supergroup_chat_created'] as bool,
     channel_chat_created: json['channel_chat_created'] as bool,
+    message_auto_delete_timer_changed:
+        json['message_auto_delete_timer_changed'] == null
+            ? null
+            : MessageAutoDeleteTimerChanged.fromJson(
+                json['message_auto_delete_timer_changed']
+                    as Map<String, dynamic>),
     migrate_to_chat_id: json['migrate_to_chat_id'] as int,
     migrate_from_chat_id: json['migrate_from_chat_id'] as int,
     pinned_message: json['pinned_message'] == null
@@ -410,6 +416,8 @@ Map<String, dynamic> _$MessageToJson(Message instance) {
   writeNotNull('group_chat_created', instance.group_chat_created);
   writeNotNull('supergroup_chat_created', instance.supergroup_chat_created);
   writeNotNull('channel_chat_created', instance.channel_chat_created);
+  writeNotNull('message_auto_delete_timer_changed',
+      instance.message_auto_delete_timer_changed?.toJson());
   writeNotNull('migrate_to_chat_id', instance.migrate_to_chat_id);
   writeNotNull('migrate_from_chat_id', instance.migrate_from_chat_id);
   writeNotNull('pinned_message', instance.pinned_message?.toJson());
@@ -962,6 +970,27 @@ Map<String, dynamic> _$ProximityAlertTriggeredToJson(
   writeNotNull('traveler', instance.traveler?.toJson());
   writeNotNull('watcher', instance.watcher?.toJson());
   writeNotNull('distance', instance.distance);
+  return val;
+}
+
+MessageAutoDeleteTimerChanged _$MessageAutoDeleteTimerChangedFromJson(
+    Map<String, dynamic> json) {
+  return MessageAutoDeleteTimerChanged(
+    message_auto_delete_time: json['message_auto_delete_time'] as int,
+  );
+}
+
+Map<String, dynamic> _$MessageAutoDeleteTimerChangedToJson(
+    MessageAutoDeleteTimerChanged instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('message_auto_delete_time', instance.message_auto_delete_time);
   return val;
 }
 

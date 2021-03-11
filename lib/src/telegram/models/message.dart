@@ -63,6 +63,7 @@ class Message {
   bool group_chat_created;
   bool supergroup_chat_created;
   bool channel_chat_created;
+  MessageAutoDeleteTimerChanged message_auto_delete_timer_changed;
   int migrate_to_chat_id;
   int migrate_from_chat_id;
   Message pinned_message;
@@ -119,6 +120,7 @@ class Message {
     this.group_chat_created,
     this.supergroup_chat_created,
     this.channel_chat_created,
+    this.message_auto_delete_timer_changed,
     this.migrate_to_chat_id,
     this.migrate_from_chat_id,
     this.pinned_message,
