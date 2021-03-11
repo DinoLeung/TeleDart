@@ -1,3 +1,7 @@
+## 0.1.6
+
+- Fixed `jsonEncode` issue caused by `_nullFilter` fix 
+
 ## 0.1.5
 
 - Added function `getDownloadLink` to `File` object
