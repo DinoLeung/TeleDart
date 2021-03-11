@@ -163,7 +163,7 @@ class Event {
     } else if (update.chat_member != null) {
       _chatMemberStreamController.add(update.chat_member);
     } else {
-      throw TeleDartEventException('Receieved unrecognised update.');
+      throw TeleDartEventException('Receieved unrecognised update');
     }
   }
 

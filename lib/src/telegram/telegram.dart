@@ -1205,6 +1205,78 @@ class Telegram {
     return await HttpClient.httpPost(requestUrl, body: body);
   }
 
+  /// Use this method to create an additional invite link for a chat.
+  /// The bot must be an administrator in the chat for this to work and must have the appropriate admin rights.
+  /// The link can be revoked using the method [revokeChatInviteLink].
+  /// Returns the new invite link as [ChatInviteLink] object.
+  ///
+  /// https://core.telegram.org/bots/api#createChatInviteLink
+  ///
+  /// [revokeChatInviteLink]: https://core.telegram.org/bots/api#revokechatinvitelink
+  /// [ChatInviteLink]: https://core.telegram.org/bots/api#chatinvitelink
+  Future<ChatInviteLink> createChatInviteLink(dynamic chat_id,
+      {int expire_date, int member_limit}) async {
+    if (chat_id is! String && chat_id is! int) {
+      return Future.error(TelegramException(
+          'Attribute \'chat_id\' can only be either type of String or int'));
+    }
+    var requestUrl = '${_baseUrl}${_token}/createChatInviteLink';
+    var body = <String, dynamic>{
+      'chat_id': chat_id,
+      'expire_date': expire_date,
+      'member_limit': member_limit,
+    };
+    return ChatInviteLink.fromJson(
+        await HttpClient.httpPost(requestUrl, body: body));
+  }
+
+  /// Use this method to edit a non-primary invite link created by the bot.
+  /// The bot must be an administrator in the chat for this to work and must have the appropriate admin rights.
+  /// Returns the edited invite link as a [ChatInviteLink] object.
+  ///
+  /// https://core.telegram.org/bots/api#editChatInviteLink
+  ///
+  /// [ChatInviteLink]: https://core.telegram.org/bots/api#chatinvitelink
+  Future<ChatInviteLink> editChatInviteLink(dynamic chat_id, String invite_link,
+      {int expire_date, int member_limit}) async {
+    if (chat_id is! String && chat_id is! int) {
+      return Future.error(TelegramException(
+          'Attribute \'chat_id\' can only be either type of String or int'));
+    }
+    var requestUrl = '${_baseUrl}${_token}/editChatInviteLink';
+    var body = <String, dynamic>{
+      'chat_id': chat_id,
+      'invite_link': invite_link,
+      'expire_date': expire_date,
+      'member_limit': member_limit,
+    };
+    return ChatInviteLink.fromJson(
+        await HttpClient.httpPost(requestUrl, body: body));
+  }
+
+  /// Use this method to revoke an invite link created by the bot. If the primary link is revoked,
+  /// a new link is automatically generated.
+  /// The bot must be an administrator in the chat for this to work and must have the appropriate admin rights.
+  /// Returns the revoked invite link as [ChatInviteLink] object.
+  ///
+  /// https://core.telegram.org/bots/api#revokeChatInviteLink
+  ///
+  /// [ChatInviteLink]: https://core.telegram.org/bots/api#chatinvitelink
+  Future<ChatInviteLink> revokeChatInviteLink(
+      dynamic chat_id, String invite_link) async {
+    if (chat_id is! String && chat_id is! int) {
+      return Future.error(TelegramException(
+          'Attribute \'chat_id\' can only be either type of String or int'));
+    }
+    var requestUrl = '${_baseUrl}${_token}/revokeChatInviteLink';
+    var body = <String, dynamic>{
+      'chat_id': chat_id,
+      'invite_link': invite_link,
+    };
+    return ChatInviteLink.fromJson(
+        await HttpClient.httpPost(requestUrl, body: body));
+  }
+
   /// Use this method to set a profile photo for the chat.
   /// Photos can't be changed for private chats.
   /// The bot must be an administrator in the chat for this to work and must have the appropriate
