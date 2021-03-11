@@ -335,6 +335,19 @@ Message _$MessageFromJson(Map<String, dynamic> json) {
         ? null
         : ProximityAlertTriggered.fromJson(
             json['proximity_alert_triggered'] as Map<String, dynamic>),
+    voice_chat_started: json['voice_chat_started'] == null
+        ? null
+        : VoiceChatStarted.fromJson(
+            json['voice_chat_started'] as Map<String, dynamic>),
+    voice_chat_ended: json['voice_chat_ended'] == null
+        ? null
+        : VoiceChatEnded.fromJson(
+            json['voice_chat_ended'] as Map<String, dynamic>),
+    voice_chat_participants_invited: json['voice_chat_participants_invited'] ==
+            null
+        ? null
+        : VoiceChatParticipantsInvited.fromJson(
+            json['voice_chat_participants_invited'] as Map<String, dynamic>),
     reply_markup: json['reply_markup'] == null
         ? null
         : InlineKeyboardMarkup.fromJson(
@@ -406,6 +419,10 @@ Map<String, dynamic> _$MessageToJson(Message instance) {
   writeNotNull('passport_data', instance.passport_data?.toJson());
   writeNotNull('proximity_alert_triggered',
       instance.proximity_alert_triggered?.toJson());
+  writeNotNull('voice_chat_started', instance.voice_chat_started?.toJson());
+  writeNotNull('voice_chat_ended', instance.voice_chat_ended?.toJson());
+  writeNotNull('voice_chat_participants_invited',
+      instance.voice_chat_participants_invited?.toJson());
   writeNotNull('reply_markup', instance.reply_markup?.toJson());
   return val;
 }
@@ -945,6 +962,56 @@ Map<String, dynamic> _$ProximityAlertTriggeredToJson(
   writeNotNull('traveler', instance.traveler?.toJson());
   writeNotNull('watcher', instance.watcher?.toJson());
   writeNotNull('distance', instance.distance);
+  return val;
+}
+
+VoiceChatStarted _$VoiceChatStartedFromJson(Map<String, dynamic> json) {
+  return VoiceChatStarted();
+}
+
+Map<String, dynamic> _$VoiceChatStartedToJson(VoiceChatStarted instance) =>
+    <String, dynamic>{};
+
+VoiceChatEnded _$VoiceChatEndedFromJson(Map<String, dynamic> json) {
+  return VoiceChatEnded(
+    duration: json['duration'] as int,
+  );
+}
+
+Map<String, dynamic> _$VoiceChatEndedToJson(VoiceChatEnded instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('duration', instance.duration);
+  return val;
+}
+
+VoiceChatParticipantsInvited _$VoiceChatParticipantsInvitedFromJson(
+    Map<String, dynamic> json) {
+  return VoiceChatParticipantsInvited(
+    users: (json['users'] as List)
+        ?.map(
+            (e) => e == null ? null : User.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
+  );
+}
+
+Map<String, dynamic> _$VoiceChatParticipantsInvitedToJson(
+    VoiceChatParticipantsInvited instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('users', instance.users?.map((e) => e?.toJson())?.toList());
   return val;
 }
 

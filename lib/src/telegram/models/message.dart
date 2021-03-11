@@ -71,6 +71,9 @@ class Message {
   String connected_website;
   PassportData passport_data;
   ProximityAlertTriggered proximity_alert_triggered;
+  VoiceChatStarted voice_chat_started;
+  VoiceChatEnded voice_chat_ended;
+  VoiceChatParticipantsInvited voice_chat_participants_invited;
   InlineKeyboardMarkup reply_markup;
 
   Message({
@@ -124,6 +127,9 @@ class Message {
     this.connected_website,
     this.passport_data,
     this.proximity_alert_triggered,
+    this.voice_chat_started,
+    this.voice_chat_ended,
+    this.voice_chat_participants_invited,
     this.reply_markup,
   });
 

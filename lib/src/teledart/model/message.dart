@@ -73,6 +73,10 @@ class TeleDartMessage extends Message {
     super.connected_website = message.connected_website;
     super.passport_data = message.passport_data;
     super.proximity_alert_triggered = message.proximity_alert_triggered;
+    super.voice_chat_started = message.voice_chat_started;
+    super.voice_chat_ended = message.voice_chat_ended;
+    super.voice_chat_participants_invited =
+        message.voice_chat_participants_invited;
     super.reply_markup = message.reply_markup;
   }
 
