@@ -1059,7 +1059,7 @@ class Telegram {
   ///
   /// [unbanned]: https://core.telegram.org/bots/api#unbanchatmember
   Future<bool> kickChatMember(dynamic chat_id, int user_id,
-      {int until_date}) async {
+      {int until_date, bool revoke_messages}) async {
     if (chat_id is! String && chat_id is! int) {
       return Future.error(TelegramException(
           'Attribute \'chat_id\' can only be either type of String or int'));
@@ -1069,6 +1069,7 @@ class Telegram {
       'chat_id': chat_id,
       'user_id': user_id,
       'until_date': until_date,
+      'revoke_messages': revoke_messages,
     };
     return await HttpClient.httpPost(requestUrl, body: body);
   }

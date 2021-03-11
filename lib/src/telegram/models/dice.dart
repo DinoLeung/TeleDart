@@ -25,6 +25,7 @@ class Dice {
   static const String DART = '🎯';
   static const String BASKETBALL = '🏀';
   static const String FOOTBALL = '⚽';
+  static const String BOWLING = '🎳';
   static const String SLOT_MACHINE = '🎰';
 
   int value;
