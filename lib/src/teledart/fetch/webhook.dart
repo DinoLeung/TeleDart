@@ -85,20 +85,19 @@ class Webhook extends AbstractUpdateFetcher {
   }
 
   Future<void> setWebhook() async {
-    Future<dynamic> serverFuture = _context != null
-        ? io.HttpServer.bind(
-            io.InternetAddress.anyIPv4.address, serverPort ?? port)
-        : io.HttpServer.bindSecure(
-            io.InternetAddress.anyIPv4.address, serverPort ?? port, _context);
+    _server = _context != null
+        ? await io.HttpServer.bindSecure(
+            io.InternetAddress.anyIPv4.address, serverPort ?? port, _context)
+        : await io.HttpServer.bind(
+            io.InternetAddress.anyIPv4.address, serverPort ?? port);
 
-    await serverFuture.then((server) => _server = server).then((_) {
-      telegram.setWebhook('$url:$port$secretPath',
-          ip_address: ip_address,
-          certificate: uploadCertificate ? certificate : null,
-          max_connections: max_connections,
-          allowed_updates: allowed_updates,
-          drop_pending_updates: drop_pending_updates);
-    });
+    // #enddocregion bind
+    await telegram.setWebhook('$url:$port$secretPath',
+        ip_address: ip_address,
+        certificate: uploadCertificate ? certificate : null,
+        max_connections: max_connections,
+        allowed_updates: allowed_updates,
+        drop_pending_updates: drop_pending_updates);
   }
 
   /// Apply webhook configuration on Telegram API, and start the webhook server.
