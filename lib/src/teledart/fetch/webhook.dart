@@ -91,7 +91,6 @@ class Webhook extends AbstractUpdateFetcher {
         : await io.HttpServer.bind(
             io.InternetAddress.anyIPv4.address, serverPort ?? port);
 
-    // #enddocregion bind
     await telegram.setWebhook('$url:$port$secretPath',
         ip_address: ip_address,
         certificate: uploadCertificate ? certificate : null,
