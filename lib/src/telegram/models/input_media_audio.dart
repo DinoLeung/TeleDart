@@ -49,7 +49,7 @@ class InputMediaAudio implements InputMedia {
   });
 
   @JsonKey(ignore: true)
-  Duration get duration_ => TimeHelper.toDuration(duration);
+  Duration get duration_ => TimeHelper.toDuration(duration ?? 0);
   set duration_(Duration duration) =>
       this.duration = TimeHelper.toSeconds(duration);
 

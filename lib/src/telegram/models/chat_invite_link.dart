@@ -38,7 +38,7 @@ class ChatInviteLink {
   });
 
   @JsonKey(ignore: true)
-  DateTime get expire_date_ => TimeHelper.toDateTime(expire_date);
+  DateTime get expire_date_ => TimeHelper.toDateTime(expire_date ?? 0);
   set expire_date_(DateTime dateTime) =>
       expire_date = TimeHelper.toUnixTime(dateTime);
 

@@ -60,7 +60,7 @@ class InlineQueryResultGif implements InlineQueryResult {
   });
 
   @JsonKey(ignore: true)
-  Duration get gif_duration_ => TimeHelper.toDuration(gif_duration);
+  Duration get gif_duration_ => TimeHelper.toDuration(gif_duration ?? 0);
   set gif_duration_(Duration duration) =>
       gif_duration = TimeHelper.toSeconds(duration);
 

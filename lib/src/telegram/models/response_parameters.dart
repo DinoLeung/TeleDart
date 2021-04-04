@@ -30,7 +30,7 @@ class ResponseParameters {
   });
 
   @JsonKey(ignore: true)
-  Duration get retry_after_ => TimeHelper.toDuration(retry_after);
+  Duration get retry_after_ => TimeHelper.toDuration(retry_after ?? 0);
   set retry_after_(Duration duration) =>
       retry_after = TimeHelper.toSeconds(duration);
 

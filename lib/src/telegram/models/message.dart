@@ -166,7 +166,7 @@ class Message {
   MessageEntity? entityOf(String type) {
     var i = indexOfEntity(type);
     if (i >= 0) {
-      return (entities ?? caption_entities)[i]!;
+      return (entities ?? caption_entities)![i];
     } else {
       return null;
     }
@@ -175,7 +175,8 @@ class Message {
   String? getEntity(String type) {
     var ett = entityOf(type);
     if (ett != null) {
-      return (text ?? caption).substring(ett.offset, ett.offset + ett.length);
+      return (text ?? caption)
+          ?.substring(ett.offset ?? 0, ett.offset ?? 0 + (ett.length ?? 0));
     } else {
       return null;
     }

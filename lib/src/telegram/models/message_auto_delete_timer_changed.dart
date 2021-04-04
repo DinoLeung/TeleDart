@@ -27,7 +27,7 @@ class MessageAutoDeleteTimerChanged {
 
   @JsonKey(ignore: true)
   Duration get message_auto_delete_time_ =>
-      TimeHelper.toDuration(message_auto_delete_time);
+      TimeHelper.toDuration(message_auto_delete_time ?? 0);
   set message_auto_delete_time_(Duration duration) =>
       message_auto_delete_time = TimeHelper.toSeconds(duration);
 

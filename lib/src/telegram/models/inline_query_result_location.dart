@@ -63,7 +63,7 @@ class InlineQueryResultLocation implements InlineQueryResult {
   });
 
   @JsonKey(ignore: true)
-  Duration get live_period_ => TimeHelper.toDuration(live_period);
+  Duration get live_period_ => TimeHelper.toDuration(live_period ?? 0);
   set live_period_(Duration duration) =>
       live_period = TimeHelper.toSeconds(duration);
 
