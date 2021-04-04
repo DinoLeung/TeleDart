@@ -19,7 +19,7 @@ import '../../../teledart.dart';
 import '../../telegram/model.dart';
 
 class TeleDartCallbackQuery extends CallbackQuery {
-  TeleDart _teledart;
+  TeleDart? _teledart;
 
   TeleDartCallbackQuery(TeleDart teledart, CallbackQuery callbackQuery) {
     _teledart = teledart;
@@ -34,7 +34,13 @@ class TeleDartCallbackQuery extends CallbackQuery {
 
   /// Short-cut to answer callback query
   Future<bool> answer(
-          {String text, bool show_alert, String url, int cache_time}) =>
-      _teledart.answerCallbackQuery(this,
-          text: text, show_alert: show_alert, url: url, cache_time: cache_time);
+          {String? text, bool? show_alert, String? url, int? cache_time}) =>
+      _teledart?.answerCallbackQuery(
+        this,
+        text: text ?? '',
+        show_alert: show_alert ?? false,
+        url: url ?? '',
+        cache_time: cache_time ?? 0,
+      ) ??
+      Future.value(false);
 }

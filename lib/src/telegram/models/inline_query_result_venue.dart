@@ -28,23 +28,23 @@ part of '../model.dart';
 @JsonSerializable()
 class InlineQueryResultVenue implements InlineQueryResult {
   @override
-  String id;
+  String? id;
   @override
-  String type;
-  double latitude;
-  double longitude;
-  String title;
-  String address;
-  String foursquare_id;
-  String foursquare_type;
-  String google_place_id;
-  String google_place_type;
+  String? type;
+  double? latitude;
+  double? longitude;
+  String? title;
+  String? address;
+  String? foursquare_id;
+  String? foursquare_type;
+  String? google_place_id;
+  String? google_place_type;
   @override
-  InlineKeyboardMarkup reply_markup;
-  InputMessageContent input_message_content;
-  String thumb_url;
-  int thumb_width;
-  int thumb_height;
+  InlineKeyboardMarkup? reply_markup;
+  InputMessageContent? input_message_content;
+  String? thumb_url;
+  int? thumb_width;
+  int? thumb_height;
   InlineQueryResultVenue({
     this.id,
     this.type = 'venue',

@@ -21,12 +21,12 @@ part of '../model.dart';
 /// https://core.telegram.org/bots/api#messageentity
 @JsonSerializable()
 class MessageEntity {
-  String type;
-  int offset;
-  int length;
-  String url;
-  User user;
-  String language;
+  String? type;
+  int? offset;
+  int? length;
+  String? url;
+  User? user;
+  String? language;
   MessageEntity({
     this.type,
     this.offset,

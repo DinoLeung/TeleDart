@@ -21,15 +21,15 @@ part of '../model.dart';
 /// https://core.telegram.org/bots/api#animation
 @JsonSerializable()
 class Animation {
-  String file_id;
-  String file_unique_id;
-  int width;
-  int height;
-  int duration;
-  PhotoSize thumb;
-  String file_name;
-  String mime_type;
-  int file_size;
+  String? file_id;
+  String? file_unique_id;
+  int? width;
+  int? height;
+  int? duration;
+  PhotoSize? thumb;
+  String? file_name;
+  String? mime_type;
+  int? file_size;
 
   Animation({
     this.file_id,
@@ -44,7 +44,7 @@ class Animation {
   });
 
   @JsonKey(ignore: true)
-  Duration get duration_ => TimeHelper.toDuration(duration);
+  Duration get duration_ => TimeHelper.toDuration(duration ?? 0);
   set duration_(Duration duration) =>
       this.duration = TimeHelper.toSeconds(duration);
 

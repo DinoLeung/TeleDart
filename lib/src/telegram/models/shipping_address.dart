@@ -21,12 +21,12 @@ part of '../model.dart';
 /// https://core.telegram.org/bots/api#shippingaddress
 @JsonSerializable()
 class ShippingAddress {
-  String country_code;
-  String state;
-  String city;
-  String street_line1;
-  String street_line2;
-  String post_code;
+  String? country_code;
+  String? state;
+  String? city;
+  String? street_line1;
+  String? street_line2;
+  String? post_code;
   ShippingAddress({
     this.country_code,
     this.state,

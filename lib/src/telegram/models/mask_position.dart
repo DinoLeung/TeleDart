@@ -21,10 +21,10 @@ part of '../model.dart';
 /// https://core.telegram.org/bots/api#maskposition
 @JsonSerializable()
 class MaskPosition {
-  String point;
-  double x_shift;
-  double y_shift;
-  double scale;
+  String? point;
+  double? x_shift;
+  double? y_shift;
+  double? scale;
   MaskPosition({
     this.point,
     this.x_shift,

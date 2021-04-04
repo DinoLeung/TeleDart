@@ -21,23 +21,23 @@ part of '../model.dart';
 /// https://core.telegram.org/bots/api#chat
 @JsonSerializable()
 class Chat {
-  int id;
-  String type;
-  String title;
-  String username;
-  String first_name;
-  String last_name;
-  ChatPhoto photo;
-  String bio;
-  String description;
-  String invite_link;
-  Message pinned_message;
-  ChatPermissions permissions;
-  int slow_mode_delay;
-  String sticker_set_name;
-  bool can_set_sticker_set;
-  int linked_chat_id;
-  ChatLocation location;
+  int? id;
+  String? type;
+  String? title;
+  String? username;
+  String? first_name;
+  String? last_name;
+  ChatPhoto? photo;
+  String? bio;
+  String? description;
+  String? invite_link;
+  Message? pinned_message;
+  ChatPermissions? permissions;
+  int? slow_mode_delay;
+  String? sticker_set_name;
+  bool? can_set_sticker_set;
+  int? linked_chat_id;
+  ChatLocation? location;
   Chat({
     this.id,
     this.type,

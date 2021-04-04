@@ -27,12 +27,12 @@ part of '../model.dart';
 @JsonSerializable()
 class InlineQueryResultGame implements InlineQueryResult {
   @override
-  String id;
+  String? id;
   @override
-  String type;
-  String game_short_name;
+  String? type;
+  String? game_short_name;
   @override
-  InlineKeyboardMarkup reply_markup;
+  InlineKeyboardMarkup? reply_markup;
   InlineQueryResultGame({
     this.id,
     this.type = 'game',

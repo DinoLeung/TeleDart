@@ -24,8 +24,8 @@ part of '../model.dart';
 /// [sticker]: https://core.telegram.org/bots/api#sticker
 @JsonSerializable()
 class PollOption {
-  String text;
-  int voter_count;
+  String? text;
+  int? voter_count;
   PollOption({
     this.text,
     this.voter_count,

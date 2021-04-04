@@ -21,8 +21,8 @@ part of '../model.dart';
 /// https://core.telegram.org/bots/api#chatlocation
 @JsonSerializable()
 class ChatLocation {
-  Location location;
-  String address;
+  Location? location;
+  String? address;
   ChatLocation({
     this.location,
     this.address,

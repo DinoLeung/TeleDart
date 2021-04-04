@@ -28,22 +28,22 @@ part of '../model.dart';
 @JsonSerializable()
 class InlineQueryResultDocument implements InlineQueryResult {
   @override
-  String id;
+  String? id;
   @override
-  String type;
-  String title;
-  String caption;
-  String parse_mode;
-  List<MessageEntity> caption_entities;
-  String document_url;
-  String mime_type;
-  String description;
+  String? type;
+  String? title;
+  String? caption;
+  String? parse_mode;
+  List<MessageEntity>? caption_entities;
+  String? document_url;
+  String? mime_type;
+  String? description;
   @override
-  InlineKeyboardMarkup reply_markup;
-  InputMessageContent input_message_content;
-  String thumb_url;
-  int thumb_width;
-  int thumb_height;
+  InlineKeyboardMarkup? reply_markup;
+  InputMessageContent? input_message_content;
+  String? thumb_url;
+  int? thumb_width;
+  int? thumb_height;
   InlineQueryResultDocument({
     this.id,
     this.type = 'document',

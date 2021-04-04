@@ -23,13 +23,13 @@ part of '../model.dart';
 @JsonSerializable()
 class PassportElementErrorDataField implements PassportElementError {
   @override
-  String source;
+  String? source;
   @override
-  String type;
+  String? type;
   @override
-  String message;
-  String field_name;
-  String data_hash;
+  String? message;
+  String? field_name;
+  String? data_hash;
   PassportElementErrorDataField({
     this.source,
     this.type,

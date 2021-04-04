@@ -42,9 +42,9 @@ part of '../model.dart';
 /// https://core.telegram.org/bots/api#inlinequeryresult
 @JsonSerializable()
 class InlineQueryResult {
-  String type;
-  String id;
-  InlineKeyboardMarkup reply_markup;
+  String? type;
+  String? id;
+  InlineKeyboardMarkup? reply_markup;
   InlineQueryResult({
     this.type,
     this.id,

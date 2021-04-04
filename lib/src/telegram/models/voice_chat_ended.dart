@@ -21,12 +21,12 @@ part of '../model.dart';
 /// https://core.telegram.org/bots/api#voicechatended
 @JsonSerializable()
 class VoiceChatEnded {
-  int duration;
+  int? duration;
 
   VoiceChatEnded({this.duration});
 
   @JsonKey(ignore: true)
-  Duration get duration_ => TimeHelper.toDuration(duration);
+  Duration get duration_ => TimeHelper.toDuration(duration ?? 0);
   set duration_(Duration duration) =>
       this.duration = TimeHelper.toSeconds(duration);
 

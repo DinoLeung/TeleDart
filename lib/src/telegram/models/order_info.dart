@@ -21,10 +21,10 @@ part of '../model.dart';
 /// https://core.telegram.org/bots/api#orderinfo
 @JsonSerializable()
 class OrderInfo {
-  String name;
-  String phone_number;
-  String email;
-  ShippingAddress shippingAddress;
+  String? name;
+  String? phone_number;
+  String? email;
+  ShippingAddress? shippingAddress;
   OrderInfo({
     this.name,
     this.phone_number,

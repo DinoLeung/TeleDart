@@ -23,12 +23,12 @@ part of '../model.dart';
 /// [content]: https://core.telegram.org/bots/api#inputmessagecontent
 @JsonSerializable()
 class InputLocationMessageContent implements InputMessageContent {
-  double latitude;
-  double longitude;
-  double horizontal_accuracy;
-  int live_period;
-  int heading;
-  int proximity_alert_radius;
+  double? latitude;
+  double? longitude;
+  double? horizontal_accuracy;
+  int? live_period;
+  int? heading;
+  int? proximity_alert_radius;
 
   InputLocationMessageContent({
     this.latitude,

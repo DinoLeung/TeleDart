@@ -27,10 +27,10 @@ part of '../model.dart';
 /// https://core.telegram.org/bots/api#keyboardbutton
 @JsonSerializable()
 class KeyboardButton {
-  String text;
-  bool request_contact;
-  bool request_location;
-  KeyboardButtonPollType request_poll;
+  String? text;
+  bool? request_contact;
+  bool? request_location;
+  KeyboardButtonPollType? request_poll;
   KeyboardButton({
     this.text,
     this.request_contact,

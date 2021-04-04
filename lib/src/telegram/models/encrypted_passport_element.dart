@@ -21,16 +21,16 @@ part of '../model.dart';
 /// https://core.telegram.org/bots/api#encryptedpassportelement
 @JsonSerializable()
 class EncryptedPassportElement {
-  String type;
-  String data;
-  String phone_number;
-  String email;
-  List<PassportFile> files;
-  PassportFile front_side;
-  PassportFile reverse_side;
-  PassportFile selfie;
-  List<PassportFile> translation;
-  String hash;
+  String? type;
+  String? data;
+  String? phone_number;
+  String? email;
+  List<PassportFile>? files;
+  PassportFile? front_side;
+  PassportFile? reverse_side;
+  PassportFile? selfie;
+  List<PassportFile>? translation;
+  String? hash;
   EncryptedPassportElement({
     this.type,
     this.data,

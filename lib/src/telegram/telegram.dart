@@ -41,10 +41,10 @@ class Telegram {
   /// [wiki]: http://en.wikipedia.org/wiki/Push_technology#Long_polling
   /// [Update]: https://core.telegram.org/bots/api#update
   Future<List<Update>> getUpdates(
-      {int offset,
-      int limit,
-      int timeout,
-      List<String> allowed_updates}) async {
+      {int? offset,
+      int? limit,
+      int? timeout,
+      List<String>? allowed_updates}) async {
     var requestUrl = '$_baseUrl$_token/getUpdates?' +
         (offset == null ? '' : 'offset=$offset&') +
         (limit == null ? '' : 'limit=$limit&') +
@@ -52,8 +52,8 @@ class Telegram {
         (allowed_updates == null
             ? ''
             : 'allowed_updates=${jsonEncode(allowed_updates)}');
-    return (await HttpClient.httpGet(requestUrl)
-            .timeout(Duration(milliseconds: (limit * 1.1 * 1000).round())))
+    return (await HttpClient.httpGet(requestUrl).timeout(
+            Duration(milliseconds: ((limit ?? 0) * 1.1 * 1000).round())))
         .map<Update>((update) => Update.fromJson(update))
         .toList();
   }
@@ -80,11 +80,11 @@ class Telegram {
   /// [getUpdates]: https://core.telegram.org/bots/api#getupdates
   /// [public key certificate]: https://core.telegram.org/bots/self-signed
   Future<bool> setWebhook(String url,
-      {String ip_address,
-      io.File certificate,
-      int max_connections,
-      List<String> allowed_updates,
-      bool drop_pending_updates}) async {
+      {String? ip_address,
+      io.File? certificate,
+      int? max_connections,
+      List<String>? allowed_updates,
+      bool? drop_pending_updates}) async {
     var requestUrl = '$_baseUrl$_token/setWebhook';
     var body = <String, dynamic>{
       'url': url,
@@ -112,7 +112,7 @@ class Telegram {
   /// https://core.telegram.org/bots/api#deletewebhook
   ///
   /// [getUpdates]: https://core.telegram.org/bots/api#getupdates
-  Future<bool> deleteWebhook({bool drop_pending_updates}) async {
+  Future<bool> deleteWebhook({bool? drop_pending_updates}) async {
     var requestUrl = '$_baseUrl$_token/deleteWebhook';
     var body = <String, dynamic>{'drop_pending_updates': drop_pending_updates};
     return await HttpClient.httpPost(requestUrl, body: body);
@@ -167,13 +167,13 @@ class Telegram {
   ///
   /// [Message]: https://core.telegram.org/bots/api#message
   Future<Message> sendMessage(dynamic chat_id, String text,
-      {String parse_mode,
-      List<MessageEntity> entities,
-      bool disable_web_page_preview,
-      bool disable_notification,
-      int reply_to_message_id,
-      bool allow_sending_without_reply,
-      ReplyMarkup reply_markup}) async {
+      {String? parse_mode,
+      List<MessageEntity>? entities,
+      bool? disable_web_page_preview,
+      bool? disable_notification,
+      int? reply_to_message_id,
+      bool? allow_sending_without_reply,
+      ReplyMarkup? reply_markup}) async {
     if (chat_id is! String && chat_id is! int) {
       return Future.error(TelegramException(
           'Attribute \'chat_id\' can only be either type of String or int'));
@@ -200,7 +200,7 @@ class Telegram {
   /// [Message]: https://core.telegram.org/bots/api#message
   Future<Message> forwardMessage(
       dynamic chat_id, int from_chat_id, int message_id,
-      {bool disable_notification}) async {
+      {bool? disable_notification}) async {
     if (chat_id is! String && chat_id is! int) {
       return Future.error(TelegramException(
           'Attribute \'chat_id\' can only be either type of String or int'));
@@ -228,13 +228,13 @@ class Telegram {
     dynamic chat_id,
     int from_chat_id,
     int message_id, {
-    String caption,
-    String parse_mode,
-    List<MessageEntity> caption_entities,
-    bool disable_notification,
-    int reply_to_message_id,
-    bool allow_sending_without_reply,
-    ReplyMarkup reply_markup,
+    String? caption,
+    String? parse_mode,
+    List<MessageEntity>? caption_entities,
+    bool? disable_notification,
+    int? reply_to_message_id,
+    bool? allow_sending_without_reply,
+    ReplyMarkup? reply_markup,
   }) async {
     if (chat_id is! String && chat_id is! int) {
       return Future.error(TelegramException(
@@ -264,13 +264,13 @@ class Telegram {
   ///
   /// [Message]: https://core.telegram.org/bots/api#message
   Future<Message> sendPhoto(dynamic chat_id, dynamic photo,
-      {String caption,
-      String parse_mode,
-      List<MessageEntity> caption_entities,
-      bool disable_notification,
-      int reply_to_message_id,
-      bool allow_sending_without_reply,
-      ReplyMarkup reply_markup}) async {
+      {String? caption,
+      String? parse_mode,
+      List<MessageEntity>? caption_entities,
+      bool? disable_notification,
+      int? reply_to_message_id,
+      bool? allow_sending_without_reply,
+      ReplyMarkup? reply_markup}) async {
     if (chat_id is! String && chat_id is! int) {
       return Future.error(TelegramException(
           'Attribute \'chat_id\' can only be either type of String or int'));
@@ -319,17 +319,17 @@ class Telegram {
   /// [Message]: https://core.telegram.org/bots/api#message
   /// [sendVoice]: https://core.telegram.org/bots/api#sendvoice
   Future<Message> sendAudio(dynamic chat_id, dynamic audio,
-      {String caption,
-      String parse_mode,
-      List<MessageEntity> caption_entities,
-      int duration,
-      String performer,
-      String title,
+      {String? caption,
+      String? parse_mode,
+      List<MessageEntity>? caption_entities,
+      int? duration,
+      String? performer,
+      String? title,
       dynamic thumb,
-      bool disable_notification,
-      int reply_to_message_id,
-      bool allow_sending_without_reply,
-      ReplyMarkup reply_markup}) async {
+      bool? disable_notification,
+      int? reply_to_message_id,
+      bool? allow_sending_without_reply,
+      ReplyMarkup? reply_markup}) async {
     if (chat_id is! String && chat_id is! int) {
       return Future.error(TelegramException(
           'Attribute \'chat_id\' can only be either type of String or int'));
@@ -388,14 +388,14 @@ class Telegram {
   /// [Message]: https://core.telegram.org/bots/api#message
   Future<Message> sendDocument(dynamic chat_id, dynamic document,
       {dynamic thumb,
-      String caption,
-      String parse_mode,
-      List<MessageEntity> caption_entities,
-      bool disable_content_type_detection,
-      bool disable_notification,
-      int reply_to_message_id,
-      bool allow_sending_without_reply,
-      ReplyMarkup reply_markup}) async {
+      String? caption,
+      String? parse_mode,
+      List<MessageEntity>? caption_entities,
+      bool? disable_content_type_detection,
+      bool? disable_notification,
+      int? reply_to_message_id,
+      bool? allow_sending_without_reply,
+      ReplyMarkup? reply_markup}) async {
     if (chat_id is! String && chat_id is! int) {
       return Future.error(TelegramException(
           'Attribute \'chat_id\' can only be either type of String or int'));
@@ -454,18 +454,18 @@ class Telegram {
   /// [Document]: https://core.telegram.org/bots/api#document
   /// [Message]: https://core.telegram.org/bots/api#message
   Future<Message> sendVideo(dynamic chat_id, dynamic video,
-      {int duration,
-      int width,
-      int height,
+      {int? duration,
+      int? width,
+      int? height,
       dynamic thumb,
-      String caption,
-      String parse_mode,
-      List<MessageEntity> caption_entities,
-      bool supports_streaming,
-      bool disable_notification,
-      int reply_to_message_id,
-      bool allow_sending_without_reply,
-      ReplyMarkup reply_markup}) async {
+      String? caption,
+      String? parse_mode,
+      List<MessageEntity>? caption_entities,
+      bool? supports_streaming,
+      bool? disable_notification,
+      int? reply_to_message_id,
+      bool? allow_sending_without_reply,
+      ReplyMarkup? reply_markup}) async {
     if (chat_id is! String && chat_id is! int) {
       return Future.error(TelegramException(
           'Attribute \'chat_id\' can only be either type of String or int'));
@@ -525,17 +525,17 @@ class Telegram {
   ///
   /// [Message]: https://core.telegram.org/bots/api#message
   Future<Message> sendAnimation(dynamic chat_id, dynamic animation,
-      {int duration,
-      int width,
-      int height,
+      {int? duration,
+      int? width,
+      int? height,
       dynamic thumb,
-      String caption,
-      String parse_mode,
-      List<MessageEntity> caption_entities,
-      bool disable_notification,
-      int reply_to_message_id,
-      bool allow_sending_without_reply,
-      ReplyMarkup reply_markup}) async {
+      String? caption,
+      String? parse_mode,
+      List<MessageEntity>? caption_entities,
+      bool? disable_notification,
+      int? reply_to_message_id,
+      bool? allow_sending_without_reply,
+      ReplyMarkup? reply_markup}) async {
     if (chat_id is! String && chat_id is! int) {
       return Future.error(TelegramException(
           'Attribute \'chat_id\' can only be either type of String or int'));
@@ -599,14 +599,14 @@ class Telegram {
   /// [Document]: https://core.telegram.org/bots/api#document
   /// [Message]: https://core.telegram.org/bots/api#message
   Future<Message> sendVoice(dynamic chat_id, dynamic voice,
-      {String caption,
-      String parse_mode,
-      List<MessageEntity> caption_entities,
-      int duration,
-      bool disable_notification,
-      int reply_to_message_id,
-      bool allow_sending_without_reply,
-      ReplyMarkup reply_markup}) async {
+      {String? caption,
+      String? parse_mode,
+      List<MessageEntity>? caption_entities,
+      int? duration,
+      bool? disable_notification,
+      int? reply_to_message_id,
+      bool? allow_sending_without_reply,
+      ReplyMarkup? reply_markup}) async {
     if (chat_id is! String && chat_id is! int) {
       return Future.error(TelegramException(
           'Attribute \'chat_id\' can only be either type of String or int'));
@@ -651,13 +651,13 @@ class Telegram {
   /// [v.4.0]: https://telegram.org/blog/video-messages-and-telescope
   /// [messages]: https://core.telegram.org/bots/api#message
   Future<Message> sendVideoNote(dynamic chat_id, dynamic video_note,
-      {int duration,
-      int length,
+      {int? duration,
+      int? length,
       dynamic thumb,
-      bool disable_notification,
-      int reply_to_message_id,
-      bool allow_sending_without_reply,
-      ReplyMarkup reply_markup}) async {
+      bool? disable_notification,
+      int? reply_to_message_id,
+      bool? allow_sending_without_reply,
+      ReplyMarkup? reply_markup}) async {
     if (chat_id is! String && chat_id is! int) {
       return Future.error(TelegramException(
           'Attribute \'chat_id\' can only be either type of String or int'));
@@ -713,9 +713,9 @@ class Telegram {
   ///
   /// [messages]: https://core.telegram.org/bots/api#message
   Future<List<Message>> sendMediaGroup(dynamic chat_id, List<InputMedia> media,
-      {bool disable_notification,
-      int reply_to_message_id,
-      bool allow_sending_without_reply}) async {
+      {bool? disable_notification,
+      int? reply_to_message_id,
+      bool? allow_sending_without_reply}) async {
     if (chat_id is! String && chat_id is! int) {
       return Future.error(TelegramException(
           'Attribute \'chat_id\' can only be either type of String or int'));
@@ -740,14 +740,14 @@ class Telegram {
   /// [messages]: https://core.telegram.org/bots/api#message
   Future<Message> sendLocation(
       dynamic chat_id, double latitude, double longitude,
-      {double horizontal_accuracy,
-      int live_period,
-      int heading,
-      int proximity_alert_radius,
-      bool disable_notification,
-      int reply_to_message_id,
-      bool allow_sending_without_reply,
-      ReplyMarkup reply_markup}) async {
+      {double? horizontal_accuracy,
+      int? live_period,
+      int? heading,
+      int? proximity_alert_radius,
+      bool? disable_notification,
+      int? reply_to_message_id,
+      bool? allow_sending_without_reply,
+      ReplyMarkup? reply_markup}) async {
     if (chat_id is! String && chat_id is! int) {
       return Future.error(TelegramException(
           'Attribute \'chat_id\' can only be either type of String or int'));
@@ -783,12 +783,12 @@ class Telegram {
   /// [Message]: https://core.telegram.org/bots/api#message
   Future<Message> editMessageLiveLocation(double latitude, double longitude,
       {dynamic chat_id,
-      int message_id,
-      String inline_message_id,
-      double horizontal_accuracy,
-      int heading,
-      int proximity_alert_radius,
-      ReplyMarkup reply_markup}) async {
+      int? message_id,
+      String? inline_message_id,
+      double? horizontal_accuracy,
+      int? heading,
+      int? proximity_alert_radius,
+      ReplyMarkup? reply_markup}) async {
     if (inline_message_id == null && (chat_id == null || message_id == null)) {
       return Future.error(TelegramException(
           'Require either \'chat_id\' and \'message_id\', or \'inline_message_id\''));
@@ -823,9 +823,9 @@ class Telegram {
   /// [Message]: https://core.telegram.org/bots/api#message
   Future<Message> stopMessageLiveLocation(
       {dynamic chat_id,
-      int message_id,
-      String inline_message_id,
-      ReplyMarkup reply_markup}) async {
+      int? message_id,
+      String? inline_message_id,
+      ReplyMarkup? reply_markup}) async {
     if (inline_message_id == null && (chat_id == null || message_id == null)) {
       return Future.error(TelegramException(
           'Require either \'chat_id\' and \'message_id\', or \'inline_message_id\''));
@@ -851,14 +851,14 @@ class Telegram {
   /// [Message]: https://core.telegram.org/bots/api#message
   Future<Message> sendVenue(dynamic chat_id, double latitude, double longitude,
       String title, String address,
-      {String foursquare_id,
-      String foursquare_type,
-      String google_place_id,
-      String google_place_type,
-      bool disable_notification,
-      int reply_to_message_id,
-      bool allow_sending_without_reply,
-      ReplyMarkup reply_markup}) async {
+      {String? foursquare_id,
+      String? foursquare_type,
+      String? google_place_id,
+      String? google_place_type,
+      bool? disable_notification,
+      int? reply_to_message_id,
+      bool? allow_sending_without_reply,
+      ReplyMarkup? reply_markup}) async {
     if (chat_id is! String && chat_id is! int) {
       return Future.error(TelegramException(
           'Attribute \'chat_id\' can only be either type of String or int'));
@@ -889,12 +889,12 @@ class Telegram {
   /// [Message]: https://core.telegram.org/bots/api#message
   Future<Message> sendContact(
       dynamic chat_id, String phone_number, String first_name,
-      {String last_name,
-      String vcard,
-      bool disable_notification,
-      int reply_to_message_id,
-      bool allow_sending_without_reply,
-      ReplyMarkup reply_markup}) async {
+      {String? last_name,
+      String? vcard,
+      bool? disable_notification,
+      int? reply_to_message_id,
+      bool? allow_sending_without_reply,
+      ReplyMarkup? reply_markup}) async {
     if (chat_id is! String && chat_id is! int) {
       return Future.error(TelegramException(
           'Attribute \'chat_id\' can only be either type of String or int'));
@@ -922,20 +922,20 @@ class Telegram {
   /// [Message]: https://core.telegram.org/bots/api#message
   Future<Message> sendPoll(
       dynamic chat_id, String question, List<String> options,
-      {bool is_anonymous,
-      String type,
-      bool allows_multiple_answers,
-      int correct_option_id,
-      String explanation,
-      String explanation_parse_mode,
-      List<MessageEntity> explanation_entities,
-      int open_period,
-      int close_date,
-      bool is_closed,
-      bool disable_notification,
-      int reply_to_message_id,
-      bool allow_sending_without_reply,
-      ReplyMarkup reply_markup}) async {
+      {bool? is_anonymous,
+      String? type,
+      bool? allows_multiple_answers,
+      int? correct_option_id,
+      String? explanation,
+      String? explanation_parse_mode,
+      List<MessageEntity>? explanation_entities,
+      int? open_period,
+      int? close_date,
+      bool? is_closed,
+      bool? disable_notification,
+      int? reply_to_message_id,
+      bool? allow_sending_without_reply,
+      ReplyMarkup? reply_markup}) async {
     if (chat_id is! String && chat_id is! int) {
       return Future.error(TelegramException(
           'Attribute \'chat_id\' can only be either type of String or int'));
@@ -969,10 +969,10 @@ class Telegram {
   /// On success, the sent Message is returned.
   Future<Message> sendDice(dynamic chat_id,
       {String emoji = Dice.DICE,
-      bool disable_notification,
-      int reply_to_message_id,
-      bool allow_sending_without_reply,
-      ReplyMarkup reply_markup}) async {
+      bool? disable_notification,
+      int? reply_to_message_id,
+      bool? allow_sending_without_reply,
+      ReplyMarkup? reply_markup}) async {
     if (chat_id is! String && chat_id is! int) {
       return Future.error(TelegramException(
           'Attribute \'chat_id\' can only be either type of String or int'));
@@ -1022,7 +1022,7 @@ class Telegram {
   ///
   /// [UserProfilePhotos]: https://core.telegram.org/bots/api#userprofilephotos
   Future<UserProfilePhotos> getUserProfilePhotos(int user_id,
-      {int offset, int limit}) async {
+      {int? offset, int? limit}) async {
     var requestUrl = '$_baseUrl$_token/getUserProfilePhotos';
     var body = <String, dynamic>{
       'user_id': user_id,
@@ -1069,7 +1069,7 @@ class Telegram {
   ///
   /// [unbanned]: https://core.telegram.org/bots/api#unbanchatmember
   Future<bool> kickChatMember(dynamic chat_id, int user_id,
-      {int until_date, bool revoke_messages}) async {
+      {int? until_date, bool? revoke_messages}) async {
     if (chat_id is! String && chat_id is! int) {
       return Future.error(TelegramException(
           'Attribute \'chat_id\' can only be either type of String or int'));
@@ -1091,7 +1091,7 @@ class Telegram {
   ///
   /// https://core.telegram.org/bots/api#unbanchatmember
   Future<bool> unbanChatMember(dynamic chat_id, int user_id,
-      {bool only_if_banned}) async {
+      {bool? only_if_banned}) async {
     if (chat_id is! String && chat_id is! int) {
       return Future.error(TelegramException(
           'Attribute \'chat_id\' can only be either type of String or int'));
@@ -1116,7 +1116,7 @@ class Telegram {
   /// This method now takes the new user permissions in a single argument of the type *ChatPermissions*.
   /// The old way of passing parameters will keep working for a while for backward compatibility.
   Future<bool> restrictChatMember(dynamic chat_id, int user_id,
-      {ChatPermissions permissions, int until_date}) async {
+      {ChatPermissions? permissions, int? until_date}) async {
     if (chat_id is! String && chat_id is! int) {
       return Future.error(TelegramException(
           'Attribute \'chat_id\' can only be either type of String or int'));
@@ -1138,17 +1138,17 @@ class Telegram {
   ///
   /// https://core.telegram.org/bots/api#promotechatmember
   Future<bool> promoteChatMember(dynamic chat_id, int user_id,
-      {bool is_anonymous,
-      bool can_manage_chat,
-      bool can_post_messages,
-      bool can_edit_messages,
-      bool can_delete_messages,
-      bool can_manage_voice_chats,
-      bool can_restrict_members,
-      bool can_promote_members,
-      bool can_change_info,
-      bool can_invite_users,
-      bool can_pin_messages}) async {
+      {bool? is_anonymous,
+      bool? can_manage_chat,
+      bool? can_post_messages,
+      bool? can_edit_messages,
+      bool? can_delete_messages,
+      bool? can_manage_voice_chats,
+      bool? can_restrict_members,
+      bool? can_promote_members,
+      bool? can_change_info,
+      bool? can_invite_users,
+      bool? can_pin_messages}) async {
     if (chat_id is! String && chat_id is! int) {
       return Future.error(TelegramException(
           'Attribute \'chat_id\' can only be either type of String or int'));
@@ -1184,14 +1184,14 @@ class Telegram {
       'user_id': user_id,
       'custom_title': custom_title,
     };
-    return HttpClient.httpPost(requestUrl, body: body);
+    return HttpClient.httpPost(requestUrl, body: body) as Future<bool>;
   }
 
   /// Use this method to set default chat permissions for all members.
   /// The bot must be an administrator in the group or a supergroup for this to work and must have the can_restrict_members admin rights.
   /// Returns *True* on success.
   Future<bool> setChatPermissions(
-      dynamic chat_id, ChatPermissions permissions) async {
+      dynamic chat_id, ChatPermissions? permissions) async {
     if (chat_id is! String && chat_id is! int) {
       return Future.error(TelegramException(
           'Attribute \'chat_id\' can only be either type of String or int'));
@@ -1201,7 +1201,7 @@ class Telegram {
       'chat_id': chat_id,
       'permissions': permissions == null ? null : jsonEncode(permissions),
     };
-    return HttpClient.httpPost(requestUrl, body: body);
+    return HttpClient.httpPost(requestUrl, body: body) as Future<bool>;
   }
 
   /// Use this method to generate a invite link for a chat;
@@ -1230,7 +1230,7 @@ class Telegram {
   /// [revokeChatInviteLink]: https://core.telegram.org/bots/api#revokechatinvitelink
   /// [ChatInviteLink]: https://core.telegram.org/bots/api#chatinvitelink
   Future<ChatInviteLink> createChatInviteLink(dynamic chat_id,
-      {int expire_date, int member_limit}) async {
+      {int? expire_date, int? member_limit}) async {
     if (chat_id is! String && chat_id is! int) {
       return Future.error(TelegramException(
           'Attribute \'chat_id\' can only be either type of String or int'));
@@ -1253,7 +1253,7 @@ class Telegram {
   ///
   /// [ChatInviteLink]: https://core.telegram.org/bots/api#chatinvitelink
   Future<ChatInviteLink> editChatInviteLink(dynamic chat_id, String invite_link,
-      {int expire_date, int member_limit}) async {
+      {int? expire_date, int? member_limit}) async {
     if (chat_id is! String && chat_id is! int) {
       return Future.error(TelegramException(
           'Attribute \'chat_id\' can only be either type of String or int'));
@@ -1362,7 +1362,8 @@ class Telegram {
   /// admin rights. Returns *True* on success.
   ///
   /// https://core.telegram.org/bots/api#setchatdescription
-  Future<bool> setChatDescription(dynamic chat_id, {String description}) async {
+  Future<bool> setChatDescription(dynamic chat_id,
+      {String? description}) async {
     if (chat_id is! String && chat_id is! int) {
       return Future.error(TelegramException(
           'Attribute \'chat_id\' can only be either type of String or int'));
@@ -1382,7 +1383,7 @@ class Telegram {
   ///
   /// https://core.telegram.org/bots/api#pinchatmessage
   Future<bool> pinChatMessage(dynamic chat_id, int message_id,
-      {bool disable_notification}) async {
+      {bool? disable_notification}) async {
     if (chat_id is! String && chat_id is! int) {
       return Future.error(TelegramException(
           'Attribute \'chat_id\' can only be either type of String or int'));
@@ -1404,7 +1405,7 @@ class Telegram {
   /// If `message_id` not specified, the most recent pinned message (by sending date) will be unpinned.
   ///
   /// https://core.telegram.org/bots/api#unpinchatmessage
-  Future<bool> unpinChatMessage(dynamic chat_id, {int message_id}) async {
+  Future<bool> unpinChatMessage(dynamic chat_id, {int? message_id}) async {
     if (chat_id is! String && chat_id is! int) {
       return Future.error(TelegramException(
           'Attribute \'chat_id\' can only be either type of String or int'));
@@ -1573,7 +1574,7 @@ class Telegram {
   /// [inline keyboards]: https://core.telegram.org/bots#inline-keyboards-and-on-the-fly-updating
   /// [@Botfather]: https://t.me/botfather
   Future<bool> answerCallbackQuery(String callback_query_id,
-      {String text, bool show_alert, String url, int cache_time}) async {
+      {String? text, bool? show_alert, String? url, int? cache_time}) async {
     var requestUrl = '$_baseUrl$_token/answerCallbackQuery';
     var body = <String, dynamic>{
       'callback_query_id': callback_query_id,
@@ -1615,11 +1616,11 @@ class Telegram {
   /// [Message]: https://core.telegram.org/bots/api#message
   Future<Message> editMessageText(String text,
       {dynamic chat_id,
-      int message_id,
-      String inline_message_id,
-      String parse_mode,
-      bool disable_web_page_preview,
-      InlineKeyboardMarkup reply_markup}) async {
+      int? message_id,
+      String? inline_message_id,
+      String? parse_mode,
+      bool? disable_web_page_preview,
+      InlineKeyboardMarkup? reply_markup}) async {
     if (inline_message_id == null && (chat_id == null || message_id == null)) {
       return Future.error(TelegramException(
           'Require either \'chat_id\' and \'message_id\', or \'inline_message_id\''));
@@ -1658,11 +1659,11 @@ class Telegram {
   /// [Message]: https://core.telegram.org/bots/api#message
   Future<Message> editMessageCaption(
       {dynamic chat_id,
-      int message_id,
-      String inline_message_id,
-      String caption,
-      String parse_mode,
-      InlineKeyboardMarkup reply_markup}) async {
+      int? message_id,
+      String? inline_message_id,
+      String? caption,
+      String? parse_mode,
+      InlineKeyboardMarkup? reply_markup}) async {
     if (inline_message_id == null && (chat_id == null || message_id == null)) {
       return Future.error(TelegramException(
           'Require either \'chat_id\' and \'message_id\', or \'inline_message_id\''));
@@ -1702,11 +1703,11 @@ class Telegram {
   /// [Message]: https://core.telegram.org/bots/api#message
   Future<Message> editMessageMedia(
       {dynamic chat_id,
-      int message_id,
-      String inline_message_id,
-      InputMedia media,
-      String parse_mode,
-      InlineKeyboardMarkup reply_markup}) async {
+      int? message_id,
+      String? inline_message_id,
+      InputMedia? media,
+      String? parse_mode,
+      InlineKeyboardMarkup? reply_markup}) async {
     if (inline_message_id == null && (chat_id == null || message_id == null)) {
       return Future.error(TelegramException(
           'Require either \'chat_id\' and \'message_id\', or \'inline_message_id\''));
@@ -1744,9 +1745,9 @@ class Telegram {
   /// [Message]: https://core.telegram.org/bots/api#message
   Future<Message> editMessageReplyMarkup(
       {dynamic chat_id,
-      int message_id,
-      String inline_message_id,
-      InlineKeyboardMarkup reply_markup}) async {
+      int? message_id,
+      String? inline_message_id,
+      InlineKeyboardMarkup? reply_markup}) async {
     if (inline_message_id == null && (chat_id == null || message_id == null)) {
       return Future.error(TelegramException(
           'Require either \'chat_id\' and \'message_id\', or \'inline_message_id\''));
@@ -1821,10 +1822,10 @@ class Telegram {
   ///
   /// [Message]: https://core.telegram.org/bots/api#message
   Future<Message> sendSticker(dynamic chat_id, dynamic sticker,
-      {bool disable_notification,
-      int reply_to_message_id,
-      bool allow_sending_without_reply,
-      ReplyMarkup reply_markup}) async {
+      {bool? disable_notification,
+      int? reply_to_message_id,
+      bool? allow_sending_without_reply,
+      ReplyMarkup? reply_markup}) async {
     if (chat_id is! String && chat_id is! int) {
       return Future.error(TelegramException(
           'Attribute \'chat_id\' can only be either type of String or int'));
@@ -1897,9 +1898,9 @@ class Telegram {
   Future<bool> createNewStickerSet(
       int user_id, String name, String title, String emojis,
       {dynamic png_sticker,
-      io.File tgs_sticker,
-      bool contains_masks,
-      MaskPosition mask_position}) async {
+      io.File? tgs_sticker,
+      bool? contains_masks,
+      MaskPosition? mask_position}) async {
     var requestUrl = '$_baseUrl$_token/createNewStickerSet';
     var botInfo = await getMe();
     var body = <String, dynamic>{
@@ -1949,8 +1950,8 @@ class Telegram {
   /// https://core.telegram.org/bots/api#addstickertoset
   Future<bool> addStickerToSet(int user_id, String name, String emojis,
       {dynamic png_sticker,
-      io.File tgs_sticker,
-      MaskPosition mask_position}) async {
+      io.File? tgs_sticker,
+      MaskPosition? mask_position}) async {
     var requestUrl = '$_baseUrl$_token/addStickerToSet';
     var body = <String, dynamic>{
       'user_id': user_id,
@@ -2045,11 +2046,11 @@ class Telegram {
   /// https://core.telegram.org/bots/api#answerinlinequery
   Future<bool> answerInlineQuery(
       String inline_query_id, List<InlineQueryResult> results,
-      {int cache_time,
-      bool is_personal,
-      String next_offset,
-      String switch_pm_text,
-      String switch_pm_parameter}) async {
+      {int? cache_time,
+      bool? is_personal,
+      String? next_offset,
+      String? switch_pm_text,
+      String? switch_pm_parameter}) async {
     var requestUrl = '$_baseUrl$_token/answerInlineQuery';
     var body = <String, dynamic>{
       'inline_query_id': inline_query_id,
@@ -2077,22 +2078,22 @@ class Telegram {
       String start_parameter,
       String currency,
       List<LabeledPrice> prices,
-      {String provider_data,
-      String photo_url,
-      int photo_size,
-      int photo_width,
-      int photo_height,
-      bool need_name,
-      bool need_phone_number,
-      bool need_email,
-      bool need_shipping_address,
-      bool send_phone_number_to_provider,
-      bool send_email_to_provider,
-      bool is_flexible,
-      bool disable_notification,
-      int reply_to_message_id,
-      bool allow_sending_without_reply,
-      InlineKeyboardMarkup reply_markup}) async {
+      {String? provider_data,
+      String? photo_url,
+      int? photo_size,
+      int? photo_width,
+      int? photo_height,
+      bool? need_name,
+      bool? need_phone_number,
+      bool? need_email,
+      bool? need_shipping_address,
+      bool? send_phone_number_to_provider,
+      bool? send_email_to_provider,
+      bool? is_flexible,
+      bool? disable_notification,
+      int? reply_to_message_id,
+      bool? allow_sending_without_reply,
+      InlineKeyboardMarkup? reply_markup}) async {
     if (chat_id is! String && chat_id is! int) {
       return Future.error(TelegramException(
           'Attribute \'chat_id\' can only be either type of String or int'));
@@ -2135,7 +2136,7 @@ class Telegram {
   ///
   /// [Update]: https://core.telegram.org/bots/api#update
   Future<bool> answerShippingQuery(String shipping_query_id, bool ok,
-      {List<ShippingOption> shipping_options, String error_message}) async {
+      {List<ShippingOption>? shipping_options, String? error_message}) async {
     if (!ok && (shipping_options == null || error_message == null)) {
       return Future.error(TelegramException(
           'Attribute \'shipping_options\' and \'error_message\' can not be null when \'ok\' = false'));
@@ -2162,7 +2163,7 @@ class Telegram {
   ///
   /// [Update]: https://core.telegram.org/bots/api#update
   Future<bool> answerPreCheckoutQuery(String pre_checkout_query_id, bool ok,
-      {String error_message}) async {
+      {String? error_message}) async {
     if (!ok && error_message == null) {
       return Future.error(TelegramException(
           'Attribute \'error_message\' can not be null when \'ok\' = false'));
@@ -2203,10 +2204,10 @@ class Telegram {
   ///
   /// [Message]: https://core.telegram.org/bots/api#message
   Future<Message> sendGame(dynamic chat_id, String game_short_name,
-      {bool disable_notification,
-      int reply_to_message_id,
-      bool allow_sending_without_reply,
-      InlineKeyboardMarkup reply_markup}) async {
+      {bool? disable_notification,
+      int? reply_to_message_id,
+      bool? allow_sending_without_reply,
+      InlineKeyboardMarkup? reply_markup}) async {
     if (chat_id is! String && chat_id is! int) {
       return Future.error(TelegramException(
           'Attribute \'chat_id\' can only be either type of String or int'));
@@ -2232,11 +2233,11 @@ class Telegram {
   ///
   /// [Message]: https://core.telegram.org/bots/api#message
   Future<Message> setGameScore(int user_id, int score,
-      {bool force,
-      bool disable_edit_message,
+      {bool? force,
+      bool? disable_edit_message,
       dynamic chat_id,
-      int message_id,
-      String inline_message_id}) async {
+      int? message_id,
+      String? inline_message_id}) async {
     if (inline_message_id == null && (chat_id == null || message_id == null)) {
       return Future.error(TelegramException(
           'Require either \'chat_id\' and \'message_id\', or \'inline_message_id\''));
@@ -2271,7 +2272,7 @@ class Telegram {
   ///
   /// [GameHighScore]: https://core.telegram.org/bots/api#gamehighscore
   Future<List<GameHighScore>> getGameHighScores(int user_id,
-      {dynamic chat_id, int message_id, String inline_message_id}) async {
+      {dynamic chat_id, int? message_id, String? inline_message_id}) async {
     if (inline_message_id == null && (chat_id == null || message_id == null)) {
       return Future.error(TelegramException(
           'Require either \'chat_id\' and \'message_id\', or \'inline_message_id\''));

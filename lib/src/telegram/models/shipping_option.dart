@@ -21,9 +21,9 @@ part of '../model.dart';
 /// https://core.telegram.org/bots/api#shippingoption
 @JsonSerializable()
 class ShippingOption {
-  String id;
-  String title;
-  List<LabeledPrice> prices;
+  String? id;
+  String? title;
+  List<LabeledPrice>? prices;
   ShippingOption({
     this.id,
     this.title,

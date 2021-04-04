@@ -25,18 +25,18 @@ part of '../model.dart';
 @JsonSerializable()
 class InlineQueryResultCachedVideo implements InlineQueryResult {
   @override
-  String id;
+  String? id;
   @override
-  String type;
-  String video_file_id;
-  String title;
-  String description;
-  String caption;
-  String parse_mode;
-  List<MessageEntity> caption_entities;
+  String? type;
+  String? video_file_id;
+  String? title;
+  String? description;
+  String? caption;
+  String? parse_mode;
+  List<MessageEntity>? caption_entities;
   @override
-  InlineKeyboardMarkup reply_markup;
-  InputMessageContent input_message_content;
+  InlineKeyboardMarkup? reply_markup;
+  InputMessageContent? input_message_content;
   InlineQueryResultCachedVideo({
     this.id,
     this.type = 'video',

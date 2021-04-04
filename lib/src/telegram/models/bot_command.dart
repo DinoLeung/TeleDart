@@ -21,8 +21,8 @@ part of '../model.dart';
 /// https://core.telegram.org/bots/api#dice
 @JsonSerializable()
 class BotCommand {
-  String command;
-  String description;
+  String? command;
+  String? description;
   BotCommand({
     this.command,
     this.description,

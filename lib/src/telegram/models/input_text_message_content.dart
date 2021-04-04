@@ -23,9 +23,9 @@ part of '../model.dart';
 /// [content]: https://core.telegram.org/bots/api#inputmessagecontent
 @JsonSerializable()
 class InputTextMessageContent implements InputMessageContent {
-  String message_text;
-  String parse_mode;
-  bool disable_web_page_preview;
+  String? message_text;
+  String? parse_mode;
+  bool? disable_web_page_preview;
   InputTextMessageContent({
     this.message_text,
     this.parse_mode,

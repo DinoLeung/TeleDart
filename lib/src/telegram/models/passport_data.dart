@@ -21,8 +21,8 @@ part of '../model.dart';
 /// https://core.telegram.org/bots/api#passportdata
 @JsonSerializable()
 class PassportData {
-  List<EncryptedPassportElement> data;
-  EncryptedCredentials credentials;
+  List<EncryptedPassportElement>? data;
+  EncryptedCredentials? credentials;
   PassportData({
     this.data,
     this.credentials,

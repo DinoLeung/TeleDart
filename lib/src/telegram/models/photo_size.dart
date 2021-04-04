@@ -24,11 +24,11 @@ part of '../model.dart';
 /// [sticker]: https://core.telegram.org/bots/api#sticker
 @JsonSerializable()
 class PhotoSize {
-  String file_id;
-  String file_unique_id;
-  int width;
-  int height;
-  int file_size;
+  String? file_id;
+  String? file_unique_id;
+  int? width;
+  int? height;
+  int? file_size;
   PhotoSize({
     this.file_id,
     this.file_unique_id,

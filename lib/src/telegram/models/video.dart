@@ -21,15 +21,15 @@ part of '../model.dart';
 /// https://core.telegram.org/bots/api#video
 @JsonSerializable()
 class Video {
-  String file_id;
-  String file_unique_id;
-  int width;
-  int height;
-  int duration;
-  PhotoSize thumb;
-  String file_name;
-  String mime_type;
-  int file_size;
+  String? file_id;
+  String? file_unique_id;
+  int? width;
+  int? height;
+  int? duration;
+  PhotoSize? thumb;
+  String? file_name;
+  String? mime_type;
+  int? file_size;
 
   Video({
     this.file_id,
@@ -44,7 +44,7 @@ class Video {
   });
 
   @JsonKey(ignore: true)
-  Duration get duration_ => TimeHelper.toDuration(duration);
+  Duration get duration_ => TimeHelper.toDuration(duration ?? 0);
   set duration_(Duration duration) =>
       this.duration = TimeHelper.toSeconds(duration);
 

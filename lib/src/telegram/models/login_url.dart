@@ -28,10 +28,10 @@ part of '../model.dart';
 /// [version 5.7]: https://telegram.org/blog/privacy-discussions-web-bots#meet-seamless-web-bots
 @JsonSerializable()
 class LoginUrl {
-  String url;
-  String forward_text;
-  String bot_username;
-  bool request_write_access;
+  String? url;
+  String? forward_text;
+  String? bot_username;
+  bool? request_write_access;
   LoginUrl({
     this.url,
     this.forward_text,

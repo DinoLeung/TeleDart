@@ -22,19 +22,19 @@ part of '../model.dart';
 @JsonSerializable()
 class InputMediaAnimation implements InputMedia {
   @override
-  String type;
+  String? type;
   @override
-  String media;
+  String? media;
   @override
-  String caption;
+  String? caption;
   @override
-  String parse_mode;
+  String? parse_mode;
   @override
-  List<MessageEntity> caption_entities;
-  dynamic thumb; // InputFile or String
-  int width;
-  int height;
-  int duration;
+  List<MessageEntity>? caption_entities;
+  dynamic? thumb; // InputFile or String
+  int? width;
+  int? height;
+  int? duration;
 
   InputMediaAnimation({
     this.type = 'animation',

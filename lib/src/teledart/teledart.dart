@@ -32,7 +32,7 @@ class TeleDart {
   final Telegram telegram;
   final Event _event;
 
-  AbstractUpdateFetcher fetcher;
+  AbstractUpdateFetcher? fetcher;
 
   /// Constructor in dependency injection manner
   TeleDart(this.telegram, this._event, {this.fetcher});
@@ -76,7 +76,7 @@ class TeleDart {
   Future<void> removeWebhook() async {
     await telegram.deleteWebhook();
     if (fetcher is Webhook) {
-      await fetcher.stop();
+      await fetcher?.stop();
       fetcher = null;
     }
   }
@@ -114,10 +114,10 @@ class TeleDart {
   ///  onMessage(entityType: 'bot_command', keyword: 'start').listen((message) =>
   ///    teledart.telegram.sendMessage(message.chat.id, 'hello world!'));
   ///  ```
-  Stream<TeleDartMessage> onMessage({String entityType, dynamic keyword}) =>
+  Stream<TeleDartMessage> onMessage({String? entityType, dynamic keyword}) =>
       _event
           .onMessage(entityType: entityType, keyword: keyword)
-          .map(_messageStreamMapper);
+          ?.map(_messageStreamMapper);
 
   /// Listens to edited message events
   Stream<TeleDartMessage> onEditedMessage() =>

@@ -23,12 +23,12 @@ part of '../model.dart';
 @JsonSerializable()
 class PassportElementErrorFrontSide implements PassportElementError {
   @override
-  String source;
+  String? source;
   @override
-  String type;
+  String? type;
   @override
-  String message;
-  String file_hash;
+  String? message;
+  String? file_hash;
   PassportElementErrorFrontSide({
     this.source,
     this.type,

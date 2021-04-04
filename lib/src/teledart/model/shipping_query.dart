@@ -19,7 +19,7 @@ import '../../../teledart.dart';
 import '../../telegram/model.dart';
 
 class TeleDartShippingQuery extends ShippingQuery {
-  TeleDart _teledart;
+  TeleDart? _teledart;
 
   TeleDartShippingQuery(TeleDart teledart, ShippingQuery shippingQuery) {
     _teledart = teledart;
@@ -30,7 +30,9 @@ class TeleDartShippingQuery extends ShippingQuery {
   }
 
   Future<bool> answer(bool ok,
-          {List<ShippingOption> shipping_options, String error_message}) =>
-      _teledart.answerShippingQuery(this, ok,
-          shipping_options: shipping_options, error_message: error_message);
+          {List<ShippingOption>? shipping_options, String? error_message}) =>
+      _teledart?.answerShippingQuery(this, ok,
+          shipping_options: shipping_options ?? [],
+          error_message: error_message ?? '') ??
+      Future.value(false);
 }

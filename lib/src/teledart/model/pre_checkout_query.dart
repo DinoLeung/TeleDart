@@ -19,7 +19,7 @@ import '../../../teledart.dart';
 import '../../telegram/model.dart';
 
 class TeleDartPreCheckoutQuery extends PreCheckoutQuery {
-  TeleDart _teledart;
+  TeleDart? _teledart;
 
   TeleDartPreCheckoutQuery(
       TeleDart teledart, PreCheckoutQuery preCheckoutQuery) {
@@ -34,6 +34,8 @@ class TeleDartPreCheckoutQuery extends PreCheckoutQuery {
   }
 
   /// Short-cut to answer pre-checkout query
-  Future<bool> answer(bool ok, {String error_message}) =>
-      _teledart.answerPreCheckoutQuery(this, ok, error_message: error_message);
+  Future<bool> answer(bool ok, {String? error_message}) =>
+      _teledart?.answerPreCheckoutQuery(this, ok,
+          error_message: error_message ?? '') ??
+      Future.value(false);
 }

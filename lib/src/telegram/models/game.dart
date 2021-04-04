@@ -22,12 +22,12 @@ part of '../model.dart';
 /// https://core.telegram.org/bots/api#game
 @JsonSerializable()
 class Game {
-  String title;
-  String description;
-  List<PhotoSize> photo;
-  String text;
-  List<MessageEntity> text_entities;
-  Animation animation;
+  String? title;
+  String? description;
+  List<PhotoSize>? photo;
+  String? text;
+  List<MessageEntity>? text_entities;
+  Animation? animation;
   Game({
     this.title,
     this.description,

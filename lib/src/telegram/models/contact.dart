@@ -21,11 +21,11 @@ part of '../model.dart';
 /// https://core.telegram.org/bots/api#contact
 @JsonSerializable()
 class Contact {
-  String phone_number;
-  String first_name;
-  String last_name;
-  int user_id;
-  String vcard;
+  String? phone_number;
+  String? first_name;
+  String? last_name;
+  int? user_id;
+  String? vcard;
   Contact({
     this.phone_number,
     this.first_name,

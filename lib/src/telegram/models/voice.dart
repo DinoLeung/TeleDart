@@ -21,11 +21,11 @@ part of '../model.dart';
 /// https://core.telegram.org/bots/api#voice
 @JsonSerializable()
 class Voice {
-  String file_id;
-  String file_unique_id;
-  int duration;
-  String mime_type;
-  int file_size;
+  String? file_id;
+  String? file_unique_id;
+  int? duration;
+  String? mime_type;
+  int? file_size;
 
   Voice({
     this.file_id,
@@ -36,7 +36,7 @@ class Voice {
   });
 
   @JsonKey(ignore: true)
-  Duration get duration_ => TimeHelper.toDuration(duration);
+  Duration get duration_ => TimeHelper.toDuration(duration ?? 0);
   set duration_(Duration duration) =>
       this.duration = TimeHelper.toSeconds(duration);
 

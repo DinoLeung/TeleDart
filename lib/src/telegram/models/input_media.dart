@@ -27,11 +27,11 @@ part of '../model.dart';
 @JsonSerializable()
 // abstract class InputMedia {
 class InputMedia {
-  String type;
-  String media;
-  String caption;
-  String parse_mode;
-  List<MessageEntity> caption_entities;
+  String? type;
+  String? media;
+  String? caption;
+  String? parse_mode;
+  List<MessageEntity>? caption_entities;
   InputMedia({
     this.type,
     this.media,

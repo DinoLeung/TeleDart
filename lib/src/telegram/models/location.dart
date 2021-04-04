@@ -21,12 +21,12 @@ part of '../model.dart';
 /// https://core.telegram.org/bots/api#location
 @JsonSerializable()
 class Location {
-  double longitude;
-  double latitude;
-  double horizontal_accuracy;
-  int live_period;
-  int heading;
-  int proximity_alert_radius;
+  double? longitude;
+  double? latitude;
+  double? horizontal_accuracy;
+  int? live_period;
+  int? heading;
+  int? proximity_alert_radius;
   Location({
     this.longitude,
     this.latitude,

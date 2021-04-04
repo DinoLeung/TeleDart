@@ -43,8 +43,8 @@ part of '../model.dart';
 /// [ForceReply]: https://core.telegram.org/bots/api#forcereply
 @JsonSerializable()
 class ForceReply implements ReplyMarkup {
-  bool force_reply;
-  bool selective;
+  bool? force_reply;
+  bool? selective;
   ForceReply({
     this.force_reply,
     this.selective,

@@ -28,8 +28,8 @@ class Dice {
   static const String BOWLING = '🎳';
   static const String SLOT_MACHINE = '🎰';
 
-  int value;
-  String emoji;
+  int? value;
+  String? emoji;
   Dice({
     this.value,
     this.emoji,

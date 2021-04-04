@@ -31,9 +31,9 @@ part of '../model.dart';
 /// https://core.telegram.org/bots/api#passportelementerror
 @JsonSerializable()
 class PassportElementError {
-  String source;
-  String type;
-  String message;
+  String? source;
+  String? type;
+  String? message;
   PassportElementError({
     this.source,
     this.type,

@@ -21,9 +21,9 @@ part of '../model.dart';
 /// https://core.telegram.org/bots/api#gamehighscore
 @JsonSerializable()
 class GameHighScore {
-  int position;
-  User user;
-  int score;
+  int? position;
+  User? user;
+  int? score;
   GameHighScore({
     this.position,
     this.user,

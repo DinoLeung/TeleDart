@@ -24,19 +24,19 @@ part of '../model.dart';
 /// [sticker]: https://core.telegram.org/bots/api#sticker
 @JsonSerializable()
 class Poll {
-  String id;
-  String question;
-  List<PollOption> options;
-  int total_voter_count;
-  bool is_closed;
-  bool is_anonymous;
-  String type;
-  bool allows_multiple_answers;
-  int correct_option_id;
-  String explanation;
-  List<MessageEntity> explanation_entities;
-  int open_period;
-  int close_date;
+  String? id;
+  String? question;
+  List<PollOption>? options;
+  int? total_voter_count;
+  bool? is_closed;
+  bool? is_anonymous;
+  String? type;
+  bool? allows_multiple_answers;
+  int? correct_option_id;
+  String? explanation;
+  List<MessageEntity>? explanation_entities;
+  int? open_period;
+  int? close_date;
   Poll({
     this.id,
     this.question,
@@ -56,12 +56,12 @@ class Poll {
   Map<String, dynamic> toJson() => _$PollToJson(this);
 
   @JsonKey(ignore: true)
-  Duration get open_period_ => TimeHelper.toDuration(open_period);
+  Duration get open_period_ => TimeHelper.toDuration(open_period ?? 0);
   set open_period_(Duration duration) =>
       open_period = TimeHelper.toSeconds(duration);
 
   @JsonKey(ignore: true)
-  DateTime get close_date_ => TimeHelper.toDateTime(close_date);
+  DateTime get close_date_ => TimeHelper.toDateTime(close_date ?? 0);
   set close_date_(DateTime dateTime) =>
       close_date = TimeHelper.toUnixTime(dateTime);
 }

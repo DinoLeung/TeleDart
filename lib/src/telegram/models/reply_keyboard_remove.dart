@@ -27,8 +27,8 @@ part of '../model.dart';
 /// [ReplyKeyboardMarkup]: https://core.telegram.org/bots/api#replykeyboardmarkup
 @JsonSerializable()
 class ReplyKeyboardRemove implements ReplyMarkup {
-  bool remove_keyboard;
-  bool selective;
+  bool? remove_keyboard;
+  bool? selective;
   ReplyKeyboardRemove({
     this.remove_keyboard,
     this.selective,

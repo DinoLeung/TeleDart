@@ -21,13 +21,13 @@ part of '../model.dart';
 /// https://core.telegram.org/bots/api#precheckoutquery
 @JsonSerializable()
 class PreCheckoutQuery {
-  String id;
-  User from;
-  String currency;
-  int total_amount;
-  String invoice_payload;
-  String shipping_option_id;
-  OrderInfo order_info;
+  String? id;
+  User? from;
+  String? currency;
+  int? total_amount;
+  String? invoice_payload;
+  String? shipping_option_id;
+  OrderInfo? order_info;
   PreCheckoutQuery({
     this.id,
     this.from,

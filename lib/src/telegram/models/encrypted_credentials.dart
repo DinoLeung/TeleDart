@@ -25,9 +25,9 @@ part of '../model.dart';
 /// [Telegram Passport Documentation]: https://core.telegram.org/passport#receiving-information
 @JsonSerializable()
 class EncryptedCredentials {
-  String data;
-  String hash;
-  String secret;
+  String? data;
+  String? hash;
+  String? secret;
   EncryptedCredentials({
     this.data,
     this.hash,

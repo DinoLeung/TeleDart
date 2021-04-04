@@ -23,14 +23,14 @@ part of '../model.dart';
 /// [content]: https://core.telegram.org/bots/api#inputmessagecontent
 @JsonSerializable()
 class InputVenueMessageContent implements InputMessageContent {
-  double latitude;
-  double longitude;
-  String title;
-  String address;
-  String foursquare_id;
-  String foursquare_type;
-  String google_place_id;
-  String google_place_type;
+  double? latitude;
+  double? longitude;
+  String? title;
+  String? address;
+  String? foursquare_id;
+  String? foursquare_type;
+  String? google_place_id;
+  String? google_place_type;
   InputVenueMessageContent({
     this.latitude,
     this.longitude,

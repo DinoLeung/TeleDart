@@ -28,23 +28,23 @@ part of '../model.dart';
 @JsonSerializable()
 class InlineQueryResultVideo implements InlineQueryResult {
   @override
-  String id;
+  String? id;
   @override
-  String type;
-  String video_url;
-  String mime_type;
-  String thumb_url;
-  String title;
-  String caption;
-  String parse_mode;
-  int video_width;
-  int video_height;
-  int video_duration;
-  String description;
-  List<MessageEntity> caption_entities;
+  String? type;
+  String? video_url;
+  String? mime_type;
+  String? thumb_url;
+  String? title;
+  String? caption;
+  String? parse_mode;
+  int? video_width;
+  int? video_height;
+  int? video_duration;
+  String? description;
+  List<MessageEntity>? caption_entities;
   @override
-  InlineKeyboardMarkup reply_markup;
-  InputMessageContent input_message_content;
+  InlineKeyboardMarkup? reply_markup;
+  InputMessageContent? input_message_content;
 
   InlineQueryResultVideo({
     this.id,

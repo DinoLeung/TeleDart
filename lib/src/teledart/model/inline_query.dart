@@ -19,7 +19,7 @@ import '../../../teledart.dart';
 import '../../telegram/model.dart';
 
 class TeleDartInlineQuery extends InlineQuery {
-  TeleDart _teledart;
+  TeleDart? _teledart;
 
   TeleDartInlineQuery(TeleDart teledart, InlineQuery inlineQuery) {
     _teledart = teledart;
@@ -32,15 +32,16 @@ class TeleDartInlineQuery extends InlineQuery {
 
   /// Short-cut to answer inline query
   Future<bool> answer(List<InlineQueryResult> results,
-          {int cache_time,
-          bool is_personal,
-          String next_offset,
-          String switch_pm_text,
-          String switch_pm_parameter}) =>
-      _teledart.answerInlineQuery(this, results,
-          cache_time: cache_time,
-          is_personal: is_personal,
-          next_offset: next_offset,
-          switch_pm_text: switch_pm_text,
-          switch_pm_parameter: switch_pm_parameter);
+          {int? cache_time,
+          bool? is_personal,
+          String? next_offset,
+          String? switch_pm_text,
+          String? switch_pm_parameter}) =>
+      _teledart?.answerInlineQuery(this, results,
+          cache_time: cache_time ?? 0,
+          is_personal: is_personal ?? false,
+          next_offset: next_offset ?? '',
+          switch_pm_text: switch_pm_text ?? '',
+          switch_pm_parameter: switch_pm_parameter ?? '') ??
+      Future.value(false);
 }

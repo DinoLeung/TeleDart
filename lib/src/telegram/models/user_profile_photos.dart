@@ -21,8 +21,8 @@ part of '../model.dart';
 /// https://core.telegram.org/bots/api#userprofilephotos
 @JsonSerializable()
 class UserProfilePhotos {
-  int total_count;
-  List<List<PhotoSize>> photos;
+  int? total_count;
+  List<List<PhotoSize>>? photos;
   UserProfilePhotos({
     this.total_count,
     this.photos,

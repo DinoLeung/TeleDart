@@ -21,9 +21,9 @@ part of '../model.dart';
 /// https://core.telegram.org/bots/api#pollanswer
 @JsonSerializable()
 class PollAnswer {
-  String poll_id;
-  User user;
-  List<int> option_ids;
+  String? poll_id;
+  User? user;
+  List<int>? option_ids;
   PollAnswer({
     this.poll_id,
     this.user,

@@ -23,12 +23,12 @@ part of '../model.dart';
 @JsonSerializable()
 class PassportElementErrorUnspecified implements PassportElementError {
   @override
-  String source;
+  String? source;
   @override
-  String type;
+  String? type;
   @override
-  String message;
-  String element_hash;
+  String? message;
+  String? element_hash;
   PassportElementErrorUnspecified({
     this.source,
     this.type,

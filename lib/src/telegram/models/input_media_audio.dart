@@ -22,19 +22,19 @@ part of '../model.dart';
 @JsonSerializable()
 class InputMediaAudio implements InputMedia {
   @override
-  String type;
+  String? type;
   @override
-  String media;
+  String? media;
   @override
-  String caption;
+  String? caption;
   @override
-  String parse_mode;
+  String? parse_mode;
   @override
-  List<MessageEntity> caption_entities;
-  dynamic thumb; // InputFile or String
-  int duration;
-  String performer;
-  String title;
+  List<MessageEntity>? caption_entities;
+  dynamic? thumb; // InputFile or String
+  int? duration;
+  String? performer;
+  String? title;
 
   InputMediaAudio({
     this.type = 'audio',

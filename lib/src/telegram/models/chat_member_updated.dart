@@ -21,12 +21,12 @@ part of '../model.dart';
 /// https://core.telegram.org/bots/api#chatmemberupdated
 @JsonSerializable()
 class ChatMemberUpdated {
-  Chat chat;
-  User from;
-  int date;
-  ChatMember old_chat_member;
-  ChatMember new_chat_member;
-  ChatInviteLink invite_link;
+  Chat? chat;
+  User? from;
+  int? date;
+  ChatMember? old_chat_member;
+  ChatMember? new_chat_member;
+  ChatInviteLink? invite_link;
 
   ChatMemberUpdated({
     this.chat,
@@ -37,7 +37,7 @@ class ChatMemberUpdated {
   });
 
   @JsonKey(ignore: true)
-  DateTime get date_ => TimeHelper.toDateTime(date);
+  DateTime get date_ => TimeHelper.toDateTime(date ?? 0);
   set date_(DateTime dateTime) => date = TimeHelper.toUnixTime(dateTime);
 
   factory ChatMemberUpdated.fromJson(Map<String, dynamic> json) =>

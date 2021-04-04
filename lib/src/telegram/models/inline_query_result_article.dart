@@ -22,19 +22,19 @@ part of '../model.dart';
 @JsonSerializable()
 class InlineQueryResultArticle implements InlineQueryResult {
   @override
-  String id;
+  String? id;
   @override
-  String type;
-  String title;
-  InputMessageContent input_message_content;
+  String? type;
+  String? title;
+  InputMessageContent? input_message_content;
   @override
-  InlineKeyboardMarkup reply_markup;
-  String url;
-  bool hide_url;
-  String description;
-  String thumb_url;
-  String thumb_width;
-  String thumb_height;
+  InlineKeyboardMarkup? reply_markup;
+  String? url;
+  bool? hide_url;
+  String? description;
+  String? thumb_url;
+  String? thumb_width;
+  String? thumb_height;
   InlineQueryResultArticle({
     this.id,
     this.type = 'article',

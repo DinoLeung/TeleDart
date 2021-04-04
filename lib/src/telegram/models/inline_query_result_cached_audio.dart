@@ -28,16 +28,16 @@ part of '../model.dart';
 @JsonSerializable()
 class InlineQueryResultCachedAudio implements InlineQueryResult {
   @override
-  String id;
+  String? id;
   @override
-  String type;
-  String audio_file_id;
-  String caption;
-  String parse_mode;
-  List<MessageEntity> caption_entities;
+  String? type;
+  String? audio_file_id;
+  String? caption;
+  String? parse_mode;
+  List<MessageEntity>? caption_entities;
   @override
-  InlineKeyboardMarkup reply_markup;
-  InputMessageContent input_message_content;
+  InlineKeyboardMarkup? reply_markup;
+  InputMessageContent? input_message_content;
   InlineQueryResultCachedAudio({
     this.id,
     this.type = 'audio',

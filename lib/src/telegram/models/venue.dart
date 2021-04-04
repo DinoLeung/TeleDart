@@ -21,13 +21,13 @@ part of '../model.dart';
 /// https://core.telegram.org/bots/api#venue
 @JsonSerializable()
 class Venue {
-  Location location;
-  String title;
-  String address;
-  String foursquare_id;
-  String foursquare_type;
-  String google_place_id;
-  String google_place_type;
+  Location? location;
+  String? title;
+  String? address;
+  String? foursquare_id;
+  String? foursquare_type;
+  String? google_place_id;
+  String? google_place_type;
   Venue({
     this.location,
     this.title,

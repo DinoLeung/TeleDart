@@ -28,18 +28,18 @@ part of '../model.dart';
 @JsonSerializable()
 class InlineQueryResultCachedDocument implements InlineQueryResult {
   @override
-  String id;
+  String? id;
   @override
-  String type;
-  String title;
-  String document_file_id;
-  String description;
-  String caption;
-  String parse_mode;
-  List<MessageEntity> caption_entities;
+  String? type;
+  String? title;
+  String? document_file_id;
+  String? description;
+  String? caption;
+  String? parse_mode;
+  List<MessageEntity>? caption_entities;
   @override
-  InlineKeyboardMarkup reply_markup;
-  InputMessageContent input_message_content;
+  InlineKeyboardMarkup? reply_markup;
+  InputMessageContent? input_message_content;
   InlineQueryResultCachedDocument({
     this.id,
     this.type = 'document',

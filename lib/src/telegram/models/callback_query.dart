@@ -35,13 +35,13 @@ part of '../model.dart';
 /// [answerCallbackQuery]: https://core.telegram.org/bots/api#answercallbackquery
 @JsonSerializable()
 class CallbackQuery {
-  String id;
-  User from;
-  Message message;
-  String inline_message_id;
-  String chat_instance;
-  String data;
-  String game_short_name;
+  String? id;
+  User? from;
+  Message? message;
+  String? inline_message_id;
+  String? chat_instance;
+  String? data;
+  String? game_short_name;
   CallbackQuery({
     this.id,
     this.from,

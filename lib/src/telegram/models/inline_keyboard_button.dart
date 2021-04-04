@@ -22,14 +22,14 @@ part of '../model.dart';
 /// https://core.telegram.org/bots/api#inlinekeyboardbutton
 @JsonSerializable()
 class InlineKeyboardButton {
-  String text;
-  String url;
-  LoginUrl login_url;
-  String callback_data;
-  String switch_inline_query;
-  String switch_inline_query_current_chat;
-  CallbackGame callback_game;
-  bool pay;
+  String? text;
+  String? url;
+  LoginUrl? login_url;
+  String? callback_data;
+  String? switch_inline_query;
+  String? switch_inline_query_current_chat;
+  CallbackGame? callback_game;
+  bool? pay;
   InlineKeyboardButton({
     this.text,
     this.url,

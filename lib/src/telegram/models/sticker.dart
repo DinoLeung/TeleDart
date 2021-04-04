@@ -21,16 +21,16 @@ part of '../model.dart';
 /// https://core.telegram.org/bots/api#sticker
 @JsonSerializable()
 class Sticker {
-  String file_id;
-  String file_unique_id;
-  int width;
-  int height;
-  bool is_animated;
-  PhotoSize thumb;
-  String emoji;
-  String set_name;
-  MaskPosition mask_position;
-  int file_size;
+  String? file_id;
+  String? file_unique_id;
+  int? width;
+  int? height;
+  bool? is_animated;
+  PhotoSize? thumb;
+  String? emoji;
+  String? set_name;
+  MaskPosition? mask_position;
+  int? file_size;
   Sticker({
     this.file_id,
     this.file_unique_id,

@@ -23,10 +23,10 @@ part of '../model.dart';
 /// [content]: https://core.telegram.org/bots/api#inputmessagecontent
 @JsonSerializable()
 class InputContactMessageContent implements InputMessageContent {
-  String phone_number;
-  String first_name;
-  String last_name;
-  String vcard;
+  String? phone_number;
+  String? first_name;
+  String? last_name;
+  String? vcard;
   InputContactMessageContent({
     this.phone_number,
     this.first_name,

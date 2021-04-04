@@ -21,11 +21,11 @@ part of '../model.dart';
 /// https://core.telegram.org/bots/api#invoice
 @JsonSerializable()
 class Invoice {
-  String title;
-  String description;
-  String start_parameter;
-  String currency;
-  int total_amount;
+  String? title;
+  String? description;
+  String? start_parameter;
+  String? currency;
+  int? total_amount;
   Invoice({
     this.title,
     this.description,

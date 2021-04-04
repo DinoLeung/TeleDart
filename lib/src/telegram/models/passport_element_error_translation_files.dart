@@ -23,12 +23,12 @@ part of '../model.dart';
 @JsonSerializable()
 class PassportElementErrorTranslationFiles implements PassportElementError {
   @override
-  String source;
+  String? source;
   @override
-  String type;
+  String? type;
   @override
-  String message;
-  List<String> file_hashes;
+  String? message;
+  List<String>? file_hashes;
   PassportElementErrorTranslationFiles({
     this.source,
     this.type,

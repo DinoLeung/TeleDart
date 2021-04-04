@@ -25,21 +25,21 @@ part of '../model.dart';
 @JsonSerializable()
 class InlineQueryResultPhoto implements InlineQueryResult {
   @override
-  String id;
+  String? id;
   @override
-  String type;
-  String photo_url;
-  String thumb_url;
-  int photo_width;
-  int photo_height;
-  String title;
-  String description;
-  String caption;
-  String parse_mode;
-  List<MessageEntity> caption_entities;
+  String? type;
+  String? photo_url;
+  String? thumb_url;
+  int? photo_width;
+  int? photo_height;
+  String? title;
+  String? description;
+  String? caption;
+  String? parse_mode;
+  List<MessageEntity>? caption_entities;
   @override
-  InlineKeyboardMarkup reply_markup;
-  InputMessageContent input_message_content;
+  InlineKeyboardMarkup? reply_markup;
+  InputMessageContent? input_message_content;
   InlineQueryResultPhoto({
     this.id,
     this.type = 'photo',

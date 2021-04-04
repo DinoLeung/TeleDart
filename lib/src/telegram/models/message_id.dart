@@ -21,7 +21,7 @@ part of '../model.dart';
 /// https://core.telegram.org/bots/api#messageid
 @JsonSerializable()
 class MessageId {
-  int message_id;
+  int? message_id;
   MessageId({
     this.message_id,
   });

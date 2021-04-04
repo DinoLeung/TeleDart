@@ -26,7 +26,7 @@ part of '../model.dart';
 /// [inline keyboard]: https://core.telegram.org/bots#inline-keyboards-and-on-the-fly-updating
 @JsonSerializable()
 class InlineKeyboardMarkup implements ReplyMarkup {
-  List<List<InlineKeyboardButton>> inline_keyboard;
+  List<List<InlineKeyboardButton>>? inline_keyboard;
   InlineKeyboardMarkup({
     this.inline_keyboard,
   });

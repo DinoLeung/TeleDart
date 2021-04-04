@@ -21,8 +21,8 @@ part of '../model.dart';
 /// https://core.telegram.org/bots/api#labeledprice
 @JsonSerializable()
 class LabeledPrice {
-  String label;
-  int amount;
+  String? label;
+  int? amount;
   LabeledPrice({
     this.label,
     this.amount,

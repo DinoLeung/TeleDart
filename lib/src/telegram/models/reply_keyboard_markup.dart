@@ -25,10 +25,10 @@ part of '../model.dart';
 /// [Introduction to bots]: https://core.telegram.org/bots#keyboards
 @JsonSerializable()
 class ReplyKeyboardMarkup implements ReplyMarkup {
-  List<List<KeyboardButton>> keyboard;
-  bool resize_keyboard;
-  bool one_time_keyboard;
-  bool selective;
+  List<List<KeyboardButton>>? keyboard;
+  bool? resize_keyboard;
+  bool? one_time_keyboard;
+  bool? selective;
   ReplyKeyboardMarkup({
     this.keyboard,
     this.resize_keyboard,

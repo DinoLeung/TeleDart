@@ -28,22 +28,22 @@ part of '../model.dart';
 @JsonSerializable()
 class InlineQueryResultLocation implements InlineQueryResult {
   @override
-  String id;
+  String? id;
   @override
-  String type;
-  double latitude;
-  double longitude;
-  String title;
-  double horizontal_accuracy;
-  int live_period;
-  int heading;
-  int proximity_alert_radius;
+  String? type;
+  double? latitude;
+  double? longitude;
+  String? title;
+  double? horizontal_accuracy;
+  int? live_period;
+  int? heading;
+  int? proximity_alert_radius;
   @override
-  InlineKeyboardMarkup reply_markup;
-  InputMessageContent input_message_content;
-  String thumb_url;
-  int thumb_width;
-  int thumb_height;
+  InlineKeyboardMarkup? reply_markup;
+  InputMessageContent? input_message_content;
+  String? thumb_url;
+  int? thumb_width;
+  int? thumb_height;
 
   InlineQueryResultLocation({
     this.id,

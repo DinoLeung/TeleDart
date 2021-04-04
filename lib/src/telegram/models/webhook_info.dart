@@ -21,14 +21,14 @@ part of '../model.dart';
 /// https://core.telegram.org/bots/api#webhookinfo
 @JsonSerializable()
 class WebhookInfo {
-  String url;
-  bool has_custom_certificate;
-  int pending_update_count;
-  String ip_address;
-  int last_error_date;
-  String last_error_message;
-  int max_connections;
-  List<String> allowed_updates;
+  String? url;
+  bool? has_custom_certificate;
+  int? pending_update_count;
+  String? ip_address;
+  int? last_error_date;
+  String? last_error_message;
+  int? max_connections;
+  List<String>? allowed_updates;
 
   WebhookInfo({
     this.url,
@@ -42,7 +42,7 @@ class WebhookInfo {
   });
 
   @JsonKey(ignore: true)
-  DateTime get last_error_date_ => TimeHelper.toDateTime(last_error_date);
+  DateTime get last_error_date_ => TimeHelper.toDateTime(last_error_date ?? 0);
   set last_error_date_(DateTime dateTime) =>
       last_error_date = TimeHelper.toUnixTime(dateTime);
 

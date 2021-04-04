@@ -27,11 +27,11 @@ part of '../model.dart';
 /// [@Botfather]: https://t.me/botfather
 @JsonSerializable()
 class ChosenInlineResult {
-  String result_id;
-  User from;
-  Location location;
-  String inline_message_id;
-  String query;
+  String? result_id;
+  User? from;
+  Location? location;
+  String? inline_message_id;
+  String? query;
   ChosenInlineResult({
     this.result_id,
     this.from,

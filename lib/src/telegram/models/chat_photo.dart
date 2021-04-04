@@ -21,10 +21,10 @@ part of '../model.dart';
 /// https://core.telegram.org/bots/api#chatphoto
 @JsonSerializable()
 class ChatPhoto {
-  String small_file_id;
-  String small_file_unique_id;
-  String big_file_id;
-  String big_file_unique_id;
+  String? small_file_id;
+  String? small_file_unique_id;
+  String? big_file_id;
+  String? big_file_unique_id;
   ChatPhoto({
     this.small_file_id,
     this.small_file_unique_id,

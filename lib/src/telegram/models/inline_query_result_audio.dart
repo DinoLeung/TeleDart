@@ -28,19 +28,19 @@ part of '../model.dart';
 @JsonSerializable()
 class InlineQueryResultAudio implements InlineQueryResult {
   @override
-  String id;
+  String? id;
   @override
-  String type;
-  String audio_url;
-  String title;
-  String caption;
-  String parse_mode;
-  String performer;
-  int audio_duration;
-  List<MessageEntity> caption_entities;
+  String? type;
+  String? audio_url;
+  String? title;
+  String? caption;
+  String? parse_mode;
+  String? performer;
+  int? audio_duration;
+  List<MessageEntity>? caption_entities;
   @override
-  InlineKeyboardMarkup reply_markup;
-  InputMessageContent input_message_content;
+  InlineKeyboardMarkup? reply_markup;
+  InputMessageContent? input_message_content;
 
   InlineQueryResultAudio({
     this.id,
@@ -57,7 +57,7 @@ class InlineQueryResultAudio implements InlineQueryResult {
   });
 
   @JsonKey(ignore: true)
-  Duration get audio_duration_ => TimeHelper.toDuration(audio_duration);
+  Duration get audio_duration_ => TimeHelper.toDuration(audio_duration ?? 0);
   set audio_duration_(Duration duration) =>
       audio_duration = TimeHelper.toSeconds(duration);
 

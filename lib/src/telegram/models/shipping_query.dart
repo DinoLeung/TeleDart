@@ -21,10 +21,10 @@ part of '../model.dart';
 /// https://core.telegram.org/bots/api#shippingquery
 @JsonSerializable()
 class ShippingQuery {
-  String id;
-  User from;
-  String invoice_payload;
-  ShippingAddress shipping_address;
+  String? id;
+  User? from;
+  String? invoice_payload;
+  ShippingAddress? shipping_address;
   ShippingQuery({
     this.id,
     this.from,

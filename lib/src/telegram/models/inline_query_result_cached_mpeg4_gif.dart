@@ -25,17 +25,17 @@ part of '../model.dart';
 @JsonSerializable()
 class InlineQueryResultCachedMpeg4Gif implements InlineQueryResult {
   @override
-  String id;
+  String? id;
   @override
-  String type;
-  String mpeg4_file_id;
-  String title;
-  String caption;
-  String parse_mode;
-  List<MessageEntity> caption_entities;
+  String? type;
+  String? mpeg4_file_id;
+  String? title;
+  String? caption;
+  String? parse_mode;
+  List<MessageEntity>? caption_entities;
   @override
-  InlineKeyboardMarkup reply_markup;
-  InputMessageContent input_message_content;
+  InlineKeyboardMarkup? reply_markup;
+  InputMessageContent? input_message_content;
   InlineQueryResultCachedMpeg4Gif({
     this.id,
     this.type = 'mpeg4_gif',

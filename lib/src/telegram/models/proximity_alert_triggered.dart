@@ -22,9 +22,9 @@ part of '../model.dart';
 /// https://core.telegram.org/bots/api#proximityalerttriggered
 @JsonSerializable()
 class ProximityAlertTriggered {
-  User traveler;
-  User watcher;
-  int distance;
+  User? traveler;
+  User? watcher;
+  int? distance;
   ProximityAlertTriggered({
     this.traveler,
     this.watcher,

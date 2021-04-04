@@ -23,11 +23,11 @@ part of '../model.dart';
 /// https://core.telegram.org/bots/api#inlinequery
 @JsonSerializable()
 class InlineQuery {
-  String id;
-  User from;
-  Location location;
-  String query;
-  String offset;
+  String? id;
+  User? from;
+  Location? location;
+  String? query;
+  String? offset;
   InlineQuery({
     this.id,
     this.from,

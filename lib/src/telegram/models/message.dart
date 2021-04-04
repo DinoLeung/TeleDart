@@ -21,61 +21,61 @@ part of '../model.dart';
 /// https://core.telegram.org/bots/api#message
 @JsonSerializable()
 class Message {
-  int message_id;
-  User from;
-  Chat sender_chat;
-  int date;
-  Chat chat;
-  User forward_from;
-  Chat forward_from_chat;
-  int forward_from_message_id;
-  String forward_signature;
-  String forward_sender_name;
-  int forward_date;
-  Message reply_to_message;
-  User via_bot;
-  int edit_date;
-  String media_group_id;
-  String author_signature;
-  String text;
-  List<MessageEntity> entities;
-  Animation animation;
-  Audio audio;
-  Document document;
-  List<PhotoSize> photo;
-  Sticker sticker;
-  Video video;
-  VideoNote video_note;
-  Voice voice;
-  String caption;
-  List<MessageEntity> caption_entities;
-  Contact contact;
-  Dice dice;
-  Game game;
-  Poll poll;
-  Venue venue;
-  Location location;
-  List<User> new_chat_members;
-  User left_chat_member;
-  String new_chat_title;
-  List<PhotoSize> new_chat_photo;
-  bool delete_chat_photo;
-  bool group_chat_created;
-  bool supergroup_chat_created;
-  bool channel_chat_created;
-  MessageAutoDeleteTimerChanged message_auto_delete_timer_changed;
-  int migrate_to_chat_id;
-  int migrate_from_chat_id;
-  Message pinned_message;
-  Invoice invoice;
-  SuccessfulPayment successful_payment;
-  String connected_website;
-  PassportData passport_data;
-  ProximityAlertTriggered proximity_alert_triggered;
-  VoiceChatStarted voice_chat_started;
-  VoiceChatEnded voice_chat_ended;
-  VoiceChatParticipantsInvited voice_chat_participants_invited;
-  InlineKeyboardMarkup reply_markup;
+  int? message_id;
+  User? from;
+  Chat? sender_chat;
+  int? date;
+  Chat? chat;
+  User? forward_from;
+  Chat? forward_from_chat;
+  int? forward_from_message_id;
+  String? forward_signature;
+  String? forward_sender_name;
+  int? forward_date;
+  Message? reply_to_message;
+  User? via_bot;
+  int? edit_date;
+  String? media_group_id;
+  String? author_signature;
+  String? text;
+  List<MessageEntity>? entities;
+  Animation? animation;
+  Audio? audio;
+  Document? document;
+  List<PhotoSize>? photo;
+  Sticker? sticker;
+  Video? video;
+  VideoNote? video_note;
+  Voice? voice;
+  String? caption;
+  List<MessageEntity>? caption_entities;
+  Contact? contact;
+  Dice? dice;
+  Game? game;
+  Poll? poll;
+  Venue? venue;
+  Location? location;
+  List<User>? new_chat_members;
+  User? left_chat_member;
+  String? new_chat_title;
+  List<PhotoSize>? new_chat_photo;
+  bool? delete_chat_photo;
+  bool? group_chat_created;
+  bool? supergroup_chat_created;
+  bool? channel_chat_created;
+  MessageAutoDeleteTimerChanged? message_auto_delete_timer_changed;
+  int? migrate_to_chat_id;
+  int? migrate_from_chat_id;
+  Message? pinned_message;
+  Invoice? invoice;
+  SuccessfulPayment? successful_payment;
+  String? connected_website;
+  PassportData? passport_data;
+  ProximityAlertTriggered? proximity_alert_triggered;
+  VoiceChatStarted? voice_chat_started;
+  VoiceChatEnded? voice_chat_ended;
+  VoiceChatParticipantsInvited? voice_chat_participants_invited;
+  InlineKeyboardMarkup? reply_markup;
 
   Message({
     this.message_id,
@@ -136,16 +136,16 @@ class Message {
   });
 
   @JsonKey(ignore: true)
-  DateTime get date_ => TimeHelper.toDateTime(date);
+  DateTime get date_ => TimeHelper.toDateTime(date ?? 0);
   set date_(DateTime dateTime) => date = TimeHelper.toUnixTime(dateTime);
 
   @JsonKey(ignore: true)
-  DateTime get forward_date_ => TimeHelper.toDateTime(forward_date);
+  DateTime get forward_date_ => TimeHelper.toDateTime(forward_date ?? 0);
   set forward_date_(DateTime dateTime) =>
       forward_date = TimeHelper.toUnixTime(dateTime);
 
   @JsonKey(ignore: true)
-  DateTime get edit_date_ => TimeHelper.toDateTime(edit_date);
+  DateTime get edit_date_ => TimeHelper.toDateTime(edit_date ?? 0);
   set edit_date_(DateTime dateTime) =>
       edit_date = TimeHelper.toUnixTime(dateTime);
 
@@ -163,16 +163,16 @@ class Message {
     return -1;
   }
 
-  MessageEntity entityOf(String type) {
+  MessageEntity? entityOf(String type) {
     var i = indexOfEntity(type);
     if (i >= 0) {
-      return (entities ?? caption_entities)[i];
+      return (entities ?? caption_entities)[i]!;
     } else {
       return null;
     }
   }
 
-  String getEntity(String type) {
+  String? getEntity(String type) {
     var ett = entityOf(type);
     if (ett != null) {
       return (text ?? caption).substring(ett.offset, ett.offset + ett.length);

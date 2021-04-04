@@ -25,20 +25,20 @@ import 'abstract_update_fetcher.dart';
 class Webhook extends AbstractUpdateFetcher {
   final Telegram telegram;
 
-  io.HttpServer _server;
-  io.SecurityContext _context;
+  io.HttpServer? _server;
+  io.SecurityContext? _context;
 
   String url;
-  String ip_address;
+  String? ip_address;
   String secretPath;
   int port;
-  int serverPort;
+  int? serverPort;
   int max_connections;
-  List<String> allowed_updates;
-  bool drop_pending_updates;
+  List<String>? allowed_updates;
+  bool? drop_pending_updates;
 
-  io.File certificate;
-  io.File privateKey;
+  io.File? certificate;
+  io.File? privateKey;
   bool uploadCertificate;
 
   /// Setup webhook
@@ -79,8 +79,8 @@ class Webhook extends AbstractUpdateFetcher {
     // serup SecurityContext
     if (certificate != null && privateKey != null) {
       _context = io.SecurityContext();
-      _context.useCertificateChainBytes(certificate.readAsBytesSync());
-      _context.usePrivateKeyBytes(privateKey.readAsBytesSync());
+      _context?.useCertificateChainBytes(certificate?.readAsBytesSync() ?? []);
+      _context?.usePrivateKeyBytes(privateKey?.readAsBytesSync() ?? []);
     }
   }
 
@@ -88,8 +88,8 @@ class Webhook extends AbstractUpdateFetcher {
     Future<dynamic> serverFuture = _context != null
         ? io.HttpServer.bind(
             io.InternetAddress.anyIPv4.address, serverPort ?? port)
-        : io.HttpServer.bindSecure(
-            io.InternetAddress.anyIPv4.address, serverPort ?? port, _context);
+        : io.HttpServer.bindSecure(io.InternetAddress.anyIPv4.address,
+            serverPort ?? port, _context ?? io.SecurityContext());
 
     await serverFuture.then((server) => _server = server).then((_) {
       telegram.setWebhook('$url:$port$secretPath',
@@ -106,7 +106,7 @@ class Webhook extends AbstractUpdateFetcher {
   Future<void> start() async {
     await setWebhook();
 
-    _server.listen((io.HttpRequest request) {
+    _server?.listen((io.HttpRequest request) {
       if (request.method == 'POST' && request.uri.path == secretPath) {
         request.cast<List<int>>().transform(utf8.decoder).join().then((data) {
           emitUpdate(Update.fromJson(jsonDecode(data)));
@@ -125,7 +125,7 @@ class Webhook extends AbstractUpdateFetcher {
 
   /// Remove webhook configuration from Telegram API, and stop the webhook server.
   @override
-  Future<void> stop({bool drop_pending_updates}) async {
+  Future<void> stop({bool? drop_pending_updates}) async {
     await telegram.deleteWebhook(drop_pending_updates: drop_pending_updates);
     return _server?.close() ?? Future.value();
   }

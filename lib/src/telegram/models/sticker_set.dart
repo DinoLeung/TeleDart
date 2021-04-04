@@ -21,12 +21,12 @@ part of '../model.dart';
 /// https://core.telegram.org/bots/api#stickerset
 @JsonSerializable()
 class StickerSet {
-  String name;
-  String title;
-  bool is_animated;
-  bool contains_masks;
-  List<Sticker> stickers;
-  PhotoSize thumb;
+  String? name;
+  String? title;
+  bool? is_animated;
+  bool? contains_masks;
+  List<Sticker>? stickers;
+  PhotoSize? thumb;
   StickerSet({
     this.name,
     this.title,

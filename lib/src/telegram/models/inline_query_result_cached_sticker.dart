@@ -28,13 +28,13 @@ part of '../model.dart';
 @JsonSerializable()
 class InlineQueryResultCachedSticker implements InlineQueryResult {
   @override
-  String id;
+  String? id;
   @override
-  String type;
-  String sticker_file_id;
+  String? type;
+  String? sticker_file_id;
   @override
-  InlineKeyboardMarkup reply_markup;
-  InputMessageContent input_message_content;
+  InlineKeyboardMarkup? reply_markup;
+  InputMessageContent? input_message_content;
   InlineQueryResultCachedSticker({
     this.id,
     this.type = 'sticker',

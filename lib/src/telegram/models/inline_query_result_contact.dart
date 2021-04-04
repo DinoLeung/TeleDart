@@ -28,19 +28,19 @@ part of '../model.dart';
 @JsonSerializable()
 class InlineQueryResultContact implements InlineQueryResult {
   @override
-  String id;
+  String? id;
   @override
-  String type;
-  String phone_number;
-  String first_name;
-  String last_name;
-  String vcard;
+  String? type;
+  String? phone_number;
+  String? first_name;
+  String? last_name;
+  String? vcard;
   @override
-  InlineKeyboardMarkup reply_markup;
-  InputMessageContent input_message_content;
-  String thumb_url;
-  int thumb_width;
-  int thumb_height;
+  InlineKeyboardMarkup? reply_markup;
+  InputMessageContent? input_message_content;
+  String? thumb_url;
+  int? thumb_width;
+  int? thumb_height;
   InlineQueryResultContact({
     this.id,
     this.type = 'contact',
