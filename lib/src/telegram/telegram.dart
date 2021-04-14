@@ -166,7 +166,7 @@ class Telegram {
   /// https://core.telegram.org/bots/api#sendmessage
   ///
   /// [Message]: https://core.telegram.org/bots/api#message
-  Future<Message> sendMessage(dynamic chat_id, String text,
+  Future<Message?> sendMessage(dynamic chat_id, String text,
       {String? parse_mode,
       List<MessageEntity>? entities,
       bool? disable_web_page_preview,
@@ -198,7 +198,7 @@ class Telegram {
   /// https://core.telegram.org/bots/api#forwardmessage
   ///
   /// [Message]: https://core.telegram.org/bots/api#message
-  Future<Message> forwardMessage(
+  Future<Message?> forwardMessage(
       dynamic chat_id, int from_chat_id, int message_id,
       {bool? disable_notification}) async {
     if (chat_id is! String && chat_id is! int) {
