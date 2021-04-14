@@ -222,7 +222,7 @@ class TeleDart {
       onMessage(entityType: 'text_mention', keyword: keyword);
 
   /// Short-cut to reply with a text message
-  Future<Message> replyMessage(Message orgMsg, String text,
+  Future<Message?> replyMessage(Message orgMsg, String text,
           {bool withQuote = false,
           String? parse_mode,
           List<MessageEntity>? entities,

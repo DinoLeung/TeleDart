@@ -83,7 +83,7 @@ class TeleDartMessage extends Message {
   }
 
   /// Short-cut to reply with a text message
-  Future<Message> reply(String text,
+  Future<Message?> reply(String text,
           {bool withQuote = false,
           String? parse_mode,
           List<MessageEntity>? entities,
