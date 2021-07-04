@@ -52,7 +52,8 @@ class TeleDart {
   /// To use webhooks, inject a [Webhook] object as [fetcher] when instantiating
   /// [Teledart].
   Future<User> start() async => await _initBotInfo().then((me) {
-        fetcher ??= LongPolling(telegram)
+        fetcher ??= LongPolling(telegram);
+        fetcher
           ..start()
           ..onUpdate().listen((_updatesHandler));
         return me;
