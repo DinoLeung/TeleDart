@@ -24,16 +24,16 @@ class User {
   int id;
   bool is_bot;
   String first_name;
-  String last_name;
-  String username;
-  String language_code;
-  bool can_join_groups;
-  bool can_read_all_group_messages;
-  bool supports_inline_queries;
+  String? last_name;
+  String? username;
+  String? language_code;
+  bool? can_join_groups;
+  bool? can_read_all_group_messages;
+  bool? supports_inline_queries;
   User({
-    this.id,
-    this.is_bot,
-    this.first_name,
+    required this.id,
+    required this.is_bot,
+    required this.first_name,
     this.last_name,
     this.username,
     this.language_code,

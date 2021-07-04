@@ -23,15 +23,15 @@ part of '../model.dart';
 @JsonSerializable()
 class InlineKeyboardButton {
   String text;
-  String url;
-  LoginUrl login_url;
-  String callback_data;
-  String switch_inline_query;
-  String switch_inline_query_current_chat;
-  CallbackGame callback_game;
-  bool pay;
+  String? url;
+  LoginUrl? login_url;
+  String? callback_data;
+  String? switch_inline_query;
+  String? switch_inline_query_current_chat;
+  CallbackGame? callback_game;
+  bool? pay;
   InlineKeyboardButton({
-    this.text,
+    required this.text,
     this.url,
     this.login_url,
     this.callback_data,

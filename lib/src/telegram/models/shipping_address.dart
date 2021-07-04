@@ -28,12 +28,12 @@ class ShippingAddress {
   String street_line2;
   String post_code;
   ShippingAddress({
-    this.country_code,
-    this.state,
-    this.city,
-    this.street_line1,
-    this.street_line2,
-    this.post_code,
+    required this.country_code,
+    required this.state,
+    required this.city,
+    required this.street_line1,
+    required this.street_line2,
+    required this.post_code,
   });
   factory ShippingAddress.fromJson(Map<String, dynamic> json) =>
       _$ShippingAddressFromJson(json);

@@ -27,21 +27,21 @@ class InlineQueryResultCachedVideo implements InlineQueryResult {
   @override
   String id;
   @override
-  String type;
+  String type = 'video';
   String video_file_id;
   String title;
-  String description;
-  String caption;
-  String parse_mode;
-  List<MessageEntity> caption_entities;
+  String? description;
+  String? caption;
+  String? parse_mode;
+  List<MessageEntity>? caption_entities;
   @override
-  InlineKeyboardMarkup reply_markup;
-  InputMessageContent input_message_content;
+  InlineKeyboardMarkup? reply_markup;
+  InputMessageContent? input_message_content;
   InlineQueryResultCachedVideo({
-    this.id,
-    this.type = 'video',
-    this.video_file_id,
-    this.title,
+    required this.id,
+    required this.type,
+    required this.video_file_id,
+    required this.title,
     this.description,
     this.caption,
     this.parse_mode,

@@ -22,18 +22,18 @@ part of '../model.dart';
 @JsonSerializable()
 class InputMediaPhoto implements InputMedia {
   @override
-  String type;
+  String type = 'photo';
   @override
   String media;
   @override
-  String caption;
+  String? caption;
   @override
-  String parse_mode;
+  String? parse_mode;
   @override
-  List<MessageEntity> caption_entities;
+  List<MessageEntity>? caption_entities;
   InputMediaPhoto({
-    this.type = 'photo',
-    this.media,
+    required this.type,
+    required this.media,
     this.caption,
     this.parse_mode,
     this.caption_entities,

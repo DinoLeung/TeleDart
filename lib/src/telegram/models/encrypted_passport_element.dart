@@ -22,17 +22,17 @@ part of '../model.dart';
 @JsonSerializable()
 class EncryptedPassportElement {
   String type;
-  String data;
-  String phone_number;
-  String email;
-  List<PassportFile> files;
-  PassportFile front_side;
-  PassportFile reverse_side;
-  PassportFile selfie;
-  List<PassportFile> translation;
+  String? data;
+  String? phone_number;
+  String? email;
+  List<PassportFile>? files;
+  PassportFile? front_side;
+  PassportFile? reverse_side;
+  PassportFile? selfie;
+  List<PassportFile>? translation;
   String hash;
   EncryptedPassportElement({
-    this.type,
+    required this.type,
     this.data,
     this.phone_number,
     this.email,
@@ -41,7 +41,7 @@ class EncryptedPassportElement {
     this.reverse_side,
     this.selfie,
     this.translation,
-    this.hash,
+    required this.hash,
   });
   factory EncryptedPassportElement.fromJson(Map<String, dynamic> json) =>
       _$EncryptedPassportElementFromJson(json);

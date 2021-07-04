@@ -30,20 +30,20 @@ class InlineQueryResultCachedVoice implements InlineQueryResult {
   @override
   String id;
   @override
-  String type;
+  String type = 'voice';
   String voice_file_id;
   String title;
-  String caption;
-  String parse_mode;
-  List<MessageEntity> caption_entities;
+  String? caption;
+  String? parse_mode;
+  List<MessageEntity>? caption_entities;
   @override
-  InlineKeyboardMarkup reply_markup;
-  InputMessageContent input_message_content;
+  InlineKeyboardMarkup? reply_markup;
+  InputMessageContent? input_message_content;
   InlineQueryResultCachedVoice({
-    this.id,
-    this.type = 'voice',
-    this.voice_file_id,
-    this.title,
+    required this.id,
+    required this.type,
+    required this.voice_file_id,
+    required this.title,
     this.caption,
     this.parse_mode,
     this.caption_entities,

@@ -22,23 +22,23 @@ part of '../model.dart';
 @JsonSerializable()
 class InputMediaAnimation implements InputMedia {
   @override
-  String type;
+  String type = 'animation';
   @override
   String media;
   @override
-  String caption;
+  String? caption;
   @override
-  String parse_mode;
+  String? parse_mode;
   @override
-  List<MessageEntity> caption_entities;
+  List<MessageEntity>? caption_entities;
   dynamic thumb; // InputFile or String
-  int width;
-  int height;
-  int duration;
+  int? width;
+  int? height;
+  int? duration;
 
   InputMediaAnimation({
-    this.type = 'animation',
-    this.media,
+    required this.type,
+    required this.media,
     this.thumb,
     this.caption,
     this.parse_mode,
@@ -49,9 +49,10 @@ class InputMediaAnimation implements InputMedia {
   });
 
   @JsonKey(ignore: true)
-  Duration get duration_ => TimeHelper.toDuration(duration);
-  set duration_(Duration duration) =>
-      this.duration = TimeHelper.toSeconds(duration);
+  Duration? get duration_ =>
+      duration == null ? null : TimeHelper.toDuration(duration!);
+  set duration_(Duration? duration) =>
+      this.duration = duration == null ? null : TimeHelper.toSeconds(duration);
 
   factory InputMediaAnimation.fromJson(Map<String, dynamic> json) =>
       _$InputMediaAnimationFromJson(json);

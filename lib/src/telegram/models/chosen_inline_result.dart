@@ -29,15 +29,15 @@ part of '../model.dart';
 class ChosenInlineResult {
   String result_id;
   User from;
-  Location location;
-  String inline_message_id;
+  Location? location;
+  String? inline_message_id;
   String query;
   ChosenInlineResult({
-    this.result_id,
-    this.from,
+    required this.result_id,
+    required this.from,
     this.location,
     this.inline_message_id,
-    this.query,
+    required this.query,
   });
   factory ChosenInlineResult.fromJson(Map<String, dynamic> json) =>
       _$ChosenInlineResultFromJson(json);

@@ -25,13 +25,13 @@ class Game {
   String title;
   String description;
   List<PhotoSize> photo;
-  String text;
-  List<MessageEntity> text_entities;
-  Animation animation;
+  String? text;
+  List<MessageEntity>? text_entities;
+  Animation? animation;
   Game({
-    this.title,
-    this.description,
-    this.photo,
+    required this.title,
+    required this.description,
+    required this.photo,
     this.text,
     this.text_entities,
     this.animation,

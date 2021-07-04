@@ -28,12 +28,12 @@ class PhotoSize {
   String file_unique_id;
   int width;
   int height;
-  int file_size;
+  int? file_size;
   PhotoSize({
-    this.file_id,
-    this.file_unique_id,
-    this.width,
-    this.height,
+    required this.file_id,
+    required this.file_unique_id,
+    required this.width,
+    required this.height,
     this.file_size,
   });
   factory PhotoSize.fromJson(Map<String, dynamic> json) =>

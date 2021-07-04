@@ -1,4 +1,4 @@
 #!/bin/sh
 
 # json_serializable build .g files
-pub run build_runner build --enable-experiment non-nullable --delete-conflicting-outputs
+dart pub run build_runner build --enable-experiment non-nullable --delete-conflicting-outputs

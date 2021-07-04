@@ -27,19 +27,19 @@ class InlineQueryResultCachedGif implements InlineQueryResult {
   @override
   String id;
   @override
-  String type;
+  String type = 'gif';
   String gif_file_id;
-  String title;
-  String caption;
-  String parse_mode;
-  List<MessageEntity> caption_entities;
+  String? title;
+  String? caption;
+  String? parse_mode;
+  List<MessageEntity>? caption_entities;
   @override
-  InlineKeyboardMarkup reply_markup;
-  InputMessageContent input_message_content;
+  InlineKeyboardMarkup? reply_markup;
+  InputMessageContent? input_message_content;
   InlineQueryResultCachedGif({
-    this.id,
-    this.type = 'gif',
-    this.gif_file_id,
+    required this.id,
+    required this.type,
+    required this.gif_file_id,
     this.title,
     this.caption,
     this.parse_mode,

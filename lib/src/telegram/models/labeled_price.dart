@@ -24,8 +24,8 @@ class LabeledPrice {
   String label;
   int amount;
   LabeledPrice({
-    this.label,
-    this.amount,
+    required this.label,
+    required this.amount,
   });
   factory LabeledPrice.fromJson(Map<String, dynamic> json) =>
       _$LabeledPriceFromJson(json);

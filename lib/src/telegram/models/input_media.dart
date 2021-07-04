@@ -29,12 +29,12 @@ part of '../model.dart';
 class InputMedia {
   String type;
   String media;
-  String caption;
-  String parse_mode;
-  List<MessageEntity> caption_entities;
+  String? caption;
+  String? parse_mode;
+  List<MessageEntity>? caption_entities;
   InputMedia({
-    this.type,
-    this.media,
+    required this.type,
+    required this.media,
     this.caption,
     this.parse_mode,
     this.caption_entities,

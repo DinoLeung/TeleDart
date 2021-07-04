@@ -24,6 +24,9 @@ part of '../model.dart';
 /// [sticker]: https://core.telegram.org/bots/api#sticker
 @JsonSerializable()
 class Poll {
+  static const String REGULAR = 'regular';
+  static const String QUIZ = 'quiz';
+
   String id;
   String question;
   List<PollOption> options;
@@ -32,20 +35,20 @@ class Poll {
   bool is_anonymous;
   String type;
   bool allows_multiple_answers;
-  int correct_option_id;
-  String explanation;
-  List<MessageEntity> explanation_entities;
-  int open_period;
-  int close_date;
+  int? correct_option_id;
+  String? explanation;
+  List<MessageEntity>? explanation_entities;
+  int? open_period;
+  int? close_date;
   Poll({
-    this.id,
-    this.question,
-    this.options,
-    this.total_voter_count,
-    this.is_closed,
-    this.is_anonymous,
-    this.type,
-    this.allows_multiple_answers,
+    required this.id,
+    required this.question,
+    required this.options,
+    required this.total_voter_count,
+    required this.is_closed,
+    required this.is_anonymous,
+    required this.type,
+    required this.allows_multiple_answers,
     this.correct_option_id,
     this.explanation,
     this.explanation_entities,
@@ -56,12 +59,12 @@ class Poll {
   Map<String, dynamic> toJson() => _$PollToJson(this);
 
   @JsonKey(ignore: true)
-  Duration get open_period_ => TimeHelper.toDuration(open_period);
-  set open_period_(Duration duration) =>
-      open_period = TimeHelper.toSeconds(duration);
+  Duration? get open_period_ => open_period == null ? null : TimeHelper.toDuration(open_period!);
+  set open_period_(Duration? duration) =>
+      open_period = duration == null ? null : TimeHelper.toSeconds(duration);
 
   @JsonKey(ignore: true)
-  DateTime get close_date_ => TimeHelper.toDateTime(close_date);
-  set close_date_(DateTime dateTime) =>
-      close_date = TimeHelper.toUnixTime(dateTime);
+  DateTime? get close_date_ => close_date == null ? null : TimeHelper.toDateTime(close_date!);
+  set close_date_(DateTime? dateTime) =>
+      close_date = dateTime == null ? null : TimeHelper.toUnixTime(dateTime);
 }

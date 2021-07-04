@@ -30,29 +30,29 @@ class InlineQueryResultVideo implements InlineQueryResult {
   @override
   String id;
   @override
-  String type;
+  String type = 'video';
   String video_url;
   String mime_type;
   String thumb_url;
   String title;
-  String caption;
-  String parse_mode;
-  int video_width;
-  int video_height;
-  int video_duration;
-  String description;
-  List<MessageEntity> caption_entities;
+  String? caption;
+  String? parse_mode;
+  int? video_width;
+  int? video_height;
+  int? video_duration;
+  String? description;
+  List<MessageEntity>? caption_entities;
   @override
-  InlineKeyboardMarkup reply_markup;
-  InputMessageContent input_message_content;
+  InlineKeyboardMarkup? reply_markup;
+  InputMessageContent? input_message_content;
 
   InlineQueryResultVideo({
-    this.id,
-    this.type = 'video',
-    this.video_url,
-    this.mime_type,
-    this.thumb_url,
-    this.title,
+    required this.id,
+    required this.type,
+    required this.video_url,
+    required this.mime_type,
+    required this.thumb_url,
+    required this.title,
     this.caption,
     this.parse_mode,
     this.video_width,
@@ -65,9 +65,10 @@ class InlineQueryResultVideo implements InlineQueryResult {
   });
 
   @JsonKey(ignore: true)
-  Duration get video_duration_ => TimeHelper.toDuration(video_duration);
-  set video_duration_(Duration duration) =>
-      video_duration = TimeHelper.toSeconds(duration);
+  Duration? get video_duration_ =>
+      video_duration == null ? null : TimeHelper.toDuration(video_duration!);
+  set video_duration_(Duration? duration) =>
+      video_duration = duration == null ? null : TimeHelper.toSeconds(duration);
 
   factory InlineQueryResultVideo.fromJson(Map<String, dynamic> json) =>
       _$InlineQueryResultVideoFromJson(json);

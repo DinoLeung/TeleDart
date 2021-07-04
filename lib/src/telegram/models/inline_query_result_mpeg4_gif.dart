@@ -27,29 +27,29 @@ class InlineQueryResultMpeg4Gif implements InlineQueryResult {
   @override
   String id;
   @override
-  String type;
+  String type = 'mpeg4_gif';
   String mpeg4_url;
-  int mpeg4_width;
-  int mpeg4_height;
-  int mpeg4_duration;
+  int? mpeg4_width;
+  int? mpeg4_height;
+  int? mpeg4_duration;
   String thumb_url;
-  String thumb_mime_type;
-  String title;
-  String caption;
-  String parse_mode;
-  List<MessageEntity> caption_entities;
+  String? thumb_mime_type;
+  String? title;
+  String? caption;
+  String? parse_mode;
+  List<MessageEntity>? caption_entities;
   @override
-  InlineKeyboardMarkup reply_markup;
-  InputMessageContent input_message_content;
+  InlineKeyboardMarkup? reply_markup;
+  InputMessageContent? input_message_content;
 
   InlineQueryResultMpeg4Gif({
-    this.id,
-    this.type = 'mpeg4_gif',
-    this.mpeg4_url,
+    required this.id,
+    required this.type,
+    required this.mpeg4_url,
     this.mpeg4_width,
     this.mpeg4_height,
     this.mpeg4_duration,
-    this.thumb_url,
+    required this.thumb_url,
     this.thumb_mime_type,
     this.title,
     this.caption,
@@ -60,9 +60,11 @@ class InlineQueryResultMpeg4Gif implements InlineQueryResult {
   });
 
   @JsonKey(ignore: true)
-  Duration get mpeg4_duration_ => TimeHelper.toDuration(mpeg4_duration);
-  set mpeg4_duration_(Duration duration) =>
-      mpeg4_duration = TimeHelper.toSeconds(duration);
+  Duration? get mpeg4_duration_ => mpeg4_duration == null
+      ? null
+      : TimeHelper.toDuration(mpeg4_duration!);
+  set mpeg4_duration_(Duration? duration) =>
+      mpeg4_duration = duration == null ? null : TimeHelper.toSeconds(duration);
 
   factory InlineQueryResultMpeg4Gif.fromJson(Map<String, dynamic> json) =>
       _$InlineQueryResultMpeg4GifFromJson(json);

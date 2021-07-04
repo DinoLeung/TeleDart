@@ -30,23 +30,23 @@ class InlineQueryResultAudio implements InlineQueryResult {
   @override
   String id;
   @override
-  String type;
+  String type = 'audio';
   String audio_url;
   String title;
-  String caption;
-  String parse_mode;
-  String performer;
-  int audio_duration;
-  List<MessageEntity> caption_entities;
+  String? caption;
+  String? parse_mode;
+  String? performer;
+  int? audio_duration;
+  List<MessageEntity>? caption_entities;
   @override
-  InlineKeyboardMarkup reply_markup;
-  InputMessageContent input_message_content;
+  InlineKeyboardMarkup? reply_markup;
+  InputMessageContent? input_message_content;
 
   InlineQueryResultAudio({
-    this.id,
-    this.type = 'audio',
-    this.audio_url,
-    this.title,
+    required this.id,
+    required this.type,
+    required this.audio_url,
+    required this.title,
     this.caption,
     this.parse_mode,
     this.performer,
@@ -57,9 +57,10 @@ class InlineQueryResultAudio implements InlineQueryResult {
   });
 
   @JsonKey(ignore: true)
-  Duration get audio_duration_ => TimeHelper.toDuration(audio_duration);
-  set audio_duration_(Duration duration) =>
-      audio_duration = TimeHelper.toSeconds(duration);
+  Duration? get audio_duration_ =>
+      audio_duration == null ? null : TimeHelper.toDuration(audio_duration!);
+  set audio_duration_(Duration? duration) =>
+      audio_duration = duration == null ? null : TimeHelper.toSeconds(duration);
 
   factory InlineQueryResultAudio.fromJson(Map<String, dynamic> json) =>
       _$InlineQueryResultAudioFromJson(json);

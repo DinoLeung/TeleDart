@@ -30,16 +30,16 @@ part of '../model.dart';
 class File {
   String file_id;
   String file_unique_id;
-  int file_size;
-  String file_path;
+  int? file_size;
+  String? file_path;
   File({
-    this.file_id,
-    this.file_unique_id,
+    required this.file_id,
+    required this.file_unique_id,
     this.file_size,
     this.file_path,
   });
 
-  String getDownloadLink(String token) => (file_path?.isEmpty ?? true)
+  String? getDownloadLink(String token) => (file_path?.isEmpty ?? true)
       ? null
       : 'https://api.telegram.org/file/bot$token/$file_path';
 

@@ -26,14 +26,14 @@ class PreCheckoutQuery {
   String currency;
   int total_amount;
   String invoice_payload;
-  String shipping_option_id;
-  OrderInfo order_info;
+  String? shipping_option_id;
+  OrderInfo? order_info;
   PreCheckoutQuery({
-    this.id,
-    this.from,
-    this.currency,
-    this.total_amount,
-    this.invoice_payload,
+    required this.id,
+    required this.from,
+    required this.currency,
+    required this.total_amount,
+    required this.invoice_payload,
     this.shipping_option_id,
     this.order_info,
   });

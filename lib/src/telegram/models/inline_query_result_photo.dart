@@ -27,24 +27,24 @@ class InlineQueryResultPhoto implements InlineQueryResult {
   @override
   String id;
   @override
-  String type;
+  String type = 'photo';
   String photo_url;
   String thumb_url;
-  int photo_width;
-  int photo_height;
-  String title;
-  String description;
-  String caption;
-  String parse_mode;
-  List<MessageEntity> caption_entities;
+  int? photo_width;
+  int? photo_height;
+  String? title;
+  String? description;
+  String? caption;
+  String? parse_mode;
+  List<MessageEntity>? caption_entities;
   @override
-  InlineKeyboardMarkup reply_markup;
-  InputMessageContent input_message_content;
+  InlineKeyboardMarkup? reply_markup;
+  InputMessageContent? input_message_content;
   InlineQueryResultPhoto({
-    this.id,
-    this.type = 'photo',
-    this.photo_url,
-    this.thumb_url,
+    required this.id,
+    required this.type,
+    required this.photo_url,
+    required this.thumb_url,
     this.photo_width,
     this.photo_height,
     this.title,

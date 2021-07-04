@@ -31,13 +31,20 @@ part of '../model.dart';
 /// https://core.telegram.org/bots/api#passportelementerror
 @JsonSerializable()
 class PassportElementError {
+  static const String PERSONAL_DETAILS = 'personal_details';
+  static const String PASSPORT = 'passport';
+  static const String DRIVER_LICENSE = 'driver_license';
+  static const String IDENTITY_CARD = 'identity_card';
+  static const String INTERNAL_PASSPORT = 'internal_passport';
+  static const String ADDRESS = 'address';
+
   String source;
   String type;
   String message;
   PassportElementError({
-    this.source,
-    this.type,
-    this.message,
+    required this.source,
+    required this.type,
+    required this.message,
   });
   factory PassportElementError.fromJson(Map<String, dynamic> json) =>
       _$PassportElementErrorFromJson(json);

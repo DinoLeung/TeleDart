@@ -44,10 +44,10 @@ part of '../model.dart';
 class InlineQueryResult {
   String type;
   String id;
-  InlineKeyboardMarkup reply_markup;
+  InlineKeyboardMarkup? reply_markup;
   InlineQueryResult({
-    this.type,
-    this.id,
+    required this.type,
+    required this.id,
     this.reply_markup,
   });
   factory InlineQueryResult.fromJson(Map<String, dynamic> json) =>

@@ -25,14 +25,14 @@ part of '../model.dart';
 class InputLocationMessageContent implements InputMessageContent {
   double latitude;
   double longitude;
-  double horizontal_accuracy;
-  int live_period;
-  int heading;
-  int proximity_alert_radius;
+  double? horizontal_accuracy;
+  int? live_period;
+  int? heading;
+  int? proximity_alert_radius;
 
   InputLocationMessageContent({
-    this.latitude,
-    this.longitude,
+    required this.latitude,
+    required this.longitude,
     this.horizontal_accuracy,
     this.live_period,
     this.heading,
@@ -40,9 +40,9 @@ class InputLocationMessageContent implements InputMessageContent {
   });
 
   @JsonKey(ignore: true)
-  Duration get live_period_ => TimeHelper.toDuration(live_period);
-  set live_period_(Duration duration) =>
-      live_period = TimeHelper.toSeconds(duration);
+  Duration? get live_period_ => live_period == null ? null : TimeHelper.toDuration(live_period!);
+  set live_period_(Duration? duration) =>
+      live_period = duration == null ? null : TimeHelper.toSeconds(duration);
 
   factory InputLocationMessageContent.fromJson(Map<String, dynamic> json) =>
       _$InputLocationMessageContentFromJson(json);

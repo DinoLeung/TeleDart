@@ -24,8 +24,8 @@ class UserProfilePhotos {
   int total_count;
   List<List<PhotoSize>> photos;
   UserProfilePhotos({
-    this.total_count,
-    this.photos,
+    required this.total_count,
+    required this.photos,
   });
   factory UserProfilePhotos.fromJson(Map<String, dynamic> json) =>
       _$UserProfilePhotosFromJson(json);
