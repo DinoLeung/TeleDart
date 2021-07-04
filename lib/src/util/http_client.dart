@@ -29,7 +29,7 @@ class HttpClient {
 
   /// HTTP get method
   /// [url] request url with query string (required)
-  static Future<dynamic> httpGet(String url) async =>
+  static Future<dynamic> httpGet(Uri url) async =>
       http.get(url).then((response) {
         Map<String, dynamic> responseBody = jsonDecode(response.body);
         if (responseBody['ok']) {
@@ -43,11 +43,10 @@ class HttpClient {
   /// HTTP post method (x-www-form-urlencoded)
   /// [url] - request url (required)
   /// [body] - parameters in map
-  static Future<dynamic> httpPost(String url,
-      {Map<String, dynamic> body}) async {
-    body.removeWhere(_nullFilter);
+  static Future<dynamic> httpPost(Uri url, {Map<String, dynamic>? body}) async {
+    body?.removeWhere(_nullFilter);
     return http
-        .post(url, body: body.map((k, v) => MapEntry(k, '$v')))
+        .post(url, body: body?.map((k, v) => MapEntry(k, '$v')))
         .then((response) {
       Map<String, dynamic> responseBody = jsonDecode(response.body);
       if (responseBody['ok']) {
@@ -64,12 +63,12 @@ class HttpClient {
   /// [file] - file to upload (required)
   /// [body] - parameters in map
   static Future<dynamic> httpMultipartPost(
-      String url, List<http.MultipartFile> files,
-      {Map<String, dynamic> body}) async {
-    body.removeWhere(_nullFilter);
-    var request = http.MultipartRequest('POST', Uri.parse(url))
+      Uri url, List<http.MultipartFile> files,
+      {Map<String, dynamic>? body}) async {
+    body?.removeWhere(_nullFilter);
+    var request = http.MultipartRequest('POST', url)
       ..headers.addAll({'Content-Type': 'multipart/form-data'})
-      ..fields.addAll(body.map((k, v) => MapEntry(k, '$v')))
+      ..fields.addAll(body?.map((k, v) => MapEntry(k, '$v')) ?? {})
       ..files.addAll(files);
     return request
         .send()
