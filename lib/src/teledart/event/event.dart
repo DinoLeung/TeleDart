@@ -97,7 +97,8 @@ class Event {
                     : '';
                 break;
               case 'bot_command': //'\/${keyword}' or '\/${keyword}\@${me.username}'
-                entityText = message.getEntity(entityType).isNotEmpty
+                entityText = message.getEntity(entityType).isNotEmpty &&
+                        message.entities[0].offset == 0
                     ? message
                         .getEntity(entityType)
                         .substring(1)
