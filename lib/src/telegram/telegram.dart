@@ -50,10 +50,10 @@ class Telegram {
       int? timeout,
       List<String>? allowed_updates}) async {
     var requestUrl = _apiUri('getUpdates', {
-      'offset': offset,
-      'limit': limit,
-      'timeout': timeout,
-      'allowed_updates': jsonEncode(allowed_updates)
+      'offset': ['$offset'],
+      'limit': ['$limit'],
+      'timeout': ['$timeout'],
+      'allowed_updates': [jsonEncode(allowed_updates)]
     });
 
     return (await HttpClient.httpGet(requestUrl).timeout(
@@ -131,8 +131,8 @@ class Telegram {
   ///
   /// [WebhookInfo]: https://core.telegram.org/bots/api#webhookinfo
   /// [getUpdates]: https://core.telegram.org/bots/api#getupdates
-  Future<WebhookInfo> getWebhookInfo() async => WebhookInfo.fromJson(
-      await HttpClient.httpGet(_apiUri('getWebhookInfo')));
+  Future<WebhookInfo> getWebhookInfo() async =>
+      WebhookInfo.fromJson(await HttpClient.httpGet(_apiUri('getWebhookInfo')));
 
   /// A simple method for testing your bot's auth token. Requires no parameters.
   /// Returns basic information about the bot in form of a [User] object.
@@ -151,8 +151,7 @@ class Telegram {
   /// Returns True on success. Requires no parameters.
   ///
   /// https://core.telegram.org/bots/api#logout
-  Future<bool> logOut() async =>
-      await HttpClient.httpGet(_apiUri('logOut'));
+  Future<bool> logOut() async => await HttpClient.httpGet(_apiUri('logOut'));
 
   /// Use this method to close the bot instance before moving it from one local server to another.
   /// You need to delete the webhook before calling this method to ensure that the bot isn't
@@ -161,8 +160,7 @@ class Telegram {
   /// Returns True on success. Requires no parameters.
   ///
   /// https://core.telegram.org/bots/api#close
-  Future<bool> close() async =>
-      await HttpClient.httpGet(_apiUri('close'));
+  Future<bool> close() async => await HttpClient.httpGet(_apiUri('close'));
 
   /// Use this method to send text messages. On success, the sent [Message] is returned.
   ///
@@ -1367,7 +1365,8 @@ class Telegram {
   /// admin rights. Returns *True* on success.
   ///
   /// https://core.telegram.org/bots/api#setchatdescription
-  Future<bool> setChatDescription(dynamic chat_id, {String? description}) async {
+  Future<bool> setChatDescription(dynamic chat_id,
+      {String? description}) async {
     if (chat_id is! String && chat_id is! int) {
       return Future.error(TelegramException(
           'Attribute \'chat_id\' can only be either type of String or int'));
@@ -1593,9 +1592,7 @@ class Telegram {
   /// Use this method to change the list of the bot's commands. Returns *True* on success.
   Future<bool> setMyCommands(List<BotCommand> commands) async {
     var requestUrl = _apiUri('setMyCommands');
-    var body = <String, dynamic>{
-      'commands': jsonEncode(commands)
-    };
+    var body = <String, dynamic>{'commands': jsonEncode(commands)};
     return await HttpClient.httpPost(requestUrl, body: body);
   }
 
