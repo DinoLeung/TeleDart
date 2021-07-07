@@ -20,7 +20,7 @@ import '../../telegram/model.dart';
 
 class Event {
   /// User object of bot.
-  User me;
+  final User _me;
 
   final StreamController<Message> _messageStreamController;
   final StreamController<Message> _editedMessageStreamController;
@@ -38,7 +38,7 @@ class Event {
   final StreamController<ChatMemberUpdated> _chatMemberStreamController;
 
   /// Constructor
-  Event(this.me, {bool sync = false})
+  Event(this._me, {bool sync = false})
       : _messageStreamController = StreamController.broadcast(sync: sync),
         _editedMessageStreamController = StreamController.broadcast(sync: sync),
         _channelPostStreamController = StreamController.broadcast(sync: sync),
@@ -103,7 +103,7 @@ class Event {
                 entityText = message
                         .getEntity(entityType)
                         ?.substring(1)
-                        .replaceAll('\@${me.username}', '') ??
+                        .replaceAll('\@${_me.username}', '') ??
                     '';
                 break;
               case 'url':
