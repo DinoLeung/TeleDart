@@ -155,7 +155,7 @@ class Webhook extends AbstractUpdateFetcher {
   @override
   Future<void> stop({bool? drop_pending_updates}) async {
     await telegram.deleteWebhook(drop_pending_updates: drop_pending_updates);
-    return _server.close() ?? Future.value();
+    return _server.close();
   }
 }
 

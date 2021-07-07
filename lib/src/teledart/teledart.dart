@@ -35,7 +35,7 @@ class TeleDart {
   AbstractUpdateFetcher fetcher;
 
   /// Constructor in dependency injection manner
-  TeleDart(this.telegram, this._event, AbstractUpdateFetcher? fetcher)
+  TeleDart(this.telegram, this._event, {AbstractUpdateFetcher? fetcher})
       : fetcher = fetcher ?? LongPolling(telegram);
 
   /// Starts listening to messages

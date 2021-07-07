@@ -24,7 +24,7 @@ import 'model.dart';
 import '../util/http_client.dart';
 
 class Telegram {
-  final String _baseUrl = 'api.telegram.org/bot';
+  final String _baseUrl = 'api.telegram.org';
   final String _token;
 
   Telegram(this._token);

@@ -112,8 +112,8 @@ class LongPolling extends AbstractUpdateFetcher {
   }
 
   void _onRecursivePollingError(Object error) {
-    print('$DateTime.now() $error');
-    print('Retrying in $retryDelay.inMinutes minute(s)...');
+    print('${DateTime.now()} $error');
+    print('Retrying in ${retryDelay.inMinutes} minute(s)...');
     _delayRetry();
     _doubleRetryDelay();
     _recursivePolling();
