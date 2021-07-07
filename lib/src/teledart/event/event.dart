@@ -19,8 +19,7 @@ import 'dart:async';
 import '../../telegram/model.dart';
 
 class Event {
-  /// User object of bot.
-  final User _me;
+  final String username;
 
   final StreamController<Message> _messageStreamController;
   final StreamController<Message> _editedMessageStreamController;
@@ -38,7 +37,7 @@ class Event {
   final StreamController<ChatMemberUpdated> _chatMemberStreamController;
 
   /// Constructor
-  Event(this._me, {bool sync = false})
+  Event(this.username, {bool sync = false})
       : _messageStreamController = StreamController.broadcast(sync: sync),
         _editedMessageStreamController = StreamController.broadcast(sync: sync),
         _channelPostStreamController = StreamController.broadcast(sync: sync),
@@ -103,7 +102,7 @@ class Event {
                 entityText = message
                         .getEntity(entityType)
                         ?.substring(1)
-                        .replaceAll('\@${_me.username}', '') ??
+                        .replaceAll('\@$username', '') ??
                     '';
                 break;
               case 'url':

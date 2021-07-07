@@ -35,13 +35,8 @@ class TeleDart {
   AbstractUpdateFetcher fetcher;
 
   /// Constructor in dependency injection manner
-  TeleDart(this.telegram, this._event, {this.fetcher});
-
-  /// Private method to get bot info
-  Future<User> _initBotInfo() async => telegram.getMe().then((user) {
-        _event.me = user;
-        return user;
-      });
+  TeleDart(this.telegram, this._event, AbstractUpdateFetcher? fetcher)
+      : fetcher = fetcher ?? LongPolling(telegram);
 
   /// Starts listening to messages
   ///
@@ -51,16 +46,14 @@ class TeleDart {
   /// instantiating [Teledart].
   /// To use webhooks, inject a [Webhook] object as [fetcher] when instantiating
   /// [Teledart].
-  Future<User> start() async => await _initBotInfo().then((me) {
-        fetcher ??= LongPolling(telegram);
-        fetcher
-          ..start()
-          ..onUpdate().listen((_updatesHandler));
-        return me;
-      });
+  void start() {
+    fetcher
+      ..start()
+      ..onUpdate().listen((_updatesHandler));
+  }
 
   /// Stops fetching updates
-  void stop() => fetcher?.stop();
+  void stop() => fetcher.stop();
 
   /// Configures a webhook used by this bot to receive updates.
   ///
@@ -68,7 +61,7 @@ class TeleDart {
   /// Alternatively, you can manage webhooks yourself by extending it.
   ///
   /// See: https://core.telegram.org/bots/api#setwebhook
-  Future<void> setWebhook() => fetcher != null && fetcher is Webhook
+  Future<void> setWebhook() => fetcher is Webhook
       ? (fetcher as Webhook).setWebhook()
       : throw TeleDartException(
           'Injected update fetcher is type of ${fetcher.runtimeType.toString()} instead of Webhook.');
@@ -78,7 +71,6 @@ class TeleDart {
     await telegram.deleteWebhook();
     if (fetcher is Webhook) {
       await fetcher.stop();
-      fetcher = null;
     }
   }
 
@@ -115,7 +107,7 @@ class TeleDart {
   ///  onMessage(entityType: 'bot_command', keyword: 'start').listen((message) =>
   ///    teledart.telegram.sendMessage(message.chat.id, 'hello world!'));
   ///  ```
-  Stream<TeleDartMessage> onMessage({String entityType, dynamic keyword}) =>
+  Stream<TeleDartMessage> onMessage({String? entityType, dynamic keyword}) =>
       _event
           .onMessage(entityType: entityType, keyword: keyword)
           .map(_messageStreamMapper);

@@ -26,19 +26,18 @@ class Webhook extends AbstractUpdateFetcher {
   final Telegram telegram;
 
   io.HttpServer _server;
-  io.SecurityContext _context;
 
   String url;
-  String ip_address;
+  String? ip_address;
   String secretPath;
   int port;
-  int serverPort;
+  int? serverPort;
   int max_connections;
-  List<String> allowed_updates;
-  bool drop_pending_updates;
+  List<String>? allowed_updates;
+  bool? drop_pending_updates;
 
-  io.File certificate;
-  io.File privateKey;
+  io.File? certificate;
+  io.File? privateKey;
   bool uploadCertificate;
 
   /// Setup webhook
@@ -52,7 +51,7 @@ class Webhook extends AbstractUpdateFetcher {
   ///
   /// Throws [WebhookException] if [port] is not supported by Telegram
   /// or [max_connections] is less than 1 or greater than 100.
-  Webhook(this.telegram, this.url, this.secretPath,
+  Webhook(this.telegram, this.url, this.secretPath, this._server,
       {this.ip_address,
       this.certificate,
       this.privateKey,
@@ -75,22 +74,53 @@ class Webhook extends AbstractUpdateFetcher {
     if (!secretPath.startsWith('\/')) {
       secretPath = '\/' + secretPath;
     }
+  }
 
-    // serup SecurityContext
-    if (certificate != null && privateKey != null) {
-      _context = io.SecurityContext();
-      _context.useCertificateChainBytes(certificate.readAsBytesSync());
-      _context.usePrivateKeyBytes(privateKey.readAsBytesSync());
-    }
+  static Future<Webhook> createHttpWebhok(
+      Telegram telegram, String url, String secretPath,
+      {String? ip_address,
+      int port = 80,
+      int? serverPort,
+      int max_connections = 40,
+      List<String>? allowed_updates,
+      bool? drop_pending_updates}) async {
+    var server = await io.HttpServer.bind(
+        io.InternetAddress.anyIPv4.address, serverPort ?? port);
+    return Webhook(telegram, url, secretPath, server,
+        ip_address: ip_address,
+        port: port,
+        serverPort: serverPort,
+        max_connections: max_connections,
+        allowed_updates: allowed_updates);
+  }
+
+  static Future<Webhook> createHttpsWebhok(Telegram telegram, String url,
+      String secretPath, io.File certificate, io.File privateKey,
+      {String? ip_address,
+      int port = 80,
+      int? serverPort,
+      bool uploadCertificate = false,
+      int max_connections = 40,
+      List<String>? allowed_updates,
+      bool? drop_pending_updates}) async {
+    var server = await io.HttpServer.bindSecure(
+          io.InternetAddress.anyIPv4.address,
+          serverPort ?? port,
+          io.SecurityContext()
+            ..useCertificateChainBytes(certificate.readAsBytesSync())
+            ..usePrivateKeyBytes(privateKey.readAsBytesSync()));
+    return Webhook(telegram, url, secretPath, server,
+        ip_address: ip_address,
+        certificate: certificate,
+        privateKey: privateKey,
+        port: port,
+        serverPort: serverPort,
+        uploadCertificate: uploadCertificate,
+        max_connections: max_connections,
+        allowed_updates: allowed_updates);
   }
 
   Future<void> setWebhook() async {
-    _server = _context != null
-        ? await io.HttpServer.bindSecure(
-            io.InternetAddress.anyIPv4.address, serverPort ?? port, _context)
-        : await io.HttpServer.bind(
-            io.InternetAddress.anyIPv4.address, serverPort ?? port);
-
     await telegram.setWebhook('$url:$port$secretPath',
         ip_address: ip_address,
         certificate: uploadCertificate ? certificate : null,
@@ -123,9 +153,9 @@ class Webhook extends AbstractUpdateFetcher {
 
   /// Remove webhook configuration from Telegram API, and stop the webhook server.
   @override
-  Future<void> stop({bool drop_pending_updates}) async {
+  Future<void> stop({bool? drop_pending_updates}) async {
     await telegram.deleteWebhook(drop_pending_updates: drop_pending_updates);
-    return _server?.close() ?? Future.value();
+    return _server.close() ?? Future.value();
   }
 }
 
