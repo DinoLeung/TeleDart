@@ -22,7 +22,7 @@ part of '../model.dart';
 @JsonSerializable()
 class InputMediaAnimation implements InputMedia {
   @override
-  String type = 'animation';
+  String type;
   @override
   String media;
   @override
@@ -37,7 +37,7 @@ class InputMediaAnimation implements InputMedia {
   int? duration;
 
   InputMediaAnimation({
-    required this.type,
+    this.type = InputMedia.ANIMATION,
     required this.media,
     this.thumb,
     this.caption,

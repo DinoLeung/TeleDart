@@ -35,7 +35,7 @@ class InlineQueryResultGame implements InlineQueryResult {
   InlineKeyboardMarkup? reply_markup;
   InlineQueryResultGame({
     required this.id,
-    this.type = 'game',
+    this.type = InlineQueryResult.GAME,
     required this.game_short_name,
     this.reply_markup,
   });

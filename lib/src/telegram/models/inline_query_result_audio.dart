@@ -44,7 +44,7 @@ class InlineQueryResultAudio implements InlineQueryResult {
 
   InlineQueryResultAudio({
     required this.id,
-    this.type = 'audio',
+    this.type = InlineQueryResult.AUDIO,
     required this.audio_url,
     required this.title,
     this.caption,

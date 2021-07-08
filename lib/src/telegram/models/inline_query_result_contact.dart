@@ -43,7 +43,7 @@ class InlineQueryResultContact implements InlineQueryResult {
   int? thumb_height;
   InlineQueryResultContact({
     required this.id,
-    this.type = 'contact',
+    this.type = InlineQueryResult.CONTACT,
     required this.phone_number,
     required this.first_name,
     this.last_name,

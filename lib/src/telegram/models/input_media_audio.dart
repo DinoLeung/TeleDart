@@ -22,7 +22,7 @@ part of '../model.dart';
 @JsonSerializable()
 class InputMediaAudio implements InputMedia {
   @override
-  String type = 'audio';
+  String type;
   @override
   String media;
   @override
@@ -37,7 +37,7 @@ class InputMediaAudio implements InputMedia {
   String? title;
 
   InputMediaAudio({
-    required this.type,
+    this.type = InputMedia.AUDIO,
     required this.media,
     this.thumb,
     this.caption,

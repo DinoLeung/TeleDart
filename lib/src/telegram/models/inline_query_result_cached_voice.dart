@@ -41,7 +41,7 @@ class InlineQueryResultCachedVoice implements InlineQueryResult {
   InputMessageContent? input_message_content;
   InlineQueryResultCachedVoice({
     required this.id,
-    this.type = 'voice',
+    this.type = InlineQueryResult.VOICE,
     required this.voice_file_id,
     required this.title,
     this.caption,

@@ -21,6 +21,11 @@ part of '../model.dart';
 /// https://core.telegram.org/bots/api#chat
 @JsonSerializable()
 class Chat {
+  static const PRIVATE = 'private';
+  static const GROUP = 'group';
+  static const SUPERGROUP = 'supergroup';
+  static const CHANNEL = 'channel';
+
   int id;
   String type;
   String? title;

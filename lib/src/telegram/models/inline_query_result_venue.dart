@@ -47,7 +47,7 @@ class InlineQueryResultVenue implements InlineQueryResult {
   int? thumb_height;
   InlineQueryResultVenue({
     required this.id,
-    this.type = 'venue',
+    this.type = InlineQueryResult.VENUE,
     required this.latitude,
     required this.longitude,
     required this.title,

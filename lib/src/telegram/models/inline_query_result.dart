@@ -42,6 +42,20 @@ part of '../model.dart';
 /// https://core.telegram.org/bots/api#inlinequeryresult
 @JsonSerializable()
 class InlineQueryResult {
+  static const ARTICLE = 'article';
+  static const AUDIO = 'audio';
+  static const DOCUMENT = 'document';
+  static const GIF = 'gif';
+  static const MPEG4_GIF = 'mpeg4_gif';
+  static const PHOTO = 'photo';
+  static const STICKER = 'sticker';
+  static const VIDEO = 'video';
+  static const VOICE = 'voice';
+  static const CONTACT = 'contact';
+  static const GAME = 'game';
+  static const LOCATION = 'location';
+  static const VENUE = 'venue';
+
   String type;
   String id;
   InlineKeyboardMarkup? reply_markup;

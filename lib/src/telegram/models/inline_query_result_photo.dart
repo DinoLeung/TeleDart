@@ -42,7 +42,7 @@ class InlineQueryResultPhoto implements InlineQueryResult {
   InputMessageContent? input_message_content;
   InlineQueryResultPhoto({
     required this.id,
-    this.type = 'photo',
+    this.type = InlineQueryResult.PHOTO,
     required this.photo_url,
     required this.thumb_url,
     this.photo_width,

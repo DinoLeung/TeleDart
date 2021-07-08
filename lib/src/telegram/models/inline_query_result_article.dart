@@ -37,7 +37,7 @@ class InlineQueryResultArticle implements InlineQueryResult {
   String? thumb_height;
   InlineQueryResultArticle({
     required this.id,
-    this.type = 'article',
+    this.type = InlineQueryResult.ARTICLE,
     required this.title,
     required this.input_message_content,
     this.reply_markup,

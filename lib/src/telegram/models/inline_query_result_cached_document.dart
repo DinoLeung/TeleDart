@@ -42,7 +42,7 @@ class InlineQueryResultCachedDocument implements InlineQueryResult {
   InputMessageContent? input_message_content;
   InlineQueryResultCachedDocument({
     required this.id,
-    this.type = 'document',
+    this.type = InlineQueryResult.DOCUMENT,
     required this.title,
     required this.document_file_id,
     this.description,

@@ -22,7 +22,7 @@ part of '../model.dart';
 @JsonSerializable()
 class InputMediaPhoto implements InputMedia {
   @override
-  String type = 'photo';
+  String type;
   @override
   String media;
   @override
@@ -32,7 +32,7 @@ class InputMediaPhoto implements InputMedia {
   @override
   List<MessageEntity>? caption_entities;
   InputMediaPhoto({
-    required this.type,
+    this.type = InputMedia.PHOTO,
     required this.media,
     this.caption,
     this.parse_mode,

@@ -37,7 +37,7 @@ class InlineQueryResultCachedSticker implements InlineQueryResult {
   InputMessageContent? input_message_content;
   InlineQueryResultCachedSticker({
     required this.id,
-    this.type = 'sticker',
+    this.type = InlineQueryResult.STICKER,
     required this.sticker_file_id,
     this.reply_markup,
     this.input_message_content,

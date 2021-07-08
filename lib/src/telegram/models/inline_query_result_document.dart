@@ -46,7 +46,7 @@ class InlineQueryResultDocument implements InlineQueryResult {
   int? thumb_height;
   InlineQueryResultDocument({
     required this.id,
-    this.type = 'document',
+    this.type = InlineQueryResult.DOCUMENT,
     required this.title,
     this.caption,
     this.parse_mode,

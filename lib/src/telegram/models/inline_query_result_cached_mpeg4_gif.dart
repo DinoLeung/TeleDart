@@ -38,7 +38,7 @@ class InlineQueryResultCachedMpeg4Gif implements InlineQueryResult {
   InputMessageContent? input_message_content;
   InlineQueryResultCachedMpeg4Gif({
     required this.id,
-    this.type = 'mpeg4_gif',
+    this.type = InlineQueryResult.MPEG4_GIF,
     required this.mpeg4_file_id,
     this.title,
     this.caption,

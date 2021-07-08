@@ -39,7 +39,7 @@ class InlineQueryResultCachedPhoto implements InlineQueryResult {
   InputMessageContent? input_message_content;
   InlineQueryResultCachedPhoto({
     required this.id,
-    this.type = 'photo',
+    this.type = InlineQueryResult.PHOTO,
     required this.photo_file_id,
     this.title,
     this.description,

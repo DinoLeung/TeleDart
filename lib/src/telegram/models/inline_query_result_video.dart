@@ -48,7 +48,7 @@ class InlineQueryResultVideo implements InlineQueryResult {
 
   InlineQueryResultVideo({
     required this.id,
-    this.type = 'video',
+    this.type = InlineQueryResult.VIDEO,
     required this.video_url,
     required this.mime_type,
     required this.thumb_url,

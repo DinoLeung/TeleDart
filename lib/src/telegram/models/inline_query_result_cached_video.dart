@@ -39,7 +39,7 @@ class InlineQueryResultCachedVideo implements InlineQueryResult {
   InputMessageContent? input_message_content;
   InlineQueryResultCachedVideo({
     required this.id,
-    this.type = 'video',
+    this.type = InlineQueryResult.VIDEO,
     required this.video_file_id,
     required this.title,
     this.description,

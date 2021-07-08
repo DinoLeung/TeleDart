@@ -47,7 +47,7 @@ class InlineQueryResultLocation implements InlineQueryResult {
 
   InlineQueryResultLocation({
     required this.id,
-    this.type = 'location',
+    this.type = InlineQueryResult.LOCATION,
     required this.latitude,
     required this.longitude,
     required this.title,

@@ -22,7 +22,7 @@ part of '../model.dart';
 @JsonSerializable()
 class InputMediaVideo implements InputMedia {
   @override
-  String type = 'video';
+  String type;
   @override
   String media;
   @override
@@ -38,7 +38,7 @@ class InputMediaVideo implements InputMedia {
   bool? supports_streaming;
 
   InputMediaVideo({
-    required this.type,
+    this.type = InputMedia.VIDEO,
     required this.media,
     this.caption,
     this.parse_mode,

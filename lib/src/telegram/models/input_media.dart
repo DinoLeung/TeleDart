@@ -27,6 +27,12 @@ part of '../model.dart';
 @JsonSerializable()
 // abstract class InputMedia {
 class InputMedia {
+  static const ANIMATION = 'animation';
+  static const AUDIO = 'audio';
+  static const DOCUMENT = 'document';
+  static const PHOTO = 'photo';
+  static const VIDEO = 'video';
+
   String type;
   String media;
   String? caption;

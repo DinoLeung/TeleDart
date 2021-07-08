@@ -43,7 +43,7 @@ class InlineQueryResultVoice implements InlineQueryResult {
 
   InlineQueryResultVoice({
     required this.id,
-    this.type = 'voice',
+    this.type = InlineQueryResult.VOICE,
     required this.voice_url,
     required this.title,
     this.caption,

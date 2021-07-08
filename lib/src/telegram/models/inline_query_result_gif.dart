@@ -44,7 +44,7 @@ class InlineQueryResultGif implements InlineQueryResult {
 
   InlineQueryResultGif({
     required this.id,
-    this.type = 'gif',
+    this.type = InlineQueryResult.GIF,
     required this.gif_url,
     this.gif_width,
     this.gif_height,

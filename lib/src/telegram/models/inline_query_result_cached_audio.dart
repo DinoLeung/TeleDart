@@ -40,7 +40,7 @@ class InlineQueryResultCachedAudio implements InlineQueryResult {
   InputMessageContent? input_message_content;
   InlineQueryResultCachedAudio({
     required this.id,
-    this.type = 'audio',
+    this.type = InlineQueryResult.AUDIO,
     required this.audio_file_id,
     this.caption,
     this.parse_mode,

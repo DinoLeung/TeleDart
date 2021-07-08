@@ -44,7 +44,7 @@ class InlineQueryResultMpeg4Gif implements InlineQueryResult {
 
   InlineQueryResultMpeg4Gif({
     required this.id,
-    this.type = 'mpeg4_gif',
+    this.type = InlineQueryResult.MPEG4_GIF,
     required this.mpeg4_url,
     this.mpeg4_width,
     this.mpeg4_height,

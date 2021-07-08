@@ -22,7 +22,7 @@ part of '../model.dart';
 @JsonSerializable()
 class InputMediaDocument implements InputMedia {
   @override
-  String type = 'document';
+  String type;
   @override
   String media;
   @override
@@ -34,7 +34,7 @@ class InputMediaDocument implements InputMedia {
   dynamic thumb; // InputFile or String
   bool? disable_content_type_detection;
   InputMediaDocument({
-    required this.type,
+    this.type = InputMedia.DOCUMENT,
     required this.media,
     this.thumb,
     this.caption,

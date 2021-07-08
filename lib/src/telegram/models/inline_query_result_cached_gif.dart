@@ -38,7 +38,7 @@ class InlineQueryResultCachedGif implements InlineQueryResult {
   InputMessageContent? input_message_content;
   InlineQueryResultCachedGif({
     required this.id,
-    this.type = 'gif',
+    this.type = InlineQueryResult.GIF,
     required this.gif_file_id,
     this.title,
     this.caption,
