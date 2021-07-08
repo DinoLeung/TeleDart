@@ -9,7 +9,7 @@ allowing you to create your own bot easily.
 ![TeleDart](https://raw.githubusercontent.com/DinoLeung/TeleDart/master/example/dash_paper_plane.svg?sanitize=true)
 
 [![Bot API Version](https://img.shields.io/badge/Bot%20API-5.0-blue.svg?style=flat-square)](https://core.telegram.org/bots/api)
-[![Dart Version](https://img.shields.io/badge/Dart-2.12.0-blue.svg?style=flat-square)](https://dart.dev)
+[![Dart Version](https://img.shields.io/badge/Dart-2.12-blue.svg?style=flat-square)](https://dart.dev)
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg?style=flat-square)](https://www.gnu.org/licenses/gpl-3.0)
 
 ## Usage
@@ -24,14 +24,11 @@ import 'package:teledart/model.dart';
 void main() {
   var telegram = Telegram(envVars['BOT_TOKEN']!);
   var event = Event((await telegram.getMe()).username!);
-  var teledart = TeleDart(telegram, event);
-
-  teledart.start().then(() => print('${event.username} is initialised'));
-
-  teledart
-      .onMessage(keyword: 'Fight for freedom')
+  
+  TeleDart(telegram, event)
+    ..start()
+    ..onMessage(keyword: 'Fight for freedom')
       .listen((message) => message.reply('Stand with Hong Kong'));
-
 }
 ```
 
@@ -39,12 +36,12 @@ Modifying [Stream](https://www.dartlang.org/tutorials/language/streams#methods-t
 
 ```dart
 teledart
-      .onMessage(keyword: 'dart')
-      .where((message) => message.text?.contains('telegram')) ?? false
-      .listen((message) => message.replyPhoto(
-          //  io.File('example/dash_paper_plane.png'),
-          'https://raw.githubusercontent.com/DinoLeung/TeleDart/master/example/dash_paper_plane.png',
-          caption: 'This is how the Dart Bird and Telegram are met'));
+    .onMessage(keyword: 'dart')
+    .where((message) => message.text?.contains('telegram') ?? false)
+    .listen((message) => message.replyPhoto(
+        //  io.File('example/dash_paper_plane.png'),
+        'https://raw.githubusercontent.com/DinoLeung/TeleDart/master/example/dash_paper_plane.png',
+        caption: 'This is how the Dart Bird and Telegram are met'));
 ```
 
 [Inline mode](https://core.telegram.org/bots/api#inline-mode) example:
