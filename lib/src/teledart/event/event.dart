@@ -77,14 +77,14 @@ class Event {
             return false;
           } else if (entityType == 'text_mention') {
             var userId = message.entityOf(entityType)?.user?.id;
-            var userName = message.entityOf(entityType)?.user?.username;
+            var firstName = message.entityOf(entityType)?.user?.first_name;
             if (keyword is RegExp) {
               var hasMatch = false;
-              if (userName != null) keyword.hasMatch(userName);
+              if (firstName != null) keyword.hasMatch(firstName);
               if (userId != null) keyword.hasMatch(userId as String);
               return hasMatch;
             } else {
-              return keyword == userName || keyword == userId;
+              return keyword == firstName || keyword == userId;
             }
           } else {
             var entityText = '';
