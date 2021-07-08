@@ -1,3 +1,10 @@
+## 0.2.0 (Unreleased)
+
+- Support sound null safety
+- Various bug fixes to built-in long poll and webhook fetcher
+- **Breaking** `Webhook` can only instantiated with built-in static functions `Webhook.createHttpWebhok` and `Webhook.createHttpsWebhok`
+- **Breaking** `Event` constructor requires bot's username
+
 ## 0.1.6
 
 - Fixed `jsonEncode` issue caused by `_nullFilter` fix 
