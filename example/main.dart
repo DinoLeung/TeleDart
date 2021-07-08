@@ -10,8 +10,8 @@ Future<void> main() async {
 
   var telegram = Telegram(envVars['BOT_TOKEN']!);
   var event = Event((await telegram.getMe()).username!);
-
-  // Use Long poll by default.
+  
+  // TeleDart uses longpoll by default if no update fetcher is specified.
   var teledart = TeleDart(telegram, event);
 
   // In case you decided to use webhook.
@@ -24,8 +24,6 @@ Future<void> main() async {
   //     port: int.parse(envVars['BOT_PORT']!));
   // var teledart = TeleDart(telegram, event, fetcher: webhook);
 
-  // TeleDart uses longpoll by default if no update fetcher is specified.
-  // teledart.start().then((me) => print('${me.username} is initialised'));
   teledart.start();
 
   // You can listen to messages like this
