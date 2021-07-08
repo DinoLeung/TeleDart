@@ -30,7 +30,7 @@ class InlineQueryResultVenue implements InlineQueryResult {
   @override
   String id;
   @override
-  String type = 'venue';
+  String type;
   double latitude;
   double longitude;
   String title;
@@ -47,7 +47,7 @@ class InlineQueryResultVenue implements InlineQueryResult {
   int? thumb_height;
   InlineQueryResultVenue({
     required this.id,
-    required this.type,
+    this.type = 'venue',
     required this.latitude,
     required this.longitude,
     required this.title,

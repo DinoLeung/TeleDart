@@ -24,7 +24,7 @@ class InlineQueryResultArticle implements InlineQueryResult {
   @override
   String id;
   @override
-  String type = 'article';
+  String type;
   String title;
   InputMessageContent input_message_content;
   @override
@@ -37,7 +37,7 @@ class InlineQueryResultArticle implements InlineQueryResult {
   String? thumb_height;
   InlineQueryResultArticle({
     required this.id,
-    required this.type,
+    this.type = 'article',
     required this.title,
     required this.input_message_content,
     this.reply_markup,

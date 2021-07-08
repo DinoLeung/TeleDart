@@ -30,7 +30,7 @@ class InlineQueryResultCachedVoice implements InlineQueryResult {
   @override
   String id;
   @override
-  String type = 'voice';
+  String type;
   String voice_file_id;
   String title;
   String? caption;
@@ -41,7 +41,7 @@ class InlineQueryResultCachedVoice implements InlineQueryResult {
   InputMessageContent? input_message_content;
   InlineQueryResultCachedVoice({
     required this.id,
-    required this.type,
+    this.type = 'voice',
     required this.voice_file_id,
     required this.title,
     this.caption,

@@ -30,7 +30,7 @@ class InlineQueryResultContact implements InlineQueryResult {
   @override
   String id;
   @override
-  String type = 'contact';
+  String type;
   String phone_number;
   String first_name;
   String? last_name;
@@ -43,7 +43,7 @@ class InlineQueryResultContact implements InlineQueryResult {
   int? thumb_height;
   InlineQueryResultContact({
     required this.id,
-    required this.type,
+    this.type = 'contact',
     required this.phone_number,
     required this.first_name,
     this.last_name,

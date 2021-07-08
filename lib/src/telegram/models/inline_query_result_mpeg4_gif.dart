@@ -27,7 +27,7 @@ class InlineQueryResultMpeg4Gif implements InlineQueryResult {
   @override
   String id;
   @override
-  String type = 'mpeg4_gif';
+  String type;
   String mpeg4_url;
   int? mpeg4_width;
   int? mpeg4_height;
@@ -44,7 +44,7 @@ class InlineQueryResultMpeg4Gif implements InlineQueryResult {
 
   InlineQueryResultMpeg4Gif({
     required this.id,
-    required this.type,
+    this.type = 'mpeg4_gif',
     required this.mpeg4_url,
     this.mpeg4_width,
     this.mpeg4_height,

@@ -29,13 +29,13 @@ class InlineQueryResultGame implements InlineQueryResult {
   @override
   String id;
   @override
-  String type = 'game';
+  String type;
   String game_short_name;
   @override
   InlineKeyboardMarkup? reply_markup;
   InlineQueryResultGame({
     required this.id,
-    required this.type,
+    this.type = 'game',
     required this.game_short_name,
     this.reply_markup,
   });

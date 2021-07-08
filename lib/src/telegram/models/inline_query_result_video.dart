@@ -30,7 +30,7 @@ class InlineQueryResultVideo implements InlineQueryResult {
   @override
   String id;
   @override
-  String type = 'video';
+  String type;
   String video_url;
   String mime_type;
   String thumb_url;
@@ -48,7 +48,7 @@ class InlineQueryResultVideo implements InlineQueryResult {
 
   InlineQueryResultVideo({
     required this.id,
-    required this.type,
+    this.type = 'video',
     required this.video_url,
     required this.mime_type,
     required this.thumb_url,

@@ -31,7 +31,7 @@ class InlineQueryResultDocument implements InlineQueryResult {
   String id;
   @override
   String type;
-  String title = 'document';
+  String title;
   String? caption;
   String? parse_mode;
   List<MessageEntity>? caption_entities;
@@ -46,7 +46,7 @@ class InlineQueryResultDocument implements InlineQueryResult {
   int? thumb_height;
   InlineQueryResultDocument({
     required this.id,
-    required this.type,
+    this.type = 'document',
     required this.title,
     this.caption,
     this.parse_mode,

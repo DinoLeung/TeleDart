@@ -27,7 +27,7 @@ class InlineQueryResultCachedPhoto implements InlineQueryResult {
   @override
   String id;
   @override
-  String type = 'photo';
+  String type;
   String photo_file_id;
   String? title;
   String? description;
@@ -39,7 +39,7 @@ class InlineQueryResultCachedPhoto implements InlineQueryResult {
   InputMessageContent? input_message_content;
   InlineQueryResultCachedPhoto({
     required this.id,
-    required this.type,
+    this.type = 'photo',
     required this.photo_file_id,
     this.title,
     this.description,

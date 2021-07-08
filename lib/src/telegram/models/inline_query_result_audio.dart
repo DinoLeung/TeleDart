@@ -30,7 +30,7 @@ class InlineQueryResultAudio implements InlineQueryResult {
   @override
   String id;
   @override
-  String type = 'audio';
+  String type;
   String audio_url;
   String title;
   String? caption;
@@ -44,7 +44,7 @@ class InlineQueryResultAudio implements InlineQueryResult {
 
   InlineQueryResultAudio({
     required this.id,
-    required this.type,
+    this.type = 'audio',
     required this.audio_url,
     required this.title,
     this.caption,

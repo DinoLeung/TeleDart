@@ -27,7 +27,7 @@ class InlineQueryResultCachedVideo implements InlineQueryResult {
   @override
   String id;
   @override
-  String type = 'video';
+  String type;
   String video_file_id;
   String title;
   String? description;
@@ -39,7 +39,7 @@ class InlineQueryResultCachedVideo implements InlineQueryResult {
   InputMessageContent? input_message_content;
   InlineQueryResultCachedVideo({
     required this.id,
-    required this.type,
+    this.type = 'video',
     required this.video_file_id,
     required this.title,
     this.description,
