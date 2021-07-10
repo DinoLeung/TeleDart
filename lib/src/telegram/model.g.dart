@@ -1802,6 +1802,7 @@ InlineQuery _$InlineQueryFromJson(Map<String, dynamic> json) {
     from: User.fromJson(json['from'] as Map<String, dynamic>),
     query: json['query'] as String,
     offset: json['offset'] as String,
+    chat_type: json['chat_type'] as String?,
     location: json['location'] == null
         ? null
         : Location.fromJson(json['location'] as Map<String, dynamic>),
@@ -1822,6 +1823,7 @@ Map<String, dynamic> _$InlineQueryToJson(InlineQuery instance) {
     }
   }
 
+  writeNotNull('chat_type', instance.chat_type);
   writeNotNull('location', instance.location?.toJson());
   return val;
 }

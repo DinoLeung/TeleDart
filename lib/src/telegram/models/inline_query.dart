@@ -27,12 +27,14 @@ class InlineQuery {
   User from;
   String query;
   String offset;
+  String? chat_type;
   Location? location;
   InlineQuery({
     required this.id,
     required this.from,
     required this.query,
     required this.offset,
+    this.chat_type,
     this.location,
   });
   factory InlineQuery.fromJson(Map<String, dynamic> json) =>
