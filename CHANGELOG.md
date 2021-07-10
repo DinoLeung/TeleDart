@@ -1,3 +1,7 @@
+## 0.2.1 (Unreleased)
+
+- Support API 5.2 and 5.3
+
 ## 0.2.0 (Unreleased)
 
 - Support sound null safety
