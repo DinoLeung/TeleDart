@@ -1324,35 +1324,32 @@ Map<String, dynamic> _$ChatInviteLinkToJson(ChatInviteLink instance) {
 
 ChatMember _$ChatMemberFromJson(Map<String, dynamic> json) {
   return ChatMember(
-    user: json['user'] == null
-        ? null
-        : User.fromJson(json['user'] as Map<String, dynamic>),
-    status: json['status'] as String?,
-    custom_title: json['custom_title'] as String?,
-    is_anonymous: json['is_anonymous'] as bool?,
-    can_be_edited: json['can_be_edited'] as bool?,
-    can_manage_chat: json['can_manage_chat'] as bool?,
-    can_post_messages: json['can_post_messages'] as bool?,
-    can_edit_messages: json['can_edit_messages'] as bool?,
-    can_delete_messages: json['can_delete_messages'] as bool?,
-    can_manage_voice_chats: json['can_manage_voice_chats'] as bool?,
-    can_restrict_members: json['can_restrict_members'] as bool?,
-    can_promote_members: json['can_promote_members'] as bool?,
-    can_change_info: json['can_change_info'] as bool?,
-    can_invite_users: json['can_invite_users'] as bool?,
-    can_pin_messages: json['can_pin_messages'] as bool?,
-    is_member: json['is_member'] as bool?,
-    can_send_messages: json['can_send_messages'] as bool?,
-    can_send_media_messages: json['can_send_media_messages'] as bool?,
-    can_send_polls: json['can_send_polls'] as bool?,
-    can_send_other_messages: json['can_send_other_messages'] as bool?,
-    can_add_web_page_previews: json['can_add_web_page_previews'] as bool?,
-    until_date: json['until_date'] as int?,
+    status: json['status'] as String,
+    user: User.fromJson(json['user'] as Map<String, dynamic>),
   );
 }
 
-Map<String, dynamic> _$ChatMemberToJson(ChatMember instance) {
-  final val = <String, dynamic>{};
+Map<String, dynamic> _$ChatMemberToJson(ChatMember instance) =>
+    <String, dynamic>{
+      'status': instance.status,
+      'user': instance.user.toJson(),
+    };
+
+ChatMemberOwner _$ChatMemberOwnerFromJson(Map<String, dynamic> json) {
+  return ChatMemberOwner(
+    user: User.fromJson(json['user'] as Map<String, dynamic>),
+    status: json['status'] as String,
+    is_anonymous: json['is_anonymous'] as bool,
+    custom_title: json['custom_title'] as String?,
+  );
+}
+
+Map<String, dynamic> _$ChatMemberOwnerToJson(ChatMemberOwner instance) {
+  final val = <String, dynamic>{
+    'status': instance.status,
+    'user': instance.user.toJson(),
+    'is_anonymous': instance.is_anonymous,
+  };
 
   void writeNotNull(String key, dynamic value) {
     if (value != null) {
@@ -1360,30 +1357,134 @@ Map<String, dynamic> _$ChatMemberToJson(ChatMember instance) {
     }
   }
 
-  writeNotNull('user', instance.user?.toJson());
-  writeNotNull('status', instance.status);
   writeNotNull('custom_title', instance.custom_title);
-  writeNotNull('is_anonymous', instance.is_anonymous);
-  writeNotNull('can_be_edited', instance.can_be_edited);
-  writeNotNull('can_manage_chat', instance.can_manage_chat);
-  writeNotNull('can_post_messages', instance.can_post_messages);
-  writeNotNull('can_edit_messages', instance.can_edit_messages);
-  writeNotNull('can_delete_messages', instance.can_delete_messages);
-  writeNotNull('can_manage_voice_chats', instance.can_manage_voice_chats);
-  writeNotNull('can_restrict_members', instance.can_restrict_members);
-  writeNotNull('can_promote_members', instance.can_promote_members);
-  writeNotNull('can_change_info', instance.can_change_info);
-  writeNotNull('can_invite_users', instance.can_invite_users);
-  writeNotNull('can_pin_messages', instance.can_pin_messages);
-  writeNotNull('is_member', instance.is_member);
-  writeNotNull('can_send_messages', instance.can_send_messages);
-  writeNotNull('can_send_media_messages', instance.can_send_media_messages);
-  writeNotNull('can_send_polls', instance.can_send_polls);
-  writeNotNull('can_send_other_messages', instance.can_send_other_messages);
-  writeNotNull('can_add_web_page_previews', instance.can_add_web_page_previews);
-  writeNotNull('until_date', instance.until_date);
   return val;
 }
+
+ChatMemberAdministrator _$ChatMemberAdministratorFromJson(
+    Map<String, dynamic> json) {
+  return ChatMemberAdministrator(
+    status: json['status'] as String,
+    user: User.fromJson(json['user'] as Map<String, dynamic>),
+    can_be_edited: json['can_be_edited'] as bool,
+    is_anonymous: json['is_anonymous'] as bool,
+    can_manage_chat: json['can_manage_chat'] as bool,
+    can_delete_messages: json['can_delete_messages'] as bool,
+    can_manage_voice_chats: json['can_manage_voice_chats'] as bool,
+    can_restrict_members: json['can_restrict_members'] as bool,
+    can_promote_members: json['can_promote_members'] as bool,
+    can_change_info: json['can_change_info'] as bool,
+    can_invite_users: json['can_invite_users'] as bool,
+    can_post_messages: json['can_post_messages'] as bool?,
+    can_edit_messages: json['can_edit_messages'] as bool?,
+    can_pin_messages: json['can_pin_messages'] as bool?,
+    custom_title: json['custom_title'] as String?,
+  );
+}
+
+Map<String, dynamic> _$ChatMemberAdministratorToJson(
+    ChatMemberAdministrator instance) {
+  final val = <String, dynamic>{
+    'status': instance.status,
+    'user': instance.user.toJson(),
+    'can_be_edited': instance.can_be_edited,
+    'is_anonymous': instance.is_anonymous,
+    'can_manage_chat': instance.can_manage_chat,
+    'can_delete_messages': instance.can_delete_messages,
+    'can_manage_voice_chats': instance.can_manage_voice_chats,
+    'can_restrict_members': instance.can_restrict_members,
+    'can_promote_members': instance.can_promote_members,
+    'can_change_info': instance.can_change_info,
+    'can_invite_users': instance.can_invite_users,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('can_post_messages', instance.can_post_messages);
+  writeNotNull('can_edit_messages', instance.can_edit_messages);
+  writeNotNull('can_pin_messages', instance.can_pin_messages);
+  writeNotNull('custom_title', instance.custom_title);
+  return val;
+}
+
+ChatMemberMember _$ChatMemberMemberFromJson(Map<String, dynamic> json) {
+  return ChatMemberMember(
+    status: json['status'] as String,
+    user: User.fromJson(json['user'] as Map<String, dynamic>),
+  );
+}
+
+Map<String, dynamic> _$ChatMemberMemberToJson(ChatMemberMember instance) =>
+    <String, dynamic>{
+      'status': instance.status,
+      'user': instance.user.toJson(),
+    };
+
+ChatMemberRestricted _$ChatMemberRestrictedFromJson(Map<String, dynamic> json) {
+  return ChatMemberRestricted(
+    status: json['status'] as String,
+    user: User.fromJson(json['user'] as Map<String, dynamic>),
+    is_member: json['is_member'] as bool,
+    can_change_info: json['can_change_info'] as bool,
+    can_invite_users: json['can_invite_users'] as bool,
+    can_pin_messages: json['can_pin_messages'] as bool,
+    can_send_messages: json['can_send_messages'] as bool,
+    can_send_media_messages: json['can_send_media_messages'] as bool,
+    can_send_polls: json['can_send_polls'] as bool,
+    can_send_other_messages: json['can_send_other_messages'] as bool,
+    can_add_web_page_previews: json['can_add_web_page_previews'] as bool,
+    until_date: json['until_date'] as int,
+  );
+}
+
+Map<String, dynamic> _$ChatMemberRestrictedToJson(
+        ChatMemberRestricted instance) =>
+    <String, dynamic>{
+      'status': instance.status,
+      'user': instance.user.toJson(),
+      'is_member': instance.is_member,
+      'can_change_info': instance.can_change_info,
+      'can_invite_users': instance.can_invite_users,
+      'can_pin_messages': instance.can_pin_messages,
+      'can_send_messages': instance.can_send_messages,
+      'can_send_media_messages': instance.can_send_media_messages,
+      'can_send_polls': instance.can_send_polls,
+      'can_send_other_messages': instance.can_send_other_messages,
+      'can_add_web_page_previews': instance.can_add_web_page_previews,
+      'until_date': instance.until_date,
+    };
+
+ChatMemberLeft _$ChatMemberLeftFromJson(Map<String, dynamic> json) {
+  return ChatMemberLeft(
+    status: json['status'] as String,
+    user: User.fromJson(json['user'] as Map<String, dynamic>),
+  );
+}
+
+Map<String, dynamic> _$ChatMemberLeftToJson(ChatMemberLeft instance) =>
+    <String, dynamic>{
+      'status': instance.status,
+      'user': instance.user.toJson(),
+    };
+
+ChatMemberBanned _$ChatMemberBannedFromJson(Map<String, dynamic> json) {
+  return ChatMemberBanned(
+    status: json['status'] as String,
+    user: User.fromJson(json['user'] as Map<String, dynamic>),
+    until_date: json['until_date'] as int,
+  );
+}
+
+Map<String, dynamic> _$ChatMemberBannedToJson(ChatMemberBanned instance) =>
+    <String, dynamic>{
+      'status': instance.status,
+      'user': instance.user.toJson(),
+      'until_date': instance.until_date,
+    };
 
 ChatMemberUpdated _$ChatMemberUpdatedFromJson(Map<String, dynamic> json) {
   return ChatMemberUpdated(

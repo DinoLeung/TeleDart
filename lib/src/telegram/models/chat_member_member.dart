@@ -16,29 +16,27 @@
 
 part of '../model.dart';
 
-/// This object contains information about one member of a chat.
-/// Currently, the following 6 types of chat members are supported:
-/// * [ChatMemberOwner](https://core.telegram.org/bots/api#chatmemberowner)
-/// * [ChatMemberAdministrator](https://core.telegram.org/bots/api#chatmemberadministrator)
-/// * [ChatMemberMember](https://core.telegram.org/bots/api#chatmembermember)
-/// * [ChatMemberRestricted](https://core.telegram.org/bots/api#chatmemberrestricted)
-/// * [ChatMemberLeft](https://core.telegram.org/bots/api#chatmemberleft)
-/// * [ChatMemberBanned](https://core.telegram.org/bots/api#chatmemberbanned)
+/// Represents a [chat member] that has no additional privileges or restrictions.
 /// 
-/// https://core.telegram.org/bots/api#chatmember
+/// https://core.telegram.org/bots/api#chatmembermember
+/// 
+/// [chat member]: https://core.telegram.org/bots/api#chatmember
 
 
 @JsonSerializable()
-class ChatMember {
+class ChatMemberMember implements ChatMember {
+  @override
   String status;
+  @override
   User user;
 
-  ChatMember({
+  ChatMemberMember({
     required this.status,
     required this.user,
   });
 
-  factory ChatMember.fromJson(Map<String, dynamic> json) =>
-      _$ChatMemberFromJson(json);
-  Map<String, dynamic> toJson() => _$ChatMemberToJson(this);
+  factory ChatMemberMember.fromJson(Map<String, dynamic> json) =>
+      _$ChatMemberMemberFromJson(json);
+  @override
+  Map<String, dynamic> toJson() => _$ChatMemberMemberToJson(this);
 }

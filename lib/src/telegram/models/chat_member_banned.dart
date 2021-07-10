@@ -16,29 +16,34 @@
 
 part of '../model.dart';
 
-/// This object contains information about one member of a chat.
-/// Currently, the following 6 types of chat members are supported:
-/// * [ChatMemberOwner](https://core.telegram.org/bots/api#chatmemberowner)
-/// * [ChatMemberAdministrator](https://core.telegram.org/bots/api#chatmemberadministrator)
-/// * [ChatMemberMember](https://core.telegram.org/bots/api#chatmembermember)
-/// * [ChatMemberRestricted](https://core.telegram.org/bots/api#chatmemberrestricted)
-/// * [ChatMemberLeft](https://core.telegram.org/bots/api#chatmemberleft)
-/// * [ChatMemberBanned](https://core.telegram.org/bots/api#chatmemberbanned)
+/// Represents a [chat member] that isn't currently a member of the chat, but may join it themselves.
 /// 
-/// https://core.telegram.org/bots/api#chatmember
+/// that isn't currently a member of the chat, but may join it themselves.
+/// 
+/// [chat member]: https://core.telegram.org/bots/api#chatmember
 
 
 @JsonSerializable()
-class ChatMember {
+class ChatMemberBanned implements ChatMember {
+  @override
   String status;
+  @override
   User user;
+  int until_date;
 
-  ChatMember({
+  ChatMemberBanned({
     required this.status,
     required this.user,
+    required this.until_date,
   });
 
-  factory ChatMember.fromJson(Map<String, dynamic> json) =>
-      _$ChatMemberFromJson(json);
-  Map<String, dynamic> toJson() => _$ChatMemberToJson(this);
+  @JsonKey(ignore: true)
+  DateTime get until_date_ => TimeHelper.toDateTime(until_date);
+  set until_date_(DateTime dateTime) =>
+      until_date = TimeHelper.toUnixTime(dateTime);
+
+  factory ChatMemberBanned.fromJson(Map<String, dynamic> json) =>
+      _$ChatMemberBannedFromJson(json);
+  @override
+  Map<String, dynamic> toJson() => _$ChatMemberBannedToJson(this);
 }
