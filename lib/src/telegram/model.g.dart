@@ -1480,6 +1480,139 @@ Map<String, dynamic> _$BotCommandToJson(BotCommand instance) =>
       'description': instance.description,
     };
 
+BotCommandScope _$BotCommandScopeFromJson(Map<String, dynamic> json) {
+  return BotCommandScope(
+    type: json['type'] as String,
+  );
+}
+
+Map<String, dynamic> _$BotCommandScopeToJson(BotCommandScope instance) =>
+    <String, dynamic>{
+      'type': instance.type,
+    };
+
+BotCommandScopeDefault _$BotCommandScopeDefaultFromJson(
+    Map<String, dynamic> json) {
+  return BotCommandScopeDefault(
+    type: json['type'] as String,
+  );
+}
+
+Map<String, dynamic> _$BotCommandScopeDefaultToJson(
+        BotCommandScopeDefault instance) =>
+    <String, dynamic>{
+      'type': instance.type,
+    };
+
+BotCommandScopeAllPrivateChats _$BotCommandScopeAllPrivateChatsFromJson(
+    Map<String, dynamic> json) {
+  return BotCommandScopeAllPrivateChats(
+    type: json['type'] as String,
+  );
+}
+
+Map<String, dynamic> _$BotCommandScopeAllPrivateChatsToJson(
+        BotCommandScopeAllPrivateChats instance) =>
+    <String, dynamic>{
+      'type': instance.type,
+    };
+
+BotCommandScopeAllGroupChats _$BotCommandScopeAllGroupChatsFromJson(
+    Map<String, dynamic> json) {
+  return BotCommandScopeAllGroupChats(
+    type: json['type'] as String,
+  );
+}
+
+Map<String, dynamic> _$BotCommandScopeAllGroupChatsToJson(
+        BotCommandScopeAllGroupChats instance) =>
+    <String, dynamic>{
+      'type': instance.type,
+    };
+
+BotCommandScopeAllChatAdministrators
+    _$BotCommandScopeAllChatAdministratorsFromJson(Map<String, dynamic> json) {
+  return BotCommandScopeAllChatAdministrators(
+    type: json['type'] as String,
+  );
+}
+
+Map<String, dynamic> _$BotCommandScopeAllChatAdministratorsToJson(
+        BotCommandScopeAllChatAdministrators instance) =>
+    <String, dynamic>{
+      'type': instance.type,
+    };
+
+BotCommandScopeChat _$BotCommandScopeChatFromJson(Map<String, dynamic> json) {
+  return BotCommandScopeChat(
+    type: json['type'] as String,
+    chat_id: json['chat_id'],
+  );
+}
+
+Map<String, dynamic> _$BotCommandScopeChatToJson(BotCommandScopeChat instance) {
+  final val = <String, dynamic>{
+    'type': instance.type,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('chat_id', instance.chat_id);
+  return val;
+}
+
+BotCommandScopeChatAdministrators _$BotCommandScopeChatAdministratorsFromJson(
+    Map<String, dynamic> json) {
+  return BotCommandScopeChatAdministrators(
+    type: json['type'] as String,
+    chat_id: json['chat_id'],
+  );
+}
+
+Map<String, dynamic> _$BotCommandScopeChatAdministratorsToJson(
+    BotCommandScopeChatAdministrators instance) {
+  final val = <String, dynamic>{
+    'type': instance.type,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('chat_id', instance.chat_id);
+  return val;
+}
+
+BotCommandScopeChatMember _$BotCommandScopeChatMemberFromJson(
+    Map<String, dynamic> json) {
+  return BotCommandScopeChatMember(
+    type: json['type'] as String,
+    chat_id: json['chat_id'],
+  );
+}
+
+Map<String, dynamic> _$BotCommandScopeChatMemberToJson(
+    BotCommandScopeChatMember instance) {
+  final val = <String, dynamic>{
+    'type': instance.type,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('chat_id', instance.chat_id);
+  return val;
+}
+
 ResponseParameters _$ResponseParametersFromJson(Map<String, dynamic> json) {
   return ResponseParameters(
     migrate_to_chat_id: json['migrate_to_chat_id'] as int?,
