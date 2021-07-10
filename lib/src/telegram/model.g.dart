@@ -337,6 +337,10 @@ Message _$MessageFromJson(Map<String, dynamic> json) {
         ? null
         : ProximityAlertTriggered.fromJson(
             json['proximity_alert_triggered'] as Map<String, dynamic>),
+    voice_chat_scheduled: json['voice_chat_scheduled'] == null
+        ? null
+        : VoiceChatScheduled.fromJson(
+            json['voice_chat_scheduled'] as Map<String, dynamic>),
     voice_chat_started: json['voice_chat_started'] == null
         ? null
         : VoiceChatStarted.fromJson(
@@ -423,6 +427,7 @@ Map<String, dynamic> _$MessageToJson(Message instance) {
   writeNotNull('passport_data', instance.passport_data?.toJson());
   writeNotNull('proximity_alert_triggered',
       instance.proximity_alert_triggered?.toJson());
+  writeNotNull('voice_chat_scheduled', instance.voice_chat_scheduled?.toJson());
   writeNotNull('voice_chat_started', instance.voice_chat_started?.toJson());
   writeNotNull('voice_chat_ended', instance.voice_chat_ended?.toJson());
   writeNotNull('voice_chat_participants_invited',
@@ -941,6 +946,17 @@ Map<String, dynamic> _$MessageAutoDeleteTimerChangedToJson(
         MessageAutoDeleteTimerChanged instance) =>
     <String, dynamic>{
       'message_auto_delete_time': instance.message_auto_delete_time,
+    };
+
+VoiceChatScheduled _$VoiceChatScheduledFromJson(Map<String, dynamic> json) {
+  return VoiceChatScheduled(
+    json['start_date'] as int,
+  );
+}
+
+Map<String, dynamic> _$VoiceChatScheduledToJson(VoiceChatScheduled instance) =>
+    <String, dynamic>{
+      'start_date': instance.start_date,
     };
 
 VoiceChatStarted _$VoiceChatStartedFromJson(Map<String, dynamic> json) {

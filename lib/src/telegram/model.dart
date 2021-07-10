@@ -44,6 +44,7 @@ part 'models/poll.dart';
 part 'models/dice.dart';
 part 'models/proximity_alert_triggered.dart';
 part 'models/message_auto_delete_timer_changed.dart';
+part 'models/voice_chat_scheduled.dart';
 part 'models/voice_chat_started.dart';
 part 'models/voice_chat_ended.dart';
 part 'models/voice_chat_participants_invited.dart';

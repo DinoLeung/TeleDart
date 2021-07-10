@@ -72,6 +72,7 @@ class Message {
   String? connected_website;
   PassportData? passport_data;
   ProximityAlertTriggered? proximity_alert_triggered;
+  VoiceChatScheduled? voice_chat_scheduled;
   VoiceChatStarted? voice_chat_started;
   VoiceChatEnded? voice_chat_ended;
   VoiceChatParticipantsInvited? voice_chat_participants_invited;
@@ -129,6 +130,7 @@ class Message {
     this.connected_website,
     this.passport_data,
     this.proximity_alert_triggered,
+    this.voice_chat_scheduled,
     this.voice_chat_started,
     this.voice_chat_ended,
     this.voice_chat_participants_invited,
@@ -140,12 +142,14 @@ class Message {
   set date_(DateTime dateTime) => date = TimeHelper.toUnixTime(dateTime);
 
   @JsonKey(ignore: true)
-  DateTime? get forward_date_ => forward_date == null ? null : TimeHelper.toDateTime(forward_date!);
+  DateTime? get forward_date_ =>
+      forward_date == null ? null : TimeHelper.toDateTime(forward_date!);
   set forward_date_(DateTime? dateTime) =>
       forward_date = dateTime == null ? null : TimeHelper.toUnixTime(dateTime);
 
   @JsonKey(ignore: true)
-  DateTime? get edit_date_ => edit_date == null ? null : TimeHelper.toDateTime(edit_date!);
+  DateTime? get edit_date_ =>
+      edit_date == null ? null : TimeHelper.toDateTime(edit_date!);
   set edit_date_(DateTime? dateTime) =>
       edit_date = dateTime == null ? null : TimeHelper.toUnixTime(dateTime);
 
