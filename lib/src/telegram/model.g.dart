@@ -1061,6 +1061,7 @@ ReplyKeyboardMarkup _$ReplyKeyboardMarkupFromJson(Map<String, dynamic> json) {
         .toList(),
     resize_keyboard: json['resize_keyboard'] as bool?,
     one_time_keyboard: json['one_time_keyboard'] as bool?,
+    input_field_placeholder: json['input_field_placeholder'] as String?,
     selective: json['selective'] as bool?,
   );
 }
@@ -1080,6 +1081,7 @@ Map<String, dynamic> _$ReplyKeyboardMarkupToJson(ReplyKeyboardMarkup instance) {
 
   writeNotNull('resize_keyboard', instance.resize_keyboard);
   writeNotNull('one_time_keyboard', instance.one_time_keyboard);
+  writeNotNull('input_field_placeholder', instance.input_field_placeholder);
   writeNotNull('selective', instance.selective);
   return val;
 }
