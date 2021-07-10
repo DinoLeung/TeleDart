@@ -2992,6 +2992,71 @@ Map<String, dynamic> _$InputContactMessageContentToJson(
   return val;
 }
 
+InputInvoiceMessageContent _$InputInvoiceMessageContentFromJson(
+    Map<String, dynamic> json) {
+  return InputInvoiceMessageContent(
+    title: json['title'] as String,
+    description: json['description'] as String,
+    payload: json['payload'] as String,
+    provider_token: json['provider_token'] as String,
+    currency: json['currency'] as String,
+    prices: (json['prices'] as List<dynamic>)
+        .map((e) => LabeledPrice.fromJson(e as Map<String, dynamic>))
+        .toList(),
+    max_tip_amount: json['max_tip_amount'] as int?,
+    suggested_tip_amounts: (json['suggested_tip_amounts'] as List<dynamic>?)
+        ?.map((e) => e as int)
+        .toList(),
+    provider_data: json['provider_data'] as String?,
+    photo_size: json['photo_size'] as int?,
+    photo_width: json['photo_width'] as int?,
+    photo_height: json['photo_height'] as int?,
+    need_name: json['need_name'] as bool?,
+    need_phone_number: json['need_phone_number'] as bool?,
+    need_email: json['need_email'] as bool?,
+    need_shipping_address: json['need_shipping_address'] as bool?,
+    send_phone_number_to_provider:
+        json['send_phone_number_to_provider'] as bool?,
+    send_email_to_provider: json['send_email_to_provider'] as bool?,
+    is_flexible: json['is_flexible'] as bool?,
+  )..photo_url = json['photo_url'] as String?;
+}
+
+Map<String, dynamic> _$InputInvoiceMessageContentToJson(
+    InputInvoiceMessageContent instance) {
+  final val = <String, dynamic>{
+    'title': instance.title,
+    'description': instance.description,
+    'payload': instance.payload,
+    'provider_token': instance.provider_token,
+    'currency': instance.currency,
+    'prices': instance.prices.map((e) => e.toJson()).toList(),
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('max_tip_amount', instance.max_tip_amount);
+  writeNotNull('suggested_tip_amounts', instance.suggested_tip_amounts);
+  writeNotNull('provider_data', instance.provider_data);
+  writeNotNull('photo_url', instance.photo_url);
+  writeNotNull('photo_size', instance.photo_size);
+  writeNotNull('photo_width', instance.photo_width);
+  writeNotNull('photo_height', instance.photo_height);
+  writeNotNull('need_name', instance.need_name);
+  writeNotNull('need_phone_number', instance.need_phone_number);
+  writeNotNull('need_email', instance.need_email);
+  writeNotNull('need_shipping_address', instance.need_shipping_address);
+  writeNotNull(
+      'send_phone_number_to_provider', instance.send_phone_number_to_provider);
+  writeNotNull('send_email_to_provider', instance.send_email_to_provider);
+  writeNotNull('is_flexible', instance.is_flexible);
+  return val;
+}
+
 ChosenInlineResult _$ChosenInlineResultFromJson(Map<String, dynamic> json) {
   return ChosenInlineResult(
     result_id: json['result_id'] as String,

@@ -14,6 +14,7 @@
 /// You should have received a copy of the GNU General Public License
 /// along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+import 'package:http/http.dart';
 import 'package:json_annotation/json_annotation.dart';
 import '../util/time_helper.dart';
 
@@ -101,6 +102,7 @@ part 'models/input_text_message_content.dart';
 part 'models/input_location_message_content.dart';
 part 'models/input_venue_message_content.dart';
 part 'models/input_contact_message_content.dart';
+part 'models/input_invoice_message_content.dart';
 part 'models/chosen_inline_result.dart';
 part 'models/labeled_price.dart';
 part 'models/invoice.dart';
