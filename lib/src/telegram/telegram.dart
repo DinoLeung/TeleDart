@@ -1589,21 +1589,57 @@ class Telegram {
     return await HttpClient.httpPost(requestUrl, body: body);
   }
 
-  /// Use this method to change the list of the bot's commands. Returns *True* on success.
-  Future<bool> setMyCommands(List<BotCommand> commands) async {
+  /// Use this method to change the list of the bot's commands.
+  /// See https://core.telegram.org/bots#commands for more details about bot commands.
+  /// Returns *True* on success.
+  ///
+  /// https://core.telegram.org/bots/api#setmycommands
+  Future<bool> setMyCommands(List<BotCommand> commands,
+      {BotCommandScope? scope, String? language_code}) async {
     var requestUrl = _apiUri('setMyCommands');
-    var body = <String, dynamic>{'commands': jsonEncode(commands)};
+    var body = <String, dynamic>{
+      'commands': jsonEncode(commands),
+      'scope': scope == null ? null : jsonEncode(scope),
+      'language_code': language_code,
+    };
     return await HttpClient.httpPost(requestUrl, body: body);
   }
 
-  /// Use this method to get the current list of the bot's commands. Requires no parameters.
+  /// Use this method to delete the list of the bot's commands for the given scope and user language.
+  /// After deletion, [higher level commands] will be shown to affected users.
+  /// Returns *True* on success.
+  ///
+  /// https://core.telegram.org/bots/api#deletemycommands
+  ///
+  /// [higher level commands]: https://core.telegram.org/bots/api#determining-list-of-commands
+  Future<bool> deleteMyCommands(
+      {BotCommandScope? scope, String? language_code}) async {
+    var requestUrl = _apiUri('deleteMyCommands');
+    var body = <String, dynamic>{
+      'scope': scope == null ? null : jsonEncode(scope),
+      'language_code': language_code,
+    };
+    return await HttpClient.httpPost(requestUrl, body: body);
+  }
+
+  /// Use this method to get the current list of the bot's commands for the given scope and user language.
   /// Returns Array of [BotCommand] on success.
+  /// If commands aren't set, an empty list is returned.
+  ///
+  /// https://core.telegram.org/bots/api#getmycommands
   ///
   /// [BotCommand]: https://core.telegram.org/bots/api#botcommand
-  Future<List<BotCommand>> getMyCommands() async =>
-      (await HttpClient.httpGet(_apiUri('getMyCommands')))
-          .map<BotCommand>((botCommand) => BotCommand.fromJson(botCommand))
-          .toList();
+  Future<List<BotCommand>> getMyCommands(
+      {BotCommandScope? scope, String? language_code}) async {
+    var requestUrl = _apiUri('getMyCommands');
+    var body = <String, dynamic>{
+      'scope': scope == null ? null : jsonEncode(scope),
+      'language_code': language_code,
+    };
+    return (await HttpClient.httpPost(requestUrl, body: body))
+        .map<BotCommand>((botCommand) => BotCommand.fromJson(botCommand))
+        .toList();
+  }
 
   /// Use this method to edit text and [game] messages sent by the bot or via the bot
   /// (for [inline bots]).
