@@ -1057,27 +1057,23 @@ class Telegram {
     return File.fromJson(await HttpClient.httpPost(requestUrl, body: body));
   }
 
-  /// Use this method to kick a user from a group, a supergroup or a channel.
+  /// Use this method to ban a user in a group, a supergroup or a channel.
   /// In the case of supergroups and channels,
   /// the user will not be able to return to the group on their own using invite links, etc.,
   /// unless [unbanned] first.
-  /// The bot must be an administrator in the chat for this to work and must have the appropriate
-  /// admin rights. Returns *True* on success.
+  /// The bot must be an administrator in the chat for this to work and must have the appropriate admin rights.
+  /// Returns *True* on success.
   ///
-  /// Note: In regular groups (non-supergroups),
-  /// this method will only work if the ‘All Members Are Admins’ setting is off in the target group.
-  /// Otherwise members may only be removed by the group's creator or by the member that added them.
-  ///
-  /// https://core.telegram.org/bots/api#kickchatmember
+  /// https://core.telegram.org/bots/api#banchatmember
   ///
   /// [unbanned]: https://core.telegram.org/bots/api#unbanchatmember
-  Future<bool> kickChatMember(dynamic chat_id, int user_id,
+  Future<bool> banChatMember(dynamic chat_id, int user_id,
       {int? until_date, bool? revoke_messages}) async {
     if (chat_id is! String && chat_id is! int) {
       return Future.error(TelegramException(
           'Attribute \'chat_id\' can only be either type of String or int'));
     }
-    var requestUrl = _apiUri('kickChatMember');
+    var requestUrl = _apiUri('banChatMember');
     var body = <String, dynamic>{
       'chat_id': chat_id,
       'user_id': user_id,
@@ -1488,13 +1484,13 @@ class Telegram {
 
   /// Use this method to get the number of members in a chat. Returns *Int* on success.
   ///
-  /// https://core.telegram.org/bots/api#getchatmemberscount
-  Future<int> getChatMembersCount(dynamic chat_id) async {
+  /// https://core.telegram.org/bots/api#getchatmembercount
+  Future<int> getChatMemberCount(dynamic chat_id) async {
     if (chat_id is! String && chat_id is! int) {
       return Future.error(TelegramException(
           'Attribute \'chat_id\' can only be either type of String or int'));
     }
-    var requestUrl = _apiUri('getChatMembersCount');
+    var requestUrl = _apiUri('getChatMemberCount');
     var body = <String, dynamic>{'chat_id': chat_id};
     return await HttpClient.httpPost(requestUrl, body: body);
   }
