@@ -1,5 +1,5 @@
 /// TeleDart - Telegram Bot API for Dart
-/// Copyright (C) 2019  Dino PH Leung
+/// Copyright (C) 2021  Dino PH Leung
 ///
 /// This program is free software: you can redistribute it and/or modify
 /// it under the terms of the GNU General Public License as published by
@@ -16,28 +16,29 @@
 
 part of '../model.dart';
 
-/// This object represents an incoming inline query.
-/// When the user sends an empty query,
-/// your bot could return some default or trending results.
+/// Represents a [chat member] that owns the chat and has all administrator privileges.
 ///
-/// https://core.telegram.org/bots/api#inlinequery
+/// https://core.telegram.org/bots/api#chatmemberowner
+///
+/// [chat member]: https://core.telegram.org/bots/api#chatmember
 @JsonSerializable()
-class InlineQuery {
-  String id;
-  User from;
-  String query;
-  String offset;
-  String? chat_type;
-  Location? location;
-  InlineQuery({
-    required this.id,
-    required this.from,
-    required this.query,
-    required this.offset,
-    this.chat_type,
-    this.location,
+class ChatMemberOwner implements ChatMember {
+  @override
+  String status;
+  @override
+  User user;
+  bool is_anonymous;
+  String? custom_title;
+
+  ChatMemberOwner({
+    required this.user,
+    required this.status,
+    required this.is_anonymous,
+    this.custom_title,
   });
-  factory InlineQuery.fromJson(Map<String, dynamic> json) =>
-      _$InlineQueryFromJson(json);
-  Map<String, dynamic> toJson() => _$InlineQueryToJson(this);
+
+  factory ChatMemberOwner.fromJson(Map<String, dynamic> json) =>
+      _$ChatMemberOwnerFromJson(json);
+  @override
+  Map<String, dynamic> toJson() => _$ChatMemberOwnerToJson(this);
 }

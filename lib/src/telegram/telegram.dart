@@ -1057,27 +1057,23 @@ class Telegram {
     return File.fromJson(await HttpClient.httpPost(requestUrl, body: body));
   }
 
-  /// Use this method to kick a user from a group, a supergroup or a channel.
+  /// Use this method to ban a user in a group, a supergroup or a channel.
   /// In the case of supergroups and channels,
   /// the user will not be able to return to the group on their own using invite links, etc.,
   /// unless [unbanned] first.
-  /// The bot must be an administrator in the chat for this to work and must have the appropriate
-  /// admin rights. Returns *True* on success.
+  /// The bot must be an administrator in the chat for this to work and must have the appropriate admin rights.
+  /// Returns *True* on success.
   ///
-  /// Note: In regular groups (non-supergroups),
-  /// this method will only work if the ‘All Members Are Admins’ setting is off in the target group.
-  /// Otherwise members may only be removed by the group's creator or by the member that added them.
-  ///
-  /// https://core.telegram.org/bots/api#kickchatmember
+  /// https://core.telegram.org/bots/api#banchatmember
   ///
   /// [unbanned]: https://core.telegram.org/bots/api#unbanchatmember
-  Future<bool> kickChatMember(dynamic chat_id, int user_id,
+  Future<bool> banChatMember(dynamic chat_id, int user_id,
       {int? until_date, bool? revoke_messages}) async {
     if (chat_id is! String && chat_id is! int) {
       return Future.error(TelegramException(
           'Attribute \'chat_id\' can only be either type of String or int'));
     }
-    var requestUrl = _apiUri('kickChatMember');
+    var requestUrl = _apiUri('banChatMember');
     var body = <String, dynamic>{
       'chat_id': chat_id,
       'user_id': user_id,
@@ -1488,13 +1484,13 @@ class Telegram {
 
   /// Use this method to get the number of members in a chat. Returns *Int* on success.
   ///
-  /// https://core.telegram.org/bots/api#getchatmemberscount
-  Future<int> getChatMembersCount(dynamic chat_id) async {
+  /// https://core.telegram.org/bots/api#getchatmembercount
+  Future<int> getChatMemberCount(dynamic chat_id) async {
     if (chat_id is! String && chat_id is! int) {
       return Future.error(TelegramException(
           'Attribute \'chat_id\' can only be either type of String or int'));
     }
-    var requestUrl = _apiUri('getChatMembersCount');
+    var requestUrl = _apiUri('getChatMemberCount');
     var body = <String, dynamic>{'chat_id': chat_id};
     return await HttpClient.httpPost(requestUrl, body: body);
   }
@@ -1589,21 +1585,57 @@ class Telegram {
     return await HttpClient.httpPost(requestUrl, body: body);
   }
 
-  /// Use this method to change the list of the bot's commands. Returns *True* on success.
-  Future<bool> setMyCommands(List<BotCommand> commands) async {
+  /// Use this method to change the list of the bot's commands.
+  /// See https://core.telegram.org/bots#commands for more details about bot commands.
+  /// Returns *True* on success.
+  ///
+  /// https://core.telegram.org/bots/api#setmycommands
+  Future<bool> setMyCommands(List<BotCommand> commands,
+      {BotCommandScope? scope, String? language_code}) async {
     var requestUrl = _apiUri('setMyCommands');
-    var body = <String, dynamic>{'commands': jsonEncode(commands)};
+    var body = <String, dynamic>{
+      'commands': jsonEncode(commands),
+      'scope': scope == null ? null : jsonEncode(scope),
+      'language_code': language_code,
+    };
     return await HttpClient.httpPost(requestUrl, body: body);
   }
 
-  /// Use this method to get the current list of the bot's commands. Requires no parameters.
+  /// Use this method to delete the list of the bot's commands for the given scope and user language.
+  /// After deletion, [higher level commands] will be shown to affected users.
+  /// Returns *True* on success.
+  ///
+  /// https://core.telegram.org/bots/api#deletemycommands
+  ///
+  /// [higher level commands]: https://core.telegram.org/bots/api#determining-list-of-commands
+  Future<bool> deleteMyCommands(
+      {BotCommandScope? scope, String? language_code}) async {
+    var requestUrl = _apiUri('deleteMyCommands');
+    var body = <String, dynamic>{
+      'scope': scope == null ? null : jsonEncode(scope),
+      'language_code': language_code,
+    };
+    return await HttpClient.httpPost(requestUrl, body: body);
+  }
+
+  /// Use this method to get the current list of the bot's commands for the given scope and user language.
   /// Returns Array of [BotCommand] on success.
+  /// If commands aren't set, an empty list is returned.
+  ///
+  /// https://core.telegram.org/bots/api#getmycommands
   ///
   /// [BotCommand]: https://core.telegram.org/bots/api#botcommand
-  Future<List<BotCommand>> getMyCommands() async =>
-      (await HttpClient.httpGet(_apiUri('getMyCommands')))
-          .map<BotCommand>((botCommand) => BotCommand.fromJson(botCommand))
-          .toList();
+  Future<List<BotCommand>> getMyCommands(
+      {BotCommandScope? scope, String? language_code}) async {
+    var requestUrl = _apiUri('getMyCommands');
+    var body = <String, dynamic>{
+      'scope': scope == null ? null : jsonEncode(scope),
+      'language_code': language_code,
+    };
+    return (await HttpClient.httpPost(requestUrl, body: body))
+        .map<BotCommand>((botCommand) => BotCommand.fromJson(botCommand))
+        .toList();
+  }
 
   /// Use this method to edit text and [game] messages sent by the bot or via the bot
   /// (for [inline bots]).
@@ -2076,10 +2108,12 @@ class Telegram {
       String description,
       String payload,
       String provider_token,
-      String start_parameter,
       String currency,
       List<LabeledPrice> prices,
-      {String? provider_data,
+      {int? max_tip_amount,
+      List<int>? suggested_tip_amounts,
+      String? start_parameter,
+      String? provider_data,
       String? photo_url,
       int? photo_size,
       int? photo_width,
@@ -2106,9 +2140,13 @@ class Telegram {
       'description': description,
       'payload': payload,
       'provider_token': provider_token,
-      'start_parameter': start_parameter,
       'currency': currency,
       'prices': jsonEncode(prices),
+      'max_tip_amount': max_tip_amount,
+      'suggested_tip_amounts': suggested_tip_amounts == null
+          ? null
+          : jsonEncode(suggested_tip_amounts),
+      'start_parameter': start_parameter,
       'provider_data': provider_data,
       'photo_url': photo_url,
       'photo_size': photo_size,

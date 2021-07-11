@@ -75,6 +75,7 @@ class TeleDartMessage extends Message {
           connected_website: message.connected_website,
           passport_data: message.passport_data,
           proximity_alert_triggered: message.proximity_alert_triggered,
+          voice_chat_scheduled: message.voice_chat_scheduled,
           voice_chat_started: message.voice_chat_started,
           voice_chat_ended: message.voice_chat_ended,
           voice_chat_participants_invited:

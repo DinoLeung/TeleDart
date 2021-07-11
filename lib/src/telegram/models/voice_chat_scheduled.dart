@@ -1,5 +1,5 @@
 /// TeleDart - Telegram Bot API for Dart
-/// Copyright (C) 2019  Dino PH Leung
+/// Copyright (C) 2021  Dino PH Leung
 ///
 /// This program is free software: you can redistribute it and/or modify
 /// it under the terms of the GNU General Public License as published by
@@ -16,28 +16,21 @@
 
 part of '../model.dart';
 
-/// This object represents an incoming inline query.
-/// When the user sends an empty query,
-/// your bot could return some default or trending results.
+/// This object represents a service message about a voice chat scheduled in the chat.
 ///
-/// https://core.telegram.org/bots/api#inlinequery
+/// https://core.telegram.org/bots/api#voicechatscheduled
 @JsonSerializable()
-class InlineQuery {
-  String id;
-  User from;
-  String query;
-  String offset;
-  String? chat_type;
-  Location? location;
-  InlineQuery({
-    required this.id,
-    required this.from,
-    required this.query,
-    required this.offset,
-    this.chat_type,
-    this.location,
-  });
-  factory InlineQuery.fromJson(Map<String, dynamic> json) =>
-      _$InlineQueryFromJson(json);
-  Map<String, dynamic> toJson() => _$InlineQueryToJson(this);
+class VoiceChatScheduled {
+  int start_date;
+
+  VoiceChatScheduled(this.start_date);
+
+  @JsonKey(ignore: true)
+  DateTime get start_date_ => TimeHelper.toDateTime(start_date);
+  set start_date_(DateTime dateTime) =>
+      start_date = TimeHelper.toUnixTime(dateTime);
+
+  factory VoiceChatScheduled.fromJson(Map<String, dynamic> json) =>
+      _$VoiceChatScheduledFromJson(json);
+  Map<String, dynamic> toJson() => _$VoiceChatScheduledToJson(this);
 }

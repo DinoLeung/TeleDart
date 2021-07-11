@@ -25,7 +25,6 @@ part of '../model.dart';
 ///
 /// https://core.telegram.org/bots/api#inputmedia
 @JsonSerializable()
-// abstract class InputMedia {
 class InputMedia {
   static const ANIMATION = 'animation';
   static const AUDIO = 'audio';
@@ -38,6 +37,7 @@ class InputMedia {
   String? caption;
   String? parse_mode;
   List<MessageEntity>? caption_entities;
+
   InputMedia({
     required this.type,
     required this.media,
@@ -45,6 +45,7 @@ class InputMedia {
     this.parse_mode,
     this.caption_entities,
   });
+  
   factory InputMedia.fromJson(Map<String, dynamic> json) =>
       _$InputMediaFromJson(json);
   Map<String, dynamic> toJson() => _$InputMediaToJson(this);

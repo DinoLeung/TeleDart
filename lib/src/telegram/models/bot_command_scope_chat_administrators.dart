@@ -1,5 +1,5 @@
 /// TeleDart - Telegram Bot API for Dart
-/// Copyright (C) 2019  Dino PH Leung
+/// Copyright (C) 2021  Dino PH Leung
 ///
 /// This program is free software: you can redistribute it and/or modify
 /// it under the terms of the GNU General Public License as published by
@@ -16,28 +16,24 @@
 
 part of '../model.dart';
 
-/// This object represents an incoming inline query.
-/// When the user sends an empty query,
-/// your bot could return some default or trending results.
+/// Represents the [scope] of bot commands, covering all administrators of a specific group or supergroup chat.
 ///
-/// https://core.telegram.org/bots/api#inlinequery
+/// https://core.telegram.org/bots/api#botcommandscopechatadministrators
+///
+/// [scope]: https://core.telegram.org/bots/api#botcommandscope
 @JsonSerializable()
-class InlineQuery {
-  String id;
-  User from;
-  String query;
-  String offset;
-  String? chat_type;
-  Location? location;
-  InlineQuery({
-    required this.id,
-    required this.from,
-    required this.query,
-    required this.offset,
-    this.chat_type,
-    this.location,
+class BotCommandScopeChatAdministrators implements BotCommandScope {
+  @override
+  String type;
+  dynamic chat_id;
+
+  BotCommandScopeChatAdministrators({
+    this.type = BotCommandScope.CHAT_ADMINISTRATORS,
+    required this.chat_id,
   });
-  factory InlineQuery.fromJson(Map<String, dynamic> json) =>
-      _$InlineQueryFromJson(json);
-  Map<String, dynamic> toJson() => _$InlineQueryToJson(this);
+
+  factory BotCommandScopeChatAdministrators.fromJson(Map<String, dynamic> json) =>
+      _$BotCommandScopeChatAdministratorsFromJson(json);
+  @override
+  Map<String, dynamic> toJson() => _$BotCommandScopeChatAdministratorsToJson(this);
 }
