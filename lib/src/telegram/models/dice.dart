@@ -23,16 +23,16 @@ part of '../model.dart';
 class Dice {
   static const String DICE = '🎲';
   static const String DART = '🎯';
+  static const String BOWLING = '🎳';
   static const String BASKETBALL = '🏀';
   static const String FOOTBALL = '⚽';
-  static const String BOWLING = '🎳';
   static const String SLOT_MACHINE = '🎰';
 
   int value;
   String emoji;
   Dice({
-    this.value,
-    this.emoji,
+    required this.value,
+    required this.emoji,
   });
   factory Dice.fromJson(Map<String, dynamic> json) => _$DiceFromJson(json);
   Map<String, dynamic> toJson() => _$DiceToJson(this);

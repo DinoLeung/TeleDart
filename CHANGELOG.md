@@ -1,3 +1,11 @@
+## 0.2.0 (Unreleased)
+
+- Support sound null safety
+- Various bug fixes to built-in long poll and webhook fetcher
+- **Breaking** `Webhook` can only instantiated with built-in static functions `webhook.createHttpWebhok` and `webhook.createHttpsWebhok`
+- **Breaking** `Event` constructor requires bot's username
+- **Breaking** `teledart.start()` method no longer returns `Future<User>`
+
 ## 0.1.6
 
 - Fixed `jsonEncode` issue caused by `_nullFilter` fix 

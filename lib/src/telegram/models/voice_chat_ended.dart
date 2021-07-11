@@ -23,7 +23,7 @@ part of '../model.dart';
 class VoiceChatEnded {
   int duration;
 
-  VoiceChatEnded({this.duration});
+  VoiceChatEnded({required this.duration});
 
   @JsonKey(ignore: true)
   Duration get duration_ => TimeHelper.toDuration(duration);

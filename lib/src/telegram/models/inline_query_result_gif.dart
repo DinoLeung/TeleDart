@@ -29,27 +29,27 @@ class InlineQueryResultGif implements InlineQueryResult {
   @override
   String type;
   String gif_url;
-  int gif_width;
-  int gif_height;
-  int gif_duration;
+  int? gif_width;
+  int? gif_height;
+  int? gif_duration;
   String thumb_url;
-  String thumb_mime_type;
-  String title;
-  String caption;
-  String parse_mode;
-  List<MessageEntity> caption_entities;
+  String? thumb_mime_type;
+  String? title;
+  String? caption;
+  String? parse_mode;
+  List<MessageEntity>? caption_entities;
   @override
-  InlineKeyboardMarkup reply_markup;
-  InputMessageContent input_message_content;
+  InlineKeyboardMarkup? reply_markup;
+  InputMessageContent? input_message_content;
 
   InlineQueryResultGif({
-    this.id,
-    this.type = 'gif',
-    this.gif_url,
+    required this.id,
+    this.type = InlineQueryResult.GIF,
+    required this.gif_url,
     this.gif_width,
     this.gif_height,
     this.gif_duration,
-    this.thumb_url,
+    required this.thumb_url,
     this.thumb_mime_type,
     this.title,
     this.caption,
@@ -60,9 +60,10 @@ class InlineQueryResultGif implements InlineQueryResult {
   });
 
   @JsonKey(ignore: true)
-  Duration get gif_duration_ => TimeHelper.toDuration(gif_duration);
-  set gif_duration_(Duration duration) =>
-      gif_duration = TimeHelper.toSeconds(duration);
+  Duration? get gif_duration_ =>
+      gif_duration == null ? null : TimeHelper.toDuration(gif_duration!);
+  set gif_duration_(Duration? duration) =>
+      gif_duration = duration == null ? null : TimeHelper.toSeconds(duration);
 
   factory InlineQueryResultGif.fromJson(Map<String, dynamic> json) =>
       _$InlineQueryResultGifFromJson(json);

@@ -29,18 +29,18 @@ class InlineQueryResultCachedPhoto implements InlineQueryResult {
   @override
   String type;
   String photo_file_id;
-  String title;
-  String description;
-  String caption;
-  String parse_mode;
-  List<MessageEntity> caption_entities;
+  String? title;
+  String? description;
+  String? caption;
+  String? parse_mode;
+  List<MessageEntity>? caption_entities;
   @override
-  InlineKeyboardMarkup reply_markup;
-  InputMessageContent input_message_content;
+  InlineKeyboardMarkup? reply_markup;
+  InputMessageContent? input_message_content;
   InlineQueryResultCachedPhoto({
-    this.id,
-    this.type = 'photo',
-    this.photo_file_id,
+    required this.id,
+    this.type = InlineQueryResult.PHOTO,
+    required this.photo_file_id,
     this.title,
     this.description,
     this.caption,

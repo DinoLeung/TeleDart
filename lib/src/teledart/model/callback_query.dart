@@ -19,22 +19,26 @@ import '../../../teledart.dart';
 import '../../telegram/model.dart';
 
 class TeleDartCallbackQuery extends CallbackQuery {
-  TeleDart _teledart;
+  final TeleDart _teledart;
 
-  TeleDartCallbackQuery(TeleDart teledart, CallbackQuery callbackQuery) {
-    _teledart = teledart;
-    super.id = callbackQuery.id;
-    super.from = callbackQuery.from;
-    super.message = callbackQuery.message;
-    super.inline_message_id = callbackQuery.inline_message_id;
-    super.chat_instance = callbackQuery.chat_instance;
-    super.data = callbackQuery.data;
-    super.game_short_name = callbackQuery.game_short_name;
-  }
+  TeleDartCallbackQuery(this._teledart, CallbackQuery callbackQuery)
+      : super(
+          id: callbackQuery.id,
+          from: callbackQuery.from,
+          message: callbackQuery.message,
+          inline_message_id: callbackQuery.inline_message_id,
+          chat_instance: callbackQuery.chat_instance,
+          data: callbackQuery.data,
+          game_short_name: callbackQuery.game_short_name,
+        );
 
   /// Short-cut to answer callback query
-  Future<bool> answer(
-          {String text, bool show_alert, String url, int cache_time}) =>
+  Future<bool> answer({
+    String? text,
+    bool? show_alert,
+    String? url,
+    int? cache_time,
+  }) =>
       _teledart.answerCallbackQuery(this,
           text: text, show_alert: show_alert, url: url, cache_time: cache_time);
 }

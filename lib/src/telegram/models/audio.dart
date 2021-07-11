@@ -24,17 +24,17 @@ class Audio {
   String file_id;
   String file_unique_id;
   int duration;
-  String performer;
-  String title;
-  String file_name;
-  String mime_type;
-  int file_size;
-  PhotoSize thumb;
+  String? performer;
+  String? title;
+  String? file_name;
+  String? mime_type;
+  int? file_size;
+  PhotoSize? thumb;
 
   Audio({
-    this.file_id,
-    this.file_unique_id,
-    this.duration,
+    required this.file_id,
+    required this.file_unique_id,
+    required this.duration,
     this.performer,
     this.title,
     this.file_name,

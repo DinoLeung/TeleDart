@@ -35,23 +35,23 @@ class InlineQueryResultVenue implements InlineQueryResult {
   double longitude;
   String title;
   String address;
-  String foursquare_id;
-  String foursquare_type;
-  String google_place_id;
-  String google_place_type;
+  String? foursquare_id;
+  String? foursquare_type;
+  String? google_place_id;
+  String? google_place_type;
   @override
-  InlineKeyboardMarkup reply_markup;
-  InputMessageContent input_message_content;
-  String thumb_url;
-  int thumb_width;
-  int thumb_height;
+  InlineKeyboardMarkup? reply_markup;
+  InputMessageContent? input_message_content;
+  String? thumb_url;
+  int? thumb_width;
+  int? thumb_height;
   InlineQueryResultVenue({
-    this.id,
-    this.type = 'venue',
-    this.latitude,
-    this.longitude,
-    this.title,
-    this.address,
+    required this.id,
+    this.type = InlineQueryResult.VENUE,
+    required this.latitude,
+    required this.longitude,
+    required this.title,
+    required this.address,
     this.foursquare_id,
     this.foursquare_type,
     this.google_place_id,

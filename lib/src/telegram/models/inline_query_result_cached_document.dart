@@ -33,18 +33,18 @@ class InlineQueryResultCachedDocument implements InlineQueryResult {
   String type;
   String title;
   String document_file_id;
-  String description;
-  String caption;
-  String parse_mode;
-  List<MessageEntity> caption_entities;
+  String? description;
+  String? caption;
+  String? parse_mode;
+  List<MessageEntity>? caption_entities;
   @override
-  InlineKeyboardMarkup reply_markup;
-  InputMessageContent input_message_content;
+  InlineKeyboardMarkup? reply_markup;
+  InputMessageContent? input_message_content;
   InlineQueryResultCachedDocument({
-    this.id,
-    this.type = 'document',
-    this.title,
-    this.document_file_id,
+    required this.id,
+    this.type = InlineQueryResult.DOCUMENT,
+    required this.title,
+    required this.document_file_id,
     this.description,
     this.caption,
     this.parse_mode,

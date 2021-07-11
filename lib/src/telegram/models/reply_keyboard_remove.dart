@@ -28,9 +28,9 @@ part of '../model.dart';
 @JsonSerializable()
 class ReplyKeyboardRemove implements ReplyMarkup {
   bool remove_keyboard;
-  bool selective;
+  bool? selective;
   ReplyKeyboardRemove({
-    this.remove_keyboard,
+    required this.remove_keyboard,
     this.selective,
   });
   factory ReplyKeyboardRemove.fromJson(Map<String, dynamic> json) =>

@@ -32,11 +32,11 @@ class InlineQueryResultGame implements InlineQueryResult {
   String type;
   String game_short_name;
   @override
-  InlineKeyboardMarkup reply_markup;
+  InlineKeyboardMarkup? reply_markup;
   InlineQueryResultGame({
-    this.id,
-    this.type = 'game',
-    this.game_short_name,
+    required this.id,
+    this.type = InlineQueryResult.GAME,
+    required this.game_short_name,
     this.reply_markup,
   });
   factory InlineQueryResultGame.fromJson(Map<String, dynamic> json) =>

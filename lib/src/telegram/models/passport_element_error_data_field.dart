@@ -31,11 +31,11 @@ class PassportElementErrorDataField implements PassportElementError {
   String field_name;
   String data_hash;
   PassportElementErrorDataField({
-    this.source,
-    this.type,
-    this.message,
-    this.field_name,
-    this.data_hash,
+    required this.source,
+    required this.type,
+    required this.message,
+    required this.field_name,
+    required this.data_hash,
   });
   factory PassportElementErrorDataField.fromJson(Map<String, dynamic> json) =>
       _$PassportElementErrorDataFieldFromJson(json);

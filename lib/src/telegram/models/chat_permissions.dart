@@ -21,14 +21,14 @@ part of '../model.dart';
 /// https://core.telegram.org/bots/api#chatpermissions
 @JsonSerializable()
 class ChatPermissions {
-  bool can_send_messages;
-  bool can_send_media_messages;
-  bool can_send_polls;
-  bool can_send_other_messages;
-  bool can_add_web_page_previews;
-  bool can_change_info;
-  bool can_invite_users;
-  bool can_pin_messages;
+  bool? can_send_messages;
+  bool? can_send_media_messages;
+  bool? can_send_polls;
+  bool? can_send_other_messages;
+  bool? can_add_web_page_previews;
+  bool? can_change_info;
+  bool? can_invite_users;
+  bool? can_pin_messages;
   ChatPermissions({
     this.can_send_messages,
     this.can_send_media_messages,

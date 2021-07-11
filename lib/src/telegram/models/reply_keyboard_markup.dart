@@ -26,11 +26,11 @@ part of '../model.dart';
 @JsonSerializable()
 class ReplyKeyboardMarkup implements ReplyMarkup {
   List<List<KeyboardButton>> keyboard;
-  bool resize_keyboard;
-  bool one_time_keyboard;
-  bool selective;
+  bool? resize_keyboard;
+  bool? one_time_keyboard;
+  bool? selective;
   ReplyKeyboardMarkup({
-    this.keyboard,
+    required this.keyboard,
     this.resize_keyboard,
     this.one_time_keyboard,
     this.selective,

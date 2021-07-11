@@ -26,17 +26,17 @@ class Animation {
   int width;
   int height;
   int duration;
-  PhotoSize thumb;
-  String file_name;
-  String mime_type;
-  int file_size;
+  PhotoSize? thumb;
+  String? file_name;
+  String? mime_type;
+  int? file_size;
 
   Animation({
-    this.file_id,
-    this.file_unique_id,
-    this.width,
-    this.height,
-    this.duration,
+    required this.file_id,
+    required this.file_unique_id,
+    required this.width,
+    required this.height,
+    required this.duration,
     this.thumb,
     this.file_name,
     this.mime_type,

@@ -19,21 +19,20 @@ import '../../../teledart.dart';
 import '../../telegram/model.dart';
 
 class TeleDartPreCheckoutQuery extends PreCheckoutQuery {
-  TeleDart _teledart;
+  final TeleDart _teledart;
 
-  TeleDartPreCheckoutQuery(
-      TeleDart teledart, PreCheckoutQuery preCheckoutQuery) {
-    _teledart = teledart;
-    super.id = preCheckoutQuery.id;
-    super.from = preCheckoutQuery.from;
-    super.currency = preCheckoutQuery.currency;
-    super.total_amount = preCheckoutQuery.total_amount;
-    super.invoice_payload = preCheckoutQuery.invoice_payload;
-    super.shipping_option_id = preCheckoutQuery.shipping_option_id;
-    super.order_info = preCheckoutQuery.order_info;
-  }
+  TeleDartPreCheckoutQuery(this._teledart, PreCheckoutQuery preCheckoutQuery)
+      : super(
+          id: preCheckoutQuery.id,
+          from: preCheckoutQuery.from,
+          currency: preCheckoutQuery.currency,
+          total_amount: preCheckoutQuery.total_amount,
+          invoice_payload: preCheckoutQuery.invoice_payload,
+          shipping_option_id: preCheckoutQuery.shipping_option_id,
+          order_info: preCheckoutQuery.order_info,
+        );
 
   /// Short-cut to answer pre-checkout query
-  Future<bool> answer(bool ok, {String error_message}) =>
+  Future<bool> answer(bool ok, {String? error_message}) =>
       _teledart.answerPreCheckoutQuery(this, ok, error_message: error_message);
 }

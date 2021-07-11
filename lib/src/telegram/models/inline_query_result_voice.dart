@@ -33,19 +33,19 @@ class InlineQueryResultVoice implements InlineQueryResult {
   String type;
   String voice_url;
   String title;
-  String caption;
-  String parse_mode;
-  int voice_duration;
-  List<MessageEntity> caption_entities;
+  String? caption;
+  String? parse_mode;
+  int? voice_duration;
+  List<MessageEntity>? caption_entities;
   @override
-  InlineKeyboardMarkup reply_markup;
-  InputMessageContent input_message_content;
+  InlineKeyboardMarkup? reply_markup;
+  InputMessageContent? input_message_content;
 
   InlineQueryResultVoice({
-    this.id,
-    this.type = 'voice',
-    this.voice_url,
-    this.title,
+    required this.id,
+    this.type = InlineQueryResult.VOICE,
+    required this.voice_url,
+    required this.title,
     this.caption,
     this.parse_mode,
     this.voice_duration,
@@ -55,9 +55,10 @@ class InlineQueryResultVoice implements InlineQueryResult {
   });
 
   @JsonKey(ignore: true)
-  Duration get voice_duration_ => TimeHelper.toDuration(voice_duration);
-  set voice_duration_(Duration duration) =>
-      voice_duration = TimeHelper.toSeconds(duration);
+  Duration? get voice_duration_ =>
+      voice_duration == null ? null : TimeHelper.toDuration(voice_duration!);
+  set voice_duration_(Duration? duration) =>
+      voice_duration = duration == null ? null : TimeHelper.toSeconds(duration);
 
   factory InlineQueryResultVoice.fromJson(Map<String, dynamic> json) =>
       _$InlineQueryResultVoiceFromJson(json);

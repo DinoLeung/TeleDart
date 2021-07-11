@@ -23,12 +23,12 @@ part of '../model.dart';
 class Contact {
   String phone_number;
   String first_name;
-  String last_name;
-  int user_id;
-  String vcard;
+  String? last_name;
+  int? user_id;
+  String? vcard;
   Contact({
-    this.phone_number,
-    this.first_name,
+    required this.phone_number,
+    required this.first_name,
     this.last_name,
     this.user_id,
     this.vcard,

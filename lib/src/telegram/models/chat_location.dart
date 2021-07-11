@@ -24,8 +24,8 @@ class ChatLocation {
   Location location;
   String address;
   ChatLocation({
-    this.location,
-    this.address,
+    required this.location,
+    required this.address,
   });
   factory ChatLocation.fromJson(Map<String, dynamic> json) =>
       _$ChatLocationFromJson(json);

@@ -37,14 +37,14 @@ part of '../model.dart';
 class CallbackQuery {
   String id;
   User from;
-  Message message;
-  String inline_message_id;
-  String chat_instance;
-  String data;
-  String game_short_name;
+  Message? message;
+  String? inline_message_id;
+  String? chat_instance;
+  String? data;
+  String? game_short_name;
   CallbackQuery({
-    this.id,
-    this.from,
+    required this.id,
+    required this.from,
     this.message,
     this.inline_message_id,
     this.chat_instance,

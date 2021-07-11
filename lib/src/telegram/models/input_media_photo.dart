@@ -26,14 +26,14 @@ class InputMediaPhoto implements InputMedia {
   @override
   String media;
   @override
-  String caption;
+  String? caption;
   @override
-  String parse_mode;
+  String? parse_mode;
   @override
-  List<MessageEntity> caption_entities;
+  List<MessageEntity>? caption_entities;
   InputMediaPhoto({
-    this.type = 'photo',
-    this.media,
+    this.type = InputMedia.PHOTO,
+    required this.media,
     this.caption,
     this.parse_mode,
     this.caption_entities,

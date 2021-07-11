@@ -27,11 +27,11 @@ class Invoice {
   String currency;
   int total_amount;
   Invoice({
-    this.title,
-    this.description,
-    this.start_parameter,
-    this.currency,
-    this.total_amount,
+    required this.title,
+    required this.description,
+    required this.start_parameter,
+    required this.currency,
+    required this.total_amount,
   });
   factory Invoice.fromJson(Map<String, dynamic> json) =>
       _$InvoiceFromJson(json);

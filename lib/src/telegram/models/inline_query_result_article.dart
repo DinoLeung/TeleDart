@@ -28,18 +28,18 @@ class InlineQueryResultArticle implements InlineQueryResult {
   String title;
   InputMessageContent input_message_content;
   @override
-  InlineKeyboardMarkup reply_markup;
-  String url;
-  bool hide_url;
-  String description;
-  String thumb_url;
-  String thumb_width;
-  String thumb_height;
+  InlineKeyboardMarkup? reply_markup;
+  String? url;
+  bool? hide_url;
+  String? description;
+  String? thumb_url;
+  String? thumb_width;
+  String? thumb_height;
   InlineQueryResultArticle({
-    this.id,
-    this.type = 'article',
-    this.title,
-    this.input_message_content,
+    required this.id,
+    this.type = InlineQueryResult.ARTICLE,
+    required this.title,
+    required this.input_message_content,
     this.reply_markup,
     this.url,
     this.hide_url,

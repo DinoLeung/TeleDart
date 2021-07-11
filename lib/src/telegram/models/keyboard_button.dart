@@ -28,11 +28,11 @@ part of '../model.dart';
 @JsonSerializable()
 class KeyboardButton {
   String text;
-  bool request_contact;
-  bool request_location;
-  KeyboardButtonPollType request_poll;
+  bool? request_contact;
+  bool? request_location;
+  KeyboardButtonPollType? request_poll;
   KeyboardButton({
-    this.text,
+    required this.text,
     this.request_contact,
     this.request_location,
     this.request_poll,

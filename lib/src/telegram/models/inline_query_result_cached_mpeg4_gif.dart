@@ -29,17 +29,17 @@ class InlineQueryResultCachedMpeg4Gif implements InlineQueryResult {
   @override
   String type;
   String mpeg4_file_id;
-  String title;
-  String caption;
-  String parse_mode;
-  List<MessageEntity> caption_entities;
+  String? title;
+  String? caption;
+  String? parse_mode;
+  List<MessageEntity>? caption_entities;
   @override
-  InlineKeyboardMarkup reply_markup;
-  InputMessageContent input_message_content;
+  InlineKeyboardMarkup? reply_markup;
+  InputMessageContent? input_message_content;
   InlineQueryResultCachedMpeg4Gif({
-    this.id,
-    this.type = 'mpeg4_gif',
-    this.mpeg4_file_id,
+    required this.id,
+    this.type = InlineQueryResult.MPEG4_GIF,
+    required this.mpeg4_file_id,
     this.title,
     this.caption,
     this.parse_mode,

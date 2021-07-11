@@ -33,19 +33,19 @@ class InlineQueryResultContact implements InlineQueryResult {
   String type;
   String phone_number;
   String first_name;
-  String last_name;
-  String vcard;
+  String? last_name;
+  String? vcard;
   @override
-  InlineKeyboardMarkup reply_markup;
-  InputMessageContent input_message_content;
-  String thumb_url;
-  int thumb_width;
-  int thumb_height;
+  InlineKeyboardMarkup? reply_markup;
+  InputMessageContent? input_message_content;
+  String? thumb_url;
+  int? thumb_width;
+  int? thumb_height;
   InlineQueryResultContact({
-    this.id,
-    this.type = 'contact',
-    this.phone_number,
-    this.first_name,
+    required this.id,
+    this.type = InlineQueryResult.CONTACT,
+    required this.phone_number,
+    required this.first_name,
     this.last_name,
     this.vcard,
     this.reply_markup,

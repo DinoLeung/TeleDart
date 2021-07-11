@@ -28,10 +28,10 @@ class PassportFile {
   int file_date;
 
   PassportFile({
-    this.file_id,
-    this.file_unique_id,
-    this.file_size,
-    this.file_date,
+    required this.file_id,
+    required this.file_unique_id,
+    required this.file_size,
+    required this.file_date,
   });
 
   @JsonKey(ignore: true)

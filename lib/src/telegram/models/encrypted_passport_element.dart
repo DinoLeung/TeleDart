@@ -21,18 +21,32 @@ part of '../model.dart';
 /// https://core.telegram.org/bots/api#encryptedpassportelement
 @JsonSerializable()
 class EncryptedPassportElement {
+  static const PERSONAL_DETAILS = 'personal_details';
+  static const PASSPORT = 'passport';
+  static const DRIVER_LICENSE = 'driver_license';
+  static const IDENTITY_CARD = 'identity_card';
+  static const INTERNAL_PASSPORT = 'internal_passport';
+  static const ADDRESS = 'address';
+  static const UTILITY_BILL = 'utility_bill';
+  static const BANK_STATEMENT = 'bank_statement';
+  static const RENTAL_AGREEMENT = 'rental_agreement';
+  static const PASSPORT_REGISTRATION = 'passport_registration';
+  static const TEMPORARY_REGISTRATION = 'temporary_registration';
+  static const PHONE_NUMBER = 'phone_number';
+  static const EMAIL = 'email';
+
   String type;
-  String data;
-  String phone_number;
-  String email;
-  List<PassportFile> files;
-  PassportFile front_side;
-  PassportFile reverse_side;
-  PassportFile selfie;
-  List<PassportFile> translation;
+  String? data;
+  String? phone_number;
+  String? email;
+  List<PassportFile>? files;
+  PassportFile? front_side;
+  PassportFile? reverse_side;
+  PassportFile? selfie;
+  List<PassportFile>? translation;
   String hash;
   EncryptedPassportElement({
-    this.type,
+    required this.type,
     this.data,
     this.phone_number,
     this.email,
@@ -41,7 +55,7 @@ class EncryptedPassportElement {
     this.reverse_side,
     this.selfie,
     this.translation,
-    this.hash,
+    required this.hash,
   });
   factory EncryptedPassportElement.fromJson(Map<String, dynamic> json) =>
       _$EncryptedPassportElementFromJson(json);

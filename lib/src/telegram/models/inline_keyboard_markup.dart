@@ -28,7 +28,7 @@ part of '../model.dart';
 class InlineKeyboardMarkup implements ReplyMarkup {
   List<List<InlineKeyboardButton>> inline_keyboard;
   InlineKeyboardMarkup({
-    this.inline_keyboard,
+    required this.inline_keyboard,
   });
   factory InlineKeyboardMarkup.fromJson(Map<String, dynamic> json) =>
       _$InlineKeyboardMarkupFromJson(json);

@@ -19,18 +19,18 @@ import '../../../teledart.dart';
 import '../../telegram/model.dart';
 
 class TeleDartShippingQuery extends ShippingQuery {
-  TeleDart _teledart;
+  final TeleDart _teledart;
 
-  TeleDartShippingQuery(TeleDart teledart, ShippingQuery shippingQuery) {
-    _teledart = teledart;
-    super.id = shippingQuery.id;
-    super.from = shippingQuery.from;
-    super.invoice_payload = shippingQuery.invoice_payload;
-    super.shipping_address = shippingQuery.shipping_address;
-  }
+  TeleDartShippingQuery(this._teledart, ShippingQuery shippingQuery)
+      : super(
+          id: shippingQuery.id,
+          from: shippingQuery.from,
+          invoice_payload: shippingQuery.invoice_payload,
+          shipping_address: shippingQuery.shipping_address,
+        );
 
   Future<bool> answer(bool ok,
-          {List<ShippingOption> shipping_options, String error_message}) =>
+          {List<ShippingOption>? shipping_options, String? error_message}) =>
       _teledart.answerShippingQuery(this, ok,
           shipping_options: shipping_options, error_message: error_message);
 }

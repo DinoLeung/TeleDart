@@ -28,14 +28,14 @@ class VideoNote {
   String file_unique_id;
   int length;
   int duration;
-  PhotoSize thumb;
-  int file_size;
+  PhotoSize? thumb;
+  int? file_size;
 
   VideoNote({
-    this.file_id,
-    this.file_unique_id,
-    this.length,
-    this.duration,
+    required this.file_id,
+    required this.file_unique_id,
+    required this.length,
+    required this.duration,
     this.thumb,
     this.file_size,
   });

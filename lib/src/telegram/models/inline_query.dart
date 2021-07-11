@@ -25,15 +25,15 @@ part of '../model.dart';
 class InlineQuery {
   String id;
   User from;
-  Location location;
   String query;
   String offset;
+  Location? location;
   InlineQuery({
-    this.id,
-    this.from,
+    required this.id,
+    required this.from,
+    required this.query,
+    required this.offset,
     this.location,
-    this.query,
-    this.offset,
   });
   factory InlineQuery.fromJson(Map<String, dynamic> json) =>
       _$InlineQueryFromJson(json);

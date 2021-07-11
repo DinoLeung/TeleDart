@@ -27,8 +27,8 @@ class PollOption {
   String text;
   int voter_count;
   PollOption({
-    this.text,
-    this.voter_count,
+    required this.text,
+    required this.voter_count,
   });
   factory PollOption.fromJson(Map<String, dynamic> json) =>
       _$PollOptionFromJson(json);
