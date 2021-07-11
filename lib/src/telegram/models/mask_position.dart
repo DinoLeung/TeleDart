@@ -26,10 +26,10 @@ class MaskPosition {
   double y_shift;
   double scale;
   MaskPosition({
-    this.point,
-    this.x_shift,
-    this.y_shift,
-    this.scale,
+    required this.point,
+    required this.x_shift,
+    required this.y_shift,
+    required this.scale,
   });
   factory MaskPosition.fromJson(Map<String, dynamic> json) =>
       _$MaskPositionFromJson(json);

@@ -25,9 +25,9 @@ class PollAnswer {
   User user;
   List<int> option_ids;
   PollAnswer({
-    this.poll_id,
-    this.user,
-    this.option_ids,
+    required this.poll_id,
+    required this.user,
+    required this.option_ids,
   });
   factory PollAnswer.fromJson(Map<String, dynamic> json) =>
       _$PollAnswerFromJson(json);

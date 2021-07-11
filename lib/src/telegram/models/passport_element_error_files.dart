@@ -30,10 +30,10 @@ class PassportElementErrorFiles implements PassportElementError {
   String message;
   List<String> file_hashes;
   PassportElementErrorFiles({
-    this.source,
-    this.type,
-    this.message,
-    this.file_hashes,
+    required this.source,
+    required this.type,
+    required this.message,
+    required this.file_hashes,
   });
   factory PassportElementErrorFiles.fromJson(Map<String, dynamic> json) =>
       _$PassportElementErrorFilesFromJson(json);

@@ -27,15 +27,15 @@ class InputVenueMessageContent implements InputMessageContent {
   double longitude;
   String title;
   String address;
-  String foursquare_id;
-  String foursquare_type;
-  String google_place_id;
-  String google_place_type;
+  String? foursquare_id;
+  String? foursquare_type;
+  String? google_place_id;
+  String? google_place_type;
   InputVenueMessageContent({
-    this.latitude,
-    this.longitude,
-    this.title,
-    this.address,
+    required this.latitude,
+    required this.longitude,
+    required this.title,
+    required this.address,
     this.foursquare_id,
     this.foursquare_type,
     this.google_place_id,

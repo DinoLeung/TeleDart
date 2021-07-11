@@ -14,6 +14,7 @@
 /// You should have received a copy of the GNU General Public License
 /// along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+import 'package:http/http.dart';
 import 'package:json_annotation/json_annotation.dart';
 import '../util/time_helper.dart';
 
@@ -43,6 +44,7 @@ part 'models/poll.dart';
 part 'models/dice.dart';
 part 'models/proximity_alert_triggered.dart';
 part 'models/message_auto_delete_timer_changed.dart';
+part 'models/voice_chat_scheduled.dart';
 part 'models/voice_chat_started.dart';
 part 'models/voice_chat_ended.dart';
 part 'models/voice_chat_participants_invited.dart';
@@ -60,10 +62,24 @@ part 'models/force_reply.dart';
 part 'models/chat_photo.dart';
 part 'models/chat_invite_link.dart';
 part 'models/chat_member.dart';
+part 'models/chat_member_owner.dart';
+part 'models/chat_member_administrator.dart';
+part 'models/chat_member_member.dart';
+part 'models/chat_member_restricted.dart';
+part 'models/chat_member_left.dart';
+part 'models/chat_member_banned.dart';
 part 'models/chat_member_updated.dart';
 part 'models/chat_permissions.dart';
 part 'models/chat_location.dart';
 part 'models/bot_command.dart';
+part 'models/bot_command_scope.dart';
+part 'models/bot_command_scope_default.dart';
+part 'models/bot_command_scope_all_private_chats.dart';
+part 'models/bot_command_scope_all_group_chats.dart';
+part 'models/bot_command_scope_all_chats_administrators.dart';
+part 'models/bot_command_scope_chat.dart';
+part 'models/bot_command_scope_chat_administrators.dart';
+part 'models/bot_command_scope_chat_member.dart';
 part 'models/response_parameters.dart';
 part 'models/input_media.dart';
 part 'models/input_media_photo.dart';
@@ -101,6 +117,7 @@ part 'models/input_text_message_content.dart';
 part 'models/input_location_message_content.dart';
 part 'models/input_venue_message_content.dart';
 part 'models/input_contact_message_content.dart';
+part 'models/input_invoice_message_content.dart';
 part 'models/chosen_inline_result.dart';
 part 'models/labeled_price.dart';
 part 'models/invoice.dart';

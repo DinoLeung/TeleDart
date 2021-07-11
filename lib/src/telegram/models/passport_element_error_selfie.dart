@@ -30,10 +30,10 @@ class PassportElementErrorSelfie implements PassportElementError {
   String message;
   String file_hash;
   PassportElementErrorSelfie({
-    this.source,
-    this.type,
-    this.message,
-    this.file_hash,
+    required this.source,
+    required this.type,
+    required this.message,
+    required this.file_hash,
   });
   factory PassportElementErrorSelfie.fromJson(Map<String, dynamic> json) =>
       _$PassportElementErrorSelfieFromJson(json);

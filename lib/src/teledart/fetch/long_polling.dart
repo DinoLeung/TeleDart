@@ -30,7 +30,7 @@ class LongPolling extends AbstractUpdateFetcher {
   int offset;
   int limit;
   int timeout;
-  List<String> allowed_updates;
+  List<String>? allowed_updates;
 
   bool _isPolling = false;
   bool get isPolling => _isPolling;
@@ -93,9 +93,11 @@ class LongPolling extends AbstractUpdateFetcher {
         }
         _resetRetryDelay();
         _recursivePolling();
-      }).catchError((error) => error is HttpClientException
-              ? _onRecursivePollingHttpError(error)
-              : _onRecursivePollingError(error));
+      }).catchError((error) {
+        error is HttpClientException
+            ? _onRecursivePollingHttpError(error)
+            : _onRecursivePollingError(error);
+      });
     }
     return Future.value();
   }
@@ -110,8 +112,8 @@ class LongPolling extends AbstractUpdateFetcher {
   }
 
   void _onRecursivePollingError(Object error) {
-    print('$DateTime.now() $error');
-    print('Retrying in $retryDelay.inMinutes minute(s)...');
+    print('${DateTime.now()} $error');
+    print('Retrying in ${retryDelay.inMinutes} minute(s)...');
     _delayRetry();
     _doubleRetryDelay();
     _recursivePolling();

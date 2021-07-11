@@ -5,21 +5,26 @@ import 'package:teledart/teledart.dart';
 import 'package:teledart/telegram.dart';
 import 'package:teledart/model.dart';
 
-void main() {
+Future<void> main() async {
   final envVars = Platform.environment;
 
-  var telegram = Telegram(envVars['BOT_TOKEN']);
-  var teledart = TeleDart(telegram, Event());
+  var telegram = Telegram(envVars['BOT_TOKEN']!);
+  var event = Event((await telegram.getMe()).username!);
+  
+  // TeleDart uses longpoll by default if no update fetcher is specified.
+  var teledart = TeleDart(telegram, event);
 
   // In case you decided to use webhook.
-  // var webhook = Webhook(telegram, envVars['HOST_URL'], envVars['BOT_TOKEN'])
-  //   ..certificate = io.File(envVars['CERT_PATH'])
-  //   ..privateKey = io.File(envVars['KEY_PATH'])
-  //   ..port = int.parse(envVars['BOT_PORT']);
-  // var teledart = TeleDart(telegram, Event(), fetcher: webhook);
+  // var webhook = await Webhook.createHttpsWebhok(
+  //     telegram,
+  //     envVars['HOST_URL']!,
+  //     envVars['BOT_TOKEN']!,
+  //     io.File(envVars['CERT_PATH']!),
+  //     io.File(envVars['KEY_PATH']!),
+  //     port: int.parse(envVars['BOT_PORT']!));
+  // var teledart = TeleDart(telegram, event, fetcher: webhook);
 
-  // TeleDart uses longpoll by default if no update fetcher is specified.
-  teledart.start().then((me) => print('${me.username} is initialised'));
+  teledart.start();
 
   // You can listen to messages like this
   teledart.onMessage(entityType: 'bot_command', keyword: 'start').listen(
@@ -39,7 +44,7 @@ void main() {
   // See: https://www.dartlang.org/tutorials/language/streams#methods-that-modify-a-stream
   teledart
       .onMessage(keyword: 'dart')
-      .where((message) => message.text.contains('telegram'))
+      .where((message) => message.text?.contains('telegram') ?? false)
       .listen((message) => teledart.replyPhoto(
           message,
           //  io.File('example/dash_paper_plane.png'),
@@ -54,17 +59,15 @@ void main() {
 
   // Inline mode.
   teledart.onInlineQuery().listen((inlineQuery) => inlineQuery.answer([
-        InlineQueryResultArticle()
-          ..id = 'ping'
-          ..title = 'ping'
-          ..input_message_content = (InputTextMessageContent()
-            ..message_text = '*pong*'
-            ..parse_mode = 'MarkdownV2'),
-        InlineQueryResultArticle()
-          ..id = 'ding'
-          ..title = 'ding'
-          ..input_message_content = (InputTextMessageContent()
-            ..message_text = '_dong_'
-            ..parse_mode = 'MarkdownV2')
+        InlineQueryResultArticle(
+            id: 'ping',
+            title: 'ping',
+            input_message_content: InputTextMessageContent(
+                message_text: '*pong*', parse_mode: 'MarkdownV2')),
+        InlineQueryResultArticle(
+            id: 'ding',
+            title: 'ding',
+            input_message_content: InputTextMessageContent(
+                message_text: '*_dong_*', parse_mode: 'MarkdownV2')),
       ]));
 }

@@ -19,24 +19,27 @@ import '../../../teledart.dart';
 import '../../telegram/model.dart';
 
 class TeleDartInlineQuery extends InlineQuery {
-  TeleDart _teledart;
+  final TeleDart _teledart;
 
-  TeleDartInlineQuery(TeleDart teledart, InlineQuery inlineQuery) {
-    _teledart = teledart;
-    super.id = inlineQuery.id;
-    super.from = inlineQuery.from;
-    super.location = inlineQuery.location;
-    super.query = inlineQuery.query;
-    super.offset = inlineQuery.offset;
-  }
+  TeleDartInlineQuery(this._teledart, InlineQuery inlineQuery)
+      : super(
+          id: inlineQuery.id,
+          from: inlineQuery.from,
+          query: inlineQuery.query,
+          offset: inlineQuery.offset,
+          chat_type: inlineQuery.chat_type,
+          location: inlineQuery.location,
+        );
 
   /// Short-cut to answer inline query
-  Future<bool> answer(List<InlineQueryResult> results,
-          {int cache_time,
-          bool is_personal,
-          String next_offset,
-          String switch_pm_text,
-          String switch_pm_parameter}) =>
+  Future<bool> answer(
+    List<InlineQueryResult> results, {
+    int? cache_time,
+    bool? is_personal,
+    String? next_offset,
+    String? switch_pm_text,
+    String? switch_pm_parameter,
+  }) =>
       _teledart.answerInlineQuery(this, results,
           cache_time: cache_time,
           is_personal: is_personal,

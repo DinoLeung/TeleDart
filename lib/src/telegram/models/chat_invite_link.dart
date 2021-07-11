@@ -25,22 +25,23 @@ class ChatInviteLink {
   User creator;
   bool is_primary;
   bool is_revoked;
-  int expire_date;
-  int member_limit;
+  int? expire_date;
+  int? member_limit;
 
   ChatInviteLink({
-    this.invite_link,
-    this.creator,
-    this.is_primary,
-    this.is_revoked,
+    required this.invite_link,
+    required this.creator,
+    required this.is_primary,
+    required this.is_revoked,
     this.expire_date,
     this.member_limit,
   });
 
   @JsonKey(ignore: true)
-  DateTime get expire_date_ => TimeHelper.toDateTime(expire_date);
-  set expire_date_(DateTime dateTime) =>
-      expire_date = TimeHelper.toUnixTime(dateTime);
+  DateTime? get expire_date_ =>
+      expire_date == null ? null : TimeHelper.toDateTime(expire_date!);
+  set expire_date_(DateTime? dateTime) =>
+      expire_date = dateTime == null ? null : TimeHelper.toUnixTime(dateTime);
 
   factory ChatInviteLink.fromJson(Map<String, dynamic> json) =>
       _$ChatInviteLinkFromJson(json);

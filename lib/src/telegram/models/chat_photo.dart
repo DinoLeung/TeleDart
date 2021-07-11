@@ -26,10 +26,10 @@ class ChatPhoto {
   String big_file_id;
   String big_file_unique_id;
   ChatPhoto({
-    this.small_file_id,
-    this.small_file_unique_id,
-    this.big_file_id,
-    this.big_file_unique_id,
+    required this.small_file_id,
+    required this.small_file_unique_id,
+    required this.big_file_id,
+    required this.big_file_unique_id,
   });
   factory ChatPhoto.fromJson(Map<String, dynamic> json) =>
       _$ChatPhotoFromJson(json);

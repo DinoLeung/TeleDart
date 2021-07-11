@@ -24,8 +24,8 @@ class BotCommand {
   String command;
   String description;
   BotCommand({
-    this.command,
-    this.description,
+    required this.command,
+    required this.description,
   });
   factory BotCommand.fromJson(Map<String, dynamic> json) =>
       _$BotCommandFromJson(json);

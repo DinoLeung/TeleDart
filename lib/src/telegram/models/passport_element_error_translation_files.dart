@@ -30,10 +30,10 @@ class PassportElementErrorTranslationFiles implements PassportElementError {
   String message;
   List<String> file_hashes;
   PassportElementErrorTranslationFiles({
-    this.source,
-    this.type,
-    this.message,
-    this.file_hashes,
+    required this.source,
+    required this.type,
+    required this.message,
+    required this.file_hashes,
   });
   factory PassportElementErrorTranslationFiles.fromJson(
           Map<String, dynamic> json) =>

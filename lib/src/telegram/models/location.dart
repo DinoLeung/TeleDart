@@ -23,13 +23,13 @@ part of '../model.dart';
 class Location {
   double longitude;
   double latitude;
-  double horizontal_accuracy;
-  int live_period;
-  int heading;
-  int proximity_alert_radius;
+  double? horizontal_accuracy;
+  int? live_period;
+  int? heading;
+  int? proximity_alert_radius;
   Location({
-    this.longitude,
-    this.latitude,
+    required this.longitude,
+    required this.latitude,
     this.horizontal_accuracy,
     this.live_period,
     this.heading,

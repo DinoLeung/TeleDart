@@ -23,7 +23,7 @@ part of '../model.dart';
 class MessageId {
   int message_id;
   MessageId({
-    this.message_id,
+    required this.message_id,
   });
   factory MessageId.fromJson(Map<String, dynamic> json) =>
       _$MessageIdFromJson(json);

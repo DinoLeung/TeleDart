@@ -25,9 +25,9 @@ class GameHighScore {
   User user;
   int score;
   GameHighScore({
-    this.position,
-    this.user,
-    this.score,
+    required this.position,
+    required this.user,
+    required this.score,
   });
   factory GameHighScore.fromJson(Map<String, dynamic> json) =>
       _$GameHighScoreFromJson(json);

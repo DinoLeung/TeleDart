@@ -24,13 +24,13 @@ class MessageEntity {
   String type;
   int offset;
   int length;
-  String url;
-  User user;
-  String language;
+  String? url;
+  User? user;
+  String? language;
   MessageEntity({
-    this.type,
-    this.offset,
-    this.length,
+    required this.type,
+    required this.offset,
+    required this.length,
     this.url,
     this.user,
     this.language,

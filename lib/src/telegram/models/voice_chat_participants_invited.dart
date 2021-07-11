@@ -21,7 +21,7 @@ part of '../model.dart';
 /// https://core.telegram.org/bots/api#voicechatparticipantsinvited
 @JsonSerializable()
 class VoiceChatParticipantsInvited {
-  List<User> users;
+  List<User>? users;
 
   VoiceChatParticipantsInvited({this.users});
 

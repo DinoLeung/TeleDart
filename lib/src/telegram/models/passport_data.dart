@@ -24,8 +24,8 @@ class PassportData {
   List<EncryptedPassportElement> data;
   EncryptedCredentials credentials;
   PassportData({
-    this.data,
-    this.credentials,
+    required this.data,
+    required this.credentials,
   });
   factory PassportData.fromJson(Map<String, dynamic> json) =>
       _$PassportDataFromJson(json);

@@ -26,9 +26,9 @@ class ProximityAlertTriggered {
   User watcher;
   int distance;
   ProximityAlertTriggered({
-    this.traveler,
-    this.watcher,
-    this.distance,
+    required this.traveler,
+    required this.watcher,
+    required this.distance,
   });
   factory ProximityAlertTriggered.fromJson(Map<String, dynamic> json) =>
       _$ProximityAlertTriggeredFromJson(json);

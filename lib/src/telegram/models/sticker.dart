@@ -26,17 +26,17 @@ class Sticker {
   int width;
   int height;
   bool is_animated;
-  PhotoSize thumb;
-  String emoji;
-  String set_name;
-  MaskPosition mask_position;
-  int file_size;
+  PhotoSize? thumb;
+  String? emoji;
+  String? set_name;
+  MaskPosition? mask_position;
+  int? file_size;
   Sticker({
-    this.file_id,
-    this.file_unique_id,
-    this.width,
-    this.height,
-    this.is_animated,
+    required this.file_id,
+    required this.file_unique_id,
+    required this.width,
+    required this.height,
+    required this.is_animated,
     this.thumb,
     this.emoji,
     this.set_name,

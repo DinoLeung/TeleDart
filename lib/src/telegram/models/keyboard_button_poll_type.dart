@@ -21,7 +21,7 @@ part of '../model.dart';
 /// https://core.telegram.org/bots/api#keyboardbuttonpolltype
 @JsonSerializable()
 class KeyboardButtonPollType {
-  String type;
+  String? type;
   KeyboardButtonPollType({
     this.type,
   });

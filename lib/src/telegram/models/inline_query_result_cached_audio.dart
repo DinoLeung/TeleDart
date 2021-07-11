@@ -32,16 +32,16 @@ class InlineQueryResultCachedAudio implements InlineQueryResult {
   @override
   String type;
   String audio_file_id;
-  String caption;
-  String parse_mode;
-  List<MessageEntity> caption_entities;
+  String? caption;
+  String? parse_mode;
+  List<MessageEntity>? caption_entities;
   @override
-  InlineKeyboardMarkup reply_markup;
-  InputMessageContent input_message_content;
+  InlineKeyboardMarkup? reply_markup;
+  InputMessageContent? input_message_content;
   InlineQueryResultCachedAudio({
-    this.id,
-    this.type = 'audio',
-    this.audio_file_id,
+    required this.id,
+    this.type = InlineQueryResult.AUDIO,
+    required this.audio_file_id,
     this.caption,
     this.parse_mode,
     this.caption_entities,

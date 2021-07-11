@@ -32,27 +32,27 @@ class InlineQueryResultDocument implements InlineQueryResult {
   @override
   String type;
   String title;
-  String caption;
-  String parse_mode;
-  List<MessageEntity> caption_entities;
+  String? caption;
+  String? parse_mode;
+  List<MessageEntity>? caption_entities;
   String document_url;
   String mime_type;
-  String description;
+  String? description;
   @override
-  InlineKeyboardMarkup reply_markup;
-  InputMessageContent input_message_content;
-  String thumb_url;
-  int thumb_width;
-  int thumb_height;
+  InlineKeyboardMarkup? reply_markup;
+  InputMessageContent? input_message_content;
+  String? thumb_url;
+  int? thumb_width;
+  int? thumb_height;
   InlineQueryResultDocument({
-    this.id,
-    this.type = 'document',
-    this.title,
+    required this.id,
+    this.type = InlineQueryResult.DOCUMENT,
+    required this.title,
     this.caption,
     this.parse_mode,
     this.caption_entities,
-    this.document_url,
-    this.mime_type,
+    required this.document_url,
+    required this.mime_type,
     this.description,
     this.reply_markup,
     this.input_message_content,

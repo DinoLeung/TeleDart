@@ -24,13 +24,13 @@ class Voice {
   String file_id;
   String file_unique_id;
   int duration;
-  String mime_type;
-  int file_size;
+  String? mime_type;
+  int? file_size;
 
   Voice({
-    this.file_id,
-    this.file_unique_id,
-    this.duration,
+    required this.file_id,
+    required this.file_unique_id,
+    required this.duration,
     this.mime_type,
     this.file_size,
   });

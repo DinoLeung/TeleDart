@@ -26,19 +26,19 @@ class InputMediaAudio implements InputMedia {
   @override
   String media;
   @override
-  String caption;
+  String? caption;
   @override
-  String parse_mode;
+  String? parse_mode;
   @override
-  List<MessageEntity> caption_entities;
+  List<MessageEntity>? caption_entities;
   dynamic thumb; // InputFile or String
-  int duration;
-  String performer;
-  String title;
+  int? duration;
+  String? performer;
+  String? title;
 
   InputMediaAudio({
-    this.type = 'audio',
-    this.media,
+    this.type = InputMedia.AUDIO,
+    required this.media,
     this.thumb,
     this.caption,
     this.parse_mode,
@@ -49,9 +49,10 @@ class InputMediaAudio implements InputMedia {
   });
 
   @JsonKey(ignore: true)
-  Duration get duration_ => TimeHelper.toDuration(duration);
-  set duration_(Duration duration) =>
-      this.duration = TimeHelper.toSeconds(duration);
+  Duration? get duration_ =>
+      duration == null ? null : TimeHelper.toDuration(duration!);
+  set duration_(Duration? duration) =>
+      this.duration = duration == null ? null : TimeHelper.toSeconds(duration);
 
   factory InputMediaAudio.fromJson(Map<String, dynamic> json) =>
       _$InputMediaAudioFromJson(json);

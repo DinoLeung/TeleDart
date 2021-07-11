@@ -29,11 +29,11 @@ part of '../model.dart';
 @JsonSerializable()
 class LoginUrl {
   String url;
-  String forward_text;
-  String bot_username;
-  bool request_write_access;
+  String? forward_text;
+  String? bot_username;
+  bool? request_write_access;
   LoginUrl({
-    this.url,
+    required this.url,
     this.forward_text,
     this.bot_username,
     this.request_write_access,

@@ -23,7 +23,7 @@ part of '../model.dart';
 class MessageAutoDeleteTimerChanged {
   int message_auto_delete_time;
 
-  MessageAutoDeleteTimerChanged({this.message_auto_delete_time});
+  MessageAutoDeleteTimerChanged({required this.message_auto_delete_time});
 
   @JsonKey(ignore: true)
   Duration get message_auto_delete_time_ =>

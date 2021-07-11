@@ -22,67 +22,68 @@ part of '../model.dart';
 @JsonSerializable()
 class Message {
   int message_id;
-  User from;
-  Chat sender_chat;
+  User? from;
+  Chat? sender_chat;
   int date;
   Chat chat;
-  User forward_from;
-  Chat forward_from_chat;
-  int forward_from_message_id;
-  String forward_signature;
-  String forward_sender_name;
-  int forward_date;
-  Message reply_to_message;
-  User via_bot;
-  int edit_date;
-  String media_group_id;
-  String author_signature;
-  String text;
-  List<MessageEntity> entities;
-  Animation animation;
-  Audio audio;
-  Document document;
-  List<PhotoSize> photo;
-  Sticker sticker;
-  Video video;
-  VideoNote video_note;
-  Voice voice;
-  String caption;
-  List<MessageEntity> caption_entities;
-  Contact contact;
-  Dice dice;
-  Game game;
-  Poll poll;
-  Venue venue;
-  Location location;
-  List<User> new_chat_members;
-  User left_chat_member;
-  String new_chat_title;
-  List<PhotoSize> new_chat_photo;
-  bool delete_chat_photo;
-  bool group_chat_created;
-  bool supergroup_chat_created;
-  bool channel_chat_created;
-  MessageAutoDeleteTimerChanged message_auto_delete_timer_changed;
-  int migrate_to_chat_id;
-  int migrate_from_chat_id;
-  Message pinned_message;
-  Invoice invoice;
-  SuccessfulPayment successful_payment;
-  String connected_website;
-  PassportData passport_data;
-  ProximityAlertTriggered proximity_alert_triggered;
-  VoiceChatStarted voice_chat_started;
-  VoiceChatEnded voice_chat_ended;
-  VoiceChatParticipantsInvited voice_chat_participants_invited;
-  InlineKeyboardMarkup reply_markup;
+  User? forward_from;
+  Chat? forward_from_chat;
+  int? forward_from_message_id;
+  String? forward_signature;
+  String? forward_sender_name;
+  int? forward_date;
+  Message? reply_to_message;
+  User? via_bot;
+  int? edit_date;
+  String? media_group_id;
+  String? author_signature;
+  String? text;
+  List<MessageEntity>? entities;
+  Animation? animation;
+  Audio? audio;
+  Document? document;
+  List<PhotoSize>? photo;
+  Sticker? sticker;
+  Video? video;
+  VideoNote? video_note;
+  Voice? voice;
+  String? caption;
+  List<MessageEntity>? caption_entities;
+  Contact? contact;
+  Dice? dice;
+  Game? game;
+  Poll? poll;
+  Venue? venue;
+  Location? location;
+  List<User>? new_chat_members;
+  User? left_chat_member;
+  String? new_chat_title;
+  List<PhotoSize>? new_chat_photo;
+  bool? delete_chat_photo;
+  bool? group_chat_created;
+  bool? supergroup_chat_created;
+  bool? channel_chat_created;
+  MessageAutoDeleteTimerChanged? message_auto_delete_timer_changed;
+  int? migrate_to_chat_id;
+  int? migrate_from_chat_id;
+  Message? pinned_message;
+  Invoice? invoice;
+  SuccessfulPayment? successful_payment;
+  String? connected_website;
+  PassportData? passport_data;
+  ProximityAlertTriggered? proximity_alert_triggered;
+  VoiceChatScheduled? voice_chat_scheduled;
+  VoiceChatStarted? voice_chat_started;
+  VoiceChatEnded? voice_chat_ended;
+  VoiceChatParticipantsInvited? voice_chat_participants_invited;
+  InlineKeyboardMarkup? reply_markup;
 
   Message({
-    this.message_id,
+    required this.message_id,
     this.from,
     this.sender_chat,
-    this.date,
-    this.chat,
+    required this.date,
+    required this.chat,
     this.forward_from,
     this.forward_from_chat,
     this.forward_from_message_id,
@@ -129,6 +130,7 @@ class Message {
     this.connected_website,
     this.passport_data,
     this.proximity_alert_triggered,
+    this.voice_chat_scheduled,
     this.voice_chat_started,
     this.voice_chat_ended,
     this.voice_chat_participants_invited,
@@ -140,20 +142,22 @@ class Message {
   set date_(DateTime dateTime) => date = TimeHelper.toUnixTime(dateTime);
 
   @JsonKey(ignore: true)
-  DateTime get forward_date_ => TimeHelper.toDateTime(forward_date);
-  set forward_date_(DateTime dateTime) =>
-      forward_date = TimeHelper.toUnixTime(dateTime);
+  DateTime? get forward_date_ =>
+      forward_date == null ? null : TimeHelper.toDateTime(forward_date!);
+  set forward_date_(DateTime? dateTime) =>
+      forward_date = dateTime == null ? null : TimeHelper.toUnixTime(dateTime);
 
   @JsonKey(ignore: true)
-  DateTime get edit_date_ => TimeHelper.toDateTime(edit_date);
-  set edit_date_(DateTime dateTime) =>
-      edit_date = TimeHelper.toUnixTime(dateTime);
+  DateTime? get edit_date_ =>
+      edit_date == null ? null : TimeHelper.toDateTime(edit_date!);
+  set edit_date_(DateTime? dateTime) =>
+      edit_date = dateTime == null ? null : TimeHelper.toUnixTime(dateTime);
 
   factory Message.fromJson(Map<String, dynamic> json) =>
       _$MessageFromJson(json);
   Map<String, dynamic> toJson() => _$MessageToJson(this);
 
-  int indexOfEntity(String type) {
+  int indexOfEntity(String? type) {
     var etts = entities ?? caption_entities;
     if (etts != null) {
       for (var ett in etts) {
@@ -163,19 +167,19 @@ class Message {
     return -1;
   }
 
-  MessageEntity entityOf(String type) {
+  MessageEntity? entityOf(String? type) {
     var i = indexOfEntity(type);
     if (i >= 0) {
-      return (entities ?? caption_entities)[i];
+      return (entities ?? caption_entities)![i];
     } else {
       return null;
     }
   }
 
-  String getEntity(String type) {
+  String? getEntity(String? type) {
     var ett = entityOf(type);
     if (ett != null) {
-      return (text ?? caption).substring(ett.offset, ett.offset + ett.length);
+      return (text ?? caption)!.substring(ett.offset, ett.offset + ett.length);
     } else {
       return null;
     }

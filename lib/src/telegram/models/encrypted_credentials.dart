@@ -29,9 +29,9 @@ class EncryptedCredentials {
   String hash;
   String secret;
   EncryptedCredentials({
-    this.data,
-    this.hash,
-    this.secret,
+    required this.data,
+    required this.hash,
+    required this.secret,
   });
   factory EncryptedCredentials.fromJson(Map<String, dynamic> json) =>
       _$EncryptedCredentialsFromJson(json);
