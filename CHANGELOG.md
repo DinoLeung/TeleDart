@@ -1,4 +1,4 @@
-## 0.2.0 (Unreleased)
+## 0.2.0
 
 - Support API 5.2 and 5.3
 - Support sound null safety
