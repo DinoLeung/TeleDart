@@ -1,9 +1,6 @@
-## 0.2.1 (Unreleased)
-
-- Support API 5.2 and 5.3
-
 ## 0.2.0 (Unreleased)
 
+- Support API 5.2 and 5.3
 - Support sound null safety
 - Various bug fixes to built-in long poll and webhook fetcher
 - **Breaking** `Webhook` can only instantiated with built-in static functions `webhook.createHttpWebhok` and `webhook.createHttpsWebhok`
