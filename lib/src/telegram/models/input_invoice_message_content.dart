@@ -67,7 +67,7 @@ class InputInvoiceMessageContent implements InputMessageContent {
   });
 
   factory InputInvoiceMessageContent.fromJson(Map<String, dynamic> json) =>
-        _$InputInvoiceMessageContentFromJson(json);
+      _$InputInvoiceMessageContentFromJson(json);
   @override
   Map<String, dynamic> toJson() => _$InputInvoiceMessageContentToJson(this);
 }

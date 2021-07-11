@@ -25,7 +25,7 @@ import 'abstract_update_fetcher.dart';
 class Webhook extends AbstractUpdateFetcher {
   final Telegram telegram;
 
-  io.HttpServer _server;
+  final io.HttpServer _server;
 
   String url;
   String? ip_address;
@@ -104,11 +104,11 @@ class Webhook extends AbstractUpdateFetcher {
       List<String>? allowed_updates,
       bool? drop_pending_updates}) async {
     var server = await io.HttpServer.bindSecure(
-          io.InternetAddress.anyIPv4.address,
-          serverPort ?? port,
-          io.SecurityContext()
-            ..useCertificateChainBytes(certificate.readAsBytesSync())
-            ..usePrivateKeyBytes(privateKey.readAsBytesSync()));
+        io.InternetAddress.anyIPv4.address,
+        serverPort ?? port,
+        io.SecurityContext()
+          ..useCertificateChainBytes(certificate.readAsBytesSync())
+          ..usePrivateKeyBytes(privateKey.readAsBytesSync()));
     return Webhook(telegram, url, secretPath, server,
         ip_address: ip_address,
         certificate: certificate,

@@ -45,7 +45,7 @@ class InputMedia {
     this.parse_mode,
     this.caption_entities,
   });
-  
+
   factory InputMedia.fromJson(Map<String, dynamic> json) =>
       _$InputMediaFromJson(json);
   Map<String, dynamic> toJson() => _$InputMediaToJson(this);

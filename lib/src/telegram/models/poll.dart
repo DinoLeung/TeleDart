@@ -59,12 +59,14 @@ class Poll {
   Map<String, dynamic> toJson() => _$PollToJson(this);
 
   @JsonKey(ignore: true)
-  Duration? get open_period_ => open_period == null ? null : TimeHelper.toDuration(open_period!);
+  Duration? get open_period_ =>
+      open_period == null ? null : TimeHelper.toDuration(open_period!);
   set open_period_(Duration? duration) =>
       open_period = duration == null ? null : TimeHelper.toSeconds(duration);
 
   @JsonKey(ignore: true)
-  DateTime? get close_date_ => close_date == null ? null : TimeHelper.toDateTime(close_date!);
+  DateTime? get close_date_ =>
+      close_date == null ? null : TimeHelper.toDateTime(close_date!);
   set close_date_(DateTime? dateTime) =>
       close_date = dateTime == null ? null : TimeHelper.toUnixTime(dateTime);
 }

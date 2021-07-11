@@ -32,8 +32,10 @@ class BotCommandScopeChatAdministrators implements BotCommandScope {
     required this.chat_id,
   });
 
-  factory BotCommandScopeChatAdministrators.fromJson(Map<String, dynamic> json) =>
+  factory BotCommandScopeChatAdministrators.fromJson(
+          Map<String, dynamic> json) =>
       _$BotCommandScopeChatAdministratorsFromJson(json);
   @override
-  Map<String, dynamic> toJson() => _$BotCommandScopeChatAdministratorsToJson(this);
+  Map<String, dynamic> toJson() =>
+      _$BotCommandScopeChatAdministratorsToJson(this);
 }

@@ -1,3 +1,6 @@
+## 0.2.1
+
+- Format files to comply with Dart styling guide
 ## 0.2.0
 
 - Support API 5.2 and 5.3

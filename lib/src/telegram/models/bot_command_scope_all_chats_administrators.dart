@@ -17,19 +17,22 @@
 part of '../model.dart';
 
 /// Represents the [scope] of bot commands, covering all group and supergroup chat administrators.
-/// 
+///
 /// https://core.telegram.org/bots/api#botcommandscopeallchatadministrators
-/// 
+///
 /// [scope]: https://core.telegram.org/bots/api#botcommandscope
 @JsonSerializable()
 class BotCommandScopeAllChatAdministrators implements BotCommandScope {
   @override
   String type;
 
-  BotCommandScopeAllChatAdministrators({this.type = BotCommandScope.ALL_CHAT_ADMINISTRATORS});
+  BotCommandScopeAllChatAdministrators(
+      {this.type = BotCommandScope.ALL_CHAT_ADMINISTRATORS});
 
-  factory BotCommandScopeAllChatAdministrators.fromJson(Map<String, dynamic> json) =>
+  factory BotCommandScopeAllChatAdministrators.fromJson(
+          Map<String, dynamic> json) =>
       _$BotCommandScopeAllChatAdministratorsFromJson(json);
   @override
-  Map<String, dynamic> toJson() => _$BotCommandScopeAllChatAdministratorsToJson(this);
+  Map<String, dynamic> toJson() =>
+      _$BotCommandScopeAllChatAdministratorsToJson(this);
 }
