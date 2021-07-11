@@ -17,16 +17,17 @@
 part of '../model.dart';
 
 /// Represents the [scope] of bot commands, covering all group and supergroup chats.
-/// 
+///
 /// https://core.telegram.org/bots/api#botcommandscopeallprivatechats
-/// 
+///
 /// [scope]: https://core.telegram.org/bots/api#botcommandscope
 @JsonSerializable()
 class BotCommandScopeAllPrivateChats implements BotCommandScope {
   @override
   String type;
 
-  BotCommandScopeAllPrivateChats({this.type = BotCommandScope.ALL_PRIVATE_CHATS});
+  BotCommandScopeAllPrivateChats(
+      {this.type = BotCommandScope.ALL_PRIVATE_CHATS});
 
   factory BotCommandScopeAllPrivateChats.fromJson(Map<String, dynamic> json) =>
       _$BotCommandScopeAllPrivateChatsFromJson(json);

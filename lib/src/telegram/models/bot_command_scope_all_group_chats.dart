@@ -17,9 +17,9 @@
 part of '../model.dart';
 
 /// Represents the [scope] of bot commands, covering all group and supergroup chats.
-/// 
+///
 /// https://core.telegram.org/bots/api#botcommandscopeallgroupchats
-/// 
+///
 /// [scope]: https://core.telegram.org/bots/api#botcommandscope
 @JsonSerializable()
 class BotCommandScopeAllGroupChats implements BotCommandScope {

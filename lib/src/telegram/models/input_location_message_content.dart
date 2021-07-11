@@ -40,7 +40,8 @@ class InputLocationMessageContent implements InputMessageContent {
   });
 
   @JsonKey(ignore: true)
-  Duration? get live_period_ => live_period == null ? null : TimeHelper.toDuration(live_period!);
+  Duration? get live_period_ =>
+      live_period == null ? null : TimeHelper.toDuration(live_period!);
   set live_period_(Duration? duration) =>
       live_period = duration == null ? null : TimeHelper.toSeconds(duration);
 

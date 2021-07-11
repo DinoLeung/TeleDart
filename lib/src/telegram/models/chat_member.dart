@@ -24,9 +24,8 @@ part of '../model.dart';
 /// * [ChatMemberRestricted](https://core.telegram.org/bots/api#chatmemberrestricted)
 /// * [ChatMemberLeft](https://core.telegram.org/bots/api#chatmemberleft)
 /// * [ChatMemberBanned](https://core.telegram.org/bots/api#chatmemberbanned)
-/// 
+///
 /// https://core.telegram.org/bots/api#chatmember
-
 
 @JsonSerializable()
 class ChatMember {

@@ -17,11 +17,10 @@
 part of '../model.dart';
 
 /// Represents a [chat member] that isn't currently a member of the chat, but may join it themselves.
-/// 
+///
 /// that isn't currently a member of the chat, but may join it themselves.
-/// 
+///
 /// [chat member]: https://core.telegram.org/bots/api#chatmember
-
 
 @JsonSerializable()
 class ChatMemberBanned implements ChatMember {

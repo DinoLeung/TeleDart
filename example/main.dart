@@ -10,7 +10,7 @@ Future<void> main() async {
 
   var telegram = Telegram(envVars['BOT_TOKEN']!);
   var event = Event((await telegram.getMe()).username!);
-  
+
   // TeleDart uses longpoll by default if no update fetcher is specified.
   var teledart = TeleDart(telegram, event);
 

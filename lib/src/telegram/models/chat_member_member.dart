@@ -17,11 +17,10 @@
 part of '../model.dart';
 
 /// Represents a [chat member] that has no additional privileges or restrictions.
-/// 
+///
 /// https://core.telegram.org/bots/api#chatmembermember
-/// 
+///
 /// [chat member]: https://core.telegram.org/bots/api#chatmember
-
 
 @JsonSerializable()
 class ChatMemberMember implements ChatMember {

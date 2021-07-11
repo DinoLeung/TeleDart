@@ -18,9 +18,9 @@ part of '../model.dart';
 
 /// Represents the default [scope] of bot commands.
 /// Default commands are used if no commands with a [narrower scope] are specified for the user.
-/// 
+///
 /// https://core.telegram.org/bots/api#botcommandscopedefault
-/// 
+///
 /// [scope]: https://core.telegram.org/bots/api#botcommandscope
 /// [narrower scope]: https://core.telegram.org/bots/api#determining-list-of-commands
 @JsonSerializable()
