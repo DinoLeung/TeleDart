@@ -1,5 +1,5 @@
 import 'dart:io' show Platform;
-// import 'dart:io' as io;
+import 'dart:io' as io;
 
 import 'package:teledart/teledart.dart';
 import 'package:teledart/telegram.dart';
@@ -15,14 +15,14 @@ Future<void> main() async {
   var teledart = TeleDart(telegram, event);
 
   // In case you decided to use webhook.
-  // var webhook = await Webhook.createHttpsWebhok(
-  //     telegram,
-  //     envVars['HOST_URL']!,
-  //     envVars['BOT_TOKEN']!,
-  //     io.File(envVars['CERT_PATH']!),
-  //     io.File(envVars['KEY_PATH']!),
-  //     port: int.parse(envVars['BOT_PORT']!));
-  // var teledart = TeleDart(telegram, event, fetcher: webhook);
+  var webhook = await Webhook.createHttpsWebhok(
+      telegram,
+      envVars['HOST_URL']!,
+      envVars['BOT_TOKEN']!,
+      io.File(envVars['CERT_PATH']!),
+      io.File(envVars['KEY_PATH']!),
+      port: int.parse(envVars['BOT_PORT']!));
+  teledart = TeleDart(telegram, event, fetcher: webhook);
 
   teledart.start();
 

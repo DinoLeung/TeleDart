@@ -1,4 +1,4 @@
-/**
+/*
  * TeleDart - Telegram Bot API for Dart
  * Copyright (C) 2019  Dino PH Leung
  *
@@ -16,7 +16,14 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-/// East to use framework building Telegram bots
+/// Easy to use framework for building Telegram bots
+///
+/// This is the main library that is used for creating Telegram
+/// bots. In most cases, you only need to use the [TeleDart]
+/// class, since it's basically a wrapper around the other classes.
+/// The other classes should only be manually used if you want to override
+/// their default constructors (For example, change [LongPolling] settings
+/// or use a [Webhook] instead of long polling).
 library teledart;
 
 export 'src/teledart/teledart.dart';

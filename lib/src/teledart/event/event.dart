@@ -56,6 +56,8 @@ class Event {
         _chatMemberStreamController = StreamController.broadcast(sync: sync);
 
   /// Listens to message events
+  ///
+  /// For the documentation, check [TeleDart.onMessage].
   Stream<Message> onMessage({String? entityType, dynamic keyword}) =>
       _messageStreamController.stream.where((message) {
         if (keyword == null) {
