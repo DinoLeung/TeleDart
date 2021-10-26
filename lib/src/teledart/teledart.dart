@@ -744,7 +744,7 @@ class TeleDart {
   /// Short-cut to answer an inline query
   ///
   /// A wrapper around [Telegram.answerInlineQuery].
-  /// On success, returns [true].
+  /// On success, returns true.
   ///
   /// Apart from a [model.InlineQuery] to answer and a [List<InlineQueryResult>]
   /// of results, it can also take some options that control the inline dialog
@@ -769,7 +769,7 @@ class TeleDart {
   /// Short-cut to answer a callback query
   ///
   /// A wrapper around [Telegram.answerCallbackQuery].
-  /// On success, returns [true].
+  /// On success, returns true.
   ///
   /// Apart from a [model.CallbackQuery] to answer, it can also
   /// take some options that control the callback query.
@@ -784,7 +784,7 @@ class TeleDart {
   /// Short-cut to answer a shipping query
   ///
   /// A wrapper around [Telegram.answerShippingQuery].
-  /// On success, returns [true].
+  /// On success, returns true.
   ///
   /// Apart from a [model.ShippingQuery] to answer and a [bool] that indicates
   /// if the shipping is possible, it can also take some options that
@@ -800,11 +800,11 @@ class TeleDart {
   /// Short-cut to answer a pre-checkout query
   ///
   /// A wrapper around [Telegram.answerPreCheckoutQuery].
-  /// On success, returns [true].
+  /// On success, returns true.
   ///
   /// It can take a [model.PreCheckoutQuery] to answer and a [bool] that indicates
   /// if the pre-checkout is possible, and an [error_message] that
-  /// is shown to user if [ok] is [false] (You don't have to specify it if [ok] is [true]).
+  /// is shown to user if [ok] is false (You don't have to specify it if [ok] is true).
   ///
   /// **Check [Telegram API documentation](https://core.telegram.org/bots/api#answerprecheckoutquery)
   /// for more information about those options.**
