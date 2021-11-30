@@ -1,23 +1,35 @@
-/// TeleDart - Telegram Bot API for Dart
-/// Copyright (C) 2020  Dino PH Leung
-///
-/// This program is free software: you can redistribute it and/or modify
-/// it under the terms of the GNU General Public License as published by
-/// the Free Software Foundation, either version 3 of the License, or
-/// (at your option) any later version.
-///
-/// This program is distributed in the hope that it will be useful,
-/// but WITHOUT ANY WARRANTY; without even the implied warranty of
-/// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-/// GNU General Public License for more details.
-///
-/// You should have received a copy of the GNU General Public License
-/// along with this program.  If not, see <https://www.gnu.org/licenses/>.
+/*
+ * TeleDart - Telegram Bot API for Dart
+ * Copyright (C) 2020  Dino PH Leung
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
 import 'dart:async';
 
 import '../../../teledart.dart';
 import '../../telegram/model.dart';
 
+/// A recieved message.
+///
+/// It is the object which gets returned by listeners such as
+/// [TeleDart.onMessage].
+///
+/// This class combines [model.Message] and [TeleDart]
+/// to add the reply methods (like [reply] or [replyPhoto]),
+/// which are shortcuts that let you automatically reply to
+/// recieved messages.
 class TeleDartMessage extends Message {
   final TeleDart _teledart;
 
@@ -83,7 +95,17 @@ class TeleDartMessage extends Message {
           reply_markup: message.reply_markup,
         );
 
-  /// Short-cut to reply with a text message
+  /// Replies to the recieved message with text
+  ///
+  /// A wrapper around [TeleDart.replyMessage].
+  /// On success, returns the sent [model.Message].
+  ///
+  /// Apart from a [String] to reply with, it can
+  /// also take some options that control the message
+  /// appearance and behavior.
+  ///
+  /// **Check [Telegram API documentation](https://core.telegram.org/bots/api#sendmessage)
+  /// for more information about those options.**
   Future<Message> reply(
     String text, {
     bool withQuote = false,
@@ -103,7 +125,17 @@ class TeleDartMessage extends Message {
           allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
-  /// Short-cut to reply with a photo message
+  /// Replies to the recieved message with an image
+  ///
+  /// A wrapper around [TeleDart.replyPhoto].
+  /// On success, returns the sent [model.Message].
+  ///
+  /// Apart from a [photo] to reply with, it can
+  /// also take some options that control the message
+  /// appearance and behavior.
+  ///
+  /// **Check [Telegram API documentation](https://core.telegram.org/bots/api#sendphoto)
+  /// for more information about those options.**
   Future<Message> replyPhoto(
     dynamic photo, {
     bool withQuote = false,
@@ -123,7 +155,17 @@ class TeleDartMessage extends Message {
           allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
-  /// Short-cut to reply with a audio message
+  /// Replies to the recieved message with an audio
+  ///
+  /// A wrapper around [TeleDart.replyAudio].
+  /// On success, returns the sent [model.Message].
+  ///
+  /// Apart from an [audio] to reply with, it can
+  /// also take some options that control the message
+  /// appearance and behavior.
+  ///
+  /// **Check [Telegram API documentation](https://core.telegram.org/bots/api#sendaudio)
+  /// for more information about those options.**
   Future<Message> replyAudio(
     dynamic audio, {
     bool withQuote = false,
@@ -151,7 +193,17 @@ class TeleDartMessage extends Message {
           allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
-  /// Short-cut to reply with a document message
+  /// Replies to the recieved message with a document
+  ///
+  /// A wrapper around [TeleDart.replyDocument].
+  /// On success, returns the sent [model.Message].
+  ///
+  /// Apart from a [document] to reply with, it can
+  /// also take some options that control the message
+  /// appearance and behavior.
+  ///
+  /// **Check [Telegram API documentation](https://core.telegram.org/bots/api#senddocument)
+  /// for more information about those options.**
   Future<Message> replyDocument(
     dynamic document, {
     bool withQuote = false,
@@ -173,7 +225,17 @@ class TeleDartMessage extends Message {
           allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
-  /// Short-cut to reply with a video message
+  /// Replies to the recieved message with a video
+  ///
+  /// A wrapper around [TeleDart.replyVideo].
+  /// On success, returns the sent [model.Message].
+  ///
+  /// Apart from a [video] to reply with, it can
+  /// also take some options that control the message
+  /// appearance and behavior.
+  ///
+  /// **Check [Telegram API documentation](https://core.telegram.org/bots/api#sendvideo)
+  /// for more information about those options.**
   Future<Message> replyVideo(
     dynamic video, {
     bool withQuote = false,
@@ -203,7 +265,17 @@ class TeleDartMessage extends Message {
           allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
-  /// Short-cut to reply with a animation message
+  /// Replies to the recieved message with an animation (GIF or H.264/MPEG-4 AVC video without sound)
+  ///
+  /// A wrapper around [TeleDart.replyAnimation].
+  /// On success, returns the sent [model.Message].
+  ///
+  /// Apart from an [animation] to reply with, it can
+  /// also take some options that control the message
+  /// appearance and behavior.
+  ///
+  /// **Check [Telegram API documentation](https://core.telegram.org/bots/api#sendanimation)
+  /// for more information about those options.**
   Future<Message> replyAnimation(
     dynamic animation, {
     bool withQuote = false,
@@ -231,7 +303,17 @@ class TeleDartMessage extends Message {
           allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
-  /// Short-cut to reply with a voice message
+  /// Replies to the recieved message with a voice message
+  ///
+  /// A wrapper around [TeleDart.replyVoice].
+  /// On success, returns the sent [model.Message].
+  ///
+  /// Apart from a [voice] to reply with, it can
+  /// also take some options that control the message
+  /// appearance and behavior.
+  ///
+  /// **Check [Telegram API documentation](https://core.telegram.org/bots/api#sendvoice)
+  /// for more information about those options.**
   Future<Message> replyVoice(
     dynamic voice, {
     bool withQuote = false,
@@ -251,7 +333,17 @@ class TeleDartMessage extends Message {
           allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
-  /// Short-cut to reply with a video note message
+  /// Replies to the recieved message with a video note
+  ///
+  /// A wrapper around [TeleDart.replyVideoNote].
+  /// On success, returns the sent [model.Message].
+  ///
+  /// Apart from a [video_note] to reply with, it can
+  /// also take some options that control the message
+  /// appearance and behavior.
+  ///
+  /// **Check [Telegram API documentation](https://core.telegram.org/bots/api#sendvideonote)
+  /// for more information about those options.**
   Future<Message> replyVideoNote(
     dynamic video_note, {
     bool withQuote = false,
@@ -271,7 +363,17 @@ class TeleDartMessage extends Message {
           allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
-  /// Short-cut to reply with a media group message
+  /// Replies to the recieved message with a media group message (multiple media files)
+  ///
+  /// A wrapper around [TeleDart.replyMediaGroup].
+  /// On success, returns the sent [model.Message].
+  ///
+  /// Apart from a [List<InputMedia>] to reply with, it can
+  /// also take some options that control the message
+  /// appearance and behavior.
+  ///
+  /// **Check [Telegram API documentation](https://core.telegram.org/bots/api#sendmediagroup)
+  /// for more information about those options.**
   Future<List<Message>> replyMediaGroup(
     List<InputMedia> media, {
     bool withQuote = false,
@@ -283,7 +385,17 @@ class TeleDartMessage extends Message {
           disable_notification: disable_notification,
           allow_sending_without_reply: allow_sending_without_reply);
 
-  /// Short-cut to reply with a location message
+  /// Replies to the recieved message with a location
+  ///
+  /// A wrapper around [TeleDart.replyLocation].
+  /// On success, returns the sent [model.Message].
+  ///
+  /// Apart from a [latitude] and a [longitude], it can
+  /// also take some options that control the message
+  /// appearance and behavior.
+  ///
+  /// **Check [Telegram API documentation](https://core.telegram.org/bots/api#sendlocation)
+  /// for more information about those options.**
   Future<Message> replyLocation(
     double latitude,
     double longitude, {
@@ -306,7 +418,17 @@ class TeleDartMessage extends Message {
           allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
-  /// Short-cut to reply with a venue message
+  /// Replies to the recieved message with a venue message
+  ///
+  /// A wrapper around [TeleDart.replyVenue].
+  /// On success, returns the sent [model.Message].
+  ///
+  /// Apart from a [latitude] and a [longitude] a [title] and an [address],
+  /// it can also take some options that control the message
+  /// appearance and behavior.
+  ///
+  /// **Check [Telegram API documentation](https://core.telegram.org/bots/api#sendvenue)
+  /// for more information about those options.**
   Future<Message> replyVenue(
     double latitude,
     double longitude,
@@ -331,7 +453,17 @@ class TeleDartMessage extends Message {
           allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
-  /// Short-cut to reply with a contact message
+  /// Replies to the recieved message with a location
+  ///
+  /// A wrapper around [TeleDart.replyContact].
+  /// On success, returns the sent [model.Message].
+  ///
+  /// Apart from a [phone_number] and a [first_name], it can
+  /// also take some options that control the message
+  /// appearance and behavior.
+  ///
+  /// **Check [Telegram API documentation](https://core.telegram.org/bots/api#sendcontact)
+  /// for more information about those options.**
   Future<Message> replyContact(
     String phone_number,
     String first_name, {
@@ -350,7 +482,17 @@ class TeleDartMessage extends Message {
           allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
-  /// Short-cut to reply with a poll message
+  /// Replies to the recieved message with a poll
+  ///
+  /// A wrapper around [TeleDart.replyPoll].
+  /// On success, returns the sent [model.Message].
+  ///
+  /// Apart from a [question] and a [List<String>] of [options], it can
+  /// also take some options that control the message
+  /// appearance and behavior.
+  ///
+  /// **Check [Telegram API documentation](https://core.telegram.org/bots/api#sendpoll)
+  /// for more information about those options.**
   Future<Message> replyPoll(String question, List<String> options,
           {bool withQuote = false,
           bool? is_anonymous,
@@ -382,7 +524,16 @@ class TeleDartMessage extends Message {
           allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
-  /// Short-cut to reply with a dice message
+  /// Replies to the recieved message with a dice message
+  ///
+  /// A wrapper around [TeleDart.replyDice].
+  /// On success, returns the sent [model.Message].
+  ///
+  /// It can take some options that control the message
+  /// appearance and behavior.
+  ///
+  /// **Check [Telegram API documentation](https://core.telegram.org/bots/api#senddice)
+  /// for more information about those options.**
   Future<Message> replyDice(
           {bool withQuote = false,
           String emoji = Dice.DICE,
@@ -396,7 +547,17 @@ class TeleDartMessage extends Message {
           allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
-  /// Short-cut to reply with a sticker
+  /// Replies to the recieved message with an image
+  ///
+  /// A wrapper around [TeleDart.replySticker].
+  /// On success, returns the sent [model.Message].
+  ///
+  /// Apart from a [sticker] to reply with, it can
+  /// also take some options that control the message
+  /// appearance and behavior.
+  ///
+  /// **Check [Telegram API documentation](https://core.telegram.org/bots/api#sendsticker)
+  /// for more information about those options.**
   Future<Message> replySticker(dynamic sticker,
           {bool withQuote = false,
           bool? disable_notification,

@@ -651,7 +651,7 @@ class TeleDart {
           allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
-  /// Replies to a given message with a contact
+  /// Replies to a given message with a poll
   ///
   /// A wrapper around [Telegram.sendPoll].
   /// On success, returns the sent [model.Message].
