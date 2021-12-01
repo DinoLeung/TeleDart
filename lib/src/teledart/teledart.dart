@@ -800,7 +800,7 @@ class TeleDart {
       telegram.answerShippingQuery(shipping_query.id, ok,
           shipping_options: shipping_options, error_message: error_message);
 
-  /// Short-cut to answer a [pre-checkout query]
+  /// Short-cut to answer a pre-checkout query
   ///
   /// A wrapper around [Telegram.answerPreCheckoutQuery].
   /// On success, returns true.
