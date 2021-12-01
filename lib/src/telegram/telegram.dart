@@ -1,18 +1,20 @@
-/// TeleDart - Telegram Bot API for Dart
-/// Copyright (C) 2019  Dino PH Leung
-///
-/// This program is free software: you can redistribute it and/or modify
-/// it under the terms of the GNU General Public License as published by
-/// the Free Software Foundation, either version 3 of the License, or
-/// (at your option) any later version.
-///
-/// This program is distributed in the hope that it will be useful,
-/// but WITHOUT ANY WARRANTY; without even the implied warranty of
-/// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-/// GNU General Public License for more details.
-///
-/// You should have received a copy of the GNU General Public License
-/// along with this program.  If not, see <https://www.gnu.org/licenses/>.
+/*
+ * TeleDart - Telegram Bot API for Dart
+ * Copyright (C) 2019  Dino PH Leung
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
 
 import 'dart:async';
 import 'dart:convert';
@@ -23,6 +25,10 @@ import 'package:http/http.dart' show MultipartFile;
 import 'model.dart';
 import '../util/http_client.dart';
 
+/// A class for communicating with Telegram API
+///
+/// You probably want to use its methods through [TeleDart], rather
+/// than accessing them directly.
 class Telegram {
   final String _baseUrl = 'api.telegram.org';
   final String _token;
@@ -33,7 +39,8 @@ class Telegram {
   Uri _apiUri(String unencodedPath, [Map<String, dynamic>? queryParameters]) =>
       Uri.https(_baseUrl, 'bot$_token/$unencodedPath', queryParameters);
 
-  /// Use this method to receive incoming updates using long polling ([wiki]).
+  /// Use this method to receive incoming updates using long polling ([wiki])
+  ///
   /// An Array of [Update] objects is returned.
   ///
   /// **Notes**
@@ -62,7 +69,8 @@ class Telegram {
         .toList();
   }
 
-  /// Use this method to specify a url and receive incoming updates via an outgoing webhook.
+  /// Use this method to specify a url and receive incoming updates via an outgoing webhook
+  ///
   /// Whenever there is an update for the bot, we will send an HTTPS POST request to the
   /// specified url, containing a JSON-serialized [Update].
   /// In case of an unsuccessful request, we will give up after a reasonable amount of attempts.
@@ -111,7 +119,8 @@ class Telegram {
     }
   }
 
-  /// Use this method to remove webhook integration if you decide to switch back to [getUpdates].
+  /// Use this method to remove webhook integration if you decide to switch back to [getUpdates]
+  ///
   /// Returns *True* on success. Requires no parameters.
   ///
   /// https://core.telegram.org/bots/api#deletewebhook
@@ -123,7 +132,9 @@ class Telegram {
     return await HttpClient.httpPost(requestUrl, body: body);
   }
 
-  /// Use this method to get current webhook status. Requires no parameters.
+  /// Use this method to get current webhook status.
+  /// Requires no parameters.
+  ///
   /// On success, returns a [WebhookInfo] object.
   /// If the bot is using [getUpdates], will return an object with the *url* field empty.
   ///
@@ -134,7 +145,8 @@ class Telegram {
   Future<WebhookInfo> getWebhookInfo() async =>
       WebhookInfo.fromJson(await HttpClient.httpGet(_apiUri('getWebhookInfo')));
 
-  /// A simple method for testing your bot's auth token. Requires no parameters.
+  /// A simple method for testing your bot's auth token.
+  /// Requires no parameters.
   /// Returns basic information about the bot in form of a [User] object.
   ///
   /// https://core.telegram.org/bots/api#getme
@@ -143,7 +155,8 @@ class Telegram {
   Future<User> getMe() async =>
       User.fromJson(await HttpClient.httpGet(_apiUri('getMe')));
 
-  /// Use this method to log out from the cloud Bot API server before launching the bot locally.
+  /// Use this method to log out from the cloud Bot API server before launching the bot locally
+  ///
   /// You must log out the bot before running it locally,
   /// otherwise there is no guarantee that the bot will receive updates.
   /// After a successful call, you can immediately log in on a local server,
@@ -153,7 +166,8 @@ class Telegram {
   /// https://core.telegram.org/bots/api#logout
   Future<bool> logOut() async => await HttpClient.httpGet(_apiUri('logOut'));
 
-  /// Use this method to close the bot instance before moving it from one local server to another.
+  /// Use this method to close the bot instance before moving it from one local server to another
+  ///
   /// You need to delete the webhook before calling this method to ensure that the bot isn't
   /// launched again after server restart.
   /// The method will return error 429 in the first 10 minutes after the bot is launched.
@@ -218,7 +232,8 @@ class Telegram {
     return Message.fromJson(await HttpClient.httpPost(requestUrl, body: body));
   }
 
-  /// se this method to copy messages of any kind.
+  /// Use this method to copy messages of any kind
+  ///
   /// The method is analogous to the method [forwardMessage],
   /// but the copied message doesn't have a link to the original message.
   /// Returns the [MessageId] of the sent message on success.
@@ -261,7 +276,9 @@ class Telegram {
         await HttpClient.httpPost(requestUrl, body: body));
   }
 
-  /// Use this method to send photos. On success, the sent [Message] is returned.
+  /// Use this method to send photos
+  ///
+  /// On success, the sent [Message] is returned.
   ///
   /// https://core.telegram.org/bots/api#sendphoto
   ///
@@ -309,8 +326,9 @@ class Telegram {
             body: body));
   }
 
-  /// Use this method to send audio files,
-  /// if you want Telegram clients to display them in the music player.
+  /// Use this method to send audio files
+  ///
+  /// If you want Telegram clients to display them in the music player.
   /// Your audio must be in the .mp3 format. On success, the sent [Message] is returned.
   /// Bots can currently send audio files of up to 50 MB in size,
   /// this limit may be changed in the future.
@@ -382,7 +400,10 @@ class Telegram {
             body: body));
   }
 
-  /// Use this method to send general files. On success, the sent [Message] is returned.
+  /// Use this method to send general files
+  ///
+  /// On success, the sent [Message] is returned.
+  ///
   /// Bots can currently send files of any type of up to 50 MB in size,
   /// this limit may be changed in the future.
   ///
@@ -446,7 +467,8 @@ class Telegram {
             body: body));
   }
 
-  /// Use this method to send video files,
+  /// Use this method to send video files
+  ///
   /// Telegram clients support mp4 videos (other formats may be sent as [Document]).
   /// On success, the sent [Message] is returned.
   /// Bots can currently send video files of up to 50 MB in size,
@@ -519,7 +541,8 @@ class Telegram {
             body: body));
   }
 
-  /// Use this method to send animation files (GIF or H.264/MPEG-4 AVC video without sound).
+  /// Use this method to send animation files (GIF or H.264/MPEG-4 AVC video without sound)
+  ///
   /// On success, the sent [Message] is returned.
   /// Bots can currently send animation files of up to 50 MB in size,
   /// this limit may be changed in the future.
@@ -588,8 +611,9 @@ class Telegram {
             body: body));
   }
 
-  /// Use this method to send audio files,
-  /// if you want Telegram clients to display the file as a playable voice message.
+  /// Use this method to send audio files
+  ///
+  /// If you want Telegram clients to display the file as a playable voice message.
   /// For this to work, your audio must be in an .ogg file encoded with OPUS
   /// (other formats may be sent as [Audio] or [Document]).
   /// On success, the sent [Message] is returned.
@@ -646,8 +670,11 @@ class Telegram {
             body: body));
   }
 
+  /// Use this method to send video [messages]
+  ///
+  /// On success, the sent Message is returned.
+  ///
   /// As of [v.4.0], Telegram clients support rounded square mp4 videos of up to 1 minute long.
-  /// Use this method to send video [messages]. On success, the sent Message is returned.
   ///
   /// https://core.telegram.org/bots/api#sendvideonote
   ///
@@ -709,7 +736,8 @@ class Telegram {
   // ! media can only take file_id or url
   // * need to implement POST multipart/form-data uploading files
   // * or even mixed input
-  /// Use this method to send a group of photos or videos as an album.
+  /// Use this method to send a group of photos or videos as an album
+  ///
   /// On success, an array of the sent [Messages] is returned.
   ///
   /// https://core.telegram.org/bots/api#sendmediagroup
@@ -736,7 +764,9 @@ class Telegram {
         .toList();
   }
 
-  /// Use this method to send point on the map. On success, the sent [Message] is returned.
+  /// Use this method to send point on the map
+  ///
+  /// On success, the sent [Message] is returned.
   ///
   /// https://core.telegram.org/bots/api#sendlocation
   ///
@@ -774,6 +804,7 @@ class Telegram {
 
   /// Use this method to edit live location messages sent by the bot or via the bot
   /// (for [inline bots]).
+  ///
   /// A location can be edited until its *live_period* expires or editing is explicitly disabled by a
   /// call to [stopMessageLiveLocation].
   /// On success, if the edited message was sent by the bot,
@@ -817,6 +848,7 @@ class Telegram {
 
   /// Use this method to stop updating a live location message sent by the bot or via the bot
   /// (for [inline bots]) before *live_period* expires.
+  ///
   /// On success, if the message was sent by the bot, the sent [Message] is returned,
   /// otherwise *True* is returned.
   ///
@@ -847,7 +879,9 @@ class Telegram {
     return Message.fromJson(await HttpClient.httpPost(requestUrl, body: body));
   }
 
-  /// Use this method to send information about a venue. On success, the sent [Message] is returned.
+  /// Use this method to send information about a venue
+  ///
+  /// On success, the sent [Message] is returned.
   ///
   /// https://core.telegram.org/bots/api#sendvenue
   ///
@@ -885,7 +919,9 @@ class Telegram {
     return Message.fromJson(await HttpClient.httpPost(requestUrl, body: body));
   }
 
-  /// Use this method to send phone contacts. On success, the sent [Message] is returned.
+  /// Use this method to send phone contacts
+  ///
+  /// On success, the sent [Message] is returned.
   ///
   /// https://core.telegram.org/bots/api#sendcontact
   ///
@@ -917,7 +953,10 @@ class Telegram {
     return Message.fromJson(await HttpClient.httpPost(requestUrl, body: body));
   }
 
-  /// Use this method to send a native poll. A native poll can't be sent to a private chat.
+  /// Use this method to send a native poll
+  ///
+  /// A native poll can't be sent to a private chat.
+  ///
   /// On success, the sent [Message] is returned.
   ///
   /// https://core.telegram.org/bots/api#sendpoll
@@ -968,8 +1007,11 @@ class Telegram {
     return Message.fromJson(await HttpClient.httpPost(requestUrl, body: body));
   }
 
-  /// Use this method to send an animated emoji that will display a random value.
-  /// On success, the sent Message is returned.
+  /// Use this method to send an animated emoji that will display a random value
+  ///
+  /// On success, the sent [Message] is returned.
+  ///
+  /// [Message]: https://core.telegram.org/bots/api#message
   Future<Message> sendDice(dynamic chat_id,
       {String emoji = Dice.DICE,
       bool? disable_notification,
@@ -992,7 +1034,8 @@ class Telegram {
     return Message.fromJson(await HttpClient.httpPost(requestUrl, body: body));
   }
 
-  /// Use this method when you need to tell the user that something is happening on the bot's side.
+  /// Use this method when you need to tell the user that something is happening on the bot's side
+  ///
   /// The status is set for 5 seconds or less
   /// (when a message arrives from your bot, Telegram clients clear its typing status).
   /// Returns *True* on success.
@@ -1019,7 +1062,9 @@ class Telegram {
     return await HttpClient.httpPost(requestUrl, body: body);
   }
 
-  /// Use this method to get a list of profile pictures for a user. Returns a [UserProfilePhotos] object.
+  /// Use this method to get a list of profile pictures for a user
+  ///
+  /// Returns a [UserProfilePhotos] object.
   ///
   /// https://core.telegram.org/bots/api#getuserprofilephotos
   ///
@@ -1036,7 +1081,8 @@ class Telegram {
         await HttpClient.httpPost(requestUrl, body: body));
   }
 
-  /// Use this method to get basic info about a file and prepare it for downloading.
+  /// Use this method to get basic info about a file and prepare it for downloading
+  ///
   /// For the moment, bots can download files of up to 20MB in size. On success,
   /// a [File] object is returned. The file can then be downloaded via the link
   /// `https://api.telegram.org/file/bot<token>/<file_path>`,
@@ -1057,7 +1103,8 @@ class Telegram {
     return File.fromJson(await HttpClient.httpPost(requestUrl, body: body));
   }
 
-  /// Use this method to ban a user in a group, a supergroup or a channel.
+  /// Use this method to ban a user in a group, a supergroup or a channel
+  ///
   /// In the case of supergroups and channels,
   /// the user will not be able to return to the group on their own using invite links, etc.,
   /// unless [unbanned] first.
@@ -1083,7 +1130,8 @@ class Telegram {
     return await HttpClient.httpPost(requestUrl, body: body);
   }
 
-  /// Use this method to unban a previously kicked user in a supergroup or channel.
+  /// Use this method to unban a previously kicked user in a supergroup or channel
+  ///
   /// The user will **not** return to the group or channel automatically,
   /// but will be able to join via link, etc. The bot must be an administrator for this to work.
   /// Returns *True* on success.
@@ -1104,7 +1152,8 @@ class Telegram {
     return await HttpClient.httpPost(requestUrl, body: body);
   }
 
-  /// Use this method to restrict a user in a supergroup.
+  /// Use this method to restrict a user in a supergroup
+  ///
   /// The bot must be an administrator in the supergroup for this to work and must have the
   /// appropriate admin rights.
   /// Pass *True* for all boolean parameters to lift restrictions from a user.
@@ -1130,7 +1179,8 @@ class Telegram {
     return await HttpClient.httpPost(requestUrl, body: body);
   }
 
-  /// Use this method to promote or demote a user in a supergroup or a channel.
+  /// Use this method to promote or demote a user in a supergroup or a channel
+  ///
   /// The bot must be an administrator in the chat for this to work and must have the appropriate
   /// admin rights.
   /// Pass *False* for all boolean parameters to demote a user. Returns *True* on success.
@@ -1186,8 +1236,11 @@ class Telegram {
     return await HttpClient.httpPost(requestUrl, body: body);
   }
 
-  /// Use this method to set default chat permissions for all members.
-  /// The bot must be an administrator in the group or a supergroup for this to work and must have the can_restrict_members admin rights.
+  /// Use this method to set default chat permissions for all members
+  ///
+  /// The bot must be an administrator in the group or a supergroup for this to work
+  /// and must have the can_restrict_members admin rights.
+  ///
   /// Returns *True* on success.
   Future<bool> setChatPermissions(
       dynamic chat_id, ChatPermissions permissions) async {
@@ -1203,10 +1256,13 @@ class Telegram {
     return await HttpClient.httpPost(requestUrl, body: body);
   }
 
-  /// Use this method to generate a invite link for a chat;
-  /// any previously generated link is revoked.
+  /// Use this method to generate a invite link for a chat
+  ///
+  /// Any previously generated link is revoked.
   /// The bot must be an administrator in the chat for this to work and must have the appropriate
-  /// admin rights. Returns the invite link as *String* on success.
+  /// admin rights.
+  ///
+  /// Returns the invite link as [String] on success.
   ///
   /// https://core.telegram.org/bots/api#exportchatinvitelink
   Future<String> exportChatInviteLink(dynamic chat_id) async {
@@ -1219,9 +1275,11 @@ class Telegram {
     return await HttpClient.httpPost(requestUrl, body: body);
   }
 
-  /// Use this method to create an additional invite link for a chat.
+  /// Use this method to create an additional invite link for a chat
+  ///
   /// The bot must be an administrator in the chat for this to work and must have the appropriate admin rights.
   /// The link can be revoked using the method [revokeChatInviteLink].
+  ///
   /// Returns the new invite link as [ChatInviteLink] object.
   ///
   /// https://core.telegram.org/bots/api#createchatinvitelink
@@ -1244,8 +1302,10 @@ class Telegram {
         await HttpClient.httpPost(requestUrl, body: body));
   }
 
-  /// Use this method to edit a non-primary invite link created by the bot.
+  /// Use this method to edit a non-primary invite link created by the bot
+  ///
   /// The bot must be an administrator in the chat for this to work and must have the appropriate admin rights.
+  ///
   /// Returns the edited invite link as a [ChatInviteLink] object.
   ///
   /// https://core.telegram.org/bots/api#editchatinvitelink
@@ -1268,9 +1328,11 @@ class Telegram {
         await HttpClient.httpPost(requestUrl, body: body));
   }
 
-  /// Use this method to revoke an invite link created by the bot. If the primary link is revoked,
-  /// a new link is automatically generated.
+  /// Use this method to revoke an invite link created by the bot
+  ///
+  /// If the primary link is revoked, a new link is automatically generated.
   /// The bot must be an administrator in the chat for this to work and must have the appropriate admin rights.
+  ///
   /// Returns the revoked invite link as [ChatInviteLink] object.
   ///
   /// https://core.telegram.org/bots/api#revokechatinvitelink
@@ -1291,10 +1353,13 @@ class Telegram {
         await HttpClient.httpPost(requestUrl, body: body));
   }
 
-  /// Use this method to set a profile photo for the chat.
+  /// Use this method to set a profile photo for the chat
+  ///
   /// Photos can't be changed for private chats.
   /// The bot must be an administrator in the chat for this to work and must have the appropriate
-  /// admin rights. Returns *True* on success.
+  /// admin rights.
+  ///
+  /// Returns *True* on success.
   ///
   /// Note: In regular groups (non-supergroups),
   /// this method will only work if the ‘All Members Are Admins’ setting is off in the target group.
@@ -1315,10 +1380,13 @@ class Telegram {
     return await HttpClient.httpMultipartPost(requestUrl, files, body: body);
   }
 
-  /// Use this method to delete a chat photo.
+  /// Use this method to delete a chat photo
+  ///
   /// Photos can't be changed for private chats.
   /// The bot must be an administrator in the chat for this to work and must have the appropriate
-  /// admin rights. Returns *True* on success.
+  /// admin rights.
+  ///
+  /// Returns *True* on success.
   ///
   /// Note: In regular groups (non-supergroups),
   /// this method will only work if the ‘All Members Are Admins’ setting is off in the target group.
@@ -1334,10 +1402,13 @@ class Telegram {
     return await HttpClient.httpPost(requestUrl, body: body);
   }
 
-  /// Use this method to change the title of a chat.
+  /// Use this method to change the title of a chat
+  ///
   /// Titles can't be changed for private chats.
   /// The bot must be an administrator in the chat for this to work and must have the appropriate
-  /// admin rights. Returns *True* on success.
+  /// admin rights.
+  ///
+  /// Returns *True* on success.
   ///
   /// Note: In regular groups (non-supergroups),
   /// this method will only work if the ‘All Members Are Admins’ setting is off in the target group.
@@ -1356,9 +1427,12 @@ class Telegram {
     return await HttpClient.httpPost(requestUrl, body: body);
   }
 
-  /// Use this method to change the description of a supergroup or a channel.
+  /// Use this method to change the description of a supergroup or a channel
+  ///
   /// The bot must be an administrator in the chat for this to work and must have the appropriate
-  /// admin rights. Returns *True* on success.
+  /// admin rights.
+  ///
+  /// Returns *True* on success.
   ///
   /// https://core.telegram.org/bots/api#setchatdescription
   Future<bool> setChatDescription(dynamic chat_id,
@@ -1375,10 +1449,13 @@ class Telegram {
     return await HttpClient.httpPost(requestUrl, body: body);
   }
 
-  /// Use this method to pin a message in a supergroup or a channel.
+  /// Use this method to pin a message in a supergroup or a channel
+  ///
   /// The bot must be an administrator in the chat for this to work and must have the
   /// ‘can_pin_messages’ admin right in the supergroup or ‘can_edit_messages’ admin right
-  /// in the channel. Returns *True* on success.
+  /// in the channel.
+  ///
+  /// Returns *True* on success.
   ///
   /// https://core.telegram.org/bots/api#pinchatmessage
   Future<bool> pinChatMessage(dynamic chat_id, int message_id,
@@ -1396,10 +1473,13 @@ class Telegram {
     return await HttpClient.httpPost(requestUrl, body: body);
   }
 
-  /// Use this method to remove a message from the list of pinned messages in a chat.
+  /// Use this method to remove a message from the list of pinned messages in a chat
+  ///
   /// If the chat is not a private chat, the bot must be an administrator in the chat for
   /// this to work and must have the 'can_pin_messages' admin right in a supergroup or
-  /// 'can_edit_messages' admin right in a channel. Returns *True* on success.
+  /// 'can_edit_messages' admin right in a channel.
+  ///
+  /// Returns *True* on success.
   ///
   /// If `message_id` not specified, the most recent pinned message (by sending date) will be unpinned.
   ///
@@ -1414,10 +1494,13 @@ class Telegram {
     return await HttpClient.httpPost(requestUrl, body: body);
   }
 
-  /// Use this method to clear the list of pinned messages in a chat.
+  /// Use this method to clear the list of pinned messages in a chat
+  ///
   /// If the chat is not a private chat, the bot must be an administrator in the chat for
   /// this to work and must have the 'can_pin_messages' admin right in a supergroup or
-  /// 'can_edit_messages' admin right in a channel. Returns *True* on success.
+  /// 'can_edit_messages' admin right in a channel.
+  ///
+  /// Returns *True* on success.
   ///
   /// https://core.telegram.org/bots/api#unpinallchatmessages
   Future<bool> unpinAllChatMessages(dynamic chat_id) async {
@@ -1430,7 +1513,9 @@ class Telegram {
     return await HttpClient.httpPost(requestUrl, body: body);
   }
 
-  /// Use this method for your bot to leave a group, supergroup or channel. Returns *True* on success.
+  /// Use this method for your bot to leave a group, supergroup or channel
+  ///
+  /// Returns *True* on success.
   ///
   /// https://core.telegram.org/bots/api#leavechat
   Future<bool> leaveChat(dynamic chat_id) async {
@@ -1446,6 +1531,7 @@ class Telegram {
   /// Use this method to get up to date information about the chat
   /// (current name of the user for one-on-one conversations,
   /// current username of a user, group or channel, etc.).
+  ///
   /// Returns a [Chat] object on success.
   ///
   /// https://core.telegram.org/bots/api#getchat
@@ -1461,7 +1547,8 @@ class Telegram {
     return Chat.fromJson(await HttpClient.httpPost(requestUrl, body: body));
   }
 
-  /// Use this method to get a list of administrators in a chat.
+  /// Use this method to get a list of administrators in a chat
+  ///
   /// On success, returns an Array of [ChatMember] objects that contains information about all chat
   /// administrators except other bots.
   /// If the chat is a group or a supergroup and no administrators were appointed,
@@ -1482,7 +1569,9 @@ class Telegram {
         .toList();
   }
 
-  /// Use this method to get the number of members in a chat. Returns *Int* on success.
+  /// Use this method to get the number of members in a chat
+  ///
+  /// Returns [int] on success.
   ///
   /// https://core.telegram.org/bots/api#getchatmembercount
   Future<int> getChatMemberCount(dynamic chat_id) async {
@@ -1495,7 +1584,8 @@ class Telegram {
     return await HttpClient.httpPost(requestUrl, body: body);
   }
 
-  /// Use this method to get information about a member of a chat.
+  /// Use this method to get information about a member of a chat
+  ///
   /// Returns a [ChatMember] object on success.
   ///
   /// https://core.telegram.org/bots/api#getchatmember
@@ -1515,11 +1605,13 @@ class Telegram {
         await HttpClient.httpPost(requestUrl, body: body));
   }
 
-  /// Use this method to set a group sticker set for a supergroup.
+  /// Use this method to set a group sticker set for a supergroup
+  ///
   /// The bot must be an administrator in the chat for this to work and must have the appropriate
   /// admin rights.
   /// Use the field *can_set_sticker_set* optionally returned in [getChat] requests to check if the
   /// bot can use this method.
+  ///
   /// Returns *True* on success.
   ///
   /// https://core.telegram.org/bots/api#setchatstickerset
@@ -1539,11 +1631,13 @@ class Telegram {
     return await HttpClient.httpPost(requestUrl, body: body);
   }
 
-  /// Use this method to delete a group sticker set from a supergroup.
+  /// Use this method to delete a group sticker set from a supergroup
+  ///
   /// The bot must be an administrator in the chat for this to work and must have the appropriate
   /// admin rights.
   /// Use the field *can_set_sticker_set* optionally returned in [getChat] requests to check if the
   /// bot can use this method.
+  ///
   /// Returns *True* on success.
   ///
   /// https://core.telegram.org/bots/api#deletechatstickerset
@@ -1559,9 +1653,12 @@ class Telegram {
     return await HttpClient.httpPost(requestUrl, body: body);
   }
 
-  /// Use this method to send answers to callback queries sent from [inline keyboards].
+  /// Use this method to send answers to callback queries sent from [inline keyboards]
+  ///
   /// The answer will be displayed to the user as a notification at the top of the chat screen or as
-  /// an alert. On success, *True* is returned.
+  /// an alert.
+  ///
+  /// On success, *True* is returned.
   ///
   /// Alternatively, the user can be redirected to the specified Game URL.
   /// For this option to work, you must first create a game for your bot via [@Botfather]
@@ -1585,8 +1682,10 @@ class Telegram {
     return await HttpClient.httpPost(requestUrl, body: body);
   }
 
-  /// Use this method to change the list of the bot's commands.
+  /// Use this method to change the list of the bot's commands
+  ///
   /// See https://core.telegram.org/bots#commands for more details about bot commands.
+  ///
   /// Returns *True* on success.
   ///
   /// https://core.telegram.org/bots/api#setmycommands
@@ -1601,8 +1700,10 @@ class Telegram {
     return await HttpClient.httpPost(requestUrl, body: body);
   }
 
-  /// Use this method to delete the list of the bot's commands for the given scope and user language.
+  /// Use this method to delete the list of the bot's commands for the given scope and user language
+  ///
   /// After deletion, [higher level commands] will be shown to affected users.
+  ///
   /// Returns *True* on success.
   ///
   /// https://core.telegram.org/bots/api#deletemycommands
@@ -1618,7 +1719,8 @@ class Telegram {
     return await HttpClient.httpPost(requestUrl, body: body);
   }
 
-  /// Use this method to get the current list of the bot's commands for the given scope and user language.
+  /// Use this method to get the current list of the bot's commands for the given scope and user language
+  ///
   /// Returns Array of [BotCommand] on success.
   /// If commands aren't set, an empty list is returned.
   ///
@@ -1639,6 +1741,7 @@ class Telegram {
 
   /// Use this method to edit text and [game] messages sent by the bot or via the bot
   /// (for [inline bots]).
+  ///
   /// On success, if edited message is sent by the bot, the edited [Message] is returned,
   /// otherwise *True* is returned.
   ///
@@ -1683,8 +1786,9 @@ class Telegram {
 
   /// Use this method to edit captions of messages sent by the bot or via the bot
   /// (for [inline bots]).
+  ///
   /// On success, if edited message is sent by the bot, the edited [Message] is returned,
-  /// otherwise True is returned.
+  /// otherwise *True* is returned.
   ///
   /// https://core.telegram.org/bots/api#editmessagecaption
   ///
@@ -1723,11 +1827,13 @@ class Telegram {
     }
   }
 
-  /// Use this method to edit audio, document, photo, or video messages.
+  /// Use this method to edit audio, document, photo, or video messages
+  ///
   /// If a message is a part of a message album, then it can be edited only to a photo or a video.
   /// Otherwise, message type can be changed arbitrarily.
   /// When inline message is edited, file can't be uploaded.
   /// Use previously uploaded file via its file_id or specify a URL.
+  ///
   /// On success, if the edited message was sent by the bot, the edited [Message] is returned,
   /// otherwise *True* is returned.
   ///
@@ -1769,8 +1875,9 @@ class Telegram {
 
   /// Use this method to edit only the reply markup of messages sent by the bot or via the bot
   /// (for [inline bots]).
+  ///
   /// On success, if edited message is sent by the bot, the edited [Message] is returned,
-  /// otherwise True is returned.
+  /// otherwise *True* is returned.
   ///
   /// https://core.telegram.org/bots/api#editmessagereplymarkup
   ///
@@ -1805,7 +1912,8 @@ class Telegram {
     }
   }
 
-  /// Use this method to stop a poll which was sent by the bot.
+  /// Use this method to stop a poll which was sent by the bot
+  ///
   /// On success, the stopped [Poll] with the final results is returned.
   ///
   /// https://core.telegram.org/bots/api#stoppoll
@@ -1826,13 +1934,16 @@ class Telegram {
     return Poll.fromJson(await HttpClient.httpPost(requestUrl, body: body));
   }
 
-  /// Use this method to delete a message, including service messages, with the following limitations:
+  /// Use this method to delete a message, including service messages
+  ///
+  /// It has the following limitations:
   /// * A message can only be deleted if it was sent less than 48 hours ago.
   /// * Bots can delete outgoing messages in groups and supergroups.
   /// * Bots can delete incoming messages in private chats.
   /// * Bots granted can_post_messages permissions can delete outgoing messages in channels.
   /// * If the bot is an administrator of a group, it can delete any message there.
   /// * If the bot has can_delete_messages permission in a supergroup or a channel, it can delete any message there.
+  ///
   /// Returns *True* on success.
   ///
   /// https://core.telegram.org/bots/api#deletemessage
@@ -1849,7 +1960,9 @@ class Telegram {
     return await HttpClient.httpPost(requestUrl, body: body);
   }
 
-  /// Use this method to send .webp stickers. On success, the sent [Message] is returned.
+  /// Use this method to send .webp stickers
+  ///
+  /// On success, the sent [Message] is returned.
   ///
   /// https://core.telegram.org/bots/api#sendsticker
   ///
@@ -1890,7 +2003,9 @@ class Telegram {
     }
   }
 
-  /// Use this method to get a sticker set. On success, a [StickerSet] object is returned.
+  /// Use this method to get a sticker set
+  ///
+  /// On success, a [StickerSet] object is returned.
   ///
   /// https://core.telegram.org/bots/api#getstickerset
   ///
@@ -1903,7 +2018,8 @@ class Telegram {
   }
 
   /// Use this method to upload a .png file with a sticker for later use in
-  /// *createNewStickerSet* and *addStickerToSet* methods (can be used multiple times).
+  /// *createNewStickerSet* and *addStickerToSet* methods (can be used multiple times)
+  ///
   /// Returns the uploaded [File] on success.
   ///
   /// https://core.telegram.org/bots/api#uploadstickerfile
@@ -1922,9 +2038,11 @@ class Telegram {
         await HttpClient.httpMultipartPost(requestUrl, files, body: body));
   }
 
-  /// Use this method to create sticker set owned by a user.
+  /// Use this method to create sticker set owned by a user
+  ///
   /// The bot will be able to edit the created sticker set.
   /// You must use exactly one of the fields png_sticker or tgs_sticker.
+  ///
   /// Returns *True* on success.
   ///
   /// https://core.telegram.org/bots/api#createnewstickerset
@@ -1973,11 +2091,13 @@ class Telegram {
     }
   }
 
-  /// Use this method to add a new sticker to a set created by the bot.
+  /// Use this method to add a new sticker to a set created by the bot
+  ///
   /// You must use exactly one of the fields png_sticker or tgs_sticker.
   /// Animated stickers can be added to animated sticker sets and only to them.
   /// Animated sticker sets can have up to 50 stickers.
   /// Static sticker sets can have up to 120 stickers.
+  ///
   /// Returns *True* on success.
   ///
   /// https://core.telegram.org/bots/api#addstickertoset
@@ -2021,7 +2141,8 @@ class Telegram {
     }
   }
 
-  /// Use this method to move a sticker in a set created by the bot to a specific position.
+  /// Use this method to move a sticker in a set created by the bot to a specific position
+  ///
   /// Returns *True* on success.
   ///
   /// https://core.telegram.org/bots/api#setstickerpositioninset
@@ -2034,7 +2155,8 @@ class Telegram {
     return await HttpClient.httpPost(requestUrl, body: body);
   }
 
-  /// Use this method to delete a sticker from a set created by the bot.
+  /// Use this method to delete a sticker from a set created by the bot
+  ///
   /// Returns *True* on success.
   ///
   /// https://core.telegram.org/bots/api#deletestickerfromset
@@ -2044,8 +2166,10 @@ class Telegram {
     return await HttpClient.httpPost(requestUrl, body: body);
   }
 
-  /// Use this method to set the thumbnail of a sticker set.
+  /// Use this method to set the thumbnail of a sticker set
+  ///
   /// Animated thumbnails can be set for animated sticker sets only.
+  ///
   /// Returns *True* on success.
   Future<bool> setStickerSetThumb(String name, int user_id,
       {dynamic thumb}) async {
@@ -2072,8 +2196,10 @@ class Telegram {
     }
   }
 
-  /// Use this method to send answers to an inline query.
+  /// Use this method to send answers to an inline query
+  ///
   /// On success, *True* is returned.
+  ///
   /// No more than **50** results per query are allowed.
   ///
   /// https://core.telegram.org/bots/api#answerinlinequery
@@ -2097,7 +2223,9 @@ class Telegram {
     return await HttpClient.httpPost(requestUrl, body: body);
   }
 
-  /// Use this method to send invoices. On success, the sent [Message] is returned.
+  /// Use this method to send invoices
+  ///
+  /// On success, the sent [Message] is returned.
   ///
   /// https://core.telegram.org/bots/api#sendinvoice
   ///
@@ -2167,9 +2295,12 @@ class Telegram {
     return Message.fromJson(await HttpClient.httpPost(requestUrl, body: body));
   }
 
+  /// Use this method to reply to shipping queries.
+  ///
   /// If you sent an invoice requesting a shipping address and the parameter *is_flexible* was specified,
   /// the Bot API will send an [Update] with a *shipping_query* field to the bot.
-  /// Use this method to reply to shipping queries. On success, *True* is returned.
+  ///
+  /// On success, *True* is returned.
   ///
   /// https://core.telegram.org/bots/api#answershippingquery
   ///
@@ -2191,9 +2322,11 @@ class Telegram {
     return await HttpClient.httpPost(requestUrl, body: body);
   }
 
+  /// Use this method to respond to such pre-checkout queries
+  ///
   /// Once the user has confirmed their payment and shipping details,
   /// the Bot API sends the final confirmation in the form of an [Update] with the field *pre_checkout_query*.
-  /// Use this method to respond to such pre-checkout queries.
+  ///
   /// On success, *True* is returned.
   ///
   /// **Note:** The Bot API must receive an answer within 10 seconds after the pre-checkout query was sent.
@@ -2217,14 +2350,16 @@ class Telegram {
   }
 
   /// Informs a user that some of the Telegram Passport elements they provided contains errors.
+  ///
   /// The user will not be able to re-submit their Passport to you until the errors are fixed
   /// (the contents of the field for which you returned the error must change).
-  /// Returns *True* on success.
   ///
   /// Use this if the data submitted by the user doesn't satisfy the standards your service requires for any reason.
   /// For example, if a birthday date seems invalid, a submitted document is blurry,
   /// a scan shows evidence of tampering, etc.
   /// Supply some details in the error message to make sure the user knows how to correct the issues.
+  ///
+  /// Returns *True* on success.
   ///
   /// https://core.telegram.org/bots/api#setpassportdataerrors
   Future<bool> setPassportDataErrors(
@@ -2237,7 +2372,9 @@ class Telegram {
     return await HttpClient.httpPost(requestUrl, body: body);
   }
 
-  /// Use this method to send a game. On success, the sent [Message] is returned.
+  /// Use this method to send a game
+  ///
+  /// On success, the sent [Message] is returned.
   ///
   /// https://core.telegram.org/bots/api#sendgame
   ///
@@ -2263,7 +2400,8 @@ class Telegram {
     return Message.fromJson(await HttpClient.httpPost(requestUrl, body: body));
   }
 
-  /// Use this method to set the score of the specified user in a game.
+  /// Use this method to set the score of the specified user in a game
+  ///
   /// On success, if the message was sent by the bot, returns the edited [Message],
   /// otherwise returns *True*. Returns an error,
   /// if the score is not greater than the user's current score in the chat and force is *False*.
@@ -2298,7 +2436,8 @@ class Telegram {
     return Message.fromJson(await HttpClient.httpPost(requestUrl, body: body));
   }
 
-  /// Use this method to get data for high score tables.
+  /// Use this method to get data for high score tables
+  ///
   /// Will return the score of the specified user and several of his neighbors in a game.
   /// On success, returns an *Array* of [GameHighScore] objects.
   ///
