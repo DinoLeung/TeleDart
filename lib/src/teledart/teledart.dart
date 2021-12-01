@@ -48,6 +48,9 @@ import 'model/shipping_query.dart';
 ///
 /// Here the `message` variable will be an instance of [TeleDartMessage],
 /// since the onMessage method returns a [Stream<TeleDartMessage>].
+///
+/// In case you want to use methods of the [Telegram] class, you can do so
+/// by calling them through [TeleDart.telegram]
 class TeleDart {
   final Telegram telegram;
   final Event _event;
@@ -797,7 +800,7 @@ class TeleDart {
       telegram.answerShippingQuery(shipping_query.id, ok,
           shipping_options: shipping_options, error_message: error_message);
 
-  /// Short-cut to answer a pre-checkout query
+  /// Short-cut to answer a [pre-checkout query]
   ///
   /// A wrapper around [Telegram.answerPreCheckoutQuery].
   /// On success, returns true.
