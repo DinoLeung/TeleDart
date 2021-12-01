@@ -58,7 +58,7 @@ class TeleDart {
   TeleDart(this.telegram, this._event, {AbstractUpdateFetcher? fetcher})
       : fetcher = fetcher ?? LongPolling(telegram);
 
-  /// Starts listening to messages
+  /// Start listening to messages
   ///
   /// Uses long polling by default.
   ///
@@ -84,10 +84,10 @@ class TeleDart {
       ..onUpdate().listen((_updatesHandler));
   }
 
-  /// Stops fetching updates
+  /// Stop fetching updates
   void stop() => fetcher.stop();
 
-  /// Configures a webhook used by this bot to receive updates.
+  /// Configure a webhook used by this bot to receive updates.
   ///
   /// For a default webhook managed by this library, you can use a [Webhook].
   /// Alternatively, you can manage webhooks yourself by extending it.
@@ -98,7 +98,7 @@ class TeleDart {
       : throw TeleDartException(
           'Injected update fetcher is type of ${fetcher.runtimeType.toString()} instead of Webhook.');
 
-  /// Removes and stops webhook
+  /// Remove and stops webhook
   Future<void> removeWebhook() async {
     await telegram.deleteWebhook();
     if (fetcher is Webhook) {
@@ -118,7 +118,7 @@ class TeleDart {
   TeleDartMessage _messageStreamMapper(Message msg) =>
       TeleDartMessage(this, msg);
 
-  /// Listens to message events with [entityType] and [keyword] in text and caption
+  /// Listen to message events with [entityType] and [keyword] in text and caption
   ///
   /// [entityType] include `mention` (@username), `hashtag` (#hashtag), `cashtag`($USD),
   /// `bot_command` (/start@jobs_bot), `url` (https://telegram.org/),
@@ -144,45 +144,45 @@ class TeleDart {
           .onMessage(entityType: entityType, keyword: keyword)
           .map(_messageStreamMapper);
 
-  /// Listens to edited message events
+  /// Listen to edited message events
   Stream<TeleDartMessage> onEditedMessage() =>
       _event.onEditedMessage().map(_messageStreamMapper);
 
-  /// Listens to channel post events
+  /// Listen to channel post events
   Stream<TeleDartMessage> onChannelPost() =>
       _event.onChannelPost().map(_messageStreamMapper);
 
-  /// Listens to edited channel post events
+  /// Listen to edited channel post events
   Stream<TeleDartMessage> onEditedChannelPost() =>
       _event.onEditedChannelPost().map(_messageStreamMapper);
 
-  /// Listens to inline query events
+  /// Listen to inline query events
   ///
   /// Use [TeleDartInlineQuery.answer] to answer to inline queries.
   Stream<TeleDartInlineQuery> onInlineQuery() => _event
       .onInlineQuery()
       .map((inlineQuery) => TeleDartInlineQuery(this, inlineQuery));
 
-  /// Listens to chosen inline query events
+  /// Listen to chosen inline query events
   Stream<ChosenInlineResult> onChosenInlineResult() =>
       _event.onChosenInlineResult();
 
-  /// Listens to callback query events
+  /// Listen to callback query events
   Stream<TeleDartCallbackQuery> onCallbackQuery() => _event
       .onCallbackQuery()
       .map((callbackQuery) => TeleDartCallbackQuery(this, callbackQuery));
 
-  /// Listens to shipping query events
+  /// Listen to shipping query events
   Stream<TeleDartShippingQuery> onShippingQuery() => _event
       .onShippingQuery()
       .map((shippingQuery) => TeleDartShippingQuery(this, shippingQuery));
 
-  /// Listens to pre checkout query events
+  /// Listen to pre checkout query events
   Stream<TeleDartPreCheckoutQuery> onPreCheckoutQuery() =>
       _event.onPreCheckoutQuery().map((preCheckoutQuery) =>
           TeleDartPreCheckoutQuery(this, preCheckoutQuery));
 
-  /// Listens to poll events
+  /// Listen to poll events
   Stream<Poll> onPoll() => _event.onPoll();
 
   /// Listen to poll answer events
@@ -248,7 +248,7 @@ class TeleDart {
   Stream<TeleDartMessage> onTextMention([dynamic keyword]) =>
       onMessage(entityType: 'text_mention', keyword: keyword);
 
-  /// Replies to a given message with text
+  /// Reply to a given message with text
   ///
   /// A wrapper around [Telegram.sendMessage].
   /// On success, returns the sent [model.Message].
@@ -276,7 +276,7 @@ class TeleDart {
           allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
-  /// Replies to a given message with an image
+  /// Reply to a given message with an image
   ///
   /// A wrapper around [Telegram.sendPhoto].
   /// On success, returns the sent [model.Message].
@@ -304,7 +304,7 @@ class TeleDart {
           allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
-  /// Replies to a given message with an audio
+  /// Reply to a given message with an audio
   ///
   /// A wrapper around [Telegram.sendAudio].
   /// On success, returns the sent [model.Message].
@@ -338,7 +338,7 @@ class TeleDart {
           allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
-  /// Replies to a given message with a document
+  /// Reply to a given message with a document
   ///
   /// A wrapper around [Telegram.sendDocument].
   /// On success, returns the sent [model.Message].
@@ -368,7 +368,7 @@ class TeleDart {
           allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
-  /// Replies to a given message with a video
+  /// Reply to a given message with a video
   ///
   /// A wrapper around [Telegram.sendVideo].
   /// On success, returns the sent [model.Message].
@@ -406,7 +406,7 @@ class TeleDart {
           allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
-  /// Replies to a given message with an animation (GIF or H.264/MPEG-4 AVC video without sound)
+  /// Reply to a given message with an animation (GIF or H.264/MPEG-4 AVC video without sound)
   ///
   /// A wrapper around [Telegram.sendAnimation].
   /// On success, returns the sent [model.Message].
@@ -442,7 +442,7 @@ class TeleDart {
           allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
-  /// Replies to a given message with a voice message
+  /// Reply to a given message with a voice message
   ///
   /// A wrapper around [Telegram.sendVoice].
   /// On success, returns the sent [model.Message].
@@ -470,7 +470,7 @@ class TeleDart {
           allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
-  /// Replies to a given message with a video note
+  /// Reply to a given message with a video note
   ///
   /// A wrapper around [Telegram.sendVideoNote].
   /// On success, returns the sent [model.Message].
@@ -498,7 +498,7 @@ class TeleDart {
           allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
-  /// Replies to a given message with a media group message (multiple media files)
+  /// Reply to a given message with a media group message (multiple media files)
   ///
   /// A wrapper around [Telegram.sendMediaGroup].
   /// On success, returns the sent [Message][model.Message]
@@ -518,7 +518,7 @@ class TeleDart {
           reply_to_message_id: withQuote ? orgMsg.message_id : null,
           allow_sending_without_reply: allow_sending_without_reply);
 
-  /// Replies to a given message with a location
+  /// Reply to a given message with a location
   ///
   /// A wrapper around [Telegram.sendLocation].
   /// On success, returns the sent [model.Message].
@@ -593,7 +593,7 @@ class TeleDart {
           inline_message_id: inline_message_id,
           reply_markup: reply_markup);
 
-  /// Replies to a given message with a venue message
+  /// Reply to a given message with a venue message
   ///
   /// A wrapper around [Telegram.sendVenue].
   /// On success, returns the sent [model.Message].
@@ -624,7 +624,7 @@ class TeleDart {
           allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
-  /// Replies to a given message with a contact
+  /// Reply to a given message with a contact
   ///
   /// A wrapper around [Telegram.sendContact].
   /// On success, returns the sent [model.Message].
@@ -651,7 +651,7 @@ class TeleDart {
           allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
-  /// Replies to a given message with a poll
+  /// Reply to a given message with a poll
   ///
   /// A wrapper around [Telegram.sendPoll].
   /// On success, returns the sent [model.Message].
@@ -694,7 +694,7 @@ class TeleDart {
           allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
-  /// Replies to a given message with a dice message
+  /// Reply to a given message with a dice message
   ///
   /// A wrapper around [Telegram.sendDice].
   /// On success, returns the sent [model.Message].
@@ -719,7 +719,7 @@ class TeleDart {
 
   // TODO: order of this block is not matching with telegram.TeleDart
   // ! just put it here for now for the sake of providing functionality
-  /// Replies to a given message with a sticker
+  /// Reply to a given message with a sticker
   ///
   /// A wrapper around [Telegram.sendSticker].
   /// On success, returns the sent [model.Message].
@@ -772,7 +772,7 @@ class TeleDart {
   /// On success, returns true.
   ///
   /// Apart from a [model.CallbackQuery] to answer, it can also
-  /// take some options that control the callback query.
+  /// take some options that control the callback query answer.
   ///
   /// **Check [Telegram API documentation](https://core.telegram.org/bots/api#answercallbackquery)
   /// for more information about those options.**

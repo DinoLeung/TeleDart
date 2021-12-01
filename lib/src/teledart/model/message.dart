@@ -21,7 +21,7 @@ import 'dart:async';
 import '../../../teledart.dart';
 import '../../telegram/model.dart';
 
-/// A recieved message.
+/// A recieved message
 ///
 /// It is the object which gets returned by listeners such as
 /// [TeleDart.onMessage].
@@ -95,7 +95,7 @@ class TeleDartMessage extends Message {
           reply_markup: message.reply_markup,
         );
 
-  /// Replies to the recieved message with text
+  /// Reply to the recieved message with text
   ///
   /// A wrapper around [TeleDart.replyMessage].
   /// On success, returns the sent [model.Message].
@@ -125,7 +125,7 @@ class TeleDartMessage extends Message {
           allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
-  /// Replies to the recieved message with an image
+  /// Reply to the recieved message with an image
   ///
   /// A wrapper around [TeleDart.replyPhoto].
   /// On success, returns the sent [model.Message].
@@ -155,7 +155,7 @@ class TeleDartMessage extends Message {
           allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
-  /// Replies to the recieved message with an audio
+  /// Reply to the recieved message with an audio
   ///
   /// A wrapper around [TeleDart.replyAudio].
   /// On success, returns the sent [model.Message].
@@ -193,7 +193,7 @@ class TeleDartMessage extends Message {
           allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
-  /// Replies to the recieved message with a document
+  /// Reply to the recieved message with a document
   ///
   /// A wrapper around [TeleDart.replyDocument].
   /// On success, returns the sent [model.Message].
@@ -225,7 +225,7 @@ class TeleDartMessage extends Message {
           allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
-  /// Replies to the recieved message with a video
+  /// Reply to the recieved message with a video
   ///
   /// A wrapper around [TeleDart.replyVideo].
   /// On success, returns the sent [model.Message].
@@ -265,7 +265,7 @@ class TeleDartMessage extends Message {
           allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
-  /// Replies to the recieved message with an animation (GIF or H.264/MPEG-4 AVC video without sound)
+  /// Reply to the recieved message with an animation (GIF or H.264/MPEG-4 AVC video without sound)
   ///
   /// A wrapper around [TeleDart.replyAnimation].
   /// On success, returns the sent [model.Message].
@@ -303,7 +303,7 @@ class TeleDartMessage extends Message {
           allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
-  /// Replies to the recieved message with a voice message
+  /// Reply to the recieved message with a voice message
   ///
   /// A wrapper around [TeleDart.replyVoice].
   /// On success, returns the sent [model.Message].
@@ -333,7 +333,7 @@ class TeleDartMessage extends Message {
           allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
-  /// Replies to the recieved message with a video note
+  /// Reply to the recieved message with a video note
   ///
   /// A wrapper around [TeleDart.replyVideoNote].
   /// On success, returns the sent [model.Message].
@@ -363,7 +363,7 @@ class TeleDartMessage extends Message {
           allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
-  /// Replies to the recieved message with a media group message (multiple media files)
+  /// Reply to the recieved message with a media group message (multiple media files)
   ///
   /// A wrapper around [TeleDart.replyMediaGroup].
   /// On success, returns the sent [model.Message].
@@ -385,7 +385,7 @@ class TeleDartMessage extends Message {
           disable_notification: disable_notification,
           allow_sending_without_reply: allow_sending_without_reply);
 
-  /// Replies to the recieved message with a location
+  /// Reply to the recieved message with a location
   ///
   /// A wrapper around [TeleDart.replyLocation].
   /// On success, returns the sent [model.Message].
@@ -418,7 +418,7 @@ class TeleDartMessage extends Message {
           allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
-  /// Replies to the recieved message with a venue message
+  /// Reply to the recieved message with a venue message
   ///
   /// A wrapper around [TeleDart.replyVenue].
   /// On success, returns the sent [model.Message].
@@ -453,7 +453,7 @@ class TeleDartMessage extends Message {
           allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
-  /// Replies to the recieved message with a location
+  /// Reply to the recieved message with a location
   ///
   /// A wrapper around [TeleDart.replyContact].
   /// On success, returns the sent [model.Message].
@@ -482,7 +482,7 @@ class TeleDartMessage extends Message {
           allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
-  /// Replies to the recieved message with a poll
+  /// Reply to the recieved message with a poll
   ///
   /// A wrapper around [TeleDart.replyPoll].
   /// On success, returns the sent [model.Message].
@@ -524,7 +524,7 @@ class TeleDartMessage extends Message {
           allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
-  /// Replies to the recieved message with a dice message
+  /// Reply to the recieved message with a dice message
   ///
   /// A wrapper around [TeleDart.replyDice].
   /// On success, returns the sent [model.Message].
@@ -547,7 +547,7 @@ class TeleDartMessage extends Message {
           allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
-  /// Replies to the recieved message with an image
+  /// Reply to the recieved message with an image
   ///
   /// A wrapper around [TeleDart.replySticker].
   /// On success, returns the sent [model.Message].
