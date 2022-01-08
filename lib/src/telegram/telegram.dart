@@ -1171,6 +1171,11 @@ class Telegram {
     return await HttpClient.httpPost(requestUrl, body: body);
   }
 
+  /// Use this method to set a custom title for an administrator in a supergroup promoted by the bot
+  ///
+  /// Returns *True* on success.
+  ///
+  /// https://core.telegram.org/bots/api#setchatadministratorcustomtitle
   Future<bool> setChatAdministratorCustomTitle(
       dynamic chat_id, int user_id, String custom_title) async {
     if (chat_id is! String && chat_id is! int) {
@@ -1186,12 +1191,52 @@ class Telegram {
     return await HttpClient.httpPost(requestUrl, body: body);
   }
 
+  /// Use this method to ban a channel chat in a supergroup or a channel
+  ///
+  /// Until the chat is unbanned, the owner of the banned chat won't be able to send messages on
+  /// behalf of any of their channels. The bot must be an administrator in the supergroup or
+  /// channel for this to work and must have the appropriate administrator rights.
+  ///
+  /// Returns *True* on success.
+  Future<bool> banChatSenderChat(dynamic chat_id, int sender_chat_id) async {
+    if (chat_id is! String && chat_id is! int) {
+      return Future.error(TelegramException(
+          'Attribute \'chat_id\' can only be either type of String or int'));
+    }
+    var requestUrl = _apiUri('banChatSenderChat');
+    var body = <String, dynamic>{
+      'chat_id': chat_id,
+      'sender_chat_id': sender_chat_id,
+    };
+    return await HttpClient.httpPost(requestUrl, body: body);
+  }
+
+  /// Use this method to unban a previously banned channel chat in a supergroup or channel
+  ///
+  /// The bot must be an administrator for this to work and must have the appropriate administrator rights.
+  ///
+  /// Returns *True* on success.
+  Future<bool> unbanChatSenderChat(dynamic chat_id, int sender_chat_id) async {
+    if (chat_id is! String && chat_id is! int) {
+      return Future.error(TelegramException(
+          'Attribute \'chat_id\' can only be either type of String or int'));
+    }
+    var requestUrl = _apiUri('unbanChatSenderChat');
+    var body = <String, dynamic>{
+      'chat_id': chat_id,
+      'sender_chat_id': sender_chat_id,
+    };
+    return await HttpClient.httpPost(requestUrl, body: body);
+  }
+
   /// Use this method to set default chat permissions for all members
   ///
   /// The bot must be an administrator in the group or a supergroup for this to work
   /// and must have the can_restrict_members admin rights.
   ///
   /// Returns *True* on success.
+  ///
+  /// https://core.telegram.org/bots/api#setchatpermissions
   Future<bool> setChatPermissions(
       dynamic chat_id, ChatPermissions permissions) async {
     if (chat_id is! String && chat_id is! int) {

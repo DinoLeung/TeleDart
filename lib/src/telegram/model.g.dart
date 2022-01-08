@@ -174,6 +174,7 @@ Chat _$ChatFromJson(Map<String, dynamic> json) {
         ? null
         : ChatPhoto.fromJson(json['photo'] as Map<String, dynamic>),
     bio: json['bio'] as String?,
+    has_private_forwards: json['has_private_forwards'] as bool?,
     description: json['description'] as String?,
     invite_link: json['invite_link'] as String?,
     pinned_message: json['pinned_message'] == null
@@ -183,6 +184,7 @@ Chat _$ChatFromJson(Map<String, dynamic> json) {
         ? null
         : ChatPermissions.fromJson(json['permissions'] as Map<String, dynamic>),
     slow_mode_delay: json['slow_mode_delay'] as int?,
+    has_protected_content: json['has_protected_content'] as bool?,
     sticker_set_name: json['sticker_set_name'] as String?,
     can_set_sticker_set: json['can_set_sticker_set'] as bool?,
     linked_chat_id: json['linked_chat_id'] as int?,
@@ -210,11 +212,13 @@ Map<String, dynamic> _$ChatToJson(Chat instance) {
   writeNotNull('last_name', instance.last_name);
   writeNotNull('photo', instance.photo?.toJson());
   writeNotNull('bio', instance.bio);
+  writeNotNull('has_private_forwards', instance.has_private_forwards);
   writeNotNull('description', instance.description);
   writeNotNull('invite_link', instance.invite_link);
   writeNotNull('pinned_message', instance.pinned_message?.toJson());
   writeNotNull('permissions', instance.permissions?.toJson());
   writeNotNull('slow_mode_delay', instance.slow_mode_delay);
+  writeNotNull('has_protected_content', instance.has_protected_content);
   writeNotNull('sticker_set_name', instance.sticker_set_name);
   writeNotNull('can_set_sticker_set', instance.can_set_sticker_set);
   writeNotNull('linked_chat_id', instance.linked_chat_id);
@@ -243,6 +247,7 @@ Message _$MessageFromJson(Map<String, dynamic> json) {
     forward_signature: json['forward_signature'] as String?,
     forward_sender_name: json['forward_sender_name'] as String?,
     forward_date: json['forward_date'] as int?,
+    is_automatic_forward: json['is_automatic_forward'] as bool?,
     reply_to_message: json['reply_to_message'] == null
         ? null
         : Message.fromJson(json['reply_to_message'] as Map<String, dynamic>),
@@ -250,6 +255,7 @@ Message _$MessageFromJson(Map<String, dynamic> json) {
         ? null
         : User.fromJson(json['via_bot'] as Map<String, dynamic>),
     edit_date: json['edit_date'] as int?,
+    has_protected_content: json['has_protected_content'] as bool?,
     media_group_id: json['media_group_id'] as String?,
     author_signature: json['author_signature'] as String?,
     text: json['text'] as String?,
@@ -387,9 +393,11 @@ Map<String, dynamic> _$MessageToJson(Message instance) {
   writeNotNull('forward_signature', instance.forward_signature);
   writeNotNull('forward_sender_name', instance.forward_sender_name);
   writeNotNull('forward_date', instance.forward_date);
+  writeNotNull('is_automatic_forward', instance.is_automatic_forward);
   writeNotNull('reply_to_message', instance.reply_to_message?.toJson());
   writeNotNull('via_bot', instance.via_bot?.toJson());
   writeNotNull('edit_date', instance.edit_date);
+  writeNotNull('has_protected_content', instance.has_protected_content);
   writeNotNull('media_group_id', instance.media_group_id);
   writeNotNull('author_signature', instance.author_signature);
   writeNotNull('text', instance.text);
