@@ -254,9 +254,9 @@ class TeleDart {
   /// Reply to a given message with text
   ///
   /// A wrapper around [Telegram.sendMessage].
-  /// On success, returns the sent [model.Message].
+  /// On success, returns the sent [Message].
   ///
-  /// Apart from a [model.Message] to reply to and a [String] to
+  /// Apart from a [Message] to reply to and a [String] to
   /// reply with, it can also take some options that
   /// control the message appearance and behavior.
   ///
@@ -282,9 +282,9 @@ class TeleDart {
   /// Reply to a given message with an image
   ///
   /// A wrapper around [Telegram.sendPhoto].
-  /// On success, returns the sent [model.Message].
+  /// On success, returns the sent [Message].
   ///
-  /// Apart from a [model.Message] to reply to and a [photo] to
+  /// Apart from a [Message] to reply to and a [photo] to
   /// reply with, it can also take some options that
   /// control the message appearance and behavior.
   ///
@@ -310,9 +310,9 @@ class TeleDart {
   /// Reply to a given message with an audio
   ///
   /// A wrapper around [Telegram.sendAudio].
-  /// On success, returns the sent [model.Message].
+  /// On success, returns the sent [Message].
   ///
-  /// Apart from a [model.Message] to reply to and an [audio] to
+  /// Apart from a [Message] to reply to and an [audio] to
   /// reply with, it can also take some options that
   /// control the message appearance and behavior.
   ///
@@ -346,9 +346,9 @@ class TeleDart {
   /// Reply to a given message with a document
   ///
   /// A wrapper around [Telegram.sendDocument].
-  /// On success, returns the sent [model.Message].
+  /// On success, returns the sent [Message].
   ///
-  /// Apart from a [model.Message] to reply to and a [document] to
+  /// Apart from a [Message] to reply to and a [document] to
   /// reply with, it can also take some options that
   /// control the message appearance and behavior.
   ///
@@ -376,9 +376,9 @@ class TeleDart {
   /// Reply to a given message with a video
   ///
   /// A wrapper around [Telegram.sendVideo].
-  /// On success, returns the sent [model.Message].
+  /// On success, returns the sent [Message].
   ///
-  /// Apart from a [model.Message] to reply to and a [video] to
+  /// Apart from a [Message] to reply to and a [video] to
   /// reply with, it can also take some options that
   /// control the message appearance and behavior.
   ///
@@ -414,9 +414,9 @@ class TeleDart {
   /// Reply to a given message with an animation (GIF or H.264/MPEG-4 AVC video without sound)
   ///
   /// A wrapper around [Telegram.sendAnimation].
-  /// On success, returns the sent [model.Message].
+  /// On success, returns the sent [Message].
   ///
-  /// Apart from a [model.Message] to reply to and an [animation] to
+  /// Apart from a [Message] to reply to and an [animation] to
   /// reply with, it can also take some options that
   /// control the message appearance and behavior.
   ///
@@ -450,9 +450,9 @@ class TeleDart {
   /// Reply to a given message with a voice message
   ///
   /// A wrapper around [Telegram.sendVoice].
-  /// On success, returns the sent [model.Message].
+  /// On success, returns the sent [Message].
   ///
-  /// Apart from a [model.Message] to reply to and a [voice] to
+  /// Apart from a [Message] to reply to and a [voice] to
   /// reply with, it can also take some options that
   /// control the message appearance and behavior.
   ///
@@ -478,9 +478,9 @@ class TeleDart {
   /// Reply to a given message with a video note
   ///
   /// A wrapper around [Telegram.sendVideoNote].
-  /// On success, returns the sent [model.Message].
+  /// On success, returns the sent [Message].
   ///
-  /// Apart from a [model.Message] to reply to and a [video_note] to
+  /// Apart from a [Message] to reply to and a [video_note] to
   /// reply with, it can also take some options that
   /// control the message appearance and behavior.
   ///
@@ -506,9 +506,9 @@ class TeleDart {
   /// Reply to a given message with a media group message (multiple media files)
   ///
   /// A wrapper around [Telegram.sendMediaGroup].
-  /// On success, returns the sent [Message][model.Message]
+  /// On success, returns the sent [Message][Message]
   ///
-  /// Apart from a [model.Message] to reply to and a [List<InputMedia>] to
+  /// Apart from a [Message] to reply to and a [List<InputMedia>] to
   /// reply with, it can also take some options that
   /// control the message appearance and behavior.
   ///
@@ -526,9 +526,9 @@ class TeleDart {
   /// Reply to a given message with a location
   ///
   /// A wrapper around [Telegram.sendLocation].
-  /// On success, returns the sent [model.Message].
+  /// On success, returns the sent [Message].
   ///
-  /// Apart from a [model.Message] to reply to, a [latitude] and a [longitude],
+  /// Apart from a [Message] to reply to, a [latitude] and a [longitude],
   /// it can also take some options that control the message appearance and behavior.
   ///
   /// **Check [Telegram API documentation](https://core.telegram.org/bots/api#sendlocation)
@@ -556,7 +556,7 @@ class TeleDart {
   /// Edits a sent live location message
   ///
   /// A wrapper around [Telegram.editMessageLiveLocation].
-  /// On success, returns the sent [model.Message].
+  /// On success, returns the sent [Message].
   ///
   /// Apart from a [latitude] and a [longitude], it can also take some options
   /// that control the message appearance and behavior.
@@ -583,7 +583,7 @@ class TeleDart {
   /// Stops a sent live location message
   ///
   /// A wrapper around [Telegram.stopMessageLiveLocation].
-  /// On success, returns the sent [model.Message].
+  /// On success, returns the sent [Message].
   ///
   /// **Check [Telegram API documentation](https://core.telegram.org/bots/api#editmessagelivelocation)
   /// for more information about the accepted options.**
@@ -601,9 +601,9 @@ class TeleDart {
   /// Reply to a given message with a venue message
   ///
   /// A wrapper around [Telegram.sendVenue].
-  /// On success, returns the sent [model.Message].
+  /// On success, returns the sent [Message].
   ///
-  /// Apart from a [model.Message] to reply to, a [latitude], a [longitude],
+  /// Apart from a [Message] to reply to, a [latitude], a [longitude],
   /// a [title] and an [address], it can also take some options that control the
   /// message appearance and behavior.
   ///
@@ -632,9 +632,9 @@ class TeleDart {
   /// Reply to a given message with a contact
   ///
   /// A wrapper around [Telegram.sendContact].
-  /// On success, returns the sent [model.Message].
+  /// On success, returns the sent [Message].
   ///
-  /// Apart from a [model.Message] to reply to, a [phone_number] and
+  /// Apart from a [Message] to reply to, a [phone_number] and
   /// a [first_name], it can also take some options that control the message
   /// appearance and behavior.
   ///
@@ -659,9 +659,9 @@ class TeleDart {
   /// Reply to a given message with a poll
   ///
   /// A wrapper around [Telegram.sendPoll].
-  /// On success, returns the sent [model.Message].
+  /// On success, returns the sent [Message].
   ///
-  /// Apart from a [model.Message] to reply to, a [question] and
+  /// Apart from a [Message] to reply to, a [question] and
   /// a [List<String>] of [options], it can also take some options that control the message
   /// appearance and behavior.
   ///
@@ -702,9 +702,9 @@ class TeleDart {
   /// Reply to a given message with a dice message
   ///
   /// A wrapper around [Telegram.sendDice].
-  /// On success, returns the sent [model.Message].
+  /// On success, returns the sent [Message].
   ///
-  /// Apart from a [model.Message] to reply to, it can
+  /// Apart from a [Message] to reply to, it can
   /// also take some options that control the message appearance and behavior.
   ///
   /// **Check [Telegram API documentation](https://core.telegram.org/bots/api#senddice)
@@ -727,9 +727,9 @@ class TeleDart {
   /// Reply to a given message with a sticker
   ///
   /// A wrapper around [Telegram.sendSticker].
-  /// On success, returns the sent [model.Message].
+  /// On success, returns the sent [Message].
   ///
-  /// Apart from a [model.Message] to reply to and a [sticker]
+  /// Apart from a [Message] to reply to and a [sticker]
   /// to reply with, it can also take some options that control
   /// the message appearance and behavior.
   ///
@@ -751,7 +751,7 @@ class TeleDart {
   /// A wrapper around [Telegram.answerInlineQuery].
   /// On success, returns true.
   ///
-  /// Apart from a [model.InlineQuery] to answer and a [List<InlineQueryResult>]
+  /// Apart from a [InlineQuery] to answer and a [List<InlineQueryResult>]
   /// of results, it can also take some options that control the inline dialog
   /// appearance and behavior.
   ///
@@ -776,7 +776,7 @@ class TeleDart {
   /// A wrapper around [Telegram.answerCallbackQuery].
   /// On success, returns true.
   ///
-  /// Apart from a [model.CallbackQuery] to answer, it can also
+  /// Apart from a [CallbackQuery] to answer, it can also
   /// take some options that control the callback query answer.
   ///
   /// **Check [Telegram API documentation](https://core.telegram.org/bots/api#answercallbackquery)
@@ -791,7 +791,7 @@ class TeleDart {
   /// A wrapper around [Telegram.answerShippingQuery].
   /// On success, returns true.
   ///
-  /// Apart from a [model.ShippingQuery] to answer and a [bool] that indicates
+  /// Apart from a [ShippingQuery] to answer and a [bool] that indicates
   /// if the shipping is possible, it can also take some options that
   /// control the shipping.
   ///
@@ -807,7 +807,7 @@ class TeleDart {
   /// A wrapper around [Telegram.answerPreCheckoutQuery].
   /// On success, returns true.
   ///
-  /// It can take a [model.PreCheckoutQuery] to answer and a [bool] that indicates
+  /// It can take a [PreCheckoutQuery] to answer and a [bool] that indicates
   /// if the pre-checkout is possible, and an [error_message] that
   /// is shown to user if [ok] is false (You don't have to specify it if [ok] is true).
   ///

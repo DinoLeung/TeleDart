@@ -41,7 +41,7 @@ class Telegram {
 
   /// Use this method to receive incoming updates using long polling ([wiki])
   ///
-  /// An Array of [model.Update] objects is returned.
+  /// An Array of [Update] objects is returned.
   ///
   /// **Notes**
   /// 1. This method will not work if an outgoing webhook is set up.
@@ -71,7 +71,7 @@ class Telegram {
   /// Use this method to specify a url and receive incoming updates via an outgoing webhook
   ///
   /// Whenever there is an update for the bot, we will send an HTTPS POST request to the
-  /// specified url, containing a JSON-serialized [model.Update].
+  /// specified url, containing a JSON-serialized [Update].
   /// In case of an unsuccessful request, we will give up after a reasonable amount of attempts.
   /// Returns *True* on success.
   /// If you'd like to make sure that the Webhook request comes from Telegram,
@@ -130,7 +130,7 @@ class Telegram {
   /// Use this method to get current webhook status.
   /// Requires no parameters.
   ///
-  /// On success, returns a [model.WebhookInfo] object.
+  /// On success, returns a [WebhookInfo] object.
   /// If the bot is using [getUpdates], will return an object with the *url* field empty.
   ///
   /// https://core.telegram.org/bots/api#getwebhookinfo
@@ -139,7 +139,7 @@ class Telegram {
 
   /// A simple method for testing your bot's auth token.
   /// Requires no parameters.
-  /// Returns basic information about the bot in form of a [model.User] object.
+  /// Returns basic information about the bot in form of a [User] object.
   ///
   /// https://core.telegram.org/bots/api#getme
   Future<User> getMe() async =>
@@ -166,7 +166,7 @@ class Telegram {
   /// https://core.telegram.org/bots/api#close
   Future<bool> close() async => await HttpClient.httpGet(_apiUri('close'));
 
-  /// Use this method to send text messages. On success, the sent [model.Message] is returned.
+  /// Use this method to send text messages. On success, the sent [Message] is returned.
   ///
   /// [**Formatting options**](https://core.telegram.org/bots/api#formatting-options)
   ///
@@ -198,7 +198,7 @@ class Telegram {
     return Message.fromJson(await HttpClient.httpPost(requestUrl, body: body));
   }
 
-  /// Use this method to forward messages of any kind. On success, the sent [model.Message] is returned.
+  /// Use this method to forward messages of any kind. On success, the sent [Message] is returned.
   ///
   /// https://core.telegram.org/bots/api#forwardmessage
   Future<Message> forwardMessage(
@@ -222,7 +222,7 @@ class Telegram {
   ///
   /// The method is analogous to the method [forwardMessage],
   /// but the copied message doesn't have a link to the original message.
-  /// Returns the [model.MessageId] of the sent message on success.
+  /// Returns the [MessageId] of the sent message on success.
   ///
   /// https://core.telegram.org/bots/api#copyMessage
   Future<MessageId> copyMessage(
@@ -261,7 +261,7 @@ class Telegram {
 
   /// Use this method to send photos
   ///
-  /// On success, the sent [model.Message] is returned.
+  /// On success, the sent [Message] is returned.
   ///
   /// https://core.telegram.org/bots/api#sendphoto
   Future<Message> sendPhoto(dynamic chat_id, dynamic photo,
@@ -310,7 +310,7 @@ class Telegram {
   /// Use this method to send audio files
   ///
   /// If you want Telegram clients to display them in the music player.
-  /// Your audio must be in the .mp3 format. On success, the sent [model.Message] is returned.
+  /// Your audio must be in the .mp3 format. On success, the sent [Message] is returned.
   /// Bots can currently send audio files of up to 50 MB in size,
   /// this limit may be changed in the future.
   ///
@@ -380,7 +380,7 @@ class Telegram {
 
   /// Use this method to send general files
   ///
-  /// On success, the sent [model.Message] is returned.
+  /// On success, the sent [Message] is returned.
   ///
   /// Bots can currently send files of any type of up to 50 MB in size,
   /// this limit may be changed in the future.
@@ -446,7 +446,7 @@ class Telegram {
   /// Use this method to send video files
   ///
   /// Telegram clients support mp4 videos (other formats may be sent as [Document]).
-  /// On success, the sent [model.Message] is returned.
+  /// On success, the sent [Message] is returned.
   /// Bots can currently send video files of up to 50 MB in size,
   /// this limit may be changed in the future.
   ///
@@ -518,7 +518,7 @@ class Telegram {
 
   /// Use this method to send animation files (GIF or H.264/MPEG-4 AVC video without sound)
   ///
-  /// On success, the sent [model.Message] is returned.
+  /// On success, the sent [Message] is returned.
   /// Bots can currently send animation files of up to 50 MB in size,
   /// this limit may be changed in the future.
   ///
@@ -589,7 +589,7 @@ class Telegram {
   /// If you want Telegram clients to display the file as a playable voice message.
   /// For this to work, your audio must be in an .ogg file encoded with OPUS
   /// (other formats may be sent as [Audio] or [Document]).
-  /// On success, the sent [model.Message] is returned.
+  /// On success, the sent [Message] is returned.
   /// Bots can currently send voice messages of up to 50 MB in size,
   /// this limit may be changed in the future.
   ///
@@ -709,7 +709,7 @@ class Telegram {
   // * or even mixed input
   /// Use this method to send a group of photos or videos as an album
   ///
-  /// On success, an array of the sent [model.Message]s is returned.
+  /// On success, an array of the sent [Message]s is returned.
   ///
   /// https://core.telegram.org/bots/api#sendmediagroup
   Future<List<Message>> sendMediaGroup(dynamic chat_id, List<InputMedia> media,
@@ -735,7 +735,7 @@ class Telegram {
 
   /// Use this method to send point on the map
   ///
-  /// On success, the sent [model.Message] is returned.
+  /// On success, the sent [Message] is returned.
   ///
   /// https://core.telegram.org/bots/api#sendlocation
   Future<Message> sendLocation(
@@ -775,7 +775,7 @@ class Telegram {
   /// A location can be edited until its *live_period* expires or editing is explicitly disabled by a
   /// call to [stopMessageLiveLocation].
   /// On success, if the edited message was sent by the bot,
-  /// the edited [model.Message] is returned, otherwise *True* is returned.
+  /// the edited [Message] is returned, otherwise *True* is returned.
   ///
   /// https://core.telegram.org/bots/api#editmessagelivelocation
   ///
@@ -814,7 +814,7 @@ class Telegram {
   /// Use this method to stop updating a live location message sent by the bot or via the bot
   /// (for [inline bots]) before *live_period* expires.
   ///
-  /// On success, if the message was sent by the bot, the sent [model.Message] is returned,
+  /// On success, if the message was sent by the bot, the sent [Message] is returned,
   /// otherwise *True* is returned.
   ///
   /// https://core.telegram.org/bots/api#stopmessagelivelocation
@@ -845,7 +845,7 @@ class Telegram {
 
   /// Use this method to send information about a venue
   ///
-  /// On success, the sent [model.Message] is returned.
+  /// On success, the sent [Message] is returned.
   ///
   /// https://core.telegram.org/bots/api#sendvenue
   Future<Message> sendVenue(dynamic chat_id, double latitude, double longitude,
@@ -883,7 +883,7 @@ class Telegram {
 
   /// Use this method to send phone contacts
   ///
-  /// On success, the sent [model.Message] is returned.
+  /// On success, the sent [Message] is returned.
   ///
   /// https://core.telegram.org/bots/api#sendcontact
   Future<Message> sendContact(
@@ -917,7 +917,7 @@ class Telegram {
   ///
   /// A native poll can't be sent to a private chat.
   ///
-  /// On success, the sent [model.Message] is returned.
+  /// On success, the sent [Message] is returned.
   ///
   /// https://core.telegram.org/bots/api#sendpoll
   Future<Message> sendPoll(
@@ -967,7 +967,7 @@ class Telegram {
 
   /// Use this method to send an animated emoji that will display a random value
   ///
-  /// On success, the sent [model.Message] is returned.
+  /// On success, the sent [Message] is returned.
   Future<Message> sendDice(dynamic chat_id,
       {String emoji = Dice.DICE,
       bool? disable_notification,
@@ -1019,7 +1019,7 @@ class Telegram {
 
   /// Use this method to get a list of profile pictures for a user
   ///
-  /// Returns a [model.UserProfilePhotos] object.
+  /// Returns a [UserProfilePhotos] object.
   ///
   /// https://core.telegram.org/bots/api#getuserprofilephotos
   Future<UserProfilePhotos> getUserProfilePhotos(int user_id,
@@ -1037,7 +1037,7 @@ class Telegram {
   /// Use this method to get basic info about a file and prepare it for downloading
   ///
   /// For the moment, bots can download files of up to 20MB in size. On success,
-  /// a [model.File] object is returned. The file can then be downloaded via the link
+  /// a [File] object is returned. The file can then be downloaded via the link
   /// `https://api.telegram.org/file/bot<token>/<file_path>`,
   /// where `<file_path>` is taken from the response.
   /// It is guaranteed that the link will be valid for at least 1 hour.
@@ -1230,7 +1230,7 @@ class Telegram {
   /// The bot must be an administrator in the chat for this to work and must have the appropriate admin rights.
   /// The link can be revoked using the method [revokeChatInviteLink].
   ///
-  /// Returns the new invite link as [model.ChatInviteLink] object.
+  /// Returns the new invite link as [ChatInviteLink] object.
   ///
   /// https://core.telegram.org/bots/api#createchatinvitelink
   Future<ChatInviteLink> createChatInviteLink(dynamic chat_id,
@@ -1253,7 +1253,7 @@ class Telegram {
   ///
   /// The bot must be an administrator in the chat for this to work and must have the appropriate admin rights.
   ///
-  /// Returns the edited invite link as a [model.ChatInviteLink] object.
+  /// Returns the edited invite link as a [ChatInviteLink] object.
   ///
   /// https://core.telegram.org/bots/api#editchatinvitelink
   Future<ChatInviteLink> editChatInviteLink(dynamic chat_id, String invite_link,
@@ -1278,7 +1278,7 @@ class Telegram {
   /// If the primary link is revoked, a new link is automatically generated.
   /// The bot must be an administrator in the chat for this to work and must have the appropriate admin rights.
   ///
-  /// Returns the revoked invite link as [model.ChatInviteLink] object.
+  /// Returns the revoked invite link as [ChatInviteLink] object.
   ///
   /// https://core.telegram.org/bots/api#revokechatinvitelink
   Future<ChatInviteLink> revokeChatInviteLink(
@@ -1475,7 +1475,7 @@ class Telegram {
   /// (current name of the user for one-on-one conversations,
   /// current username of a user, group or channel, etc.).
   ///
-  /// Returns a [model.Chat] object on success.
+  /// Returns a [Chat] object on success.
   ///
   /// https://core.telegram.org/bots/api#getchat
   Future<Chat> getChat(dynamic chat_id) async {
@@ -1490,7 +1490,7 @@ class Telegram {
 
   /// Use this method to get a list of administrators in a chat
   ///
-  /// On success, returns an Array of [model.ChatMember] objects that contains information about all chat
+  /// On success, returns an Array of [ChatMember] objects that contains information about all chat
   /// administrators except other bots.
   /// If the chat is a group or a supergroup and no administrators were appointed,
   /// only the creator will be returned.
@@ -1525,7 +1525,7 @@ class Telegram {
 
   /// Use this method to get information about a member of a chat
   ///
-  /// Returns a [model.ChatMember] object on success.
+  /// Returns a [ChatMember] object on success.
   ///
   /// https://core.telegram.org/bots/api#getchatmember
   Future<ChatMember> getChatMember(dynamic chat_id, int user_id) async {
@@ -1654,7 +1654,7 @@ class Telegram {
 
   /// Use this method to get the current list of the bot's commands for the given scope and user language
   ///
-  /// Returns Array of [model.BotCommand] on success.
+  /// Returns Array of [BotCommand] on success.
   /// If commands aren't set, an empty list is returned.
   ///
   /// https://core.telegram.org/bots/api#getmycommands
@@ -1670,10 +1670,10 @@ class Telegram {
         .toList();
   }
 
-  /// Use this method to edit text and [model.Game] messages sent by the bot or via the bot
+  /// Use this method to edit text and [Game] messages sent by the bot or via the bot
   /// (for [inline bots]).
   ///
-  /// On success, if edited message is sent by the bot, the edited [model.Message] is returned,
+  /// On success, if edited message is sent by the bot, the edited [Message] is returned,
   /// otherwise *True* is returned.
   ///
   /// https://core.telegram.org/bots/api#editmessagetext
@@ -1716,7 +1716,7 @@ class Telegram {
   /// Use this method to edit captions of messages sent by the bot or via the bot
   /// (for [inline bots]).
   ///
-  /// On success, if edited message is sent by the bot, the edited [model.Message] is returned,
+  /// On success, if edited message is sent by the bot, the edited [Message] is returned,
   /// otherwise *True* is returned.
   ///
   /// https://core.telegram.org/bots/api#editmessagecaption
@@ -1762,7 +1762,7 @@ class Telegram {
   /// When inline message is edited, file can't be uploaded.
   /// Use previously uploaded file via its file_id or specify a URL.
   ///
-  /// On success, if the edited message was sent by the bot, the edited [model.Message] is returned,
+  /// On success, if the edited message was sent by the bot, the edited [Message] is returned,
   /// otherwise *True* is returned.
   ///
   /// https://core.telegram.org/bots/api#editMessageMedia
@@ -1802,7 +1802,7 @@ class Telegram {
   /// Use this method to edit only the reply markup of messages sent by the bot or via the bot
   /// (for [inline bots]).
   ///
-  /// On success, if edited message is sent by the bot, the edited [model.Message] is returned,
+  /// On success, if edited message is sent by the bot, the edited [Message] is returned,
   /// otherwise *True* is returned.
   ///
   /// https://core.telegram.org/bots/api#editmessagereplymarkup
@@ -1839,7 +1839,7 @@ class Telegram {
 
   /// Use this method to stop a poll which was sent by the bot
   ///
-  /// On success, the stopped [model.Poll] with the final results is returned.
+  /// On success, the stopped [Poll] with the final results is returned.
   ///
   /// https://core.telegram.org/bots/api#stoppoll
   Future<Poll> stopPoll(dynamic chat_id, int message_id,
@@ -1885,7 +1885,7 @@ class Telegram {
 
   /// Use this method to send .webp stickers
   ///
-  /// On success, the sent [model.Message] is returned.
+  /// On success, the sent [Message] is returned.
   ///
   /// https://core.telegram.org/bots/api#sendsticker
   Future<Message> sendSticker(dynamic chat_id, dynamic sticker,
@@ -1926,7 +1926,7 @@ class Telegram {
 
   /// Use this method to get a sticker set
   ///
-  /// On success, a [model.StickerSet] object is returned.
+  /// On success, a [StickerSet] object is returned.
   ///
   /// https://core.telegram.org/bots/api#getstickerset
   Future<StickerSet> getStickerSet(String name) async {
@@ -1939,7 +1939,7 @@ class Telegram {
   /// Use this method to upload a .png file with a sticker for later use in
   /// *createNewStickerSet* and *addStickerToSet* methods (can be used multiple times)
   ///
-  /// Returns the uploaded [model.File] on success.
+  /// Returns the uploaded [File] on success.
   ///
   /// https://core.telegram.org/bots/api#uploadstickerfile
   Future<File> uploadStickerFile(int user_id, io.File png_sticker) async {
@@ -2142,7 +2142,7 @@ class Telegram {
 
   /// Use this method to send invoices
   ///
-  /// On success, the sent [model.Message] is returned.
+  /// On success, the sent [Message] is returned.
   ///
   /// https://core.telegram.org/bots/api#sendinvoice
   Future<Message> sendInvoice(
@@ -2213,7 +2213,7 @@ class Telegram {
   /// Use this method to reply to shipping queries.
   ///
   /// If you sent an invoice requesting a shipping address and the parameter *is_flexible* was specified,
-  /// the Bot API will send an [model.Update] with a *shipping_query* field to the bot.
+  /// the Bot API will send an [Update] with a *shipping_query* field to the bot.
   ///
   /// On success, *True* is returned.
   ///
@@ -2238,7 +2238,7 @@ class Telegram {
   /// Use this method to respond to such pre-checkout queries
   ///
   /// Once the user has confirmed their payment and shipping details,
-  /// the Bot API sends the final confirmation in the form of an [model.Update] with the field *pre_checkout_query*.
+  /// the Bot API sends the final confirmation in the form of an [Update] with the field *pre_checkout_query*.
   ///
   /// On success, *True* is returned.
   ///
@@ -2285,7 +2285,7 @@ class Telegram {
 
   /// Use this method to send a game
   ///
-  /// On success, the sent [model.Message] is returned.
+  /// On success, the sent [Message] is returned.
   ///
   /// https://core.telegram.org/bots/api#sendgame
   Future<Message> sendGame(dynamic chat_id, String game_short_name,
@@ -2311,7 +2311,7 @@ class Telegram {
 
   /// Use this method to set the score of the specified user in a game
   ///
-  /// On success, if the message was sent by the bot, returns the edited [model.Message],
+  /// On success, if the message was sent by the bot, returns the edited [Message],
   /// otherwise returns *True*. Returns an error,
   /// if the score is not greater than the user's current score in the chat and force is *False*.
   ///
@@ -2346,7 +2346,7 @@ class Telegram {
   /// Use this method to get data for high score tables
   ///
   /// Will return the score of the specified user and several of his neighbors in a game.
-  /// On success, returns an *Array* of [model.GameHighScore] objects.
+  /// On success, returns an *Array* of [GameHighScore] objects.
   ///
   /// This method will currently return scores for the target user,
   /// plus two of his closest neighbors on each side.
