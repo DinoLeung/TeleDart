@@ -39,6 +39,7 @@ class Update {
   PollAnswer? poll_answer;
   ChatMemberUpdated? my_chat_member;
   ChatMemberUpdated? chat_member;
+  ChatJoinRequest? chat_join_request;
   Update({
     required this.update_id,
     this.message,
@@ -54,6 +55,7 @@ class Update {
     this.poll_answer,
     this.my_chat_member,
     this.chat_member,
+    this.chat_join_request,
   });
   factory Update.fromJson(Map<String, dynamic> json) => _$UpdateFromJson(json);
   Map<String, dynamic> toJson() => _$UpdateToJson(this);

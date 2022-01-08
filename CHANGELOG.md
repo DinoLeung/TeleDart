@@ -1,3 +1,7 @@
+## Unreleased
+
+- Support API 5.4
+
 ## 0.2.2
 
 - Improve documentations
