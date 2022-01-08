@@ -25,7 +25,7 @@ import '../../telegram/model.dart';
 ///
 /// It is returned by the [TeleDart.onInlineQuery] method.
 ///
-/// This class combines [model.InlineQuery] and [TeleDart]
+/// This class combines [InlineQuery] and [TeleDart]
 /// to add the [answer] method, which lets you
 /// easily reply to inline queries.
 class TeleDartInlineQuery extends InlineQuery {

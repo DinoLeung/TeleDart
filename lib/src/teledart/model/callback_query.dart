@@ -25,7 +25,7 @@ import '../../telegram/model.dart';
 ///
 /// It is returned by the [TeleDart.onCallbackQuery] method.
 ///
-/// This class combines [model.CallbackQuery] and [TeleDart]
+/// This class combines [CallbackQuery] and [TeleDart]
 /// to add the [answer] method, which lets you
 /// easily reply to callback queries.
 class TeleDartCallbackQuery extends CallbackQuery {

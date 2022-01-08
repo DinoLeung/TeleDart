@@ -25,7 +25,7 @@ import '../../telegram/model.dart';
 ///
 /// It is returned by the [TeleDart.onPreCheckoutQuery] method.
 ///
-/// This class combines [model.PreCheckoutQuery] and [TeleDart]
+/// This class combines [PreCheckoutQuery] and [TeleDart]
 /// to add the [answer] method, which lets you
 /// easily reply to pre-checkout queries.
 class TeleDartPreCheckoutQuery extends PreCheckoutQuery {

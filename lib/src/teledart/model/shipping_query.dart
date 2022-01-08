@@ -25,7 +25,7 @@ import '../../telegram/model.dart';
 ///
 /// It is returned by the [TeleDart.onShippingQuery] method.
 ///
-/// This class combines [model.ShippingQuery] and [TeleDart]
+/// This class combines [ShippingQuery] and [TeleDart]
 /// to add the [answer] method, which lets you
 /// easily reply to shipping queries.
 class TeleDartShippingQuery extends ShippingQuery {
