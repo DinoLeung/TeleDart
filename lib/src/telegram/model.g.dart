@@ -6,60 +6,59 @@ part of 'model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Update _$UpdateFromJson(Map<String, dynamic> json) {
-  return Update(
-    update_id: json['update_id'] as int,
-    message: json['message'] == null
-        ? null
-        : Message.fromJson(json['message'] as Map<String, dynamic>),
-    edited_message: json['edited_message'] == null
-        ? null
-        : Message.fromJson(json['edited_message'] as Map<String, dynamic>),
-    channel_post: json['channel_post'] == null
-        ? null
-        : Message.fromJson(json['channel_post'] as Map<String, dynamic>),
-    edited_channel_post: json['edited_channel_post'] == null
-        ? null
-        : Message.fromJson(json['edited_channel_post'] as Map<String, dynamic>),
-    inline_query: json['inline_query'] == null
-        ? null
-        : InlineQuery.fromJson(json['inline_query'] as Map<String, dynamic>),
-    chosen_inline_result: json['chosen_inline_result'] == null
-        ? null
-        : ChosenInlineResult.fromJson(
-            json['chosen_inline_result'] as Map<String, dynamic>),
-    callback_query: json['callback_query'] == null
-        ? null
-        : CallbackQuery.fromJson(
-            json['callback_query'] as Map<String, dynamic>),
-    shipping_query: json['shipping_query'] == null
-        ? null
-        : ShippingQuery.fromJson(
-            json['shipping_query'] as Map<String, dynamic>),
-    pre_checkout_query: json['pre_checkout_query'] == null
-        ? null
-        : PreCheckoutQuery.fromJson(
-            json['pre_checkout_query'] as Map<String, dynamic>),
-    poll: json['poll'] == null
-        ? null
-        : Poll.fromJson(json['poll'] as Map<String, dynamic>),
-    poll_answer: json['poll_answer'] == null
-        ? null
-        : PollAnswer.fromJson(json['poll_answer'] as Map<String, dynamic>),
-    my_chat_member: json['my_chat_member'] == null
-        ? null
-        : ChatMemberUpdated.fromJson(
-            json['my_chat_member'] as Map<String, dynamic>),
-    chat_member: json['chat_member'] == null
-        ? null
-        : ChatMemberUpdated.fromJson(
-            json['chat_member'] as Map<String, dynamic>),
-    chat_join_request: json['chat_join_request'] == null
-        ? null
-        : ChatJoinRequest.fromJson(
-            json['chat_join_request'] as Map<String, dynamic>),
-  );
-}
+Update _$UpdateFromJson(Map<String, dynamic> json) => Update(
+      update_id: json['update_id'] as int,
+      message: json['message'] == null
+          ? null
+          : Message.fromJson(json['message'] as Map<String, dynamic>),
+      edited_message: json['edited_message'] == null
+          ? null
+          : Message.fromJson(json['edited_message'] as Map<String, dynamic>),
+      channel_post: json['channel_post'] == null
+          ? null
+          : Message.fromJson(json['channel_post'] as Map<String, dynamic>),
+      edited_channel_post: json['edited_channel_post'] == null
+          ? null
+          : Message.fromJson(
+              json['edited_channel_post'] as Map<String, dynamic>),
+      inline_query: json['inline_query'] == null
+          ? null
+          : InlineQuery.fromJson(json['inline_query'] as Map<String, dynamic>),
+      chosen_inline_result: json['chosen_inline_result'] == null
+          ? null
+          : ChosenInlineResult.fromJson(
+              json['chosen_inline_result'] as Map<String, dynamic>),
+      callback_query: json['callback_query'] == null
+          ? null
+          : CallbackQuery.fromJson(
+              json['callback_query'] as Map<String, dynamic>),
+      shipping_query: json['shipping_query'] == null
+          ? null
+          : ShippingQuery.fromJson(
+              json['shipping_query'] as Map<String, dynamic>),
+      pre_checkout_query: json['pre_checkout_query'] == null
+          ? null
+          : PreCheckoutQuery.fromJson(
+              json['pre_checkout_query'] as Map<String, dynamic>),
+      poll: json['poll'] == null
+          ? null
+          : Poll.fromJson(json['poll'] as Map<String, dynamic>),
+      poll_answer: json['poll_answer'] == null
+          ? null
+          : PollAnswer.fromJson(json['poll_answer'] as Map<String, dynamic>),
+      my_chat_member: json['my_chat_member'] == null
+          ? null
+          : ChatMemberUpdated.fromJson(
+              json['my_chat_member'] as Map<String, dynamic>),
+      chat_member: json['chat_member'] == null
+          ? null
+          : ChatMemberUpdated.fromJson(
+              json['chat_member'] as Map<String, dynamic>),
+      chat_join_request: json['chat_join_request'] == null
+          ? null
+          : ChatJoinRequest.fromJson(
+              json['chat_join_request'] as Map<String, dynamic>),
+    );
 
 Map<String, dynamic> _$UpdateToJson(Update instance) {
   final val = <String, dynamic>{
@@ -89,20 +88,18 @@ Map<String, dynamic> _$UpdateToJson(Update instance) {
   return val;
 }
 
-WebhookInfo _$WebhookInfoFromJson(Map<String, dynamic> json) {
-  return WebhookInfo(
-    url: json['url'] as String,
-    has_custom_certificate: json['has_custom_certificate'] as bool,
-    pending_update_count: json['pending_update_count'] as int,
-    ip_address: json['ip_address'] as String?,
-    last_error_date: json['last_error_date'] as int?,
-    last_error_message: json['last_error_message'] as String?,
-    max_connections: json['max_connections'] as int?,
-    allowed_updates: (json['allowed_updates'] as List<dynamic>?)
-        ?.map((e) => e as String)
-        .toList(),
-  );
-}
+WebhookInfo _$WebhookInfoFromJson(Map<String, dynamic> json) => WebhookInfo(
+      url: json['url'] as String,
+      has_custom_certificate: json['has_custom_certificate'] as bool,
+      pending_update_count: json['pending_update_count'] as int,
+      ip_address: json['ip_address'] as String?,
+      last_error_date: json['last_error_date'] as int?,
+      last_error_message: json['last_error_message'] as String?,
+      max_connections: json['max_connections'] as int?,
+      allowed_updates: (json['allowed_updates'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+    );
 
 Map<String, dynamic> _$WebhookInfoToJson(WebhookInfo instance) {
   final val = <String, dynamic>{
@@ -125,19 +122,17 @@ Map<String, dynamic> _$WebhookInfoToJson(WebhookInfo instance) {
   return val;
 }
 
-User _$UserFromJson(Map<String, dynamic> json) {
-  return User(
-    id: json['id'] as int,
-    is_bot: json['is_bot'] as bool,
-    first_name: json['first_name'] as String,
-    last_name: json['last_name'] as String?,
-    username: json['username'] as String?,
-    language_code: json['language_code'] as String?,
-    can_join_groups: json['can_join_groups'] as bool?,
-    can_read_all_group_messages: json['can_read_all_group_messages'] as bool?,
-    supports_inline_queries: json['supports_inline_queries'] as bool?,
-  );
-}
+User _$UserFromJson(Map<String, dynamic> json) => User(
+      id: json['id'] as int,
+      is_bot: json['is_bot'] as bool,
+      first_name: json['first_name'] as String,
+      last_name: json['last_name'] as String?,
+      username: json['username'] as String?,
+      language_code: json['language_code'] as String?,
+      can_join_groups: json['can_join_groups'] as bool?,
+      can_read_all_group_messages: json['can_read_all_group_messages'] as bool?,
+      supports_inline_queries: json['supports_inline_queries'] as bool?,
+    );
 
 Map<String, dynamic> _$UserToJson(User instance) {
   final val = <String, dynamic>{
@@ -162,37 +157,36 @@ Map<String, dynamic> _$UserToJson(User instance) {
   return val;
 }
 
-Chat _$ChatFromJson(Map<String, dynamic> json) {
-  return Chat(
-    id: json['id'] as int,
-    type: json['type'] as String,
-    title: json['title'] as String?,
-    username: json['username'] as String?,
-    first_name: json['first_name'] as String?,
-    last_name: json['last_name'] as String?,
-    photo: json['photo'] == null
-        ? null
-        : ChatPhoto.fromJson(json['photo'] as Map<String, dynamic>),
-    bio: json['bio'] as String?,
-    has_private_forwards: json['has_private_forwards'] as bool?,
-    description: json['description'] as String?,
-    invite_link: json['invite_link'] as String?,
-    pinned_message: json['pinned_message'] == null
-        ? null
-        : Message.fromJson(json['pinned_message'] as Map<String, dynamic>),
-    permissions: json['permissions'] == null
-        ? null
-        : ChatPermissions.fromJson(json['permissions'] as Map<String, dynamic>),
-    slow_mode_delay: json['slow_mode_delay'] as int?,
-    has_protected_content: json['has_protected_content'] as bool?,
-    sticker_set_name: json['sticker_set_name'] as String?,
-    can_set_sticker_set: json['can_set_sticker_set'] as bool?,
-    linked_chat_id: json['linked_chat_id'] as int?,
-    location: json['location'] == null
-        ? null
-        : ChatLocation.fromJson(json['location'] as Map<String, dynamic>),
-  );
-}
+Chat _$ChatFromJson(Map<String, dynamic> json) => Chat(
+      id: json['id'] as int,
+      type: json['type'] as String,
+      title: json['title'] as String?,
+      username: json['username'] as String?,
+      first_name: json['first_name'] as String?,
+      last_name: json['last_name'] as String?,
+      photo: json['photo'] == null
+          ? null
+          : ChatPhoto.fromJson(json['photo'] as Map<String, dynamic>),
+      bio: json['bio'] as String?,
+      has_private_forwards: json['has_private_forwards'] as bool?,
+      description: json['description'] as String?,
+      invite_link: json['invite_link'] as String?,
+      pinned_message: json['pinned_message'] == null
+          ? null
+          : Message.fromJson(json['pinned_message'] as Map<String, dynamic>),
+      permissions: json['permissions'] == null
+          ? null
+          : ChatPermissions.fromJson(
+              json['permissions'] as Map<String, dynamic>),
+      slow_mode_delay: json['slow_mode_delay'] as int?,
+      has_protected_content: json['has_protected_content'] as bool?,
+      sticker_set_name: json['sticker_set_name'] as String?,
+      can_set_sticker_set: json['can_set_sticker_set'] as bool?,
+      linked_chat_id: json['linked_chat_id'] as int?,
+      location: json['location'] == null
+          ? null
+          : ChatLocation.fromJson(json['location'] as Map<String, dynamic>),
+    );
 
 Map<String, dynamic> _$ChatToJson(Chat instance) {
   final val = <String, dynamic>{
@@ -226,151 +220,151 @@ Map<String, dynamic> _$ChatToJson(Chat instance) {
   return val;
 }
 
-Message _$MessageFromJson(Map<String, dynamic> json) {
-  return Message(
-    message_id: json['message_id'] as int,
-    from: json['from'] == null
-        ? null
-        : User.fromJson(json['from'] as Map<String, dynamic>),
-    sender_chat: json['sender_chat'] == null
-        ? null
-        : Chat.fromJson(json['sender_chat'] as Map<String, dynamic>),
-    date: json['date'] as int,
-    chat: Chat.fromJson(json['chat'] as Map<String, dynamic>),
-    forward_from: json['forward_from'] == null
-        ? null
-        : User.fromJson(json['forward_from'] as Map<String, dynamic>),
-    forward_from_chat: json['forward_from_chat'] == null
-        ? null
-        : Chat.fromJson(json['forward_from_chat'] as Map<String, dynamic>),
-    forward_from_message_id: json['forward_from_message_id'] as int?,
-    forward_signature: json['forward_signature'] as String?,
-    forward_sender_name: json['forward_sender_name'] as String?,
-    forward_date: json['forward_date'] as int?,
-    is_automatic_forward: json['is_automatic_forward'] as bool?,
-    reply_to_message: json['reply_to_message'] == null
-        ? null
-        : Message.fromJson(json['reply_to_message'] as Map<String, dynamic>),
-    via_bot: json['via_bot'] == null
-        ? null
-        : User.fromJson(json['via_bot'] as Map<String, dynamic>),
-    edit_date: json['edit_date'] as int?,
-    has_protected_content: json['has_protected_content'] as bool?,
-    media_group_id: json['media_group_id'] as String?,
-    author_signature: json['author_signature'] as String?,
-    text: json['text'] as String?,
-    entities: (json['entities'] as List<dynamic>?)
-        ?.map((e) => MessageEntity.fromJson(e as Map<String, dynamic>))
-        .toList(),
-    animation: json['animation'] == null
-        ? null
-        : Animation.fromJson(json['animation'] as Map<String, dynamic>),
-    audio: json['audio'] == null
-        ? null
-        : Audio.fromJson(json['audio'] as Map<String, dynamic>),
-    document: json['document'] == null
-        ? null
-        : Document.fromJson(json['document'] as Map<String, dynamic>),
-    photo: (json['photo'] as List<dynamic>?)
-        ?.map((e) => PhotoSize.fromJson(e as Map<String, dynamic>))
-        .toList(),
-    sticker: json['sticker'] == null
-        ? null
-        : Sticker.fromJson(json['sticker'] as Map<String, dynamic>),
-    video: json['video'] == null
-        ? null
-        : Video.fromJson(json['video'] as Map<String, dynamic>),
-    video_note: json['video_note'] == null
-        ? null
-        : VideoNote.fromJson(json['video_note'] as Map<String, dynamic>),
-    voice: json['voice'] == null
-        ? null
-        : Voice.fromJson(json['voice'] as Map<String, dynamic>),
-    caption: json['caption'] as String?,
-    caption_entities: (json['caption_entities'] as List<dynamic>?)
-        ?.map((e) => MessageEntity.fromJson(e as Map<String, dynamic>))
-        .toList(),
-    contact: json['contact'] == null
-        ? null
-        : Contact.fromJson(json['contact'] as Map<String, dynamic>),
-    dice: json['dice'] == null
-        ? null
-        : Dice.fromJson(json['dice'] as Map<String, dynamic>),
-    game: json['game'] == null
-        ? null
-        : Game.fromJson(json['game'] as Map<String, dynamic>),
-    poll: json['poll'] == null
-        ? null
-        : Poll.fromJson(json['poll'] as Map<String, dynamic>),
-    venue: json['venue'] == null
-        ? null
-        : Venue.fromJson(json['venue'] as Map<String, dynamic>),
-    location: json['location'] == null
-        ? null
-        : Location.fromJson(json['location'] as Map<String, dynamic>),
-    new_chat_members: (json['new_chat_members'] as List<dynamic>?)
-        ?.map((e) => User.fromJson(e as Map<String, dynamic>))
-        .toList(),
-    left_chat_member: json['left_chat_member'] == null
-        ? null
-        : User.fromJson(json['left_chat_member'] as Map<String, dynamic>),
-    new_chat_title: json['new_chat_title'] as String?,
-    new_chat_photo: (json['new_chat_photo'] as List<dynamic>?)
-        ?.map((e) => PhotoSize.fromJson(e as Map<String, dynamic>))
-        .toList(),
-    delete_chat_photo: json['delete_chat_photo'] as bool?,
-    group_chat_created: json['group_chat_created'] as bool?,
-    supergroup_chat_created: json['supergroup_chat_created'] as bool?,
-    channel_chat_created: json['channel_chat_created'] as bool?,
-    message_auto_delete_timer_changed:
-        json['message_auto_delete_timer_changed'] == null
-            ? null
-            : MessageAutoDeleteTimerChanged.fromJson(
-                json['message_auto_delete_timer_changed']
-                    as Map<String, dynamic>),
-    migrate_to_chat_id: json['migrate_to_chat_id'] as int?,
-    migrate_from_chat_id: json['migrate_from_chat_id'] as int?,
-    pinned_message: json['pinned_message'] == null
-        ? null
-        : Message.fromJson(json['pinned_message'] as Map<String, dynamic>),
-    invoice: json['invoice'] == null
-        ? null
-        : Invoice.fromJson(json['invoice'] as Map<String, dynamic>),
-    successful_payment: json['successful_payment'] == null
-        ? null
-        : SuccessfulPayment.fromJson(
-            json['successful_payment'] as Map<String, dynamic>),
-    connected_website: json['connected_website'] as String?,
-    passport_data: json['passport_data'] == null
-        ? null
-        : PassportData.fromJson(json['passport_data'] as Map<String, dynamic>),
-    proximity_alert_triggered: json['proximity_alert_triggered'] == null
-        ? null
-        : ProximityAlertTriggered.fromJson(
-            json['proximity_alert_triggered'] as Map<String, dynamic>),
-    voice_chat_scheduled: json['voice_chat_scheduled'] == null
-        ? null
-        : VoiceChatScheduled.fromJson(
-            json['voice_chat_scheduled'] as Map<String, dynamic>),
-    voice_chat_started: json['voice_chat_started'] == null
-        ? null
-        : VoiceChatStarted.fromJson(
-            json['voice_chat_started'] as Map<String, dynamic>),
-    voice_chat_ended: json['voice_chat_ended'] == null
-        ? null
-        : VoiceChatEnded.fromJson(
-            json['voice_chat_ended'] as Map<String, dynamic>),
-    voice_chat_participants_invited: json['voice_chat_participants_invited'] ==
-            null
-        ? null
-        : VoiceChatParticipantsInvited.fromJson(
-            json['voice_chat_participants_invited'] as Map<String, dynamic>),
-    reply_markup: json['reply_markup'] == null
-        ? null
-        : InlineKeyboardMarkup.fromJson(
-            json['reply_markup'] as Map<String, dynamic>),
-  );
-}
+Message _$MessageFromJson(Map<String, dynamic> json) => Message(
+      message_id: json['message_id'] as int,
+      from: json['from'] == null
+          ? null
+          : User.fromJson(json['from'] as Map<String, dynamic>),
+      sender_chat: json['sender_chat'] == null
+          ? null
+          : Chat.fromJson(json['sender_chat'] as Map<String, dynamic>),
+      date: json['date'] as int,
+      chat: Chat.fromJson(json['chat'] as Map<String, dynamic>),
+      forward_from: json['forward_from'] == null
+          ? null
+          : User.fromJson(json['forward_from'] as Map<String, dynamic>),
+      forward_from_chat: json['forward_from_chat'] == null
+          ? null
+          : Chat.fromJson(json['forward_from_chat'] as Map<String, dynamic>),
+      forward_from_message_id: json['forward_from_message_id'] as int?,
+      forward_signature: json['forward_signature'] as String?,
+      forward_sender_name: json['forward_sender_name'] as String?,
+      forward_date: json['forward_date'] as int?,
+      is_automatic_forward: json['is_automatic_forward'] as bool?,
+      reply_to_message: json['reply_to_message'] == null
+          ? null
+          : Message.fromJson(json['reply_to_message'] as Map<String, dynamic>),
+      via_bot: json['via_bot'] == null
+          ? null
+          : User.fromJson(json['via_bot'] as Map<String, dynamic>),
+      edit_date: json['edit_date'] as int?,
+      has_protected_content: json['has_protected_content'] as bool?,
+      media_group_id: json['media_group_id'] as String?,
+      author_signature: json['author_signature'] as String?,
+      text: json['text'] as String?,
+      entities: (json['entities'] as List<dynamic>?)
+          ?.map((e) => MessageEntity.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      animation: json['animation'] == null
+          ? null
+          : Animation.fromJson(json['animation'] as Map<String, dynamic>),
+      audio: json['audio'] == null
+          ? null
+          : Audio.fromJson(json['audio'] as Map<String, dynamic>),
+      document: json['document'] == null
+          ? null
+          : Document.fromJson(json['document'] as Map<String, dynamic>),
+      photo: (json['photo'] as List<dynamic>?)
+          ?.map((e) => PhotoSize.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      sticker: json['sticker'] == null
+          ? null
+          : Sticker.fromJson(json['sticker'] as Map<String, dynamic>),
+      video: json['video'] == null
+          ? null
+          : Video.fromJson(json['video'] as Map<String, dynamic>),
+      video_note: json['video_note'] == null
+          ? null
+          : VideoNote.fromJson(json['video_note'] as Map<String, dynamic>),
+      voice: json['voice'] == null
+          ? null
+          : Voice.fromJson(json['voice'] as Map<String, dynamic>),
+      caption: json['caption'] as String?,
+      caption_entities: (json['caption_entities'] as List<dynamic>?)
+          ?.map((e) => MessageEntity.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      contact: json['contact'] == null
+          ? null
+          : Contact.fromJson(json['contact'] as Map<String, dynamic>),
+      dice: json['dice'] == null
+          ? null
+          : Dice.fromJson(json['dice'] as Map<String, dynamic>),
+      game: json['game'] == null
+          ? null
+          : Game.fromJson(json['game'] as Map<String, dynamic>),
+      poll: json['poll'] == null
+          ? null
+          : Poll.fromJson(json['poll'] as Map<String, dynamic>),
+      venue: json['venue'] == null
+          ? null
+          : Venue.fromJson(json['venue'] as Map<String, dynamic>),
+      location: json['location'] == null
+          ? null
+          : Location.fromJson(json['location'] as Map<String, dynamic>),
+      new_chat_members: (json['new_chat_members'] as List<dynamic>?)
+          ?.map((e) => User.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      left_chat_member: json['left_chat_member'] == null
+          ? null
+          : User.fromJson(json['left_chat_member'] as Map<String, dynamic>),
+      new_chat_title: json['new_chat_title'] as String?,
+      new_chat_photo: (json['new_chat_photo'] as List<dynamic>?)
+          ?.map((e) => PhotoSize.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      delete_chat_photo: json['delete_chat_photo'] as bool?,
+      group_chat_created: json['group_chat_created'] as bool?,
+      supergroup_chat_created: json['supergroup_chat_created'] as bool?,
+      channel_chat_created: json['channel_chat_created'] as bool?,
+      message_auto_delete_timer_changed:
+          json['message_auto_delete_timer_changed'] == null
+              ? null
+              : MessageAutoDeleteTimerChanged.fromJson(
+                  json['message_auto_delete_timer_changed']
+                      as Map<String, dynamic>),
+      migrate_to_chat_id: json['migrate_to_chat_id'] as int?,
+      migrate_from_chat_id: json['migrate_from_chat_id'] as int?,
+      pinned_message: json['pinned_message'] == null
+          ? null
+          : Message.fromJson(json['pinned_message'] as Map<String, dynamic>),
+      invoice: json['invoice'] == null
+          ? null
+          : Invoice.fromJson(json['invoice'] as Map<String, dynamic>),
+      successful_payment: json['successful_payment'] == null
+          ? null
+          : SuccessfulPayment.fromJson(
+              json['successful_payment'] as Map<String, dynamic>),
+      connected_website: json['connected_website'] as String?,
+      passport_data: json['passport_data'] == null
+          ? null
+          : PassportData.fromJson(
+              json['passport_data'] as Map<String, dynamic>),
+      proximity_alert_triggered: json['proximity_alert_triggered'] == null
+          ? null
+          : ProximityAlertTriggered.fromJson(
+              json['proximity_alert_triggered'] as Map<String, dynamic>),
+      voice_chat_scheduled: json['voice_chat_scheduled'] == null
+          ? null
+          : VoiceChatScheduled.fromJson(
+              json['voice_chat_scheduled'] as Map<String, dynamic>),
+      voice_chat_started: json['voice_chat_started'] == null
+          ? null
+          : VoiceChatStarted.fromJson(
+              json['voice_chat_started'] as Map<String, dynamic>),
+      voice_chat_ended: json['voice_chat_ended'] == null
+          ? null
+          : VoiceChatEnded.fromJson(
+              json['voice_chat_ended'] as Map<String, dynamic>),
+      voice_chat_participants_invited:
+          json['voice_chat_participants_invited'] == null
+              ? null
+              : VoiceChatParticipantsInvited.fromJson(
+                  json['voice_chat_participants_invited']
+                      as Map<String, dynamic>),
+      reply_markup: json['reply_markup'] == null
+          ? null
+          : InlineKeyboardMarkup.fromJson(
+              json['reply_markup'] as Map<String, dynamic>),
+    );
 
 Map<String, dynamic> _$MessageToJson(Message instance) {
   final val = <String, dynamic>{
@@ -449,28 +443,25 @@ Map<String, dynamic> _$MessageToJson(Message instance) {
   return val;
 }
 
-MessageId _$MessageIdFromJson(Map<String, dynamic> json) {
-  return MessageId(
-    message_id: json['message_id'] as int,
-  );
-}
+MessageId _$MessageIdFromJson(Map<String, dynamic> json) => MessageId(
+      message_id: json['message_id'] as int,
+    );
 
 Map<String, dynamic> _$MessageIdToJson(MessageId instance) => <String, dynamic>{
       'message_id': instance.message_id,
     };
 
-MessageEntity _$MessageEntityFromJson(Map<String, dynamic> json) {
-  return MessageEntity(
-    type: json['type'] as String,
-    offset: json['offset'] as int,
-    length: json['length'] as int,
-    url: json['url'] as String?,
-    user: json['user'] == null
-        ? null
-        : User.fromJson(json['user'] as Map<String, dynamic>),
-    language: json['language'] as String?,
-  );
-}
+MessageEntity _$MessageEntityFromJson(Map<String, dynamic> json) =>
+    MessageEntity(
+      type: json['type'] as String,
+      offset: json['offset'] as int,
+      length: json['length'] as int,
+      url: json['url'] as String?,
+      user: json['user'] == null
+          ? null
+          : User.fromJson(json['user'] as Map<String, dynamic>),
+      language: json['language'] as String?,
+    );
 
 Map<String, dynamic> _$MessageEntityToJson(MessageEntity instance) {
   final val = <String, dynamic>{
@@ -491,15 +482,13 @@ Map<String, dynamic> _$MessageEntityToJson(MessageEntity instance) {
   return val;
 }
 
-PhotoSize _$PhotoSizeFromJson(Map<String, dynamic> json) {
-  return PhotoSize(
-    file_id: json['file_id'] as String,
-    file_unique_id: json['file_unique_id'] as String,
-    width: json['width'] as int,
-    height: json['height'] as int,
-    file_size: json['file_size'] as int?,
-  );
-}
+PhotoSize _$PhotoSizeFromJson(Map<String, dynamic> json) => PhotoSize(
+      file_id: json['file_id'] as String,
+      file_unique_id: json['file_unique_id'] as String,
+      width: json['width'] as int,
+      height: json['height'] as int,
+      file_size: json['file_size'] as int?,
+    );
 
 Map<String, dynamic> _$PhotoSizeToJson(PhotoSize instance) {
   final val = <String, dynamic>{
@@ -519,21 +508,19 @@ Map<String, dynamic> _$PhotoSizeToJson(PhotoSize instance) {
   return val;
 }
 
-Audio _$AudioFromJson(Map<String, dynamic> json) {
-  return Audio(
-    file_id: json['file_id'] as String,
-    file_unique_id: json['file_unique_id'] as String,
-    duration: json['duration'] as int,
-    performer: json['performer'] as String?,
-    title: json['title'] as String?,
-    file_name: json['file_name'] as String?,
-    mime_type: json['mime_type'] as String?,
-    file_size: json['file_size'] as int?,
-    thumb: json['thumb'] == null
-        ? null
-        : PhotoSize.fromJson(json['thumb'] as Map<String, dynamic>),
-  );
-}
+Audio _$AudioFromJson(Map<String, dynamic> json) => Audio(
+      file_id: json['file_id'] as String,
+      file_unique_id: json['file_unique_id'] as String,
+      duration: json['duration'] as int,
+      performer: json['performer'] as String?,
+      title: json['title'] as String?,
+      file_name: json['file_name'] as String?,
+      mime_type: json['mime_type'] as String?,
+      file_size: json['file_size'] as int?,
+      thumb: json['thumb'] == null
+          ? null
+          : PhotoSize.fromJson(json['thumb'] as Map<String, dynamic>),
+    );
 
 Map<String, dynamic> _$AudioToJson(Audio instance) {
   final val = <String, dynamic>{
@@ -557,18 +544,16 @@ Map<String, dynamic> _$AudioToJson(Audio instance) {
   return val;
 }
 
-Document _$DocumentFromJson(Map<String, dynamic> json) {
-  return Document(
-    file_id: json['file_id'] as String,
-    file_unique_id: json['file_unique_id'] as String,
-    thumb: json['thumb'] == null
-        ? null
-        : PhotoSize.fromJson(json['thumb'] as Map<String, dynamic>),
-    file_name: json['file_name'] as String?,
-    mime_type: json['mime_type'] as String?,
-    file_size: json['file_size'] as int?,
-  );
-}
+Document _$DocumentFromJson(Map<String, dynamic> json) => Document(
+      file_id: json['file_id'] as String,
+      file_unique_id: json['file_unique_id'] as String,
+      thumb: json['thumb'] == null
+          ? null
+          : PhotoSize.fromJson(json['thumb'] as Map<String, dynamic>),
+      file_name: json['file_name'] as String?,
+      mime_type: json['mime_type'] as String?,
+      file_size: json['file_size'] as int?,
+    );
 
 Map<String, dynamic> _$DocumentToJson(Document instance) {
   final val = <String, dynamic>{
@@ -589,21 +574,19 @@ Map<String, dynamic> _$DocumentToJson(Document instance) {
   return val;
 }
 
-Video _$VideoFromJson(Map<String, dynamic> json) {
-  return Video(
-    file_id: json['file_id'] as String,
-    file_unique_id: json['file_unique_id'] as String,
-    width: json['width'] as int,
-    height: json['height'] as int,
-    duration: json['duration'] as int,
-    thumb: json['thumb'] == null
-        ? null
-        : PhotoSize.fromJson(json['thumb'] as Map<String, dynamic>),
-    file_name: json['file_name'] as String?,
-    mime_type: json['mime_type'] as String?,
-    file_size: json['file_size'] as int?,
-  );
-}
+Video _$VideoFromJson(Map<String, dynamic> json) => Video(
+      file_id: json['file_id'] as String,
+      file_unique_id: json['file_unique_id'] as String,
+      width: json['width'] as int,
+      height: json['height'] as int,
+      duration: json['duration'] as int,
+      thumb: json['thumb'] == null
+          ? null
+          : PhotoSize.fromJson(json['thumb'] as Map<String, dynamic>),
+      file_name: json['file_name'] as String?,
+      mime_type: json['mime_type'] as String?,
+      file_size: json['file_size'] as int?,
+    );
 
 Map<String, dynamic> _$VideoToJson(Video instance) {
   final val = <String, dynamic>{
@@ -627,21 +610,19 @@ Map<String, dynamic> _$VideoToJson(Video instance) {
   return val;
 }
 
-Animation _$AnimationFromJson(Map<String, dynamic> json) {
-  return Animation(
-    file_id: json['file_id'] as String,
-    file_unique_id: json['file_unique_id'] as String,
-    width: json['width'] as int,
-    height: json['height'] as int,
-    duration: json['duration'] as int,
-    thumb: json['thumb'] == null
-        ? null
-        : PhotoSize.fromJson(json['thumb'] as Map<String, dynamic>),
-    file_name: json['file_name'] as String?,
-    mime_type: json['mime_type'] as String?,
-    file_size: json['file_size'] as int?,
-  );
-}
+Animation _$AnimationFromJson(Map<String, dynamic> json) => Animation(
+      file_id: json['file_id'] as String,
+      file_unique_id: json['file_unique_id'] as String,
+      width: json['width'] as int,
+      height: json['height'] as int,
+      duration: json['duration'] as int,
+      thumb: json['thumb'] == null
+          ? null
+          : PhotoSize.fromJson(json['thumb'] as Map<String, dynamic>),
+      file_name: json['file_name'] as String?,
+      mime_type: json['mime_type'] as String?,
+      file_size: json['file_size'] as int?,
+    );
 
 Map<String, dynamic> _$AnimationToJson(Animation instance) {
   final val = <String, dynamic>{
@@ -665,15 +646,13 @@ Map<String, dynamic> _$AnimationToJson(Animation instance) {
   return val;
 }
 
-Voice _$VoiceFromJson(Map<String, dynamic> json) {
-  return Voice(
-    file_id: json['file_id'] as String,
-    file_unique_id: json['file_unique_id'] as String,
-    duration: json['duration'] as int,
-    mime_type: json['mime_type'] as String?,
-    file_size: json['file_size'] as int?,
-  );
-}
+Voice _$VoiceFromJson(Map<String, dynamic> json) => Voice(
+      file_id: json['file_id'] as String,
+      file_unique_id: json['file_unique_id'] as String,
+      duration: json['duration'] as int,
+      mime_type: json['mime_type'] as String?,
+      file_size: json['file_size'] as int?,
+    );
 
 Map<String, dynamic> _$VoiceToJson(Voice instance) {
   final val = <String, dynamic>{
@@ -693,18 +672,16 @@ Map<String, dynamic> _$VoiceToJson(Voice instance) {
   return val;
 }
 
-VideoNote _$VideoNoteFromJson(Map<String, dynamic> json) {
-  return VideoNote(
-    file_id: json['file_id'] as String,
-    file_unique_id: json['file_unique_id'] as String,
-    length: json['length'] as int,
-    duration: json['duration'] as int,
-    thumb: json['thumb'] == null
-        ? null
-        : PhotoSize.fromJson(json['thumb'] as Map<String, dynamic>),
-    file_size: json['file_size'] as int?,
-  );
-}
+VideoNote _$VideoNoteFromJson(Map<String, dynamic> json) => VideoNote(
+      file_id: json['file_id'] as String,
+      file_unique_id: json['file_unique_id'] as String,
+      length: json['length'] as int,
+      duration: json['duration'] as int,
+      thumb: json['thumb'] == null
+          ? null
+          : PhotoSize.fromJson(json['thumb'] as Map<String, dynamic>),
+      file_size: json['file_size'] as int?,
+    );
 
 Map<String, dynamic> _$VideoNoteToJson(VideoNote instance) {
   final val = <String, dynamic>{
@@ -725,15 +702,13 @@ Map<String, dynamic> _$VideoNoteToJson(VideoNote instance) {
   return val;
 }
 
-Contact _$ContactFromJson(Map<String, dynamic> json) {
-  return Contact(
-    phone_number: json['phone_number'] as String,
-    first_name: json['first_name'] as String,
-    last_name: json['last_name'] as String?,
-    user_id: json['user_id'] as int?,
-    vcard: json['vcard'] as String?,
-  );
-}
+Contact _$ContactFromJson(Map<String, dynamic> json) => Contact(
+      phone_number: json['phone_number'] as String,
+      first_name: json['first_name'] as String,
+      last_name: json['last_name'] as String?,
+      user_id: json['user_id'] as int?,
+      vcard: json['vcard'] as String?,
+    );
 
 Map<String, dynamic> _$ContactToJson(Contact instance) {
   final val = <String, dynamic>{
@@ -753,14 +728,12 @@ Map<String, dynamic> _$ContactToJson(Contact instance) {
   return val;
 }
 
-LoginUrl _$LoginUrlFromJson(Map<String, dynamic> json) {
-  return LoginUrl(
-    url: json['url'] as String,
-    forward_text: json['forward_text'] as String?,
-    bot_username: json['bot_username'] as String?,
-    request_write_access: json['request_write_access'] as bool?,
-  );
-}
+LoginUrl _$LoginUrlFromJson(Map<String, dynamic> json) => LoginUrl(
+      url: json['url'] as String,
+      forward_text: json['forward_text'] as String?,
+      bot_username: json['bot_username'] as String?,
+      request_write_access: json['request_write_access'] as bool?,
+    );
 
 Map<String, dynamic> _$LoginUrlToJson(LoginUrl instance) {
   final val = <String, dynamic>{
@@ -779,16 +752,14 @@ Map<String, dynamic> _$LoginUrlToJson(LoginUrl instance) {
   return val;
 }
 
-Location _$LocationFromJson(Map<String, dynamic> json) {
-  return Location(
-    longitude: (json['longitude'] as num).toDouble(),
-    latitude: (json['latitude'] as num).toDouble(),
-    horizontal_accuracy: (json['horizontal_accuracy'] as num?)?.toDouble(),
-    live_period: json['live_period'] as int?,
-    heading: json['heading'] as int?,
-    proximity_alert_radius: json['proximity_alert_radius'] as int?,
-  );
-}
+Location _$LocationFromJson(Map<String, dynamic> json) => Location(
+      longitude: (json['longitude'] as num).toDouble(),
+      latitude: (json['latitude'] as num).toDouble(),
+      horizontal_accuracy: (json['horizontal_accuracy'] as num?)?.toDouble(),
+      live_period: json['live_period'] as int?,
+      heading: json['heading'] as int?,
+      proximity_alert_radius: json['proximity_alert_radius'] as int?,
+    );
 
 Map<String, dynamic> _$LocationToJson(Location instance) {
   final val = <String, dynamic>{
@@ -809,17 +780,15 @@ Map<String, dynamic> _$LocationToJson(Location instance) {
   return val;
 }
 
-Venue _$VenueFromJson(Map<String, dynamic> json) {
-  return Venue(
-    location: Location.fromJson(json['location'] as Map<String, dynamic>),
-    title: json['title'] as String,
-    address: json['address'] as String,
-    foursquare_id: json['foursquare_id'] as String?,
-    foursquare_type: json['foursquare_type'] as String?,
-    google_place_id: json['google_place_id'] as String?,
-    google_place_type: json['google_place_type'] as String?,
-  );
-}
+Venue _$VenueFromJson(Map<String, dynamic> json) => Venue(
+      location: Location.fromJson(json['location'] as Map<String, dynamic>),
+      title: json['title'] as String,
+      address: json['address'] as String,
+      foursquare_id: json['foursquare_id'] as String?,
+      foursquare_type: json['foursquare_type'] as String?,
+      google_place_id: json['google_place_id'] as String?,
+      google_place_type: json['google_place_type'] as String?,
+    );
 
 Map<String, dynamic> _$VenueToJson(Venue instance) {
   final val = <String, dynamic>{
@@ -841,12 +810,10 @@ Map<String, dynamic> _$VenueToJson(Venue instance) {
   return val;
 }
 
-PollOption _$PollOptionFromJson(Map<String, dynamic> json) {
-  return PollOption(
-    text: json['text'] as String,
-    voter_count: json['voter_count'] as int,
-  );
-}
+PollOption _$PollOptionFromJson(Map<String, dynamic> json) => PollOption(
+      text: json['text'] as String,
+      voter_count: json['voter_count'] as int,
+    );
 
 Map<String, dynamic> _$PollOptionToJson(PollOption instance) =>
     <String, dynamic>{
@@ -854,14 +821,12 @@ Map<String, dynamic> _$PollOptionToJson(PollOption instance) =>
       'voter_count': instance.voter_count,
     };
 
-PollAnswer _$PollAnswerFromJson(Map<String, dynamic> json) {
-  return PollAnswer(
-    poll_id: json['poll_id'] as String,
-    user: User.fromJson(json['user'] as Map<String, dynamic>),
-    option_ids:
-        (json['option_ids'] as List<dynamic>).map((e) => e as int).toList(),
-  );
-}
+PollAnswer _$PollAnswerFromJson(Map<String, dynamic> json) => PollAnswer(
+      poll_id: json['poll_id'] as String,
+      user: User.fromJson(json['user'] as Map<String, dynamic>),
+      option_ids:
+          (json['option_ids'] as List<dynamic>).map((e) => e as int).toList(),
+    );
 
 Map<String, dynamic> _$PollAnswerToJson(PollAnswer instance) =>
     <String, dynamic>{
@@ -870,27 +835,25 @@ Map<String, dynamic> _$PollAnswerToJson(PollAnswer instance) =>
       'option_ids': instance.option_ids,
     };
 
-Poll _$PollFromJson(Map<String, dynamic> json) {
-  return Poll(
-    id: json['id'] as String,
-    question: json['question'] as String,
-    options: (json['options'] as List<dynamic>)
-        .map((e) => PollOption.fromJson(e as Map<String, dynamic>))
-        .toList(),
-    total_voter_count: json['total_voter_count'] as int,
-    is_closed: json['is_closed'] as bool,
-    is_anonymous: json['is_anonymous'] as bool,
-    type: json['type'] as String,
-    allows_multiple_answers: json['allows_multiple_answers'] as bool,
-    correct_option_id: json['correct_option_id'] as int?,
-    explanation: json['explanation'] as String?,
-    explanation_entities: (json['explanation_entities'] as List<dynamic>?)
-        ?.map((e) => MessageEntity.fromJson(e as Map<String, dynamic>))
-        .toList(),
-    open_period: json['open_period'] as int?,
-    close_date: json['close_date'] as int?,
-  );
-}
+Poll _$PollFromJson(Map<String, dynamic> json) => Poll(
+      id: json['id'] as String,
+      question: json['question'] as String,
+      options: (json['options'] as List<dynamic>)
+          .map((e) => PollOption.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      total_voter_count: json['total_voter_count'] as int,
+      is_closed: json['is_closed'] as bool,
+      is_anonymous: json['is_anonymous'] as bool,
+      type: json['type'] as String,
+      allows_multiple_answers: json['allows_multiple_answers'] as bool,
+      correct_option_id: json['correct_option_id'] as int?,
+      explanation: json['explanation'] as String?,
+      explanation_entities: (json['explanation_entities'] as List<dynamic>?)
+          ?.map((e) => MessageEntity.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      open_period: json['open_period'] as int?,
+      close_date: json['close_date'] as int?,
+    );
 
 Map<String, dynamic> _$PollToJson(Poll instance) {
   final val = <String, dynamic>{
@@ -919,12 +882,10 @@ Map<String, dynamic> _$PollToJson(Poll instance) {
   return val;
 }
 
-Dice _$DiceFromJson(Map<String, dynamic> json) {
-  return Dice(
-    value: json['value'] as int,
-    emoji: json['emoji'] as String,
-  );
-}
+Dice _$DiceFromJson(Map<String, dynamic> json) => Dice(
+      value: json['value'] as int,
+      emoji: json['emoji'] as String,
+    );
 
 Map<String, dynamic> _$DiceToJson(Dice instance) => <String, dynamic>{
       'value': instance.value,
@@ -932,13 +893,12 @@ Map<String, dynamic> _$DiceToJson(Dice instance) => <String, dynamic>{
     };
 
 ProximityAlertTriggered _$ProximityAlertTriggeredFromJson(
-    Map<String, dynamic> json) {
-  return ProximityAlertTriggered(
-    traveler: User.fromJson(json['traveler'] as Map<String, dynamic>),
-    watcher: User.fromJson(json['watcher'] as Map<String, dynamic>),
-    distance: json['distance'] as int,
-  );
-}
+        Map<String, dynamic> json) =>
+    ProximityAlertTriggered(
+      traveler: User.fromJson(json['traveler'] as Map<String, dynamic>),
+      watcher: User.fromJson(json['watcher'] as Map<String, dynamic>),
+      distance: json['distance'] as int,
+    );
 
 Map<String, dynamic> _$ProximityAlertTriggeredToJson(
         ProximityAlertTriggered instance) =>
@@ -949,11 +909,10 @@ Map<String, dynamic> _$ProximityAlertTriggeredToJson(
     };
 
 MessageAutoDeleteTimerChanged _$MessageAutoDeleteTimerChangedFromJson(
-    Map<String, dynamic> json) {
-  return MessageAutoDeleteTimerChanged(
-    message_auto_delete_time: json['message_auto_delete_time'] as int,
-  );
-}
+        Map<String, dynamic> json) =>
+    MessageAutoDeleteTimerChanged(
+      message_auto_delete_time: json['message_auto_delete_time'] as int,
+    );
 
 Map<String, dynamic> _$MessageAutoDeleteTimerChangedToJson(
         MessageAutoDeleteTimerChanged instance) =>
@@ -961,29 +920,26 @@ Map<String, dynamic> _$MessageAutoDeleteTimerChangedToJson(
       'message_auto_delete_time': instance.message_auto_delete_time,
     };
 
-VoiceChatScheduled _$VoiceChatScheduledFromJson(Map<String, dynamic> json) {
-  return VoiceChatScheduled(
-    json['start_date'] as int,
-  );
-}
+VoiceChatScheduled _$VoiceChatScheduledFromJson(Map<String, dynamic> json) =>
+    VoiceChatScheduled(
+      json['start_date'] as int,
+    );
 
 Map<String, dynamic> _$VoiceChatScheduledToJson(VoiceChatScheduled instance) =>
     <String, dynamic>{
       'start_date': instance.start_date,
     };
 
-VoiceChatStarted _$VoiceChatStartedFromJson(Map<String, dynamic> json) {
-  return VoiceChatStarted();
-}
+VoiceChatStarted _$VoiceChatStartedFromJson(Map<String, dynamic> json) =>
+    VoiceChatStarted();
 
 Map<String, dynamic> _$VoiceChatStartedToJson(VoiceChatStarted instance) =>
     <String, dynamic>{};
 
-VoiceChatEnded _$VoiceChatEndedFromJson(Map<String, dynamic> json) {
-  return VoiceChatEnded(
-    duration: json['duration'] as int,
-  );
-}
+VoiceChatEnded _$VoiceChatEndedFromJson(Map<String, dynamic> json) =>
+    VoiceChatEnded(
+      duration: json['duration'] as int,
+    );
 
 Map<String, dynamic> _$VoiceChatEndedToJson(VoiceChatEnded instance) =>
     <String, dynamic>{
@@ -991,13 +947,12 @@ Map<String, dynamic> _$VoiceChatEndedToJson(VoiceChatEnded instance) =>
     };
 
 VoiceChatParticipantsInvited _$VoiceChatParticipantsInvitedFromJson(
-    Map<String, dynamic> json) {
-  return VoiceChatParticipantsInvited(
-    users: (json['users'] as List<dynamic>?)
-        ?.map((e) => User.fromJson(e as Map<String, dynamic>))
-        .toList(),
-  );
-}
+        Map<String, dynamic> json) =>
+    VoiceChatParticipantsInvited(
+      users: (json['users'] as List<dynamic>?)
+          ?.map((e) => User.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
 
 Map<String, dynamic> _$VoiceChatParticipantsInvitedToJson(
     VoiceChatParticipantsInvited instance) {
@@ -1013,16 +968,15 @@ Map<String, dynamic> _$VoiceChatParticipantsInvitedToJson(
   return val;
 }
 
-UserProfilePhotos _$UserProfilePhotosFromJson(Map<String, dynamic> json) {
-  return UserProfilePhotos(
-    total_count: json['total_count'] as int,
-    photos: (json['photos'] as List<dynamic>)
-        .map((e) => (e as List<dynamic>)
-            .map((e) => PhotoSize.fromJson(e as Map<String, dynamic>))
-            .toList())
-        .toList(),
-  );
-}
+UserProfilePhotos _$UserProfilePhotosFromJson(Map<String, dynamic> json) =>
+    UserProfilePhotos(
+      total_count: json['total_count'] as int,
+      photos: (json['photos'] as List<dynamic>)
+          .map((e) => (e as List<dynamic>)
+              .map((e) => PhotoSize.fromJson(e as Map<String, dynamic>))
+              .toList())
+          .toList(),
+    );
 
 Map<String, dynamic> _$UserProfilePhotosToJson(UserProfilePhotos instance) =>
     <String, dynamic>{
@@ -1032,14 +986,12 @@ Map<String, dynamic> _$UserProfilePhotosToJson(UserProfilePhotos instance) =>
           .toList(),
     };
 
-File _$FileFromJson(Map<String, dynamic> json) {
-  return File(
-    file_id: json['file_id'] as String,
-    file_unique_id: json['file_unique_id'] as String,
-    file_size: json['file_size'] as int?,
-    file_path: json['file_path'] as String?,
-  );
-}
+File _$FileFromJson(Map<String, dynamic> json) => File(
+      file_id: json['file_id'] as String,
+      file_unique_id: json['file_unique_id'] as String,
+      file_size: json['file_size'] as int?,
+      file_path: json['file_path'] as String?,
+    );
 
 Map<String, dynamic> _$FileToJson(File instance) {
   final val = <String, dynamic>{
@@ -1058,26 +1010,23 @@ Map<String, dynamic> _$FileToJson(File instance) {
   return val;
 }
 
-ReplyMarkup _$ReplyMarkupFromJson(Map<String, dynamic> json) {
-  return ReplyMarkup();
-}
+ReplyMarkup _$ReplyMarkupFromJson(Map<String, dynamic> json) => ReplyMarkup();
 
 Map<String, dynamic> _$ReplyMarkupToJson(ReplyMarkup instance) =>
     <String, dynamic>{};
 
-ReplyKeyboardMarkup _$ReplyKeyboardMarkupFromJson(Map<String, dynamic> json) {
-  return ReplyKeyboardMarkup(
-    keyboard: (json['keyboard'] as List<dynamic>)
-        .map((e) => (e as List<dynamic>)
-            .map((e) => KeyboardButton.fromJson(e as Map<String, dynamic>))
-            .toList())
-        .toList(),
-    resize_keyboard: json['resize_keyboard'] as bool?,
-    one_time_keyboard: json['one_time_keyboard'] as bool?,
-    input_field_placeholder: json['input_field_placeholder'] as String?,
-    selective: json['selective'] as bool?,
-  );
-}
+ReplyKeyboardMarkup _$ReplyKeyboardMarkupFromJson(Map<String, dynamic> json) =>
+    ReplyKeyboardMarkup(
+      keyboard: (json['keyboard'] as List<dynamic>)
+          .map((e) => (e as List<dynamic>)
+              .map((e) => KeyboardButton.fromJson(e as Map<String, dynamic>))
+              .toList())
+          .toList(),
+      resize_keyboard: json['resize_keyboard'] as bool?,
+      one_time_keyboard: json['one_time_keyboard'] as bool?,
+      input_field_placeholder: json['input_field_placeholder'] as String?,
+      selective: json['selective'] as bool?,
+    );
 
 Map<String, dynamic> _$ReplyKeyboardMarkupToJson(ReplyKeyboardMarkup instance) {
   final val = <String, dynamic>{
@@ -1099,17 +1048,16 @@ Map<String, dynamic> _$ReplyKeyboardMarkupToJson(ReplyKeyboardMarkup instance) {
   return val;
 }
 
-KeyboardButton _$KeyboardButtonFromJson(Map<String, dynamic> json) {
-  return KeyboardButton(
-    text: json['text'] as String,
-    request_contact: json['request_contact'] as bool?,
-    request_location: json['request_location'] as bool?,
-    request_poll: json['request_poll'] == null
-        ? null
-        : KeyboardButtonPollType.fromJson(
-            json['request_poll'] as Map<String, dynamic>),
-  );
-}
+KeyboardButton _$KeyboardButtonFromJson(Map<String, dynamic> json) =>
+    KeyboardButton(
+      text: json['text'] as String,
+      request_contact: json['request_contact'] as bool?,
+      request_location: json['request_location'] as bool?,
+      request_poll: json['request_poll'] == null
+          ? null
+          : KeyboardButtonPollType.fromJson(
+              json['request_poll'] as Map<String, dynamic>),
+    );
 
 Map<String, dynamic> _$KeyboardButtonToJson(KeyboardButton instance) {
   final val = <String, dynamic>{
@@ -1129,11 +1077,10 @@ Map<String, dynamic> _$KeyboardButtonToJson(KeyboardButton instance) {
 }
 
 KeyboardButtonPollType _$KeyboardButtonPollTypeFromJson(
-    Map<String, dynamic> json) {
-  return KeyboardButtonPollType(
-    type: json['type'] as String?,
-  );
-}
+        Map<String, dynamic> json) =>
+    KeyboardButtonPollType(
+      type: json['type'] as String?,
+    );
 
 Map<String, dynamic> _$KeyboardButtonPollTypeToJson(
     KeyboardButtonPollType instance) {
@@ -1149,12 +1096,11 @@ Map<String, dynamic> _$KeyboardButtonPollTypeToJson(
   return val;
 }
 
-ReplyKeyboardRemove _$ReplyKeyboardRemoveFromJson(Map<String, dynamic> json) {
-  return ReplyKeyboardRemove(
-    remove_keyboard: json['remove_keyboard'] as bool,
-    selective: json['selective'] as bool?,
-  );
-}
+ReplyKeyboardRemove _$ReplyKeyboardRemoveFromJson(Map<String, dynamic> json) =>
+    ReplyKeyboardRemove(
+      remove_keyboard: json['remove_keyboard'] as bool,
+      selective: json['selective'] as bool?,
+    );
 
 Map<String, dynamic> _$ReplyKeyboardRemoveToJson(ReplyKeyboardRemove instance) {
   final val = <String, dynamic>{
@@ -1171,16 +1117,16 @@ Map<String, dynamic> _$ReplyKeyboardRemoveToJson(ReplyKeyboardRemove instance) {
   return val;
 }
 
-InlineKeyboardMarkup _$InlineKeyboardMarkupFromJson(Map<String, dynamic> json) {
-  return InlineKeyboardMarkup(
-    inline_keyboard: (json['inline_keyboard'] as List<dynamic>)
-        .map((e) => (e as List<dynamic>)
-            .map(
-                (e) => InlineKeyboardButton.fromJson(e as Map<String, dynamic>))
-            .toList())
-        .toList(),
-  );
-}
+InlineKeyboardMarkup _$InlineKeyboardMarkupFromJson(
+        Map<String, dynamic> json) =>
+    InlineKeyboardMarkup(
+      inline_keyboard: (json['inline_keyboard'] as List<dynamic>)
+          .map((e) => (e as List<dynamic>)
+              .map((e) =>
+                  InlineKeyboardButton.fromJson(e as Map<String, dynamic>))
+              .toList())
+          .toList(),
+    );
 
 Map<String, dynamic> _$InlineKeyboardMarkupToJson(
         InlineKeyboardMarkup instance) =>
@@ -1190,23 +1136,24 @@ Map<String, dynamic> _$InlineKeyboardMarkupToJson(
           .toList(),
     };
 
-InlineKeyboardButton _$InlineKeyboardButtonFromJson(Map<String, dynamic> json) {
-  return InlineKeyboardButton(
-    text: json['text'] as String,
-    url: json['url'] as String?,
-    login_url: json['login_url'] == null
-        ? null
-        : LoginUrl.fromJson(json['login_url'] as Map<String, dynamic>),
-    callback_data: json['callback_data'] as String?,
-    switch_inline_query: json['switch_inline_query'] as String?,
-    switch_inline_query_current_chat:
-        json['switch_inline_query_current_chat'] as String?,
-    callback_game: json['callback_game'] == null
-        ? null
-        : CallbackGame.fromJson(json['callback_game'] as Map<String, dynamic>),
-    pay: json['pay'] as bool?,
-  );
-}
+InlineKeyboardButton _$InlineKeyboardButtonFromJson(
+        Map<String, dynamic> json) =>
+    InlineKeyboardButton(
+      text: json['text'] as String,
+      url: json['url'] as String?,
+      login_url: json['login_url'] == null
+          ? null
+          : LoginUrl.fromJson(json['login_url'] as Map<String, dynamic>),
+      callback_data: json['callback_data'] as String?,
+      switch_inline_query: json['switch_inline_query'] as String?,
+      switch_inline_query_current_chat:
+          json['switch_inline_query_current_chat'] as String?,
+      callback_game: json['callback_game'] == null
+          ? null
+          : CallbackGame.fromJson(
+              json['callback_game'] as Map<String, dynamic>),
+      pay: json['pay'] as bool?,
+    );
 
 Map<String, dynamic> _$InlineKeyboardButtonToJson(
     InlineKeyboardButton instance) {
@@ -1231,19 +1178,18 @@ Map<String, dynamic> _$InlineKeyboardButtonToJson(
   return val;
 }
 
-CallbackQuery _$CallbackQueryFromJson(Map<String, dynamic> json) {
-  return CallbackQuery(
-    id: json['id'] as String,
-    from: User.fromJson(json['from'] as Map<String, dynamic>),
-    message: json['message'] == null
-        ? null
-        : Message.fromJson(json['message'] as Map<String, dynamic>),
-    inline_message_id: json['inline_message_id'] as String?,
-    chat_instance: json['chat_instance'] as String?,
-    data: json['data'] as String?,
-    game_short_name: json['game_short_name'] as String?,
-  );
-}
+CallbackQuery _$CallbackQueryFromJson(Map<String, dynamic> json) =>
+    CallbackQuery(
+      id: json['id'] as String,
+      from: User.fromJson(json['from'] as Map<String, dynamic>),
+      message: json['message'] == null
+          ? null
+          : Message.fromJson(json['message'] as Map<String, dynamic>),
+      inline_message_id: json['inline_message_id'] as String?,
+      chat_instance: json['chat_instance'] as String?,
+      data: json['data'] as String?,
+      game_short_name: json['game_short_name'] as String?,
+    );
 
 Map<String, dynamic> _$CallbackQueryToJson(CallbackQuery instance) {
   final val = <String, dynamic>{
@@ -1265,13 +1211,11 @@ Map<String, dynamic> _$CallbackQueryToJson(CallbackQuery instance) {
   return val;
 }
 
-ForceReply _$ForceReplyFromJson(Map<String, dynamic> json) {
-  return ForceReply(
-    force_reply: json['force_reply'] as bool,
-    input_field_placeholder: json['input_field_placeholder'] as String?,
-    selective: json['selective'] as bool?,
-  );
-}
+ForceReply _$ForceReplyFromJson(Map<String, dynamic> json) => ForceReply(
+      force_reply: json['force_reply'] as bool,
+      input_field_placeholder: json['input_field_placeholder'] as String?,
+      selective: json['selective'] as bool?,
+    );
 
 Map<String, dynamic> _$ForceReplyToJson(ForceReply instance) {
   final val = <String, dynamic>{
@@ -1289,14 +1233,12 @@ Map<String, dynamic> _$ForceReplyToJson(ForceReply instance) {
   return val;
 }
 
-ChatPhoto _$ChatPhotoFromJson(Map<String, dynamic> json) {
-  return ChatPhoto(
-    small_file_id: json['small_file_id'] as String,
-    small_file_unique_id: json['small_file_unique_id'] as String,
-    big_file_id: json['big_file_id'] as String,
-    big_file_unique_id: json['big_file_unique_id'] as String,
-  );
-}
+ChatPhoto _$ChatPhotoFromJson(Map<String, dynamic> json) => ChatPhoto(
+      small_file_id: json['small_file_id'] as String,
+      small_file_unique_id: json['small_file_unique_id'] as String,
+      big_file_id: json['big_file_id'] as String,
+      big_file_unique_id: json['big_file_unique_id'] as String,
+    );
 
 Map<String, dynamic> _$ChatPhotoToJson(ChatPhoto instance) => <String, dynamic>{
       'small_file_id': instance.small_file_id,
@@ -1305,19 +1247,18 @@ Map<String, dynamic> _$ChatPhotoToJson(ChatPhoto instance) => <String, dynamic>{
       'big_file_unique_id': instance.big_file_unique_id,
     };
 
-ChatInviteLink _$ChatInviteLinkFromJson(Map<String, dynamic> json) {
-  return ChatInviteLink(
-    invite_link: json['invite_link'] as String,
-    creator: User.fromJson(json['creator'] as Map<String, dynamic>),
-    creates_join_request: json['creates_join_request'] as bool,
-    is_primary: json['is_primary'] as bool,
-    is_revoked: json['is_revoked'] as bool,
-    name: json['name'] as String?,
-    expire_date: json['expire_date'] as int?,
-    member_limit: json['member_limit'] as int?,
-    pending_join_request_count: json['pending_join_request_count'] as int?,
-  );
-}
+ChatInviteLink _$ChatInviteLinkFromJson(Map<String, dynamic> json) =>
+    ChatInviteLink(
+      invite_link: json['invite_link'] as String,
+      creator: User.fromJson(json['creator'] as Map<String, dynamic>),
+      creates_join_request: json['creates_join_request'] as bool,
+      is_primary: json['is_primary'] as bool,
+      is_revoked: json['is_revoked'] as bool,
+      name: json['name'] as String?,
+      expire_date: json['expire_date'] as int?,
+      member_limit: json['member_limit'] as int?,
+      pending_join_request_count: json['pending_join_request_count'] as int?,
+    );
 
 Map<String, dynamic> _$ChatInviteLinkToJson(ChatInviteLink instance) {
   final val = <String, dynamic>{
@@ -1342,12 +1283,10 @@ Map<String, dynamic> _$ChatInviteLinkToJson(ChatInviteLink instance) {
   return val;
 }
 
-ChatMember _$ChatMemberFromJson(Map<String, dynamic> json) {
-  return ChatMember(
-    status: json['status'] as String,
-    user: User.fromJson(json['user'] as Map<String, dynamic>),
-  );
-}
+ChatMember _$ChatMemberFromJson(Map<String, dynamic> json) => ChatMember(
+      status: json['status'] as String,
+      user: User.fromJson(json['user'] as Map<String, dynamic>),
+    );
 
 Map<String, dynamic> _$ChatMemberToJson(ChatMember instance) =>
     <String, dynamic>{
@@ -1355,14 +1294,13 @@ Map<String, dynamic> _$ChatMemberToJson(ChatMember instance) =>
       'user': instance.user.toJson(),
     };
 
-ChatMemberOwner _$ChatMemberOwnerFromJson(Map<String, dynamic> json) {
-  return ChatMemberOwner(
-    user: User.fromJson(json['user'] as Map<String, dynamic>),
-    status: json['status'] as String,
-    is_anonymous: json['is_anonymous'] as bool,
-    custom_title: json['custom_title'] as String?,
-  );
-}
+ChatMemberOwner _$ChatMemberOwnerFromJson(Map<String, dynamic> json) =>
+    ChatMemberOwner(
+      user: User.fromJson(json['user'] as Map<String, dynamic>),
+      status: json['status'] as String,
+      is_anonymous: json['is_anonymous'] as bool,
+      custom_title: json['custom_title'] as String?,
+    );
 
 Map<String, dynamic> _$ChatMemberOwnerToJson(ChatMemberOwner instance) {
   final val = <String, dynamic>{
@@ -1382,25 +1320,24 @@ Map<String, dynamic> _$ChatMemberOwnerToJson(ChatMemberOwner instance) {
 }
 
 ChatMemberAdministrator _$ChatMemberAdministratorFromJson(
-    Map<String, dynamic> json) {
-  return ChatMemberAdministrator(
-    status: json['status'] as String,
-    user: User.fromJson(json['user'] as Map<String, dynamic>),
-    can_be_edited: json['can_be_edited'] as bool,
-    is_anonymous: json['is_anonymous'] as bool,
-    can_manage_chat: json['can_manage_chat'] as bool,
-    can_delete_messages: json['can_delete_messages'] as bool,
-    can_manage_voice_chats: json['can_manage_voice_chats'] as bool,
-    can_restrict_members: json['can_restrict_members'] as bool,
-    can_promote_members: json['can_promote_members'] as bool,
-    can_change_info: json['can_change_info'] as bool,
-    can_invite_users: json['can_invite_users'] as bool,
-    can_post_messages: json['can_post_messages'] as bool?,
-    can_edit_messages: json['can_edit_messages'] as bool?,
-    can_pin_messages: json['can_pin_messages'] as bool?,
-    custom_title: json['custom_title'] as String?,
-  );
-}
+        Map<String, dynamic> json) =>
+    ChatMemberAdministrator(
+      status: json['status'] as String,
+      user: User.fromJson(json['user'] as Map<String, dynamic>),
+      can_be_edited: json['can_be_edited'] as bool? ?? false,
+      is_anonymous: json['is_anonymous'] as bool? ?? false,
+      can_manage_chat: json['can_manage_chat'] as bool? ?? false,
+      can_delete_messages: json['can_delete_messages'] as bool? ?? false,
+      can_manage_voice_chats: json['can_manage_voice_chats'] as bool? ?? false,
+      can_restrict_members: json['can_restrict_members'] as bool? ?? false,
+      can_promote_members: json['can_promote_members'] as bool? ?? false,
+      can_change_info: json['can_change_info'] as bool? ?? false,
+      can_invite_users: json['can_invite_users'] as bool? ?? false,
+      can_post_messages: json['can_post_messages'] as bool?,
+      can_edit_messages: json['can_edit_messages'] as bool?,
+      can_pin_messages: json['can_pin_messages'] as bool?,
+      custom_title: json['custom_title'] as String?,
+    );
 
 Map<String, dynamic> _$ChatMemberAdministratorToJson(
     ChatMemberAdministrator instance) {
@@ -1431,12 +1368,11 @@ Map<String, dynamic> _$ChatMemberAdministratorToJson(
   return val;
 }
 
-ChatMemberMember _$ChatMemberMemberFromJson(Map<String, dynamic> json) {
-  return ChatMemberMember(
-    status: json['status'] as String,
-    user: User.fromJson(json['user'] as Map<String, dynamic>),
-  );
-}
+ChatMemberMember _$ChatMemberMemberFromJson(Map<String, dynamic> json) =>
+    ChatMemberMember(
+      status: json['status'] as String,
+      user: User.fromJson(json['user'] as Map<String, dynamic>),
+    );
 
 Map<String, dynamic> _$ChatMemberMemberToJson(ChatMemberMember instance) =>
     <String, dynamic>{
@@ -1444,22 +1380,25 @@ Map<String, dynamic> _$ChatMemberMemberToJson(ChatMemberMember instance) =>
       'user': instance.user.toJson(),
     };
 
-ChatMemberRestricted _$ChatMemberRestrictedFromJson(Map<String, dynamic> json) {
-  return ChatMemberRestricted(
-    status: json['status'] as String,
-    user: User.fromJson(json['user'] as Map<String, dynamic>),
-    is_member: json['is_member'] as bool,
-    can_change_info: json['can_change_info'] as bool,
-    can_invite_users: json['can_invite_users'] as bool,
-    can_pin_messages: json['can_pin_messages'] as bool,
-    can_send_messages: json['can_send_messages'] as bool,
-    can_send_media_messages: json['can_send_media_messages'] as bool,
-    can_send_polls: json['can_send_polls'] as bool,
-    can_send_other_messages: json['can_send_other_messages'] as bool,
-    can_add_web_page_previews: json['can_add_web_page_previews'] as bool,
-    until_date: json['until_date'] as int,
-  );
-}
+ChatMemberRestricted _$ChatMemberRestrictedFromJson(
+        Map<String, dynamic> json) =>
+    ChatMemberRestricted(
+      status: json['status'] as String,
+      user: User.fromJson(json['user'] as Map<String, dynamic>),
+      is_member: json['is_member'] as bool? ?? false,
+      can_change_info: json['can_change_info'] as bool? ?? false,
+      can_invite_users: json['can_invite_users'] as bool? ?? false,
+      can_pin_messages: json['can_pin_messages'] as bool? ?? false,
+      can_send_messages: json['can_send_messages'] as bool? ?? false,
+      can_send_media_messages:
+          json['can_send_media_messages'] as bool? ?? false,
+      can_send_polls: json['can_send_polls'] as bool? ?? false,
+      can_send_other_messages:
+          json['can_send_other_messages'] as bool? ?? false,
+      can_add_web_page_previews:
+          json['can_add_web_page_previews'] as bool? ?? false,
+      until_date: json['until_date'] as int,
+    );
 
 Map<String, dynamic> _$ChatMemberRestrictedToJson(
         ChatMemberRestricted instance) =>
@@ -1478,12 +1417,11 @@ Map<String, dynamic> _$ChatMemberRestrictedToJson(
       'until_date': instance.until_date,
     };
 
-ChatMemberLeft _$ChatMemberLeftFromJson(Map<String, dynamic> json) {
-  return ChatMemberLeft(
-    status: json['status'] as String,
-    user: User.fromJson(json['user'] as Map<String, dynamic>),
-  );
-}
+ChatMemberLeft _$ChatMemberLeftFromJson(Map<String, dynamic> json) =>
+    ChatMemberLeft(
+      status: json['status'] as String,
+      user: User.fromJson(json['user'] as Map<String, dynamic>),
+    );
 
 Map<String, dynamic> _$ChatMemberLeftToJson(ChatMemberLeft instance) =>
     <String, dynamic>{
@@ -1491,13 +1429,12 @@ Map<String, dynamic> _$ChatMemberLeftToJson(ChatMemberLeft instance) =>
       'user': instance.user.toJson(),
     };
 
-ChatMemberBanned _$ChatMemberBannedFromJson(Map<String, dynamic> json) {
-  return ChatMemberBanned(
-    status: json['status'] as String,
-    user: User.fromJson(json['user'] as Map<String, dynamic>),
-    until_date: json['until_date'] as int,
-  );
-}
+ChatMemberBanned _$ChatMemberBannedFromJson(Map<String, dynamic> json) =>
+    ChatMemberBanned(
+      status: json['status'] as String,
+      user: User.fromJson(json['user'] as Map<String, dynamic>),
+      until_date: json['until_date'] as int,
+    );
 
 Map<String, dynamic> _$ChatMemberBannedToJson(ChatMemberBanned instance) =>
     <String, dynamic>{
@@ -1506,25 +1443,27 @@ Map<String, dynamic> _$ChatMemberBannedToJson(ChatMemberBanned instance) =>
       'until_date': instance.until_date,
     };
 
-ChatMemberUpdated _$ChatMemberUpdatedFromJson(Map<String, dynamic> json) {
-  return ChatMemberUpdated(
-    chat: json['chat'] == null
-        ? null
-        : Chat.fromJson(json['chat'] as Map<String, dynamic>),
-    from: json['from'] == null
-        ? null
-        : User.fromJson(json['from'] as Map<String, dynamic>),
-    old_chat_member: json['old_chat_member'] == null
-        ? null
-        : ChatMember.fromJson(json['old_chat_member'] as Map<String, dynamic>),
-    new_chat_member: json['new_chat_member'] == null
-        ? null
-        : ChatMember.fromJson(json['new_chat_member'] as Map<String, dynamic>),
-    invite_link: json['invite_link'] == null
-        ? null
-        : ChatInviteLink.fromJson(json['invite_link'] as Map<String, dynamic>),
-  )..date = json['date'] as int?;
-}
+ChatMemberUpdated _$ChatMemberUpdatedFromJson(Map<String, dynamic> json) =>
+    ChatMemberUpdated(
+      chat: json['chat'] == null
+          ? null
+          : Chat.fromJson(json['chat'] as Map<String, dynamic>),
+      from: json['from'] == null
+          ? null
+          : User.fromJson(json['from'] as Map<String, dynamic>),
+      old_chat_member: json['old_chat_member'] == null
+          ? null
+          : ChatMember.fromJson(
+              json['old_chat_member'] as Map<String, dynamic>),
+      new_chat_member: json['new_chat_member'] == null
+          ? null
+          : ChatMember.fromJson(
+              json['new_chat_member'] as Map<String, dynamic>),
+      invite_link: json['invite_link'] == null
+          ? null
+          : ChatInviteLink.fromJson(
+              json['invite_link'] as Map<String, dynamic>),
+    )..date = json['date'] as int?;
 
 Map<String, dynamic> _$ChatMemberUpdatedToJson(ChatMemberUpdated instance) {
   final val = <String, dynamic>{};
@@ -1544,17 +1483,17 @@ Map<String, dynamic> _$ChatMemberUpdatedToJson(ChatMemberUpdated instance) {
   return val;
 }
 
-ChatJoinRequest _$ChatJoinRequestFromJson(Map<String, dynamic> json) {
-  return ChatJoinRequest(
-    chat: Chat.fromJson(json['chat'] as Map<String, dynamic>),
-    from: User.fromJson(json['from'] as Map<String, dynamic>),
-    date: json['date'] as int,
-    bio: json['bio'] as String?,
-    invite_link: json['invite_link'] == null
-        ? null
-        : ChatInviteLink.fromJson(json['invite_link'] as Map<String, dynamic>),
-  );
-}
+ChatJoinRequest _$ChatJoinRequestFromJson(Map<String, dynamic> json) =>
+    ChatJoinRequest(
+      chat: Chat.fromJson(json['chat'] as Map<String, dynamic>),
+      from: User.fromJson(json['from'] as Map<String, dynamic>),
+      date: json['date'] as int,
+      bio: json['bio'] as String?,
+      invite_link: json['invite_link'] == null
+          ? null
+          : ChatInviteLink.fromJson(
+              json['invite_link'] as Map<String, dynamic>),
+    );
 
 Map<String, dynamic> _$ChatJoinRequestToJson(ChatJoinRequest instance) {
   final val = <String, dynamic>{
@@ -1574,18 +1513,17 @@ Map<String, dynamic> _$ChatJoinRequestToJson(ChatJoinRequest instance) {
   return val;
 }
 
-ChatPermissions _$ChatPermissionsFromJson(Map<String, dynamic> json) {
-  return ChatPermissions(
-    can_send_messages: json['can_send_messages'] as bool?,
-    can_send_media_messages: json['can_send_media_messages'] as bool?,
-    can_send_polls: json['can_send_polls'] as bool?,
-    can_send_other_messages: json['can_send_other_messages'] as bool?,
-    can_add_web_page_previews: json['can_add_web_page_previews'] as bool?,
-    can_change_info: json['can_change_info'] as bool?,
-    can_invite_users: json['can_invite_users'] as bool?,
-    can_pin_messages: json['can_pin_messages'] as bool?,
-  );
-}
+ChatPermissions _$ChatPermissionsFromJson(Map<String, dynamic> json) =>
+    ChatPermissions(
+      can_send_messages: json['can_send_messages'] as bool?,
+      can_send_media_messages: json['can_send_media_messages'] as bool?,
+      can_send_polls: json['can_send_polls'] as bool?,
+      can_send_other_messages: json['can_send_other_messages'] as bool?,
+      can_add_web_page_previews: json['can_add_web_page_previews'] as bool?,
+      can_change_info: json['can_change_info'] as bool?,
+      can_invite_users: json['can_invite_users'] as bool?,
+      can_pin_messages: json['can_pin_messages'] as bool?,
+    );
 
 Map<String, dynamic> _$ChatPermissionsToJson(ChatPermissions instance) {
   final val = <String, dynamic>{};
@@ -1607,12 +1545,10 @@ Map<String, dynamic> _$ChatPermissionsToJson(ChatPermissions instance) {
   return val;
 }
 
-ChatLocation _$ChatLocationFromJson(Map<String, dynamic> json) {
-  return ChatLocation(
-    location: Location.fromJson(json['location'] as Map<String, dynamic>),
-    address: json['address'] as String,
-  );
-}
+ChatLocation _$ChatLocationFromJson(Map<String, dynamic> json) => ChatLocation(
+      location: Location.fromJson(json['location'] as Map<String, dynamic>),
+      address: json['address'] as String,
+    );
 
 Map<String, dynamic> _$ChatLocationToJson(ChatLocation instance) =>
     <String, dynamic>{
@@ -1620,12 +1556,10 @@ Map<String, dynamic> _$ChatLocationToJson(ChatLocation instance) =>
       'address': instance.address,
     };
 
-BotCommand _$BotCommandFromJson(Map<String, dynamic> json) {
-  return BotCommand(
-    command: json['command'] as String,
-    description: json['description'] as String,
-  );
-}
+BotCommand _$BotCommandFromJson(Map<String, dynamic> json) => BotCommand(
+      command: json['command'] as String,
+      description: json['description'] as String,
+    );
 
 Map<String, dynamic> _$BotCommandToJson(BotCommand instance) =>
     <String, dynamic>{
@@ -1633,11 +1567,10 @@ Map<String, dynamic> _$BotCommandToJson(BotCommand instance) =>
       'description': instance.description,
     };
 
-BotCommandScope _$BotCommandScopeFromJson(Map<String, dynamic> json) {
-  return BotCommandScope(
-    type: json['type'] as String,
-  );
-}
+BotCommandScope _$BotCommandScopeFromJson(Map<String, dynamic> json) =>
+    BotCommandScope(
+      type: json['type'] as String,
+    );
 
 Map<String, dynamic> _$BotCommandScopeToJson(BotCommandScope instance) =>
     <String, dynamic>{
@@ -1645,11 +1578,10 @@ Map<String, dynamic> _$BotCommandScopeToJson(BotCommandScope instance) =>
     };
 
 BotCommandScopeDefault _$BotCommandScopeDefaultFromJson(
-    Map<String, dynamic> json) {
-  return BotCommandScopeDefault(
-    type: json['type'] as String,
-  );
-}
+        Map<String, dynamic> json) =>
+    BotCommandScopeDefault(
+      type: json['type'] as String? ?? BotCommandScope.DEFAULT,
+    );
 
 Map<String, dynamic> _$BotCommandScopeDefaultToJson(
         BotCommandScopeDefault instance) =>
@@ -1658,11 +1590,10 @@ Map<String, dynamic> _$BotCommandScopeDefaultToJson(
     };
 
 BotCommandScopeAllPrivateChats _$BotCommandScopeAllPrivateChatsFromJson(
-    Map<String, dynamic> json) {
-  return BotCommandScopeAllPrivateChats(
-    type: json['type'] as String,
-  );
-}
+        Map<String, dynamic> json) =>
+    BotCommandScopeAllPrivateChats(
+      type: json['type'] as String? ?? BotCommandScope.ALL_PRIVATE_CHATS,
+    );
 
 Map<String, dynamic> _$BotCommandScopeAllPrivateChatsToJson(
         BotCommandScopeAllPrivateChats instance) =>
@@ -1671,11 +1602,10 @@ Map<String, dynamic> _$BotCommandScopeAllPrivateChatsToJson(
     };
 
 BotCommandScopeAllGroupChats _$BotCommandScopeAllGroupChatsFromJson(
-    Map<String, dynamic> json) {
-  return BotCommandScopeAllGroupChats(
-    type: json['type'] as String,
-  );
-}
+        Map<String, dynamic> json) =>
+    BotCommandScopeAllGroupChats(
+      type: json['type'] as String? ?? BotCommandScope.ALL_GROUP_CHATS,
+    );
 
 Map<String, dynamic> _$BotCommandScopeAllGroupChatsToJson(
         BotCommandScopeAllGroupChats instance) =>
@@ -1684,11 +1614,11 @@ Map<String, dynamic> _$BotCommandScopeAllGroupChatsToJson(
     };
 
 BotCommandScopeAllChatAdministrators
-    _$BotCommandScopeAllChatAdministratorsFromJson(Map<String, dynamic> json) {
-  return BotCommandScopeAllChatAdministrators(
-    type: json['type'] as String,
-  );
-}
+    _$BotCommandScopeAllChatAdministratorsFromJson(Map<String, dynamic> json) =>
+        BotCommandScopeAllChatAdministrators(
+          type: json['type'] as String? ??
+              BotCommandScope.ALL_CHAT_ADMINISTRATORS,
+        );
 
 Map<String, dynamic> _$BotCommandScopeAllChatAdministratorsToJson(
         BotCommandScopeAllChatAdministrators instance) =>
@@ -1696,12 +1626,11 @@ Map<String, dynamic> _$BotCommandScopeAllChatAdministratorsToJson(
       'type': instance.type,
     };
 
-BotCommandScopeChat _$BotCommandScopeChatFromJson(Map<String, dynamic> json) {
-  return BotCommandScopeChat(
-    type: json['type'] as String,
-    chat_id: json['chat_id'],
-  );
-}
+BotCommandScopeChat _$BotCommandScopeChatFromJson(Map<String, dynamic> json) =>
+    BotCommandScopeChat(
+      type: json['type'] as String? ?? BotCommandScope.CHAT,
+      chat_id: json['chat_id'],
+    );
 
 Map<String, dynamic> _$BotCommandScopeChatToJson(BotCommandScopeChat instance) {
   final val = <String, dynamic>{
@@ -1719,12 +1648,11 @@ Map<String, dynamic> _$BotCommandScopeChatToJson(BotCommandScopeChat instance) {
 }
 
 BotCommandScopeChatAdministrators _$BotCommandScopeChatAdministratorsFromJson(
-    Map<String, dynamic> json) {
-  return BotCommandScopeChatAdministrators(
-    type: json['type'] as String,
-    chat_id: json['chat_id'],
-  );
-}
+        Map<String, dynamic> json) =>
+    BotCommandScopeChatAdministrators(
+      type: json['type'] as String? ?? BotCommandScope.CHAT_ADMINISTRATORS,
+      chat_id: json['chat_id'],
+    );
 
 Map<String, dynamic> _$BotCommandScopeChatAdministratorsToJson(
     BotCommandScopeChatAdministrators instance) {
@@ -1743,12 +1671,11 @@ Map<String, dynamic> _$BotCommandScopeChatAdministratorsToJson(
 }
 
 BotCommandScopeChatMember _$BotCommandScopeChatMemberFromJson(
-    Map<String, dynamic> json) {
-  return BotCommandScopeChatMember(
-    type: json['type'] as String,
-    chat_id: json['chat_id'],
-  );
-}
+        Map<String, dynamic> json) =>
+    BotCommandScopeChatMember(
+      type: json['type'] as String? ?? BotCommandScope.CHAT_MEMBER,
+      chat_id: json['chat_id'],
+    );
 
 Map<String, dynamic> _$BotCommandScopeChatMemberToJson(
     BotCommandScopeChatMember instance) {
@@ -1766,12 +1693,11 @@ Map<String, dynamic> _$BotCommandScopeChatMemberToJson(
   return val;
 }
 
-ResponseParameters _$ResponseParametersFromJson(Map<String, dynamic> json) {
-  return ResponseParameters(
-    migrate_to_chat_id: json['migrate_to_chat_id'] as int?,
-    retry_after: json['retry_after'] as int?,
-  );
-}
+ResponseParameters _$ResponseParametersFromJson(Map<String, dynamic> json) =>
+    ResponseParameters(
+      migrate_to_chat_id: json['migrate_to_chat_id'] as int?,
+      retry_after: json['retry_after'] as int?,
+    );
 
 Map<String, dynamic> _$ResponseParametersToJson(ResponseParameters instance) {
   final val = <String, dynamic>{};
@@ -1787,17 +1713,15 @@ Map<String, dynamic> _$ResponseParametersToJson(ResponseParameters instance) {
   return val;
 }
 
-InputMedia _$InputMediaFromJson(Map<String, dynamic> json) {
-  return InputMedia(
-    type: json['type'] as String,
-    media: json['media'] as String,
-    caption: json['caption'] as String?,
-    parse_mode: json['parse_mode'] as String?,
-    caption_entities: (json['caption_entities'] as List<dynamic>?)
-        ?.map((e) => MessageEntity.fromJson(e as Map<String, dynamic>))
-        .toList(),
-  );
-}
+InputMedia _$InputMediaFromJson(Map<String, dynamic> json) => InputMedia(
+      type: json['type'] as String,
+      media: json['media'] as String,
+      caption: json['caption'] as String?,
+      parse_mode: json['parse_mode'] as String?,
+      caption_entities: (json['caption_entities'] as List<dynamic>?)
+          ?.map((e) => MessageEntity.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
 
 Map<String, dynamic> _$InputMediaToJson(InputMedia instance) {
   final val = <String, dynamic>{
@@ -1818,17 +1742,16 @@ Map<String, dynamic> _$InputMediaToJson(InputMedia instance) {
   return val;
 }
 
-InputMediaPhoto _$InputMediaPhotoFromJson(Map<String, dynamic> json) {
-  return InputMediaPhoto(
-    type: json['type'] as String,
-    media: json['media'] as String,
-    caption: json['caption'] as String?,
-    parse_mode: json['parse_mode'] as String?,
-    caption_entities: (json['caption_entities'] as List<dynamic>?)
-        ?.map((e) => MessageEntity.fromJson(e as Map<String, dynamic>))
-        .toList(),
-  );
-}
+InputMediaPhoto _$InputMediaPhotoFromJson(Map<String, dynamic> json) =>
+    InputMediaPhoto(
+      type: json['type'] as String? ?? InputMedia.PHOTO,
+      media: json['media'] as String,
+      caption: json['caption'] as String?,
+      parse_mode: json['parse_mode'] as String?,
+      caption_entities: (json['caption_entities'] as List<dynamic>?)
+          ?.map((e) => MessageEntity.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
 
 Map<String, dynamic> _$InputMediaPhotoToJson(InputMediaPhoto instance) {
   final val = <String, dynamic>{
@@ -1849,22 +1772,21 @@ Map<String, dynamic> _$InputMediaPhotoToJson(InputMediaPhoto instance) {
   return val;
 }
 
-InputMediaVideo _$InputMediaVideoFromJson(Map<String, dynamic> json) {
-  return InputMediaVideo(
-    type: json['type'] as String,
-    media: json['media'] as String,
-    caption: json['caption'] as String?,
-    parse_mode: json['parse_mode'] as String?,
-    caption_entities: (json['caption_entities'] as List<dynamic>?)
-        ?.map((e) => MessageEntity.fromJson(e as Map<String, dynamic>))
-        .toList(),
-    thumb: json['thumb'],
-    width: json['width'] as int?,
-    height: json['height'] as int?,
-    duration: json['duration'] as int?,
-    supports_streaming: json['supports_streaming'] as bool?,
-  );
-}
+InputMediaVideo _$InputMediaVideoFromJson(Map<String, dynamic> json) =>
+    InputMediaVideo(
+      type: json['type'] as String? ?? InputMedia.VIDEO,
+      media: json['media'] as String,
+      caption: json['caption'] as String?,
+      parse_mode: json['parse_mode'] as String?,
+      caption_entities: (json['caption_entities'] as List<dynamic>?)
+          ?.map((e) => MessageEntity.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      thumb: json['thumb'],
+      width: json['width'] as int?,
+      height: json['height'] as int?,
+      duration: json['duration'] as int?,
+      supports_streaming: json['supports_streaming'] as bool?,
+    );
 
 Map<String, dynamic> _$InputMediaVideoToJson(InputMediaVideo instance) {
   final val = <String, dynamic>{
@@ -1890,21 +1812,20 @@ Map<String, dynamic> _$InputMediaVideoToJson(InputMediaVideo instance) {
   return val;
 }
 
-InputMediaAnimation _$InputMediaAnimationFromJson(Map<String, dynamic> json) {
-  return InputMediaAnimation(
-    type: json['type'] as String,
-    media: json['media'] as String,
-    thumb: json['thumb'],
-    caption: json['caption'] as String?,
-    parse_mode: json['parse_mode'] as String?,
-    caption_entities: (json['caption_entities'] as List<dynamic>?)
-        ?.map((e) => MessageEntity.fromJson(e as Map<String, dynamic>))
-        .toList(),
-    width: json['width'] as int?,
-    height: json['height'] as int?,
-    duration: json['duration'] as int?,
-  );
-}
+InputMediaAnimation _$InputMediaAnimationFromJson(Map<String, dynamic> json) =>
+    InputMediaAnimation(
+      type: json['type'] as String? ?? InputMedia.ANIMATION,
+      media: json['media'] as String,
+      thumb: json['thumb'],
+      caption: json['caption'] as String?,
+      parse_mode: json['parse_mode'] as String?,
+      caption_entities: (json['caption_entities'] as List<dynamic>?)
+          ?.map((e) => MessageEntity.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      width: json['width'] as int?,
+      height: json['height'] as int?,
+      duration: json['duration'] as int?,
+    );
 
 Map<String, dynamic> _$InputMediaAnimationToJson(InputMediaAnimation instance) {
   final val = <String, dynamic>{
@@ -1929,21 +1850,20 @@ Map<String, dynamic> _$InputMediaAnimationToJson(InputMediaAnimation instance) {
   return val;
 }
 
-InputMediaAudio _$InputMediaAudioFromJson(Map<String, dynamic> json) {
-  return InputMediaAudio(
-    type: json['type'] as String,
-    media: json['media'] as String,
-    thumb: json['thumb'],
-    caption: json['caption'] as String?,
-    parse_mode: json['parse_mode'] as String?,
-    caption_entities: (json['caption_entities'] as List<dynamic>?)
-        ?.map((e) => MessageEntity.fromJson(e as Map<String, dynamic>))
-        .toList(),
-    duration: json['duration'] as int?,
-    performer: json['performer'] as String?,
-    title: json['title'] as String?,
-  );
-}
+InputMediaAudio _$InputMediaAudioFromJson(Map<String, dynamic> json) =>
+    InputMediaAudio(
+      type: json['type'] as String? ?? InputMedia.AUDIO,
+      media: json['media'] as String,
+      thumb: json['thumb'],
+      caption: json['caption'] as String?,
+      parse_mode: json['parse_mode'] as String?,
+      caption_entities: (json['caption_entities'] as List<dynamic>?)
+          ?.map((e) => MessageEntity.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      duration: json['duration'] as int?,
+      performer: json['performer'] as String?,
+      title: json['title'] as String?,
+    );
 
 Map<String, dynamic> _$InputMediaAudioToJson(InputMediaAudio instance) {
   final val = <String, dynamic>{
@@ -1968,20 +1888,19 @@ Map<String, dynamic> _$InputMediaAudioToJson(InputMediaAudio instance) {
   return val;
 }
 
-InputMediaDocument _$InputMediaDocumentFromJson(Map<String, dynamic> json) {
-  return InputMediaDocument(
-    type: json['type'] as String,
-    media: json['media'] as String,
-    thumb: json['thumb'],
-    caption: json['caption'] as String?,
-    parse_mode: json['parse_mode'] as String?,
-    caption_entities: (json['caption_entities'] as List<dynamic>?)
-        ?.map((e) => MessageEntity.fromJson(e as Map<String, dynamic>))
-        .toList(),
-    disable_content_type_detection:
-        json['disable_content_type_detection'] as bool?,
-  );
-}
+InputMediaDocument _$InputMediaDocumentFromJson(Map<String, dynamic> json) =>
+    InputMediaDocument(
+      type: json['type'] as String? ?? InputMedia.DOCUMENT,
+      media: json['media'] as String,
+      thumb: json['thumb'],
+      caption: json['caption'] as String?,
+      parse_mode: json['parse_mode'] as String?,
+      caption_entities: (json['caption_entities'] as List<dynamic>?)
+          ?.map((e) => MessageEntity.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      disable_content_type_detection:
+          json['disable_content_type_detection'] as bool?,
+    );
 
 Map<String, dynamic> _$InputMediaDocumentToJson(InputMediaDocument instance) {
   final val = <String, dynamic>{
@@ -2005,24 +1924,23 @@ Map<String, dynamic> _$InputMediaDocumentToJson(InputMediaDocument instance) {
   return val;
 }
 
-Sticker _$StickerFromJson(Map<String, dynamic> json) {
-  return Sticker(
-    file_id: json['file_id'] as String,
-    file_unique_id: json['file_unique_id'] as String,
-    width: json['width'] as int,
-    height: json['height'] as int,
-    is_animated: json['is_animated'] as bool,
-    thumb: json['thumb'] == null
-        ? null
-        : PhotoSize.fromJson(json['thumb'] as Map<String, dynamic>),
-    emoji: json['emoji'] as String?,
-    set_name: json['set_name'] as String?,
-    mask_position: json['mask_position'] == null
-        ? null
-        : MaskPosition.fromJson(json['mask_position'] as Map<String, dynamic>),
-    file_size: json['file_size'] as int?,
-  );
-}
+Sticker _$StickerFromJson(Map<String, dynamic> json) => Sticker(
+      file_id: json['file_id'] as String,
+      file_unique_id: json['file_unique_id'] as String,
+      width: json['width'] as int,
+      height: json['height'] as int,
+      is_animated: json['is_animated'] as bool,
+      thumb: json['thumb'] == null
+          ? null
+          : PhotoSize.fromJson(json['thumb'] as Map<String, dynamic>),
+      emoji: json['emoji'] as String?,
+      set_name: json['set_name'] as String?,
+      mask_position: json['mask_position'] == null
+          ? null
+          : MaskPosition.fromJson(
+              json['mask_position'] as Map<String, dynamic>),
+      file_size: json['file_size'] as int?,
+    );
 
 Map<String, dynamic> _$StickerToJson(Sticker instance) {
   final val = <String, dynamic>{
@@ -2047,20 +1965,18 @@ Map<String, dynamic> _$StickerToJson(Sticker instance) {
   return val;
 }
 
-StickerSet _$StickerSetFromJson(Map<String, dynamic> json) {
-  return StickerSet(
-    name: json['name'] as String,
-    title: json['title'] as String,
-    is_animated: json['is_animated'] as bool,
-    contains_masks: json['contains_masks'] as bool,
-    stickers: (json['stickers'] as List<dynamic>)
-        .map((e) => Sticker.fromJson(e as Map<String, dynamic>))
-        .toList(),
-    thumb: json['thumb'] == null
-        ? null
-        : PhotoSize.fromJson(json['thumb'] as Map<String, dynamic>),
-  );
-}
+StickerSet _$StickerSetFromJson(Map<String, dynamic> json) => StickerSet(
+      name: json['name'] as String,
+      title: json['title'] as String,
+      is_animated: json['is_animated'] as bool,
+      contains_masks: json['contains_masks'] as bool,
+      stickers: (json['stickers'] as List<dynamic>)
+          .map((e) => Sticker.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      thumb: json['thumb'] == null
+          ? null
+          : PhotoSize.fromJson(json['thumb'] as Map<String, dynamic>),
+    );
 
 Map<String, dynamic> _$StickerSetToJson(StickerSet instance) {
   final val = <String, dynamic>{
@@ -2081,14 +1997,12 @@ Map<String, dynamic> _$StickerSetToJson(StickerSet instance) {
   return val;
 }
 
-MaskPosition _$MaskPositionFromJson(Map<String, dynamic> json) {
-  return MaskPosition(
-    point: json['point'] as String,
-    x_shift: (json['x_shift'] as num).toDouble(),
-    y_shift: (json['y_shift'] as num).toDouble(),
-    scale: (json['scale'] as num).toDouble(),
-  );
-}
+MaskPosition _$MaskPositionFromJson(Map<String, dynamic> json) => MaskPosition(
+      point: json['point'] as String,
+      x_shift: (json['x_shift'] as num).toDouble(),
+      y_shift: (json['y_shift'] as num).toDouble(),
+      scale: (json['scale'] as num).toDouble(),
+    );
 
 Map<String, dynamic> _$MaskPositionToJson(MaskPosition instance) =>
     <String, dynamic>{
@@ -2098,18 +2012,16 @@ Map<String, dynamic> _$MaskPositionToJson(MaskPosition instance) =>
       'scale': instance.scale,
     };
 
-InlineQuery _$InlineQueryFromJson(Map<String, dynamic> json) {
-  return InlineQuery(
-    id: json['id'] as String,
-    from: User.fromJson(json['from'] as Map<String, dynamic>),
-    query: json['query'] as String,
-    offset: json['offset'] as String,
-    chat_type: json['chat_type'] as String?,
-    location: json['location'] == null
-        ? null
-        : Location.fromJson(json['location'] as Map<String, dynamic>),
-  );
-}
+InlineQuery _$InlineQueryFromJson(Map<String, dynamic> json) => InlineQuery(
+      id: json['id'] as String,
+      from: User.fromJson(json['from'] as Map<String, dynamic>),
+      query: json['query'] as String,
+      offset: json['offset'] as String,
+      chat_type: json['chat_type'] as String?,
+      location: json['location'] == null
+          ? null
+          : Location.fromJson(json['location'] as Map<String, dynamic>),
+    );
 
 Map<String, dynamic> _$InlineQueryToJson(InlineQuery instance) {
   final val = <String, dynamic>{
@@ -2130,16 +2042,15 @@ Map<String, dynamic> _$InlineQueryToJson(InlineQuery instance) {
   return val;
 }
 
-InlineQueryResult _$InlineQueryResultFromJson(Map<String, dynamic> json) {
-  return InlineQueryResult(
-    type: json['type'] as String,
-    id: json['id'] as String,
-    reply_markup: json['reply_markup'] == null
-        ? null
-        : InlineKeyboardMarkup.fromJson(
-            json['reply_markup'] as Map<String, dynamic>),
-  );
-}
+InlineQueryResult _$InlineQueryResultFromJson(Map<String, dynamic> json) =>
+    InlineQueryResult(
+      type: json['type'] as String,
+      id: json['id'] as String,
+      reply_markup: json['reply_markup'] == null
+          ? null
+          : InlineKeyboardMarkup.fromJson(
+              json['reply_markup'] as Map<String, dynamic>),
+    );
 
 Map<String, dynamic> _$InlineQueryResultToJson(InlineQueryResult instance) {
   final val = <String, dynamic>{
@@ -2158,25 +2069,24 @@ Map<String, dynamic> _$InlineQueryResultToJson(InlineQueryResult instance) {
 }
 
 InlineQueryResultArticle _$InlineQueryResultArticleFromJson(
-    Map<String, dynamic> json) {
-  return InlineQueryResultArticle(
-    id: json['id'] as String,
-    type: json['type'] as String,
-    title: json['title'] as String,
-    input_message_content: InputMessageContent.fromJson(
-        json['input_message_content'] as Map<String, dynamic>),
-    reply_markup: json['reply_markup'] == null
-        ? null
-        : InlineKeyboardMarkup.fromJson(
-            json['reply_markup'] as Map<String, dynamic>),
-    url: json['url'] as String?,
-    hide_url: json['hide_url'] as bool?,
-    description: json['description'] as String?,
-    thumb_url: json['thumb_url'] as String?,
-    thumb_width: json['thumb_width'] as String?,
-    thumb_height: json['thumb_height'] as String?,
-  );
-}
+        Map<String, dynamic> json) =>
+    InlineQueryResultArticle(
+      id: json['id'] as String,
+      type: json['type'] as String? ?? InlineQueryResult.ARTICLE,
+      title: json['title'] as String,
+      input_message_content: InputMessageContent.fromJson(
+          json['input_message_content'] as Map<String, dynamic>),
+      reply_markup: json['reply_markup'] == null
+          ? null
+          : InlineKeyboardMarkup.fromJson(
+              json['reply_markup'] as Map<String, dynamic>),
+      url: json['url'] as String?,
+      hide_url: json['hide_url'] as bool?,
+      description: json['description'] as String?,
+      thumb_url: json['thumb_url'] as String?,
+      thumb_width: json['thumb_width'] as String?,
+      thumb_height: json['thumb_height'] as String?,
+    );
 
 Map<String, dynamic> _$InlineQueryResultArticleToJson(
     InlineQueryResultArticle instance) {
@@ -2204,31 +2114,30 @@ Map<String, dynamic> _$InlineQueryResultArticleToJson(
 }
 
 InlineQueryResultPhoto _$InlineQueryResultPhotoFromJson(
-    Map<String, dynamic> json) {
-  return InlineQueryResultPhoto(
-    id: json['id'] as String,
-    type: json['type'] as String,
-    photo_url: json['photo_url'] as String,
-    thumb_url: json['thumb_url'] as String,
-    photo_width: json['photo_width'] as int?,
-    photo_height: json['photo_height'] as int?,
-    title: json['title'] as String?,
-    description: json['description'] as String?,
-    caption: json['caption'] as String?,
-    parse_mode: json['parse_mode'] as String?,
-    caption_entities: (json['caption_entities'] as List<dynamic>?)
-        ?.map((e) => MessageEntity.fromJson(e as Map<String, dynamic>))
-        .toList(),
-    reply_markup: json['reply_markup'] == null
-        ? null
-        : InlineKeyboardMarkup.fromJson(
-            json['reply_markup'] as Map<String, dynamic>),
-    input_message_content: json['input_message_content'] == null
-        ? null
-        : InputMessageContent.fromJson(
-            json['input_message_content'] as Map<String, dynamic>),
-  );
-}
+        Map<String, dynamic> json) =>
+    InlineQueryResultPhoto(
+      id: json['id'] as String,
+      type: json['type'] as String? ?? InlineQueryResult.PHOTO,
+      photo_url: json['photo_url'] as String,
+      thumb_url: json['thumb_url'] as String,
+      photo_width: json['photo_width'] as int?,
+      photo_height: json['photo_height'] as int?,
+      title: json['title'] as String?,
+      description: json['description'] as String?,
+      caption: json['caption'] as String?,
+      parse_mode: json['parse_mode'] as String?,
+      caption_entities: (json['caption_entities'] as List<dynamic>?)
+          ?.map((e) => MessageEntity.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      reply_markup: json['reply_markup'] == null
+          ? null
+          : InlineKeyboardMarkup.fromJson(
+              json['reply_markup'] as Map<String, dynamic>),
+      input_message_content: json['input_message_content'] == null
+          ? null
+          : InputMessageContent.fromJson(
+              json['input_message_content'] as Map<String, dynamic>),
+    );
 
 Map<String, dynamic> _$InlineQueryResultPhotoToJson(
     InlineQueryResultPhoto instance) {
@@ -2259,32 +2168,32 @@ Map<String, dynamic> _$InlineQueryResultPhotoToJson(
   return val;
 }
 
-InlineQueryResultGif _$InlineQueryResultGifFromJson(Map<String, dynamic> json) {
-  return InlineQueryResultGif(
-    id: json['id'] as String,
-    type: json['type'] as String,
-    gif_url: json['gif_url'] as String,
-    gif_width: json['gif_width'] as int?,
-    gif_height: json['gif_height'] as int?,
-    gif_duration: json['gif_duration'] as int?,
-    thumb_url: json['thumb_url'] as String,
-    thumb_mime_type: json['thumb_mime_type'] as String?,
-    title: json['title'] as String?,
-    caption: json['caption'] as String?,
-    parse_mode: json['parse_mode'] as String?,
-    caption_entities: (json['caption_entities'] as List<dynamic>?)
-        ?.map((e) => MessageEntity.fromJson(e as Map<String, dynamic>))
-        .toList(),
-    reply_markup: json['reply_markup'] == null
-        ? null
-        : InlineKeyboardMarkup.fromJson(
-            json['reply_markup'] as Map<String, dynamic>),
-    input_message_content: json['input_message_content'] == null
-        ? null
-        : InputMessageContent.fromJson(
-            json['input_message_content'] as Map<String, dynamic>),
-  );
-}
+InlineQueryResultGif _$InlineQueryResultGifFromJson(
+        Map<String, dynamic> json) =>
+    InlineQueryResultGif(
+      id: json['id'] as String,
+      type: json['type'] as String? ?? InlineQueryResult.GIF,
+      gif_url: json['gif_url'] as String,
+      gif_width: json['gif_width'] as int?,
+      gif_height: json['gif_height'] as int?,
+      gif_duration: json['gif_duration'] as int?,
+      thumb_url: json['thumb_url'] as String,
+      thumb_mime_type: json['thumb_mime_type'] as String?,
+      title: json['title'] as String?,
+      caption: json['caption'] as String?,
+      parse_mode: json['parse_mode'] as String?,
+      caption_entities: (json['caption_entities'] as List<dynamic>?)
+          ?.map((e) => MessageEntity.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      reply_markup: json['reply_markup'] == null
+          ? null
+          : InlineKeyboardMarkup.fromJson(
+              json['reply_markup'] as Map<String, dynamic>),
+      input_message_content: json['input_message_content'] == null
+          ? null
+          : InputMessageContent.fromJson(
+              json['input_message_content'] as Map<String, dynamic>),
+    );
 
 Map<String, dynamic> _$InlineQueryResultGifToJson(
     InlineQueryResultGif instance) {
@@ -2317,32 +2226,31 @@ Map<String, dynamic> _$InlineQueryResultGifToJson(
 }
 
 InlineQueryResultMpeg4Gif _$InlineQueryResultMpeg4GifFromJson(
-    Map<String, dynamic> json) {
-  return InlineQueryResultMpeg4Gif(
-    id: json['id'] as String,
-    type: json['type'] as String,
-    mpeg4_url: json['mpeg4_url'] as String,
-    mpeg4_width: json['mpeg4_width'] as int?,
-    mpeg4_height: json['mpeg4_height'] as int?,
-    mpeg4_duration: json['mpeg4_duration'] as int?,
-    thumb_url: json['thumb_url'] as String,
-    thumb_mime_type: json['thumb_mime_type'] as String?,
-    title: json['title'] as String?,
-    caption: json['caption'] as String?,
-    parse_mode: json['parse_mode'] as String?,
-    caption_entities: (json['caption_entities'] as List<dynamic>?)
-        ?.map((e) => MessageEntity.fromJson(e as Map<String, dynamic>))
-        .toList(),
-    reply_markup: json['reply_markup'] == null
-        ? null
-        : InlineKeyboardMarkup.fromJson(
-            json['reply_markup'] as Map<String, dynamic>),
-    input_message_content: json['input_message_content'] == null
-        ? null
-        : InputMessageContent.fromJson(
-            json['input_message_content'] as Map<String, dynamic>),
-  );
-}
+        Map<String, dynamic> json) =>
+    InlineQueryResultMpeg4Gif(
+      id: json['id'] as String,
+      type: json['type'] as String? ?? InlineQueryResult.MPEG4_GIF,
+      mpeg4_url: json['mpeg4_url'] as String,
+      mpeg4_width: json['mpeg4_width'] as int?,
+      mpeg4_height: json['mpeg4_height'] as int?,
+      mpeg4_duration: json['mpeg4_duration'] as int?,
+      thumb_url: json['thumb_url'] as String,
+      thumb_mime_type: json['thumb_mime_type'] as String?,
+      title: json['title'] as String?,
+      caption: json['caption'] as String?,
+      parse_mode: json['parse_mode'] as String?,
+      caption_entities: (json['caption_entities'] as List<dynamic>?)
+          ?.map((e) => MessageEntity.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      reply_markup: json['reply_markup'] == null
+          ? null
+          : InlineKeyboardMarkup.fromJson(
+              json['reply_markup'] as Map<String, dynamic>),
+      input_message_content: json['input_message_content'] == null
+          ? null
+          : InputMessageContent.fromJson(
+              json['input_message_content'] as Map<String, dynamic>),
+    );
 
 Map<String, dynamic> _$InlineQueryResultMpeg4GifToJson(
     InlineQueryResultMpeg4Gif instance) {
@@ -2375,33 +2283,32 @@ Map<String, dynamic> _$InlineQueryResultMpeg4GifToJson(
 }
 
 InlineQueryResultVideo _$InlineQueryResultVideoFromJson(
-    Map<String, dynamic> json) {
-  return InlineQueryResultVideo(
-    id: json['id'] as String,
-    type: json['type'] as String,
-    video_url: json['video_url'] as String,
-    mime_type: json['mime_type'] as String,
-    thumb_url: json['thumb_url'] as String,
-    title: json['title'] as String,
-    caption: json['caption'] as String?,
-    parse_mode: json['parse_mode'] as String?,
-    video_width: json['video_width'] as int?,
-    video_height: json['video_height'] as int?,
-    video_duration: json['video_duration'] as int?,
-    description: json['description'] as String?,
-    caption_entities: (json['caption_entities'] as List<dynamic>?)
-        ?.map((e) => MessageEntity.fromJson(e as Map<String, dynamic>))
-        .toList(),
-    reply_markup: json['reply_markup'] == null
-        ? null
-        : InlineKeyboardMarkup.fromJson(
-            json['reply_markup'] as Map<String, dynamic>),
-    input_message_content: json['input_message_content'] == null
-        ? null
-        : InputMessageContent.fromJson(
-            json['input_message_content'] as Map<String, dynamic>),
-  );
-}
+        Map<String, dynamic> json) =>
+    InlineQueryResultVideo(
+      id: json['id'] as String,
+      type: json['type'] as String? ?? InlineQueryResult.VIDEO,
+      video_url: json['video_url'] as String,
+      mime_type: json['mime_type'] as String,
+      thumb_url: json['thumb_url'] as String,
+      title: json['title'] as String,
+      caption: json['caption'] as String?,
+      parse_mode: json['parse_mode'] as String?,
+      video_width: json['video_width'] as int?,
+      video_height: json['video_height'] as int?,
+      video_duration: json['video_duration'] as int?,
+      description: json['description'] as String?,
+      caption_entities: (json['caption_entities'] as List<dynamic>?)
+          ?.map((e) => MessageEntity.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      reply_markup: json['reply_markup'] == null
+          ? null
+          : InlineKeyboardMarkup.fromJson(
+              json['reply_markup'] as Map<String, dynamic>),
+      input_message_content: json['input_message_content'] == null
+          ? null
+          : InputMessageContent.fromJson(
+              json['input_message_content'] as Map<String, dynamic>),
+    );
 
 Map<String, dynamic> _$InlineQueryResultVideoToJson(
     InlineQueryResultVideo instance) {
@@ -2435,29 +2342,28 @@ Map<String, dynamic> _$InlineQueryResultVideoToJson(
 }
 
 InlineQueryResultAudio _$InlineQueryResultAudioFromJson(
-    Map<String, dynamic> json) {
-  return InlineQueryResultAudio(
-    id: json['id'] as String,
-    type: json['type'] as String,
-    audio_url: json['audio_url'] as String,
-    title: json['title'] as String,
-    caption: json['caption'] as String?,
-    parse_mode: json['parse_mode'] as String?,
-    performer: json['performer'] as String?,
-    audio_duration: json['audio_duration'] as int?,
-    caption_entities: (json['caption_entities'] as List<dynamic>?)
-        ?.map((e) => MessageEntity.fromJson(e as Map<String, dynamic>))
-        .toList(),
-    reply_markup: json['reply_markup'] == null
-        ? null
-        : InlineKeyboardMarkup.fromJson(
-            json['reply_markup'] as Map<String, dynamic>),
-    input_message_content: json['input_message_content'] == null
-        ? null
-        : InputMessageContent.fromJson(
-            json['input_message_content'] as Map<String, dynamic>),
-  );
-}
+        Map<String, dynamic> json) =>
+    InlineQueryResultAudio(
+      id: json['id'] as String,
+      type: json['type'] as String? ?? InlineQueryResult.AUDIO,
+      audio_url: json['audio_url'] as String,
+      title: json['title'] as String,
+      caption: json['caption'] as String?,
+      parse_mode: json['parse_mode'] as String?,
+      performer: json['performer'] as String?,
+      audio_duration: json['audio_duration'] as int?,
+      caption_entities: (json['caption_entities'] as List<dynamic>?)
+          ?.map((e) => MessageEntity.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      reply_markup: json['reply_markup'] == null
+          ? null
+          : InlineKeyboardMarkup.fromJson(
+              json['reply_markup'] as Map<String, dynamic>),
+      input_message_content: json['input_message_content'] == null
+          ? null
+          : InputMessageContent.fromJson(
+              json['input_message_content'] as Map<String, dynamic>),
+    );
 
 Map<String, dynamic> _$InlineQueryResultAudioToJson(
     InlineQueryResultAudio instance) {
@@ -2487,28 +2393,27 @@ Map<String, dynamic> _$InlineQueryResultAudioToJson(
 }
 
 InlineQueryResultVoice _$InlineQueryResultVoiceFromJson(
-    Map<String, dynamic> json) {
-  return InlineQueryResultVoice(
-    id: json['id'] as String,
-    type: json['type'] as String,
-    voice_url: json['voice_url'] as String,
-    title: json['title'] as String,
-    caption: json['caption'] as String?,
-    parse_mode: json['parse_mode'] as String?,
-    voice_duration: json['voice_duration'] as int?,
-    caption_entities: (json['caption_entities'] as List<dynamic>?)
-        ?.map((e) => MessageEntity.fromJson(e as Map<String, dynamic>))
-        .toList(),
-    reply_markup: json['reply_markup'] == null
-        ? null
-        : InlineKeyboardMarkup.fromJson(
-            json['reply_markup'] as Map<String, dynamic>),
-    input_message_content: json['input_message_content'] == null
-        ? null
-        : InputMessageContent.fromJson(
-            json['input_message_content'] as Map<String, dynamic>),
-  );
-}
+        Map<String, dynamic> json) =>
+    InlineQueryResultVoice(
+      id: json['id'] as String,
+      type: json['type'] as String? ?? InlineQueryResult.VOICE,
+      voice_url: json['voice_url'] as String,
+      title: json['title'] as String,
+      caption: json['caption'] as String?,
+      parse_mode: json['parse_mode'] as String?,
+      voice_duration: json['voice_duration'] as int?,
+      caption_entities: (json['caption_entities'] as List<dynamic>?)
+          ?.map((e) => MessageEntity.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      reply_markup: json['reply_markup'] == null
+          ? null
+          : InlineKeyboardMarkup.fromJson(
+              json['reply_markup'] as Map<String, dynamic>),
+      input_message_content: json['input_message_content'] == null
+          ? null
+          : InputMessageContent.fromJson(
+              json['input_message_content'] as Map<String, dynamic>),
+    );
 
 Map<String, dynamic> _$InlineQueryResultVoiceToJson(
     InlineQueryResultVoice instance) {
@@ -2537,32 +2442,31 @@ Map<String, dynamic> _$InlineQueryResultVoiceToJson(
 }
 
 InlineQueryResultDocument _$InlineQueryResultDocumentFromJson(
-    Map<String, dynamic> json) {
-  return InlineQueryResultDocument(
-    id: json['id'] as String,
-    type: json['type'] as String,
-    title: json['title'] as String,
-    caption: json['caption'] as String?,
-    parse_mode: json['parse_mode'] as String?,
-    caption_entities: (json['caption_entities'] as List<dynamic>?)
-        ?.map((e) => MessageEntity.fromJson(e as Map<String, dynamic>))
-        .toList(),
-    document_url: json['document_url'] as String,
-    mime_type: json['mime_type'] as String,
-    description: json['description'] as String?,
-    reply_markup: json['reply_markup'] == null
-        ? null
-        : InlineKeyboardMarkup.fromJson(
-            json['reply_markup'] as Map<String, dynamic>),
-    input_message_content: json['input_message_content'] == null
-        ? null
-        : InputMessageContent.fromJson(
-            json['input_message_content'] as Map<String, dynamic>),
-    thumb_url: json['thumb_url'] as String?,
-    thumb_width: json['thumb_width'] as int?,
-    thumb_height: json['thumb_height'] as int?,
-  );
-}
+        Map<String, dynamic> json) =>
+    InlineQueryResultDocument(
+      id: json['id'] as String,
+      type: json['type'] as String? ?? InlineQueryResult.DOCUMENT,
+      title: json['title'] as String,
+      caption: json['caption'] as String?,
+      parse_mode: json['parse_mode'] as String?,
+      caption_entities: (json['caption_entities'] as List<dynamic>?)
+          ?.map((e) => MessageEntity.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      document_url: json['document_url'] as String,
+      mime_type: json['mime_type'] as String,
+      description: json['description'] as String?,
+      reply_markup: json['reply_markup'] == null
+          ? null
+          : InlineKeyboardMarkup.fromJson(
+              json['reply_markup'] as Map<String, dynamic>),
+      input_message_content: json['input_message_content'] == null
+          ? null
+          : InputMessageContent.fromJson(
+              json['input_message_content'] as Map<String, dynamic>),
+      thumb_url: json['thumb_url'] as String?,
+      thumb_width: json['thumb_width'] as int?,
+      thumb_height: json['thumb_height'] as int?,
+    );
 
 Map<String, dynamic> _$InlineQueryResultDocumentToJson(
     InlineQueryResultDocument instance) {
@@ -2595,30 +2499,29 @@ Map<String, dynamic> _$InlineQueryResultDocumentToJson(
 }
 
 InlineQueryResultLocation _$InlineQueryResultLocationFromJson(
-    Map<String, dynamic> json) {
-  return InlineQueryResultLocation(
-    id: json['id'] as String,
-    type: json['type'] as String,
-    latitude: (json['latitude'] as num).toDouble(),
-    longitude: (json['longitude'] as num).toDouble(),
-    title: json['title'] as String,
-    horizontal_accuracy: (json['horizontal_accuracy'] as num?)?.toDouble(),
-    live_period: json['live_period'] as int?,
-    heading: json['heading'] as int?,
-    proximity_alert_radius: json['proximity_alert_radius'] as int?,
-    reply_markup: json['reply_markup'] == null
-        ? null
-        : InlineKeyboardMarkup.fromJson(
-            json['reply_markup'] as Map<String, dynamic>),
-    input_message_content: json['input_message_content'] == null
-        ? null
-        : InputMessageContent.fromJson(
-            json['input_message_content'] as Map<String, dynamic>),
-    thumb_url: json['thumb_url'] as String?,
-    thumb_width: json['thumb_width'] as int?,
-    thumb_height: json['thumb_height'] as int?,
-  );
-}
+        Map<String, dynamic> json) =>
+    InlineQueryResultLocation(
+      id: json['id'] as String,
+      type: json['type'] as String? ?? InlineQueryResult.LOCATION,
+      latitude: (json['latitude'] as num).toDouble(),
+      longitude: (json['longitude'] as num).toDouble(),
+      title: json['title'] as String,
+      horizontal_accuracy: (json['horizontal_accuracy'] as num?)?.toDouble(),
+      live_period: json['live_period'] as int?,
+      heading: json['heading'] as int?,
+      proximity_alert_radius: json['proximity_alert_radius'] as int?,
+      reply_markup: json['reply_markup'] == null
+          ? null
+          : InlineKeyboardMarkup.fromJson(
+              json['reply_markup'] as Map<String, dynamic>),
+      input_message_content: json['input_message_content'] == null
+          ? null
+          : InputMessageContent.fromJson(
+              json['input_message_content'] as Map<String, dynamic>),
+      thumb_url: json['thumb_url'] as String?,
+      thumb_width: json['thumb_width'] as int?,
+      thumb_height: json['thumb_height'] as int?,
+    );
 
 Map<String, dynamic> _$InlineQueryResultLocationToJson(
     InlineQueryResultLocation instance) {
@@ -2650,31 +2553,30 @@ Map<String, dynamic> _$InlineQueryResultLocationToJson(
 }
 
 InlineQueryResultVenue _$InlineQueryResultVenueFromJson(
-    Map<String, dynamic> json) {
-  return InlineQueryResultVenue(
-    id: json['id'] as String,
-    type: json['type'] as String,
-    latitude: (json['latitude'] as num).toDouble(),
-    longitude: (json['longitude'] as num).toDouble(),
-    title: json['title'] as String,
-    address: json['address'] as String,
-    foursquare_id: json['foursquare_id'] as String?,
-    foursquare_type: json['foursquare_type'] as String?,
-    google_place_id: json['google_place_id'] as String?,
-    google_place_type: json['google_place_type'] as String?,
-    reply_markup: json['reply_markup'] == null
-        ? null
-        : InlineKeyboardMarkup.fromJson(
-            json['reply_markup'] as Map<String, dynamic>),
-    input_message_content: json['input_message_content'] == null
-        ? null
-        : InputMessageContent.fromJson(
-            json['input_message_content'] as Map<String, dynamic>),
-    thumb_url: json['thumb_url'] as String?,
-    thumb_width: json['thumb_width'] as int?,
-    thumb_height: json['thumb_height'] as int?,
-  );
-}
+        Map<String, dynamic> json) =>
+    InlineQueryResultVenue(
+      id: json['id'] as String,
+      type: json['type'] as String? ?? InlineQueryResult.VENUE,
+      latitude: (json['latitude'] as num).toDouble(),
+      longitude: (json['longitude'] as num).toDouble(),
+      title: json['title'] as String,
+      address: json['address'] as String,
+      foursquare_id: json['foursquare_id'] as String?,
+      foursquare_type: json['foursquare_type'] as String?,
+      google_place_id: json['google_place_id'] as String?,
+      google_place_type: json['google_place_type'] as String?,
+      reply_markup: json['reply_markup'] == null
+          ? null
+          : InlineKeyboardMarkup.fromJson(
+              json['reply_markup'] as Map<String, dynamic>),
+      input_message_content: json['input_message_content'] == null
+          ? null
+          : InputMessageContent.fromJson(
+              json['input_message_content'] as Map<String, dynamic>),
+      thumb_url: json['thumb_url'] as String?,
+      thumb_width: json['thumb_width'] as int?,
+      thumb_height: json['thumb_height'] as int?,
+    );
 
 Map<String, dynamic> _$InlineQueryResultVenueToJson(
     InlineQueryResultVenue instance) {
@@ -2707,27 +2609,26 @@ Map<String, dynamic> _$InlineQueryResultVenueToJson(
 }
 
 InlineQueryResultContact _$InlineQueryResultContactFromJson(
-    Map<String, dynamic> json) {
-  return InlineQueryResultContact(
-    id: json['id'] as String,
-    type: json['type'] as String,
-    phone_number: json['phone_number'] as String,
-    first_name: json['first_name'] as String,
-    last_name: json['last_name'] as String?,
-    vcard: json['vcard'] as String?,
-    reply_markup: json['reply_markup'] == null
-        ? null
-        : InlineKeyboardMarkup.fromJson(
-            json['reply_markup'] as Map<String, dynamic>),
-    input_message_content: json['input_message_content'] == null
-        ? null
-        : InputMessageContent.fromJson(
-            json['input_message_content'] as Map<String, dynamic>),
-    thumb_url: json['thumb_url'] as String?,
-    thumb_width: json['thumb_width'] as int?,
-    thumb_height: json['thumb_height'] as int?,
-  );
-}
+        Map<String, dynamic> json) =>
+    InlineQueryResultContact(
+      id: json['id'] as String,
+      type: json['type'] as String? ?? InlineQueryResult.CONTACT,
+      phone_number: json['phone_number'] as String,
+      first_name: json['first_name'] as String,
+      last_name: json['last_name'] as String?,
+      vcard: json['vcard'] as String?,
+      reply_markup: json['reply_markup'] == null
+          ? null
+          : InlineKeyboardMarkup.fromJson(
+              json['reply_markup'] as Map<String, dynamic>),
+      input_message_content: json['input_message_content'] == null
+          ? null
+          : InputMessageContent.fromJson(
+              json['input_message_content'] as Map<String, dynamic>),
+      thumb_url: json['thumb_url'] as String?,
+      thumb_width: json['thumb_width'] as int?,
+      thumb_height: json['thumb_height'] as int?,
+    );
 
 Map<String, dynamic> _$InlineQueryResultContactToJson(
     InlineQueryResultContact instance) {
@@ -2756,17 +2657,16 @@ Map<String, dynamic> _$InlineQueryResultContactToJson(
 }
 
 InlineQueryResultGame _$InlineQueryResultGameFromJson(
-    Map<String, dynamic> json) {
-  return InlineQueryResultGame(
-    id: json['id'] as String,
-    type: json['type'] as String,
-    game_short_name: json['game_short_name'] as String,
-    reply_markup: json['reply_markup'] == null
-        ? null
-        : InlineKeyboardMarkup.fromJson(
-            json['reply_markup'] as Map<String, dynamic>),
-  );
-}
+        Map<String, dynamic> json) =>
+    InlineQueryResultGame(
+      id: json['id'] as String,
+      type: json['type'] as String? ?? InlineQueryResult.GAME,
+      game_short_name: json['game_short_name'] as String,
+      reply_markup: json['reply_markup'] == null
+          ? null
+          : InlineKeyboardMarkup.fromJson(
+              json['reply_markup'] as Map<String, dynamic>),
+    );
 
 Map<String, dynamic> _$InlineQueryResultGameToJson(
     InlineQueryResultGame instance) {
@@ -2787,28 +2687,27 @@ Map<String, dynamic> _$InlineQueryResultGameToJson(
 }
 
 InlineQueryResultCachedPhoto _$InlineQueryResultCachedPhotoFromJson(
-    Map<String, dynamic> json) {
-  return InlineQueryResultCachedPhoto(
-    id: json['id'] as String,
-    type: json['type'] as String,
-    photo_file_id: json['photo_file_id'] as String,
-    title: json['title'] as String?,
-    description: json['description'] as String?,
-    caption: json['caption'] as String?,
-    parse_mode: json['parse_mode'] as String?,
-    caption_entities: (json['caption_entities'] as List<dynamic>?)
-        ?.map((e) => MessageEntity.fromJson(e as Map<String, dynamic>))
-        .toList(),
-    reply_markup: json['reply_markup'] == null
-        ? null
-        : InlineKeyboardMarkup.fromJson(
-            json['reply_markup'] as Map<String, dynamic>),
-    input_message_content: json['input_message_content'] == null
-        ? null
-        : InputMessageContent.fromJson(
-            json['input_message_content'] as Map<String, dynamic>),
-  );
-}
+        Map<String, dynamic> json) =>
+    InlineQueryResultCachedPhoto(
+      id: json['id'] as String,
+      type: json['type'] as String? ?? InlineQueryResult.PHOTO,
+      photo_file_id: json['photo_file_id'] as String,
+      title: json['title'] as String?,
+      description: json['description'] as String?,
+      caption: json['caption'] as String?,
+      parse_mode: json['parse_mode'] as String?,
+      caption_entities: (json['caption_entities'] as List<dynamic>?)
+          ?.map((e) => MessageEntity.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      reply_markup: json['reply_markup'] == null
+          ? null
+          : InlineKeyboardMarkup.fromJson(
+              json['reply_markup'] as Map<String, dynamic>),
+      input_message_content: json['input_message_content'] == null
+          ? null
+          : InputMessageContent.fromJson(
+              json['input_message_content'] as Map<String, dynamic>),
+    );
 
 Map<String, dynamic> _$InlineQueryResultCachedPhotoToJson(
     InlineQueryResultCachedPhoto instance) {
@@ -2837,27 +2736,26 @@ Map<String, dynamic> _$InlineQueryResultCachedPhotoToJson(
 }
 
 InlineQueryResultCachedGif _$InlineQueryResultCachedGifFromJson(
-    Map<String, dynamic> json) {
-  return InlineQueryResultCachedGif(
-    id: json['id'] as String,
-    type: json['type'] as String,
-    gif_file_id: json['gif_file_id'] as String,
-    title: json['title'] as String?,
-    caption: json['caption'] as String?,
-    parse_mode: json['parse_mode'] as String?,
-    caption_entities: (json['caption_entities'] as List<dynamic>?)
-        ?.map((e) => MessageEntity.fromJson(e as Map<String, dynamic>))
-        .toList(),
-    reply_markup: json['reply_markup'] == null
-        ? null
-        : InlineKeyboardMarkup.fromJson(
-            json['reply_markup'] as Map<String, dynamic>),
-    input_message_content: json['input_message_content'] == null
-        ? null
-        : InputMessageContent.fromJson(
-            json['input_message_content'] as Map<String, dynamic>),
-  );
-}
+        Map<String, dynamic> json) =>
+    InlineQueryResultCachedGif(
+      id: json['id'] as String,
+      type: json['type'] as String? ?? InlineQueryResult.GIF,
+      gif_file_id: json['gif_file_id'] as String,
+      title: json['title'] as String?,
+      caption: json['caption'] as String?,
+      parse_mode: json['parse_mode'] as String?,
+      caption_entities: (json['caption_entities'] as List<dynamic>?)
+          ?.map((e) => MessageEntity.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      reply_markup: json['reply_markup'] == null
+          ? null
+          : InlineKeyboardMarkup.fromJson(
+              json['reply_markup'] as Map<String, dynamic>),
+      input_message_content: json['input_message_content'] == null
+          ? null
+          : InputMessageContent.fromJson(
+              json['input_message_content'] as Map<String, dynamic>),
+    );
 
 Map<String, dynamic> _$InlineQueryResultCachedGifToJson(
     InlineQueryResultCachedGif instance) {
@@ -2885,27 +2783,26 @@ Map<String, dynamic> _$InlineQueryResultCachedGifToJson(
 }
 
 InlineQueryResultCachedMpeg4Gif _$InlineQueryResultCachedMpeg4GifFromJson(
-    Map<String, dynamic> json) {
-  return InlineQueryResultCachedMpeg4Gif(
-    id: json['id'] as String,
-    type: json['type'] as String,
-    mpeg4_file_id: json['mpeg4_file_id'] as String,
-    title: json['title'] as String?,
-    caption: json['caption'] as String?,
-    parse_mode: json['parse_mode'] as String?,
-    caption_entities: (json['caption_entities'] as List<dynamic>?)
-        ?.map((e) => MessageEntity.fromJson(e as Map<String, dynamic>))
-        .toList(),
-    reply_markup: json['reply_markup'] == null
-        ? null
-        : InlineKeyboardMarkup.fromJson(
-            json['reply_markup'] as Map<String, dynamic>),
-    input_message_content: json['input_message_content'] == null
-        ? null
-        : InputMessageContent.fromJson(
-            json['input_message_content'] as Map<String, dynamic>),
-  );
-}
+        Map<String, dynamic> json) =>
+    InlineQueryResultCachedMpeg4Gif(
+      id: json['id'] as String,
+      type: json['type'] as String? ?? InlineQueryResult.MPEG4_GIF,
+      mpeg4_file_id: json['mpeg4_file_id'] as String,
+      title: json['title'] as String?,
+      caption: json['caption'] as String?,
+      parse_mode: json['parse_mode'] as String?,
+      caption_entities: (json['caption_entities'] as List<dynamic>?)
+          ?.map((e) => MessageEntity.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      reply_markup: json['reply_markup'] == null
+          ? null
+          : InlineKeyboardMarkup.fromJson(
+              json['reply_markup'] as Map<String, dynamic>),
+      input_message_content: json['input_message_content'] == null
+          ? null
+          : InputMessageContent.fromJson(
+              json['input_message_content'] as Map<String, dynamic>),
+    );
 
 Map<String, dynamic> _$InlineQueryResultCachedMpeg4GifToJson(
     InlineQueryResultCachedMpeg4Gif instance) {
@@ -2933,21 +2830,20 @@ Map<String, dynamic> _$InlineQueryResultCachedMpeg4GifToJson(
 }
 
 InlineQueryResultCachedSticker _$InlineQueryResultCachedStickerFromJson(
-    Map<String, dynamic> json) {
-  return InlineQueryResultCachedSticker(
-    id: json['id'] as String,
-    type: json['type'] as String,
-    sticker_file_id: json['sticker_file_id'] as String?,
-    reply_markup: json['reply_markup'] == null
-        ? null
-        : InlineKeyboardMarkup.fromJson(
-            json['reply_markup'] as Map<String, dynamic>),
-    input_message_content: json['input_message_content'] == null
-        ? null
-        : InputMessageContent.fromJson(
-            json['input_message_content'] as Map<String, dynamic>),
-  );
-}
+        Map<String, dynamic> json) =>
+    InlineQueryResultCachedSticker(
+      id: json['id'] as String,
+      type: json['type'] as String? ?? InlineQueryResult.STICKER,
+      sticker_file_id: json['sticker_file_id'] as String?,
+      reply_markup: json['reply_markup'] == null
+          ? null
+          : InlineKeyboardMarkup.fromJson(
+              json['reply_markup'] as Map<String, dynamic>),
+      input_message_content: json['input_message_content'] == null
+          ? null
+          : InputMessageContent.fromJson(
+              json['input_message_content'] as Map<String, dynamic>),
+    );
 
 Map<String, dynamic> _$InlineQueryResultCachedStickerToJson(
     InlineQueryResultCachedSticker instance) {
@@ -2970,28 +2866,27 @@ Map<String, dynamic> _$InlineQueryResultCachedStickerToJson(
 }
 
 InlineQueryResultCachedDocument _$InlineQueryResultCachedDocumentFromJson(
-    Map<String, dynamic> json) {
-  return InlineQueryResultCachedDocument(
-    id: json['id'] as String,
-    type: json['type'] as String,
-    title: json['title'] as String,
-    document_file_id: json['document_file_id'] as String,
-    description: json['description'] as String?,
-    caption: json['caption'] as String?,
-    parse_mode: json['parse_mode'] as String?,
-    caption_entities: (json['caption_entities'] as List<dynamic>?)
-        ?.map((e) => MessageEntity.fromJson(e as Map<String, dynamic>))
-        .toList(),
-    reply_markup: json['reply_markup'] == null
-        ? null
-        : InlineKeyboardMarkup.fromJson(
-            json['reply_markup'] as Map<String, dynamic>),
-    input_message_content: json['input_message_content'] == null
-        ? null
-        : InputMessageContent.fromJson(
-            json['input_message_content'] as Map<String, dynamic>),
-  );
-}
+        Map<String, dynamic> json) =>
+    InlineQueryResultCachedDocument(
+      id: json['id'] as String,
+      type: json['type'] as String? ?? InlineQueryResult.DOCUMENT,
+      title: json['title'] as String,
+      document_file_id: json['document_file_id'] as String,
+      description: json['description'] as String?,
+      caption: json['caption'] as String?,
+      parse_mode: json['parse_mode'] as String?,
+      caption_entities: (json['caption_entities'] as List<dynamic>?)
+          ?.map((e) => MessageEntity.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      reply_markup: json['reply_markup'] == null
+          ? null
+          : InlineKeyboardMarkup.fromJson(
+              json['reply_markup'] as Map<String, dynamic>),
+      input_message_content: json['input_message_content'] == null
+          ? null
+          : InputMessageContent.fromJson(
+              json['input_message_content'] as Map<String, dynamic>),
+    );
 
 Map<String, dynamic> _$InlineQueryResultCachedDocumentToJson(
     InlineQueryResultCachedDocument instance) {
@@ -3020,28 +2915,27 @@ Map<String, dynamic> _$InlineQueryResultCachedDocumentToJson(
 }
 
 InlineQueryResultCachedVideo _$InlineQueryResultCachedVideoFromJson(
-    Map<String, dynamic> json) {
-  return InlineQueryResultCachedVideo(
-    id: json['id'] as String,
-    type: json['type'] as String,
-    video_file_id: json['video_file_id'] as String,
-    title: json['title'] as String,
-    description: json['description'] as String?,
-    caption: json['caption'] as String?,
-    parse_mode: json['parse_mode'] as String?,
-    caption_entities: (json['caption_entities'] as List<dynamic>?)
-        ?.map((e) => MessageEntity.fromJson(e as Map<String, dynamic>))
-        .toList(),
-    reply_markup: json['reply_markup'] == null
-        ? null
-        : InlineKeyboardMarkup.fromJson(
-            json['reply_markup'] as Map<String, dynamic>),
-    input_message_content: json['input_message_content'] == null
-        ? null
-        : InputMessageContent.fromJson(
-            json['input_message_content'] as Map<String, dynamic>),
-  );
-}
+        Map<String, dynamic> json) =>
+    InlineQueryResultCachedVideo(
+      id: json['id'] as String,
+      type: json['type'] as String? ?? InlineQueryResult.VIDEO,
+      video_file_id: json['video_file_id'] as String,
+      title: json['title'] as String,
+      description: json['description'] as String?,
+      caption: json['caption'] as String?,
+      parse_mode: json['parse_mode'] as String?,
+      caption_entities: (json['caption_entities'] as List<dynamic>?)
+          ?.map((e) => MessageEntity.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      reply_markup: json['reply_markup'] == null
+          ? null
+          : InlineKeyboardMarkup.fromJson(
+              json['reply_markup'] as Map<String, dynamic>),
+      input_message_content: json['input_message_content'] == null
+          ? null
+          : InputMessageContent.fromJson(
+              json['input_message_content'] as Map<String, dynamic>),
+    );
 
 Map<String, dynamic> _$InlineQueryResultCachedVideoToJson(
     InlineQueryResultCachedVideo instance) {
@@ -3070,27 +2964,26 @@ Map<String, dynamic> _$InlineQueryResultCachedVideoToJson(
 }
 
 InlineQueryResultCachedVoice _$InlineQueryResultCachedVoiceFromJson(
-    Map<String, dynamic> json) {
-  return InlineQueryResultCachedVoice(
-    id: json['id'] as String,
-    type: json['type'] as String,
-    voice_file_id: json['voice_file_id'] as String,
-    title: json['title'] as String,
-    caption: json['caption'] as String?,
-    parse_mode: json['parse_mode'] as String?,
-    caption_entities: (json['caption_entities'] as List<dynamic>?)
-        ?.map((e) => MessageEntity.fromJson(e as Map<String, dynamic>))
-        .toList(),
-    reply_markup: json['reply_markup'] == null
-        ? null
-        : InlineKeyboardMarkup.fromJson(
-            json['reply_markup'] as Map<String, dynamic>),
-    input_message_content: json['input_message_content'] == null
-        ? null
-        : InputMessageContent.fromJson(
-            json['input_message_content'] as Map<String, dynamic>),
-  );
-}
+        Map<String, dynamic> json) =>
+    InlineQueryResultCachedVoice(
+      id: json['id'] as String,
+      type: json['type'] as String? ?? InlineQueryResult.VOICE,
+      voice_file_id: json['voice_file_id'] as String,
+      title: json['title'] as String,
+      caption: json['caption'] as String?,
+      parse_mode: json['parse_mode'] as String?,
+      caption_entities: (json['caption_entities'] as List<dynamic>?)
+          ?.map((e) => MessageEntity.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      reply_markup: json['reply_markup'] == null
+          ? null
+          : InlineKeyboardMarkup.fromJson(
+              json['reply_markup'] as Map<String, dynamic>),
+      input_message_content: json['input_message_content'] == null
+          ? null
+          : InputMessageContent.fromJson(
+              json['input_message_content'] as Map<String, dynamic>),
+    );
 
 Map<String, dynamic> _$InlineQueryResultCachedVoiceToJson(
     InlineQueryResultCachedVoice instance) {
@@ -3118,26 +3011,25 @@ Map<String, dynamic> _$InlineQueryResultCachedVoiceToJson(
 }
 
 InlineQueryResultCachedAudio _$InlineQueryResultCachedAudioFromJson(
-    Map<String, dynamic> json) {
-  return InlineQueryResultCachedAudio(
-    id: json['id'] as String,
-    type: json['type'] as String,
-    audio_file_id: json['audio_file_id'] as String,
-    caption: json['caption'] as String?,
-    parse_mode: json['parse_mode'] as String?,
-    caption_entities: (json['caption_entities'] as List<dynamic>?)
-        ?.map((e) => MessageEntity.fromJson(e as Map<String, dynamic>))
-        .toList(),
-    reply_markup: json['reply_markup'] == null
-        ? null
-        : InlineKeyboardMarkup.fromJson(
-            json['reply_markup'] as Map<String, dynamic>),
-    input_message_content: json['input_message_content'] == null
-        ? null
-        : InputMessageContent.fromJson(
-            json['input_message_content'] as Map<String, dynamic>),
-  );
-}
+        Map<String, dynamic> json) =>
+    InlineQueryResultCachedAudio(
+      id: json['id'] as String,
+      type: json['type'] as String? ?? InlineQueryResult.AUDIO,
+      audio_file_id: json['audio_file_id'] as String,
+      caption: json['caption'] as String?,
+      parse_mode: json['parse_mode'] as String?,
+      caption_entities: (json['caption_entities'] as List<dynamic>?)
+          ?.map((e) => MessageEntity.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      reply_markup: json['reply_markup'] == null
+          ? null
+          : InlineKeyboardMarkup.fromJson(
+              json['reply_markup'] as Map<String, dynamic>),
+      input_message_content: json['input_message_content'] == null
+          ? null
+          : InputMessageContent.fromJson(
+              json['input_message_content'] as Map<String, dynamic>),
+    );
 
 Map<String, dynamic> _$InlineQueryResultCachedAudioToJson(
     InlineQueryResultCachedAudio instance) {
@@ -3163,24 +3055,22 @@ Map<String, dynamic> _$InlineQueryResultCachedAudioToJson(
   return val;
 }
 
-InputMessageContent _$InputMessageContentFromJson(Map<String, dynamic> json) {
-  return InputMessageContent();
-}
+InputMessageContent _$InputMessageContentFromJson(Map<String, dynamic> json) =>
+    InputMessageContent();
 
 Map<String, dynamic> _$InputMessageContentToJson(
         InputMessageContent instance) =>
     <String, dynamic>{};
 
 InputTextMessageContent _$InputTextMessageContentFromJson(
-    Map<String, dynamic> json) {
-  return InputTextMessageContent(
-    message_text: json['message_text'] as String,
-    parse_mode: json['parse_mode'] as String?,
-    disable_web_page_preview: json['disable_web_page_preview'] as bool?,
-  )..entities = (json['entities'] as List<dynamic>?)
-      ?.map((e) => MessageEntity.fromJson(e as Map<String, dynamic>))
-      .toList();
-}
+        Map<String, dynamic> json) =>
+    InputTextMessageContent(
+      message_text: json['message_text'] as String,
+      parse_mode: json['parse_mode'] as String?,
+      disable_web_page_preview: json['disable_web_page_preview'] as bool?,
+    )..entities = (json['entities'] as List<dynamic>?)
+        ?.map((e) => MessageEntity.fromJson(e as Map<String, dynamic>))
+        .toList();
 
 Map<String, dynamic> _$InputTextMessageContentToJson(
     InputTextMessageContent instance) {
@@ -3201,16 +3091,15 @@ Map<String, dynamic> _$InputTextMessageContentToJson(
 }
 
 InputLocationMessageContent _$InputLocationMessageContentFromJson(
-    Map<String, dynamic> json) {
-  return InputLocationMessageContent(
-    latitude: (json['latitude'] as num).toDouble(),
-    longitude: (json['longitude'] as num).toDouble(),
-    horizontal_accuracy: (json['horizontal_accuracy'] as num?)?.toDouble(),
-    live_period: json['live_period'] as int?,
-    heading: json['heading'] as int?,
-    proximity_alert_radius: json['proximity_alert_radius'] as int?,
-  );
-}
+        Map<String, dynamic> json) =>
+    InputLocationMessageContent(
+      latitude: (json['latitude'] as num).toDouble(),
+      longitude: (json['longitude'] as num).toDouble(),
+      horizontal_accuracy: (json['horizontal_accuracy'] as num?)?.toDouble(),
+      live_period: json['live_period'] as int?,
+      heading: json['heading'] as int?,
+      proximity_alert_radius: json['proximity_alert_radius'] as int?,
+    );
 
 Map<String, dynamic> _$InputLocationMessageContentToJson(
     InputLocationMessageContent instance) {
@@ -3233,18 +3122,17 @@ Map<String, dynamic> _$InputLocationMessageContentToJson(
 }
 
 InputVenueMessageContent _$InputVenueMessageContentFromJson(
-    Map<String, dynamic> json) {
-  return InputVenueMessageContent(
-    latitude: (json['latitude'] as num).toDouble(),
-    longitude: (json['longitude'] as num).toDouble(),
-    title: json['title'] as String,
-    address: json['address'] as String,
-    foursquare_id: json['foursquare_id'] as String?,
-    foursquare_type: json['foursquare_type'] as String?,
-    google_place_id: json['google_place_id'] as String?,
-    google_place_type: json['google_place_type'] as String?,
-  );
-}
+        Map<String, dynamic> json) =>
+    InputVenueMessageContent(
+      latitude: (json['latitude'] as num).toDouble(),
+      longitude: (json['longitude'] as num).toDouble(),
+      title: json['title'] as String,
+      address: json['address'] as String,
+      foursquare_id: json['foursquare_id'] as String?,
+      foursquare_type: json['foursquare_type'] as String?,
+      google_place_id: json['google_place_id'] as String?,
+      google_place_type: json['google_place_type'] as String?,
+    );
 
 Map<String, dynamic> _$InputVenueMessageContentToJson(
     InputVenueMessageContent instance) {
@@ -3269,14 +3157,13 @@ Map<String, dynamic> _$InputVenueMessageContentToJson(
 }
 
 InputContactMessageContent _$InputContactMessageContentFromJson(
-    Map<String, dynamic> json) {
-  return InputContactMessageContent(
-    phone_number: json['phone_number'] as String,
-    first_name: json['first_name'] as String,
-    last_name: json['last_name'] as String?,
-    vcard: json['vcard'] as String?,
-  );
-}
+        Map<String, dynamic> json) =>
+    InputContactMessageContent(
+      phone_number: json['phone_number'] as String,
+      first_name: json['first_name'] as String,
+      last_name: json['last_name'] as String?,
+      vcard: json['vcard'] as String?,
+    );
 
 Map<String, dynamic> _$InputContactMessageContentToJson(
     InputContactMessageContent instance) {
@@ -3297,34 +3184,33 @@ Map<String, dynamic> _$InputContactMessageContentToJson(
 }
 
 InputInvoiceMessageContent _$InputInvoiceMessageContentFromJson(
-    Map<String, dynamic> json) {
-  return InputInvoiceMessageContent(
-    title: json['title'] as String,
-    description: json['description'] as String,
-    payload: json['payload'] as String,
-    provider_token: json['provider_token'] as String,
-    currency: json['currency'] as String,
-    prices: (json['prices'] as List<dynamic>)
-        .map((e) => LabeledPrice.fromJson(e as Map<String, dynamic>))
-        .toList(),
-    max_tip_amount: json['max_tip_amount'] as int?,
-    suggested_tip_amounts: (json['suggested_tip_amounts'] as List<dynamic>?)
-        ?.map((e) => e as int)
-        .toList(),
-    provider_data: json['provider_data'] as String?,
-    photo_size: json['photo_size'] as int?,
-    photo_width: json['photo_width'] as int?,
-    photo_height: json['photo_height'] as int?,
-    need_name: json['need_name'] as bool?,
-    need_phone_number: json['need_phone_number'] as bool?,
-    need_email: json['need_email'] as bool?,
-    need_shipping_address: json['need_shipping_address'] as bool?,
-    send_phone_number_to_provider:
-        json['send_phone_number_to_provider'] as bool?,
-    send_email_to_provider: json['send_email_to_provider'] as bool?,
-    is_flexible: json['is_flexible'] as bool?,
-  )..photo_url = json['photo_url'] as String?;
-}
+        Map<String, dynamic> json) =>
+    InputInvoiceMessageContent(
+      title: json['title'] as String,
+      description: json['description'] as String,
+      payload: json['payload'] as String,
+      provider_token: json['provider_token'] as String,
+      currency: json['currency'] as String,
+      prices: (json['prices'] as List<dynamic>)
+          .map((e) => LabeledPrice.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      max_tip_amount: json['max_tip_amount'] as int?,
+      suggested_tip_amounts: (json['suggested_tip_amounts'] as List<dynamic>?)
+          ?.map((e) => e as int)
+          .toList(),
+      provider_data: json['provider_data'] as String?,
+      photo_size: json['photo_size'] as int?,
+      photo_width: json['photo_width'] as int?,
+      photo_height: json['photo_height'] as int?,
+      need_name: json['need_name'] as bool?,
+      need_phone_number: json['need_phone_number'] as bool?,
+      need_email: json['need_email'] as bool?,
+      need_shipping_address: json['need_shipping_address'] as bool?,
+      send_phone_number_to_provider:
+          json['send_phone_number_to_provider'] as bool?,
+      send_email_to_provider: json['send_email_to_provider'] as bool?,
+      is_flexible: json['is_flexible'] as bool?,
+    )..photo_url = json['photo_url'] as String?;
 
 Map<String, dynamic> _$InputInvoiceMessageContentToJson(
     InputInvoiceMessageContent instance) {
@@ -3361,17 +3247,16 @@ Map<String, dynamic> _$InputInvoiceMessageContentToJson(
   return val;
 }
 
-ChosenInlineResult _$ChosenInlineResultFromJson(Map<String, dynamic> json) {
-  return ChosenInlineResult(
-    result_id: json['result_id'] as String,
-    from: User.fromJson(json['from'] as Map<String, dynamic>),
-    location: json['location'] == null
-        ? null
-        : Location.fromJson(json['location'] as Map<String, dynamic>),
-    inline_message_id: json['inline_message_id'] as String?,
-    query: json['query'] as String,
-  );
-}
+ChosenInlineResult _$ChosenInlineResultFromJson(Map<String, dynamic> json) =>
+    ChosenInlineResult(
+      result_id: json['result_id'] as String,
+      from: User.fromJson(json['from'] as Map<String, dynamic>),
+      location: json['location'] == null
+          ? null
+          : Location.fromJson(json['location'] as Map<String, dynamic>),
+      inline_message_id: json['inline_message_id'] as String?,
+      query: json['query'] as String,
+    );
 
 Map<String, dynamic> _$ChosenInlineResultToJson(ChosenInlineResult instance) {
   final val = <String, dynamic>{
@@ -3391,12 +3276,10 @@ Map<String, dynamic> _$ChosenInlineResultToJson(ChosenInlineResult instance) {
   return val;
 }
 
-LabeledPrice _$LabeledPriceFromJson(Map<String, dynamic> json) {
-  return LabeledPrice(
-    label: json['label'] as String,
-    amount: json['amount'] as int,
-  );
-}
+LabeledPrice _$LabeledPriceFromJson(Map<String, dynamic> json) => LabeledPrice(
+      label: json['label'] as String,
+      amount: json['amount'] as int,
+    );
 
 Map<String, dynamic> _$LabeledPriceToJson(LabeledPrice instance) =>
     <String, dynamic>{
@@ -3404,15 +3287,13 @@ Map<String, dynamic> _$LabeledPriceToJson(LabeledPrice instance) =>
       'amount': instance.amount,
     };
 
-Invoice _$InvoiceFromJson(Map<String, dynamic> json) {
-  return Invoice(
-    title: json['title'] as String,
-    description: json['description'] as String,
-    start_parameter: json['start_parameter'] as String,
-    currency: json['currency'] as String,
-    total_amount: json['total_amount'] as int,
-  );
-}
+Invoice _$InvoiceFromJson(Map<String, dynamic> json) => Invoice(
+      title: json['title'] as String,
+      description: json['description'] as String,
+      start_parameter: json['start_parameter'] as String,
+      currency: json['currency'] as String,
+      total_amount: json['total_amount'] as int,
+    );
 
 Map<String, dynamic> _$InvoiceToJson(Invoice instance) => <String, dynamic>{
       'title': instance.title,
@@ -3422,16 +3303,15 @@ Map<String, dynamic> _$InvoiceToJson(Invoice instance) => <String, dynamic>{
       'total_amount': instance.total_amount,
     };
 
-ShippingAddress _$ShippingAddressFromJson(Map<String, dynamic> json) {
-  return ShippingAddress(
-    country_code: json['country_code'] as String,
-    state: json['state'] as String,
-    city: json['city'] as String,
-    street_line1: json['street_line1'] as String,
-    street_line2: json['street_line2'] as String,
-    post_code: json['post_code'] as String,
-  );
-}
+ShippingAddress _$ShippingAddressFromJson(Map<String, dynamic> json) =>
+    ShippingAddress(
+      country_code: json['country_code'] as String,
+      state: json['state'] as String,
+      city: json['city'] as String,
+      street_line1: json['street_line1'] as String,
+      street_line2: json['street_line2'] as String,
+      post_code: json['post_code'] as String,
+    );
 
 Map<String, dynamic> _$ShippingAddressToJson(ShippingAddress instance) =>
     <String, dynamic>{
@@ -3443,17 +3323,15 @@ Map<String, dynamic> _$ShippingAddressToJson(ShippingAddress instance) =>
       'post_code': instance.post_code,
     };
 
-OrderInfo _$OrderInfoFromJson(Map<String, dynamic> json) {
-  return OrderInfo(
-    name: json['name'] as String?,
-    phone_number: json['phone_number'] as String?,
-    email: json['email'] as String?,
-    shippingAddress: json['shippingAddress'] == null
-        ? null
-        : ShippingAddress.fromJson(
-            json['shippingAddress'] as Map<String, dynamic>),
-  );
-}
+OrderInfo _$OrderInfoFromJson(Map<String, dynamic> json) => OrderInfo(
+      name: json['name'] as String?,
+      phone_number: json['phone_number'] as String?,
+      email: json['email'] as String?,
+      shippingAddress: json['shippingAddress'] == null
+          ? null
+          : ShippingAddress.fromJson(
+              json['shippingAddress'] as Map<String, dynamic>),
+    );
 
 Map<String, dynamic> _$OrderInfoToJson(OrderInfo instance) {
   final val = <String, dynamic>{};
@@ -3471,15 +3349,14 @@ Map<String, dynamic> _$OrderInfoToJson(OrderInfo instance) {
   return val;
 }
 
-ShippingOption _$ShippingOptionFromJson(Map<String, dynamic> json) {
-  return ShippingOption(
-    id: json['id'] as String,
-    title: json['title'] as String,
-    prices: (json['prices'] as List<dynamic>)
-        .map((e) => LabeledPrice.fromJson(e as Map<String, dynamic>))
-        .toList(),
-  );
-}
+ShippingOption _$ShippingOptionFromJson(Map<String, dynamic> json) =>
+    ShippingOption(
+      id: json['id'] as String,
+      title: json['title'] as String,
+      prices: (json['prices'] as List<dynamic>)
+          .map((e) => LabeledPrice.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
 
 Map<String, dynamic> _$ShippingOptionToJson(ShippingOption instance) =>
     <String, dynamic>{
@@ -3488,19 +3365,18 @@ Map<String, dynamic> _$ShippingOptionToJson(ShippingOption instance) =>
       'prices': instance.prices.map((e) => e.toJson()).toList(),
     };
 
-SuccessfulPayment _$SuccessfulPaymentFromJson(Map<String, dynamic> json) {
-  return SuccessfulPayment(
-    currency: json['currency'] as String,
-    total_amount: json['total_amount'] as int,
-    invoice_payload: json['invoice_payload'] as String,
-    shipping_option_id: json['shipping_option_id'] as String?,
-    order_info: json['order_info'] == null
-        ? null
-        : OrderInfo.fromJson(json['order_info'] as Map<String, dynamic>),
-    telegram_payment_charge_id: json['telegram_payment_charge_id'] as String,
-    provider_payment_charge_id: json['provider_payment_charge_id'] as String,
-  );
-}
+SuccessfulPayment _$SuccessfulPaymentFromJson(Map<String, dynamic> json) =>
+    SuccessfulPayment(
+      currency: json['currency'] as String,
+      total_amount: json['total_amount'] as int,
+      invoice_payload: json['invoice_payload'] as String,
+      shipping_option_id: json['shipping_option_id'] as String?,
+      order_info: json['order_info'] == null
+          ? null
+          : OrderInfo.fromJson(json['order_info'] as Map<String, dynamic>),
+      telegram_payment_charge_id: json['telegram_payment_charge_id'] as String,
+      provider_payment_charge_id: json['provider_payment_charge_id'] as String,
+    );
 
 Map<String, dynamic> _$SuccessfulPaymentToJson(SuccessfulPayment instance) {
   final val = <String, dynamic>{
@@ -3522,15 +3398,14 @@ Map<String, dynamic> _$SuccessfulPaymentToJson(SuccessfulPayment instance) {
   return val;
 }
 
-ShippingQuery _$ShippingQueryFromJson(Map<String, dynamic> json) {
-  return ShippingQuery(
-    id: json['id'] as String,
-    from: User.fromJson(json['from'] as Map<String, dynamic>),
-    invoice_payload: json['invoice_payload'] as String,
-    shipping_address: ShippingAddress.fromJson(
-        json['shipping_address'] as Map<String, dynamic>),
-  );
-}
+ShippingQuery _$ShippingQueryFromJson(Map<String, dynamic> json) =>
+    ShippingQuery(
+      id: json['id'] as String,
+      from: User.fromJson(json['from'] as Map<String, dynamic>),
+      invoice_payload: json['invoice_payload'] as String,
+      shipping_address: ShippingAddress.fromJson(
+          json['shipping_address'] as Map<String, dynamic>),
+    );
 
 Map<String, dynamic> _$ShippingQueryToJson(ShippingQuery instance) =>
     <String, dynamic>{
@@ -3540,19 +3415,18 @@ Map<String, dynamic> _$ShippingQueryToJson(ShippingQuery instance) =>
       'shipping_address': instance.shipping_address.toJson(),
     };
 
-PreCheckoutQuery _$PreCheckoutQueryFromJson(Map<String, dynamic> json) {
-  return PreCheckoutQuery(
-    id: json['id'] as String,
-    from: User.fromJson(json['from'] as Map<String, dynamic>),
-    currency: json['currency'] as String,
-    total_amount: json['total_amount'] as int,
-    invoice_payload: json['invoice_payload'] as String,
-    shipping_option_id: json['shipping_option_id'] as String?,
-    order_info: json['order_info'] == null
-        ? null
-        : OrderInfo.fromJson(json['order_info'] as Map<String, dynamic>),
-  );
-}
+PreCheckoutQuery _$PreCheckoutQueryFromJson(Map<String, dynamic> json) =>
+    PreCheckoutQuery(
+      id: json['id'] as String,
+      from: User.fromJson(json['from'] as Map<String, dynamic>),
+      currency: json['currency'] as String,
+      total_amount: json['total_amount'] as int,
+      invoice_payload: json['invoice_payload'] as String,
+      shipping_option_id: json['shipping_option_id'] as String?,
+      order_info: json['order_info'] == null
+          ? null
+          : OrderInfo.fromJson(json['order_info'] as Map<String, dynamic>),
+    );
 
 Map<String, dynamic> _$PreCheckoutQueryToJson(PreCheckoutQuery instance) {
   final val = <String, dynamic>{
@@ -3574,16 +3448,14 @@ Map<String, dynamic> _$PreCheckoutQueryToJson(PreCheckoutQuery instance) {
   return val;
 }
 
-PassportData _$PassportDataFromJson(Map<String, dynamic> json) {
-  return PassportData(
-    data: (json['data'] as List<dynamic>)
-        .map(
-            (e) => EncryptedPassportElement.fromJson(e as Map<String, dynamic>))
-        .toList(),
-    credentials: EncryptedCredentials.fromJson(
-        json['credentials'] as Map<String, dynamic>),
-  );
-}
+PassportData _$PassportDataFromJson(Map<String, dynamic> json) => PassportData(
+      data: (json['data'] as List<dynamic>)
+          .map((e) =>
+              EncryptedPassportElement.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      credentials: EncryptedCredentials.fromJson(
+          json['credentials'] as Map<String, dynamic>),
+    );
 
 Map<String, dynamic> _$PassportDataToJson(PassportData instance) =>
     <String, dynamic>{
@@ -3591,14 +3463,12 @@ Map<String, dynamic> _$PassportDataToJson(PassportData instance) =>
       'credentials': instance.credentials.toJson(),
     };
 
-PassportFile _$PassportFileFromJson(Map<String, dynamic> json) {
-  return PassportFile(
-    file_id: json['file_id'] as String,
-    file_unique_id: json['file_unique_id'] as String,
-    file_size: json['file_size'] as int,
-    file_date: json['file_date'] as int,
-  );
-}
+PassportFile _$PassportFileFromJson(Map<String, dynamic> json) => PassportFile(
+      file_id: json['file_id'] as String,
+      file_unique_id: json['file_unique_id'] as String,
+      file_size: json['file_size'] as int,
+      file_date: json['file_date'] as int,
+    );
 
 Map<String, dynamic> _$PassportFileToJson(PassportFile instance) =>
     <String, dynamic>{
@@ -3609,30 +3479,29 @@ Map<String, dynamic> _$PassportFileToJson(PassportFile instance) =>
     };
 
 EncryptedPassportElement _$EncryptedPassportElementFromJson(
-    Map<String, dynamic> json) {
-  return EncryptedPassportElement(
-    type: json['type'] as String,
-    data: json['data'] as String?,
-    phone_number: json['phone_number'] as String?,
-    email: json['email'] as String?,
-    files: (json['files'] as List<dynamic>?)
-        ?.map((e) => PassportFile.fromJson(e as Map<String, dynamic>))
-        .toList(),
-    front_side: json['front_side'] == null
-        ? null
-        : PassportFile.fromJson(json['front_side'] as Map<String, dynamic>),
-    reverse_side: json['reverse_side'] == null
-        ? null
-        : PassportFile.fromJson(json['reverse_side'] as Map<String, dynamic>),
-    selfie: json['selfie'] == null
-        ? null
-        : PassportFile.fromJson(json['selfie'] as Map<String, dynamic>),
-    translation: (json['translation'] as List<dynamic>?)
-        ?.map((e) => PassportFile.fromJson(e as Map<String, dynamic>))
-        .toList(),
-    hash: json['hash'] as String,
-  );
-}
+        Map<String, dynamic> json) =>
+    EncryptedPassportElement(
+      type: json['type'] as String,
+      data: json['data'] as String?,
+      phone_number: json['phone_number'] as String?,
+      email: json['email'] as String?,
+      files: (json['files'] as List<dynamic>?)
+          ?.map((e) => PassportFile.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      front_side: json['front_side'] == null
+          ? null
+          : PassportFile.fromJson(json['front_side'] as Map<String, dynamic>),
+      reverse_side: json['reverse_side'] == null
+          ? null
+          : PassportFile.fromJson(json['reverse_side'] as Map<String, dynamic>),
+      selfie: json['selfie'] == null
+          ? null
+          : PassportFile.fromJson(json['selfie'] as Map<String, dynamic>),
+      translation: (json['translation'] as List<dynamic>?)
+          ?.map((e) => PassportFile.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      hash: json['hash'] as String,
+    );
 
 Map<String, dynamic> _$EncryptedPassportElementToJson(
     EncryptedPassportElement instance) {
@@ -3659,13 +3528,13 @@ Map<String, dynamic> _$EncryptedPassportElementToJson(
   return val;
 }
 
-EncryptedCredentials _$EncryptedCredentialsFromJson(Map<String, dynamic> json) {
-  return EncryptedCredentials(
-    data: json['data'] as String,
-    hash: json['hash'] as String,
-    secret: json['secret'] as String,
-  );
-}
+EncryptedCredentials _$EncryptedCredentialsFromJson(
+        Map<String, dynamic> json) =>
+    EncryptedCredentials(
+      data: json['data'] as String,
+      hash: json['hash'] as String,
+      secret: json['secret'] as String,
+    );
 
 Map<String, dynamic> _$EncryptedCredentialsToJson(
         EncryptedCredentials instance) =>
@@ -3675,13 +3544,13 @@ Map<String, dynamic> _$EncryptedCredentialsToJson(
       'secret': instance.secret,
     };
 
-PassportElementError _$PassportElementErrorFromJson(Map<String, dynamic> json) {
-  return PassportElementError(
-    source: json['source'] as String,
-    type: json['type'] as String,
-    message: json['message'] as String,
-  );
-}
+PassportElementError _$PassportElementErrorFromJson(
+        Map<String, dynamic> json) =>
+    PassportElementError(
+      source: json['source'] as String,
+      type: json['type'] as String,
+      message: json['message'] as String,
+    );
 
 Map<String, dynamic> _$PassportElementErrorToJson(
         PassportElementError instance) =>
@@ -3692,15 +3561,14 @@ Map<String, dynamic> _$PassportElementErrorToJson(
     };
 
 PassportElementErrorDataField _$PassportElementErrorDataFieldFromJson(
-    Map<String, dynamic> json) {
-  return PassportElementErrorDataField(
-    source: json['source'] as String,
-    type: json['type'] as String,
-    message: json['message'] as String,
-    field_name: json['field_name'] as String,
-    data_hash: json['data_hash'] as String,
-  );
-}
+        Map<String, dynamic> json) =>
+    PassportElementErrorDataField(
+      source: json['source'] as String,
+      type: json['type'] as String,
+      message: json['message'] as String,
+      field_name: json['field_name'] as String,
+      data_hash: json['data_hash'] as String,
+    );
 
 Map<String, dynamic> _$PassportElementErrorDataFieldToJson(
         PassportElementErrorDataField instance) =>
@@ -3713,14 +3581,13 @@ Map<String, dynamic> _$PassportElementErrorDataFieldToJson(
     };
 
 PassportElementErrorFrontSide _$PassportElementErrorFrontSideFromJson(
-    Map<String, dynamic> json) {
-  return PassportElementErrorFrontSide(
-    source: json['source'] as String,
-    type: json['type'] as String,
-    message: json['message'] as String,
-    file_hash: json['file_hash'] as String,
-  );
-}
+        Map<String, dynamic> json) =>
+    PassportElementErrorFrontSide(
+      source: json['source'] as String,
+      type: json['type'] as String,
+      message: json['message'] as String,
+      file_hash: json['file_hash'] as String,
+    );
 
 Map<String, dynamic> _$PassportElementErrorFrontSideToJson(
         PassportElementErrorFrontSide instance) =>
@@ -3732,14 +3599,13 @@ Map<String, dynamic> _$PassportElementErrorFrontSideToJson(
     };
 
 PassportElementErrorReverseSide _$PassportElementErrorReverseSideFromJson(
-    Map<String, dynamic> json) {
-  return PassportElementErrorReverseSide(
-    source: json['source'] as String,
-    type: json['type'] as String,
-    message: json['message'] as String,
-    file_hash: json['file_hash'] as String,
-  );
-}
+        Map<String, dynamic> json) =>
+    PassportElementErrorReverseSide(
+      source: json['source'] as String,
+      type: json['type'] as String,
+      message: json['message'] as String,
+      file_hash: json['file_hash'] as String,
+    );
 
 Map<String, dynamic> _$PassportElementErrorReverseSideToJson(
         PassportElementErrorReverseSide instance) =>
@@ -3751,14 +3617,13 @@ Map<String, dynamic> _$PassportElementErrorReverseSideToJson(
     };
 
 PassportElementErrorSelfie _$PassportElementErrorSelfieFromJson(
-    Map<String, dynamic> json) {
-  return PassportElementErrorSelfie(
-    source: json['source'] as String,
-    type: json['type'] as String,
-    message: json['message'] as String,
-    file_hash: json['file_hash'] as String,
-  );
-}
+        Map<String, dynamic> json) =>
+    PassportElementErrorSelfie(
+      source: json['source'] as String,
+      type: json['type'] as String,
+      message: json['message'] as String,
+      file_hash: json['file_hash'] as String,
+    );
 
 Map<String, dynamic> _$PassportElementErrorSelfieToJson(
         PassportElementErrorSelfie instance) =>
@@ -3770,14 +3635,13 @@ Map<String, dynamic> _$PassportElementErrorSelfieToJson(
     };
 
 PassportElementErrorFile _$PassportElementErrorFileFromJson(
-    Map<String, dynamic> json) {
-  return PassportElementErrorFile(
-    source: json['source'] as String,
-    type: json['type'] as String,
-    message: json['message'] as String,
-    file_hash: json['file_hash'] as String,
-  );
-}
+        Map<String, dynamic> json) =>
+    PassportElementErrorFile(
+      source: json['source'] as String,
+      type: json['type'] as String,
+      message: json['message'] as String,
+      file_hash: json['file_hash'] as String,
+    );
 
 Map<String, dynamic> _$PassportElementErrorFileToJson(
         PassportElementErrorFile instance) =>
@@ -3789,15 +3653,15 @@ Map<String, dynamic> _$PassportElementErrorFileToJson(
     };
 
 PassportElementErrorFiles _$PassportElementErrorFilesFromJson(
-    Map<String, dynamic> json) {
-  return PassportElementErrorFiles(
-    source: json['source'] as String,
-    type: json['type'] as String,
-    message: json['message'] as String,
-    file_hashes:
-        (json['file_hashes'] as List<dynamic>).map((e) => e as String).toList(),
-  );
-}
+        Map<String, dynamic> json) =>
+    PassportElementErrorFiles(
+      source: json['source'] as String,
+      type: json['type'] as String,
+      message: json['message'] as String,
+      file_hashes: (json['file_hashes'] as List<dynamic>)
+          .map((e) => e as String)
+          .toList(),
+    );
 
 Map<String, dynamic> _$PassportElementErrorFilesToJson(
         PassportElementErrorFiles instance) =>
@@ -3809,14 +3673,13 @@ Map<String, dynamic> _$PassportElementErrorFilesToJson(
     };
 
 PassportElementErrorTranslationFile
-    _$PassportElementErrorTranslationFileFromJson(Map<String, dynamic> json) {
-  return PassportElementErrorTranslationFile(
-    source: json['source'] as String,
-    type: json['type'] as String,
-    message: json['message'] as String,
-    file_hash: json['file_hash'] as String,
-  );
-}
+    _$PassportElementErrorTranslationFileFromJson(Map<String, dynamic> json) =>
+        PassportElementErrorTranslationFile(
+          source: json['source'] as String,
+          type: json['type'] as String,
+          message: json['message'] as String,
+          file_hash: json['file_hash'] as String,
+        );
 
 Map<String, dynamic> _$PassportElementErrorTranslationFileToJson(
         PassportElementErrorTranslationFile instance) =>
@@ -3828,15 +3691,15 @@ Map<String, dynamic> _$PassportElementErrorTranslationFileToJson(
     };
 
 PassportElementErrorTranslationFiles
-    _$PassportElementErrorTranslationFilesFromJson(Map<String, dynamic> json) {
-  return PassportElementErrorTranslationFiles(
-    source: json['source'] as String,
-    type: json['type'] as String,
-    message: json['message'] as String,
-    file_hashes:
-        (json['file_hashes'] as List<dynamic>).map((e) => e as String).toList(),
-  );
-}
+    _$PassportElementErrorTranslationFilesFromJson(Map<String, dynamic> json) =>
+        PassportElementErrorTranslationFiles(
+          source: json['source'] as String,
+          type: json['type'] as String,
+          message: json['message'] as String,
+          file_hashes: (json['file_hashes'] as List<dynamic>)
+              .map((e) => e as String)
+              .toList(),
+        );
 
 Map<String, dynamic> _$PassportElementErrorTranslationFilesToJson(
         PassportElementErrorTranslationFiles instance) =>
@@ -3848,14 +3711,13 @@ Map<String, dynamic> _$PassportElementErrorTranslationFilesToJson(
     };
 
 PassportElementErrorUnspecified _$PassportElementErrorUnspecifiedFromJson(
-    Map<String, dynamic> json) {
-  return PassportElementErrorUnspecified(
-    source: json['source'] as String,
-    type: json['type'] as String,
-    message: json['message'] as String,
-    element_hash: json['element_hash'] as String,
-  );
-}
+        Map<String, dynamic> json) =>
+    PassportElementErrorUnspecified(
+      source: json['source'] as String,
+      type: json['type'] as String,
+      message: json['message'] as String,
+      element_hash: json['element_hash'] as String,
+    );
 
 Map<String, dynamic> _$PassportElementErrorUnspecifiedToJson(
         PassportElementErrorUnspecified instance) =>
@@ -3866,22 +3728,20 @@ Map<String, dynamic> _$PassportElementErrorUnspecifiedToJson(
       'element_hash': instance.element_hash,
     };
 
-Game _$GameFromJson(Map<String, dynamic> json) {
-  return Game(
-    title: json['title'] as String,
-    description: json['description'] as String,
-    photo: (json['photo'] as List<dynamic>)
-        .map((e) => PhotoSize.fromJson(e as Map<String, dynamic>))
-        .toList(),
-    text: json['text'] as String?,
-    text_entities: (json['text_entities'] as List<dynamic>?)
-        ?.map((e) => MessageEntity.fromJson(e as Map<String, dynamic>))
-        .toList(),
-    animation: json['animation'] == null
-        ? null
-        : Animation.fromJson(json['animation'] as Map<String, dynamic>),
-  );
-}
+Game _$GameFromJson(Map<String, dynamic> json) => Game(
+      title: json['title'] as String,
+      description: json['description'] as String,
+      photo: (json['photo'] as List<dynamic>)
+          .map((e) => PhotoSize.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      text: json['text'] as String?,
+      text_entities: (json['text_entities'] as List<dynamic>?)
+          ?.map((e) => MessageEntity.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      animation: json['animation'] == null
+          ? null
+          : Animation.fromJson(json['animation'] as Map<String, dynamic>),
+    );
 
 Map<String, dynamic> _$GameToJson(Game instance) {
   final val = <String, dynamic>{
@@ -3903,20 +3763,18 @@ Map<String, dynamic> _$GameToJson(Game instance) {
   return val;
 }
 
-CallbackGame _$CallbackGameFromJson(Map<String, dynamic> json) {
-  return CallbackGame();
-}
+CallbackGame _$CallbackGameFromJson(Map<String, dynamic> json) =>
+    CallbackGame();
 
 Map<String, dynamic> _$CallbackGameToJson(CallbackGame instance) =>
     <String, dynamic>{};
 
-GameHighScore _$GameHighScoreFromJson(Map<String, dynamic> json) {
-  return GameHighScore(
-    position: json['position'] as int,
-    user: User.fromJson(json['user'] as Map<String, dynamic>),
-    score: json['score'] as int,
-  );
-}
+GameHighScore _$GameHighScoreFromJson(Map<String, dynamic> json) =>
+    GameHighScore(
+      position: json['position'] as int,
+      user: User.fromJson(json['user'] as Map<String, dynamic>),
+      score: json['score'] as int,
+    );
 
 Map<String, dynamic> _$GameHighScoreToJson(GameHighScore instance) =>
     <String, dynamic>{
