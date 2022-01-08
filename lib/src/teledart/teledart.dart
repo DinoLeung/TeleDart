@@ -1,18 +1,20 @@
-/// TeleDart - Telegram Bot API for Dart
-/// Copyright (C) 2019  Dino PH Leung
-///
-/// This program is free software: you can redistribute it and/or modify
-/// it under the terms of the GNU General Public License as published by
-/// the Free Software Foundation, either version 3 of the License, or
-/// (at your option) any later version.
-///
-/// This program is distributed in the hope that it will be useful,
-/// but WITHOUT ANY WARRANTY; without even the implied warranty of
-/// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-/// GNU General Public License for more details.
-///
-/// You should have received a copy of the GNU General Public License
-/// along with this program.  If not, see <https://www.gnu.org/licenses/>.
+/*
+ * TeleDart - Telegram Bot API for Dart
+ * Copyright (C) 2019  Dino PH Leung
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
 
 import 'dart:async';
 
@@ -28,6 +30,27 @@ import 'model/message.dart';
 import 'model/pre_checkout_query.dart';
 import 'model/shipping_query.dart';
 
+/// The main class for controlling your bot.
+///
+/// It combines the methods from the [Telegram] and the [Event] objects
+/// that you pass into it, so that you can conviniently call them
+/// as methods of a single object.
+///
+/// All of the listeners ([onMessage], [onPoll], etc.) return a [Stream].
+/// To actually do something when that listener triggers, you need to
+/// Use the [Stream.listen] method and pass a function into it. For example:
+///
+/// ```dart
+/// teledart.onMessage().listen((message) => print(message.text));
+/// ````
+///
+/// Where `teledart` is an instance of the [TeleDart] class.
+///
+/// Here the `message` variable will be an instance of [TeleDartMessage],
+/// since the onMessage method returns a [Stream<TeleDartMessage>].
+///
+/// In case you want to use methods of the [Telegram] class, you can do so
+/// by calling them through [TeleDart.telegram]
 class TeleDart {
   final Telegram telegram;
   final Event _event;
@@ -38,24 +61,36 @@ class TeleDart {
   TeleDart(this.telegram, this._event, {AbstractUpdateFetcher? fetcher})
       : fetcher = fetcher ?? LongPolling(telegram);
 
-  /// Starts listening to messages
+  /// Start listening to messages
   ///
   /// Uses long polling by default.
   ///
   /// To configure long polling, inject a [LongPolling] object as [fetcher] when
-  /// instantiating [Teledart].
+  /// instantiating [TeleDart].
   /// To use webhooks, inject a [Webhook] object as [fetcher] when instantiating
-  /// [Teledart].
+  /// [TeleDart].
+  ///
+  /// The webhook injection is done like so:
+  /// ```dart
+  /// var webhook = await Webhook.createHttpsWebhok(
+  ///     telegram,
+  ///     envVars['HOST_URL']!,
+  ///     envVars['BOT_TOKEN']!,
+  ///     io.File(envVars['CERT_PATH']!),
+  ///     io.File(envVars['KEY_PATH']!),
+  ///     port: int.parse(envVars['BOT_PORT']!));
+  /// var teledart = TeleDart(telegram, event, fetcher: webhook);
+  /// ```
   void start() {
     fetcher
       ..start()
       ..onUpdate().listen((_updatesHandler));
   }
 
-  /// Stops fetching updates
+  /// Stop fetching updates
   void stop() => fetcher.stop();
 
-  /// Configures a webhook used by this bot to receive updates.
+  /// Configure a webhook used by this bot to receive updates.
   ///
   /// For a default webhook managed by this library, you can use a [Webhook].
   /// Alternatively, you can manage webhooks yourself by extending it.
@@ -66,7 +101,7 @@ class TeleDart {
       : throw TeleDartException(
           'Injected update fetcher is type of ${fetcher.runtimeType.toString()} instead of Webhook.');
 
-  /// Removes and stops webhook
+  /// Remove and stops webhook
   Future<void> removeWebhook() async {
     await telegram.deleteWebhook();
     if (fetcher is Webhook) {
@@ -86,10 +121,10 @@ class TeleDart {
   TeleDartMessage _messageStreamMapper(Message msg) =>
       TeleDartMessage(this, msg);
 
-  /// Listens to message events with [entityType] and [keyword] in text and caption
+  /// Listen to message events with [entityType] and [keyword] in text and caption
   ///
   /// [entityType] include `mention` (@username), `hashtag` (#hashtag), `cashtag`($USD),
-  /// `bot_command` (/start@jobs_bot), `url` (https://telegram.org),
+  /// `bot_command` (/start@jobs_bot), `url` (https://telegram.org/),
   /// `email`(do-not-reply@telegram.org), `phone_number` (+1-212-555-0123), `bold` (bold text),
   /// `italic` (italic text), `underline` (underlined text), `strikethrough` (strikethrough text),
   /// `code` (monowidth string), `pre` (monowidth block), `text_link` (for
@@ -103,52 +138,54 @@ class TeleDart {
   /// Normal message accepts regular expressions as [keyword]
   ///
   /// To listen to `/start`
-  ///  ```
-  ///  onMessage(entityType: 'bot_command', keyword: 'start').listen((message) =>
-  ///    teledart.telegram.sendMessage(message.chat.id, 'hello world!'));
-  ///  ```
+  /// ```dart
+  /// onMessage(entityType: 'bot_command', keyword: 'start').listen((message) =>
+  ///   teledart.telegram.sendMessage(message.chat.id, 'hello world!'));
+  /// ```
   Stream<TeleDartMessage> onMessage({String? entityType, dynamic keyword}) =>
       _event
           .onMessage(entityType: entityType, keyword: keyword)
           .map(_messageStreamMapper);
 
-  /// Listens to edited message events
+  /// Listen to edited message events
   Stream<TeleDartMessage> onEditedMessage() =>
       _event.onEditedMessage().map(_messageStreamMapper);
 
-  /// Listens to channel post events
+  /// Listen to channel post events
   Stream<TeleDartMessage> onChannelPost() =>
       _event.onChannelPost().map(_messageStreamMapper);
 
-  /// Listens to edited channel post events
+  /// Listen to edited channel post events
   Stream<TeleDartMessage> onEditedChannelPost() =>
       _event.onEditedChannelPost().map(_messageStreamMapper);
 
-  /// Listens to inline query events
+  /// Listen to inline query events
+  ///
+  /// Use [TeleDartInlineQuery.answer] to answer to inline queries.
   Stream<TeleDartInlineQuery> onInlineQuery() => _event
       .onInlineQuery()
       .map((inlineQuery) => TeleDartInlineQuery(this, inlineQuery));
 
-  /// Listens to chosen inline query events
+  /// Listen to chosen inline query events
   Stream<ChosenInlineResult> onChosenInlineResult() =>
       _event.onChosenInlineResult();
 
-  /// Listens to callback query events
+  /// Listen to callback query events
   Stream<TeleDartCallbackQuery> onCallbackQuery() => _event
       .onCallbackQuery()
       .map((callbackQuery) => TeleDartCallbackQuery(this, callbackQuery));
 
-  /// Listens to shipping query events
+  /// Listen to shipping query events
   Stream<TeleDartShippingQuery> onShippingQuery() => _event
       .onShippingQuery()
       .map((shippingQuery) => TeleDartShippingQuery(this, shippingQuery));
 
-  /// Listens to pre checkout query events
+  /// Listen to pre checkout query events
   Stream<TeleDartPreCheckoutQuery> onPreCheckoutQuery() =>
       _event.onPreCheckoutQuery().map((preCheckoutQuery) =>
           TeleDartPreCheckoutQuery(this, preCheckoutQuery));
 
-  /// Listens to poll events
+  /// Listen to poll events
   Stream<Poll> onPoll() => _event.onPoll();
 
   /// Listen to poll answer events
@@ -162,59 +199,69 @@ class TeleDart {
 
   // Short-cuts revolution
 
-  /// Short-cut for onMessage handling entityType `mention` (@username)
+  /// Short-cut for [onMessage] handling entityType `mention` (@username)
   Stream<TeleDartMessage> onMention([dynamic keyword]) =>
       onMessage(entityType: 'mention', keyword: keyword);
 
-  /// Short-cut for onMessage handling entityType `cashtag`
+  /// Short-cut for [onMessage] handling entityType `cashtag`
   Stream<TeleDartMessage> onCashtag([dynamic keyword]) =>
       onMessage(entityType: 'cashtag', keyword: keyword);
 
-  /// Short-cut for onMessage handling entityType `hashtag`
+  /// Short-cut for [onMessage] handling entityType `hashtag`
   Stream<TeleDartMessage> onHashtag([dynamic keyword]) =>
       onMessage(entityType: 'hashtag', keyword: keyword);
 
-  /// Short-cut for onMessage handling entityType `bot_command`
+  /// Short-cut for [onMessage] handling entityType `bot_command`
   Stream<TeleDartMessage> onCommand([dynamic keyword]) =>
       onMessage(entityType: 'bot_command', keyword: keyword);
 
-  /// Short-cut for onMessage handling entityType `url`
+  /// Short-cut for [onMessage] handling entityType `url`
   Stream<TeleDartMessage> onUrl([dynamic keyword]) =>
       onMessage(entityType: 'url', keyword: keyword);
 
-  /// Short-cut for onMessage handling entityType `email`
+  /// Short-cut for [onMessage] handling entityType `email`
   Stream<TeleDartMessage> onEmail([dynamic keyword]) =>
       onMessage(entityType: 'email', keyword: keyword);
 
-  /// Short-cut for onMessage handling entityType `phone_number`
+  /// Short-cut for [onMessage] handling entityType `phone_number`
   Stream<TeleDartMessage> onPhoneNumber([dynamic keyword]) =>
       onMessage(entityType: 'phone_number', keyword: keyword);
 
-  /// Short-cut for onMessage handling entityType `bold`
+  /// Short-cut for [onMessage] handling entityType `bold`
   Stream<TeleDartMessage> onBold([dynamic keyword]) =>
       onMessage(entityType: 'bold', keyword: keyword);
 
-  /// Short-cut for onMessage handling entityType `italic`
+  /// Short-cut for [onMessage] handling entityType `italic`
   Stream<TeleDartMessage> onItalic([dynamic keyword]) =>
       onMessage(entityType: 'italic', keyword: keyword);
 
-  /// Short-cut for onMessage handling entityType `code`
+  /// Short-cut for [onMessage] handling entityType `code`
   Stream<TeleDartMessage> onCode([dynamic keyword]) =>
       onMessage(entityType: 'code', keyword: keyword);
 
-  /// Short-cut for onMessage handling entityType `pre`
+  /// Short-cut for [onMessage] handling entityType `pre`
   Stream<TeleDartMessage> onPre([dynamic keyword]) =>
       onMessage(entityType: 'pre', keyword: keyword);
 
-  /// Short-cut for onMessage handling entityType `text_link`
+  /// Short-cut for [onMessage] handling entityType `text_link`
   Stream<TeleDartMessage> onTextLink([dynamic keyword]) =>
       onMessage(entityType: 'text_link', keyword: keyword);
 
-  /// Short-cut for onMessage handling entityType `text_mention`
+  /// Short-cut for [onMessage] handling entityType `text_mention`
   Stream<TeleDartMessage> onTextMention([dynamic keyword]) =>
       onMessage(entityType: 'text_mention', keyword: keyword);
 
-  /// Short-cut to reply with a text message
+  /// Reply to a given message with text
+  ///
+  /// A wrapper around [Telegram.sendMessage].
+  /// On success, returns the sent [Message].
+  ///
+  /// Apart from a [Message] to reply to and a [String] to
+  /// reply with, it can also take some options that
+  /// control the message appearance and behavior.
+  ///
+  /// **Check [Telegram API documentation](https://core.telegram.org/bots/api#sendmessage)
+  /// for more information about those options.**
   Future<Message> replyMessage(Message orgMsg, String text,
           {bool withQuote = false,
           String? parse_mode,
@@ -232,7 +279,17 @@ class TeleDart {
           allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
-  /// Short-cut to reply with a photo message
+  /// Reply to a given message with an image
+  ///
+  /// A wrapper around [Telegram.sendPhoto].
+  /// On success, returns the sent [Message].
+  ///
+  /// Apart from a [Message] to reply to and a [photo] to
+  /// reply with, it can also take some options that
+  /// control the message appearance and behavior.
+  ///
+  /// **Check [Telegram API documentation](https://core.telegram.org/bots/api#sendphoto)
+  /// for more information about those options.**
   Future<Message> replyPhoto(Message orgMsg, dynamic photo,
           {bool withQuote = false,
           String? caption,
@@ -250,7 +307,17 @@ class TeleDart {
           allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
-  /// Short-cut to reply with a audio message
+  /// Reply to a given message with an audio
+  ///
+  /// A wrapper around [Telegram.sendAudio].
+  /// On success, returns the sent [Message].
+  ///
+  /// Apart from a [Message] to reply to and an [audio] to
+  /// reply with, it can also take some options that
+  /// control the message appearance and behavior.
+  ///
+  /// **Check [Telegram API documentation](https://core.telegram.org/bots/api#sendaudio)
+  /// for more information about those options.**
   Future<Message> replyAudio(Message orgMsg, dynamic audio,
           {bool withQuote = false,
           String? caption,
@@ -276,7 +343,17 @@ class TeleDart {
           allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
-  /// Short-cut to reply with a document message
+  /// Reply to a given message with a document
+  ///
+  /// A wrapper around [Telegram.sendDocument].
+  /// On success, returns the sent [Message].
+  ///
+  /// Apart from a [Message] to reply to and a [document] to
+  /// reply with, it can also take some options that
+  /// control the message appearance and behavior.
+  ///
+  /// **Check [Telegram API documentation](https://core.telegram.org/bots/api#senddocument)
+  /// for more information about those options.**
   Future<Message> replyDocument(Message orgMsg, dynamic document,
           {bool withQuote = false,
           dynamic thumb,
@@ -296,7 +373,17 @@ class TeleDart {
           allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
-  /// Short-cut to reply with a video message
+  /// Reply to a given message with a video
+  ///
+  /// A wrapper around [Telegram.sendVideo].
+  /// On success, returns the sent [Message].
+  ///
+  /// Apart from a [Message] to reply to and a [video] to
+  /// reply with, it can also take some options that
+  /// control the message appearance and behavior.
+  ///
+  /// **Check [Telegram API documentation](https://core.telegram.org/bots/api#sendvideo)
+  /// for more information about those options.**
   Future<Message> replyVideo(Message orgMsg, dynamic video,
           {bool withQuote = false,
           int? duration,
@@ -324,7 +411,17 @@ class TeleDart {
           allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
-  /// Short-cut to reply with a animation message
+  /// Reply to a given message with an animation (GIF or H.264/MPEG-4 AVC video without sound)
+  ///
+  /// A wrapper around [Telegram.sendAnimation].
+  /// On success, returns the sent [Message].
+  ///
+  /// Apart from a [Message] to reply to and an [animation] to
+  /// reply with, it can also take some options that
+  /// control the message appearance and behavior.
+  ///
+  /// **Check [Telegram API documentation](https://core.telegram.org/bots/api#sendanimation)
+  /// for more information about those options.**
   Future<Message> replyAnimation(Message orgMsg, dynamic animation,
           {bool withQuote = false,
           int? duration,
@@ -350,7 +447,17 @@ class TeleDart {
           allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
-  /// Short-cut to reply with a voice message
+  /// Reply to a given message with a voice message
+  ///
+  /// A wrapper around [Telegram.sendVoice].
+  /// On success, returns the sent [Message].
+  ///
+  /// Apart from a [Message] to reply to and a [voice] to
+  /// reply with, it can also take some options that
+  /// control the message appearance and behavior.
+  ///
+  /// **Check [Telegram API documentation](https://core.telegram.org/bots/api#sendvoice)
+  /// for more information about those options.**
   Future<Message> replyVoice(Message orgMsg, dynamic voice,
           {bool withQuote = false,
           String? caption,
@@ -368,7 +475,17 @@ class TeleDart {
           allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
-  /// Short-cut to reply with a video note message
+  /// Reply to a given message with a video note
+  ///
+  /// A wrapper around [Telegram.sendVideoNote].
+  /// On success, returns the sent [Message].
+  ///
+  /// Apart from a [Message] to reply to and a [video_note] to
+  /// reply with, it can also take some options that
+  /// control the message appearance and behavior.
+  ///
+  /// **Check [Telegram API documentation](https://core.telegram.org/bots/api#sendvideonote)
+  /// for more information about those options.**
   Future<Message> replyVideoNote(Message orgMsg, dynamic video_note,
           {bool withQuote = false,
           int? duration,
@@ -386,7 +503,17 @@ class TeleDart {
           allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
-  /// Short-cut to reply with a media group message
+  /// Reply to a given message with a media group message (multiple media files)
+  ///
+  /// A wrapper around [Telegram.sendMediaGroup].
+  /// On success, returns the sent [Message][Message]
+  ///
+  /// Apart from a [Message] to reply to and a [List<InputMedia>] to
+  /// reply with, it can also take some options that
+  /// control the message appearance and behavior.
+  ///
+  /// **Check [Telegram API documentation](https://core.telegram.org/bots/api#sendmediagroup)
+  /// for more information about those options.**
   Future<List<Message>> replyMediaGroup(Message orgMsg, List<InputMedia> media,
           {bool withQuote = false,
           bool? disable_notification,
@@ -396,7 +523,16 @@ class TeleDart {
           reply_to_message_id: withQuote ? orgMsg.message_id : null,
           allow_sending_without_reply: allow_sending_without_reply);
 
-  /// Short-cut to reply with a location message
+  /// Reply to a given message with a location
+  ///
+  /// A wrapper around [Telegram.sendLocation].
+  /// On success, returns the sent [Message].
+  ///
+  /// Apart from a [Message] to reply to, a [latitude] and a [longitude],
+  /// it can also take some options that control the message appearance and behavior.
+  ///
+  /// **Check [Telegram API documentation](https://core.telegram.org/bots/api#sendlocation)
+  /// for more information about those options.**
   Future<Message> replyLocation(
           Message orgMsg, double latitude, double longitude,
           {bool withQuote = false,
@@ -417,7 +553,16 @@ class TeleDart {
           allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
-  /// Short-cut to edit a live location message
+  /// Edits a sent live location message
+  ///
+  /// A wrapper around [Telegram.editMessageLiveLocation].
+  /// On success, returns the sent [Message].
+  ///
+  /// Apart from a [latitude] and a [longitude], it can also take some options
+  /// that control the message appearance and behavior.
+  ///
+  /// **Check [Telegram API documentation](https://core.telegram.org/bots/api#editmessagelivelocation)
+  /// for more information about those options.**
   Future<Message> editLiveLocation(double latitude, double longitude,
           {dynamic chat_id,
           int? message_id,
@@ -435,7 +580,13 @@ class TeleDart {
           proximity_alert_radius: proximity_alert_radius,
           reply_markup: reply_markup);
 
-  /// Short-cut to stop a live location message
+  /// Stops a sent live location message
+  ///
+  /// A wrapper around [Telegram.stopMessageLiveLocation].
+  /// On success, returns the sent [Message].
+  ///
+  /// **Check [Telegram API documentation](https://core.telegram.org/bots/api#editmessagelivelocation)
+  /// for more information about the accepted options.**
   Future<Message> stopLiveLocation(
           {dynamic chat_id,
           int? message_id,
@@ -447,7 +598,17 @@ class TeleDart {
           inline_message_id: inline_message_id,
           reply_markup: reply_markup);
 
-  /// Short-cut to reply with a venue message
+  /// Reply to a given message with a venue message
+  ///
+  /// A wrapper around [Telegram.sendVenue].
+  /// On success, returns the sent [Message].
+  ///
+  /// Apart from a [Message] to reply to, a [latitude], a [longitude],
+  /// a [title] and an [address], it can also take some options that control the
+  /// message appearance and behavior.
+  ///
+  /// **Check [Telegram API documentation](https://core.telegram.org/bots/api#sendvenue)
+  /// for more information about those options.**
   Future<Message> replyVenue(Message orgMsg, double latitude, double longitude,
           String title, String address,
           {bool withQuote = false,
@@ -468,7 +629,17 @@ class TeleDart {
           allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
-  /// Short-cut to reply with a contact message
+  /// Reply to a given message with a contact
+  ///
+  /// A wrapper around [Telegram.sendContact].
+  /// On success, returns the sent [Message].
+  ///
+  /// Apart from a [Message] to reply to, a [phone_number] and
+  /// a [first_name], it can also take some options that control the message
+  /// appearance and behavior.
+  ///
+  /// **Check [Telegram API documentation](https://core.telegram.org/bots/api#sendcontact)
+  /// for more information about those options.**
   Future<Message> replyContact(
           Message orgMsg, String phone_number, String first_name,
           {bool withQuote = false,
@@ -485,7 +656,17 @@ class TeleDart {
           allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
-  /// Short-cut to reply with a poll message
+  /// Reply to a given message with a poll
+  ///
+  /// A wrapper around [Telegram.sendPoll].
+  /// On success, returns the sent [Message].
+  ///
+  /// Apart from a [Message] to reply to, a [question] and
+  /// a [List<String>] of [options], it can also take some options that control the message
+  /// appearance and behavior.
+  ///
+  /// **Check [Telegram API documentation](https://core.telegram.org/bots/api#sendpoll)
+  /// for more information about those options.**
   Future<Message> replyPoll(
           Message orgMsg, String question, List<String> options,
           {bool withQuote = false,
@@ -518,7 +699,16 @@ class TeleDart {
           allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
-  /// Short-cut to reply with a dice message
+  /// Reply to a given message with a dice message
+  ///
+  /// A wrapper around [Telegram.sendDice].
+  /// On success, returns the sent [Message].
+  ///
+  /// Apart from a [Message] to reply to, it can
+  /// also take some options that control the message appearance and behavior.
+  ///
+  /// **Check [Telegram API documentation](https://core.telegram.org/bots/api#senddice)
+  /// for more information about those options.**
   Future<Message> replyDice(Message orgMsg,
           {bool withQuote = false,
           String emoji = Dice.DICE,
@@ -534,7 +724,17 @@ class TeleDart {
 
   // TODO: order of this block is not matching with telegram.TeleDart
   // ! just put it here for now for the sake of providing functionality
-  /// Short-cut to reply with a contact message
+  /// Reply to a given message with a sticker
+  ///
+  /// A wrapper around [Telegram.sendSticker].
+  /// On success, returns the sent [Message].
+  ///
+  /// Apart from a [Message] to reply to and a [sticker]
+  /// to reply with, it can also take some options that control
+  /// the message appearance and behavior.
+  ///
+  /// **Check [Telegram API documentation](https://core.telegram.org/bots/api#sendsticker)
+  /// for more information about those options.**
   Future<Message> replySticker(Message orgMsg, dynamic sticker,
           {bool withQuote = false,
           bool? disable_notification,
@@ -546,7 +746,17 @@ class TeleDart {
           allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
-  /// Short-cut to answer inline query
+  /// Short-cut to answer an inline query
+  ///
+  /// A wrapper around [Telegram.answerInlineQuery].
+  /// On success, returns true.
+  ///
+  /// Apart from a [InlineQuery] to answer and a [List<InlineQueryResult>]
+  /// of results, it can also take some options that control the inline dialog
+  /// appearance and behavior.
+  ///
+  /// **Check [Telegram API documentation](https://core.telegram.org/bots/api#answerinlinequery)
+  /// for more information about those options.**
   Future<bool> answerInlineQuery(
           InlineQuery inline_query, List<InlineQueryResult> results,
           {int? cache_time,
@@ -561,19 +771,48 @@ class TeleDart {
           switch_pm_text: switch_pm_text,
           switch_pm_parameter: switch_pm_parameter);
 
-  /// Short-cut to answer callback query
+  /// Short-cut to answer a callback query
+  ///
+  /// A wrapper around [Telegram.answerCallbackQuery].
+  /// On success, returns true.
+  ///
+  /// Apart from a [CallbackQuery] to answer, it can also
+  /// take some options that control the callback query answer.
+  ///
+  /// **Check [Telegram API documentation](https://core.telegram.org/bots/api#answercallbackquery)
+  /// for more information about those options.**
   Future<bool> answerCallbackQuery(CallbackQuery callback_query,
           {String? text, bool? show_alert, String? url, int? cache_time}) =>
       telegram.answerCallbackQuery(callback_query.id,
           text: text, show_alert: show_alert, url: url, cache_time: cache_time);
 
-  /// Short-cut to answer shipping query
+  /// Short-cut to answer a shipping query
+  ///
+  /// A wrapper around [Telegram.answerShippingQuery].
+  /// On success, returns true.
+  ///
+  /// Apart from a [ShippingQuery] to answer and a [bool] that indicates
+  /// if the shipping is possible, it can also take some options that
+  /// control the shipping.
+  ///
+  /// **Check [Telegram API documentation](https://core.telegram.org/bots/api#answershippingquery)
+  /// for more information about those options.**
   Future<bool> answerShippingQuery(ShippingQuery shipping_query, bool ok,
           {List<ShippingOption>? shipping_options, String? error_message}) =>
       telegram.answerShippingQuery(shipping_query.id, ok,
           shipping_options: shipping_options, error_message: error_message);
 
-  /// Short-cut to answer pre-checkout query
+  /// Short-cut to answer a pre-checkout query
+  ///
+  /// A wrapper around [Telegram.answerPreCheckoutQuery].
+  /// On success, returns true.
+  ///
+  /// It can take a [PreCheckoutQuery] to answer and a [bool] that indicates
+  /// if the pre-checkout is possible, and an [error_message] that
+  /// is shown to user if [ok] is false (You don't have to specify it if [ok] is true).
+  ///
+  /// **Check [Telegram API documentation](https://core.telegram.org/bots/api#answerprecheckoutquery)
+  /// for more information about those options.**
   Future<bool> answerPreCheckoutQuery(
           PreCheckoutQuery pre_checkout_query, bool ok,
           {String? error_message}) =>

@@ -16,6 +16,8 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+/// Various models used by TeleDart
+///
 /// All types used in the Bot API responses are represented as JSON-objects.
 /// It is safe to use 32-bit signed integers for storing all __Integer__ fields unless otherwise noted.
 ///

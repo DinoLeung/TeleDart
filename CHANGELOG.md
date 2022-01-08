@@ -1,3 +1,7 @@
+## 0.2.2
+
+- Improve documentations
+
 ## 0.2.1
 
 - Format files to comply with Dart styling guide

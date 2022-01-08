@@ -1,23 +1,33 @@
-/// TeleDart - Telegram Bot API for Dart
-/// Copyright (C) 2020  Dino PH Leung
-///
-/// This program is free software: you can redistribute it and/or modify
-/// it under the terms of the GNU General Public License as published by
-/// the Free Software Foundation, either version 3 of the License, or
-/// (at your option) any later version.
-///
-/// This program is distributed in the hope that it will be useful,
-/// but WITHOUT ANY WARRANTY; without even the implied warranty of
-/// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-/// GNU General Public License for more details.
-///
-/// You should have received a copy of the GNU General Public License
-/// along with this program.  If not, see <https://www.gnu.org/licenses/>.
+/*
+ * TeleDart - Telegram Bot API for Dart
+ * Copyright (C) 2020  Dino PH Leung
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
 import 'dart:async';
 
 import '../../../teledart.dart';
 import '../../telegram/model.dart';
 
+/// A recieved inline query
+///
+/// It is returned by the [TeleDart.onInlineQuery] method.
+///
+/// This class combines [InlineQuery] and [TeleDart]
+/// to add the [answer] method, which lets you
+/// easily reply to inline queries.
 class TeleDartInlineQuery extends InlineQuery {
   final TeleDart _teledart;
 
@@ -31,7 +41,17 @@ class TeleDartInlineQuery extends InlineQuery {
           location: inlineQuery.location,
         );
 
-  /// Short-cut to answer inline query
+  /// Answer the recieved inline query
+  ///
+  /// A wrapper around [TeleDart.answerInlineQuery].
+  /// On success, returns true.
+  ///
+  /// Apart from a [List<InlineQueryResult>] of results,
+  /// it can also take some options that control the inline dialog
+  /// appearance and behavior.
+  ///
+  /// **Check [Telegram API documentation](https://core.telegram.org/bots/api#answerinlinequery)
+  /// for more information about those options.**
   Future<bool> answer(
     List<InlineQueryResult> results, {
     int? cache_time,

@@ -12,24 +12,50 @@ allowing you to create your own bot easily.
 [![Dart Version](https://img.shields.io/badge/Dart-2.12-blue.svg?style=flat-square)](https://dart.dev)
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg?style=flat-square)](https://www.gnu.org/licenses/gpl-3.0)
 
+## Creating a Telegram bot
+
+In order to create a Telegram bot, you need to use [@BotFather](https://t.me/botfather).
+Follow the instructions in BotFather, then copy your bot token and you're ready to go.
+
 ## Usage
 
-A simple usage example:
+Initializing the bot:
 
 ```dart
 import 'package:teledart/teledart.dart';
 import 'package:teledart/telegram.dart';
-import 'package:teledart/model.dart';
 
 void main() {
-  var telegram = Telegram(envVars['BOT_TOKEN']!);
+  var telegram = Telegram(BOT_TOKEN); // Replace BOT_TOKEN with the token of your bot
   var event = Event((await telegram.getMe()).username!);
-  
-  TeleDart(telegram, event)
-    ..start()
-    ..onMessage(keyword: 'Fight for freedom')
-      .listen((message) => message.reply('Stand with Hong Kong'));
+  var teledart = TeleDart(telegram, event);
+
+  teledart.start()
+
+  // ...
 }
+```
+
+A simple usage example:
+
+```dart
+teledart
+  ..onMessage(keyword: 'Fight for freedom')
+    .listen((message) => message.reply('Stand with Hong Kong'));
+```
+
+Using bot commands:
+
+```dart
+// Long way
+teledart.onMessage(entityType: 'bot_command', keyword: 'start').listen(
+    (message) =>
+        teledart.telegram.sendMessage(message.chat.id, 'Hello TeleDart!'));
+
+// Short way (recommended)
+teledart
+    .onCommand('short')
+    .listen(((message) => teledart.replyMessage(message, 'This works too!')));
 ```
 
 Modifying [Stream](https://www.dartlang.org/tutorials/language/streams#methods-that-modify-a-stream):
