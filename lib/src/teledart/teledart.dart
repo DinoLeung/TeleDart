@@ -336,6 +336,8 @@ class TeleDart {
           caption_entities: caption_entities,
           duration: duration,
           performer: performer,
+          title: title,
+          thumb: thumb,
           disable_notification: disable_notification,
           reply_to_message_id: withQuote ? orgMsg.message_id : null,
           allow_sending_without_reply: allow_sending_without_reply,
