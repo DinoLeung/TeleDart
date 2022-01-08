@@ -118,12 +118,12 @@ class TeleDartMessage extends Message {
     bool? allow_sending_without_reply,
     ReplyMarkup? reply_markup,
   }) =>
-      _teledart.replyMessage(this, text,
-          withQuote: withQuote,
+      _teledart.sendMessage(chat.id, text,
           parse_mode: parse_mode,
           entities: entities,
           disable_web_page_preview: disable_web_page_preview,
           disable_notification: disable_notification,
+          reply_to_message_id: withQuote ? message_id : null,
           allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
@@ -148,12 +148,12 @@ class TeleDartMessage extends Message {
     bool? allow_sending_without_reply,
     ReplyMarkup? reply_markup,
   }) =>
-      _teledart.replyPhoto(this, photo,
-          withQuote: withQuote,
+      _teledart.sendPhoto(chat.id, photo,
           caption: caption,
           parse_mode: parse_mode,
           caption_entities: caption_entities,
           disable_notification: disable_notification,
+          reply_to_message_id: withQuote ? message_id : null,
           allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
@@ -182,8 +182,7 @@ class TeleDartMessage extends Message {
     bool? allow_sending_without_reply,
     ReplyMarkup? reply_markup,
   }) =>
-      _teledart.replyAudio(this, audio,
-          withQuote: withQuote,
+      _teledart.sendAudio(chat.id, audio,
           caption: caption,
           parse_mode: parse_mode,
           caption_entities: caption_entities,
@@ -192,6 +191,7 @@ class TeleDartMessage extends Message {
           title: title,
           thumb: thumb,
           disable_notification: disable_notification,
+          reply_to_message_id: withQuote ? message_id : null,
           allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
@@ -217,13 +217,13 @@ class TeleDartMessage extends Message {
     bool? allow_sending_without_reply,
     ReplyMarkup? reply_markup,
   }) =>
-      _teledart.replyDocument(this, document,
-          withQuote: withQuote,
+      _teledart.sendDocument(chat.id, document,
           thumb: thumb,
           caption: caption,
           parse_mode: parse_mode,
           caption_entities: caption_entities,
           disable_notification: disable_notification,
+          reply_to_message_id: withQuote ? message_id : null,
           allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
@@ -253,8 +253,7 @@ class TeleDartMessage extends Message {
     bool? allow_sending_without_reply,
     ReplyMarkup? reply_markup,
   }) =>
-      _teledart.replyVideo(this, video,
-          withQuote: withQuote,
+      _teledart.sendVideo(chat.id, video,
           duration: duration,
           width: width,
           height: height,
@@ -264,6 +263,7 @@ class TeleDartMessage extends Message {
           caption_entities: caption_entities,
           supports_streaming: supports_streaming,
           disable_notification: disable_notification,
+          reply_to_message_id: withQuote ? message_id : null,
           allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
@@ -292,8 +292,7 @@ class TeleDartMessage extends Message {
     bool? allow_sending_without_reply,
     ReplyMarkup? reply_markup,
   }) =>
-      _teledart.replyAnimation(this, animation,
-          withQuote: withQuote,
+      _teledart.sendAnimation(chat.id, animation,
           duration: duration,
           width: width,
           height: height,
@@ -302,6 +301,7 @@ class TeleDartMessage extends Message {
           parse_mode: parse_mode,
           caption_entities: caption_entities,
           disable_notification: disable_notification,
+          reply_to_message_id: withQuote ? message_id : null,
           allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
@@ -326,12 +326,12 @@ class TeleDartMessage extends Message {
     bool? allow_sending_without_reply,
     ReplyMarkup? reply_markup,
   }) =>
-      _teledart.replyVoice(this, voice,
-          withQuote: withQuote,
+      _teledart.sendVoice(chat.id, voice,
           caption: caption,
           parse_mode: parse_mode,
           caption_entities: caption_entities,
           disable_notification: disable_notification,
+          reply_to_message_id: withQuote ? message_id : null,
           allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
@@ -356,12 +356,12 @@ class TeleDartMessage extends Message {
     bool? allow_sending_without_reply,
     ReplyMarkup? reply_markup,
   }) =>
-      _teledart.replyVideoNote(this, video_note,
-          withQuote: withQuote,
+      _teledart.sendVideoNote(chat.id, video_note,
           duration: duration,
           length: length,
           thumb: thumb,
           disable_notification: disable_notification,
+          reply_to_message_id: withQuote ? message_id : null,
           allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
@@ -382,9 +382,9 @@ class TeleDartMessage extends Message {
     bool? disable_notification,
     bool? allow_sending_without_reply,
   }) =>
-      _teledart.replyMediaGroup(this, media,
-          withQuote: withQuote,
+      _teledart.sendMediaGroup(chat.id, media,
           disable_notification: disable_notification,
+          reply_to_message_id: withQuote ? message_id : null,
           allow_sending_without_reply: allow_sending_without_reply);
 
   /// Reply to the recieved message with a location
@@ -410,13 +410,13 @@ class TeleDartMessage extends Message {
     bool? allow_sending_without_reply,
     ReplyMarkup? reply_markup,
   }) =>
-      _teledart.replyLocation(this, latitude, longitude,
-          withQuote: withQuote,
+      _teledart.sendLocation(chat.id, latitude, longitude,
           horizontal_accuracy: horizontal_accuracy,
           live_period: live_period,
           heading: heading,
           proximity_alert_radius: proximity_alert_radius,
           disable_notification: disable_notification,
+          reply_to_message_id: withQuote ? message_id : null,
           allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
@@ -445,13 +445,13 @@ class TeleDartMessage extends Message {
     bool? allow_sending_without_reply,
     ReplyMarkup? reply_markup,
   }) =>
-      _teledart.replyVenue(this, latitude, longitude, title, address,
-          withQuote: withQuote,
+      _teledart.sendVenue(chat.id, latitude, longitude, title, address,
           foursquare_id: foursquare_id,
           foursquare_type: foursquare_type,
           google_place_id: google_place_id,
           google_place_type: google_place_type,
           disable_notification: disable_notification,
+          reply_to_message_id: withQuote ? message_id : null,
           allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
@@ -476,11 +476,11 @@ class TeleDartMessage extends Message {
     bool? allow_sending_without_reply,
     ReplyMarkup? reply_markup,
   }) =>
-      _teledart.replyContact(this, phone_number, first_name,
-          withQuote: withQuote,
+      _teledart.sendContact(chat.id, phone_number, first_name,
           last_name: last_name,
           vcard: vcard,
           disable_notification: disable_notification,
+          reply_to_message_id: withQuote ? message_id : null,
           allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
@@ -510,8 +510,7 @@ class TeleDartMessage extends Message {
           bool? disable_notification,
           bool? allow_sending_without_reply,
           ReplyMarkup? reply_markup}) =>
-      _teledart.replyPoll(this, question, options,
-          withQuote: withQuote,
+      _teledart.sendPoll(chat.id, question, options,
           is_anonymous: is_anonymous,
           type: type,
           allows_multiple_answers: allows_multiple_answers,
@@ -523,6 +522,7 @@ class TeleDartMessage extends Message {
           close_date: close_date,
           is_closed: is_closed,
           disable_notification: disable_notification,
+          reply_to_message_id: withQuote ? message_id : null,
           allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
@@ -542,10 +542,10 @@ class TeleDartMessage extends Message {
           bool? disable_notification,
           bool? allow_sending_without_reply,
           ReplyMarkup? reply_markup}) =>
-      _teledart.replyDice(this,
-          withQuote: withQuote,
+      _teledart.sendDice(chat.id,
           emoji: emoji,
           disable_notification: disable_notification,
+          reply_to_message_id: withQuote ? message_id : null,
           allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
@@ -565,8 +565,9 @@ class TeleDartMessage extends Message {
           bool? disable_notification,
           bool? allow_sending_without_reply,
           ReplyMarkup? reply_markup}) =>
-      _teledart.replySticker(this, sticker,
+      _teledart.sendSticker(chat.id, sticker,
           disable_notification: disable_notification,
+          reply_to_message_id: withQuote ? message_id : null,
           allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 }

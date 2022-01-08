@@ -54,5 +54,5 @@ class TeleDartPreCheckoutQuery extends PreCheckoutQuery {
   /// **Check [Telegram API documentation](https://core.telegram.org/bots/api#answerprecheckoutquery)
   /// for more information about those options.**
   Future<bool> answer(bool ok, {String? error_message}) =>
-      _teledart.answerPreCheckoutQuery(this, ok, error_message: error_message);
+      _teledart.answerPreCheckoutQuery(id, ok, error_message: error_message);
 }
