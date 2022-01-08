@@ -26,7 +26,7 @@ import '../../telegram/model.dart';
 /// It is the object which gets returned by listeners such as
 /// [TeleDart.onMessage].
 ///
-/// This class combines [model.Message] and [TeleDart]
+/// This class combines [Message] and [TeleDart]
 /// to add the reply methods (like [reply] or [replyPhoto]),
 /// which are shortcuts that let you automatically reply to
 /// recieved messages.
@@ -98,7 +98,7 @@ class TeleDartMessage extends Message {
   /// Reply to the recieved message with text
   ///
   /// A wrapper around [TeleDart.replyMessage].
-  /// On success, returns the sent [model.Message].
+  /// On success, returns the sent [Message].
   ///
   /// Apart from a [String] to reply with, it can
   /// also take some options that control the message
@@ -128,7 +128,7 @@ class TeleDartMessage extends Message {
   /// Reply to the recieved message with an image
   ///
   /// A wrapper around [TeleDart.replyPhoto].
-  /// On success, returns the sent [model.Message].
+  /// On success, returns the sent [Message].
   ///
   /// Apart from a [photo] to reply with, it can
   /// also take some options that control the message
@@ -158,7 +158,7 @@ class TeleDartMessage extends Message {
   /// Reply to the recieved message with an audio
   ///
   /// A wrapper around [TeleDart.replyAudio].
-  /// On success, returns the sent [model.Message].
+  /// On success, returns the sent [Message].
   ///
   /// Apart from an [audio] to reply with, it can
   /// also take some options that control the message
@@ -196,7 +196,7 @@ class TeleDartMessage extends Message {
   /// Reply to the recieved message with a document
   ///
   /// A wrapper around [TeleDart.replyDocument].
-  /// On success, returns the sent [model.Message].
+  /// On success, returns the sent [Message].
   ///
   /// Apart from a [document] to reply with, it can
   /// also take some options that control the message
@@ -228,7 +228,7 @@ class TeleDartMessage extends Message {
   /// Reply to the recieved message with a video
   ///
   /// A wrapper around [TeleDart.replyVideo].
-  /// On success, returns the sent [model.Message].
+  /// On success, returns the sent [Message].
   ///
   /// Apart from a [video] to reply with, it can
   /// also take some options that control the message
@@ -268,7 +268,7 @@ class TeleDartMessage extends Message {
   /// Reply to the recieved message with an animation (GIF or H.264/MPEG-4 AVC video without sound)
   ///
   /// A wrapper around [TeleDart.replyAnimation].
-  /// On success, returns the sent [model.Message].
+  /// On success, returns the sent [Message].
   ///
   /// Apart from an [animation] to reply with, it can
   /// also take some options that control the message
@@ -306,7 +306,7 @@ class TeleDartMessage extends Message {
   /// Reply to the recieved message with a voice message
   ///
   /// A wrapper around [TeleDart.replyVoice].
-  /// On success, returns the sent [model.Message].
+  /// On success, returns the sent [Message].
   ///
   /// Apart from a [voice] to reply with, it can
   /// also take some options that control the message
@@ -336,7 +336,7 @@ class TeleDartMessage extends Message {
   /// Reply to the recieved message with a video note
   ///
   /// A wrapper around [TeleDart.replyVideoNote].
-  /// On success, returns the sent [model.Message].
+  /// On success, returns the sent [Message].
   ///
   /// Apart from a [video_note] to reply with, it can
   /// also take some options that control the message
@@ -366,7 +366,7 @@ class TeleDartMessage extends Message {
   /// Reply to the recieved message with a media group message (multiple media files)
   ///
   /// A wrapper around [TeleDart.replyMediaGroup].
-  /// On success, returns the sent [model.Message].
+  /// On success, returns the sent [Message].
   ///
   /// Apart from a [List<InputMedia>] to reply with, it can
   /// also take some options that control the message
@@ -388,7 +388,7 @@ class TeleDartMessage extends Message {
   /// Reply to the recieved message with a location
   ///
   /// A wrapper around [TeleDart.replyLocation].
-  /// On success, returns the sent [model.Message].
+  /// On success, returns the sent [Message].
   ///
   /// Apart from a [latitude] and a [longitude], it can
   /// also take some options that control the message
@@ -421,7 +421,7 @@ class TeleDartMessage extends Message {
   /// Reply to the recieved message with a venue message
   ///
   /// A wrapper around [TeleDart.replyVenue].
-  /// On success, returns the sent [model.Message].
+  /// On success, returns the sent [Message].
   ///
   /// Apart from a [latitude] and a [longitude] a [title] and an [address],
   /// it can also take some options that control the message
@@ -456,7 +456,7 @@ class TeleDartMessage extends Message {
   /// Reply to the recieved message with a location
   ///
   /// A wrapper around [TeleDart.replyContact].
-  /// On success, returns the sent [model.Message].
+  /// On success, returns the sent [Message].
   ///
   /// Apart from a [phone_number] and a [first_name], it can
   /// also take some options that control the message
@@ -485,7 +485,7 @@ class TeleDartMessage extends Message {
   /// Reply to the recieved message with a poll
   ///
   /// A wrapper around [TeleDart.replyPoll].
-  /// On success, returns the sent [model.Message].
+  /// On success, returns the sent [Message].
   ///
   /// Apart from a [question] and a [List<String>] of [options], it can
   /// also take some options that control the message
@@ -527,7 +527,7 @@ class TeleDartMessage extends Message {
   /// Reply to the recieved message with a dice message
   ///
   /// A wrapper around [TeleDart.replyDice].
-  /// On success, returns the sent [model.Message].
+  /// On success, returns the sent [Message].
   ///
   /// It can take some options that control the message
   /// appearance and behavior.
@@ -550,7 +550,7 @@ class TeleDartMessage extends Message {
   /// Reply to the recieved message with an image
   ///
   /// A wrapper around [TeleDart.replySticker].
-  /// On success, returns the sent [model.Message].
+  /// On success, returns the sent [Message].
   ///
   /// Apart from a [sticker] to reply with, it can
   /// also take some options that control the message
