@@ -8,8 +8,8 @@ allowing you to create your own bot easily.
 
 ![TeleDart](https://raw.githubusercontent.com/DinoLeung/TeleDart/master/example/dash_paper_plane.svg?sanitize=true)
 
-[![Bot API Version](https://img.shields.io/badge/Bot%20API-5.3-blue.svg?style=flat-square)](https://core.telegram.org/bots/api)
-[![Dart Version](https://img.shields.io/badge/Dart-2.12-blue.svg?style=flat-square)](https://dart.dev)
+[![Bot API Version](https://img.shields.io/badge/Bot%20API-5.6-blue.svg?style=flat-square)](https://core.telegram.org/bots/api)
+[![Dart Version](https://img.shields.io/badge/Dart-2.14-blue.svg?style=flat-square)](https://dart.dev)
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg?style=flat-square)](https://www.gnu.org/licenses/gpl-3.0)
 
 ## Creating a Telegram bot
@@ -26,21 +26,18 @@ import 'package:teledart/teledart.dart';
 import 'package:teledart/telegram.dart';
 
 void main() {
-  var telegram = Telegram(BOT_TOKEN); // Replace BOT_TOKEN with the token of your bot
-  var event = Event((await telegram.getMe()).username!);
-  var teledart = TeleDart(telegram, event);
+  var BOT_TOKEN = 'YOUR_BOT_TOKEN_FROM_BOT_FATHER';
+  final username = (await Telegram(BOT_TOKEN).getMe()).username;
+  var teledart = TeleDart(BOT_TOKEN, Event(username!));
 
   teledart.start()
-
-  // ...
 }
 ```
 
 A simple usage example:
 
 ```dart
-teledart
-  ..onMessage(keyword: 'Fight for freedom')
+teledart.onMessage(keyword: 'Fight for freedom')
     .listen((message) => message.reply('Stand with Hong Kong'));
 ```
 
@@ -48,14 +45,12 @@ Using bot commands:
 
 ```dart
 // Long way
-teledart.onMessage(entityType: 'bot_command', keyword: 'start').listen(
-    (message) =>
-        teledart.telegram.sendMessage(message.chat.id, 'Hello TeleDart!'));
+teledart.onMessage(entityType: 'bot_command', keyword: 'start')
+    .listen((message) => teledart.sendMessage(message.chat.id, 'Hello TeleDart!'));
 
 // Short way (recommended)
-teledart
-    .onCommand('short')
-    .listen(((message) => teledart.replyMessage(message, 'This works too!')));
+teledart.onCommand('short')
+    .listen((message) => message.reply('This works too!'));
 ```
 
 Modifying [Stream](https://www.dartlang.org/tutorials/language/streams#methods-that-modify-a-stream):

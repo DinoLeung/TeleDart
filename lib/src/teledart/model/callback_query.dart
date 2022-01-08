@@ -57,6 +57,6 @@ class TeleDartCallbackQuery extends CallbackQuery {
     String? url,
     int? cache_time,
   }) =>
-      _teledart.answerCallbackQuery(this,
+      _teledart.answerCallbackQuery(id,
           text: text, show_alert: show_alert, url: url, cache_time: cache_time);
 }

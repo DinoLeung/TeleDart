@@ -60,7 +60,7 @@ class TeleDartInlineQuery extends InlineQuery {
     String? switch_pm_text,
     String? switch_pm_parameter,
   }) =>
-      _teledart.answerInlineQuery(this, results,
+      _teledart.answerInlineQuery(id, results,
           cache_time: cache_time,
           is_personal: is_personal,
           next_offset: next_offset,

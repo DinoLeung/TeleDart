@@ -1,6 +1,15 @@
-## Unreleased
+## 0.3.0
 
-- Support API 5.4 and 5.5
+- Support API 5.4, 5.5 and 5.6
+- **Breaking** `TeleDart` now extends `Telegram`, constructor signiture has changed, all `Telegram` functions are accessable from `TeleDart`.
+- **Breaking** Renamed `TeleDart.setWebhook` into `TeleDart.configureWebhook`
+- **Breaking** Removed `TeleDart.editLiveLocation`, should use `Telegram.editMessageLiveLocation` instead
+- **Breaking** Removed `TeleDart.stopLiveLocation`, should use `Telegram.stopMessageLiveLocation` instead
+- **Breaking** Removed `CallbackQuery` answer short-cut from `TeleDart`, should use short-cut method from `TeleDartCallbackQuery`
+- **Breaking** Removed `InlineQuery` answer short-cut from `TeleDart`, should use short-cut method from `TeleDartInlineQuery`
+- **Breaking** Removed `Message` reply short-cuts from `TeleDart`, should use short-cut methods from `TeleDartMessage`
+- **Breaking** Removed `PreCheckoutQuery` answer short-cut from `TeleDart`, should use short-cut method from `TeleDartPreCheckoutQuery`
+- **Breaking** Removed `ShippingQuery` answer short-cut from `TeleDart`, should use short-cut method from `TeleDartShippingQuery`
 
 ## 0.2.2
 

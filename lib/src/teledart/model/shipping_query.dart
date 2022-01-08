@@ -52,6 +52,6 @@ class TeleDartShippingQuery extends ShippingQuery {
   /// for more information about those options.**
   Future<bool> answer(bool ok,
           {List<ShippingOption>? shipping_options, String? error_message}) =>
-      _teledart.answerShippingQuery(this, ok,
+      _teledart.answerShippingQuery(id, ok,
           shipping_options: shipping_options, error_message: error_message);
 }
