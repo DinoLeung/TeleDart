@@ -26,7 +26,7 @@ import '../../telegram/model.dart';
 /// It is the object which gets returned by listeners such as
 /// [TeleDart.onMessage].
 ///
-/// This class combines [model.Message] and [TeleDart]
+/// This class combines [Message] and [TeleDart]
 /// to add the reply methods (like [reply] or [replyPhoto]),
 /// which are shortcuts that let you automatically reply to
 /// recieved messages.
@@ -46,9 +46,11 @@ class TeleDartMessage extends Message {
           forward_signature: message.forward_signature,
           forward_sender_name: message.forward_sender_name,
           forward_date: message.forward_date,
+          is_automatic_forward: message.is_automatic_forward,
           reply_to_message: message.reply_to_message,
           via_bot: message.via_bot,
           edit_date: message.edit_date,
+          has_protected_content: message.has_protected_content,
           media_group_id: message.media_group_id,
           author_signature: message.author_signature,
           text: message.text,
@@ -98,7 +100,7 @@ class TeleDartMessage extends Message {
   /// Reply to the recieved message with text
   ///
   /// A wrapper around [TeleDart.replyMessage].
-  /// On success, returns the sent [model.Message].
+  /// On success, returns the sent [Message].
   ///
   /// Apart from a [String] to reply with, it can
   /// also take some options that control the message
@@ -116,19 +118,19 @@ class TeleDartMessage extends Message {
     bool? allow_sending_without_reply,
     ReplyMarkup? reply_markup,
   }) =>
-      _teledart.replyMessage(this, text,
-          withQuote: withQuote,
+      _teledart.sendMessage(chat.id, text,
           parse_mode: parse_mode,
           entities: entities,
           disable_web_page_preview: disable_web_page_preview,
           disable_notification: disable_notification,
+          reply_to_message_id: withQuote ? message_id : null,
           allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
   /// Reply to the recieved message with an image
   ///
   /// A wrapper around [TeleDart.replyPhoto].
-  /// On success, returns the sent [model.Message].
+  /// On success, returns the sent [Message].
   ///
   /// Apart from a [photo] to reply with, it can
   /// also take some options that control the message
@@ -146,19 +148,19 @@ class TeleDartMessage extends Message {
     bool? allow_sending_without_reply,
     ReplyMarkup? reply_markup,
   }) =>
-      _teledart.replyPhoto(this, photo,
-          withQuote: withQuote,
+      _teledart.sendPhoto(chat.id, photo,
           caption: caption,
           parse_mode: parse_mode,
           caption_entities: caption_entities,
           disable_notification: disable_notification,
+          reply_to_message_id: withQuote ? message_id : null,
           allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
   /// Reply to the recieved message with an audio
   ///
   /// A wrapper around [TeleDart.replyAudio].
-  /// On success, returns the sent [model.Message].
+  /// On success, returns the sent [Message].
   ///
   /// Apart from an [audio] to reply with, it can
   /// also take some options that control the message
@@ -180,8 +182,7 @@ class TeleDartMessage extends Message {
     bool? allow_sending_without_reply,
     ReplyMarkup? reply_markup,
   }) =>
-      _teledart.replyAudio(this, audio,
-          withQuote: withQuote,
+      _teledart.sendAudio(chat.id, audio,
           caption: caption,
           parse_mode: parse_mode,
           caption_entities: caption_entities,
@@ -190,13 +191,14 @@ class TeleDartMessage extends Message {
           title: title,
           thumb: thumb,
           disable_notification: disable_notification,
+          reply_to_message_id: withQuote ? message_id : null,
           allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
   /// Reply to the recieved message with a document
   ///
   /// A wrapper around [TeleDart.replyDocument].
-  /// On success, returns the sent [model.Message].
+  /// On success, returns the sent [Message].
   ///
   /// Apart from a [document] to reply with, it can
   /// also take some options that control the message
@@ -215,20 +217,20 @@ class TeleDartMessage extends Message {
     bool? allow_sending_without_reply,
     ReplyMarkup? reply_markup,
   }) =>
-      _teledart.replyDocument(this, document,
-          withQuote: withQuote,
+      _teledart.sendDocument(chat.id, document,
           thumb: thumb,
           caption: caption,
           parse_mode: parse_mode,
           caption_entities: caption_entities,
           disable_notification: disable_notification,
+          reply_to_message_id: withQuote ? message_id : null,
           allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
   /// Reply to the recieved message with a video
   ///
   /// A wrapper around [TeleDart.replyVideo].
-  /// On success, returns the sent [model.Message].
+  /// On success, returns the sent [Message].
   ///
   /// Apart from a [video] to reply with, it can
   /// also take some options that control the message
@@ -251,8 +253,7 @@ class TeleDartMessage extends Message {
     bool? allow_sending_without_reply,
     ReplyMarkup? reply_markup,
   }) =>
-      _teledart.replyVideo(this, video,
-          withQuote: withQuote,
+      _teledart.sendVideo(chat.id, video,
           duration: duration,
           width: width,
           height: height,
@@ -262,13 +263,14 @@ class TeleDartMessage extends Message {
           caption_entities: caption_entities,
           supports_streaming: supports_streaming,
           disable_notification: disable_notification,
+          reply_to_message_id: withQuote ? message_id : null,
           allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
   /// Reply to the recieved message with an animation (GIF or H.264/MPEG-4 AVC video without sound)
   ///
   /// A wrapper around [TeleDart.replyAnimation].
-  /// On success, returns the sent [model.Message].
+  /// On success, returns the sent [Message].
   ///
   /// Apart from an [animation] to reply with, it can
   /// also take some options that control the message
@@ -290,8 +292,7 @@ class TeleDartMessage extends Message {
     bool? allow_sending_without_reply,
     ReplyMarkup? reply_markup,
   }) =>
-      _teledart.replyAnimation(this, animation,
-          withQuote: withQuote,
+      _teledart.sendAnimation(chat.id, animation,
           duration: duration,
           width: width,
           height: height,
@@ -300,13 +301,14 @@ class TeleDartMessage extends Message {
           parse_mode: parse_mode,
           caption_entities: caption_entities,
           disable_notification: disable_notification,
+          reply_to_message_id: withQuote ? message_id : null,
           allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
   /// Reply to the recieved message with a voice message
   ///
   /// A wrapper around [TeleDart.replyVoice].
-  /// On success, returns the sent [model.Message].
+  /// On success, returns the sent [Message].
   ///
   /// Apart from a [voice] to reply with, it can
   /// also take some options that control the message
@@ -324,19 +326,19 @@ class TeleDartMessage extends Message {
     bool? allow_sending_without_reply,
     ReplyMarkup? reply_markup,
   }) =>
-      _teledart.replyVoice(this, voice,
-          withQuote: withQuote,
+      _teledart.sendVoice(chat.id, voice,
           caption: caption,
           parse_mode: parse_mode,
           caption_entities: caption_entities,
           disable_notification: disable_notification,
+          reply_to_message_id: withQuote ? message_id : null,
           allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
   /// Reply to the recieved message with a video note
   ///
   /// A wrapper around [TeleDart.replyVideoNote].
-  /// On success, returns the sent [model.Message].
+  /// On success, returns the sent [Message].
   ///
   /// Apart from a [video_note] to reply with, it can
   /// also take some options that control the message
@@ -354,19 +356,19 @@ class TeleDartMessage extends Message {
     bool? allow_sending_without_reply,
     ReplyMarkup? reply_markup,
   }) =>
-      _teledart.replyVideoNote(this, video_note,
-          withQuote: withQuote,
+      _teledart.sendVideoNote(chat.id, video_note,
           duration: duration,
           length: length,
           thumb: thumb,
           disable_notification: disable_notification,
+          reply_to_message_id: withQuote ? message_id : null,
           allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
   /// Reply to the recieved message with a media group message (multiple media files)
   ///
   /// A wrapper around [TeleDart.replyMediaGroup].
-  /// On success, returns the sent [model.Message].
+  /// On success, returns the sent [Message].
   ///
   /// Apart from a [List<InputMedia>] to reply with, it can
   /// also take some options that control the message
@@ -380,15 +382,15 @@ class TeleDartMessage extends Message {
     bool? disable_notification,
     bool? allow_sending_without_reply,
   }) =>
-      _teledart.replyMediaGroup(this, media,
-          withQuote: withQuote,
+      _teledart.sendMediaGroup(chat.id, media,
           disable_notification: disable_notification,
+          reply_to_message_id: withQuote ? message_id : null,
           allow_sending_without_reply: allow_sending_without_reply);
 
   /// Reply to the recieved message with a location
   ///
   /// A wrapper around [TeleDart.replyLocation].
-  /// On success, returns the sent [model.Message].
+  /// On success, returns the sent [Message].
   ///
   /// Apart from a [latitude] and a [longitude], it can
   /// also take some options that control the message
@@ -408,20 +410,20 @@ class TeleDartMessage extends Message {
     bool? allow_sending_without_reply,
     ReplyMarkup? reply_markup,
   }) =>
-      _teledart.replyLocation(this, latitude, longitude,
-          withQuote: withQuote,
+      _teledart.sendLocation(chat.id, latitude, longitude,
           horizontal_accuracy: horizontal_accuracy,
           live_period: live_period,
           heading: heading,
           proximity_alert_radius: proximity_alert_radius,
           disable_notification: disable_notification,
+          reply_to_message_id: withQuote ? message_id : null,
           allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
   /// Reply to the recieved message with a venue message
   ///
   /// A wrapper around [TeleDart.replyVenue].
-  /// On success, returns the sent [model.Message].
+  /// On success, returns the sent [Message].
   ///
   /// Apart from a [latitude] and a [longitude] a [title] and an [address],
   /// it can also take some options that control the message
@@ -443,20 +445,20 @@ class TeleDartMessage extends Message {
     bool? allow_sending_without_reply,
     ReplyMarkup? reply_markup,
   }) =>
-      _teledart.replyVenue(this, latitude, longitude, title, address,
-          withQuote: withQuote,
+      _teledart.sendVenue(chat.id, latitude, longitude, title, address,
           foursquare_id: foursquare_id,
           foursquare_type: foursquare_type,
           google_place_id: google_place_id,
           google_place_type: google_place_type,
           disable_notification: disable_notification,
+          reply_to_message_id: withQuote ? message_id : null,
           allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
   /// Reply to the recieved message with a location
   ///
   /// A wrapper around [TeleDart.replyContact].
-  /// On success, returns the sent [model.Message].
+  /// On success, returns the sent [Message].
   ///
   /// Apart from a [phone_number] and a [first_name], it can
   /// also take some options that control the message
@@ -474,18 +476,18 @@ class TeleDartMessage extends Message {
     bool? allow_sending_without_reply,
     ReplyMarkup? reply_markup,
   }) =>
-      _teledart.replyContact(this, phone_number, first_name,
-          withQuote: withQuote,
+      _teledart.sendContact(chat.id, phone_number, first_name,
           last_name: last_name,
           vcard: vcard,
           disable_notification: disable_notification,
+          reply_to_message_id: withQuote ? message_id : null,
           allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
   /// Reply to the recieved message with a poll
   ///
   /// A wrapper around [TeleDart.replyPoll].
-  /// On success, returns the sent [model.Message].
+  /// On success, returns the sent [Message].
   ///
   /// Apart from a [question] and a [List<String>] of [options], it can
   /// also take some options that control the message
@@ -508,8 +510,7 @@ class TeleDartMessage extends Message {
           bool? disable_notification,
           bool? allow_sending_without_reply,
           ReplyMarkup? reply_markup}) =>
-      _teledart.replyPoll(this, question, options,
-          withQuote: withQuote,
+      _teledart.sendPoll(chat.id, question, options,
           is_anonymous: is_anonymous,
           type: type,
           allows_multiple_answers: allows_multiple_answers,
@@ -521,13 +522,14 @@ class TeleDartMessage extends Message {
           close_date: close_date,
           is_closed: is_closed,
           disable_notification: disable_notification,
+          reply_to_message_id: withQuote ? message_id : null,
           allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
   /// Reply to the recieved message with a dice message
   ///
   /// A wrapper around [TeleDart.replyDice].
-  /// On success, returns the sent [model.Message].
+  /// On success, returns the sent [Message].
   ///
   /// It can take some options that control the message
   /// appearance and behavior.
@@ -540,17 +542,17 @@ class TeleDartMessage extends Message {
           bool? disable_notification,
           bool? allow_sending_without_reply,
           ReplyMarkup? reply_markup}) =>
-      _teledart.replyDice(this,
-          withQuote: withQuote,
+      _teledart.sendDice(chat.id,
           emoji: emoji,
           disable_notification: disable_notification,
+          reply_to_message_id: withQuote ? message_id : null,
           allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
   /// Reply to the recieved message with an image
   ///
   /// A wrapper around [TeleDart.replySticker].
-  /// On success, returns the sent [model.Message].
+  /// On success, returns the sent [Message].
   ///
   /// Apart from a [sticker] to reply with, it can
   /// also take some options that control the message
@@ -563,8 +565,9 @@ class TeleDartMessage extends Message {
           bool? disable_notification,
           bool? allow_sending_without_reply,
           ReplyMarkup? reply_markup}) =>
-      _teledart.replySticker(this, sticker,
+      _teledart.sendSticker(chat.id, sticker,
           disable_notification: disable_notification,
+          reply_to_message_id: withQuote ? message_id : null,
           allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 }

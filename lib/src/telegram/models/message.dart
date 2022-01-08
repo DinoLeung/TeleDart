@@ -34,9 +34,11 @@ class Message {
   String? forward_signature;
   String? forward_sender_name;
   int? forward_date;
+  bool? is_automatic_forward;
   Message? reply_to_message;
   User? via_bot;
   int? edit_date;
+  bool? has_protected_content;
   String? media_group_id;
   String? author_signature;
   String? text;
@@ -92,9 +94,11 @@ class Message {
     this.forward_signature,
     this.forward_sender_name,
     this.forward_date,
+    this.is_automatic_forward,
     this.reply_to_message,
     this.via_bot,
     this.edit_date,
+    this.has_protected_content,
     this.media_group_id,
     this.author_signature,
     this.text,

@@ -23,6 +23,23 @@ part of '../model.dart';
 /// https://core.telegram.org/bots/api#messageentity
 @JsonSerializable()
 class MessageEntity {
+  static const String MENTION = 'mention';
+  static const String HASHTAG = 'hashtag';
+  static const String CASHTAG = 'cashtag';
+  static const String BOT_COMMAND = 'bot_command';
+  static const String URL = 'url';
+  static const String EMAIL = 'email';
+  static const String PHONE_NUMBER = 'phone_number';
+  static const String BOLD = 'bold';
+  static const String ITALIC = 'italic';
+  static const String UNDERLINE = 'underline';
+  static const String STRIKETHROUGH = 'strikethrough';
+  static const String SPOILER = 'spoiler';
+  static const String CODE = 'code';
+  static const String PRE = 'pre';
+  static const String TEXT_LINK = 'text_link';
+  static const String TEXT_MENTION = 'text_mention';
+
   String type;
   int offset;
   int length;

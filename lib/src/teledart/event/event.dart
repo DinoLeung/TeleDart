@@ -18,6 +18,7 @@
 
 import 'dart:async';
 
+import '../teledart.dart';
 import '../../telegram/model.dart';
 
 /// This class listens to various events, such as message edits
@@ -42,6 +43,7 @@ class Event {
   final StreamController<PollAnswer> _pollAnswerStreamController;
   final StreamController<ChatMemberUpdated> _myChatMemberStreamController;
   final StreamController<ChatMemberUpdated> _chatMemberStreamController;
+  final StreamController<ChatJoinRequest> _chatJoinRequestStreamController;
 
   Event(this.username, {bool sync = false})
       : _messageStreamController = StreamController.broadcast(sync: sync),
@@ -59,87 +61,9 @@ class Event {
         _pollStreamController = StreamController.broadcast(sync: sync),
         _pollAnswerStreamController = StreamController.broadcast(sync: sync),
         _myChatMemberStreamController = StreamController.broadcast(sync: sync),
-        _chatMemberStreamController = StreamController.broadcast(sync: sync);
-
-  /// Listens to message events
-  ///
-  /// For the documentation, check [TeleDart.onMessage].
-  Stream<Message> onMessage({String? entityType, dynamic keyword}) =>
-      _messageStreamController.stream.where((message) {
-        if (keyword == null) {
-          if (entityType == null) {
-            // no keyword and entityType
-            return (message.entities ?? message.caption_entities) == null;
-          } else {
-            // no keyword but entityType
-            return entityType == '*' || message.entityOf(entityType) != null;
-          }
-        } else {
-          if (!(keyword is String) && !(keyword is RegExp)) {
-            throw TeleDartEventException(
-                'Attribute \'keyword\' accepts type of String or RegExp');
-          } else if (entityType == null) {
-            return (message.entities ?? message.caption_entities) == null &&
-                (message.text ?? message.caption ?? '').contains(keyword);
-          } else if (message.entityOf(entityType) == null) {
-            return false;
-          } else if (entityType == 'text_mention') {
-            var userId = message.entityOf(entityType)?.user?.id;
-            var firstName = message.entityOf(entityType)?.user?.first_name;
-            if (keyword is RegExp) {
-              var hasMatch = false;
-              if (firstName != null) keyword.hasMatch(firstName);
-              if (userId != null) keyword.hasMatch(userId as String);
-              return hasMatch;
-            } else {
-              return keyword == firstName || keyword == userId;
-            }
-          } else {
-            var entityText = '';
-
-            switch (entityType) {
-              case '*': // Any entityType
-                entityText = (message.text ?? message.caption ?? '');
-                break;
-              case 'mention': //'\@${keyword}'
-              case 'cashtag': //'\$${keyword}'
-              case 'hashtag': //'\#${keyword}'
-                entityText = message.getEntity(entityType)?.substring(1) ?? '';
-                break;
-              case 'bot_command': //'\/${keyword}' or '\/${keyword}\@${me.username}'
-                entityText = message
-                        .getEntity(entityType)
-                        ?.substring(1)
-                        .replaceAll('\@$username', '') ??
-                    '';
-                break;
-              case 'url':
-              case 'email':
-              case 'phone_number':
-              case 'bold':
-              case 'italic':
-              case 'code':
-              case 'pre':
-              case 'underline':
-              case 'strikethrough':
-                entityText = message.getEntity(entityType) ?? '';
-                break;
-              case 'text_link':
-                entityText = message.entityOf(entityType)?.url ?? '';
-                break;
-              default: // Dynamically listen to message types.
-                entityText = message.getEntity(entityType) ?? '';
-                break;
-            }
-
-            if (keyword is RegExp) {
-              return keyword.hasMatch(entityText);
-            } else {
-              return keyword == entityText;
-            }
-          }
-        }
-      });
+        _chatMemberStreamController = StreamController.broadcast(sync: sync),
+        _chatJoinRequestStreamController =
+            StreamController.broadcast(sync: sync);
 
   /// Emits update events
   void emitUpdate(Update update) {
@@ -169,10 +93,93 @@ class Event {
       _myChatMemberStreamController.add(update.my_chat_member!);
     } else if (update.chat_member != null) {
       _chatMemberStreamController.add(update.chat_member!);
+    } else if (update.chat_join_request != null) {
+      _chatJoinRequestStreamController.add(update.chat_join_request!);
     } else {
       throw TeleDartEventException('Receieved unrecognised update');
     }
   }
+
+  /// Listens to message events
+  ///
+  /// For the documentation, check [TeleDart.onMessage].
+  Stream<Message> onMessage({String? entityType, dynamic keyword}) =>
+      _messageStreamController.stream.where((message) {
+        if (keyword == null) {
+          if (entityType == null) {
+            // no keyword and entityType
+            return (message.entities ?? message.caption_entities) == null;
+          } else {
+            // no keyword but entityType
+            return entityType == '*' || message.entityOf(entityType) != null;
+          }
+        } else {
+          if (!(keyword is String) && !(keyword is RegExp)) {
+            throw TeleDartEventException(
+                'Attribute \'keyword\' accepts type of String or RegExp');
+          } else if (entityType == null) {
+            return (message.entities ?? message.caption_entities) == null &&
+                (message.text ?? message.caption ?? '').contains(keyword);
+          } else if (message.entityOf(entityType) == null) {
+            return false;
+          } else if (entityType == MessageEntity.TEXT_MENTION) {
+            var userId = message.entityOf(entityType)?.user?.id;
+            var firstName = message.entityOf(entityType)?.user?.first_name;
+            if (keyword is RegExp) {
+              var hasMatch = false;
+              if (firstName != null) keyword.hasMatch(firstName);
+              if (userId != null) keyword.hasMatch(userId as String);
+              return hasMatch;
+            } else {
+              return keyword == firstName || keyword == userId;
+            }
+          } else {
+            var entityText = '';
+
+            switch (entityType) {
+              case '*': // Any entityType
+                entityText = (message.text ?? message.caption ?? '');
+                break;
+              case MessageEntity.MENTION: // '\@${keyword}'
+              case MessageEntity.CASHTAG: // '\$${keyword}'
+              case MessageEntity.HASHTAG: // '\#${keyword}'
+                entityText = message.getEntity(entityType)?.substring(1) ?? '';
+                break;
+              case 'bot_command': // '\/${keyword}' or '\/${keyword}\@${me.username}'
+                entityText = message
+                        .getEntity(entityType)
+                        ?.substring(1)
+                        .replaceAll('\@$username', '') ??
+                    '';
+                break;
+              case MessageEntity.URL:
+              case MessageEntity.EMAIL:
+              case MessageEntity.PHONE_NUMBER:
+              case MessageEntity.BOLD:
+              case MessageEntity.ITALIC:
+              case MessageEntity.SPOILER:
+              case MessageEntity.CODE:
+              case MessageEntity.PRE:
+              case MessageEntity.UNDERLINE:
+              case MessageEntity.STRIKETHROUGH:
+                entityText = message.getEntity(entityType) ?? '';
+                break;
+              case MessageEntity.TEXT_LINK:
+                entityText = message.entityOf(entityType)?.url ?? '';
+                break;
+              default: // Dynamically listen to message types.
+                entityText = message.getEntity(entityType) ?? '';
+                break;
+            }
+
+            if (keyword is RegExp) {
+              return keyword.hasMatch(entityText);
+            } else {
+              return keyword == entityText;
+            }
+          }
+        }
+      });
 
   /// Listens to edited message events
   Stream<Message> onEditedMessage() => _editedMessageStreamController.stream;
@@ -216,6 +223,10 @@ class Event {
   /// Listen to chat member events
   Stream<ChatMemberUpdated> onChatMember() =>
       _chatMemberStreamController.stream;
+
+  /// Listen to chat join request events
+  Stream<ChatJoinRequest> onChatJoinRequest() =>
+      _chatJoinRequestStreamController.stream;
 }
 
 class TeleDartEventException implements Exception {
