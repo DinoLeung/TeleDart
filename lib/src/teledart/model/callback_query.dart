@@ -20,6 +20,7 @@ import 'dart:async';
 
 import '../../../teledart.dart';
 import '../../telegram/model.dart';
+import './message.dart';
 
 /// A recieved callback query
 ///
@@ -41,6 +42,9 @@ class TeleDartCallbackQuery extends CallbackQuery {
           data: callbackQuery.data,
           game_short_name: callbackQuery.game_short_name,
         );
+
+  TeleDartMessage? get teledartMessage =>
+      message == null ? null : TeleDartMessage(_teledart, message!);
 
   /// Answer the recieved callback query
   ///

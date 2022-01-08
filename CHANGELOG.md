@@ -1,3 +1,7 @@
+## 0.3.1
+
+- Added short-cut to get `TeledartMessage` from `TeleDartCallbackQuery`
+
 ## 0.3.0
 
 - Support API 5.4, 5.5 and 5.6
