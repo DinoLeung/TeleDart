@@ -36,11 +36,13 @@ class Chat {
   String? last_name;
   ChatPhoto? photo;
   String? bio;
+  bool? has_private_forwards;
   String? description;
   String? invite_link;
   Message? pinned_message;
   ChatPermissions? permissions;
   int? slow_mode_delay;
+  bool? has_protected_content;
   String? sticker_set_name;
   bool? can_set_sticker_set;
   int? linked_chat_id;
@@ -54,11 +56,13 @@ class Chat {
     this.last_name,
     this.photo,
     this.bio,
+    this.has_private_forwards,
     this.description,
     this.invite_link,
     this.pinned_message,
     this.permissions,
     this.slow_mode_delay,
+    this.has_protected_content,
     this.sticker_set_name,
     this.can_set_sticker_set,
     this.linked_chat_id,

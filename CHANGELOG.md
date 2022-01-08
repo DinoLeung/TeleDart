@@ -1,6 +1,6 @@
 ## Unreleased
 
-- Support API 5.4
+- Support API 5.4 and 5.5
 
 ## 0.2.2
 
