@@ -176,6 +176,7 @@ class Telegram {
       List<MessageEntity>? entities,
       bool? disable_web_page_preview,
       bool? disable_notification,
+      bool? protect_content,
       int? reply_to_message_id,
       bool? allow_sending_without_reply,
       ReplyMarkup? reply_markup}) async {
@@ -191,6 +192,7 @@ class Telegram {
       'entities': entities == null ? null : jsonEncode(entities),
       'disable_web_page_preview': disable_web_page_preview,
       'disable_notification': disable_notification,
+      'protect_content': protect_content,
       'reply_to_message_id': reply_to_message_id,
       'allow_sending_without_reply': allow_sending_without_reply,
       'reply_markup': reply_markup == null ? null : jsonEncode(reply_markup),
@@ -203,7 +205,7 @@ class Telegram {
   /// https://core.telegram.org/bots/api#forwardmessage
   Future<Message> forwardMessage(
       dynamic chat_id, int from_chat_id, int message_id,
-      {bool? disable_notification}) async {
+      {bool? disable_notification, bool? protect_content}) async {
     if (chat_id is! String && chat_id is! int) {
       return Future.error(TelegramException(
           'Attribute \'chat_id\' can only be either type of String or int'));
@@ -214,6 +216,7 @@ class Telegram {
       'from_chat_id': from_chat_id,
       'message_id': message_id,
       'disable_notification': disable_notification,
+      'protect_content': protect_content,
     };
     return Message.fromJson(await HttpClient.httpPost(requestUrl, body: body));
   }
@@ -233,6 +236,7 @@ class Telegram {
     String? parse_mode,
     List<MessageEntity>? caption_entities,
     bool? disable_notification,
+    bool? protect_content,
     int? reply_to_message_id,
     bool? allow_sending_without_reply,
     ReplyMarkup? reply_markup,
@@ -251,6 +255,7 @@ class Telegram {
       'caption_entities':
           caption_entities == null ? null : jsonEncode(caption_entities),
       'disable_notification': disable_notification,
+      'protect_content': protect_content,
       'reply_to_message_id': reply_to_message_id,
       'allow_sending_without_reply': allow_sending_without_reply,
       'reply_markup': reply_markup == null ? null : jsonEncode(reply_markup)
@@ -269,6 +274,7 @@ class Telegram {
       String? parse_mode,
       List<MessageEntity>? caption_entities,
       bool? disable_notification,
+      bool? protect_content,
       int? reply_to_message_id,
       bool? allow_sending_without_reply,
       ReplyMarkup? reply_markup}) async {
@@ -284,6 +290,7 @@ class Telegram {
       'caption_entities':
           caption_entities == null ? null : jsonEncode(caption_entities),
       'disable_notification': disable_notification,
+      'protect_content': protect_content,
       'reply_to_message_id': reply_to_message_id,
       'allow_sending_without_reply': allow_sending_without_reply,
       'reply_markup': reply_markup == null ? null : jsonEncode(reply_markup),
@@ -326,6 +333,7 @@ class Telegram {
       String? title,
       dynamic thumb,
       bool? disable_notification,
+      bool? protect_content,
       int? reply_to_message_id,
       bool? allow_sending_without_reply,
       ReplyMarkup? reply_markup}) async {
@@ -344,6 +352,7 @@ class Telegram {
       'performer': performer,
       'title': title,
       'disable_notification': disable_notification,
+      'protect_content': protect_content,
       'reply_to_message_id': reply_to_message_id,
       'allow_sending_without_reply': allow_sending_without_reply,
       'reply_markup': reply_markup == null ? null : jsonEncode(reply_markup),
@@ -393,6 +402,7 @@ class Telegram {
       List<MessageEntity>? caption_entities,
       bool? disable_content_type_detection,
       bool? disable_notification,
+      bool? protect_content,
       int? reply_to_message_id,
       bool? allow_sending_without_reply,
       ReplyMarkup? reply_markup}) async {
@@ -409,6 +419,7 @@ class Telegram {
           caption_entities == null ? null : jsonEncode(caption_entities),
       'disable_content_type_detection': disable_content_type_detection,
       'disable_notification': disable_notification,
+      'protect_content': protect_content,
       'reply_to_message_id': reply_to_message_id,
       'allow_sending_without_reply': allow_sending_without_reply,
       'reply_markup': reply_markup == null ? null : jsonEncode(reply_markup),
@@ -463,6 +474,7 @@ class Telegram {
       List<MessageEntity>? caption_entities,
       bool? supports_streaming,
       bool? disable_notification,
+      bool? protect_content,
       int? reply_to_message_id,
       bool? allow_sending_without_reply,
       ReplyMarkup? reply_markup}) async {
@@ -482,6 +494,7 @@ class Telegram {
           caption_entities == null ? null : jsonEncode(caption_entities),
       'supports_streaming': supports_streaming,
       'disable_notification': disable_notification,
+      'protect_content': protect_content,
       'reply_to_message_id': reply_to_message_id,
       'allow_sending_without_reply': allow_sending_without_reply,
       'reply_markup': reply_markup == null ? null : jsonEncode(reply_markup),
@@ -532,6 +545,7 @@ class Telegram {
       String? parse_mode,
       List<MessageEntity>? caption_entities,
       bool? disable_notification,
+      bool? protect_content,
       int? reply_to_message_id,
       bool? allow_sending_without_reply,
       ReplyMarkup? reply_markup}) async {
@@ -550,6 +564,7 @@ class Telegram {
       'caption_entities':
           caption_entities == null ? null : jsonEncode(caption_entities),
       'disable_notification': disable_notification,
+      'protect_content': protect_content,
       'reply_to_message_id': reply_to_message_id,
       'allow_sending_without_reply': allow_sending_without_reply,
       'reply_markup': reply_markup == null ? null : jsonEncode(reply_markup),
@@ -603,6 +618,7 @@ class Telegram {
       List<MessageEntity>? caption_entities,
       int? duration,
       bool? disable_notification,
+      bool? protect_content,
       int? reply_to_message_id,
       bool? allow_sending_without_reply,
       ReplyMarkup? reply_markup}) async {
@@ -619,6 +635,7 @@ class Telegram {
           caption_entities == null ? null : jsonEncode(caption_entities),
       'duration': duration,
       'disable_notification': disable_notification,
+      'protect_content': protect_content,
       'reply_to_message_id': reply_to_message_id,
       'allow_sending_without_reply': allow_sending_without_reply,
       'reply_markup': reply_markup == null ? null : jsonEncode(reply_markup),
@@ -656,6 +673,7 @@ class Telegram {
       int? length,
       dynamic thumb,
       bool? disable_notification,
+      bool? protect_content,
       int? reply_to_message_id,
       bool? allow_sending_without_reply,
       ReplyMarkup? reply_markup}) async {
@@ -669,6 +687,7 @@ class Telegram {
       'duration': duration,
       'length': length,
       'disable_notification': disable_notification,
+      'protect_content': protect_content,
       'reply_to_message_id': reply_to_message_id,
       'allow_sending_without_reply': allow_sending_without_reply,
       'reply_markup': reply_markup == null ? null : jsonEncode(reply_markup),
@@ -714,6 +733,7 @@ class Telegram {
   /// https://core.telegram.org/bots/api#sendmediagroup
   Future<List<Message>> sendMediaGroup(dynamic chat_id, List<InputMedia> media,
       {bool? disable_notification,
+      bool? protect_content,
       int? reply_to_message_id,
       bool? allow_sending_without_reply}) async {
     if (chat_id is! String && chat_id is! int) {
@@ -725,6 +745,7 @@ class Telegram {
       'chat_id': chat_id,
       'media': jsonEncode(media),
       'disable_notification': disable_notification,
+      'protect_content': protect_content,
       'reply_to_message_id': reply_to_message_id,
       'allow_sending_without_reply': allow_sending_without_reply,
     };
@@ -745,6 +766,7 @@ class Telegram {
       int? heading,
       int? proximity_alert_radius,
       bool? disable_notification,
+      bool? protect_content,
       int? reply_to_message_id,
       bool? allow_sending_without_reply,
       ReplyMarkup? reply_markup}) async {
@@ -762,6 +784,7 @@ class Telegram {
       'heading': heading,
       'proximity_alert_radius': proximity_alert_radius,
       'disable_notification': disable_notification,
+      'protect_content': protect_content,
       'reply_to_message_id': reply_to_message_id,
       'allow_sending_without_reply': allow_sending_without_reply,
       'reply_markup': reply_markup == null ? null : jsonEncode(reply_markup),
@@ -855,6 +878,7 @@ class Telegram {
       String? google_place_id,
       String? google_place_type,
       bool? disable_notification,
+      bool? protect_content,
       int? reply_to_message_id,
       bool? allow_sending_without_reply,
       ReplyMarkup? reply_markup}) async {
@@ -874,6 +898,7 @@ class Telegram {
       'google_place_id': google_place_id,
       'google_place_type': google_place_type,
       'disable_notification': disable_notification,
+      'protect_content': protect_content,
       'reply_to_message_id': reply_to_message_id,
       'allow_sending_without_reply': allow_sending_without_reply,
       'reply_markup': reply_markup == null ? null : jsonEncode(reply_markup),
@@ -891,6 +916,7 @@ class Telegram {
       {String? last_name,
       String? vcard,
       bool? disable_notification,
+      bool? protect_content,
       int? reply_to_message_id,
       bool? allow_sending_without_reply,
       ReplyMarkup? reply_markup}) async {
@@ -906,6 +932,7 @@ class Telegram {
       'last_name': last_name,
       'vcard': vcard,
       'disable_notification': disable_notification,
+      'protect_content': protect_content,
       'reply_to_message_id': reply_to_message_id,
       'allow_sending_without_reply': allow_sending_without_reply,
       'reply_markup': reply_markup == null ? null : jsonEncode(reply_markup),
@@ -933,6 +960,7 @@ class Telegram {
       int? close_date,
       bool? is_closed,
       bool? disable_notification,
+      bool? protect_content,
       int? reply_to_message_id,
       bool? allow_sending_without_reply,
       ReplyMarkup? reply_markup}) async {
@@ -958,6 +986,7 @@ class Telegram {
       'close_date': close_date,
       'is_closed': is_closed,
       'disable_notification': disable_notification,
+      'protect_content': protect_content,
       'reply_to_message_id': reply_to_message_id,
       'allow_sending_without_reply': allow_sending_without_reply,
       'reply_markup': reply_markup == null ? null : jsonEncode(reply_markup),
@@ -971,6 +1000,7 @@ class Telegram {
   Future<Message> sendDice(dynamic chat_id,
       {String emoji = Dice.DICE,
       bool? disable_notification,
+      bool? protect_content,
       int? reply_to_message_id,
       bool? allow_sending_without_reply,
       ReplyMarkup? reply_markup}) async {
@@ -983,6 +1013,7 @@ class Telegram {
       'chat_id': chat_id,
       'emoji': emoji,
       'disable_notification': disable_notification,
+      'protect_content': protect_content,
       'reply_to_message_id': reply_to_message_id,
       'allow_sending_without_reply': allow_sending_without_reply,
       'reply_markup': reply_markup == null ? null : jsonEncode(reply_markup),
@@ -1983,6 +2014,7 @@ class Telegram {
   /// https://core.telegram.org/bots/api#sendsticker
   Future<Message> sendSticker(dynamic chat_id, dynamic sticker,
       {bool? disable_notification,
+      bool? protect_content,
       int? reply_to_message_id,
       bool? allow_sending_without_reply,
       ReplyMarkup? reply_markup}) async {
@@ -1994,6 +2026,7 @@ class Telegram {
     var body = <String, dynamic>{
       'chat_id': chat_id,
       'disable_notification': disable_notification,
+      'protect_content': protect_content,
       'reply_to_message_id': reply_to_message_id,
       'allow_sending_without_reply': allow_sending_without_reply,
       'reply_markup': reply_markup == null ? null : jsonEncode(reply_markup),
@@ -2262,6 +2295,7 @@ class Telegram {
       bool? send_email_to_provider,
       bool? is_flexible,
       bool? disable_notification,
+      bool? protect_content,
       int? reply_to_message_id,
       bool? allow_sending_without_reply,
       InlineKeyboardMarkup? reply_markup}) async {
@@ -2296,6 +2330,7 @@ class Telegram {
       'send_email_to_provider': send_email_to_provider,
       'is_flexible': is_flexible,
       'disable_notification': disable_notification,
+      'protect_content': protect_content,
       'reply_to_message_id': reply_to_message_id,
       'allow_sending_without_reply': allow_sending_without_reply,
       'reply_markup': reply_markup == null ? null : jsonEncode(reply_markup),
@@ -2383,6 +2418,7 @@ class Telegram {
   /// https://core.telegram.org/bots/api#sendgame
   Future<Message> sendGame(dynamic chat_id, String game_short_name,
       {bool? disable_notification,
+      bool? protect_content,
       int? reply_to_message_id,
       bool? allow_sending_without_reply,
       InlineKeyboardMarkup? reply_markup}) async {
@@ -2395,6 +2431,7 @@ class Telegram {
       'chat_id': chat_id,
       'game_short_name': game_short_name,
       'disable_notification': disable_notification,
+      'protect_content': protect_content,
       'reply_to_message_id': reply_to_message_id,
       'allow_sending_without_reply': allow_sending_without_reply,
       'reply_markup': reply_markup == null ? null : jsonEncode(reply_markup),

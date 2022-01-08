@@ -18,6 +18,7 @@
 
 import 'dart:async';
 
+import '../teledart.dart';
 import '../../telegram/model.dart';
 
 /// This class listens to various events, such as message edits
@@ -121,7 +122,7 @@ class Event {
                 (message.text ?? message.caption ?? '').contains(keyword);
           } else if (message.entityOf(entityType) == null) {
             return false;
-          } else if (entityType == 'text_mention') {
+          } else if (entityType == MessageEntity.TEXT_MENTION) {
             var userId = message.entityOf(entityType)?.user?.id;
             var firstName = message.entityOf(entityType)?.user?.first_name;
             if (keyword is RegExp) {
@@ -139,30 +140,31 @@ class Event {
               case '*': // Any entityType
                 entityText = (message.text ?? message.caption ?? '');
                 break;
-              case 'mention': //'\@${keyword}'
-              case 'cashtag': //'\$${keyword}'
-              case 'hashtag': //'\#${keyword}'
+              case MessageEntity.MENTION: // '\@${keyword}'
+              case MessageEntity.CASHTAG: // '\$${keyword}'
+              case MessageEntity.HASHTAG: // '\#${keyword}'
                 entityText = message.getEntity(entityType)?.substring(1) ?? '';
                 break;
-              case 'bot_command': //'\/${keyword}' or '\/${keyword}\@${me.username}'
+              case 'bot_command': // '\/${keyword}' or '\/${keyword}\@${me.username}'
                 entityText = message
                         .getEntity(entityType)
                         ?.substring(1)
                         .replaceAll('\@$username', '') ??
                     '';
                 break;
-              case 'url':
-              case 'email':
-              case 'phone_number':
-              case 'bold':
-              case 'italic':
-              case 'code':
-              case 'pre':
-              case 'underline':
-              case 'strikethrough':
+              case MessageEntity.URL:
+              case MessageEntity.EMAIL:
+              case MessageEntity.PHONE_NUMBER:
+              case MessageEntity.BOLD:
+              case MessageEntity.ITALIC:
+              case MessageEntity.SPOILER:
+              case MessageEntity.CODE:
+              case MessageEntity.PRE:
+              case MessageEntity.UNDERLINE:
+              case MessageEntity.STRIKETHROUGH:
                 entityText = message.getEntity(entityType) ?? '';
                 break;
-              case 'text_link':
+              case MessageEntity.TEXT_LINK:
                 entityText = message.entityOf(entityType)?.url ?? '';
                 break;
               default: // Dynamically listen to message types.
