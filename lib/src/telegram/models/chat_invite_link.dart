@@ -25,18 +25,24 @@ part of '../model.dart';
 class ChatInviteLink {
   String invite_link;
   User creator;
+  bool creates_join_request;
   bool is_primary;
   bool is_revoked;
+  String? name;
   int? expire_date;
   int? member_limit;
+  int? pending_join_request_count;
 
   ChatInviteLink({
     required this.invite_link,
     required this.creator,
+    required this.creates_join_request,
     required this.is_primary,
     required this.is_revoked,
+    this.name,
     this.expire_date,
     this.member_limit,
+    this.pending_join_request_count,
   });
 
   @JsonKey(ignore: true)

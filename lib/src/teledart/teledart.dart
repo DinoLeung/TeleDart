@@ -197,6 +197,9 @@ class TeleDart {
   /// Listen to chat member events
   Stream<ChatMemberUpdated> onChatMember() => _event.onChatMember();
 
+  /// Listen to chat join request events
+  Stream<ChatJoinRequest> onChatJoinRequest() => _event.onChatJoinRequest();
+
   // Short-cuts revolution
 
   /// Short-cut for [onMessage] handling entityType `mention` (@username)

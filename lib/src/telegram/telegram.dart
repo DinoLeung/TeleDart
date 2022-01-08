@@ -1234,7 +1234,10 @@ class Telegram {
   ///
   /// https://core.telegram.org/bots/api#createchatinvitelink
   Future<ChatInviteLink> createChatInviteLink(dynamic chat_id,
-      {int? expire_date, int? member_limit}) async {
+      {String? name,
+      int? expire_date,
+      int? member_limit,
+      bool? creates_join_request}) async {
     if (chat_id is! String && chat_id is! int) {
       return Future.error(TelegramException(
           'Attribute \'chat_id\' can only be either type of String or int'));
@@ -1242,8 +1245,10 @@ class Telegram {
     var requestUrl = _apiUri('createChatInviteLink');
     var body = <String, dynamic>{
       'chat_id': chat_id,
+      'name': name,
       'expire_date': expire_date,
       'member_limit': member_limit,
+      'creates_join_request': creates_join_request,
     };
     return ChatInviteLink.fromJson(
         await HttpClient.httpPost(requestUrl, body: body));
@@ -1257,7 +1262,10 @@ class Telegram {
   ///
   /// https://core.telegram.org/bots/api#editchatinvitelink
   Future<ChatInviteLink> editChatInviteLink(dynamic chat_id, String invite_link,
-      {int? expire_date, int? member_limit}) async {
+      {String? name,
+      int? expire_date,
+      int? member_limit,
+      bool? creates_join_request}) async {
     if (chat_id is! String && chat_id is! int) {
       return Future.error(TelegramException(
           'Attribute \'chat_id\' can only be either type of String or int'));
@@ -1266,8 +1274,10 @@ class Telegram {
     var body = <String, dynamic>{
       'chat_id': chat_id,
       'invite_link': invite_link,
+      'name': name,
       'expire_date': expire_date,
       'member_limit': member_limit,
+      'creates_join_request': creates_join_request,
     };
     return ChatInviteLink.fromJson(
         await HttpClient.httpPost(requestUrl, body: body));
@@ -1294,6 +1304,44 @@ class Telegram {
     };
     return ChatInviteLink.fromJson(
         await HttpClient.httpPost(requestUrl, body: body));
+  }
+
+  /// Use this method to approve a chat join request
+  ///
+  /// The bot must be an administrator in the chat for this to work and must have the *can_invite_users* administrator right.
+  ///
+  /// Returns *True* on success.
+  ///
+  /// https://core.telegram.org/bots/api#approvechatjoinrequest
+  Future<bool> approveChatJoinRequest(dynamic chat_id, int user_id) async {
+    if (chat_id is! String && chat_id is! int) {
+      return Future.error(TelegramException(
+          'Attribute \'chat_id\' can only be either type of String or int'));
+    }
+    var requestUrl = _apiUri('approveChatJoinRequest');
+    var body = <String, dynamic>{
+      'chat_id': chat_id,
+      'user_id': user_id,
+    };
+    return await HttpClient.httpPost(requestUrl, body: body);
+  }
+
+  /// Use this method to decline a chat join request
+  ///
+  /// The bot must be an administrator in the chat for this to work and must have the *can_invite_users* administrator right.
+  ///
+  /// Returns *True* on success.
+  Future<bool> declineChatJoinRequest(dynamic chat_id, int user_id) async {
+    if (chat_id is! String && chat_id is! int) {
+      return Future.error(TelegramException(
+          'Attribute \'chat_id\' can only be either type of String or int'));
+    }
+    var requestUrl = _apiUri('declineChatJoinRequest');
+    var body = <String, dynamic>{
+      'chat_id': chat_id,
+      'user_id': user_id,
+    };
+    return await HttpClient.httpPost(requestUrl, body: body);
   }
 
   /// Use this method to set a profile photo for the chat

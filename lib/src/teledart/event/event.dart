@@ -42,6 +42,7 @@ class Event {
   final StreamController<PollAnswer> _pollAnswerStreamController;
   final StreamController<ChatMemberUpdated> _myChatMemberStreamController;
   final StreamController<ChatMemberUpdated> _chatMemberStreamController;
+  final StreamController<ChatJoinRequest> _chatJoinRequestStreamController;
 
   Event(this.username, {bool sync = false})
       : _messageStreamController = StreamController.broadcast(sync: sync),
@@ -59,7 +60,44 @@ class Event {
         _pollStreamController = StreamController.broadcast(sync: sync),
         _pollAnswerStreamController = StreamController.broadcast(sync: sync),
         _myChatMemberStreamController = StreamController.broadcast(sync: sync),
-        _chatMemberStreamController = StreamController.broadcast(sync: sync);
+        _chatMemberStreamController = StreamController.broadcast(sync: sync),
+        _chatJoinRequestStreamController =
+            StreamController.broadcast(sync: sync);
+
+  /// Emits update events
+  void emitUpdate(Update update) {
+    if (update.message != null) {
+      _messageStreamController.add(update.message!);
+    } else if (update.edited_message != null) {
+      _editedMessageStreamController.add(update.edited_message!);
+    } else if (update.channel_post != null) {
+      _channelPostStreamController.add(update.channel_post!);
+    } else if (update.edited_channel_post != null) {
+      _editedChannelPostStreamController.add(update.edited_channel_post!);
+    } else if (update.inline_query != null) {
+      _inlineQueryStreamController.add(update.inline_query!);
+    } else if (update.chosen_inline_result != null) {
+      _chosenInlineResultStreamController.add(update.chosen_inline_result!);
+    } else if (update.callback_query != null) {
+      _callbackQueryStreamController.add(update.callback_query!);
+    } else if (update.shipping_query != null) {
+      _shippingQueryStreamController.add(update.shipping_query!);
+    } else if (update.pre_checkout_query != null) {
+      _preCheckoutQueryStreamController.add(update.pre_checkout_query!);
+    } else if (update.poll != null) {
+      _pollStreamController.add(update.poll!);
+    } else if (update.poll_answer != null) {
+      _pollAnswerStreamController.add(update.poll_answer!);
+    } else if (update.my_chat_member != null) {
+      _myChatMemberStreamController.add(update.my_chat_member!);
+    } else if (update.chat_member != null) {
+      _chatMemberStreamController.add(update.chat_member!);
+    } else if (update.chat_join_request != null) {
+      _chatJoinRequestStreamController.add(update.chat_join_request!);
+    } else {
+      throw TeleDartEventException('Receieved unrecognised update');
+    }
+  }
 
   /// Listens to message events
   ///
@@ -141,39 +179,6 @@ class Event {
         }
       });
 
-  /// Emits update events
-  void emitUpdate(Update update) {
-    if (update.message != null) {
-      _messageStreamController.add(update.message!);
-    } else if (update.edited_message != null) {
-      _editedMessageStreamController.add(update.edited_message!);
-    } else if (update.channel_post != null) {
-      _channelPostStreamController.add(update.channel_post!);
-    } else if (update.edited_channel_post != null) {
-      _editedChannelPostStreamController.add(update.edited_channel_post!);
-    } else if (update.inline_query != null) {
-      _inlineQueryStreamController.add(update.inline_query!);
-    } else if (update.chosen_inline_result != null) {
-      _chosenInlineResultStreamController.add(update.chosen_inline_result!);
-    } else if (update.callback_query != null) {
-      _callbackQueryStreamController.add(update.callback_query!);
-    } else if (update.shipping_query != null) {
-      _shippingQueryStreamController.add(update.shipping_query!);
-    } else if (update.pre_checkout_query != null) {
-      _preCheckoutQueryStreamController.add(update.pre_checkout_query!);
-    } else if (update.poll != null) {
-      _pollStreamController.add(update.poll!);
-    } else if (update.poll_answer != null) {
-      _pollAnswerStreamController.add(update.poll_answer!);
-    } else if (update.my_chat_member != null) {
-      _myChatMemberStreamController.add(update.my_chat_member!);
-    } else if (update.chat_member != null) {
-      _chatMemberStreamController.add(update.chat_member!);
-    } else {
-      throw TeleDartEventException('Receieved unrecognised update');
-    }
-  }
-
   /// Listens to edited message events
   Stream<Message> onEditedMessage() => _editedMessageStreamController.stream;
 
@@ -216,6 +221,10 @@ class Event {
   /// Listen to chat member events
   Stream<ChatMemberUpdated> onChatMember() =>
       _chatMemberStreamController.stream;
+
+  /// Listen to chat join request events
+  Stream<ChatJoinRequest> onChatJoinRequest() =>
+      _chatJoinRequestStreamController.stream;
 }
 
 class TeleDartEventException implements Exception {

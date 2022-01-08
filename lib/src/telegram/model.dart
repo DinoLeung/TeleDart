@@ -70,6 +70,7 @@ part 'models/chat_member_restricted.dart';
 part 'models/chat_member_left.dart';
 part 'models/chat_member_banned.dart';
 part 'models/chat_member_updated.dart';
+part 'models/chat_join_request.dart';
 part 'models/chat_permissions.dart';
 part 'models/chat_location.dart';
 part 'models/bot_command.dart';
