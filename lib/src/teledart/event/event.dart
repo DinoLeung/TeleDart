@@ -114,7 +114,7 @@ class Event {
             return entityType == '*' || message.entityOf(entityType) != null;
           }
         } else {
-          if (!(keyword is String) && !(keyword is RegExp)) {
+          if (keyword is! String && keyword is! RegExp) {
             throw TeleDartEventException(
                 'Attribute \'keyword\' accepts type of String or RegExp');
           } else if (entityType == null) {
@@ -128,7 +128,7 @@ class Event {
             if (keyword is RegExp) {
               var hasMatch = false;
               if (firstName != null) keyword.hasMatch(firstName);
-              if (userId != null) keyword.hasMatch(userId as String);
+              if (userId != null) keyword.hasMatch(userId.toString());
               return hasMatch;
             } else {
               return keyword == firstName || keyword == userId;
