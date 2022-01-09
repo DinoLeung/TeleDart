@@ -1,3 +1,7 @@
+## 0.3.2
+
+- Fixed `onTextMention` type cast bug
+
 ## 0.3.1
 
 - Added short-cut to get `TeledartMessage` from `TeleDartCallbackQuery`
