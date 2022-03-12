@@ -126,35 +126,36 @@ class Webhook extends AbstractUpdateFetcher {
         allowed_updates: allowed_updates);
   }
 
-  Future<void> setWebhook() async {
-    await telegram.setWebhook('$url:$port$secretPath',
-        ip_address: ip_address,
-        certificate: uploadCertificate ? certificate : null,
-        max_connections: max_connections,
-        allowed_updates: allowed_updates,
-        drop_pending_updates: drop_pending_updates);
-  }
+  Future<bool> setWebhook() async =>
+      await telegram.setWebhook('$url:$port$secretPath',
+          ip_address: ip_address,
+          certificate: uploadCertificate ? certificate : null,
+          max_connections: max_connections,
+          allowed_updates: allowed_updates,
+          drop_pending_updates: drop_pending_updates);
 
   /// Apply webhook configuration on Telegram API, and start the webhook server.
   @override
   Future<void> start() async {
-    await setWebhook();
-
-    _server.listen((io.HttpRequest request) {
-      if (request.method == 'POST' && request.uri.path == secretPath) {
-        request.cast<List<int>>().transform(utf8.decoder).join().then((data) {
-          emitUpdate(Update.fromJson(jsonDecode(data)));
+    if (await setWebhook()) {
+      _server.listen((io.HttpRequest request) {
+        if (request.method == 'POST' && request.uri.path == secretPath) {
+          request.cast<List<int>>().transform(utf8.decoder).join().then((data) {
+            emitUpdate(Update.fromJson(jsonDecode(data)));
+            request.response
+              ..write(jsonEncode({'ok': true}))
+              ..close();
+          });
+        } else {
           request.response
-            ..write(jsonEncode({'ok': true}))
+            ..statusCode = io.HttpStatus.methodNotAllowed
+            ..write(jsonEncode({'ok': false}))
             ..close();
-        });
-      } else {
-        request.response
-          ..statusCode = io.HttpStatus.methodNotAllowed
-          ..write(jsonEncode({'ok': false}))
-          ..close();
-      }
-    });
+        }
+      });
+    } else {
+      throw WebhookException('Telegram API returns an error while attempting to set the webhook.');
+    }
   }
 
   /// Remove webhook configuration from Telegram API, and stop the webhook server.

@@ -1,3 +1,7 @@
+## 0.3.4
+
+- Webhook to throw error when `setWebhook` failed
+
 ## 0.3.3
 
 - Support API 5.7
