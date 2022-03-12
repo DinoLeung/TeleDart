@@ -2084,7 +2084,7 @@ class Telegram {
   /// Use this method to create sticker set owned by a user
   ///
   /// The bot will be able to edit the created sticker set.
-  /// You must use exactly one of the fields png_sticker or tgs_sticker.
+  /// You **must** use exactly one of the *fields png_sticker*, *tgs_sticker*, or *webm_sticker*.
   ///
   /// Returns *True* on success.
   ///
@@ -2093,6 +2093,7 @@ class Telegram {
       int user_id, String name, String title, String emojis,
       {dynamic png_sticker,
       io.File? tgs_sticker,
+      io.File? webm_sticker,
       bool? contains_masks,
       MaskPosition? mask_position}) async {
     var requestUrl = _apiUri('createNewStickerSet');
@@ -2106,28 +2107,22 @@ class Telegram {
       'mask_position': mask_position == null ? null : jsonEncode(mask_position),
     };
 
-    if (tgs_sticker == null && png_sticker == null) {
+    if (png_sticker == null && tgs_sticker == null && webm_sticker == null) {
       return Future.error(TelegramException(
-          'You must use exactly one of the fields \`png_sticker\` or \`tgs_sticker\`.'));
-    } else if (tgs_sticker != null) {
-      // filename cannot be empty to post to Telegram server
-      var files = List<MultipartFile>.filled(
-          1,
-          MultipartFile(
-              'tgs_sticker', tgs_sticker.openRead(), tgs_sticker.lengthSync(),
-              filename: '${tgs_sticker.lengthSync()}'));
-      return await HttpClient.httpMultipartPost(requestUrl, files, body: body);
-    } else if (png_sticker is io.File) {
-      // filename cannot be empty to post to Telegram server
-      var files = List<MultipartFile>.filled(
-          1,
-          MultipartFile(
-              'png_sticker', png_sticker.openRead(), png_sticker.lengthSync(),
-              filename: '${png_sticker.lengthSync()}'));
-      return await HttpClient.httpMultipartPost(requestUrl, files, body: body);
+          'You must use exactly one of the fields `png_sticker`, `tgs_sticker` or `webm_sticker`.'));
     } else if (png_sticker is String) {
       body.addAll({'png_sticker': png_sticker});
       return await HttpClient.httpPost(requestUrl, body: body);
+    } else if (png_sticker is io.File || tgs_sticker != null || webm_sticker != null ) {
+      var file = png_sticker ?? tgs_sticker ?? webm_sticker;
+      var fieldName = png_sticker != null ? 'png_sticker' : tgs_sticker != null ? 'tgs_sticker' : 'webm_sticker';
+      // filename cannot be empty to post to Telegram server
+      var files = List<MultipartFile>.filled(
+          1,
+          MultipartFile(
+              fieldName, file.openRead(), file.lengthSync(),
+              filename: '${file.lengthSync()}'));
+      return await HttpClient.httpMultipartPost(requestUrl, files, body: body);
     } else {
       return Future.error(TelegramException(
           'Attribute \'png_sticker\' can only be either io.File or String (Telegram file_id or image url)'));
@@ -2136,7 +2131,7 @@ class Telegram {
 
   /// Use this method to add a new sticker to a set created by the bot
   ///
-  /// You must use exactly one of the fields png_sticker or tgs_sticker.
+  /// You **must** use exactly one of the *fields png_sticker*, *tgs_sticker*, or *webm_sticker*.
   /// Animated stickers can be added to animated sticker sets and only to them.
   /// Animated sticker sets can have up to 50 stickers.
   /// Static sticker sets can have up to 120 stickers.
@@ -2147,6 +2142,7 @@ class Telegram {
   Future<bool> addStickerToSet(int user_id, String name, String emojis,
       {dynamic png_sticker,
       io.File? tgs_sticker,
+      io.File? webm_sticker,
       MaskPosition? mask_position}) async {
     var requestUrl = _apiUri('addStickerToSet');
     var body = <String, dynamic>{
@@ -2156,28 +2152,22 @@ class Telegram {
       'mask_position': mask_position == null ? null : jsonEncode(mask_position),
     };
 
-    if (tgs_sticker == null && png_sticker == null) {
+    if (png_sticker == null && tgs_sticker == null && webm_sticker == null) {
       return Future.error(TelegramException(
-          'You must use exactly one of the fields \`png_sticker\` or \`tgs_sticker\`.'));
-    } else if (tgs_sticker != null) {
-      // filename cannot be empty to post to Telegram server
-      var files = List<MultipartFile>.filled(
-          1,
-          MultipartFile(
-              'tgs_sticker', tgs_sticker.openRead(), tgs_sticker.lengthSync(),
-              filename: '${tgs_sticker.lengthSync()}'));
-      return await HttpClient.httpMultipartPost(requestUrl, files, body: body);
-    } else if (png_sticker is io.File) {
-      // filename cannot be empty to post to Telegram server
-      var files = List<MultipartFile>.filled(
-          1,
-          MultipartFile(
-              'png_sticker', png_sticker.openRead(), png_sticker.lengthSync(),
-              filename: '${png_sticker.lengthSync()}'));
-      return await HttpClient.httpMultipartPost(requestUrl, files, body: body);
+          'You must use exactly one of the fields `png_sticker`, `tgs_sticker` or `webm_sticker`.'));
     } else if (png_sticker is String) {
       body.addAll({'png_sticker': png_sticker});
       return await HttpClient.httpPost(requestUrl, body: body);
+    } else if (png_sticker is io.File || tgs_sticker != null || webm_sticker != null ) {
+      var file = png_sticker ?? tgs_sticker ?? webm_sticker;
+      var fieldName = png_sticker != null ? 'png_sticker' : tgs_sticker != null ? 'tgs_sticker' : 'webm_sticker';
+      // filename cannot be empty to post to Telegram server
+      var files = List<MultipartFile>.filled(
+          1,
+          MultipartFile(
+              fieldName, file.openRead(), file.lengthSync(),
+              filename: '${file.lengthSync()}'));
+      return await HttpClient.httpMultipartPost(requestUrl, files, body: body);
     } else {
       return Future.error(TelegramException(
           'Attribute \'png_sticker\' can only be either io.File or String (Telegram file_id or image url)'));
