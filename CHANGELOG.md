@@ -1,3 +1,8 @@
+## 0.3.3
+
+- Support API 5.7
+- Show Ukrainian some love
+
 ## 0.3.2
 
 - Fixed `onTextMention` type cast bug
