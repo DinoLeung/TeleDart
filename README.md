@@ -49,8 +49,8 @@ teledart.onMessage(entityType: 'bot_command', keyword: 'start')
     .listen((message) => teledart.sendMessage(message.chat.id, 'Hello TeleDart!'));
 
 // Short way (recommended)
-teledart.onCommand('short')
-    .listen((message) => message.reply('This works too!'));
+teledart.onCommand('glory')
+    .listen((message) => message.reply('to Ukraine!'));
 ```
 
 Modifying [Stream](https://www.dartlang.org/tutorials/language/streams#methods-that-modify-a-stream):
