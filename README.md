@@ -12,12 +12,11 @@ A clean implementation of [Telegram bot API](https://core.telegram.org/bots/api)
 
 ## Creating a Telegram bot
 
-In order to create a Telegram bot, you need to use [@BotFather](https://t.me/botfather).
-Follow the instructions in BotFather, then copy your bot token and you're ready to go.
+In order to create a Telegram bot, you need to talk to [@BotFather](https://t.me/botfather) generating a bot token. Simply follow the [instructions](https://core.telegram.org/bots#6-botfather).
 
 ## Usage
 
-Initializing the bot:
+Initialising the bot:
 
 ```dart
 import 'package:teledart/teledart.dart';
