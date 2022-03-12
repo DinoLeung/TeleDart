@@ -1,25 +1,22 @@
 # TeleDart
 
-[Telegram](https://telegram.org/) is a popular secured instant messenger.
-They have an open [bot platform](https://telegram.org/blog/bot-revolution),
-this package is a [Dart](https://dart.dev)
-implementation of their [bot API](https://core.telegram.org/bots/api)
-allowing you to create your own bot easily.
+A clean implementation of [Telegram bot API](https://core.telegram.org/bots/api) allows you to create your own easily.
 
 ![TeleDart](https://raw.githubusercontent.com/DinoLeung/TeleDart/master/example/dash_paper_plane.svg?sanitize=true)
 
-[![Bot API Version](https://img.shields.io/badge/Bot%20API-5.6-blue.svg?style=flat-square)](https://core.telegram.org/bots/api)
+[![Bot API Version](https://img.shields.io/badge/Bot%20API-5.7-blue.svg?style=flat-square)](https://core.telegram.org/bots/api)
 [![Dart Version](https://img.shields.io/badge/Dart-2.14-blue.svg?style=flat-square)](https://dart.dev)
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg?style=flat-square)](https://www.gnu.org/licenses/gpl-3.0)
 
+[![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=DinoLeung&repo=TeleDart)](https://github.com/DinoLeung/TeleDart)
+
 ## Creating a Telegram bot
 
-In order to create a Telegram bot, you need to use [@BotFather](https://t.me/botfather).
-Follow the instructions in BotFather, then copy your bot token and you're ready to go.
+In order to create a Telegram bot, you need to talk to [@BotFather](https://t.me/botfather) generating a bot token. Simply follow the [instructions](https://core.telegram.org/bots#6-botfather).
 
 ## Usage
 
-Initializing the bot:
+Initialising the bot:
 
 ```dart
 import 'package:teledart/teledart.dart';
@@ -49,8 +46,8 @@ teledart.onMessage(entityType: 'bot_command', keyword: 'start')
     .listen((message) => teledart.sendMessage(message.chat.id, 'Hello TeleDart!'));
 
 // Short way (recommended)
-teledart.onCommand('short')
-    .listen((message) => message.reply('This works too!'));
+teledart.onCommand('glory')
+    .listen((message) => message.reply('to Ukraine!'));
 ```
 
 Modifying [Stream](https://www.dartlang.org/tutorials/language/streams#methods-that-modify-a-stream):

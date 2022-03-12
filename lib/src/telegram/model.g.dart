@@ -1930,6 +1930,7 @@ Sticker _$StickerFromJson(Map<String, dynamic> json) => Sticker(
       width: json['width'] as int,
       height: json['height'] as int,
       is_animated: json['is_animated'] as bool,
+      is_video: json['is_video'] as bool,
       thumb: json['thumb'] == null
           ? null
           : PhotoSize.fromJson(json['thumb'] as Map<String, dynamic>),
@@ -1949,6 +1950,7 @@ Map<String, dynamic> _$StickerToJson(Sticker instance) {
     'width': instance.width,
     'height': instance.height,
     'is_animated': instance.is_animated,
+    'is_video': instance.is_video,
   };
 
   void writeNotNull(String key, dynamic value) {
@@ -1969,6 +1971,7 @@ StickerSet _$StickerSetFromJson(Map<String, dynamic> json) => StickerSet(
       name: json['name'] as String,
       title: json['title'] as String,
       is_animated: json['is_animated'] as bool,
+      is_video: json['is_video'] as bool,
       contains_masks: json['contains_masks'] as bool,
       stickers: (json['stickers'] as List<dynamic>)
           .map((e) => Sticker.fromJson(e as Map<String, dynamic>))
@@ -1983,6 +1986,7 @@ Map<String, dynamic> _$StickerSetToJson(StickerSet instance) {
     'name': instance.name,
     'title': instance.title,
     'is_animated': instance.is_animated,
+    'is_video': instance.is_video,
     'contains_masks': instance.contains_masks,
     'stickers': instance.stickers.map((e) => e.toJson()).toList(),
   };

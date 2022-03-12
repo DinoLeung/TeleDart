@@ -26,6 +26,7 @@ class StickerSet {
   String name;
   String title;
   bool is_animated;
+  bool is_video;
   bool contains_masks;
   List<Sticker> stickers;
   PhotoSize? thumb;
@@ -33,6 +34,7 @@ class StickerSet {
     required this.name,
     required this.title,
     required this.is_animated,
+    required this.is_video,
     required this.contains_masks,
     required this.stickers,
     this.thumb,

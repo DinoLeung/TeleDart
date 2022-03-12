@@ -28,6 +28,7 @@ class Sticker {
   int width;
   int height;
   bool is_animated;
+  bool is_video;
   PhotoSize? thumb;
   String? emoji;
   String? set_name;
@@ -39,6 +40,7 @@ class Sticker {
     required this.width,
     required this.height,
     required this.is_animated,
+    required this.is_video,
     this.thumb,
     this.emoji,
     this.set_name,
