@@ -132,6 +132,7 @@ User _$UserFromJson(Map<String, dynamic> json) => User(
       can_join_groups: json['can_join_groups'] as bool?,
       can_read_all_group_messages: json['can_read_all_group_messages'] as bool?,
       supports_inline_queries: json['supports_inline_queries'] as bool?,
+      is_premium: json['is_premium'] as bool?,
     );
 
 Map<String, dynamic> _$UserToJson(User instance) {
@@ -154,6 +155,7 @@ Map<String, dynamic> _$UserToJson(User instance) {
   writeNotNull(
       'can_read_all_group_messages', instance.can_read_all_group_messages);
   writeNotNull('supports_inline_queries', instance.supports_inline_queries);
+  writeNotNull('is_premium', instance.is_premium);
   return val;
 }
 

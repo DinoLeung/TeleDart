@@ -32,6 +32,7 @@ class User {
   bool? can_join_groups;
   bool? can_read_all_group_messages;
   bool? supports_inline_queries;
+  bool? is_premium;
   User({
     required this.id,
     required this.is_bot,
@@ -42,6 +43,7 @@ class User {
     this.can_join_groups,
     this.can_read_all_group_messages,
     this.supports_inline_queries,
+    this.is_premium,
   });
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
   Map<String, dynamic> toJson() => _$UserToJson(this);
