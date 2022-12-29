@@ -33,7 +33,7 @@ class ChatMemberAdministrator implements ChatMember {
   bool is_anonymous;
   bool can_manage_chat;
   bool can_delete_messages;
-  bool can_manage_voice_chats;
+  bool can_manage_video_chats;
   bool can_restrict_members;
   bool can_promote_members;
   bool can_change_info;
@@ -50,7 +50,7 @@ class ChatMemberAdministrator implements ChatMember {
     this.is_anonymous = false,
     this.can_manage_chat = false,
     this.can_delete_messages = false,
-    this.can_manage_voice_chats = false,
+    this.can_manage_video_chats = false,
     this.can_restrict_members = false,
     this.can_promote_members = false,
     this.can_change_info = false,

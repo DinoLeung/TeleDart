@@ -38,14 +38,14 @@ class ChatAdministratorRights {
   bool? can_manage_topics;
 
   ChatAdministratorRights({
-    required this.is_anonymous,
-    required this.can_manage_chat,
-    required this.can_delete_messages,
-    required this.can_manage_video_chats,
-    required this.can_restrict_members,
-    required this.can_promote_members,
-    required this.can_change_info,
-    required this.can_invite_users,
+    this.is_anonymous = false,
+    this.can_manage_chat = false,
+    this.can_delete_messages = false,
+    this.can_manage_video_chats = false,
+    this.can_restrict_members = false,
+    this.can_promote_members = false,
+    this.can_change_info = false,
+    this.can_invite_users = false,
     this.can_post_messages,
     this.can_edit_messages,
     this.can_pin_messages,
