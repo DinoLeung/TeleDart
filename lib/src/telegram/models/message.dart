@@ -76,10 +76,10 @@ class Message {
   String? connected_website;
   PassportData? passport_data;
   ProximityAlertTriggered? proximity_alert_triggered;
-  VoiceChatScheduled? voice_chat_scheduled;
-  VoiceChatStarted? voice_chat_started;
-  VoiceChatEnded? voice_chat_ended;
-  VoiceChatParticipantsInvited? voice_chat_participants_invited;
+  VoiceChatScheduled? video_chat_scheduled;
+  VoiceChatStarted? video_chat_started;
+  VoiceChatEnded? video_chat_ended;
+  VoiceChatParticipantsInvited? video_chat_participants_invited;
   WebAppData? web_app_data;
   InlineKeyboardMarkup? reply_markup;
 
@@ -137,10 +137,10 @@ class Message {
     this.connected_website,
     this.passport_data,
     this.proximity_alert_triggered,
-    this.voice_chat_scheduled,
-    this.voice_chat_started,
-    this.voice_chat_ended,
-    this.voice_chat_participants_invited,
+    this.video_chat_scheduled,
+    this.video_chat_started,
+    this.video_chat_ended,
+    this.video_chat_participants_invited,
     this.web_app_data,
     this.reply_markup,
   });

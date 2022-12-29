@@ -2812,23 +2812,23 @@ Message _$MessageFromJson(Map<String, dynamic> json) => Message(
           ? null
           : ProximityAlertTriggered.fromJson(
               json['proximity_alert_triggered'] as Map<String, dynamic>),
-      voice_chat_scheduled: json['voice_chat_scheduled'] == null
+      video_chat_scheduled: json['video_chat_scheduled'] == null
           ? null
           : VoiceChatScheduled.fromJson(
-              json['voice_chat_scheduled'] as Map<String, dynamic>),
-      voice_chat_started: json['voice_chat_started'] == null
+              json['video_chat_scheduled'] as Map<String, dynamic>),
+      video_chat_started: json['video_chat_started'] == null
           ? null
           : VoiceChatStarted.fromJson(
-              json['voice_chat_started'] as Map<String, dynamic>),
-      voice_chat_ended: json['voice_chat_ended'] == null
+              json['video_chat_started'] as Map<String, dynamic>),
+      video_chat_ended: json['video_chat_ended'] == null
           ? null
           : VoiceChatEnded.fromJson(
-              json['voice_chat_ended'] as Map<String, dynamic>),
-      voice_chat_participants_invited:
-          json['voice_chat_participants_invited'] == null
+              json['video_chat_ended'] as Map<String, dynamic>),
+      video_chat_participants_invited:
+          json['video_chat_participants_invited'] == null
               ? null
               : VoiceChatParticipantsInvited.fromJson(
-                  json['voice_chat_participants_invited']
+                  json['video_chat_participants_invited']
                       as Map<String, dynamic>),
       web_app_data: json['web_app_data'] == null
           ? null
@@ -2907,11 +2907,11 @@ Map<String, dynamic> _$MessageToJson(Message instance) {
   writeNotNull('passport_data', instance.passport_data?.toJson());
   writeNotNull('proximity_alert_triggered',
       instance.proximity_alert_triggered?.toJson());
-  writeNotNull('voice_chat_scheduled', instance.voice_chat_scheduled?.toJson());
-  writeNotNull('voice_chat_started', instance.voice_chat_started?.toJson());
-  writeNotNull('voice_chat_ended', instance.voice_chat_ended?.toJson());
-  writeNotNull('voice_chat_participants_invited',
-      instance.voice_chat_participants_invited?.toJson());
+  writeNotNull('video_chat_scheduled', instance.video_chat_scheduled?.toJson());
+  writeNotNull('video_chat_started', instance.video_chat_started?.toJson());
+  writeNotNull('video_chat_ended', instance.video_chat_ended?.toJson());
+  writeNotNull('video_chat_participants_invited',
+      instance.video_chat_participants_invited?.toJson());
   writeNotNull('web_app_data', instance.web_app_data?.toJson());
   writeNotNull('reply_markup', instance.reply_markup?.toJson());
   return val;
