@@ -127,8 +127,12 @@ class Event {
             var firstName = message.entityOf(entityType)?.user?.first_name;
             if (keyword is RegExp) {
               var hasMatch = false;
-              if (firstName != null) keyword.hasMatch(firstName);
-              if (userId != null) keyword.hasMatch(userId.toString());
+              if (firstName != null) {
+                hasMatch = keyword.hasMatch(firstName);
+              }
+              if (userId != null) {
+                hasMatch = keyword.hasMatch(userId.toString());
+              }
               return hasMatch;
             } else {
               return keyword == firstName || keyword == userId;
@@ -149,7 +153,7 @@ class Event {
                 entityText = message
                         .getEntity(entityType)
                         ?.substring(1)
-                        .replaceAll('\@$username', '') ??
+                        .replaceAll('@$username', '') ??
                     '';
                 break;
               case MessageEntity.URL:
