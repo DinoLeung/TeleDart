@@ -2553,6 +2553,49 @@ Map<String, dynamic> _$MaskPositionToJson(MaskPosition instance) =>
       'scale': instance.scale,
     };
 
+MenuButton _$MenuButtonFromJson(Map<String, dynamic> json) => MenuButton(
+      type: json['type'] as String,
+    );
+
+Map<String, dynamic> _$MenuButtonToJson(MenuButton instance) =>
+    <String, dynamic>{
+      'type': instance.type,
+    };
+
+MenuButtonCommands _$MenuButtonCommandsFromJson(Map<String, dynamic> json) =>
+    MenuButtonCommands(
+      type: json['type'] as String? ?? MenuButton.COMMANDS,
+    );
+
+Map<String, dynamic> _$MenuButtonCommandsToJson(MenuButtonCommands instance) =>
+    <String, dynamic>{
+      'type': instance.type,
+    };
+
+MenuButtonDefault _$MenuButtonDefaultFromJson(Map<String, dynamic> json) =>
+    MenuButtonDefault(
+      type: json['type'] as String? ?? MenuButton.DEFAULT,
+    );
+
+Map<String, dynamic> _$MenuButtonDefaultToJson(MenuButtonDefault instance) =>
+    <String, dynamic>{
+      'type': instance.type,
+    };
+
+MenuButtonWebApp _$MenuButtonWebAppFromJson(Map<String, dynamic> json) =>
+    MenuButtonWebApp(
+      type: json['type'] as String? ?? MenuButton.WEB_APP,
+      text: json['text'] as String,
+      web_app: WebAppInfo.fromJson(json['web_app'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$MenuButtonWebAppToJson(MenuButtonWebApp instance) =>
+    <String, dynamic>{
+      'type': instance.type,
+      'text': instance.text,
+      'web_app': instance.web_app.toJson(),
+    };
+
 MessageAutoDeleteTimerChanged _$MessageAutoDeleteTimerChangedFromJson(
         Map<String, dynamic> json) =>
     MessageAutoDeleteTimerChanged(

@@ -1794,6 +1794,33 @@ class Telegram {
         .toList();
   }
 
+  /// Use this method to change the bot's menu button in a private chat, or the default menu button.
+  /// 
+  /// Returns *True* on success.
+  /// 
+  /// https://core.telegram.org/bots/api#setchatmenubutton
+  Future<bool> setChatMenuButton(int? chat_id, MenuButton? menu_button) async {
+    var requestUrl = _apiUri('setChatMenuButton');
+    var body = <String, dynamic>{
+      'chat_id': chat_id,
+      'menu_button': jsonEncode(menu_button),
+    };
+    return await HttpClient.httpPost(requestUrl, body: body);
+  }
+  
+  /// Use this method to get the current value of the bot's menu button in a private chat, or the default menu button.
+  /// 
+  /// Returns [MenuButton] on success.
+  /// 
+  /// https://core.telegram.org/bots/api#getchatmenubutton
+  Future<MenuButton> getChatMenuButton(int? chat_id) async {
+    var requestUrl = _apiUri('getChatMenuButton');
+    var body = <String, dynamic>{
+      'chat_id': chat_id,
+    };
+    return MenuButton.fromJson(await HttpClient.httpPost(requestUrl, body: body));
+  }
+
   /// Use this method to edit text and [Game] messages sent by the bot or via the bot
   /// (for [inline bots]).
   ///
