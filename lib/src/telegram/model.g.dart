@@ -3293,6 +3293,24 @@ Map<String, dynamic> _$ResponseParametersToJson(ResponseParameters instance) {
   return val;
 }
 
+SentWebAppMessage _$SentWebAppMessageFromJson(Map<String, dynamic> json) =>
+    SentWebAppMessage(
+      inline_message_id: json['inline_message_id'] as String?,
+    );
+
+Map<String, dynamic> _$SentWebAppMessageToJson(SentWebAppMessage instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('inline_message_id', instance.inline_message_id);
+  return val;
+}
+
 ShippingAddress _$ShippingAddressFromJson(Map<String, dynamic> json) =>
     ShippingAddress(
       country_code: json['country_code'] as String,

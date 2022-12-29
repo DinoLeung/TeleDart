@@ -2256,6 +2256,21 @@ class Telegram {
     return await HttpClient.httpPost(requestUrl, body: body);
   }
 
+  /// Use this method to set the result of an interaction with a [Web App] and send a corresponding
+  /// message on behalf of the user to the chat from which the query originated.
+  /// 
+  /// On success, a [SentWebAppMessage] object is returned.
+  /// 
+  /// https://core.telegram.org/bots/api#answerwebappquery
+  Future<SentWebAppMessage> answerWebAppQuery(String web_app_query_id, InlineQueryResult result) async {
+    var requestUrl = _apiUri('answerWebAppQuery');
+    var body = <String, dynamic>{
+      'web_app_query_id': web_app_query_id,
+      'result': jsonEncode(result),
+    };
+    return await HttpClient.httpPost(requestUrl, body: body);
+  }
+
   /// Use this method to send invoices
   ///
   /// On success, the sent [Message] is returned.

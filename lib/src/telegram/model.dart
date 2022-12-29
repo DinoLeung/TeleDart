@@ -128,6 +128,7 @@ part 'models/reply_keyboard_markup.dart';
 part 'models/reply_keyboard_remove.dart';
 part 'models/reply_markup.dart';
 part 'models/response_parameters.dart';
+part 'models/sent_web_app_message.dart';
 part 'models/shipping_address.dart';
 part 'models/shipping_option.dart';
 part 'models/shipping_query.dart';
