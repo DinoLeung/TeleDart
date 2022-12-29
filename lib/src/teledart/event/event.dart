@@ -126,14 +126,9 @@ class Event {
             var userId = message.entityOf(entityType)?.user?.id;
             var firstName = message.entityOf(entityType)?.user?.first_name;
             if (keyword is RegExp) {
-              var hasMatch = false;
-              if (firstName != null) {
-                hasMatch = keyword.hasMatch(firstName);
-              }
-              if (userId != null) {
-                hasMatch = keyword.hasMatch(userId.toString());
-              }
-              return hasMatch;
+              var matchFirstName = firstName != null ? keyword.hasMatch(firstName) : false;
+              var matchUserId = userId != null ? keyword.hasMatch(userId.toString()) : false;
+              return matchFirstName || matchUserId;
             } else {
               return keyword == firstName || keyword == userId;
             }
