@@ -34,6 +34,7 @@ part 'models/bot_command_scope.dart';
 part 'models/bot_command.dart';
 part 'models/callback_game.dart';
 part 'models/callback_query.dart';
+part 'models/chat_administrator_rights.dart';
 part 'models/chat_invite_link.dart';
 part 'models/chat_join_request.dart';
 part 'models/chat_location.dart';

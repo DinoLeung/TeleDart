@@ -1821,6 +1821,34 @@ class Telegram {
     return MenuButton.fromJson(await HttpClient.httpPost(requestUrl, body: body));
   }
 
+  /// Use this method to change the default administrator rights requested by the bot when it's added as an administrator to groups or channels.
+  /// These rights will be suggested to users, but they are are free to modify the list before adding the bot.
+  /// 
+  /// Returns *True* on success.
+  ///
+  /// https://core.telegram.org/bots/api#setmydefaultadministratorrights
+  Future<bool> setMyDefaultAdministratorRights(ChatAdministratorRights? rights, bool? for_channels) async {
+    var requestUrl = _apiUri('setMyDefaultAdministratorRights');
+    var body = <String, dynamic>{
+      'rights': rights == null ? null : jsonEncode(rights),
+      'for_channels': for_channels,
+    };
+    return await HttpClient.httpPost(requestUrl, body: body);
+  }
+
+  /// Use this method to get the current default administrator rights of the bot.
+  /// 
+  /// Returns [ChatAdministratorRights] on success.
+  /// 
+  /// https://core.telegram.org/bots/api#getmydefaultadministratorrights
+  Future<ChatAdministratorRights> getMyDefaultAdministratorRights(bool? for_channels) async {
+    var requestUrl = _apiUri('getMyDefaultAdministratorRights');
+    var body = <String, dynamic>{
+      'for_channels': for_channels,
+    };
+    return ChatAdministratorRights.fromJson(await HttpClient.httpPost(requestUrl, body: body));
+  }
+
   /// Use this method to edit text and [Game] messages sent by the bot or via the bot
   /// (for [inline bots]).
   ///

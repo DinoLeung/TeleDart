@@ -254,6 +254,49 @@ Map<String, dynamic> _$CallbackQueryToJson(CallbackQuery instance) {
   return val;
 }
 
+ChatAdministratorRights _$ChatAdministratorRightsFromJson(
+        Map<String, dynamic> json) =>
+    ChatAdministratorRights(
+      is_anonymous: json['is_anonymous'] as bool,
+      can_manage_chat: json['can_manage_chat'] as bool,
+      can_delete_messages: json['can_delete_messages'] as bool,
+      can_manage_video_chats: json['can_manage_video_chats'] as bool,
+      can_restrict_members: json['can_restrict_members'] as bool,
+      can_promote_members: json['can_promote_members'] as bool,
+      can_change_info: json['can_change_info'] as bool,
+      can_invite_users: json['can_invite_users'] as bool,
+      can_post_messages: json['can_post_messages'] as bool?,
+      can_edit_messages: json['can_edit_messages'] as bool?,
+      can_pin_messages: json['can_pin_messages'] as bool?,
+      can_manage_topics: json['can_manage_topics'] as bool?,
+    );
+
+Map<String, dynamic> _$ChatAdministratorRightsToJson(
+    ChatAdministratorRights instance) {
+  final val = <String, dynamic>{
+    'is_anonymous': instance.is_anonymous,
+    'can_manage_chat': instance.can_manage_chat,
+    'can_delete_messages': instance.can_delete_messages,
+    'can_manage_video_chats': instance.can_manage_video_chats,
+    'can_restrict_members': instance.can_restrict_members,
+    'can_promote_members': instance.can_promote_members,
+    'can_change_info': instance.can_change_info,
+    'can_invite_users': instance.can_invite_users,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('can_post_messages', instance.can_post_messages);
+  writeNotNull('can_edit_messages', instance.can_edit_messages);
+  writeNotNull('can_pin_messages', instance.can_pin_messages);
+  writeNotNull('can_manage_topics', instance.can_manage_topics);
+  return val;
+}
+
 ChatInviteLink _$ChatInviteLinkFromJson(Map<String, dynamic> json) =>
     ChatInviteLink(
       invite_link: json['invite_link'] as String,
@@ -2553,15 +2596,6 @@ Map<String, dynamic> _$MaskPositionToJson(MaskPosition instance) =>
       'scale': instance.scale,
     };
 
-MenuButton _$MenuButtonFromJson(Map<String, dynamic> json) => MenuButton(
-      type: json['type'] as String,
-    );
-
-Map<String, dynamic> _$MenuButtonToJson(MenuButton instance) =>
-    <String, dynamic>{
-      'type': instance.type,
-    };
-
 MenuButtonCommands _$MenuButtonCommandsFromJson(Map<String, dynamic> json) =>
     MenuButtonCommands(
       type: json['type'] as String? ?? MenuButton.COMMANDS,
@@ -2594,6 +2628,15 @@ Map<String, dynamic> _$MenuButtonWebAppToJson(MenuButtonWebApp instance) =>
       'type': instance.type,
       'text': instance.text,
       'web_app': instance.web_app.toJson(),
+    };
+
+MenuButton _$MenuButtonFromJson(Map<String, dynamic> json) => MenuButton(
+      type: json['type'] as String,
+    );
+
+Map<String, dynamic> _$MenuButtonToJson(MenuButton instance) =>
+    <String, dynamic>{
+      'type': instance.type,
     };
 
 MessageAutoDeleteTimerChanged _$MessageAutoDeleteTimerChangedFromJson(
