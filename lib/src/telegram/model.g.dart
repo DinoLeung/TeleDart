@@ -2744,6 +2744,9 @@ Message _$MessageFromJson(Map<String, dynamic> json) => Message(
               : VoiceChatParticipantsInvited.fromJson(
                   json['voice_chat_participants_invited']
                       as Map<String, dynamic>),
+      web_app_data: json['web_app_data'] == null
+          ? null
+          : WebAppData.fromJson(json['web_app_data'] as Map<String, dynamic>),
       reply_markup: json['reply_markup'] == null
           ? null
           : InlineKeyboardMarkup.fromJson(
@@ -2823,6 +2826,7 @@ Map<String, dynamic> _$MessageToJson(Message instance) {
   writeNotNull('voice_chat_ended', instance.voice_chat_ended?.toJson());
   writeNotNull('voice_chat_participants_invited',
       instance.voice_chat_participants_invited?.toJson());
+  writeNotNull('web_app_data', instance.web_app_data?.toJson());
   writeNotNull('reply_markup', instance.reply_markup?.toJson());
   return val;
 }
@@ -3779,6 +3783,26 @@ Map<String, dynamic> _$VoiceToJson(Voice instance) {
   return val;
 }
 
+WebAppData _$WebAppDataFromJson(Map<String, dynamic> json) => WebAppData(
+      data: json['data'] as String,
+      button_text: json['button_text'] as String,
+    );
+
+Map<String, dynamic> _$WebAppDataToJson(WebAppData instance) =>
+    <String, dynamic>{
+      'data': instance.data,
+      'button_text': instance.button_text,
+    };
+
+WebAppInfo _$WebAppInfoFromJson(Map<String, dynamic> json) => WebAppInfo(
+      url: json['url'] as String,
+    );
+
+Map<String, dynamic> _$WebAppInfoToJson(WebAppInfo instance) =>
+    <String, dynamic>{
+      'url': instance.url,
+    };
+
 WebhookInfo _$WebhookInfoFromJson(Map<String, dynamic> json) => WebhookInfo(
       url: json['url'] as String,
       has_custom_certificate: json['has_custom_certificate'] as bool,
@@ -3812,12 +3836,3 @@ Map<String, dynamic> _$WebhookInfoToJson(WebhookInfo instance) {
   writeNotNull('allowed_updates', instance.allowed_updates);
   return val;
 }
-
-WebAppInfo _$WebAppInfoFromJson(Map<String, dynamic> json) => WebAppInfo(
-      url: json['url'] as String,
-    );
-
-Map<String, dynamic> _$WebAppInfoToJson(WebAppInfo instance) =>
-    <String, dynamic>{
-      'url': instance.url,
-    };

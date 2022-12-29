@@ -94,6 +94,7 @@ class TeleDartMessage extends Message {
           voice_chat_ended: message.voice_chat_ended,
           voice_chat_participants_invited:
               message.voice_chat_participants_invited,
+          web_app_data: message.web_app_data,
           reply_markup: message.reply_markup,
         );
 

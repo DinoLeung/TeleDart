@@ -80,6 +80,7 @@ class Message {
   VoiceChatStarted? voice_chat_started;
   VoiceChatEnded? voice_chat_ended;
   VoiceChatParticipantsInvited? voice_chat_participants_invited;
+  WebAppData? web_app_data;
   InlineKeyboardMarkup? reply_markup;
 
   Message({
@@ -140,6 +141,7 @@ class Message {
     this.voice_chat_started,
     this.voice_chat_ended,
     this.voice_chat_participants_invited,
+    this.web_app_data,
     this.reply_markup,
   });
 

@@ -146,5 +146,6 @@ part 'models/voice_chat_participants_invited.dart';
 part 'models/voice_chat_scheduled.dart';
 part 'models/voice_chat_started.dart';
 part 'models/voice.dart';
-part 'models/webhook_info.dart';
+part 'models/web_app_data.dart';
 part 'models/web_app_info.dart';
+part 'models/webhook_info.dart';
