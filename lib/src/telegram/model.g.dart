@@ -3896,6 +3896,8 @@ WebhookInfo _$WebhookInfoFromJson(Map<String, dynamic> json) => WebhookInfo(
       ip_address: json['ip_address'] as String?,
       last_error_date: json['last_error_date'] as int?,
       last_error_message: json['last_error_message'] as String?,
+      last_synchronization_error_date:
+          json['last_synchronization_error_date'] as int?,
       max_connections: json['max_connections'] as int?,
       allowed_updates: (json['allowed_updates'] as List<dynamic>?)
           ?.map((e) => e as String)
@@ -3918,6 +3920,8 @@ Map<String, dynamic> _$WebhookInfoToJson(WebhookInfo instance) {
   writeNotNull('ip_address', instance.ip_address);
   writeNotNull('last_error_date', instance.last_error_date);
   writeNotNull('last_error_message', instance.last_error_message);
+  writeNotNull('last_synchronization_error_date',
+      instance.last_synchronization_error_date);
   writeNotNull('max_connections', instance.max_connections);
   writeNotNull('allowed_updates', instance.allowed_updates);
   return val;

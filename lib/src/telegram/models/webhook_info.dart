@@ -29,6 +29,7 @@ class WebhookInfo {
   String? ip_address;
   int? last_error_date;
   String? last_error_message;
+  int? last_synchronization_error_date;
   int? max_connections;
   List<String>? allowed_updates;
 
@@ -39,6 +40,7 @@ class WebhookInfo {
     this.ip_address,
     this.last_error_date,
     this.last_error_message,
+    this.last_synchronization_error_date,
     this.max_connections,
     this.allowed_updates,
   });
