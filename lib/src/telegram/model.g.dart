@@ -632,6 +632,8 @@ Chat _$ChatFromJson(Map<String, dynamic> json) => Chat(
           : ChatPhoto.fromJson(json['photo'] as Map<String, dynamic>),
       bio: json['bio'] as String?,
       has_private_forwards: json['has_private_forwards'] as bool?,
+      join_to_send_messages: json['join_to_send_messages'] as bool?,
+      join_by_request: json['join_by_request'] as bool?,
       description: json['description'] as String?,
       invite_link: json['invite_link'] as String?,
       pinned_message: json['pinned_message'] == null
@@ -670,6 +672,8 @@ Map<String, dynamic> _$ChatToJson(Chat instance) {
   writeNotNull('photo', instance.photo?.toJson());
   writeNotNull('bio', instance.bio);
   writeNotNull('has_private_forwards', instance.has_private_forwards);
+  writeNotNull('join_to_send_messages', instance.join_to_send_messages);
+  writeNotNull('join_by_request', instance.join_by_request);
   writeNotNull('description', instance.description);
   writeNotNull('invite_link', instance.invite_link);
   writeNotNull('pinned_message', instance.pinned_message?.toJson());
@@ -3500,6 +3504,9 @@ Sticker _$StickerFromJson(Map<String, dynamic> json) => Sticker(
           : PhotoSize.fromJson(json['thumb'] as Map<String, dynamic>),
       emoji: json['emoji'] as String?,
       set_name: json['set_name'] as String?,
+      premium_animation: json['premium_animation'] == null
+          ? null
+          : File.fromJson(json['premium_animation'] as Map<String, dynamic>),
       mask_position: json['mask_position'] == null
           ? null
           : MaskPosition.fromJson(
@@ -3526,6 +3533,7 @@ Map<String, dynamic> _$StickerToJson(Sticker instance) {
   writeNotNull('thumb', instance.thumb?.toJson());
   writeNotNull('emoji', instance.emoji);
   writeNotNull('set_name', instance.set_name);
+  writeNotNull('premium_animation', instance.premium_animation?.toJson());
   writeNotNull('mask_position', instance.mask_position?.toJson());
   writeNotNull('file_size', instance.file_size);
   return val;
@@ -3671,6 +3679,8 @@ User _$UserFromJson(Map<String, dynamic> json) => User(
       last_name: json['last_name'] as String?,
       username: json['username'] as String?,
       language_code: json['language_code'] as String?,
+      is_premium: json['is_premium'] as bool?,
+      added_to_attachment_menu: json['added_to_attachment_menu'] as bool?,
       can_join_groups: json['can_join_groups'] as bool?,
       can_read_all_group_messages: json['can_read_all_group_messages'] as bool?,
       supports_inline_queries: json['supports_inline_queries'] as bool?,
@@ -3692,6 +3702,8 @@ Map<String, dynamic> _$UserToJson(User instance) {
   writeNotNull('last_name', instance.last_name);
   writeNotNull('username', instance.username);
   writeNotNull('language_code', instance.language_code);
+  writeNotNull('is_premium', instance.is_premium);
+  writeNotNull('added_to_attachment_menu', instance.added_to_attachment_menu);
   writeNotNull('can_join_groups', instance.can_join_groups);
   writeNotNull(
       'can_read_all_group_messages', instance.can_read_all_group_messages);
