@@ -632,6 +632,8 @@ Chat _$ChatFromJson(Map<String, dynamic> json) => Chat(
           : ChatPhoto.fromJson(json['photo'] as Map<String, dynamic>),
       bio: json['bio'] as String?,
       has_private_forwards: json['has_private_forwards'] as bool?,
+      has_restricted_voice_and_video_messages:
+          json['has_restricted_voice_and_video_messages'] as bool?,
       join_to_send_messages: json['join_to_send_messages'] as bool?,
       join_by_request: json['join_by_request'] as bool?,
       description: json['description'] as String?,
@@ -672,6 +674,8 @@ Map<String, dynamic> _$ChatToJson(Chat instance) {
   writeNotNull('photo', instance.photo?.toJson());
   writeNotNull('bio', instance.bio);
   writeNotNull('has_private_forwards', instance.has_private_forwards);
+  writeNotNull('has_restricted_voice_and_video_messages',
+      instance.has_restricted_voice_and_video_messages);
   writeNotNull('join_to_send_messages', instance.join_to_send_messages);
   writeNotNull('join_by_request', instance.join_by_request);
   writeNotNull('description', instance.description);
@@ -2665,6 +2669,7 @@ MessageEntity _$MessageEntityFromJson(Map<String, dynamic> json) =>
           ? null
           : User.fromJson(json['user'] as Map<String, dynamic>),
       language: json['language'] as String?,
+      custom_emoji_id: json['custom_emoji_id'] as String?,
     );
 
 Map<String, dynamic> _$MessageEntityToJson(MessageEntity instance) {
@@ -2683,6 +2688,7 @@ Map<String, dynamic> _$MessageEntityToJson(MessageEntity instance) {
   writeNotNull('url', instance.url);
   writeNotNull('user', instance.user?.toJson());
   writeNotNull('language', instance.language);
+  writeNotNull('custom_emoji_id', instance.custom_emoji_id);
   return val;
 }
 
@@ -3461,9 +3467,9 @@ Map<String, dynamic> _$ShippingQueryToJson(ShippingQuery instance) =>
 StickerSet _$StickerSetFromJson(Map<String, dynamic> json) => StickerSet(
       name: json['name'] as String,
       title: json['title'] as String,
+      sticker_type: json['sticker_type'] as String,
       is_animated: json['is_animated'] as bool,
       is_video: json['is_video'] as bool,
-      contains_masks: json['contains_masks'] as bool,
       stickers: (json['stickers'] as List<dynamic>)
           .map((e) => Sticker.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -3476,9 +3482,9 @@ Map<String, dynamic> _$StickerSetToJson(StickerSet instance) {
   final val = <String, dynamic>{
     'name': instance.name,
     'title': instance.title,
+    'sticker_type': instance.sticker_type,
     'is_animated': instance.is_animated,
     'is_video': instance.is_video,
-    'contains_masks': instance.contains_masks,
     'stickers': instance.stickers.map((e) => e.toJson()).toList(),
   };
 
@@ -3511,6 +3517,7 @@ Sticker _$StickerFromJson(Map<String, dynamic> json) => Sticker(
           ? null
           : MaskPosition.fromJson(
               json['mask_position'] as Map<String, dynamic>),
+      custom_emoji_id: json['custom_emoji_id'] as String?,
       file_size: json['file_size'] as int?,
     );
 
@@ -3535,6 +3542,7 @@ Map<String, dynamic> _$StickerToJson(Sticker instance) {
   writeNotNull('set_name', instance.set_name);
   writeNotNull('premium_animation', instance.premium_animation?.toJson());
   writeNotNull('mask_position', instance.mask_position?.toJson());
+  writeNotNull('custom_emoji_id', instance.custom_emoji_id);
   writeNotNull('file_size', instance.file_size);
   return val;
 }
