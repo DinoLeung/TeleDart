@@ -632,6 +632,8 @@ Chat _$ChatFromJson(Map<String, dynamic> json) => Chat(
           : ChatPhoto.fromJson(json['photo'] as Map<String, dynamic>),
       bio: json['bio'] as String?,
       has_private_forwards: json['has_private_forwards'] as bool?,
+      has_restricted_voice_and_video_messages:
+          json['has_restricted_voice_and_video_messages'] as bool?,
       join_to_send_messages: json['join_to_send_messages'] as bool?,
       join_by_request: json['join_by_request'] as bool?,
       description: json['description'] as String?,
@@ -672,6 +674,8 @@ Map<String, dynamic> _$ChatToJson(Chat instance) {
   writeNotNull('photo', instance.photo?.toJson());
   writeNotNull('bio', instance.bio);
   writeNotNull('has_private_forwards', instance.has_private_forwards);
+  writeNotNull('has_restricted_voice_and_video_messages',
+      instance.has_restricted_voice_and_video_messages);
   writeNotNull('join_to_send_messages', instance.join_to_send_messages);
   writeNotNull('join_by_request', instance.join_by_request);
   writeNotNull('description', instance.description);

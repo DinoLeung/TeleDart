@@ -37,6 +37,7 @@ class Chat {
   ChatPhoto? photo;
   String? bio;
   bool? has_private_forwards;
+  bool? has_restricted_voice_and_video_messages;
   bool? join_to_send_messages;
   bool? join_by_request;
   String? description;
@@ -59,6 +60,7 @@ class Chat {
     this.photo,
     this.bio,
     this.has_private_forwards,
+    this.has_restricted_voice_and_video_messages,
     this.join_to_send_messages,
     this.join_by_request,
     this.description,
