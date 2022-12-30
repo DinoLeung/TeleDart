@@ -3680,6 +3680,7 @@ User _$UserFromJson(Map<String, dynamic> json) => User(
       username: json['username'] as String?,
       language_code: json['language_code'] as String?,
       is_premium: json['is_premium'] as bool?,
+      added_to_attachment_menu: json['added_to_attachment_menu'] as bool?,
       can_join_groups: json['can_join_groups'] as bool?,
       can_read_all_group_messages: json['can_read_all_group_messages'] as bool?,
       supports_inline_queries: json['supports_inline_queries'] as bool?,
@@ -3702,6 +3703,7 @@ Map<String, dynamic> _$UserToJson(User instance) {
   writeNotNull('username', instance.username);
   writeNotNull('language_code', instance.language_code);
   writeNotNull('is_premium', instance.is_premium);
+  writeNotNull('added_to_attachment_menu', instance.added_to_attachment_menu);
   writeNotNull('can_join_groups', instance.can_join_groups);
   writeNotNull(
       'can_read_all_group_messages', instance.can_read_all_group_messages);

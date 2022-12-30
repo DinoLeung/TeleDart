@@ -30,6 +30,7 @@ class User {
   String? username;
   String? language_code;
   bool? is_premium;
+  bool? added_to_attachment_menu;
   bool? can_join_groups;
   bool? can_read_all_group_messages;
   bool? supports_inline_queries;
@@ -41,6 +42,7 @@ class User {
     this.username,
     this.language_code,
     this.is_premium,
+    this.added_to_attachment_menu,
     this.can_join_groups,
     this.can_read_all_group_messages,
     this.supports_inline_queries,
