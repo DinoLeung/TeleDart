@@ -1180,7 +1180,8 @@ class Telegram {
       bool? can_promote_members,
       bool? can_change_info,
       bool? can_invite_users,
-      bool? can_pin_messages}) async {
+      bool? can_pin_messages,
+      bool? can_manage_topics}) async {
     if (chat_id is! String && chat_id is! int) {
       return Future.error(TelegramException(
           'Attribute \'chat_id\' can only be either type of String or int'));
@@ -1200,6 +1201,7 @@ class Telegram {
       'can_change_info': can_change_info,
       'can_invite_users': can_invite_users,
       'can_pin_messages': can_pin_messages,
+      'can_manage_topics': can_manage_topics,
     };
     return await HttpClient.httpPost(requestUrl, body: body);
   }

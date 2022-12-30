@@ -34,6 +34,7 @@ class ChatMemberRestricted implements ChatMember {
   bool can_change_info;
   bool can_invite_users;
   bool can_pin_messages;
+  bool can_manage_topics;
   bool can_send_messages;
   bool can_send_media_messages;
   bool can_send_polls;
@@ -48,6 +49,7 @@ class ChatMemberRestricted implements ChatMember {
     this.can_change_info = false,
     this.can_invite_users = false,
     this.can_pin_messages = false,
+    this.can_manage_topics = false,
     this.can_send_messages = false,
     this.can_send_media_messages = false,
     this.can_send_polls = false,

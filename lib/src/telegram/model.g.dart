@@ -391,6 +391,7 @@ ChatMemberAdministrator _$ChatMemberAdministratorFromJson(
       can_post_messages: json['can_post_messages'] as bool?,
       can_edit_messages: json['can_edit_messages'] as bool?,
       can_pin_messages: json['can_pin_messages'] as bool?,
+      can_manage_topics: json['can_manage_topics'] as bool?,
       custom_title: json['custom_title'] as String?,
     );
 
@@ -419,6 +420,7 @@ Map<String, dynamic> _$ChatMemberAdministratorToJson(
   writeNotNull('can_post_messages', instance.can_post_messages);
   writeNotNull('can_edit_messages', instance.can_edit_messages);
   writeNotNull('can_pin_messages', instance.can_pin_messages);
+  writeNotNull('can_manage_topics', instance.can_manage_topics);
   writeNotNull('custom_title', instance.custom_title);
   return val;
 }
@@ -495,6 +497,7 @@ ChatMemberRestricted _$ChatMemberRestrictedFromJson(
       can_change_info: json['can_change_info'] as bool? ?? false,
       can_invite_users: json['can_invite_users'] as bool? ?? false,
       can_pin_messages: json['can_pin_messages'] as bool? ?? false,
+      can_manage_topics: json['can_manage_topics'] as bool? ?? false,
       can_send_messages: json['can_send_messages'] as bool? ?? false,
       can_send_media_messages:
           json['can_send_media_messages'] as bool? ?? false,
@@ -515,6 +518,7 @@ Map<String, dynamic> _$ChatMemberRestrictedToJson(
       'can_change_info': instance.can_change_info,
       'can_invite_users': instance.can_invite_users,
       'can_pin_messages': instance.can_pin_messages,
+      'can_manage_topics': instance.can_manage_topics,
       'can_send_messages': instance.can_send_messages,
       'can_send_media_messages': instance.can_send_media_messages,
       'can_send_polls': instance.can_send_polls,
@@ -584,6 +588,7 @@ ChatPermissions _$ChatPermissionsFromJson(Map<String, dynamic> json) =>
       can_change_info: json['can_change_info'] as bool?,
       can_invite_users: json['can_invite_users'] as bool?,
       can_pin_messages: json['can_pin_messages'] as bool?,
+      can_manage_topics: json['can_manage_topics'] as bool?,
     );
 
 Map<String, dynamic> _$ChatPermissionsToJson(ChatPermissions instance) {
@@ -603,6 +608,7 @@ Map<String, dynamic> _$ChatPermissionsToJson(ChatPermissions instance) {
   writeNotNull('can_change_info', instance.can_change_info);
   writeNotNull('can_invite_users', instance.can_invite_users);
   writeNotNull('can_pin_messages', instance.can_pin_messages);
+  writeNotNull('can_manage_topics', instance.can_manage_topics);
   return val;
 }
 
