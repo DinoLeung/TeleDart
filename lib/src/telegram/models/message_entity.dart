@@ -39,6 +39,7 @@ class MessageEntity {
   static const String PRE = 'pre';
   static const String TEXT_LINK = 'text_link';
   static const String TEXT_MENTION = 'text_mention';
+  static const String CUSTOM_EMOJI = 'custom_emoji';
 
   String type;
   int offset;
@@ -46,6 +47,7 @@ class MessageEntity {
   String? url;
   User? user;
   String? language;
+  String? custom_emoji_id;
   MessageEntity({
     required this.type,
     required this.offset,
@@ -53,6 +55,7 @@ class MessageEntity {
     this.url,
     this.user,
     this.language,
+    this.custom_emoji_id,
   });
   factory MessageEntity.fromJson(Map<String, dynamic> json) =>
       _$MessageEntityFromJson(json);

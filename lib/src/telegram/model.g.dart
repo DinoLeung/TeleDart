@@ -2665,6 +2665,7 @@ MessageEntity _$MessageEntityFromJson(Map<String, dynamic> json) =>
           ? null
           : User.fromJson(json['user'] as Map<String, dynamic>),
       language: json['language'] as String?,
+      custom_emoji_id: json['custom_emoji_id'] as String?,
     );
 
 Map<String, dynamic> _$MessageEntityToJson(MessageEntity instance) {
@@ -2683,6 +2684,7 @@ Map<String, dynamic> _$MessageEntityToJson(MessageEntity instance) {
   writeNotNull('url', instance.url);
   writeNotNull('user', instance.user?.toJson());
   writeNotNull('language', instance.language);
+  writeNotNull('custom_emoji_id', instance.custom_emoji_id);
   return val;
 }
 

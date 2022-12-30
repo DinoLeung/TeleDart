@@ -126,8 +126,10 @@ class Event {
             var userId = message.entityOf(entityType)?.user?.id;
             var firstName = message.entityOf(entityType)?.user?.first_name;
             if (keyword is RegExp) {
-              var matchFirstName = firstName != null ? keyword.hasMatch(firstName) : false;
-              var matchUserId = userId != null ? keyword.hasMatch(userId.toString()) : false;
+              var matchFirstName =
+                  firstName != null ? keyword.hasMatch(firstName) : false;
+              var matchUserId =
+                  userId != null ? keyword.hasMatch(userId.toString()) : false;
               return matchFirstName || matchUserId;
             } else {
               return keyword == firstName || keyword == userId;
@@ -144,7 +146,8 @@ class Event {
               case MessageEntity.HASHTAG: // '\#${keyword}'
                 entityText = message.getEntity(entityType)?.substring(1) ?? '';
                 break;
-              case 'bot_command': // '\/${keyword}' or '\/${keyword}\@${me.username}'
+              case MessageEntity
+                  .BOT_COMMAND: // '\/${keyword}' or '\/${keyword}\@${me.username}'
                 entityText = message
                         .getEntity(entityType)
                         ?.substring(1)
@@ -158,13 +161,18 @@ class Event {
               case MessageEntity.ITALIC:
               case MessageEntity.SPOILER:
               case MessageEntity.CODE:
-              case MessageEntity.PRE:
+              case MessageEntity
+                  .PRE: // TODO: need to return language prop somehow
               case MessageEntity.UNDERLINE:
               case MessageEntity.STRIKETHROUGH:
                 entityText = message.getEntity(entityType) ?? '';
                 break;
               case MessageEntity.TEXT_LINK:
                 entityText = message.entityOf(entityType)?.url ?? '';
+                break;
+              case MessageEntity.CUSTOM_EMOJI:
+                entityText =
+                    message.entityOf(entityType)?.custom_emoji_id ?? '';
                 break;
               default: // Dynamically listen to message types.
                 entityText = message.getEntity(entityType) ?? '';
