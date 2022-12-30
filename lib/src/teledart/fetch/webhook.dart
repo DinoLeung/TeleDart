@@ -96,8 +96,8 @@ class Webhook extends AbstractUpdateFetcher {
         secret_token: secret_token);
   }
 
-  static Future<Webhook> createHttpsWebhok(Telegram telegram, String url,
-      String secretPath, io.File certificate, io.File privateKey,
+  static Future<Webhook> createHttpsWebhok(
+      Telegram telegram, String url, io.File certificate, io.File privateKey,
       {String? ip_address,
       int port = 80,
       int? serverPort,
