@@ -2123,6 +2123,22 @@ class Telegram {
         await HttpClient.httpPost(requestUrl, body: body));
   }
 
+  /// Use this method to get information about custom emoji stickers by their identifiers.
+  ///
+  /// Returns an Array of [Sticker] objects.
+  ///
+  /// https://core.telegram.org/bots/api#getcustomemojistickers
+  Future<List<Sticker>> getCustomEmojiStickers(
+      List<String> custom_emoji_ids) async {
+    var requestUrl = _apiUri('getCustomEmojiStickers');
+    var body = <String, dynamic>{
+      'custom_emoji_ids': jsonEncode(custom_emoji_ids)
+    };
+    return (await HttpClient.httpPost(requestUrl, body: body))
+        .map<Sticker>((sticker) => Sticker.fromJson(sticker))
+        .toList();
+  }
+
   /// Use this method to upload a .png file with a sticker for later use in
   /// *createNewStickerSet* and *addStickerToSet* methods (can be used multiple times)
   ///
