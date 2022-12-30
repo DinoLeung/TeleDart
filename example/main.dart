@@ -16,10 +16,10 @@ Future<void> main() async {
   // var webhook = await Webhook.createHttpsWebhok(
   //     Telegram(envVars['BOT_TOKEN']!),
   //     envVars['HOST_URL']!,
-  //     envVars['BOT_TOKEN']!,
   //     io.File(envVars['CERT_PATH']!),
   //     io.File(envVars['KEY_PATH']!),
-  //     port: int.parse(envVars['BOT_PORT']!));
+  //     port: int.parse(envVars['BOT_PORT']!),
+  //     secret_token: envVars['SECRET_TOKEN']!);
   // var teledart = TeleDart(envVars['BOT_TOKEN']!, Event(username!), fetcher: webhook);
 
   teledart.start();
@@ -30,8 +30,7 @@ Future<void> main() async {
 
   // Sick of boilerplates? Reply messages like below, nice and tidy
   // Short hands also available for answer query methods
-  teledart.onCommand('glory')
-    .listen((message) => message.reply('to Ukraine!'));
+  teledart.onCommand('glory').listen((message) => message.reply('to Ukraine!'));
 
   // You can also utilise regular expressions
   teledart

@@ -4,7 +4,7 @@ A clean implementation of [Telegram bot API](https://core.telegram.org/bots/api)
 
 ![TeleDart](https://raw.githubusercontent.com/DinoLeung/TeleDart/master/example/dash_paper_plane.svg?sanitize=true)
 
-[![Bot API Version](https://img.shields.io/badge/Bot%20API-5.7-blue.svg?style=flat-square)](https://core.telegram.org/bots/api)
+[![Bot API Version](https://img.shields.io/badge/Bot%20API-6.3-blue.svg?style=flat-square)](https://core.telegram.org/bots/api)
 [![Dart Version](https://img.shields.io/badge/Dart-2.14-blue.svg?style=flat-square)](https://dart.dev)
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg?style=flat-square)](https://www.gnu.org/licenses/gpl-3.0)
 
