@@ -25,17 +25,17 @@ part of '../model.dart';
 class StickerSet {
   String name;
   String title;
+  String sticker_type;
   bool is_animated;
   bool is_video;
-  bool contains_masks;
   List<Sticker> stickers;
   PhotoSize? thumb;
   StickerSet({
     required this.name,
     required this.title,
+    required this.sticker_type,
     required this.is_animated,
     required this.is_video,
-    required this.contains_masks,
     required this.stickers,
     this.thumb,
   });
