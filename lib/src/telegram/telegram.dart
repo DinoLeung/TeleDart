@@ -2171,7 +2171,7 @@ class Telegram {
       {dynamic png_sticker,
       io.File? tgs_sticker,
       io.File? webm_sticker,
-      bool? contains_masks,
+      String? sticker_type,
       MaskPosition? mask_position}) async {
     var requestUrl = _apiUri('createNewStickerSet');
     var botInfo = await getMe();
@@ -2180,7 +2180,7 @@ class Telegram {
       'name': '${name}_by_${botInfo.username}',
       'title': title,
       'emojis': emojis,
-      'contains_masks': contains_masks,
+      'sticker_type': sticker_type,
       'mask_position': mask_position == null ? null : jsonEncode(mask_position),
     };
 
