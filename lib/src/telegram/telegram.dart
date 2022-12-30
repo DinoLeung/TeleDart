@@ -1795,9 +1795,9 @@ class Telegram {
   }
 
   /// Use this method to change the bot's menu button in a private chat, or the default menu button.
-  /// 
+  ///
   /// Returns *True* on success.
-  /// 
+  ///
   /// https://core.telegram.org/bots/api#setchatmenubutton
   Future<bool> setChatMenuButton(int? chat_id, MenuButton? menu_button) async {
     var requestUrl = _apiUri('setChatMenuButton');
@@ -1807,27 +1807,29 @@ class Telegram {
     };
     return await HttpClient.httpPost(requestUrl, body: body);
   }
-  
+
   /// Use this method to get the current value of the bot's menu button in a private chat, or the default menu button.
-  /// 
+  ///
   /// Returns [MenuButton] on success.
-  /// 
+  ///
   /// https://core.telegram.org/bots/api#getchatmenubutton
   Future<MenuButton> getChatMenuButton(int? chat_id) async {
     var requestUrl = _apiUri('getChatMenuButton');
     var body = <String, dynamic>{
       'chat_id': chat_id,
     };
-    return MenuButton.fromJson(await HttpClient.httpPost(requestUrl, body: body));
+    return MenuButton.fromJson(
+        await HttpClient.httpPost(requestUrl, body: body));
   }
 
   /// Use this method to change the default administrator rights requested by the bot when it's added as an administrator to groups or channels.
   /// These rights will be suggested to users, but they are are free to modify the list before adding the bot.
-  /// 
+  ///
   /// Returns *True* on success.
   ///
   /// https://core.telegram.org/bots/api#setmydefaultadministratorrights
-  Future<bool> setMyDefaultAdministratorRights(ChatAdministratorRights? rights, bool? for_channels) async {
+  Future<bool> setMyDefaultAdministratorRights(
+      ChatAdministratorRights? rights, bool? for_channels) async {
     var requestUrl = _apiUri('setMyDefaultAdministratorRights');
     var body = <String, dynamic>{
       'rights': rights == null ? null : jsonEncode(rights),
@@ -1837,16 +1839,18 @@ class Telegram {
   }
 
   /// Use this method to get the current default administrator rights of the bot.
-  /// 
+  ///
   /// Returns [ChatAdministratorRights] on success.
-  /// 
+  ///
   /// https://core.telegram.org/bots/api#getmydefaultadministratorrights
-  Future<ChatAdministratorRights> getMyDefaultAdministratorRights(bool? for_channels) async {
+  Future<ChatAdministratorRights> getMyDefaultAdministratorRights(
+      bool? for_channels) async {
     var requestUrl = _apiUri('getMyDefaultAdministratorRights');
     var body = <String, dynamic>{
       'for_channels': for_channels,
     };
-    return ChatAdministratorRights.fromJson(await HttpClient.httpPost(requestUrl, body: body));
+    return ChatAdministratorRights.fromJson(
+        await HttpClient.httpPost(requestUrl, body: body));
   }
 
   /// Use this method to edit text and [Game] messages sent by the bot or via the bot
@@ -2168,14 +2172,19 @@ class Telegram {
     } else if (png_sticker is String) {
       body.addAll({'png_sticker': png_sticker});
       return await HttpClient.httpPost(requestUrl, body: body);
-    } else if (png_sticker is io.File || tgs_sticker != null || webm_sticker != null ) {
+    } else if (png_sticker is io.File ||
+        tgs_sticker != null ||
+        webm_sticker != null) {
       var file = png_sticker ?? tgs_sticker ?? webm_sticker;
-      var fieldName = png_sticker != null ? 'png_sticker' : tgs_sticker != null ? 'tgs_sticker' : 'webm_sticker';
+      var fieldName = png_sticker != null
+          ? 'png_sticker'
+          : tgs_sticker != null
+              ? 'tgs_sticker'
+              : 'webm_sticker';
       // filename cannot be empty to post to Telegram server
       var files = List<MultipartFile>.filled(
           1,
-          MultipartFile(
-              fieldName, file.openRead(), file.lengthSync(),
+          MultipartFile(fieldName, file.openRead(), file.lengthSync(),
               filename: '${file.lengthSync()}'));
       return await HttpClient.httpMultipartPost(requestUrl, files, body: body);
     } else {
@@ -2213,14 +2222,19 @@ class Telegram {
     } else if (png_sticker is String) {
       body.addAll({'png_sticker': png_sticker});
       return await HttpClient.httpPost(requestUrl, body: body);
-    } else if (png_sticker is io.File || tgs_sticker != null || webm_sticker != null ) {
+    } else if (png_sticker is io.File ||
+        tgs_sticker != null ||
+        webm_sticker != null) {
       var file = png_sticker ?? tgs_sticker ?? webm_sticker;
-      var fieldName = png_sticker != null ? 'png_sticker' : tgs_sticker != null ? 'tgs_sticker' : 'webm_sticker';
+      var fieldName = png_sticker != null
+          ? 'png_sticker'
+          : tgs_sticker != null
+              ? 'tgs_sticker'
+              : 'webm_sticker';
       // filename cannot be empty to post to Telegram server
       var files = List<MultipartFile>.filled(
           1,
-          MultipartFile(
-              fieldName, file.openRead(), file.lengthSync(),
+          MultipartFile(fieldName, file.openRead(), file.lengthSync(),
               filename: '${file.lengthSync()}'));
       return await HttpClient.httpMultipartPost(requestUrl, files, body: body);
     } else {
@@ -2313,11 +2327,12 @@ class Telegram {
 
   /// Use this method to set the result of an interaction with a [Web App] and send a corresponding
   /// message on behalf of the user to the chat from which the query originated.
-  /// 
+  ///
   /// On success, a [SentWebAppMessage] object is returned.
-  /// 
+  ///
   /// https://core.telegram.org/bots/api#answerwebappquery
-  Future<SentWebAppMessage> answerWebAppQuery(String web_app_query_id, InlineQueryResult result) async {
+  Future<SentWebAppMessage> answerWebAppQuery(
+      String web_app_query_id, InlineQueryResult result) async {
     var requestUrl = _apiUri('answerWebAppQuery');
     var body = <String, dynamic>{
       'web_app_query_id': web_app_query_id,
@@ -2396,6 +2411,35 @@ class Telegram {
       'reply_markup': reply_markup == null ? null : jsonEncode(reply_markup),
     };
     return Message.fromJson(await HttpClient.httpPost(requestUrl, body: body));
+  }
+
+  /// Use this method to create a link for an invoice.
+  ///
+  /// Returns the created invoice link as *String* on success
+  Future<String> createInvoiceLink(
+      String title,
+      String description,
+      String payload,
+      String provider_token,
+      String currency,
+      List<LabeledPrice> prices,
+      {int? max_tip_amount,
+      List<int>? suggested_tip_amounts,
+      String? provider_data,
+      String? photo_url,
+      int? photo_size,
+      int? photo_width,
+      int? photo_height,
+      bool? need_name,
+      bool? need_phone_number,
+      bool? need_email,
+      bool? need_shipping_address,
+      bool? send_phone_number_to_provider,
+      bool? send_email_to_provider,
+      bool? is_flexible}) async {
+    var requestUrl = _apiUri('createInvoiceLink');
+    var body = <String, dynamic>{};
+    return await HttpClient.httpPost(requestUrl, body: body);
   }
 
   /// Use this method to reply to shipping queries.
