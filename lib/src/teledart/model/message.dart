@@ -89,11 +89,12 @@ class TeleDartMessage extends Message {
           connected_website: message.connected_website,
           passport_data: message.passport_data,
           proximity_alert_triggered: message.proximity_alert_triggered,
-          voice_chat_scheduled: message.voice_chat_scheduled,
-          voice_chat_started: message.voice_chat_started,
-          voice_chat_ended: message.voice_chat_ended,
-          voice_chat_participants_invited:
-              message.voice_chat_participants_invited,
+          video_chat_scheduled: message.video_chat_scheduled,
+          video_chat_started: message.video_chat_started,
+          video_chat_ended: message.video_chat_ended,
+          video_chat_participants_invited:
+              message.video_chat_participants_invited,
+          web_app_data: message.web_app_data,
           reply_markup: message.reply_markup,
         );
 

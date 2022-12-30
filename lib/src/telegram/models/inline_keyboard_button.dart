@@ -27,8 +27,9 @@ part of '../model.dart';
 class InlineKeyboardButton {
   String text;
   String? url;
-  LoginUrl? login_url;
   String? callback_data;
+  WebAppInfo? web_app;
+  LoginUrl? login_url;
   String? switch_inline_query;
   String? switch_inline_query_current_chat;
   CallbackGame? callback_game;
@@ -36,8 +37,9 @@ class InlineKeyboardButton {
   InlineKeyboardButton({
     required this.text,
     this.url,
-    this.login_url,
     this.callback_data,
+    this.web_app,
+    this.login_url,
     this.switch_inline_query,
     this.switch_inline_query_current_chat,
     this.callback_game,

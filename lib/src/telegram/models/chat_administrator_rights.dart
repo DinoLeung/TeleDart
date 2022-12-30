@@ -1,6 +1,6 @@
 /*
  * TeleDart - Telegram Bot API for Dart
- * Copyright (C) 2021  Dino PH Leung
+ * Copyright (C) 2022  Dino PH Leung
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,18 +18,12 @@
 
 part of '../model.dart';
 
-/// Represents a [chat member] that has some additional privileges.
+/// Represents the rights of an administrator in a chat.
 ///
-/// https://core.telegram.org/bots/api#chatmemberadministrator
-///
-/// [chat member]: https://core.telegram.org/bots/api#chatmember
+/// https://core.telegram.org/bots/api#chatadministratorrights
+
 @JsonSerializable()
-class ChatMemberAdministrator implements ChatMember {
-  @override
-  String status;
-  @override
-  User user;
-  bool can_be_edited;
+class ChatAdministratorRights {
   bool is_anonymous;
   bool can_manage_chat;
   bool can_delete_messages;
@@ -41,12 +35,9 @@ class ChatMemberAdministrator implements ChatMember {
   bool? can_post_messages;
   bool? can_edit_messages;
   bool? can_pin_messages;
-  String? custom_title;
+  bool? can_manage_topics;
 
-  ChatMemberAdministrator({
-    required this.status,
-    required this.user,
-    this.can_be_edited = false,
+  ChatAdministratorRights({
     this.is_anonymous = false,
     this.can_manage_chat = false,
     this.can_delete_messages = false,
@@ -58,11 +49,10 @@ class ChatMemberAdministrator implements ChatMember {
     this.can_post_messages,
     this.can_edit_messages,
     this.can_pin_messages,
-    this.custom_title,
+    this.can_manage_topics,
   });
-
-  factory ChatMemberAdministrator.fromJson(Map<String, dynamic> json) =>
-      _$ChatMemberAdministratorFromJson(json);
-  @override
-  Map<String, dynamic> toJson() => _$ChatMemberAdministratorToJson(this);
+  
+  factory ChatAdministratorRights.fromJson(Map<String, dynamic> json) =>
+      _$ChatAdministratorRightsFromJson(json);
+  Map<String, dynamic> toJson() => _$ChatAdministratorRightsToJson(this);
 }

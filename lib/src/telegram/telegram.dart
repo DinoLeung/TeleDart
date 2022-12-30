@@ -1173,7 +1173,7 @@ class Telegram {
       bool? can_post_messages,
       bool? can_edit_messages,
       bool? can_delete_messages,
-      bool? can_manage_voice_chats,
+      bool? can_manage_video_chats,
       bool? can_restrict_members,
       bool? can_promote_members,
       bool? can_change_info,
@@ -1192,7 +1192,7 @@ class Telegram {
       'can_post_messages': can_post_messages,
       'can_edit_messages': can_edit_messages,
       'can_delete_messages': can_delete_messages,
-      'can_manage_voice_chats': can_manage_voice_chats,
+      'can_manage_video_chats': can_manage_video_chats,
       'can_restrict_members': can_restrict_members,
       'can_promote_members': can_promote_members,
       'can_change_info': can_change_info,
@@ -1794,6 +1794,61 @@ class Telegram {
         .toList();
   }
 
+  /// Use this method to change the bot's menu button in a private chat, or the default menu button.
+  /// 
+  /// Returns *True* on success.
+  /// 
+  /// https://core.telegram.org/bots/api#setchatmenubutton
+  Future<bool> setChatMenuButton(int? chat_id, MenuButton? menu_button) async {
+    var requestUrl = _apiUri('setChatMenuButton');
+    var body = <String, dynamic>{
+      'chat_id': chat_id,
+      'menu_button': jsonEncode(menu_button),
+    };
+    return await HttpClient.httpPost(requestUrl, body: body);
+  }
+  
+  /// Use this method to get the current value of the bot's menu button in a private chat, or the default menu button.
+  /// 
+  /// Returns [MenuButton] on success.
+  /// 
+  /// https://core.telegram.org/bots/api#getchatmenubutton
+  Future<MenuButton> getChatMenuButton(int? chat_id) async {
+    var requestUrl = _apiUri('getChatMenuButton');
+    var body = <String, dynamic>{
+      'chat_id': chat_id,
+    };
+    return MenuButton.fromJson(await HttpClient.httpPost(requestUrl, body: body));
+  }
+
+  /// Use this method to change the default administrator rights requested by the bot when it's added as an administrator to groups or channels.
+  /// These rights will be suggested to users, but they are are free to modify the list before adding the bot.
+  /// 
+  /// Returns *True* on success.
+  ///
+  /// https://core.telegram.org/bots/api#setmydefaultadministratorrights
+  Future<bool> setMyDefaultAdministratorRights(ChatAdministratorRights? rights, bool? for_channels) async {
+    var requestUrl = _apiUri('setMyDefaultAdministratorRights');
+    var body = <String, dynamic>{
+      'rights': rights == null ? null : jsonEncode(rights),
+      'for_channels': for_channels,
+    };
+    return await HttpClient.httpPost(requestUrl, body: body);
+  }
+
+  /// Use this method to get the current default administrator rights of the bot.
+  /// 
+  /// Returns [ChatAdministratorRights] on success.
+  /// 
+  /// https://core.telegram.org/bots/api#getmydefaultadministratorrights
+  Future<ChatAdministratorRights> getMyDefaultAdministratorRights(bool? for_channels) async {
+    var requestUrl = _apiUri('getMyDefaultAdministratorRights');
+    var body = <String, dynamic>{
+      'for_channels': for_channels,
+    };
+    return ChatAdministratorRights.fromJson(await HttpClient.httpPost(requestUrl, body: body));
+  }
+
   /// Use this method to edit text and [Game] messages sent by the bot or via the bot
   /// (for [inline bots]).
   ///
@@ -2252,6 +2307,21 @@ class Telegram {
       'next_offset': next_offset,
       'switch_pm_text': switch_pm_text,
       'switch_pm_parameter': switch_pm_parameter,
+    };
+    return await HttpClient.httpPost(requestUrl, body: body);
+  }
+
+  /// Use this method to set the result of an interaction with a [Web App] and send a corresponding
+  /// message on behalf of the user to the chat from which the query originated.
+  /// 
+  /// On success, a [SentWebAppMessage] object is returned.
+  /// 
+  /// https://core.telegram.org/bots/api#answerwebappquery
+  Future<SentWebAppMessage> answerWebAppQuery(String web_app_query_id, InlineQueryResult result) async {
+    var requestUrl = _apiUri('answerWebAppQuery');
+    var body = <String, dynamic>{
+      'web_app_query_id': web_app_query_id,
+      'result': jsonEncode(result),
     };
     return await HttpClient.httpPost(requestUrl, body: body);
   }
