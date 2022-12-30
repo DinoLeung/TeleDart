@@ -24,6 +24,7 @@ part of '../model.dart';
 @JsonSerializable()
 class Message {
   int message_id;
+  int? message_thread_id;
   User? from;
   Chat? sender_chat;
   int date;
@@ -34,6 +35,7 @@ class Message {
   String? forward_signature;
   String? forward_sender_name;
   int? forward_date;
+  bool? is_topic_message;
   bool? is_automatic_forward;
   Message? reply_to_message;
   User? via_bot;
@@ -76,6 +78,9 @@ class Message {
   String? connected_website;
   PassportData? passport_data;
   ProximityAlertTriggered? proximity_alert_triggered;
+  ForumTopicCreated? forum_topic_created;
+  ForumTopicClosed? forum_topic_closed;
+  ForumTopicReopened? forum_topic_reopened;
   VoiceChatScheduled? video_chat_scheduled;
   VoiceChatStarted? video_chat_started;
   VoiceChatEnded? video_chat_ended;
@@ -85,6 +90,7 @@ class Message {
 
   Message({
     required this.message_id,
+    this.message_thread_id,
     this.from,
     this.sender_chat,
     required this.date,
@@ -95,6 +101,7 @@ class Message {
     this.forward_signature,
     this.forward_sender_name,
     this.forward_date,
+    this.is_topic_message,
     this.is_automatic_forward,
     this.reply_to_message,
     this.via_bot,
@@ -137,6 +144,9 @@ class Message {
     this.connected_website,
     this.passport_data,
     this.proximity_alert_triggered,
+    this.forum_topic_created,
+    this.forum_topic_closed,
+    this.forum_topic_reopened,
     this.video_chat_scheduled,
     this.video_chat_started,
     this.video_chat_ended,

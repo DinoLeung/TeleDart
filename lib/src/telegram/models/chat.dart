@@ -34,6 +34,7 @@ class Chat {
   String? username;
   String? first_name;
   String? last_name;
+  bool? is_forum;
   ChatPhoto? photo;
   String? bio;
   bool? has_private_forwards;
@@ -57,6 +58,7 @@ class Chat {
     this.username,
     this.first_name,
     this.last_name,
+    this.is_forum,
     this.photo,
     this.bio,
     this.has_private_forwards,

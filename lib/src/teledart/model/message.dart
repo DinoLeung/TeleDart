@@ -36,6 +36,7 @@ class TeleDartMessage extends Message {
   TeleDartMessage(this._teledart, Message message)
       : super(
           message_id: message.message_id,
+          message_thread_id: message.message_thread_id,
           from: message.from,
           date: message.date,
           sender_chat: message.sender_chat,
@@ -46,6 +47,7 @@ class TeleDartMessage extends Message {
           forward_signature: message.forward_signature,
           forward_sender_name: message.forward_sender_name,
           forward_date: message.forward_date,
+          is_topic_message: message.is_topic_message,
           is_automatic_forward: message.is_automatic_forward,
           reply_to_message: message.reply_to_message,
           via_bot: message.via_bot,
@@ -89,6 +91,9 @@ class TeleDartMessage extends Message {
           connected_website: message.connected_website,
           passport_data: message.passport_data,
           proximity_alert_triggered: message.proximity_alert_triggered,
+          forum_topic_created: message.forum_topic_created,
+          forum_topic_closed: message.forum_topic_closed,
+          forum_topic_reopened: message.forum_topic_reopened,
           video_chat_scheduled: message.video_chat_scheduled,
           video_chat_started: message.video_chat_started,
           video_chat_ended: message.video_chat_ended,
