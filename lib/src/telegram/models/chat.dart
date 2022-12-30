@@ -34,7 +34,10 @@ class Chat {
   String? username;
   String? first_name;
   String? last_name;
+  bool? is_forum;
   ChatPhoto? photo;
+  List<String>? active_usernames;
+  String? emoji_status_custom_emoji_id;
   String? bio;
   bool? has_private_forwards;
   bool? has_restricted_voice_and_video_messages;
@@ -50,6 +53,7 @@ class Chat {
   bool? can_set_sticker_set;
   int? linked_chat_id;
   ChatLocation? location;
+
   Chat({
     required this.id,
     required this.type,
@@ -57,7 +61,10 @@ class Chat {
     this.username,
     this.first_name,
     this.last_name,
+    this.is_forum,
     this.photo,
+    this.active_usernames,
+    this.emoji_status_custom_emoji_id,
     this.bio,
     this.has_private_forwards,
     this.has_restricted_voice_and_video_messages,
@@ -74,6 +81,7 @@ class Chat {
     this.linked_chat_id,
     this.location,
   });
+
   factory Chat.fromJson(Map<String, dynamic> json) => _$ChatFromJson(json);
   Map<String, dynamic> toJson() => _$ChatToJson(this);
 }

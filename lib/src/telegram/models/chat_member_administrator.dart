@@ -41,6 +41,7 @@ class ChatMemberAdministrator implements ChatMember {
   bool? can_post_messages;
   bool? can_edit_messages;
   bool? can_pin_messages;
+  bool? can_manage_topics;
   String? custom_title;
 
   ChatMemberAdministrator({
@@ -58,6 +59,7 @@ class ChatMemberAdministrator implements ChatMember {
     this.can_post_messages,
     this.can_edit_messages,
     this.can_pin_messages,
+    this.can_manage_topics,
     this.custom_title,
   });
 

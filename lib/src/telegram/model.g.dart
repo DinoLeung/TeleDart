@@ -391,6 +391,7 @@ ChatMemberAdministrator _$ChatMemberAdministratorFromJson(
       can_post_messages: json['can_post_messages'] as bool?,
       can_edit_messages: json['can_edit_messages'] as bool?,
       can_pin_messages: json['can_pin_messages'] as bool?,
+      can_manage_topics: json['can_manage_topics'] as bool?,
       custom_title: json['custom_title'] as String?,
     );
 
@@ -419,6 +420,7 @@ Map<String, dynamic> _$ChatMemberAdministratorToJson(
   writeNotNull('can_post_messages', instance.can_post_messages);
   writeNotNull('can_edit_messages', instance.can_edit_messages);
   writeNotNull('can_pin_messages', instance.can_pin_messages);
+  writeNotNull('can_manage_topics', instance.can_manage_topics);
   writeNotNull('custom_title', instance.custom_title);
   return val;
 }
@@ -495,6 +497,7 @@ ChatMemberRestricted _$ChatMemberRestrictedFromJson(
       can_change_info: json['can_change_info'] as bool? ?? false,
       can_invite_users: json['can_invite_users'] as bool? ?? false,
       can_pin_messages: json['can_pin_messages'] as bool? ?? false,
+      can_manage_topics: json['can_manage_topics'] as bool? ?? false,
       can_send_messages: json['can_send_messages'] as bool? ?? false,
       can_send_media_messages:
           json['can_send_media_messages'] as bool? ?? false,
@@ -515,6 +518,7 @@ Map<String, dynamic> _$ChatMemberRestrictedToJson(
       'can_change_info': instance.can_change_info,
       'can_invite_users': instance.can_invite_users,
       'can_pin_messages': instance.can_pin_messages,
+      'can_manage_topics': instance.can_manage_topics,
       'can_send_messages': instance.can_send_messages,
       'can_send_media_messages': instance.can_send_media_messages,
       'can_send_polls': instance.can_send_polls,
@@ -584,6 +588,7 @@ ChatPermissions _$ChatPermissionsFromJson(Map<String, dynamic> json) =>
       can_change_info: json['can_change_info'] as bool?,
       can_invite_users: json['can_invite_users'] as bool?,
       can_pin_messages: json['can_pin_messages'] as bool?,
+      can_manage_topics: json['can_manage_topics'] as bool?,
     );
 
 Map<String, dynamic> _$ChatPermissionsToJson(ChatPermissions instance) {
@@ -603,6 +608,7 @@ Map<String, dynamic> _$ChatPermissionsToJson(ChatPermissions instance) {
   writeNotNull('can_change_info', instance.can_change_info);
   writeNotNull('can_invite_users', instance.can_invite_users);
   writeNotNull('can_pin_messages', instance.can_pin_messages);
+  writeNotNull('can_manage_topics', instance.can_manage_topics);
   return val;
 }
 
@@ -627,6 +633,7 @@ Chat _$ChatFromJson(Map<String, dynamic> json) => Chat(
       username: json['username'] as String?,
       first_name: json['first_name'] as String?,
       last_name: json['last_name'] as String?,
+      is_forum: json['is_forum'] as bool?,
       photo: json['photo'] == null
           ? null
           : ChatPhoto.fromJson(json['photo'] as Map<String, dynamic>),
@@ -671,6 +678,7 @@ Map<String, dynamic> _$ChatToJson(Chat instance) {
   writeNotNull('username', instance.username);
   writeNotNull('first_name', instance.first_name);
   writeNotNull('last_name', instance.last_name);
+  writeNotNull('is_forum', instance.is_forum);
   writeNotNull('photo', instance.photo?.toJson());
   writeNotNull('bio', instance.bio);
   writeNotNull('has_private_forwards', instance.has_private_forwards);
@@ -895,6 +903,65 @@ Map<String, dynamic> _$ForceReplyToJson(ForceReply instance) {
 
   writeNotNull('input_field_placeholder', instance.input_field_placeholder);
   writeNotNull('selective', instance.selective);
+  return val;
+}
+
+ForumTopicClosed _$ForumTopicClosedFromJson(Map<String, dynamic> json) =>
+    ForumTopicClosed();
+
+Map<String, dynamic> _$ForumTopicClosedToJson(ForumTopicClosed instance) =>
+    <String, dynamic>{};
+
+ForumTopicCreated _$ForumTopicCreatedFromJson(Map<String, dynamic> json) =>
+    ForumTopicCreated(
+      name: json['name'] as String,
+      icon_color: json['icon_color'] as int,
+      icon_custom_emoji_id: json['icon_custom_emoji_id'] as String?,
+    );
+
+Map<String, dynamic> _$ForumTopicCreatedToJson(ForumTopicCreated instance) {
+  final val = <String, dynamic>{
+    'name': instance.name,
+    'icon_color': instance.icon_color,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('icon_custom_emoji_id', instance.icon_custom_emoji_id);
+  return val;
+}
+
+ForumTopicReopened _$ForumTopicReopenedFromJson(Map<String, dynamic> json) =>
+    ForumTopicReopened();
+
+Map<String, dynamic> _$ForumTopicReopenedToJson(ForumTopicReopened instance) =>
+    <String, dynamic>{};
+
+ForumTopic _$ForumTopicFromJson(Map<String, dynamic> json) => ForumTopic(
+      message_thread_id: json['message_thread_id'] as String,
+      name: json['name'] as String,
+      icon_color: json['icon_color'] as int,
+      icon_custom_emoji_id: json['icon_custom_emoji_id'] as String?,
+    );
+
+Map<String, dynamic> _$ForumTopicToJson(ForumTopic instance) {
+  final val = <String, dynamic>{
+    'message_thread_id': instance.message_thread_id,
+    'name': instance.name,
+    'icon_color': instance.icon_color,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('icon_custom_emoji_id', instance.icon_custom_emoji_id);
   return val;
 }
 
@@ -2702,6 +2769,7 @@ Map<String, dynamic> _$MessageIdToJson(MessageId instance) => <String, dynamic>{
 
 Message _$MessageFromJson(Map<String, dynamic> json) => Message(
       message_id: json['message_id'] as int,
+      message_thread_id: json['message_thread_id'] as int?,
       from: json['from'] == null
           ? null
           : User.fromJson(json['from'] as Map<String, dynamic>),
@@ -2720,6 +2788,7 @@ Message _$MessageFromJson(Map<String, dynamic> json) => Message(
       forward_signature: json['forward_signature'] as String?,
       forward_sender_name: json['forward_sender_name'] as String?,
       forward_date: json['forward_date'] as int?,
+      is_topic_message: json['is_topic_message'] as bool?,
       is_automatic_forward: json['is_automatic_forward'] as bool?,
       reply_to_message: json['reply_to_message'] == null
           ? null
@@ -2822,6 +2891,18 @@ Message _$MessageFromJson(Map<String, dynamic> json) => Message(
           ? null
           : ProximityAlertTriggered.fromJson(
               json['proximity_alert_triggered'] as Map<String, dynamic>),
+      forum_topic_created: json['forum_topic_created'] == null
+          ? null
+          : ForumTopicCreated.fromJson(
+              json['forum_topic_created'] as Map<String, dynamic>),
+      forum_topic_closed: json['forum_topic_closed'] == null
+          ? null
+          : ForumTopicClosed.fromJson(
+              json['forum_topic_closed'] as Map<String, dynamic>),
+      forum_topic_reopened: json['forum_topic_reopened'] == null
+          ? null
+          : ForumTopicReopened.fromJson(
+              json['forum_topic_reopened'] as Map<String, dynamic>),
       video_chat_scheduled: json['video_chat_scheduled'] == null
           ? null
           : VoiceChatScheduled.fromJson(
@@ -2860,6 +2941,7 @@ Map<String, dynamic> _$MessageToJson(Message instance) {
     }
   }
 
+  writeNotNull('message_thread_id', instance.message_thread_id);
   writeNotNull('from', instance.from?.toJson());
   writeNotNull('sender_chat', instance.sender_chat?.toJson());
   val['date'] = instance.date;
@@ -2870,6 +2952,7 @@ Map<String, dynamic> _$MessageToJson(Message instance) {
   writeNotNull('forward_signature', instance.forward_signature);
   writeNotNull('forward_sender_name', instance.forward_sender_name);
   writeNotNull('forward_date', instance.forward_date);
+  writeNotNull('is_topic_message', instance.is_topic_message);
   writeNotNull('is_automatic_forward', instance.is_automatic_forward);
   writeNotNull('reply_to_message', instance.reply_to_message?.toJson());
   writeNotNull('via_bot', instance.via_bot?.toJson());
@@ -2917,6 +3000,9 @@ Map<String, dynamic> _$MessageToJson(Message instance) {
   writeNotNull('passport_data', instance.passport_data?.toJson());
   writeNotNull('proximity_alert_triggered',
       instance.proximity_alert_triggered?.toJson());
+  writeNotNull('forum_topic_created', instance.forum_topic_created?.toJson());
+  writeNotNull('forum_topic_closed', instance.forum_topic_closed?.toJson());
+  writeNotNull('forum_topic_reopened', instance.forum_topic_reopened?.toJson());
   writeNotNull('video_chat_scheduled', instance.video_chat_scheduled?.toJson());
   writeNotNull('video_chat_started', instance.video_chat_started?.toJson());
   writeNotNull('video_chat_ended', instance.video_chat_ended?.toJson());

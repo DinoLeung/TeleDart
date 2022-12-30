@@ -36,6 +36,7 @@ class TeleDartMessage extends Message {
   TeleDartMessage(this._teledart, Message message)
       : super(
           message_id: message.message_id,
+          message_thread_id: message.message_thread_id,
           from: message.from,
           date: message.date,
           sender_chat: message.sender_chat,
@@ -46,6 +47,7 @@ class TeleDartMessage extends Message {
           forward_signature: message.forward_signature,
           forward_sender_name: message.forward_sender_name,
           forward_date: message.forward_date,
+          is_topic_message: message.is_topic_message,
           is_automatic_forward: message.is_automatic_forward,
           reply_to_message: message.reply_to_message,
           via_bot: message.via_bot,
@@ -89,6 +91,9 @@ class TeleDartMessage extends Message {
           connected_website: message.connected_website,
           passport_data: message.passport_data,
           proximity_alert_triggered: message.proximity_alert_triggered,
+          forum_topic_created: message.forum_topic_created,
+          forum_topic_closed: message.forum_topic_closed,
+          forum_topic_reopened: message.forum_topic_reopened,
           video_chat_scheduled: message.video_chat_scheduled,
           video_chat_started: message.video_chat_started,
           video_chat_ended: message.video_chat_ended,
@@ -111,6 +116,7 @@ class TeleDartMessage extends Message {
   /// for more information about those options.**
   Future<Message> reply(
     String text, {
+    int? message_thread_id,
     bool withQuote = false,
     String? parse_mode,
     List<MessageEntity>? entities,
@@ -120,6 +126,7 @@ class TeleDartMessage extends Message {
     ReplyMarkup? reply_markup,
   }) =>
       _teledart.sendMessage(chat.id, text,
+          message_thread_id: message_thread_id ?? this.message_thread_id,
           parse_mode: parse_mode,
           entities: entities,
           disable_web_page_preview: disable_web_page_preview,
@@ -141,6 +148,7 @@ class TeleDartMessage extends Message {
   /// for more information about those options.**
   Future<Message> replyPhoto(
     dynamic photo, {
+    int? message_thread_id,
     bool withQuote = false,
     String? caption,
     String? parse_mode,
@@ -150,6 +158,7 @@ class TeleDartMessage extends Message {
     ReplyMarkup? reply_markup,
   }) =>
       _teledart.sendPhoto(chat.id, photo,
+          message_thread_id: message_thread_id ?? this.message_thread_id,
           caption: caption,
           parse_mode: parse_mode,
           caption_entities: caption_entities,
@@ -171,6 +180,7 @@ class TeleDartMessage extends Message {
   /// for more information about those options.**
   Future<Message> replyAudio(
     dynamic audio, {
+    int? message_thread_id,
     bool withQuote = false,
     String? caption,
     String? parse_mode,
@@ -184,6 +194,7 @@ class TeleDartMessage extends Message {
     ReplyMarkup? reply_markup,
   }) =>
       _teledart.sendAudio(chat.id, audio,
+          message_thread_id: message_thread_id ?? this.message_thread_id,
           caption: caption,
           parse_mode: parse_mode,
           caption_entities: caption_entities,
@@ -209,6 +220,7 @@ class TeleDartMessage extends Message {
   /// for more information about those options.**
   Future<Message> replyDocument(
     dynamic document, {
+    int? message_thread_id,
     bool withQuote = false,
     dynamic thumb,
     String? caption,
@@ -219,6 +231,7 @@ class TeleDartMessage extends Message {
     ReplyMarkup? reply_markup,
   }) =>
       _teledart.sendDocument(chat.id, document,
+          message_thread_id: message_thread_id ?? this.message_thread_id,
           thumb: thumb,
           caption: caption,
           parse_mode: parse_mode,
@@ -241,6 +254,7 @@ class TeleDartMessage extends Message {
   /// for more information about those options.**
   Future<Message> replyVideo(
     dynamic video, {
+    int? message_thread_id,
     bool withQuote = false,
     int? duration,
     int? width,
@@ -255,6 +269,7 @@ class TeleDartMessage extends Message {
     ReplyMarkup? reply_markup,
   }) =>
       _teledart.sendVideo(chat.id, video,
+          message_thread_id: message_thread_id ?? this.message_thread_id,
           duration: duration,
           width: width,
           height: height,
@@ -281,6 +296,7 @@ class TeleDartMessage extends Message {
   /// for more information about those options.**
   Future<Message> replyAnimation(
     dynamic animation, {
+    int? message_thread_id,
     bool withQuote = false,
     int? duration,
     int? width,
@@ -294,6 +310,7 @@ class TeleDartMessage extends Message {
     ReplyMarkup? reply_markup,
   }) =>
       _teledart.sendAnimation(chat.id, animation,
+          message_thread_id: message_thread_id ?? this.message_thread_id,
           duration: duration,
           width: width,
           height: height,
@@ -319,6 +336,7 @@ class TeleDartMessage extends Message {
   /// for more information about those options.**
   Future<Message> replyVoice(
     dynamic voice, {
+    int? message_thread_id,
     bool withQuote = false,
     String? caption,
     String? parse_mode,
@@ -328,6 +346,7 @@ class TeleDartMessage extends Message {
     ReplyMarkup? reply_markup,
   }) =>
       _teledart.sendVoice(chat.id, voice,
+          message_thread_id: message_thread_id ?? this.message_thread_id,
           caption: caption,
           parse_mode: parse_mode,
           caption_entities: caption_entities,
@@ -349,6 +368,7 @@ class TeleDartMessage extends Message {
   /// for more information about those options.**
   Future<Message> replyVideoNote(
     dynamic video_note, {
+    int? message_thread_id,
     bool withQuote = false,
     int? duration,
     int? length,
@@ -358,6 +378,7 @@ class TeleDartMessage extends Message {
     ReplyMarkup? reply_markup,
   }) =>
       _teledart.sendVideoNote(chat.id, video_note,
+          message_thread_id: message_thread_id ?? this.message_thread_id,
           duration: duration,
           length: length,
           thumb: thumb,
@@ -379,11 +400,13 @@ class TeleDartMessage extends Message {
   /// for more information about those options.**
   Future<List<Message>> replyMediaGroup(
     List<InputMedia> media, {
+    int? message_thread_id,
     bool withQuote = false,
     bool? disable_notification,
     bool? allow_sending_without_reply,
   }) =>
       _teledart.sendMediaGroup(chat.id, media,
+          message_thread_id: message_thread_id ?? this.message_thread_id,
           disable_notification: disable_notification,
           reply_to_message_id: withQuote ? message_id : null,
           allow_sending_without_reply: allow_sending_without_reply);
@@ -402,6 +425,7 @@ class TeleDartMessage extends Message {
   Future<Message> replyLocation(
     double latitude,
     double longitude, {
+    int? message_thread_id,
     bool withQuote = false,
     double? horizontal_accuracy,
     int? live_period,
@@ -412,6 +436,7 @@ class TeleDartMessage extends Message {
     ReplyMarkup? reply_markup,
   }) =>
       _teledart.sendLocation(chat.id, latitude, longitude,
+          message_thread_id: message_thread_id ?? this.message_thread_id,
           horizontal_accuracy: horizontal_accuracy,
           live_period: live_period,
           heading: heading,
@@ -437,6 +462,7 @@ class TeleDartMessage extends Message {
     double longitude,
     String title,
     String address, {
+    int? message_thread_id,
     bool withQuote = false,
     String? foursquare_id,
     String? foursquare_type,
@@ -447,6 +473,7 @@ class TeleDartMessage extends Message {
     ReplyMarkup? reply_markup,
   }) =>
       _teledart.sendVenue(chat.id, latitude, longitude, title, address,
+          message_thread_id: message_thread_id ?? message_thread_id,
           foursquare_id: foursquare_id,
           foursquare_type: foursquare_type,
           google_place_id: google_place_id,
@@ -470,6 +497,7 @@ class TeleDartMessage extends Message {
   Future<Message> replyContact(
     String phone_number,
     String first_name, {
+    int? message_thread_id,
     bool withQuote = false,
     String? last_name,
     String? vcard,
@@ -478,6 +506,7 @@ class TeleDartMessage extends Message {
     ReplyMarkup? reply_markup,
   }) =>
       _teledart.sendContact(chat.id, phone_number, first_name,
+          message_thread_id: message_thread_id ?? this.message_thread_id,
           last_name: last_name,
           vcard: vcard,
           disable_notification: disable_notification,
@@ -496,22 +525,27 @@ class TeleDartMessage extends Message {
   ///
   /// **Check [Telegram API documentation](https://core.telegram.org/bots/api#sendpoll)
   /// for more information about those options.**
-  Future<Message> replyPoll(String question, List<String> options,
-          {bool withQuote = false,
-          bool? is_anonymous,
-          String? type,
-          bool? allows_multiple_answers,
-          int? correct_option_id,
-          String? explanation,
-          String? explanation_parse_mode,
-          List<MessageEntity>? explanation_entities,
-          int? open_period,
-          int? close_date,
-          bool? is_closed,
-          bool? disable_notification,
-          bool? allow_sending_without_reply,
-          ReplyMarkup? reply_markup}) =>
+  Future<Message> replyPoll(
+    String question,
+    List<String> options, {
+    int? message_thread_id,
+    bool withQuote = false,
+    bool? is_anonymous,
+    String? type,
+    bool? allows_multiple_answers,
+    int? correct_option_id,
+    String? explanation,
+    String? explanation_parse_mode,
+    List<MessageEntity>? explanation_entities,
+    int? open_period,
+    int? close_date,
+    bool? is_closed,
+    bool? disable_notification,
+    bool? allow_sending_without_reply,
+    ReplyMarkup? reply_markup,
+  }) =>
       _teledart.sendPoll(chat.id, question, options,
+          message_thread_id: message_thread_id ?? this.message_thread_id,
           is_anonymous: is_anonymous,
           type: type,
           allows_multiple_answers: allows_multiple_answers,
@@ -537,15 +571,107 @@ class TeleDartMessage extends Message {
   ///
   /// **Check [Telegram API documentation](https://core.telegram.org/bots/api#senddice)
   /// for more information about those options.**
-  Future<Message> replyDice(
-          {bool withQuote = false,
-          String emoji = Dice.DICE,
-          bool? disable_notification,
-          bool? allow_sending_without_reply,
-          ReplyMarkup? reply_markup}) =>
+  Future<Message> replyDice({
+    int? message_thread_id,
+    bool withQuote = false,
+    String emoji = Dice.DICE,
+    bool? disable_notification,
+    bool? allow_sending_without_reply,
+    ReplyMarkup? reply_markup,
+  }) =>
       _teledart.sendDice(chat.id,
+          message_thread_id: message_thread_id ?? this.message_thread_id,
           emoji: emoji,
           disable_notification: disable_notification,
+          reply_to_message_id: withQuote ? message_id : null,
+          allow_sending_without_reply: allow_sending_without_reply,
+          reply_markup: reply_markup);
+
+  /// Reply to the recieved message with an invoice
+  ///
+  /// A wrapper around [TeleDart.replyInvoice].
+  /// On success, returns the sent [Message].
+  ///
+  /// Apart from a [title], a [description], a [payload], a [provider_token] and a list of [prices],
+  /// it can also take some options that control the message appearance and behavior.
+  ///
+  /// **Check [Telegram API documentation](https://core.telegram.org/bots/api#sendinvoice)
+  /// for more information about those options.**
+  Future<Message> replyInvoice(
+    String title,
+    String description,
+    String payload,
+    String provider_token,
+    String currency,
+    List<LabeledPrice> prices, {
+    int? message_thread_id,
+    bool withQuote = false,
+    int? max_tip_amount,
+    List<int>? suggested_tip_amounts,
+    String? start_parameter,
+    String? provider_data,
+    String? photo_url,
+    int? photo_size,
+    int? photo_width,
+    int? photo_height,
+    bool? need_name,
+    bool? need_phone_number,
+    bool? need_email,
+    bool? need_shipping_address,
+    bool? send_phone_number_to_provider,
+    bool? send_email_to_provider,
+    bool? is_flexible,
+    bool? disable_notification,
+    bool? protect_content,
+    bool? allow_sending_without_reply,
+    InlineKeyboardMarkup? reply_markup,
+  }) =>
+      _teledart.sendInvoice(chat.id, title, description, payload,
+          provider_token, currency, prices,
+          message_thread_id: message_thread_id ?? this.message_thread_id,
+          max_tip_amount: max_tip_amount,
+          suggested_tip_amounts: suggested_tip_amounts,
+          start_parameter: start_parameter,
+          provider_data: provider_data,
+          photo_url: photo_url,
+          photo_size: photo_size,
+          photo_width: photo_width,
+          photo_height: photo_height,
+          need_name: need_name,
+          need_phone_number: need_phone_number,
+          need_email: need_email,
+          need_shipping_address: need_shipping_address,
+          send_phone_number_to_provider: send_phone_number_to_provider,
+          send_email_to_provider: send_email_to_provider,
+          is_flexible: is_flexible,
+          disable_notification: disable_notification,
+          protect_content: protect_content,
+          reply_to_message_id: withQuote ? message_id : null,
+          allow_sending_without_reply: allow_sending_without_reply,
+          reply_markup: reply_markup);
+
+  /// Reply to the recieved message with a game
+  ///
+  /// A wrapper around [TeleDart.replyGame].
+  /// On success, returns the sent [Message].
+  ///
+  /// Apart from a [game_short_name], it can also take some options that control the message appearance and behavior.
+  ///
+  /// **Check [Telegram API documentation](https://core.telegram.org/bots/api#sendgame)
+  /// for more information about those options.**
+  Future<Message> replyGame(
+    String game_short_name, {
+    int? message_thread_id,
+    bool withQuote = false,
+    bool? disable_notification,
+    bool? protect_content,
+    bool? allow_sending_without_reply,
+    InlineKeyboardMarkup? reply_markup,
+  }) =>
+      _teledart.sendGame(chat.id, game_short_name,
+          message_thread_id: message_thread_id ?? this.message_thread_id,
+          disable_notification: disable_notification,
+          protect_content: protect_content,
           reply_to_message_id: withQuote ? message_id : null,
           allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
@@ -561,14 +687,72 @@ class TeleDartMessage extends Message {
   ///
   /// **Check [Telegram API documentation](https://core.telegram.org/bots/api#sendsticker)
   /// for more information about those options.**
-  Future<Message> replySticker(dynamic sticker,
-          {bool withQuote = false,
-          bool? disable_notification,
-          bool? allow_sending_without_reply,
-          ReplyMarkup? reply_markup}) =>
+  Future<Message> replySticker(
+    dynamic sticker, {
+    int? message_thread_id,
+    bool withQuote = false,
+    bool? disable_notification,
+    bool? allow_sending_without_reply,
+    ReplyMarkup? reply_markup,
+  }) =>
       _teledart.sendSticker(chat.id, sticker,
+          message_thread_id: message_thread_id ?? this.message_thread_id,
           disable_notification: disable_notification,
           reply_to_message_id: withQuote ? message_id : null,
           allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
+
+  /// Copy the recieved message to a channel or chat.
+  ///
+  /// A wrapper around [TeleDart.copyMessage].
+  /// On success, returns the sent [MessageId].
+  ///
+  /// Apart from a [chat_id] to copy the message to, it can
+  /// also take some options that control the message
+  ///
+  /// **Check [Telegram API documentation](https://core.telegram.org/bots/api#copymessage)
+  /// for more information about those options.**
+  Future<MessageId> copyTo(
+    int chat_id, {
+    int? message_thread_id,
+    int? reply_to_message_id,
+    String? caption,
+    String? parse_mode,
+    List<MessageEntity>? caption_entities,
+    bool? disable_notification,
+    bool? protect_content,
+    bool? allow_sending_without_reply,
+    ReplyMarkup? reply_markup,
+  }) =>
+      _teledart.copyMessage(chat_id, chat.id, message_id,
+          message_thread_id: message_thread_id,
+          caption: caption,
+          parse_mode: parse_mode,
+          caption_entities: caption_entities,
+          disable_notification: disable_notification,
+          protect_content: protect_content,
+          reply_to_message_id: reply_to_message_id,
+          allow_sending_without_reply: allow_sending_without_reply,
+          reply_markup: reply_markup);
+
+  /// Forward the recieved message to a channel or chat.
+  ///
+  /// A wrapper around [TeleDart.forwardMessage].
+  /// On success, returns the sent [Message].
+  ///
+  /// Apart from a [chat_id] to forward the message to, it can
+  /// also take some options that control the message
+  ///
+  /// **Check [Telegram API documentation](https://core.telegram.org/bots/api#forwardmessage)
+  /// for more information about those options.**
+  Future<Message> forwardTo(
+    int chat_id, {
+    int? message_thread_id,
+    bool? disable_notification,
+    bool? protect_content,
+  }) =>
+      _teledart.forwardMessage(chat_id, chat.id, message_id,
+          message_thread_id: message_thread_id,
+          disable_notification: disable_notification,
+          protect_content: protect_content);
 }
