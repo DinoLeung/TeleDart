@@ -32,6 +32,7 @@ class Sticker {
   PhotoSize? thumb;
   String? emoji;
   String? set_name;
+  File? premium_animation;
   MaskPosition? mask_position;
   int? file_size;
   Sticker({
@@ -44,6 +45,7 @@ class Sticker {
     this.thumb,
     this.emoji,
     this.set_name,
+    this.premium_animation,
     this.mask_position,
     this.file_size,
   });

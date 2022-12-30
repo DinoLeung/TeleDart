@@ -29,6 +29,7 @@ class User {
   String? last_name;
   String? username;
   String? language_code;
+  bool? is_premium;
   bool? can_join_groups;
   bool? can_read_all_group_messages;
   bool? supports_inline_queries;
@@ -39,6 +40,7 @@ class User {
     this.last_name,
     this.username,
     this.language_code,
+    this.is_premium,
     this.can_join_groups,
     this.can_read_all_group_messages,
     this.supports_inline_queries,
