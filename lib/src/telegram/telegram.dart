@@ -74,26 +74,27 @@ class Telegram {
   /// specified url, containing a JSON-serialized [Update].
   /// In case of an unsuccessful request, we will give up after a reasonable amount of attempts.
   /// Returns *True* on success.
-  /// If you'd like to make sure that the Webhook request comes from Telegram,
-  /// we recommend using a secret path in the URL, e.g. `https://www.example.com/<token>`.
-  /// Since nobody else knows your bot‘s token, you can be pretty sure it’s us.
+  /// If you'd like to make sure that the webhook was set by you, you can specify secret data in the parameter secret_token.
+  /// If specified, the request will contain a header “X-Telegram-Bot-Api-Secret-Token” with the secret token as content.
   ///
   /// **Notes**
   /// 1. You will not be able to receive updates using [getUpdates] for as long as an outgoing webhook is set up.
   /// 2. To use a self-signed certificate, you need to upload your [public key certificate] using certificate parameter. Please upload as InputFile, sending a String will not work.
   /// 3. Ports currently supported for Webhooks: **443, 80, 88, 8443**.
   ///
-  /// **NEW!** If you're having any trouble setting up webhooks, please check out this amazing guide to Webhooks.
+  /// If you're having any trouble setting up webhooks, please check out this [amazing guide to Webhooks].
   ///
   /// https://core.telegram.org/bots/api#setwebhook
   ///
   /// [public key certificate]: https://core.telegram.org/bots/self-signed
+  /// [amazing guide to Webhooks]: https://core.telegram.org/bots/webhooks
   Future<bool> setWebhook(String url,
       {String? ip_address,
       io.File? certificate,
       int? max_connections,
       List<String>? allowed_updates,
-      bool? drop_pending_updates}) async {
+      bool? drop_pending_updates,
+      String? secret_token}) async {
     var requestUrl = _apiUri('setWebhook');
 
     var body = <String, dynamic>{
@@ -103,6 +104,7 @@ class Telegram {
       'allowed_updates':
           allowed_updates == null ? null : jsonEncode(allowed_updates),
       'drop_pending_updates': drop_pending_updates,
+      'secret_token': secret_token,
     };
     if (certificate != null) {
       // filename cannot be empty to post to Telegram server

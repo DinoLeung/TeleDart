@@ -1,3 +1,9 @@
+## unreleased
+
+- Fixed `TEXT_MENTION` bug when using regex
+- Support API 6.0, 6.1
+- **Breaking** Removed `secretPath` from `webhook` fetcher, should use `secret_token` instead see [setWebhook](https://core.telegram.org/bots/api#setwebhook)
+
 ## 0.3.4
 
 - Webhook to throw error when `setWebhook` failed
@@ -35,6 +41,7 @@
 ## 0.2.1
 
 - Format files to comply with Dart styling guide
+
 ## 0.2.0
 
 - Support API 5.2 and 5.3
@@ -46,7 +53,7 @@
 
 ## 0.1.6
 
-- Fixed `jsonEncode` issue caused by `_nullFilter` fix 
+- Fixed `jsonEncode` issue caused by `_nullFilter` fix
 
 ## 0.1.5
 
