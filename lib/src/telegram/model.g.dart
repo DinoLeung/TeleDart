@@ -941,6 +941,30 @@ ForumTopicReopened _$ForumTopicReopenedFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$ForumTopicReopenedToJson(ForumTopicReopened instance) =>
     <String, dynamic>{};
 
+ForumTopic _$ForumTopicFromJson(Map<String, dynamic> json) => ForumTopic(
+      message_thread_id: json['message_thread_id'] as String,
+      name: json['name'] as String,
+      icon_color: json['icon_color'] as int,
+      icon_custom_emoji_id: json['icon_custom_emoji_id'] as String?,
+    );
+
+Map<String, dynamic> _$ForumTopicToJson(ForumTopic instance) {
+  final val = <String, dynamic>{
+    'message_thread_id': instance.message_thread_id,
+    'name': instance.name,
+    'icon_color': instance.icon_color,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('icon_custom_emoji_id', instance.icon_custom_emoji_id);
+  return val;
+}
+
 GameHighScore _$GameHighScoreFromJson(Map<String, dynamic> json) =>
     GameHighScore(
       position: json['position'] as int,

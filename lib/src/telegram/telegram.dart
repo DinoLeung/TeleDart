@@ -1714,6 +1714,151 @@ class Telegram {
     return await HttpClient.httpPost(requestUrl, body: body);
   }
 
+  ///Use this method to get custom emoji stickers, which can be used as a forum topic icon by any user.
+  ///
+  ///Requires no parameters.
+  ///
+  ///Returns an Array of [Sticker] objects.
+  ///
+  ///https://core.telegram.org/bots/api#getforumtopiciconstickers
+  Future<List<Sticker>> getForumTopicIconStickers() async {
+    var requestUrl = _apiUri('getForumTopicIconStickers');
+    return (await HttpClient.httpPost(requestUrl))
+        .map<Sticker>((sticker) => Sticker.fromJson(sticker))
+        .toList();
+  }
+
+  /// Use this method to create a topic in a forum supergroup chat.
+  ///
+  /// The bot must be an administrator in the chat for this to work and must have the can_manage_topics administrator rights.
+  ///
+  /// Returns information about the created topic as a [ForumTopic] object.
+  ///
+  /// https://core.telegram.org/bots/api#createforumtopic
+  Future<ForumTopic> createForumTopic(dynamic chat_id, String name,
+      {int? icon_color, String? icon_custom_emoji_id}) async {
+    if (chat_id is! String && chat_id is! int) {
+      return Future.error(TelegramException(
+          'Attribute \'chat_id\' can only be either type of String or int'));
+    }
+    var requestUrl = _apiUri('createForumTopic');
+    var body = <String, dynamic>{
+      'chat_id': chat_id,
+      'name': name,
+      'icon_color': icon_color,
+      'icon_custom_emoji_id': icon_custom_emoji_id,
+    };
+    return ForumTopic.fromJson(
+        await HttpClient.httpPost(requestUrl, body: body));
+  }
+
+  ///Use this method to edit name and icon of a topic in a forum supergroup chat.
+  ///
+  ///The bot must be an administrator in the chat for this to work and must have `can_manage_topics` administrator rights, unless it is the creator of the topic.
+  ///
+  ///Returns *True* on success.
+  ///
+  ///https://core.telegram.org/bots/api#editforumtopic
+  Future<bool> editForumTopic(dynamic chat_id, String message_thread_id,
+      String name, String icon_custom_emoji_id) async {
+    if (chat_id is! String && chat_id is! int) {
+      return Future.error(TelegramException(
+          'Attribute \'chat_id\' can only be either type of String or int'));
+    }
+    var requestUrl = _apiUri('editForumTopic');
+    var body = <String, dynamic>{
+      'chat_id': chat_id,
+      'message_thread_id': message_thread_id,
+      'name': name,
+      'icon_custom_emoji_id': icon_custom_emoji_id,
+    };
+    return await HttpClient.httpPost(requestUrl, body: body);
+  }
+
+  /// Use this method to close an open topic in a forum supergroup chat.
+  ///
+  /// The bot must be an administrator in the chat for this to work and must have the `can_manage_topics` administrator rights, unless it is the creator of the topic.
+  ///
+  /// Returns *True* on success.
+  ///
+  /// https://core.telegram.org/bots/api#closeforumtopic
+  Future<bool> closeForumTopic(
+      dynamic chat_id, String message_thread_id) async {
+    if (chat_id is! String && chat_id is! int) {
+      return Future.error(TelegramException(
+          'Attribute \'chat_id\' can only be either type of String or int'));
+    }
+    var requestUrl = _apiUri('closeForumTopic');
+    var body = <String, dynamic>{
+      'chat_id': chat_id,
+      'message_thread_id': message_thread_id,
+    };
+    return await HttpClient.httpPost(requestUrl, body: body);
+  }
+
+  /// Use this method to reopen a closed topic in a forum supergroup chat.
+  ///
+  /// The bot must be an administrator in the chat for this to work and must have the `can_manage_topics` administrator rights, unless it is the creator of the topic.
+  ///
+  /// Returns *True* on success.
+  ///
+  /// https://core.telegram.org/bots/api#reopenforumtopic
+  Future<bool> reopenForumTopic(
+      dynamic chat_id, String message_thread_id) async {
+    if (chat_id is! String && chat_id is! int) {
+      return Future.error(TelegramException(
+          'Attribute \'chat_id\' can only be either type of String or int'));
+    }
+    var requestUrl = _apiUri('reopenForumTopic');
+    var body = <String, dynamic>{
+      'chat_id': chat_id,
+      'message_thread_id': message_thread_id,
+    };
+    return await HttpClient.httpPost(requestUrl, body: body);
+  }
+
+  /// Use this method to delete a forum topic along with all its messages in a forum supergroup chat.
+  ///
+  /// The bot must be an administrator in the chat for this to work and must have the `can_delete_messages` administrator rights.
+  ///
+  /// Returns *True* on success.
+  ///
+  /// https://core.telegram.org/bots/api#deleteforumtopic
+  Future<bool> deleteForumTopic(
+      dynamic chat_id, String message_thread_id) async {
+    if (chat_id is! String && chat_id is! int) {
+      return Future.error(TelegramException(
+          'Attribute \'chat_id\' can only be either type of String or int'));
+    }
+    var requestUrl = _apiUri('deleteForumTopic');
+    var body = <String, dynamic>{
+      'chat_id': chat_id,
+      'message_thread_id': message_thread_id,
+    };
+    return await HttpClient.httpPost(requestUrl, body: body);
+  }
+
+  /// Use this method to clear the list of pinned messages in a forum topic.
+  ///
+  /// The bot must be an administrator in the chat for this to work and must have the `can_pin_messages` administrator right in the supergroup.
+  ///
+  /// Returns *True* on success.
+  ///
+  /// https://core.telegram.org/bots/api#unpinallforumtopicmessages
+  Future<bool> unpinAllForumTopicMessages(
+      dynamic chat_id, String message_thread_id) async {
+    if (chat_id is! String && chat_id is! int) {
+      return Future.error(TelegramException(
+          'Attribute \'chat_id\' can only be either type of String or int'));
+    }
+    var requestUrl = _apiUri('unpinAllForumTopicMessages');
+    var body = <String, dynamic>{
+      'chat_id': chat_id,
+      'message_thread_id': message_thread_id,
+    };
+    return await HttpClient.httpPost(requestUrl, body: body);
+  }
+
   /// Use this method to send answers to callback queries sent from [inline keyboards]
   ///
   /// The answer will be displayed to the user as a notification at the top of the chat screen or as

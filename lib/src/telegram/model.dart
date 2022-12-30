@@ -60,6 +60,7 @@ part 'models/force_reply.dart';
 part 'models/forum_topic_closed.dart';
 part 'models/forum_topic_created.dart';
 part 'models/forum_topic_reopened.dart';
+part 'models/forum_topic.dart';
 part 'models/game_high_score.dart';
 part 'models/game.dart';
 part 'models/inline_keyboard_button.dart';
