@@ -174,7 +174,8 @@ class Telegram {
   ///
   /// https://core.telegram.org/bots/api#sendmessage
   Future<Message> sendMessage(dynamic chat_id, String text,
-      {String? parse_mode,
+      {int? message_thread_id,
+      String? parse_mode,
       List<MessageEntity>? entities,
       bool? disable_web_page_preview,
       bool? disable_notification,
@@ -189,6 +190,7 @@ class Telegram {
     var requestUrl = _apiUri('sendMessage');
     var body = <String, dynamic>{
       'chat_id': chat_id,
+      'message_thread_id': message_thread_id,
       'text': text,
       'parse_mode': parse_mode,
       'entities': entities == null ? null : jsonEncode(entities),
@@ -207,7 +209,9 @@ class Telegram {
   /// https://core.telegram.org/bots/api#forwardmessage
   Future<Message> forwardMessage(
       dynamic chat_id, int from_chat_id, int message_id,
-      {bool? disable_notification, bool? protect_content}) async {
+      {int? message_thread_id,
+      bool? disable_notification,
+      bool? protect_content}) async {
     if (chat_id is! String && chat_id is! int) {
       return Future.error(TelegramException(
           'Attribute \'chat_id\' can only be either type of String or int'));
@@ -215,6 +219,7 @@ class Telegram {
     var requestUrl = _apiUri('forwardMessage');
     var body = <String, dynamic>{
       'chat_id': chat_id,
+      'message_thread_id': message_thread_id,
       'from_chat_id': from_chat_id,
       'message_id': message_id,
       'disable_notification': disable_notification,
@@ -231,18 +236,16 @@ class Telegram {
   ///
   /// https://core.telegram.org/bots/api#copyMessage
   Future<MessageId> copyMessage(
-    dynamic chat_id,
-    int from_chat_id,
-    int message_id, {
-    String? caption,
-    String? parse_mode,
-    List<MessageEntity>? caption_entities,
-    bool? disable_notification,
-    bool? protect_content,
-    int? reply_to_message_id,
-    bool? allow_sending_without_reply,
-    ReplyMarkup? reply_markup,
-  }) async {
+      dynamic chat_id, int from_chat_id, int message_id,
+      {int? message_thread_id,
+      String? caption,
+      String? parse_mode,
+      List<MessageEntity>? caption_entities,
+      bool? disable_notification,
+      bool? protect_content,
+      int? reply_to_message_id,
+      bool? allow_sending_without_reply,
+      ReplyMarkup? reply_markup}) async {
     if (chat_id is! String && chat_id is! int) {
       return Future.error(TelegramException(
           'Attribute \'chat_id\' can only be either type of String or int'));
@@ -250,6 +253,7 @@ class Telegram {
     var requestUrl = _apiUri('copyMessage');
     var body = <String, dynamic>{
       'chat_id': chat_id,
+      'message_thread_id': message_thread_id,
       'from_chat_id': from_chat_id,
       'message_id': message_id,
       'caption': caption,
@@ -272,7 +276,8 @@ class Telegram {
   ///
   /// https://core.telegram.org/bots/api#sendphoto
   Future<Message> sendPhoto(dynamic chat_id, dynamic photo,
-      {String? caption,
+      {int? message_thread_id,
+      String? caption,
       String? parse_mode,
       List<MessageEntity>? caption_entities,
       bool? disable_notification,
@@ -287,6 +292,7 @@ class Telegram {
     var requestUrl = _apiUri('sendPhoto');
     var body = <String, dynamic>{
       'chat_id': chat_id,
+      'message_thread_id': message_thread_id,
       'caption': caption,
       'parse_mode': parse_mode,
       'caption_entities':
@@ -327,7 +333,8 @@ class Telegram {
   ///
   /// https://core.telegram.org/bots/api#sendaudio
   Future<Message> sendAudio(dynamic chat_id, dynamic audio,
-      {String? caption,
+      {int? message_thread_id,
+      String? caption,
       String? parse_mode,
       List<MessageEntity>? caption_entities,
       int? duration,
@@ -346,6 +353,7 @@ class Telegram {
     var requestUrl = _apiUri('sendAudio');
     var body = <String, dynamic>{
       'chat_id': chat_id,
+      'message_thread_id': message_thread_id,
       'caption': caption,
       'parse_mode': parse_mode,
       'caption_entities':
@@ -398,7 +406,8 @@ class Telegram {
   ///
   /// https://core.telegram.org/bots/api#senddocument
   Future<Message> sendDocument(dynamic chat_id, dynamic document,
-      {dynamic thumb,
+      {int? message_thread_id,
+      dynamic thumb,
       String? caption,
       String? parse_mode,
       List<MessageEntity>? caption_entities,
@@ -415,6 +424,7 @@ class Telegram {
     var requestUrl = _apiUri('sendDocument');
     var body = <String, dynamic>{
       'chat_id': chat_id,
+      'message_thread_id': message_thread_id,
       'caption': caption,
       'parse_mode': parse_mode,
       'caption_entities':
@@ -467,7 +477,8 @@ class Telegram {
   ///
   /// [Document]: https://core.telegram.org/bots/api#document
   Future<Message> sendVideo(dynamic chat_id, dynamic video,
-      {int? duration,
+      {int? message_thread_id,
+      int? duration,
       int? width,
       int? height,
       dynamic thumb,
@@ -487,6 +498,7 @@ class Telegram {
     var requestUrl = _apiUri('sendVideo');
     var body = <String, dynamic>{
       'chat_id': chat_id,
+      'message_thread_id': message_thread_id,
       'duration': duration,
       'width': width,
       'height': height,
@@ -539,7 +551,8 @@ class Telegram {
   ///
   /// https://core.telegram.org/bots/api#sendanimation
   Future<Message> sendAnimation(dynamic chat_id, dynamic animation,
-      {int? duration,
+      {int? message_thread_id,
+      int? duration,
       int? width,
       int? height,
       dynamic thumb,
@@ -558,6 +571,7 @@ class Telegram {
     var requestUrl = _apiUri('sendAnimation');
     var body = <String, dynamic>{
       'chat_id': chat_id,
+      'message_thread_id': message_thread_id,
       'duration': duration,
       'width': width,
       'height': height,
@@ -615,7 +629,8 @@ class Telegram {
   /// [Audio]: https://core.telegram.org/bots/api#audio
   /// [Document]: https://core.telegram.org/bots/api#document
   Future<Message> sendVoice(dynamic chat_id, dynamic voice,
-      {String? caption,
+      {int? message_thread_id,
+      String? caption,
       String? parse_mode,
       List<MessageEntity>? caption_entities,
       int? duration,
@@ -631,6 +646,7 @@ class Telegram {
     var requestUrl = _apiUri('sendVoice');
     var body = <String, dynamic>{
       'chat_id': chat_id,
+      'message_thread_id': message_thread_id,
       'caption': caption,
       'parse_mode': parse_mode,
       'caption_entities':
@@ -671,7 +687,8 @@ class Telegram {
   ///
   /// [v.4.0]: https://telegram.org/blog/video-messages-and-telescope
   Future<Message> sendVideoNote(dynamic chat_id, dynamic video_note,
-      {int? duration,
+      {int? message_thread_id,
+      int? duration,
       int? length,
       dynamic thumb,
       bool? disable_notification,
@@ -686,6 +703,7 @@ class Telegram {
     var requestUrl = _apiUri('sendVideoNote');
     var body = <String, dynamic>{
       'chat_id': chat_id,
+      'message_thread_id': message_thread_id,
       'duration': duration,
       'length': length,
       'disable_notification': disable_notification,
@@ -734,7 +752,8 @@ class Telegram {
   ///
   /// https://core.telegram.org/bots/api#sendmediagroup
   Future<List<Message>> sendMediaGroup(dynamic chat_id, List<InputMedia> media,
-      {bool? disable_notification,
+      {int? message_thread_id,
+      bool? disable_notification,
       bool? protect_content,
       int? reply_to_message_id,
       bool? allow_sending_without_reply}) async {
@@ -745,6 +764,7 @@ class Telegram {
     var requestUrl = _apiUri('sendMediaGroup');
     var body = <String, dynamic>{
       'chat_id': chat_id,
+      'message_thread_id': message_thread_id,
       'media': jsonEncode(media),
       'disable_notification': disable_notification,
       'protect_content': protect_content,
@@ -763,7 +783,8 @@ class Telegram {
   /// https://core.telegram.org/bots/api#sendlocation
   Future<Message> sendLocation(
       dynamic chat_id, double latitude, double longitude,
-      {double? horizontal_accuracy,
+      {int? message_thread_id,
+      double? horizontal_accuracy,
       int? live_period,
       int? heading,
       int? proximity_alert_radius,
@@ -779,6 +800,7 @@ class Telegram {
     var requestUrl = _apiUri('sendLocation');
     var body = <String, dynamic>{
       'chat_id': chat_id,
+      'message_thread_id': message_thread_id,
       'latitude': latitude,
       'longitude': longitude,
       'horizontal_accuracy': horizontal_accuracy,
@@ -875,7 +897,8 @@ class Telegram {
   /// https://core.telegram.org/bots/api#sendvenue
   Future<Message> sendVenue(dynamic chat_id, double latitude, double longitude,
       String title, String address,
-      {String? foursquare_id,
+      {int? message_thread_id,
+      String? foursquare_id,
       String? foursquare_type,
       String? google_place_id,
       String? google_place_type,
@@ -891,6 +914,7 @@ class Telegram {
     var requestUrl = _apiUri('sendVenue');
     var body = <String, dynamic>{
       'chat_id': chat_id,
+      'message_thread_id': message_thread_id,
       'latitude': latitude,
       'longitude': longitude,
       'title': title,
@@ -915,7 +939,8 @@ class Telegram {
   /// https://core.telegram.org/bots/api#sendcontact
   Future<Message> sendContact(
       dynamic chat_id, String phone_number, String first_name,
-      {String? last_name,
+      {int? message_thread_id,
+      String? last_name,
       String? vcard,
       bool? disable_notification,
       bool? protect_content,
@@ -929,6 +954,7 @@ class Telegram {
     var requestUrl = _apiUri('sendContact');
     var body = <String, dynamic>{
       'chat_id': chat_id,
+      'message_thread_id': message_thread_id,
       'phone_number': phone_number,
       'first_name': first_name,
       'last_name': last_name,
@@ -951,7 +977,8 @@ class Telegram {
   /// https://core.telegram.org/bots/api#sendpoll
   Future<Message> sendPoll(
       dynamic chat_id, String question, List<String> options,
-      {bool? is_anonymous,
+      {int? message_thread_id,
+      bool? is_anonymous,
       String? type,
       bool? allows_multiple_answers,
       int? correct_option_id,
@@ -973,6 +1000,7 @@ class Telegram {
     var requestUrl = _apiUri('sendPoll');
     var body = <String, dynamic>{
       'chat_id': chat_id,
+      'message_thread_id': message_thread_id,
       'question': question,
       'options': jsonEncode(options),
       'is_anonymous': is_anonymous,
@@ -1000,7 +1028,8 @@ class Telegram {
   ///
   /// On success, the sent [Message] is returned.
   Future<Message> sendDice(dynamic chat_id,
-      {String emoji = Dice.DICE,
+      {int? message_thread_id,
+      String emoji = Dice.DICE,
       bool? disable_notification,
       bool? protect_content,
       int? reply_to_message_id,
@@ -1013,6 +1042,7 @@ class Telegram {
     var requestUrl = _apiUri('sendDice');
     var body = <String, dynamic>{
       'chat_id': chat_id,
+      'message_thread_id': message_thread_id,
       'emoji': emoji,
       'disable_notification': disable_notification,
       'protect_content': protect_content,
@@ -2221,7 +2251,8 @@ class Telegram {
   ///
   /// https://core.telegram.org/bots/api#sendsticker
   Future<Message> sendSticker(dynamic chat_id, dynamic sticker,
-      {bool? disable_notification,
+      {int? message_thread_id,
+      bool? disable_notification,
       bool? protect_content,
       int? reply_to_message_id,
       bool? allow_sending_without_reply,
@@ -2233,6 +2264,7 @@ class Telegram {
     var requestUrl = _apiUri('sendSticker');
     var body = <String, dynamic>{
       'chat_id': chat_id,
+      'message_thread_id': message_thread_id,
       'disable_notification': disable_notification,
       'protect_content': protect_content,
       'reply_to_message_id': reply_to_message_id,
@@ -2519,7 +2551,8 @@ class Telegram {
       String provider_token,
       String currency,
       List<LabeledPrice> prices,
-      {int? max_tip_amount,
+      {int? message_thread_id,
+      int? max_tip_amount,
       List<int>? suggested_tip_amounts,
       String? start_parameter,
       String? provider_data,
@@ -2546,6 +2579,7 @@ class Telegram {
     var requestUrl = _apiUri('sendInvoice');
     var body = <String, dynamic>{
       'chat_id': chat_id,
+      'message_thread_id': message_thread_id,
       'title': title,
       'description': description,
       'payload': payload,
@@ -2686,7 +2720,8 @@ class Telegram {
   ///
   /// https://core.telegram.org/bots/api#sendgame
   Future<Message> sendGame(dynamic chat_id, String game_short_name,
-      {bool? disable_notification,
+      {int? message_thread_id,
+      bool? disable_notification,
       bool? protect_content,
       int? reply_to_message_id,
       bool? allow_sending_without_reply,
@@ -2698,6 +2733,7 @@ class Telegram {
     var requestUrl = _apiUri('sendGame');
     var body = <String, dynamic>{
       'chat_id': chat_id,
+      'message_thread_id': message_thread_id,
       'game_short_name': game_short_name,
       'disable_notification': disable_notification,
       'protect_content': protect_content,
