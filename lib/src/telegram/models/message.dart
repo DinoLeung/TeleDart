@@ -55,6 +55,7 @@ class Message {
   Voice? voice;
   String? caption;
   List<MessageEntity>? caption_entities;
+  bool? has_media_spoiler;
   Contact? contact;
   Dice? dice;
   Game? game;
@@ -121,6 +122,7 @@ class Message {
     this.voice,
     this.caption,
     this.caption_entities,
+    this.has_media_spoiler,
     this.contact,
     this.dice,
     this.game,

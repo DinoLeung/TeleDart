@@ -2846,6 +2846,7 @@ Message _$MessageFromJson(Map<String, dynamic> json) => Message(
       caption_entities: (json['caption_entities'] as List<dynamic>?)
           ?.map((e) => MessageEntity.fromJson(e as Map<String, dynamic>))
           .toList(),
+      has_media_spoiler: json['has_media_spoiler'] as bool?,
       contact: json['contact'] == null
           ? null
           : Contact.fromJson(json['contact'] as Map<String, dynamic>),
@@ -2987,6 +2988,7 @@ Map<String, dynamic> _$MessageToJson(Message instance) {
   writeNotNull('caption', instance.caption);
   writeNotNull('caption_entities',
       instance.caption_entities?.map((e) => e.toJson()).toList());
+  writeNotNull('has_media_spoiler', instance.has_media_spoiler);
   writeNotNull('contact', instance.contact?.toJson());
   writeNotNull('dice', instance.dice?.toJson());
   writeNotNull('game', instance.game?.toJson());

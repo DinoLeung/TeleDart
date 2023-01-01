@@ -67,6 +67,7 @@ class TeleDartMessage extends Message {
           voice: message.voice,
           caption: message.caption,
           caption_entities: message.caption_entities,
+          has_media_spoiler: message.has_media_spoiler,
           contact: message.contact,
           dice: message.dice,
           game: message.game,
