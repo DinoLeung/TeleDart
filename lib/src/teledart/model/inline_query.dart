@@ -54,16 +54,16 @@ class TeleDartInlineQuery extends InlineQuery {
   /// for more information about those options.**
   Future<bool> answer(
     List<InlineQueryResult> results, {
-    int? cache_time,
-    bool? is_personal,
-    String? next_offset,
-    String? switch_pm_text,
-    String? switch_pm_parameter,
+    int? cacheTime,
+    bool? isPersonal,
+    String? nextOffset,
+    String? switchPmText,
+    String? switchPmParameter,
   }) =>
       _teledart.answerInlineQuery(id, results,
-          cache_time: cache_time,
-          is_personal: is_personal,
-          next_offset: next_offset,
-          switch_pm_text: switch_pm_text,
-          switch_pm_parameter: switch_pm_parameter);
+          cacheTime: cacheTime,
+          isPersonal: isPersonal,
+          nextOffset: nextOffset,
+          switchPmText: switchPmText,
+          switchPmParameter: switchPmParameter);
 }

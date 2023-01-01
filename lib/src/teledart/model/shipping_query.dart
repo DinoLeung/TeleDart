@@ -51,7 +51,7 @@ class TeleDartShippingQuery extends ShippingQuery {
   /// **Check [Telegram API documentation](https://core.telegram.org/bots/api#answershippingquery)
   /// for more information about those options.**
   Future<bool> answer(bool ok,
-          {List<ShippingOption>? shipping_options, String? error_message}) =>
+          {List<ShippingOption>? shippingOptions, String? errorMessage}) =>
       _teledart.answerShippingQuery(id, ok,
-          shipping_options: shipping_options, error_message: error_message);
+          shippingOptions: shippingOptions, errorMessage: errorMessage);
 }

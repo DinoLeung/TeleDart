@@ -57,10 +57,10 @@ class TeleDartCallbackQuery extends CallbackQuery {
   /// for more information about those options.**
   Future<bool> answer({
     String? text,
-    bool? show_alert,
+    bool? showAlert,
     String? url,
-    int? cache_time,
+    int? cacheTime,
   }) =>
       _teledart.answerCallbackQuery(id,
-          text: text, show_alert: show_alert, url: url, cache_time: cache_time);
+          text: text, showAlert: showAlert, url: url, cacheTime: cacheTime);
 }

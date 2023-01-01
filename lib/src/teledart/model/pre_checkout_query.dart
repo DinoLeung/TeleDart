@@ -48,11 +48,11 @@ class TeleDartPreCheckoutQuery extends PreCheckoutQuery {
   /// On success, returns true.
   ///
   /// It can take a [bool] that indicates
-  /// if the pre-checkout is possible, and an [error_message] that
+  /// if the pre-checkout is possible, and an [errorMessage] that
   /// is shown to user if [ok] is false (You don't have to specify it if [ok] is true).
   ///
   /// **Check [Telegram API documentation](https://core.telegram.org/bots/api#answerprecheckoutquery)
   /// for more information about those options.**
-  Future<bool> answer(bool ok, {String? error_message}) =>
-      _teledart.answerPreCheckoutQuery(id, ok, error_message: error_message);
+  Future<bool> answer(bool ok, {String? errorMessage}) =>
+      _teledart.answerPreCheckoutQuery(id, ok, errorMessage: errorMessage);
 }
