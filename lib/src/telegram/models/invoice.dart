@@ -21,19 +21,19 @@ part of '../model.dart';
 /// This object contains basic information about an invoice.
 ///
 /// https://core.telegram.org/bots/api#invoice
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class Invoice {
   String title;
   String description;
-  String start_parameter;
+  String startParameter;
   String currency;
-  int total_amount;
+  int totalAmount;
   Invoice({
     required this.title,
     required this.description,
-    required this.start_parameter,
+    required this.startParameter,
     required this.currency,
-    required this.total_amount,
+    required this.totalAmount,
   });
   factory Invoice.fromJson(Map<String, dynamic> json) =>
       _$InvoiceFromJson(json);

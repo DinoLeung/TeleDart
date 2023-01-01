@@ -24,7 +24,7 @@ part of '../model.dart';
 ///
 /// [chat member]: https://core.telegram.org/bots/api#chatmember
 
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class ChatMemberLeft implements ChatMember {
   @override
   String status;

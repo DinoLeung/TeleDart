@@ -21,17 +21,17 @@ part of '../model.dart';
 /// This object represents a service message about a change in auto-delete timer settings.
 ///
 /// https://core.telegram.org/bots/api#messageautodeletetimerchanged
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class MessageAutoDeleteTimerChanged {
-  int message_auto_delete_time;
+  int messageAutoDeleteTime;
 
-  MessageAutoDeleteTimerChanged({required this.message_auto_delete_time});
+  MessageAutoDeleteTimerChanged({required this.messageAutoDeleteTime});
 
   @JsonKey(ignore: true)
-  Duration get message_auto_delete_time_ =>
-      TimeHelper.toDuration(message_auto_delete_time);
-  set message_auto_delete_time_(Duration duration) =>
-      message_auto_delete_time = TimeHelper.toSeconds(duration);
+  Duration get messageAutoDeleteTime_ =>
+      TimeHelper.toDuration(messageAutoDeleteTime);
+  set messageAutoDeleteTime_(Duration duration) =>
+      messageAutoDeleteTime = TimeHelper.toSeconds(duration);
 
   factory MessageAutoDeleteTimerChanged.fromJson(Map<String, dynamic> json) =>
       _$MessageAutoDeleteTimerChangedFromJson(json);

@@ -204,59 +204,59 @@ class TeleDart extends Telegram {
 
   /// Short-cut for [onMessage] handling entityType `mention` (@username)
   Stream<TeleDartMessage> onMention([dynamic keyword]) =>
-      onMessage(entityType: MessageEntity.MENTION, keyword: keyword);
+      onMessage(entityType: MessageEntity.typeMention, keyword: keyword);
 
   /// Short-cut for [onMessage] handling entityType `cashtag`
   Stream<TeleDartMessage> onCashtag([dynamic keyword]) =>
-      onMessage(entityType: MessageEntity.CASHTAG, keyword: keyword);
+      onMessage(entityType: MessageEntity.typeCashtag, keyword: keyword);
 
   /// Short-cut for [onMessage] handling entityType `hashtag`
   Stream<TeleDartMessage> onHashtag([dynamic keyword]) =>
-      onMessage(entityType: MessageEntity.HASHTAG, keyword: keyword);
+      onMessage(entityType: MessageEntity.typeHashtag, keyword: keyword);
 
   /// Short-cut for [onMessage] handling entityType `bot_command`
   Stream<TeleDartMessage> onCommand([dynamic keyword]) =>
-      onMessage(entityType: MessageEntity.BOT_COMMAND, keyword: keyword);
+      onMessage(entityType: MessageEntity.typeBotCommand, keyword: keyword);
 
   /// Short-cut for [onMessage] handling entityType `url`
   Stream<TeleDartMessage> onUrl([dynamic keyword]) =>
-      onMessage(entityType: MessageEntity.URL, keyword: keyword);
+      onMessage(entityType: MessageEntity.typeUrl, keyword: keyword);
 
   /// Short-cut for [onMessage] handling entityType `email`
   Stream<TeleDartMessage> onEmail([dynamic keyword]) =>
-      onMessage(entityType: MessageEntity.EMAIL, keyword: keyword);
+      onMessage(entityType: MessageEntity.typeEmail, keyword: keyword);
 
   /// Short-cut for [onMessage] handling entityType `phone_number`
   Stream<TeleDartMessage> onPhoneNumber([dynamic keyword]) =>
-      onMessage(entityType: MessageEntity.PHONE_NUMBER, keyword: keyword);
+      onMessage(entityType: MessageEntity.typePhoneNmber, keyword: keyword);
 
   /// Short-cut for [onMessage] handling entityType `bold`
   Stream<TeleDartMessage> onBold([dynamic keyword]) =>
-      onMessage(entityType: MessageEntity.BOLD, keyword: keyword);
+      onMessage(entityType: MessageEntity.typeBold, keyword: keyword);
 
   /// Short-cut for [onMessage] handling entityType `italic`
   Stream<TeleDartMessage> onItalic([dynamic keyword]) =>
-      onMessage(entityType: MessageEntity.ITALIC, keyword: keyword);
+      onMessage(entityType: MessageEntity.typeItalic, keyword: keyword);
 
   /// Short-cut for [onMessage] handling entityType `spoiler`
   Stream<TeleDartMessage> onSpoiler([dynamic keyword]) =>
-      onMessage(entityType: MessageEntity.SPOILER, keyword: keyword);
+      onMessage(entityType: MessageEntity.typeSpolier, keyword: keyword);
 
   /// Short-cut for [onMessage] handling entityType `code`
   Stream<TeleDartMessage> onCode([dynamic keyword]) =>
-      onMessage(entityType: MessageEntity.CODE, keyword: keyword);
+      onMessage(entityType: MessageEntity.typeCode, keyword: keyword);
 
   /// Short-cut for [onMessage] handling entityType `pre`
   Stream<TeleDartMessage> onPre([dynamic keyword]) =>
-      onMessage(entityType: MessageEntity.PRE, keyword: keyword);
+      onMessage(entityType: MessageEntity.typePre, keyword: keyword);
 
   /// Short-cut for [onMessage] handling entityType `text_link`
   Stream<TeleDartMessage> onTextLink([dynamic keyword]) =>
-      onMessage(entityType: MessageEntity.TEXT_LINK, keyword: keyword);
+      onMessage(entityType: MessageEntity.typeTextLink, keyword: keyword);
 
   /// Short-cut for [onMessage] handling entityType `text_mention`
   Stream<TeleDartMessage> onTextMention([dynamic keyword]) =>
-      onMessage(entityType: MessageEntity.TEXT_MENTION, keyword: keyword);
+      onMessage(entityType: MessageEntity.typeTextMention, keyword: keyword);
 }
 
 class TeleDartException implements Exception {

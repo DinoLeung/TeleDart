@@ -23,26 +23,26 @@ part of '../model.dart';
 /// You **must** use exactly one of the optional fields.
 ///
 /// https://core.telegram.org/bots/api#inlinekeyboardbutton
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class InlineKeyboardButton {
   String text;
   String? url;
-  String? callback_data;
-  WebAppInfo? web_app;
-  LoginUrl? login_url;
-  String? switch_inline_query;
-  String? switch_inline_query_current_chat;
-  CallbackGame? callback_game;
+  String? callbackData;
+  WebAppInfo? webApp;
+  LoginUrl? loginUrl;
+  String? switchInlineQuery;
+  String? switchInlineQueryCurrentChat;
+  CallbackGame? callbackGame;
   bool? pay;
   InlineKeyboardButton({
     required this.text,
     this.url,
-    this.callback_data,
-    this.web_app,
-    this.login_url,
-    this.switch_inline_query,
-    this.switch_inline_query_current_chat,
-    this.callback_game,
+    this.callbackData,
+    this.webApp,
+    this.loginUrl,
+    this.switchInlineQuery,
+    this.switchInlineQueryCurrentChat,
+    this.callbackGame,
     this.pay,
   });
   factory InlineKeyboardButton.fromJson(Map<String, dynamic> json) =>

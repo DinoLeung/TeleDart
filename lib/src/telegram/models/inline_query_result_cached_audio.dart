@@ -21,35 +21,35 @@ part of '../model.dart';
 /// Represents a link to an mp3 audio file stored on the Telegram servers.
 ///
 /// By default, this audio file will be sent by the user.
-/// Alternatively, you can use *input_message_content* to
+/// Alternatively, you can use *inputMessageContent* to
 /// send a message with the specified content instead of the audio.
 ///
 /// **Note:** This will only work in Telegram versions released after 9 April, 2016.
 /// Older clients will ignore them
 ///
 /// https://core.telegram.org/bots/api#inlinequeryresultcachedaudio
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class InlineQueryResultCachedAudio implements InlineQueryResult {
   @override
   String id;
   @override
   String type;
-  String audio_file_id;
+  String audioFileId;
   String? caption;
-  String? parse_mode;
-  List<MessageEntity>? caption_entities;
+  String? parseMode;
+  List<MessageEntity>? captionEntities;
   @override
-  InlineKeyboardMarkup? reply_markup;
-  InputMessageContent? input_message_content;
+  InlineKeyboardMarkup? replyMarkup;
+  InputMessageContent? inputMessageContent;
   InlineQueryResultCachedAudio({
     required this.id,
-    this.type = InlineQueryResult.AUDIO,
-    required this.audio_file_id,
+    this.type = InlineQueryResult.typeAudio,
+    required this.audioFileId,
     this.caption,
-    this.parse_mode,
-    this.caption_entities,
-    this.reply_markup,
-    this.input_message_content,
+    this.parseMode,
+    this.captionEntities,
+    this.replyMarkup,
+    this.inputMessageContent,
   });
   factory InlineQueryResultCachedAudio.fromJson(Map<String, dynamic> json) =>
       _$InlineQueryResultCachedAudioFromJson(json);

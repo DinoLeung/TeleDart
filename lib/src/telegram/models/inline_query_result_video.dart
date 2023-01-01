@@ -22,56 +22,56 @@ part of '../model.dart';
 ///
 /// By default, this video file will be sent by the user with an optional caption.
 /// Alternatively,
-/// you can use *input_message_content* to send a message with the specified content instead of the video.
+/// you can use *inputMessageContent* to send a message with the specified content instead of the video.
 ///
 /// If an InlineQueryResultVideo message contains an embedded video (e.g., YouTube),
-/// you **must** replace its content using *input_message_content*.
+/// you **must** replace its content using *inputMessageContent*.
 ///
 /// https://core.telegram.org/bots/api#inlinequeryresultvideo
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class InlineQueryResultVideo implements InlineQueryResult {
   @override
   String id;
   @override
   String type;
-  String video_url;
-  String mime_type;
-  String thumb_url;
+  String videoUrl;
+  String mimeType;
+  String thumbUrl;
   String title;
   String? caption;
-  String? parse_mode;
-  int? video_width;
-  int? video_height;
-  int? video_duration;
+  String? parseMode;
+  int? videoWidth;
+  int? videoHeight;
+  int? videoDuration;
   String? description;
-  List<MessageEntity>? caption_entities;
+  List<MessageEntity>? captionEntities;
   @override
-  InlineKeyboardMarkup? reply_markup;
-  InputMessageContent? input_message_content;
+  InlineKeyboardMarkup? replyMarkup;
+  InputMessageContent? inputMessageContent;
 
   InlineQueryResultVideo({
     required this.id,
-    this.type = InlineQueryResult.VIDEO,
-    required this.video_url,
-    required this.mime_type,
-    required this.thumb_url,
+    this.type = InlineQueryResult.typeVideo,
+    required this.videoUrl,
+    required this.mimeType,
+    required this.thumbUrl,
     required this.title,
     this.caption,
-    this.parse_mode,
-    this.video_width,
-    this.video_height,
-    this.video_duration,
+    this.parseMode,
+    this.videoWidth,
+    this.videoHeight,
+    this.videoDuration,
     this.description,
-    this.caption_entities,
-    this.reply_markup,
-    this.input_message_content,
+    this.captionEntities,
+    this.replyMarkup,
+    this.inputMessageContent,
   });
 
   @JsonKey(ignore: true)
-  Duration? get video_duration_ =>
-      video_duration == null ? null : TimeHelper.toDuration(video_duration!);
-  set video_duration_(Duration? duration) =>
-      video_duration = duration == null ? null : TimeHelper.toSeconds(duration);
+  Duration? get videoDuration_ =>
+      videoDuration == null ? null : TimeHelper.toDuration(videoDuration!);
+  set videoDuration_(Duration? duration) =>
+      videoDuration = duration == null ? null : TimeHelper.toSeconds(duration);
 
   factory InlineQueryResultVideo.fromJson(Map<String, dynamic> json) =>
       _$InlineQueryResultVideoFromJson(json);

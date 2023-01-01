@@ -22,40 +22,40 @@ part of '../model.dart';
 ///
 /// By default, the contact will be sent by the user.
 /// Alternatively,
-/// you can use *input_message_content* to send a message with the specified content instead of the contact.
+/// you can use *inputMessageContent* to send a message with the specified content instead of the contact.
 ///
 /// **Note:** This will only work in Telegram versions released after 9 April, 2016.
 /// Older clients will ignore them.
 ///
 /// https://core.telegram.org/bots/api#inlinequeryresultcontact
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class InlineQueryResultContact implements InlineQueryResult {
   @override
   String id;
   @override
   String type;
-  String phone_number;
-  String first_name;
-  String? last_name;
+  String phoneNumber;
+  String firstName;
+  String? lastName;
   String? vcard;
   @override
-  InlineKeyboardMarkup? reply_markup;
-  InputMessageContent? input_message_content;
-  String? thumb_url;
-  int? thumb_width;
-  int? thumb_height;
+  InlineKeyboardMarkup? replyMarkup;
+  InputMessageContent? inputMessageContent;
+  String? thumbUrl;
+  int? thumbWidth;
+  int? thumbHeight;
   InlineQueryResultContact({
     required this.id,
-    this.type = InlineQueryResult.CONTACT,
-    required this.phone_number,
-    required this.first_name,
-    this.last_name,
+    this.type = InlineQueryResult.typeContact,
+    required this.phoneNumber,
+    required this.firstName,
+    this.lastName,
     this.vcard,
-    this.reply_markup,
-    this.input_message_content,
-    this.thumb_url,
-    this.thumb_width,
-    this.thumb_height,
+    this.replyMarkup,
+    this.inputMessageContent,
+    this.thumbUrl,
+    this.thumbWidth,
+    this.thumbHeight,
   });
   factory InlineQueryResultContact.fromJson(Map<String, dynamic> json) =>
       _$InlineQueryResultContactFromJson(json);

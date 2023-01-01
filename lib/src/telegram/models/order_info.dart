@@ -21,15 +21,15 @@ part of '../model.dart';
 /// This object represents information about an order.
 ///
 /// https://core.telegram.org/bots/api#orderinfo
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class OrderInfo {
   String? name;
-  String? phone_number;
+  String? phoneNumber;
   String? email;
   ShippingAddress? shippingAddress;
   OrderInfo({
     this.name,
-    this.phone_number,
+    this.phoneNumber,
     this.email,
     this.shippingAddress,
   });

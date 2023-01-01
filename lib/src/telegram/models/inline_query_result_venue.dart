@@ -22,13 +22,13 @@ part of '../model.dart';
 ///
 /// By default, the venue will be sent by the user.
 /// Alternatively,
-/// you can use *input_message_content* to send a message with the specified content instead of the venue.
+/// you can use *inputMessageContent* to send a message with the specified content instead of the venue.
 ///
 /// **Note:** This will only work in Telegram versions released after 9 April, 2016.
 /// Older clients will ignore them.
 ///
 /// https://core.telegram.org/bots/api#inlinequeryresultvenue
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class InlineQueryResultVenue implements InlineQueryResult {
   @override
   String id;
@@ -38,32 +38,32 @@ class InlineQueryResultVenue implements InlineQueryResult {
   double longitude;
   String title;
   String address;
-  String? foursquare_id;
-  String? foursquare_type;
-  String? google_place_id;
-  String? google_place_type;
+  String? foursquareId;
+  String? foursquareType;
+  String? googlePlaceId;
+  String? googlePlaceType;
   @override
-  InlineKeyboardMarkup? reply_markup;
-  InputMessageContent? input_message_content;
-  String? thumb_url;
-  int? thumb_width;
-  int? thumb_height;
+  InlineKeyboardMarkup? replyMarkup;
+  InputMessageContent? inputMessageContent;
+  String? thumbUrl;
+  int? thumbWidth;
+  int? thumbHeight;
   InlineQueryResultVenue({
     required this.id,
-    this.type = InlineQueryResult.VENUE,
+    this.type = InlineQueryResult.typeVenue,
     required this.latitude,
     required this.longitude,
     required this.title,
     required this.address,
-    this.foursquare_id,
-    this.foursquare_type,
-    this.google_place_id,
-    this.google_place_type,
-    this.reply_markup,
-    this.input_message_content,
-    this.thumb_url,
-    this.thumb_width,
-    this.thumb_height,
+    this.foursquareId,
+    this.foursquareType,
+    this.googlePlaceId,
+    this.googlePlaceType,
+    this.replyMarkup,
+    this.inputMessageContent,
+    this.thumbUrl,
+    this.thumbWidth,
+    this.thumbHeight,
   });
   factory InlineQueryResultVenue.fromJson(Map<String, dynamic> json) =>
       _$InlineQueryResultVenueFromJson(json);

@@ -27,7 +27,7 @@ part of '../model.dart';
 ///
 /// [inline keyboard]: https://core.telegram.org/bots#inline-keyboards-and-on-the-fly-updating
 /// [custom reply keyboard]: https://core.telegram.org/bots#keyboards
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class ReplyMarkup {
   ReplyMarkup();
   factory ReplyMarkup.fromJson(Map<String, dynamic> json) =>

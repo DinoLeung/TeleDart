@@ -21,15 +21,15 @@ part of '../model.dart';
 /// This object represents a service message about a new forum topic created in the chat.
 ///
 /// https://core.telegram.org/bots/api#forumtopiccreated
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class ForumTopicCreated {
   String name;
-  int icon_color;
-  String? icon_custom_emoji_id;
+  int iconColor;
+  String? iconCustomEmojiId;
   ForumTopicCreated({
     required this.name,
-    required this.icon_color,
-    this.icon_custom_emoji_id,
+    required this.iconColor,
+    this.iconCustomEmojiId,
   });
   factory ForumTopicCreated.fromJson(Map<String, dynamic> json) =>
       _$ForumTopicCreatedFromJson(json);

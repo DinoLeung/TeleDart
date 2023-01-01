@@ -23,7 +23,7 @@ part of '../model.dart';
 /// The error is considered resolved when the file with the front side of the document changes.
 ///
 /// https://core.telegram.org/bots/api#passportelementerrorfrontside
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class PassportElementErrorFrontSide implements PassportElementError {
   @override
   String source;
@@ -31,12 +31,12 @@ class PassportElementErrorFrontSide implements PassportElementError {
   String type;
   @override
   String message;
-  String file_hash;
+  String fileHash;
   PassportElementErrorFrontSide({
     required this.source,
     required this.type,
     required this.message,
-    required this.file_hash,
+    required this.fileHash,
   });
   factory PassportElementErrorFrontSide.fromJson(Map<String, dynamic> json) =>
       _$PassportElementErrorFrontSideFromJson(json);

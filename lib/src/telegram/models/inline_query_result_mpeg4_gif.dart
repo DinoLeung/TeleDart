@@ -22,51 +22,51 @@ part of '../model.dart';
 ///
 /// By default, this animated MPEG-4 file will be sent by the user with optional caption.
 /// Alternatively,
-/// you can use *input_message_content* to send a message with the specified content instead of the animation.
+/// you can use *inputMessageContent* to send a message with the specified content instead of the animation.
 ///
 /// https://core.telegram.org/bots/api#inlinequeryresultmpeg4gif
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class InlineQueryResultMpeg4Gif implements InlineQueryResult {
   @override
   String id;
   @override
   String type;
-  String mpeg4_url;
-  int? mpeg4_width;
-  int? mpeg4_height;
-  int? mpeg4_duration;
-  String thumb_url;
-  String? thumb_mime_type;
+  String mpeg4Url;
+  int? mpeg4Width;
+  int? mpeg4Height;
+  int? mpeg4Duration;
+  String thumbUrl;
+  String? thumbMimeType;
   String? title;
   String? caption;
-  String? parse_mode;
-  List<MessageEntity>? caption_entities;
+  String? parseMode;
+  List<MessageEntity>? captionEntities;
   @override
-  InlineKeyboardMarkup? reply_markup;
-  InputMessageContent? input_message_content;
+  InlineKeyboardMarkup? replyMarkup;
+  InputMessageContent? inputMessageContent;
 
   InlineQueryResultMpeg4Gif({
     required this.id,
-    this.type = InlineQueryResult.MPEG4_GIF,
-    required this.mpeg4_url,
-    this.mpeg4_width,
-    this.mpeg4_height,
-    this.mpeg4_duration,
-    required this.thumb_url,
-    this.thumb_mime_type,
+    this.type = InlineQueryResult.typeMpeg4Gif,
+    required this.mpeg4Url,
+    this.mpeg4Width,
+    this.mpeg4Height,
+    this.mpeg4Duration,
+    required this.thumbUrl,
+    this.thumbMimeType,
     this.title,
     this.caption,
-    this.parse_mode,
-    this.caption_entities,
-    this.reply_markup,
-    this.input_message_content,
+    this.parseMode,
+    this.captionEntities,
+    this.replyMarkup,
+    this.inputMessageContent,
   });
 
   @JsonKey(ignore: true)
-  Duration? get mpeg4_duration_ =>
-      mpeg4_duration == null ? null : TimeHelper.toDuration(mpeg4_duration!);
-  set mpeg4_duration_(Duration? duration) =>
-      mpeg4_duration = duration == null ? null : TimeHelper.toSeconds(duration);
+  Duration? get mpeg4Duration_ =>
+      mpeg4Duration == null ? null : TimeHelper.toDuration(mpeg4Duration!);
+  set mpeg4Duration_(Duration? duration) =>
+      mpeg4Duration = duration == null ? null : TimeHelper.toSeconds(duration);
 
   factory InlineQueryResultMpeg4Gif.fromJson(Map<String, dynamic> json) =>
       _$InlineQueryResultMpeg4GifFromJson(json);

@@ -21,7 +21,7 @@ part of '../model.dart';
 /// Represents an audio file to be treated as music to be sent.
 ///
 /// https://core.telegram.org/bots/api#inputmediaaudio
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class InputMediaAudio implements InputMedia {
   @override
   String type;
@@ -30,21 +30,21 @@ class InputMediaAudio implements InputMedia {
   @override
   String? caption;
   @override
-  String? parse_mode;
+  String? parseMode;
   @override
-  List<MessageEntity>? caption_entities;
+  List<MessageEntity>? captionEntities;
   dynamic thumb; // InputFile or String
   int? duration;
   String? performer;
   String? title;
 
   InputMediaAudio({
-    this.type = InputMedia.AUDIO,
+    this.type = InputMedia.typeAudio,
     required this.media,
     this.thumb,
     this.caption,
-    this.parse_mode,
-    this.caption_entities,
+    this.parseMode,
+    this.captionEntities,
     this.duration,
     this.performer,
     this.title,

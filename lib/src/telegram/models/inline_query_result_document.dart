@@ -21,14 +21,14 @@ part of '../model.dart';
 /// Represents a link to a file. By default, this file will be sent by the user with an optional caption.
 ///
 /// Alternatively,
-/// you can use *input_message_content* to send a message with the specified content instead of the file.
+/// you can use *inputMessageContent* to send a message with the specified content instead of the file.
 /// Currently, only **.PDF** and **.ZIP** files can be sent using this method.
 ///
 /// **Note:** This will only work in Telegram versions released after 9 April, 2016.
 /// Older clients will ignore them.
 ///
 /// https://core.telegram.org/bots/api#inlinequeryresultdocument
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class InlineQueryResultDocument implements InlineQueryResult {
   @override
   String id;
@@ -36,32 +36,32 @@ class InlineQueryResultDocument implements InlineQueryResult {
   String type;
   String title;
   String? caption;
-  String? parse_mode;
-  List<MessageEntity>? caption_entities;
-  String document_url;
-  String mime_type;
+  String? parseMode;
+  List<MessageEntity>? captionEntities;
+  String documentUrl;
+  String mimeType;
   String? description;
   @override
-  InlineKeyboardMarkup? reply_markup;
-  InputMessageContent? input_message_content;
-  String? thumb_url;
-  int? thumb_width;
-  int? thumb_height;
+  InlineKeyboardMarkup? replyMarkup;
+  InputMessageContent? inputMessageContent;
+  String? thumbUrl;
+  int? thumbWidth;
+  int? thumbHeight;
   InlineQueryResultDocument({
     required this.id,
-    this.type = InlineQueryResult.DOCUMENT,
+    this.type = InlineQueryResult.typeDocument,
     required this.title,
     this.caption,
-    this.parse_mode,
-    this.caption_entities,
-    required this.document_url,
-    required this.mime_type,
+    this.parseMode,
+    this.captionEntities,
+    required this.documentUrl,
+    required this.mimeType,
     this.description,
-    this.reply_markup,
-    this.input_message_content,
-    this.thumb_url,
-    this.thumb_width,
-    this.thumb_height,
+    this.replyMarkup,
+    this.inputMessageContent,
+    this.thumbUrl,
+    this.thumbWidth,
+    this.thumbHeight,
   });
   factory InlineQueryResultDocument.fromJson(Map<String, dynamic> json) =>
       _$InlineQueryResultDocumentFromJson(json);

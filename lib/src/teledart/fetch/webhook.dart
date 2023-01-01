@@ -34,13 +34,13 @@ class Webhook extends AbstractUpdateFetcher {
   final io.HttpServer _server;
 
   String url;
-  String? ip_address;
+  String? ipAddress;
   int port;
   int? serverPort;
-  int max_connections;
-  List<String>? allowed_updates;
-  bool? drop_pending_updates;
-  String? secret_token;
+  int maxConnections;
+  List<String>? allowedUpdates;
+  bool? dropPendingUpdates;
+  String? secretToken;
 
   io.File? certificate;
   io.File? privateKey;
@@ -56,56 +56,56 @@ class Webhook extends AbstractUpdateFetcher {
   /// Provide [privateKey] and [certificate] pair for HTTPS configuration
   ///
   /// Throws [WebhookException] if [port] is not supported by Telegram
-  /// or [max_connections] is less than 1 or greater than 100.
+  /// or [maxConnections] is less than 1 or greater than 100.
   Webhook(this.telegram, this.url, this._server,
-      {this.ip_address,
+      {this.ipAddress,
       this.certificate,
       this.privateKey,
       this.port = 443,
       this.serverPort,
       this.uploadCertificate = false,
-      this.max_connections = 40,
-      this.allowed_updates,
-      this.drop_pending_updates,
-      this.secret_token}) {
+      this.maxConnections = 40,
+      this.allowedUpdates,
+      this.dropPendingUpdates,
+      this.secretToken}) {
     if (![443, 80, 88, 8443].contains(port)) {
       throw WebhookException(
           'Ports currently supported for Webhooks: 443, 80, 88, 8443.');
     }
-    if (max_connections > 100 || max_connections < 1) {
+    if (maxConnections > 100 || maxConnections < 1) {
       throw WebhookException('Connection limit must between 1 and 100.');
     }
   }
 
   static Future<Webhook> createHttpWebhok(Telegram telegram, String url,
-      {String? ip_address,
+      {String? ipAddress,
       int port = 80,
       int? serverPort,
-      int max_connections = 40,
-      List<String>? allowed_updates,
-      bool? drop_pending_updates,
-      String? secret_token}) async {
+      int maxConnections = 40,
+      List<String>? allowedUpdates,
+      bool? dropPendingUpdates,
+      String? secretToken}) async {
     var server = await io.HttpServer.bind(
         io.InternetAddress.anyIPv4.address, serverPort ?? port);
     return Webhook(telegram, url, server,
-        ip_address: ip_address,
+        ipAddress: ipAddress,
         port: port,
         serverPort: serverPort,
-        max_connections: max_connections,
-        allowed_updates: allowed_updates,
-        secret_token: secret_token);
+        maxConnections: maxConnections,
+        allowedUpdates: allowedUpdates,
+        secretToken: secretToken);
   }
 
   static Future<Webhook> createHttpsWebhok(
       Telegram telegram, String url, io.File certificate, io.File privateKey,
-      {String? ip_address,
+      {String? ipAddress,
       int port = 80,
       int? serverPort,
       bool uploadCertificate = false,
-      int max_connections = 40,
-      List<String>? allowed_updates,
-      bool? drop_pending_updates,
-      String? secret_token}) async {
+      int maxConnections = 40,
+      List<String>? allowedUpdates,
+      bool? dropPendingUpdates,
+      String? secretToken}) async {
     var server = await io.HttpServer.bindSecure(
         io.InternetAddress.anyIPv4.address,
         serverPort ?? port,
@@ -113,24 +113,24 @@ class Webhook extends AbstractUpdateFetcher {
           ..useCertificateChainBytes(certificate.readAsBytesSync())
           ..usePrivateKeyBytes(privateKey.readAsBytesSync()));
     return Webhook(telegram, url, server,
-        ip_address: ip_address,
+        ipAddress: ipAddress,
         certificate: certificate,
         privateKey: privateKey,
         port: port,
         serverPort: serverPort,
         uploadCertificate: uploadCertificate,
-        max_connections: max_connections,
-        allowed_updates: allowed_updates,
-        secret_token: secret_token);
+        maxConnections: maxConnections,
+        allowedUpdates: allowedUpdates,
+        secretToken: secretToken);
   }
 
   Future<bool> setWebhook() async => await telegram.setWebhook('$url:$port',
-      ip_address: ip_address,
+      ipAddress: ipAddress,
       certificate: uploadCertificate ? certificate : null,
-      max_connections: max_connections,
-      allowed_updates: allowed_updates,
-      drop_pending_updates: drop_pending_updates,
-      secret_token: secret_token);
+      maxConnections: maxConnections,
+      allowedUpdates: allowedUpdates,
+      dropPendingUpdates: dropPendingUpdates,
+      secretToken: secretToken);
 
   /// Apply webhook configuration on Telegram API, and start the webhook server.
   @override
@@ -138,8 +138,8 @@ class Webhook extends AbstractUpdateFetcher {
     if (await setWebhook()) {
       _server.listen((io.HttpRequest request) {
         var isPostRequest = request.method == 'POST';
-        var isAuthorised = secret_token == null ||
-            secret_token ==
+        var isAuthorised = secretToken == null ||
+            secretToken ==
                 request.headers.value('X-Telegram-Bot-Api-Secret-Token');
 
         if (isPostRequest && isAuthorised) {
@@ -164,8 +164,8 @@ class Webhook extends AbstractUpdateFetcher {
 
   /// Remove webhook configuration from Telegram API, and stop the webhook server.
   @override
-  Future<void> stop({bool? drop_pending_updates}) async {
-    await telegram.deleteWebhook(drop_pending_updates: drop_pending_updates);
+  Future<void> stop({bool? dropPendingUpdates}) async {
+    await telegram.deleteWebhook(dropPendingUpdates: dropPendingUpdates);
     return _server.close();
   }
 }

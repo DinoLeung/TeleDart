@@ -21,7 +21,7 @@ part of '../model.dart';
 /// Represents a photo to be sent.
 ///
 /// https://core.telegram.org/bots/api#inputmediaphoto
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class InputMediaPhoto implements InputMedia {
   @override
   String type;
@@ -30,17 +30,17 @@ class InputMediaPhoto implements InputMedia {
   @override
   String? caption;
   @override
-  String? parse_mode;
+  String? parseMode;
   @override
-  List<MessageEntity>? caption_entities;
-  bool? has_spoiler;
+  List<MessageEntity>? captionEntities;
+  bool? hasSpoiler;
   InputMediaPhoto({
-    this.type = InputMedia.PHOTO,
+    this.type = InputMedia.typePhoto,
     required this.media,
     this.caption,
-    this.parse_mode,
-    this.caption_entities,
-    this.has_spoiler,
+    this.parseMode,
+    this.captionEntities,
+    this.hasSpoiler,
   });
   factory InputMediaPhoto.fromJson(Map<String, dynamic> json) =>
       _$InputMediaPhotoFromJson(json);

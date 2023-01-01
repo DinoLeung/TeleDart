@@ -23,7 +23,7 @@ part of '../model.dart';
 /// The error is considered resolved when the file with the document scan changes.
 ///
 /// https://core.telegram.org/bots/api#passportelementerrorfile
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class PassportElementErrorFile implements PassportElementError {
   @override
   String source;
@@ -31,12 +31,12 @@ class PassportElementErrorFile implements PassportElementError {
   String type;
   @override
   String message;
-  String file_hash;
+  String fileHash;
   PassportElementErrorFile({
     required this.source,
     required this.type,
     required this.message,
-    required this.file_hash,
+    required this.fileHash,
   });
   factory PassportElementErrorFile.fromJson(Map<String, dynamic> json) =>
       _$PassportElementErrorFileFromJson(json);

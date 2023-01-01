@@ -23,7 +23,7 @@ part of '../model.dart';
 /// The error is considered resolved when new data is added.
 ///
 /// https://core.telegram.org/bots/api#passportelementerrorunspecified
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class PassportElementErrorUnspecified implements PassportElementError {
   @override
   String source;
@@ -31,12 +31,12 @@ class PassportElementErrorUnspecified implements PassportElementError {
   String type;
   @override
   String message;
-  String element_hash;
+  String elementHash;
   PassportElementErrorUnspecified({
     required this.source,
     required this.type,
     required this.message,
-    required this.element_hash,
+    required this.elementHash,
   });
   factory PassportElementErrorUnspecified.fromJson(Map<String, dynamic> json) =>
       _$PassportElementErrorUnspecifiedFromJson(json);

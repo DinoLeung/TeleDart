@@ -19,7 +19,7 @@ Future<void> main() async {
   //     io.File(envVars['CERT_PATH']!),
   //     io.File(envVars['KEY_PATH']!),
   //     port: int.parse(envVars['BOT_PORT']!),
-  //     secret_token: envVars['SECRET_TOKEN']!);
+  //     secretToken: envVars['SECRET_TOKEN']!);
   // var teledart = TeleDart(envVars['BOT_TOKEN']!, Event(username!), fetcher: webhook);
 
   teledart.start();
@@ -52,12 +52,12 @@ Future<void> main() async {
         InlineQueryResultArticle(
             id: 'ping',
             title: 'ping',
-            input_message_content: InputTextMessageContent(
-                message_text: '*pong*', parse_mode: 'MarkdownV2')),
+            inputMessageContent: InputTextMessageContent(
+                messageText: '*pong*', parseMode: 'MarkdownV2')),
         InlineQueryResultArticle(
             id: 'ding',
             title: 'ding',
-            input_message_content: InputTextMessageContent(
-                message_text: '*_dong_*', parse_mode: 'MarkdownV2')),
+            inputMessageContent: InputTextMessageContent(
+                messageText: '*_dong_*', parseMode: 'MarkdownV2')),
       ]));
 }

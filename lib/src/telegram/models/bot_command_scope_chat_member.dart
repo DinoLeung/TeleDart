@@ -23,15 +23,15 @@ part of '../model.dart';
 /// https://core.telegram.org/bots/api#botcommandscopechatmember
 ///
 /// [scope]: https://core.telegram.org/bots/api#botcommandscope
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class BotCommandScopeChatMember implements BotCommandScope {
   @override
   String type;
-  dynamic chat_id;
+  dynamic chatId;
 
   BotCommandScopeChatMember({
-    this.type = BotCommandScope.CHAT_MEMBER,
-    required this.chat_id,
+    this.type = BotCommandScope.typeChatMember,
+    required this.chatId,
   });
 
   factory BotCommandScopeChatMember.fromJson(Map<String, dynamic> json) =>

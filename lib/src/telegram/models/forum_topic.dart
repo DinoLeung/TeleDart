@@ -21,18 +21,18 @@ part of '../model.dart';
 /// This object represents a forum topic.
 ///
 /// https://core.telegram.org/bots/api#forumtopic
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class ForumTopic {
-  String message_thread_id;
+  String messageThreadId;
   String name;
-  int icon_color;
-  String? icon_custom_emoji_id;
+  int iconColor;
+  String? iconCustomEmojiId;
 
   ForumTopic({
-    required this.message_thread_id,
+    required this.messageThreadId,
     required this.name,
-    required this.icon_color,
-    this.icon_custom_emoji_id,
+    required this.iconColor,
+    this.iconCustomEmojiId,
   });
 
   factory ForumTopic.fromJson(Map<String, dynamic> json) =>

@@ -21,35 +21,35 @@ part of '../model.dart';
 /// This object represents a sticker.
 ///
 /// https://core.telegram.org/bots/api#sticker
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class Sticker {
-  String file_id;
-  String file_unique_id;
+  String fileId;
+  String fileUniqueId;
   int width;
   int height;
-  bool is_animated;
-  bool is_video;
+  bool isAnimated;
+  bool isVideo;
   PhotoSize? thumb;
   String? emoji;
-  String? set_name;
-  File? premium_animation;
-  MaskPosition? mask_position;
-  String? custom_emoji_id;
-  int? file_size;
+  String? setName;
+  File? premiumAnimation;
+  MaskPosition? maskPosition;
+  String? customEmojiId;
+  int? fileSize;
   Sticker({
-    required this.file_id,
-    required this.file_unique_id,
+    required this.fileId,
+    required this.fileUniqueId,
     required this.width,
     required this.height,
-    required this.is_animated,
-    required this.is_video,
+    required this.isAnimated,
+    required this.isVideo,
     this.thumb,
     this.emoji,
-    this.set_name,
-    this.premium_animation,
-    this.mask_position,
-    this.custom_emoji_id,
-    this.file_size,
+    this.setName,
+    this.premiumAnimation,
+    this.maskPosition,
+    this.customEmojiId,
+    this.fileSize,
   });
   factory Sticker.fromJson(Map<String, dynamic> json) =>
       _$StickerFromJson(json);

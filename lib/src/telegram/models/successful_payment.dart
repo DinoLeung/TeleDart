@@ -21,23 +21,23 @@ part of '../model.dart';
 /// This object contains basic information about a successful payment.
 ///
 /// https://core.telegram.org/bots/api#successfulpayment
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class SuccessfulPayment {
   String currency;
-  int total_amount;
-  String invoice_payload;
-  String? shipping_option_id;
-  OrderInfo? order_info;
-  String telegram_payment_charge_id;
-  String provider_payment_charge_id;
+  int totalAmount;
+  String invoicePayload;
+  String? shippingOptionId;
+  OrderInfo? orderInfo;
+  String telegramPaymentChargeId;
+  String providerPaymentChargeId;
   SuccessfulPayment({
     required this.currency,
-    required this.total_amount,
-    required this.invoice_payload,
-    this.shipping_option_id,
-    this.order_info,
-    required this.telegram_payment_charge_id,
-    required this.provider_payment_charge_id,
+    required this.totalAmount,
+    required this.invoicePayload,
+    this.shippingOptionId,
+    this.orderInfo,
+    required this.telegramPaymentChargeId,
+    required this.providerPaymentChargeId,
   });
   factory SuccessfulPayment.fromJson(Map<String, dynamic> json) =>
       _$SuccessfulPaymentFromJson(json);

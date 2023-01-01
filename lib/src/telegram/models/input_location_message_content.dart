@@ -23,29 +23,29 @@ part of '../model.dart';
 /// https://core.telegram.org/bots/api#inputlocationmessagecontent
 ///
 /// [content]: https://core.telegram.org/bots/api#inputmessagecontent
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class InputLocationMessageContent implements InputMessageContent {
   double latitude;
   double longitude;
-  double? horizontal_accuracy;
-  int? live_period;
+  double? horizontalAccuracy;
+  int? livePeriod;
   int? heading;
-  int? proximity_alert_radius;
+  int? proximityAlertRadius;
 
   InputLocationMessageContent({
     required this.latitude,
     required this.longitude,
-    this.horizontal_accuracy,
-    this.live_period,
+    this.horizontalAccuracy,
+    this.livePeriod,
     this.heading,
-    this.proximity_alert_radius,
+    this.proximityAlertRadius,
   });
 
   @JsonKey(ignore: true)
-  Duration? get live_period_ =>
-      live_period == null ? null : TimeHelper.toDuration(live_period!);
-  set live_period_(Duration? duration) =>
-      live_period = duration == null ? null : TimeHelper.toSeconds(duration);
+  Duration? get livePeriod_ =>
+      livePeriod == null ? null : TimeHelper.toDuration(livePeriod!);
+  set livePeriod_(Duration? duration) =>
+      livePeriod = duration == null ? null : TimeHelper.toSeconds(duration);
 
   factory InputLocationMessageContent.fromJson(Map<String, dynamic> json) =>
       _$InputLocationMessageContentFromJson(json);

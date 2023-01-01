@@ -26,12 +26,12 @@ part of '../model.dart';
 ///
 /// [scope]: https://core.telegram.org/bots/api#botcommandscope
 /// [narrower scope]: https://core.telegram.org/bots/api#determining-list-of-commands
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class BotCommandScopeDefault implements BotCommandScope {
   @override
   String type;
 
-  BotCommandScopeDefault({this.type = BotCommandScope.DEFAULT});
+  BotCommandScopeDefault({this.type = BotCommandScope.typeDefault});
 
   factory BotCommandScopeDefault.fromJson(Map<String, dynamic> json) =>
       _$BotCommandScopeDefaultFromJson(json);

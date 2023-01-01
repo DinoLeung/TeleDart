@@ -24,7 +24,7 @@ part of '../model.dart';
 ///
 /// [Web App]: https://core.telegram.org/bots/webapps
 
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class WebAppInfo {
   String url;
 

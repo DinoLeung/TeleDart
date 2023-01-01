@@ -23,39 +23,39 @@ part of '../model.dart';
 /// At most one of the optional parameters can be present in any given update.
 ///
 /// https://core.telegram.org/bots/api#update
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class Update {
-  int update_id;
+  int updateId;
   Message? message;
-  Message? edited_message;
-  Message? channel_post;
-  Message? edited_channel_post;
-  InlineQuery? inline_query;
-  ChosenInlineResult? chosen_inline_result;
-  CallbackQuery? callback_query;
-  ShippingQuery? shipping_query;
-  PreCheckoutQuery? pre_checkout_query;
+  Message? editedMessage;
+  Message? channelPost;
+  Message? editedChannelPost;
+  InlineQuery? inlineQuery;
+  ChosenInlineResult? chosenInlineResult;
+  CallbackQuery? callbackQuery;
+  ShippingQuery? shippingQuery;
+  PreCheckoutQuery? preCheckoutQuery;
   Poll? poll;
-  PollAnswer? poll_answer;
-  ChatMemberUpdated? my_chat_member;
-  ChatMemberUpdated? chat_member;
-  ChatJoinRequest? chat_join_request;
+  PollAnswer? pollAnswer;
+  ChatMemberUpdated? myChatMember;
+  ChatMemberUpdated? chatMember;
+  ChatJoinRequest? chatJoinRequest;
   Update({
-    required this.update_id,
+    required this.updateId,
     this.message,
-    this.edited_message,
-    this.channel_post,
-    this.edited_channel_post,
-    this.inline_query,
-    this.chosen_inline_result,
-    this.callback_query,
-    this.shipping_query,
-    this.pre_checkout_query,
+    this.editedMessage,
+    this.channelPost,
+    this.editedChannelPost,
+    this.inlineQuery,
+    this.chosenInlineResult,
+    this.callbackQuery,
+    this.shippingQuery,
+    this.preCheckoutQuery,
     this.poll,
-    this.poll_answer,
-    this.my_chat_member,
-    this.chat_member,
-    this.chat_join_request,
+    this.pollAnswer,
+    this.myChatMember,
+    this.chatMember,
+    this.chatJoinRequest,
   });
   factory Update.fromJson(Map<String, dynamic> json) => _$UpdateFromJson(json);
   Map<String, dynamic> toJson() => _$UpdateToJson(this);

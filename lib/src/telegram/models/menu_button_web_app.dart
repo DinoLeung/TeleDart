@@ -24,15 +24,18 @@ part of '../model.dart';
 ///
 /// [Web App]: https://core.telegram.org/bots/webapps
 
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class MenuButtonWebApp implements MenuButton {
   @override
   String type;
   String text;
-  WebAppInfo web_app;
-  MenuButtonWebApp({this.type = MenuButton.WEB_APP, required this.text, required this.web_app});
+  WebAppInfo webApp;
+  MenuButtonWebApp(
+      {this.type = MenuButton.typeWebApp,
+      required this.text,
+      required this.webApp});
   factory MenuButtonWebApp.fromJson(Map<String, dynamic> json) =>
       _$MenuButtonWebAppFromJson(json);
-
+  @override
   Map<String, dynamic> toJson() => _$MenuButtonWebAppToJson(this);
 }

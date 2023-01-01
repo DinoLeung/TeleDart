@@ -27,18 +27,18 @@ part of '../model.dart';
 /// [result]: https://core.telegram.org/bots/api#inlinequeryresult
 /// [inline feedback]: https://core.telegram.org/bots/inline#collecting-feedback
 /// [@Botfather]: https://t.me/botfather
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class ChosenInlineResult {
-  String result_id;
+  String resultId;
   User from;
   Location? location;
-  String? inline_message_id;
+  String? inlineMessageId;
   String query;
   ChosenInlineResult({
-    required this.result_id,
+    required this.resultId,
     required this.from,
     this.location,
-    this.inline_message_id,
+    this.inlineMessageId,
     required this.query,
   });
   factory ChosenInlineResult.fromJson(Map<String, dynamic> json) =>

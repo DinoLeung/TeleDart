@@ -23,7 +23,7 @@ part of '../model.dart';
 /// Currently holds no information.
 ///
 /// https://core.telegram.org/bots/api#voicechatstarted
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class VoiceChatStarted {
   VoiceChatStarted();
   factory VoiceChatStarted.fromJson(Map<String, dynamic> json) =>

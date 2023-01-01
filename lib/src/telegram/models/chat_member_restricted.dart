@@ -24,44 +24,44 @@ part of '../model.dart';
 ///
 /// [chat member]: https://core.telegram.org/bots/api#chatmember
 
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class ChatMemberRestricted implements ChatMember {
   @override
   String status;
   @override
   User user;
-  bool is_member;
-  bool can_change_info;
-  bool can_invite_users;
-  bool can_pin_messages;
-  bool can_manage_topics;
-  bool can_send_messages;
-  bool can_send_media_messages;
-  bool can_send_polls;
-  bool can_send_other_messages;
-  bool can_add_web_page_previews;
-  int until_date;
+  bool isMember;
+  bool canChangeInfo;
+  bool canInviteUsers;
+  bool canPinMessages;
+  bool canManageTopics;
+  bool canSendMessages;
+  bool canSendMediaMessages;
+  bool canSendPolls;
+  bool canSendOtherMessages;
+  bool canAddWebPagePreviews;
+  int untilDate;
 
   ChatMemberRestricted({
     required this.status,
     required this.user,
-    this.is_member = false,
-    this.can_change_info = false,
-    this.can_invite_users = false,
-    this.can_pin_messages = false,
-    this.can_manage_topics = false,
-    this.can_send_messages = false,
-    this.can_send_media_messages = false,
-    this.can_send_polls = false,
-    this.can_send_other_messages = false,
-    this.can_add_web_page_previews = false,
-    required this.until_date,
+    this.isMember = false,
+    this.canChangeInfo = false,
+    this.canInviteUsers = false,
+    this.canPinMessages = false,
+    this.canManageTopics = false,
+    this.canSendMessages = false,
+    this.canSendMediaMessages = false,
+    this.canSendPolls = false,
+    this.canSendOtherMessages = false,
+    this.canAddWebPagePreviews = false,
+    required this.untilDate,
   });
 
   @JsonKey(ignore: true)
-  DateTime get until_date_ => TimeHelper.toDateTime(until_date);
-  set until_date_(DateTime dateTime) =>
-      until_date = TimeHelper.toUnixTime(dateTime);
+  DateTime get untilDate_ => TimeHelper.toDateTime(untilDate);
+  set untilDate_(DateTime dateTime) =>
+      untilDate = TimeHelper.toUnixTime(dateTime);
 
   factory ChatMemberRestricted.fromJson(Map<String, dynamic> json) =>
       _$ChatMemberRestrictedFromJson(json);

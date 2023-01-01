@@ -36,23 +36,23 @@ part of '../model.dart';
 /// [inline keyboard]: https://core.telegram.org/bots#inline-keyboards-and-on-the-fly-updating
 /// [inline mode]: https://core.telegram.org/bots/api#inline-mode
 /// [answerCallbackQuery]: https://core.telegram.org/bots/api#answercallbackquery
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class CallbackQuery {
   String id;
   User from;
   Message? message;
-  String? inline_message_id;
-  String? chat_instance;
+  String? inlineMessageId;
+  String? chatInstance;
   String? data;
-  String? game_short_name;
+  String? gameShortName;
   CallbackQuery({
     required this.id,
     required this.from,
     this.message,
-    this.inline_message_id,
-    this.chat_instance,
+    this.inlineMessageId,
+    this.chatInstance,
     this.data,
-    this.game_short_name,
+    this.gameShortName,
   });
   factory CallbackQuery.fromJson(Map<String, dynamic> json) =>
       _$CallbackQueryFromJson(json);

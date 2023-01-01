@@ -29,22 +29,22 @@ part of '../model.dart';
 /// https://core.telegram.org/bots/api#file
 ///
 /// [getFile]: https://core.telegram.org/bots/api#getfile
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class File {
-  String file_id;
-  String file_unique_id;
-  int? file_size;
-  String? file_path;
+  String fileId;
+  String fileUniqueId;
+  int? fileSize;
+  String? filePath;
   File({
-    required this.file_id,
-    required this.file_unique_id,
-    this.file_size,
-    this.file_path,
+    required this.fileId,
+    required this.fileUniqueId,
+    this.fileSize,
+    this.filePath,
   });
 
-  String? getDownloadLink(String token) => (file_path?.isEmpty ?? true)
+  String? getDownloadLink(String token) => (filePath?.isEmpty ?? true)
       ? null
-      : 'https://api.telegram.org/file/bot$token/$file_path';
+      : 'https://api.telegram.org/file/bot$token/$filePath';
 
   factory File.fromJson(Map<String, dynamic> json) => _$FileFromJson(json);
   Map<String, dynamic> toJson() => _$FileToJson(this);

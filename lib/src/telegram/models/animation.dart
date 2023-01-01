@@ -21,28 +21,28 @@ part of '../model.dart';
 /// This object represents an animation file (GIF or H.264/MPEG-4 AVC video without sound).
 ///
 /// https://core.telegram.org/bots/api#animation
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class Animation {
-  String file_id;
-  String file_unique_id;
+  String fileId;
+  String fileUniqueId;
   int width;
   int height;
   int duration;
   PhotoSize? thumb;
-  String? file_name;
-  String? mime_type;
-  int? file_size;
+  String? fileName;
+  String? mimeType;
+  int? fileSize;
 
   Animation({
-    required this.file_id,
-    required this.file_unique_id,
+    required this.fileId,
+    required this.fileUniqueId,
     required this.width,
     required this.height,
     required this.duration,
     this.thumb,
-    this.file_name,
-    this.mime_type,
-    this.file_size,
+    this.fileName,
+    this.mimeType,
+    this.fileSize,
   });
 
   @JsonKey(ignore: true)

@@ -24,24 +24,24 @@ part of '../model.dart';
 ///
 /// [chat member]: https://core.telegram.org/bots/api#chatmember
 
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class ChatMemberBanned implements ChatMember {
   @override
   String status;
   @override
   User user;
-  int until_date;
+  int untilDate;
 
   ChatMemberBanned({
     required this.status,
     required this.user,
-    required this.until_date,
+    required this.untilDate,
   });
 
   @JsonKey(ignore: true)
-  DateTime get until_date_ => TimeHelper.toDateTime(until_date);
-  set until_date_(DateTime dateTime) =>
-      until_date = TimeHelper.toUnixTime(dateTime);
+  DateTime get untilDate_ => TimeHelper.toDateTime(untilDate);
+  set untilDate_(DateTime dateTime) =>
+      untilDate = TimeHelper.toUnixTime(dateTime);
 
   factory ChatMemberBanned.fromJson(Map<String, dynamic> json) =>
       _$ChatMemberBannedFromJson(json);

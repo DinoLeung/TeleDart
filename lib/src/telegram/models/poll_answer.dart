@@ -21,15 +21,15 @@ part of '../model.dart';
 /// This object represents type of a poll, which is allowed to be created and sent when the corresponding button is pressed.
 ///
 /// https://core.telegram.org/bots/api#pollanswer
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class PollAnswer {
-  String poll_id;
+  String pollId;
   User user;
-  List<int> option_ids;
+  List<int> optionIds;
   PollAnswer({
-    required this.poll_id,
+    required this.pollId,
     required this.user,
-    required this.option_ids,
+    required this.optionIds,
   });
   factory PollAnswer.fromJson(Map<String, dynamic> json) =>
       _$PollAnswerFromJson(json);

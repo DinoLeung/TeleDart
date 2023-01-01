@@ -21,18 +21,18 @@ part of '../model.dart';
 /// This object represents a phone contact.
 ///
 /// https://core.telegram.org/bots/api#contact
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class Contact {
-  String phone_number;
-  String first_name;
-  String? last_name;
-  int? user_id;
+  String phoneNumber;
+  String firstName;
+  String? lastName;
+  int? userId;
   String? vcard;
   Contact({
-    required this.phone_number,
-    required this.first_name,
-    this.last_name,
-    this.user_id,
+    required this.phoneNumber,
+    required this.firstName,
+    this.lastName,
+    this.userId,
     this.vcard,
   });
   factory Contact.fromJson(Map<String, dynamic> json) =>

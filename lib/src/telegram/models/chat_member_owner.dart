@@ -23,20 +23,20 @@ part of '../model.dart';
 /// https://core.telegram.org/bots/api#chatmemberowner
 ///
 /// [chat member]: https://core.telegram.org/bots/api#chatmember
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class ChatMemberOwner implements ChatMember {
   @override
   String status;
   @override
   User user;
-  bool is_anonymous;
-  String? custom_title;
+  bool isAnonymous;
+  String? customTitle;
 
   ChatMemberOwner({
     required this.user,
     required this.status,
-    required this.is_anonymous,
-    this.custom_title,
+    required this.isAnonymous,
+    this.customTitle,
   });
 
   factory ChatMemberOwner.fromJson(Map<String, dynamic> json) =>

@@ -24,12 +24,12 @@ part of '../model.dart';
 ///
 /// [Web App]: https://core.telegram.org/bots/webapps
 
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class WebAppData {
   String data;
-  String button_text;
+  String buttonText;
 
-  WebAppData({required this.data, required this.button_text});
+  WebAppData({required this.data, required this.buttonText});
 
   factory WebAppData.fromJson(Map<String, dynamic> json) =>
       _$WebAppDataFromJson(json);

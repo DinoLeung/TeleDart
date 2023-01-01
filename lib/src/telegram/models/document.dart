@@ -25,21 +25,21 @@ part of '../model.dart';
 /// [photos]: https://core.telegram.org/bots/api#photosize
 /// [voice messages]: https://core.telegram.org/bots/api#voice
 /// [audio files]: https://core.telegram.org/bots/api#audio
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class Document {
-  String file_id;
-  String file_unique_id;
+  String fileId;
+  String fileUniqueId;
   PhotoSize? thumb;
-  String? file_name;
-  String? mime_type;
-  int? file_size;
+  String? fileName;
+  String? mimeType;
+  int? fileSize;
   Document({
-    required this.file_id,
-    required this.file_unique_id,
+    required this.fileId,
+    required this.fileUniqueId,
     this.thumb,
-    this.file_name,
-    this.mime_type,
-    this.file_size,
+    this.fileName,
+    this.mimeType,
+    this.fileSize,
   });
   factory Document.fromJson(Map<String, dynamic> json) =>
       _$DocumentFromJson(json);

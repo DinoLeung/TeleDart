@@ -37,10 +37,10 @@ class TeleDartCallbackQuery extends CallbackQuery {
           id: callbackQuery.id,
           from: callbackQuery.from,
           message: callbackQuery.message,
-          inline_message_id: callbackQuery.inline_message_id,
-          chat_instance: callbackQuery.chat_instance,
+          inlineMessageId: callbackQuery.inlineMessageId,
+          chatInstance: callbackQuery.chatInstance,
           data: callbackQuery.data,
-          game_short_name: callbackQuery.game_short_name,
+          gameShortName: callbackQuery.gameShortName,
         );
 
   TeleDartMessage? get teledartMessage =>
@@ -57,10 +57,10 @@ class TeleDartCallbackQuery extends CallbackQuery {
   /// for more information about those options.**
   Future<bool> answer({
     String? text,
-    bool? show_alert,
+    bool? showAlert,
     String? url,
-    int? cache_time,
+    int? cacheTime,
   }) =>
       _teledart.answerCallbackQuery(id,
-          text: text, show_alert: show_alert, url: url, cache_time: cache_time);
+          text: text, showAlert: showAlert, url: url, cacheTime: cacheTime);
 }

@@ -21,7 +21,7 @@ part of '../model.dart';
 /// This object represents a service message about new members invited to a voice chat.
 ///
 /// https://core.telegram.org/bots/api#voicechatparticipantsinvited
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class VoiceChatParticipantsInvited {
   List<User>? users;
 

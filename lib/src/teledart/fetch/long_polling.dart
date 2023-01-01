@@ -16,7 +16,6 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import 'dart:async';
 import 'dart:core';
 import 'dart:io';
 
@@ -31,12 +30,12 @@ import 'abstract_update_fetcher.dart';
 class LongPolling extends AbstractUpdateFetcher {
   final Telegram telegram;
 
-  final MAX_TIMEOUT = 50;
+  final maxTimeout = 50;
 
   int offset;
   int limit;
   int timeout;
-  List<String>? allowed_updates;
+  List<String>? allowedUpdates;
 
   bool _isPolling = false;
   bool get isPolling => _isPolling;
@@ -51,12 +50,12 @@ class LongPolling extends AbstractUpdateFetcher {
       {this.offset = 0,
       this.limit = 100,
       this.timeout = 30,
-      this.allowed_updates}) {
+      this.allowedUpdates}) {
     if (limit > 100 || limit < 1) {
       throw LongPollingException('Limit must between 1 and 100.');
     }
-    if (timeout > MAX_TIMEOUT) {
-      throw LongPollingException('Timeout may not greater than $MAX_TIMEOUT.');
+    if (timeout > maxTimeout) {
+      throw LongPollingException('Timeout may not greater than $maxTimeout.');
     }
   }
 
@@ -89,12 +88,12 @@ class LongPolling extends AbstractUpdateFetcher {
               offset: offset,
               limit: limit,
               timeout: timeout,
-              allowed_updates: allowed_updates)
+              allowedUpdates: allowedUpdates)
           .then((updates) {
         if (updates.isNotEmpty) {
           for (var update in updates) {
             emitUpdate(update);
-            offset = update.update_id + 1;
+            offset = update.updateId + 1;
           }
         }
         _resetRetryDelay();

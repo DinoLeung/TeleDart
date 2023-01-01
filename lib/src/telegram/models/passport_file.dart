@@ -23,24 +23,24 @@ part of '../model.dart';
 /// Currently all Telegram Passport files are in JPEG format when decrypted and don't exceed 10MB.
 ///
 /// https://core.telegram.org/bots/api#passportfile
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class PassportFile {
-  String file_id;
-  String file_unique_id;
-  int file_size;
-  int file_date;
+  String fileId;
+  String fileUniqueId;
+  int fileSize;
+  int fileDate;
 
   PassportFile({
-    required this.file_id,
-    required this.file_unique_id,
-    required this.file_size,
-    required this.file_date,
+    required this.fileId,
+    required this.fileUniqueId,
+    required this.fileSize,
+    required this.fileDate,
   });
 
   @JsonKey(ignore: true)
-  DateTime get file_date_ => TimeHelper.toDateTime(file_date);
-  set file_date_(DateTime dateTime) =>
-      file_date = TimeHelper.toUnixTime(dateTime);
+  DateTime get fileDate_ => TimeHelper.toDateTime(fileDate);
+  set fileDate_(DateTime dateTime) =>
+      fileDate = TimeHelper.toUnixTime(dateTime);
 
   factory PassportFile.fromJson(Map<String, dynamic> json) =>
       _$PassportFileFromJson(json);

@@ -28,7 +28,7 @@ class HttpClient {
 
   static http.MultipartFile toMultiPartFile(io.File file, String fieldName) =>
       http.MultipartFile(fieldName, file.openRead(), file.lengthSync(),
-          filename: '${file.path.split(io.Platform.pathSeparator).last}');
+          filename: file.path.split(io.Platform.pathSeparator).last);
 
   /// HTTP get method
   /// [url] request url with query string (required)

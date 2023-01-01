@@ -24,11 +24,11 @@ part of '../model.dart';
 ///
 /// [Web App]: https://core.telegram.org/bots/webapps
 
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class SentWebAppMessage {
-  String? inline_message_id;
+  String? inlineMessageId;
 
-  SentWebAppMessage({this.inline_message_id});
+  SentWebAppMessage({this.inlineMessageId});
 
   factory SentWebAppMessage.fromJson(Map<String, dynamic> json) =>
       _$SentWebAppMessageFromJson(json);

@@ -29,17 +29,17 @@ part of '../model.dart';
 ///
 /// [Telegram Login Widget]: https://core.telegram.org/widgets/login
 /// [version 5.7]: https://telegram.org/blog/privacy-discussions-web-bots#meet-seamless-web-bots
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class LoginUrl {
   String url;
-  String? forward_text;
-  String? bot_username;
-  bool? request_write_access;
+  String? forwardText;
+  String? botUsername;
+  bool? requestWriteAccess;
   LoginUrl({
     required this.url,
-    this.forward_text,
-    this.bot_username,
-    this.request_write_access,
+    this.forwardText,
+    this.botUsername,
+    this.requestWriteAccess,
   });
   factory LoginUrl.fromJson(Map<String, dynamic> json) =>
       _$LoginUrlFromJson(json);
