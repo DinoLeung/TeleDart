@@ -1895,6 +1895,104 @@ class Telegram {
     return await HttpClient.httpPost(requestUrl, body: body);
   }
 
+  /// Use this method to edit the name of the 'General' topic in a forum supergroup chat.
+  ///
+  /// The bot must be an administrator in the chat for this to work and must have `can_manage_topics` administrator rights.
+  ///
+  /// Returns *True* on success.
+  ///
+  /// https://core.telegram.org/bots/api#editgeneralforumtopic
+  Future<bool> editGeneralForumTopic(dynamic chat_id, String name) async {
+    if (chat_id is! String && chat_id is! int) {
+      return Future.error(TelegramException(
+          'Attribute \'chat_id\' can only be either type of String or int'));
+    }
+    var requestUrl = _apiUri('editGeneralForumTopic');
+    var body = <String, dynamic>{
+      'chat_id': chat_id,
+      'name': name,
+    };
+    return await HttpClient.httpPost(requestUrl, body: body);
+  }
+
+  /// Use this method to close an open 'General' topic in a forum supergroup chat.
+  ///
+  /// The bot must be an administrator in the chat for this to work and must have the `can_manage_topics` administrator rights.
+  ///
+  /// Returns *True* on success.
+  ///
+  ///https://core.telegram.org/bots/api#closegeneralforumtopic
+  Future<bool> closeGeneralForumTopic(dynamic chat_id) async {
+    if (chat_id is! String && chat_id is! int) {
+      return Future.error(TelegramException(
+          'Attribute \'chat_id\' can only be either type of String or int'));
+    }
+    var requestUrl = _apiUri('closeGeneralForumTopic');
+    var body = <String, dynamic>{
+      'chat_id': chat_id,
+    };
+    return await HttpClient.httpPost(requestUrl, body: body);
+  }
+
+  /// Use this method to reopen a closed 'General' topic in a forum supergroup chat.
+  ///
+  /// The bot must be an administrator in the chat for this to work and must have the `can_manage_topics` administrator rights.
+  /// The topic will be automatically unhidden if it was hidden.
+  ///
+  /// Returns True on success.
+  ///
+  /// https://core.telegram.org/bots/api#reopengeneralforumtopic
+  Future<bool> reopenGeneralForumTopic(dynamic chat_id) async {
+    if (chat_id is! String && chat_id is! int) {
+      return Future.error(TelegramException(
+          'Attribute \'chat_id\' can only be either type of String or int'));
+    }
+    var requestUrl = _apiUri('reopenGeneralForumTopic');
+    var body = <String, dynamic>{
+      'chat_id': chat_id,
+    };
+    return await HttpClient.httpPost(requestUrl, body: body);
+  }
+
+  /// Use this method to hide the 'General' topic in a forum supergroup chat.
+  ///
+  /// The bot must be an administrator in the chat for this to work and must have the `can_manage_topics` administrator rights.
+  /// The topic will be automatically closed if it was open.
+  ///
+  /// Returns *True* on success.
+  ///
+  /// https://core.telegram.org/bots/api#hidegeneralforumtopic
+  Future<bool> hideGeneralForumTopic(dynamic chat_id) async {
+    if (chat_id is! String && chat_id is! int) {
+      return Future.error(TelegramException(
+          'Attribute \'chat_id\' can only be either type of String or int'));
+    }
+    var requestUrl = _apiUri('hideGeneralForumTopic');
+    var body = <String, dynamic>{
+      'chat_id': chat_id,
+    };
+    return await HttpClient.httpPost(requestUrl, body: body);
+  }
+
+  /// Use this method to unhide the 'General' topic in a forum supergroup chat.
+  ///
+  /// The bot must be an administrator in the chat for this to work and must have the `can_manage_topics` administrator rights
+  ///
+  /// Returns *True* on success.
+  ///
+  /// https://core.telegram.org/bots/api#unhidegeneralforumtopic
+  Future<bool> unhideGeneralForumTopic(dynamic chat_id) async {
+    if (chat_id is! String && chat_id is! int) {
+      return Future.error(TelegramException(
+          'Attribute \'chat_id\' can only be either type of String or int'));
+    }
+    var requestUrl = _apiUri('unhideGeneralForumTopic');
+    var body = <String, dynamic>{
+      'chat_id': chat_id,
+    };
+    return await HttpClient.httpPost(requestUrl, body: body);
+  }
+
   /// Use this method to send answers to callback queries sent from [inline keyboards]
   ///
   /// The answer will be displayed to the user as a notification at the top of the chat screen or as
