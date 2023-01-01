@@ -77,11 +77,15 @@ class Message {
   Invoice? invoice;
   SuccessfulPayment? successful_payment;
   String? connected_website;
+  WriteAccessAllowed? write_access_allowed;
   PassportData? passport_data;
   ProximityAlertTriggered? proximity_alert_triggered;
   ForumTopicCreated? forum_topic_created;
+  ForumTopicEdited? forum_topic_edited;
   ForumTopicClosed? forum_topic_closed;
   ForumTopicReopened? forum_topic_reopened;
+  GeneralForumTopicHidden? general_forum_topic_hidden;
+  GeneralForumTopicUnhidden? general_forum_topic_unhidden;
   VoiceChatScheduled? video_chat_scheduled;
   VoiceChatStarted? video_chat_started;
   VoiceChatEnded? video_chat_ended;
@@ -144,11 +148,15 @@ class Message {
     this.invoice,
     this.successful_payment,
     this.connected_website,
+    this.write_access_allowed,
     this.passport_data,
     this.proximity_alert_triggered,
     this.forum_topic_created,
+    this.forum_topic_edited,
     this.forum_topic_closed,
     this.forum_topic_reopened,
+    this.general_forum_topic_hidden,
+    this.general_forum_topic_unhidden,
     this.video_chat_scheduled,
     this.video_chat_started,
     this.video_chat_ended,

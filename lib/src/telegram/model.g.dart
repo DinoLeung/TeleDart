@@ -943,6 +943,26 @@ Map<String, dynamic> _$ForumTopicCreatedToJson(ForumTopicCreated instance) {
   return val;
 }
 
+ForumTopicEdited _$ForumTopicEditedFromJson(Map<String, dynamic> json) =>
+    ForumTopicEdited(
+      name: json['name'] as String?,
+      icon_custom_emoji_id: json['icon_custom_emoji_id'] as String?,
+    );
+
+Map<String, dynamic> _$ForumTopicEditedToJson(ForumTopicEdited instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('name', instance.name);
+  writeNotNull('icon_custom_emoji_id', instance.icon_custom_emoji_id);
+  return val;
+}
+
 ForumTopicReopened _$ForumTopicReopenedFromJson(Map<String, dynamic> json) =>
     ForumTopicReopened();
 
@@ -1021,6 +1041,22 @@ Map<String, dynamic> _$GameToJson(Game instance) {
   writeNotNull('animation', instance.animation?.toJson());
   return val;
 }
+
+GeneralForumTopicHidden _$GeneralForumTopicHiddenFromJson(
+        Map<String, dynamic> json) =>
+    GeneralForumTopicHidden();
+
+Map<String, dynamic> _$GeneralForumTopicHiddenToJson(
+        GeneralForumTopicHidden instance) =>
+    <String, dynamic>{};
+
+GeneralForumTopicUnhidden _$GeneralForumTopicUnhiddenFromJson(
+        Map<String, dynamic> json) =>
+    GeneralForumTopicUnhidden();
+
+Map<String, dynamic> _$GeneralForumTopicUnhiddenToJson(
+        GeneralForumTopicUnhidden instance) =>
+    <String, dynamic>{};
 
 InlineKeyboardButton _$InlineKeyboardButtonFromJson(
         Map<String, dynamic> json) =>
@@ -2898,6 +2934,10 @@ Message _$MessageFromJson(Map<String, dynamic> json) => Message(
           : SuccessfulPayment.fromJson(
               json['successful_payment'] as Map<String, dynamic>),
       connected_website: json['connected_website'] as String?,
+      write_access_allowed: json['write_access_allowed'] == null
+          ? null
+          : WriteAccessAllowed.fromJson(
+              json['write_access_allowed'] as Map<String, dynamic>),
       passport_data: json['passport_data'] == null
           ? null
           : PassportData.fromJson(
@@ -2910,6 +2950,10 @@ Message _$MessageFromJson(Map<String, dynamic> json) => Message(
           ? null
           : ForumTopicCreated.fromJson(
               json['forum_topic_created'] as Map<String, dynamic>),
+      forum_topic_edited: json['forum_topic_edited'] == null
+          ? null
+          : ForumTopicEdited.fromJson(
+              json['forum_topic_edited'] as Map<String, dynamic>),
       forum_topic_closed: json['forum_topic_closed'] == null
           ? null
           : ForumTopicClosed.fromJson(
@@ -2918,6 +2962,14 @@ Message _$MessageFromJson(Map<String, dynamic> json) => Message(
           ? null
           : ForumTopicReopened.fromJson(
               json['forum_topic_reopened'] as Map<String, dynamic>),
+      general_forum_topic_hidden: json['general_forum_topic_hidden'] == null
+          ? null
+          : GeneralForumTopicHidden.fromJson(
+              json['general_forum_topic_hidden'] as Map<String, dynamic>),
+      general_forum_topic_unhidden: json['general_forum_topic_unhidden'] == null
+          ? null
+          : GeneralForumTopicUnhidden.fromJson(
+              json['general_forum_topic_unhidden'] as Map<String, dynamic>),
       video_chat_scheduled: json['video_chat_scheduled'] == null
           ? null
           : VoiceChatScheduled.fromJson(
@@ -3013,12 +3065,18 @@ Map<String, dynamic> _$MessageToJson(Message instance) {
   writeNotNull('invoice', instance.invoice?.toJson());
   writeNotNull('successful_payment', instance.successful_payment?.toJson());
   writeNotNull('connected_website', instance.connected_website);
+  writeNotNull('write_access_allowed', instance.write_access_allowed?.toJson());
   writeNotNull('passport_data', instance.passport_data?.toJson());
   writeNotNull('proximity_alert_triggered',
       instance.proximity_alert_triggered?.toJson());
   writeNotNull('forum_topic_created', instance.forum_topic_created?.toJson());
+  writeNotNull('forum_topic_edited', instance.forum_topic_edited?.toJson());
   writeNotNull('forum_topic_closed', instance.forum_topic_closed?.toJson());
   writeNotNull('forum_topic_reopened', instance.forum_topic_reopened?.toJson());
+  writeNotNull('general_forum_topic_hidden',
+      instance.general_forum_topic_hidden?.toJson());
+  writeNotNull('general_forum_topic_unhidden',
+      instance.general_forum_topic_unhidden?.toJson());
   writeNotNull('video_chat_scheduled', instance.video_chat_scheduled?.toJson());
   writeNotNull('video_chat_started', instance.video_chat_started?.toJson());
   writeNotNull('video_chat_ended', instance.video_chat_ended?.toJson());
@@ -4050,3 +4108,9 @@ Map<String, dynamic> _$WebhookInfoToJson(WebhookInfo instance) {
   writeNotNull('allowed_updates', instance.allowed_updates);
   return val;
 }
+
+WriteAccessAllowed _$WriteAccessAllowedFromJson(Map<String, dynamic> json) =>
+    WriteAccessAllowed();
+
+Map<String, dynamic> _$WriteAccessAllowedToJson(WriteAccessAllowed instance) =>
+    <String, dynamic>{};
