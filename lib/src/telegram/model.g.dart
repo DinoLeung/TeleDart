@@ -637,6 +637,11 @@ Chat _$ChatFromJson(Map<String, dynamic> json) => Chat(
       photo: json['photo'] == null
           ? null
           : ChatPhoto.fromJson(json['photo'] as Map<String, dynamic>),
+      active_usernames: (json['active_usernames'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+      emoji_status_custom_emoji_id:
+          json['emoji_status_custom_emoji_id'] as String?,
       bio: json['bio'] as String?,
       has_private_forwards: json['has_private_forwards'] as bool?,
       has_restricted_voice_and_video_messages:
@@ -653,6 +658,10 @@ Chat _$ChatFromJson(Map<String, dynamic> json) => Chat(
           : ChatPermissions.fromJson(
               json['permissions'] as Map<String, dynamic>),
       slow_mode_delay: json['slow_mode_delay'] as int?,
+      message_auto_delete_time: json['message_auto_delete_time'] as int?,
+      has_aggressive_anti_spam_enabled:
+          json['has_aggressive_anti_spam_enabled'] as bool?,
+      has_hidden_members: json['has_hidden_members'] as bool?,
       has_protected_content: json['has_protected_content'] as bool?,
       sticker_set_name: json['sticker_set_name'] as String?,
       can_set_sticker_set: json['can_set_sticker_set'] as bool?,
@@ -680,6 +689,9 @@ Map<String, dynamic> _$ChatToJson(Chat instance) {
   writeNotNull('last_name', instance.last_name);
   writeNotNull('is_forum', instance.is_forum);
   writeNotNull('photo', instance.photo?.toJson());
+  writeNotNull('active_usernames', instance.active_usernames);
+  writeNotNull(
+      'emoji_status_custom_emoji_id', instance.emoji_status_custom_emoji_id);
   writeNotNull('bio', instance.bio);
   writeNotNull('has_private_forwards', instance.has_private_forwards);
   writeNotNull('has_restricted_voice_and_video_messages',
@@ -691,6 +703,10 @@ Map<String, dynamic> _$ChatToJson(Chat instance) {
   writeNotNull('pinned_message', instance.pinned_message?.toJson());
   writeNotNull('permissions', instance.permissions?.toJson());
   writeNotNull('slow_mode_delay', instance.slow_mode_delay);
+  writeNotNull('message_auto_delete_time', instance.message_auto_delete_time);
+  writeNotNull('has_aggressive_anti_spam_enabled',
+      instance.has_aggressive_anti_spam_enabled);
+  writeNotNull('has_hidden_members', instance.has_hidden_members);
   writeNotNull('has_protected_content', instance.has_protected_content);
   writeNotNull('sticker_set_name', instance.sticker_set_name);
   writeNotNull('can_set_sticker_set', instance.can_set_sticker_set);
@@ -935,6 +951,26 @@ Map<String, dynamic> _$ForumTopicCreatedToJson(ForumTopicCreated instance) {
   return val;
 }
 
+ForumTopicEdited _$ForumTopicEditedFromJson(Map<String, dynamic> json) =>
+    ForumTopicEdited(
+      name: json['name'] as String?,
+      icon_custom_emoji_id: json['icon_custom_emoji_id'] as String?,
+    );
+
+Map<String, dynamic> _$ForumTopicEditedToJson(ForumTopicEdited instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('name', instance.name);
+  writeNotNull('icon_custom_emoji_id', instance.icon_custom_emoji_id);
+  return val;
+}
+
 ForumTopicReopened _$ForumTopicReopenedFromJson(Map<String, dynamic> json) =>
     ForumTopicReopened();
 
@@ -1013,6 +1049,22 @@ Map<String, dynamic> _$GameToJson(Game instance) {
   writeNotNull('animation', instance.animation?.toJson());
   return val;
 }
+
+GeneralForumTopicHidden _$GeneralForumTopicHiddenFromJson(
+        Map<String, dynamic> json) =>
+    GeneralForumTopicHidden();
+
+Map<String, dynamic> _$GeneralForumTopicHiddenToJson(
+        GeneralForumTopicHidden instance) =>
+    <String, dynamic>{};
+
+GeneralForumTopicUnhidden _$GeneralForumTopicUnhiddenFromJson(
+        Map<String, dynamic> json) =>
+    GeneralForumTopicUnhidden();
+
+Map<String, dynamic> _$GeneralForumTopicUnhiddenToJson(
+        GeneralForumTopicUnhidden instance) =>
+    <String, dynamic>{};
 
 InlineKeyboardButton _$InlineKeyboardButtonFromJson(
         Map<String, dynamic> json) =>
@@ -2257,6 +2309,7 @@ InputMediaAnimation _$InputMediaAnimationFromJson(Map<String, dynamic> json) =>
       width: json['width'] as int?,
       height: json['height'] as int?,
       duration: json['duration'] as int?,
+      has_spoiler: json['has_spoiler'] as bool?,
     );
 
 Map<String, dynamic> _$InputMediaAnimationToJson(InputMediaAnimation instance) {
@@ -2279,6 +2332,7 @@ Map<String, dynamic> _$InputMediaAnimationToJson(InputMediaAnimation instance) {
   writeNotNull('width', instance.width);
   writeNotNull('height', instance.height);
   writeNotNull('duration', instance.duration);
+  writeNotNull('has_spoiler', instance.has_spoiler);
   return val;
 }
 
@@ -2365,6 +2419,7 @@ InputMediaPhoto _$InputMediaPhotoFromJson(Map<String, dynamic> json) =>
       caption_entities: (json['caption_entities'] as List<dynamic>?)
           ?.map((e) => MessageEntity.fromJson(e as Map<String, dynamic>))
           .toList(),
+      has_spoiler: json['has_spoiler'] as bool?,
     );
 
 Map<String, dynamic> _$InputMediaPhotoToJson(InputMediaPhoto instance) {
@@ -2383,6 +2438,7 @@ Map<String, dynamic> _$InputMediaPhotoToJson(InputMediaPhoto instance) {
   writeNotNull('parse_mode', instance.parse_mode);
   writeNotNull('caption_entities',
       instance.caption_entities?.map((e) => e.toJson()).toList());
+  writeNotNull('has_spoiler', instance.has_spoiler);
   return val;
 }
 
@@ -2400,6 +2456,7 @@ InputMediaVideo _$InputMediaVideoFromJson(Map<String, dynamic> json) =>
       height: json['height'] as int?,
       duration: json['duration'] as int?,
       supports_streaming: json['supports_streaming'] as bool?,
+      has_spoiler: json['has_spoiler'] as bool?,
     );
 
 Map<String, dynamic> _$InputMediaVideoToJson(InputMediaVideo instance) {
@@ -2423,6 +2480,7 @@ Map<String, dynamic> _$InputMediaVideoToJson(InputMediaVideo instance) {
   writeNotNull('height', instance.height);
   writeNotNull('duration', instance.duration);
   writeNotNull('supports_streaming', instance.supports_streaming);
+  writeNotNull('has_spoiler', instance.has_spoiler);
   return val;
 }
 
@@ -2832,6 +2890,7 @@ Message _$MessageFromJson(Map<String, dynamic> json) => Message(
       caption_entities: (json['caption_entities'] as List<dynamic>?)
           ?.map((e) => MessageEntity.fromJson(e as Map<String, dynamic>))
           .toList(),
+      has_media_spoiler: json['has_media_spoiler'] as bool?,
       contact: json['contact'] == null
           ? null
           : Contact.fromJson(json['contact'] as Map<String, dynamic>),
@@ -2883,6 +2942,10 @@ Message _$MessageFromJson(Map<String, dynamic> json) => Message(
           : SuccessfulPayment.fromJson(
               json['successful_payment'] as Map<String, dynamic>),
       connected_website: json['connected_website'] as String?,
+      write_access_allowed: json['write_access_allowed'] == null
+          ? null
+          : WriteAccessAllowed.fromJson(
+              json['write_access_allowed'] as Map<String, dynamic>),
       passport_data: json['passport_data'] == null
           ? null
           : PassportData.fromJson(
@@ -2895,6 +2958,10 @@ Message _$MessageFromJson(Map<String, dynamic> json) => Message(
           ? null
           : ForumTopicCreated.fromJson(
               json['forum_topic_created'] as Map<String, dynamic>),
+      forum_topic_edited: json['forum_topic_edited'] == null
+          ? null
+          : ForumTopicEdited.fromJson(
+              json['forum_topic_edited'] as Map<String, dynamic>),
       forum_topic_closed: json['forum_topic_closed'] == null
           ? null
           : ForumTopicClosed.fromJson(
@@ -2903,6 +2970,14 @@ Message _$MessageFromJson(Map<String, dynamic> json) => Message(
           ? null
           : ForumTopicReopened.fromJson(
               json['forum_topic_reopened'] as Map<String, dynamic>),
+      general_forum_topic_hidden: json['general_forum_topic_hidden'] == null
+          ? null
+          : GeneralForumTopicHidden.fromJson(
+              json['general_forum_topic_hidden'] as Map<String, dynamic>),
+      general_forum_topic_unhidden: json['general_forum_topic_unhidden'] == null
+          ? null
+          : GeneralForumTopicUnhidden.fromJson(
+              json['general_forum_topic_unhidden'] as Map<String, dynamic>),
       video_chat_scheduled: json['video_chat_scheduled'] == null
           ? null
           : VoiceChatScheduled.fromJson(
@@ -2973,6 +3048,7 @@ Map<String, dynamic> _$MessageToJson(Message instance) {
   writeNotNull('caption', instance.caption);
   writeNotNull('caption_entities',
       instance.caption_entities?.map((e) => e.toJson()).toList());
+  writeNotNull('has_media_spoiler', instance.has_media_spoiler);
   writeNotNull('contact', instance.contact?.toJson());
   writeNotNull('dice', instance.dice?.toJson());
   writeNotNull('game', instance.game?.toJson());
@@ -2997,12 +3073,18 @@ Map<String, dynamic> _$MessageToJson(Message instance) {
   writeNotNull('invoice', instance.invoice?.toJson());
   writeNotNull('successful_payment', instance.successful_payment?.toJson());
   writeNotNull('connected_website', instance.connected_website);
+  writeNotNull('write_access_allowed', instance.write_access_allowed?.toJson());
   writeNotNull('passport_data', instance.passport_data?.toJson());
   writeNotNull('proximity_alert_triggered',
       instance.proximity_alert_triggered?.toJson());
   writeNotNull('forum_topic_created', instance.forum_topic_created?.toJson());
+  writeNotNull('forum_topic_edited', instance.forum_topic_edited?.toJson());
   writeNotNull('forum_topic_closed', instance.forum_topic_closed?.toJson());
   writeNotNull('forum_topic_reopened', instance.forum_topic_reopened?.toJson());
+  writeNotNull('general_forum_topic_hidden',
+      instance.general_forum_topic_hidden?.toJson());
+  writeNotNull('general_forum_topic_unhidden',
+      instance.general_forum_topic_unhidden?.toJson());
   writeNotNull('video_chat_scheduled', instance.video_chat_scheduled?.toJson());
   writeNotNull('video_chat_started', instance.video_chat_started?.toJson());
   writeNotNull('video_chat_ended', instance.video_chat_ended?.toJson());
@@ -3407,6 +3489,7 @@ ReplyKeyboardMarkup _$ReplyKeyboardMarkupFromJson(Map<String, dynamic> json) =>
               .map((e) => KeyboardButton.fromJson(e as Map<String, dynamic>))
               .toList())
           .toList(),
+      is_persistent: json['is_persistent'] as bool?,
       resize_keyboard: json['resize_keyboard'] as bool?,
       one_time_keyboard: json['one_time_keyboard'] as bool?,
       input_field_placeholder: json['input_field_placeholder'] as String?,
@@ -3426,6 +3509,7 @@ Map<String, dynamic> _$ReplyKeyboardMarkupToJson(ReplyKeyboardMarkup instance) {
     }
   }
 
+  writeNotNull('is_persistent', instance.is_persistent);
   writeNotNull('resize_keyboard', instance.resize_keyboard);
   writeNotNull('one_time_keyboard', instance.one_time_keyboard);
   writeNotNull('input_field_placeholder', instance.input_field_placeholder);
@@ -4032,3 +4116,9 @@ Map<String, dynamic> _$WebhookInfoToJson(WebhookInfo instance) {
   writeNotNull('allowed_updates', instance.allowed_updates);
   return val;
 }
+
+WriteAccessAllowed _$WriteAccessAllowedFromJson(Map<String, dynamic> json) =>
+    WriteAccessAllowed();
+
+Map<String, dynamic> _$WriteAccessAllowedToJson(WriteAccessAllowed instance) =>
+    <String, dynamic>{};

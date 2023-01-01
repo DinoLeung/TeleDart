@@ -280,6 +280,7 @@ class Telegram {
       String? caption,
       String? parse_mode,
       List<MessageEntity>? caption_entities,
+      bool? has_spoiler,
       bool? disable_notification,
       bool? protect_content,
       int? reply_to_message_id,
@@ -297,6 +298,7 @@ class Telegram {
       'parse_mode': parse_mode,
       'caption_entities':
           caption_entities == null ? null : jsonEncode(caption_entities),
+      'has_spoiler': has_spoiler,
       'disable_notification': disable_notification,
       'protect_content': protect_content,
       'reply_to_message_id': reply_to_message_id,
@@ -485,6 +487,7 @@ class Telegram {
       String? caption,
       String? parse_mode,
       List<MessageEntity>? caption_entities,
+      bool? has_spoiler,
       bool? supports_streaming,
       bool? disable_notification,
       bool? protect_content,
@@ -506,6 +509,7 @@ class Telegram {
       'parse_mode': parse_mode,
       'caption_entities':
           caption_entities == null ? null : jsonEncode(caption_entities),
+      'has_spoiler': has_spoiler,
       'supports_streaming': supports_streaming,
       'disable_notification': disable_notification,
       'protect_content': protect_content,
@@ -559,6 +563,7 @@ class Telegram {
       String? caption,
       String? parse_mode,
       List<MessageEntity>? caption_entities,
+      bool? has_spoiler,
       bool? disable_notification,
       bool? protect_content,
       int? reply_to_message_id,
@@ -579,6 +584,7 @@ class Telegram {
       'parse_mode': parse_mode,
       'caption_entities':
           caption_entities == null ? null : jsonEncode(caption_entities),
+      'has_spoiler': has_spoiler,
       'disable_notification': disable_notification,
       'protect_content': protect_content,
       'reply_to_message_id': reply_to_message_id,
@@ -1070,13 +1076,18 @@ class Telegram {
   /// https://core.telegram.org/bots/api#sendchataction
   ///
   /// [ImageBot]: https://t.me/imagebot
-  Future<bool> sendChatAction(dynamic chat_id, String action) async {
+  Future<bool> sendChatAction(dynamic chat_id, String action,
+      {int? message_thread_id}) async {
     if (chat_id is! String && chat_id is! int) {
       return Future.error(TelegramException(
           'Attribute \'chat_id\' can only be either type of String or int'));
     }
     var requestUrl = _apiUri('sendChatAction');
-    var body = <String, dynamic>{'chat_id': chat_id, 'action': action};
+    var body = <String, dynamic>{
+      'chat_id': chat_id,
+      'message_thread_id': message_thread_id,
+      'action': action
+    };
     return await HttpClient.httpPost(requestUrl, body: body);
   }
 
@@ -1885,6 +1896,104 @@ class Telegram {
     var body = <String, dynamic>{
       'chat_id': chat_id,
       'message_thread_id': message_thread_id,
+    };
+    return await HttpClient.httpPost(requestUrl, body: body);
+  }
+
+  /// Use this method to edit the name of the 'General' topic in a forum supergroup chat.
+  ///
+  /// The bot must be an administrator in the chat for this to work and must have `can_manage_topics` administrator rights.
+  ///
+  /// Returns *True* on success.
+  ///
+  /// https://core.telegram.org/bots/api#editgeneralforumtopic
+  Future<bool> editGeneralForumTopic(dynamic chat_id, String name) async {
+    if (chat_id is! String && chat_id is! int) {
+      return Future.error(TelegramException(
+          'Attribute \'chat_id\' can only be either type of String or int'));
+    }
+    var requestUrl = _apiUri('editGeneralForumTopic');
+    var body = <String, dynamic>{
+      'chat_id': chat_id,
+      'name': name,
+    };
+    return await HttpClient.httpPost(requestUrl, body: body);
+  }
+
+  /// Use this method to close an open 'General' topic in a forum supergroup chat.
+  ///
+  /// The bot must be an administrator in the chat for this to work and must have the `can_manage_topics` administrator rights.
+  ///
+  /// Returns *True* on success.
+  ///
+  ///https://core.telegram.org/bots/api#closegeneralforumtopic
+  Future<bool> closeGeneralForumTopic(dynamic chat_id) async {
+    if (chat_id is! String && chat_id is! int) {
+      return Future.error(TelegramException(
+          'Attribute \'chat_id\' can only be either type of String or int'));
+    }
+    var requestUrl = _apiUri('closeGeneralForumTopic');
+    var body = <String, dynamic>{
+      'chat_id': chat_id,
+    };
+    return await HttpClient.httpPost(requestUrl, body: body);
+  }
+
+  /// Use this method to reopen a closed 'General' topic in a forum supergroup chat.
+  ///
+  /// The bot must be an administrator in the chat for this to work and must have the `can_manage_topics` administrator rights.
+  /// The topic will be automatically unhidden if it was hidden.
+  ///
+  /// Returns True on success.
+  ///
+  /// https://core.telegram.org/bots/api#reopengeneralforumtopic
+  Future<bool> reopenGeneralForumTopic(dynamic chat_id) async {
+    if (chat_id is! String && chat_id is! int) {
+      return Future.error(TelegramException(
+          'Attribute \'chat_id\' can only be either type of String or int'));
+    }
+    var requestUrl = _apiUri('reopenGeneralForumTopic');
+    var body = <String, dynamic>{
+      'chat_id': chat_id,
+    };
+    return await HttpClient.httpPost(requestUrl, body: body);
+  }
+
+  /// Use this method to hide the 'General' topic in a forum supergroup chat.
+  ///
+  /// The bot must be an administrator in the chat for this to work and must have the `can_manage_topics` administrator rights.
+  /// The topic will be automatically closed if it was open.
+  ///
+  /// Returns *True* on success.
+  ///
+  /// https://core.telegram.org/bots/api#hidegeneralforumtopic
+  Future<bool> hideGeneralForumTopic(dynamic chat_id) async {
+    if (chat_id is! String && chat_id is! int) {
+      return Future.error(TelegramException(
+          'Attribute \'chat_id\' can only be either type of String or int'));
+    }
+    var requestUrl = _apiUri('hideGeneralForumTopic');
+    var body = <String, dynamic>{
+      'chat_id': chat_id,
+    };
+    return await HttpClient.httpPost(requestUrl, body: body);
+  }
+
+  /// Use this method to unhide the 'General' topic in a forum supergroup chat.
+  ///
+  /// The bot must be an administrator in the chat for this to work and must have the `can_manage_topics` administrator rights
+  ///
+  /// Returns *True* on success.
+  ///
+  /// https://core.telegram.org/bots/api#unhidegeneralforumtopic
+  Future<bool> unhideGeneralForumTopic(dynamic chat_id) async {
+    if (chat_id is! String && chat_id is! int) {
+      return Future.error(TelegramException(
+          'Attribute \'chat_id\' can only be either type of String or int'));
+    }
+    var requestUrl = _apiUri('unhideGeneralForumTopic');
+    var body = <String, dynamic>{
+      'chat_id': chat_id,
     };
     return await HttpClient.httpPost(requestUrl, body: body);
   }

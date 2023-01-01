@@ -1,7 +1,7 @@
 ## 0.4.0
 
 - Fixed `TEXT_MENTION` bug when using regex
-- Support API 6.0, 6.1, 6.2, 6.3
+- Support API 6.0, 6.1, 6.2, 6.3, 6.4
 - **Breaking** Removed `secretPath` from `webhook` fetcher, should use `secret_token` instead see [setWebhook](https://core.telegram.org/bots/api#setwebhook)
 
 ## 0.3.4

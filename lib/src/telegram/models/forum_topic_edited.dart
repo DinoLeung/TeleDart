@@ -1,6 +1,6 @@
 /*
  * TeleDart - Telegram Bot API for Dart
- * Copyright (C) 2019  Dino PH Leung
+ * Copyright (C) 2023  Dino PH Leung
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,32 +18,18 @@
 
 part of '../model.dart';
 
-/// Represents a photo to be sent.
+/// This object represents a service message about an edited forum topic.
 ///
-/// https://core.telegram.org/bots/api#inputmediaphoto
+/// https://core.telegram.org/bots/api#forumtopicedited
 @JsonSerializable()
-class InputMediaPhoto implements InputMedia {
-  @override
-  String type;
-  @override
-  String media;
-  @override
-  String? caption;
-  @override
-  String? parse_mode;
-  @override
-  List<MessageEntity>? caption_entities;
-  bool? has_spoiler;
-  InputMediaPhoto({
-    this.type = InputMedia.PHOTO,
-    required this.media,
-    this.caption,
-    this.parse_mode,
-    this.caption_entities,
-    this.has_spoiler,
+class ForumTopicEdited {
+  String? name;
+  String? icon_custom_emoji_id;
+  ForumTopicEdited({
+    this.name,
+    this.icon_custom_emoji_id,
   });
-  factory InputMediaPhoto.fromJson(Map<String, dynamic> json) =>
-      _$InputMediaPhotoFromJson(json);
-  @override
-  Map<String, dynamic> toJson() => _$InputMediaPhotoToJson(this);
+  factory ForumTopicEdited.fromJson(Map<String, dynamic> json) =>
+      _$ForumTopicEditedFromJson(json);
+  Map<String, dynamic> toJson() => _$ForumTopicEditedToJson(this);
 }
