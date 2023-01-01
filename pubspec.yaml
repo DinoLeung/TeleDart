@@ -5,7 +5,7 @@ homepage: https://github.com/DinoLeung/TeleDart
 issue_tracker: https://github.com/DinoLeung/TeleDart/issues
 
 environment:
-  sdk: ">=2.18.0 <3.0.0"
+  sdk: ">=2.0.0 <3.0.0"
 
 dependencies:
   json_annotation: ^4.7.0
