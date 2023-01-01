@@ -1076,13 +1076,18 @@ class Telegram {
   /// https://core.telegram.org/bots/api#sendchataction
   ///
   /// [ImageBot]: https://t.me/imagebot
-  Future<bool> sendChatAction(dynamic chat_id, String action) async {
+  Future<bool> sendChatAction(dynamic chat_id, String action,
+      {int? message_thread_id}) async {
     if (chat_id is! String && chat_id is! int) {
       return Future.error(TelegramException(
           'Attribute \'chat_id\' can only be either type of String or int'));
     }
     var requestUrl = _apiUri('sendChatAction');
-    var body = <String, dynamic>{'chat_id': chat_id, 'action': action};
+    var body = <String, dynamic>{
+      'chat_id': chat_id,
+      'message_thread_id': message_thread_id,
+      'action': action
+    };
     return await HttpClient.httpPost(requestUrl, body: body);
   }
 
