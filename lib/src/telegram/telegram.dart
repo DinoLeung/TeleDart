@@ -280,6 +280,7 @@ class Telegram {
       String? caption,
       String? parse_mode,
       List<MessageEntity>? caption_entities,
+      bool? has_spoiler,
       bool? disable_notification,
       bool? protect_content,
       int? reply_to_message_id,
@@ -297,6 +298,7 @@ class Telegram {
       'parse_mode': parse_mode,
       'caption_entities':
           caption_entities == null ? null : jsonEncode(caption_entities),
+      'has_spoiler': has_spoiler,
       'disable_notification': disable_notification,
       'protect_content': protect_content,
       'reply_to_message_id': reply_to_message_id,
@@ -485,6 +487,7 @@ class Telegram {
       String? caption,
       String? parse_mode,
       List<MessageEntity>? caption_entities,
+      bool? has_spoiler,
       bool? supports_streaming,
       bool? disable_notification,
       bool? protect_content,
@@ -506,6 +509,7 @@ class Telegram {
       'parse_mode': parse_mode,
       'caption_entities':
           caption_entities == null ? null : jsonEncode(caption_entities),
+      'has_spoiler': has_spoiler,
       'supports_streaming': supports_streaming,
       'disable_notification': disable_notification,
       'protect_content': protect_content,
@@ -559,6 +563,7 @@ class Telegram {
       String? caption,
       String? parse_mode,
       List<MessageEntity>? caption_entities,
+      bool? has_spoiler,
       bool? disable_notification,
       bool? protect_content,
       int? reply_to_message_id,
@@ -579,6 +584,7 @@ class Telegram {
       'parse_mode': parse_mode,
       'caption_entities':
           caption_entities == null ? null : jsonEncode(caption_entities),
+      'has_spoiler': has_spoiler,
       'disable_notification': disable_notification,
       'protect_content': protect_content,
       'reply_to_message_id': reply_to_message_id,
