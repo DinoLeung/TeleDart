@@ -33,12 +33,14 @@ class InputMediaPhoto implements InputMedia {
   String? parse_mode;
   @override
   List<MessageEntity>? caption_entities;
+  bool? has_spoiler;
   InputMediaPhoto({
     this.type = InputMedia.PHOTO,
     required this.media,
     this.caption,
     this.parse_mode,
     this.caption_entities,
+    this.has_spoiler,
   });
   factory InputMediaPhoto.fromJson(Map<String, dynamic> json) =>
       _$InputMediaPhotoFromJson(json);

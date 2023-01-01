@@ -1,3 +1,9 @@
+## 0.4.0
+
+- Fixed `TEXT_MENTION` bug when using regex
+- Support API 6.0, 6.1, 6.2, 6.3, 6.4
+- **Breaking** Removed `secretPath` from `webhook` fetcher, should use `secret_token` instead see [setWebhook](https://core.telegram.org/bots/api#setwebhook)
+
 ## 0.3.4
 
 - Webhook to throw error when `setWebhook` failed
@@ -18,7 +24,7 @@
 ## 0.3.0
 
 - Support API 5.4, 5.5 and 5.6
-- **Breaking** `TeleDart` now extends `Telegram`, constructor signiture has changed, all `Telegram` functions are accessable from `TeleDart`.
+- **Breaking** `TeleDart` now extends `Telegram`, constructor signature has changed, all `Telegram` functions are accessible from `TeleDart`.
 - **Breaking** Renamed `TeleDart.setWebhook` into `TeleDart.configureWebhook`
 - **Breaking** Removed `TeleDart.editLiveLocation`, should use `Telegram.editMessageLiveLocation` instead
 - **Breaking** Removed `TeleDart.stopLiveLocation`, should use `Telegram.stopMessageLiveLocation` instead
@@ -35,6 +41,7 @@
 ## 0.2.1
 
 - Format files to comply with Dart styling guide
+
 ## 0.2.0
 
 - Support API 5.2 and 5.3
@@ -46,7 +53,7 @@
 
 ## 0.1.6
 
-- Fixed `jsonEncode` issue caused by `_nullFilter` fix 
+- Fixed `jsonEncode` issue caused by `_nullFilter` fix
 
 ## 0.1.5
 
@@ -72,11 +79,11 @@
 
 ## 0.1.1
 
-- Allowed create webook without key pair
+- Allowed create webhook without key pair
 
 ## 0.1.0
 
-- Inrtoduced `AbstractUpdateFetcher`, and now `Webhook` and `LongPoll` extends this class.
+- Introduced `AbstractUpdateFetcher`, and now `Webhook` and `LongPoll` extends this class.
 - Support custom update fetcher implementations through `AbstractUpdateFetcher`
 - Introduced `stop` function to `Teledart` to stop fetching updates.
 - Introduced `setWebhook` to `Teledart`, which is an alias to `setWebhook` function in `Webhook`, and it is not required to call this function before starting webhook.
@@ -88,18 +95,18 @@
 
 ## 0.0.50
 
-- Fixed long poll onError type mismatch bug
-- Enabled Teledart to remove webhook without setting up a webhook
+- Fixed long poll `onError` type mismatch bug
+- Enabled `Teledart` to remove webhook without setting up a webhook
 
 ## 0.0.49
 
 - Fixed http client exception bug
-- Femoved redundant error catch
+- Removed redundant error catch
 - Temporary accept dynamic `chat_id`
 
 ## 0.0.48
 
-- Fixed restrictChatMember API URL
+- Fixed `restrictChatMember` API URL
 - Fixed `toJson` methods in `chat_permissions`, `location` and `login_url` models
 - Enabled `explicit_to_json` in `json_serializable` so nested objects can be parsed
 
@@ -109,14 +116,14 @@
 - Added auto-retry to long poll implementation
   - Gradually increase retry timeout on each retry, initial timeout is 1 minute
   - Automatically retry on exception except HTTP Client error (400)
-- Updated multipart file upload to include original file name
+- Updated multi-part file upload to include original file name
 
 ## 0.0.46
 
-- Fixed removeLongPolling not stopping recursive long poll
+- Fixed `removeLongPolling` not stopping recursive long poll
 - Fixed long poll not starting with custom long poll configuration
-- Fixed missing fields/typos in InlineQueryResultGif, InlineQueryResultMpeg4Gif and PassportElementErrorUnspecified
-- updated restrictChatMember
+- Fixed missing fields/typos in `InlineQueryResultGif`, `InlineQueryResultMpeg4Gif` and `PassportElementErrorUnspecified`
+- updated `restrictChatMember`
 
 ## 0.0.45
 
@@ -131,7 +138,7 @@
 
 ## 0.0.43
 
-- Added onPollAnswer teledart shorthand
+- Added `onPollAnswer` `TeleDart` shorthand
 
 ## 0.0.42
 
@@ -140,7 +147,7 @@
 
 ## 0.0.41
 
-- Fixed answerPreCheckoutQuery typo
+- Fixed `answerPreCheckoutQuery` typo
 
 ## 0.0.40
 
@@ -161,7 +168,7 @@
 - Support API 4.6
 - Support API 4.7
 - Utilised native objects for date/time related objects (#91)
-- Updated onMessage (and related functions) to accept String as well as RegExp (#92)
+- Updated `onMessage` (and related functions) to accept String as well as RegExp (#92)
 
 ## 0.0.36
 
@@ -184,11 +191,11 @@
 
 ## 0.0.32
 
-- Prepare for upcoming change to HttpRequest and HttpClientResponse
+- Prepare for upcoming change to `HttpRequest` and `HttpClientResponse`
 
 ## 0.0.31
 
-- Fixed styling with if statments
+- Fixed styling with if statements
 - Updated readme and example
 
 ## 0.0.30
@@ -205,7 +212,7 @@
 
 ## 0.0.28
 
-- Modulised model files
+- Modularised model files
 - Updated examples
 
 ## 0.0.27
@@ -236,12 +243,12 @@
 
 ## 0.0.21
 
-- Hot fix #36, toJSON() passing null values explicitly
+- Hot fix #36, `toJSON()` passing null values explicitly
 
 ## 0.0.20
 
-- Hot fix #34 400 Bad Request: field "keyboard" of the ReplyKeyboardMarkup should be an Array of Arrays
-- Fixed getUserProfilePhotos() returns UserProfilePhotos instead of List<UserProfilePhotos>
+- Hot fix #34 400 Bad Request: field "keyboard" of the `ReplyKeyboardMarkup` should be an Array of Arrays
+- Fixed `getUserProfilePhotos()` returns `UserProfilePhotos` instead of `List<UserProfilePhotos>`
 
 ## 0.0.19
 
@@ -263,7 +270,7 @@
 
 ## 0.0.15
 
-- Hot fix inline_keyboard variable in InlineKeyboardMarkup
+- Hot fix inline_keyboard variable in `InlineKeyboardMarkup`
 
 ## 0.0.14
 
@@ -275,16 +282,16 @@
 
 ## 0.0.12
 
-- Depends on json_serializable/json_annotation handling json objects
+- Depends on `json_serializable/json_annotation` handling json objects
 - Fixes typos in model.dart
 
 ## 0.0.11
 
-- Supports regular expression in onMessage()
+- Supports regular expression in `onMessage()`
 
 ## 0.0.10
 
-- Fixes pubspec.ymal SDK constraint to support Dart 2 release
+- Fixes `pubspec.ymal` SDK constraint to support Dart 2 release
 - Edit README.md Dart Version shield to build version
 
 ## 0.0.9
@@ -301,8 +308,8 @@
 
 - Dart2 ready!
 - Add short-cut for inline query
-- Rename ChosenInlineQuery into ChosenInlineResult and associated objects
-- Add missing InlineQueryResultVoice to model
+- Rename `ChosenInlineQuery` into `ChosenInlineResult` and associated objects
+- Add missing `InlineQueryResultVoice` to model
 - Bug fixes
 
 ## 0.0.6
@@ -311,9 +318,9 @@
 
 ## 0.0.5
 
-- Add onMessage short-cuts
-- Add sendMessage short-cuts
-- Add missing ShippingQuery to Update
+- Add `onMessage` short-cuts
+- Add `sendMessage` short-cuts
+- Add missing `ShippingQuery` to Update
 
 ## 0.0.4
 

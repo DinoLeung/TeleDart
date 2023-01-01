@@ -31,6 +31,8 @@ class ChatPermissions {
   bool? can_change_info;
   bool? can_invite_users;
   bool? can_pin_messages;
+  bool? can_manage_topics;
+
   ChatPermissions({
     this.can_send_messages,
     this.can_send_media_messages,
@@ -40,7 +42,9 @@ class ChatPermissions {
     this.can_change_info,
     this.can_invite_users,
     this.can_pin_messages,
+    this.can_manage_topics,
   });
+
   factory ChatPermissions.fromJson(Map<String, dynamic> json) =>
       _$ChatPermissionsFromJson(json);
   Map<String, dynamic> toJson() => _$ChatPermissionsToJson(this);

@@ -24,6 +24,7 @@ part of '../model.dart';
 @JsonSerializable()
 class Message {
   int message_id;
+  int? message_thread_id;
   User? from;
   Chat? sender_chat;
   int date;
@@ -34,6 +35,7 @@ class Message {
   String? forward_signature;
   String? forward_sender_name;
   int? forward_date;
+  bool? is_topic_message;
   bool? is_automatic_forward;
   Message? reply_to_message;
   User? via_bot;
@@ -53,6 +55,7 @@ class Message {
   Voice? voice;
   String? caption;
   List<MessageEntity>? caption_entities;
+  bool? has_media_spoiler;
   Contact? contact;
   Dice? dice;
   Game? game;
@@ -74,16 +77,25 @@ class Message {
   Invoice? invoice;
   SuccessfulPayment? successful_payment;
   String? connected_website;
+  WriteAccessAllowed? write_access_allowed;
   PassportData? passport_data;
   ProximityAlertTriggered? proximity_alert_triggered;
-  VoiceChatScheduled? voice_chat_scheduled;
-  VoiceChatStarted? voice_chat_started;
-  VoiceChatEnded? voice_chat_ended;
-  VoiceChatParticipantsInvited? voice_chat_participants_invited;
+  ForumTopicCreated? forum_topic_created;
+  ForumTopicEdited? forum_topic_edited;
+  ForumTopicClosed? forum_topic_closed;
+  ForumTopicReopened? forum_topic_reopened;
+  GeneralForumTopicHidden? general_forum_topic_hidden;
+  GeneralForumTopicUnhidden? general_forum_topic_unhidden;
+  VoiceChatScheduled? video_chat_scheduled;
+  VoiceChatStarted? video_chat_started;
+  VoiceChatEnded? video_chat_ended;
+  VoiceChatParticipantsInvited? video_chat_participants_invited;
+  WebAppData? web_app_data;
   InlineKeyboardMarkup? reply_markup;
 
   Message({
     required this.message_id,
+    this.message_thread_id,
     this.from,
     this.sender_chat,
     required this.date,
@@ -94,6 +106,7 @@ class Message {
     this.forward_signature,
     this.forward_sender_name,
     this.forward_date,
+    this.is_topic_message,
     this.is_automatic_forward,
     this.reply_to_message,
     this.via_bot,
@@ -113,6 +126,7 @@ class Message {
     this.voice,
     this.caption,
     this.caption_entities,
+    this.has_media_spoiler,
     this.contact,
     this.dice,
     this.game,
@@ -134,12 +148,20 @@ class Message {
     this.invoice,
     this.successful_payment,
     this.connected_website,
+    this.write_access_allowed,
     this.passport_data,
     this.proximity_alert_triggered,
-    this.voice_chat_scheduled,
-    this.voice_chat_started,
-    this.voice_chat_ended,
-    this.voice_chat_participants_invited,
+    this.forum_topic_created,
+    this.forum_topic_edited,
+    this.forum_topic_closed,
+    this.forum_topic_reopened,
+    this.general_forum_topic_hidden,
+    this.general_forum_topic_unhidden,
+    this.video_chat_scheduled,
+    this.video_chat_started,
+    this.video_chat_ended,
+    this.video_chat_participants_invited,
+    this.web_app_data,
     this.reply_markup,
   });
 

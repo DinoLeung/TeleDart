@@ -74,26 +74,27 @@ class Telegram {
   /// specified url, containing a JSON-serialized [Update].
   /// In case of an unsuccessful request, we will give up after a reasonable amount of attempts.
   /// Returns *True* on success.
-  /// If you'd like to make sure that the Webhook request comes from Telegram,
-  /// we recommend using a secret path in the URL, e.g. `https://www.example.com/<token>`.
-  /// Since nobody else knows your bot‘s token, you can be pretty sure it’s us.
+  /// If you'd like to make sure that the webhook was set by you, you can specify secret data in the parameter secret_token.
+  /// If specified, the request will contain a header “X-Telegram-Bot-Api-Secret-Token” with the secret token as content.
   ///
   /// **Notes**
   /// 1. You will not be able to receive updates using [getUpdates] for as long as an outgoing webhook is set up.
   /// 2. To use a self-signed certificate, you need to upload your [public key certificate] using certificate parameter. Please upload as InputFile, sending a String will not work.
   /// 3. Ports currently supported for Webhooks: **443, 80, 88, 8443**.
   ///
-  /// **NEW!** If you're having any trouble setting up webhooks, please check out this amazing guide to Webhooks.
+  /// If you're having any trouble setting up webhooks, please check out this [amazing guide to Webhooks].
   ///
   /// https://core.telegram.org/bots/api#setwebhook
   ///
   /// [public key certificate]: https://core.telegram.org/bots/self-signed
+  /// [amazing guide to Webhooks]: https://core.telegram.org/bots/webhooks
   Future<bool> setWebhook(String url,
       {String? ip_address,
       io.File? certificate,
       int? max_connections,
       List<String>? allowed_updates,
-      bool? drop_pending_updates}) async {
+      bool? drop_pending_updates,
+      String? secret_token}) async {
     var requestUrl = _apiUri('setWebhook');
 
     var body = <String, dynamic>{
@@ -103,6 +104,7 @@ class Telegram {
       'allowed_updates':
           allowed_updates == null ? null : jsonEncode(allowed_updates),
       'drop_pending_updates': drop_pending_updates,
+      'secret_token': secret_token,
     };
     if (certificate != null) {
       // filename cannot be empty to post to Telegram server
@@ -172,7 +174,8 @@ class Telegram {
   ///
   /// https://core.telegram.org/bots/api#sendmessage
   Future<Message> sendMessage(dynamic chat_id, String text,
-      {String? parse_mode,
+      {int? message_thread_id,
+      String? parse_mode,
       List<MessageEntity>? entities,
       bool? disable_web_page_preview,
       bool? disable_notification,
@@ -187,6 +190,7 @@ class Telegram {
     var requestUrl = _apiUri('sendMessage');
     var body = <String, dynamic>{
       'chat_id': chat_id,
+      'message_thread_id': message_thread_id,
       'text': text,
       'parse_mode': parse_mode,
       'entities': entities == null ? null : jsonEncode(entities),
@@ -205,7 +209,9 @@ class Telegram {
   /// https://core.telegram.org/bots/api#forwardmessage
   Future<Message> forwardMessage(
       dynamic chat_id, int from_chat_id, int message_id,
-      {bool? disable_notification, bool? protect_content}) async {
+      {int? message_thread_id,
+      bool? disable_notification,
+      bool? protect_content}) async {
     if (chat_id is! String && chat_id is! int) {
       return Future.error(TelegramException(
           'Attribute \'chat_id\' can only be either type of String or int'));
@@ -213,6 +219,7 @@ class Telegram {
     var requestUrl = _apiUri('forwardMessage');
     var body = <String, dynamic>{
       'chat_id': chat_id,
+      'message_thread_id': message_thread_id,
       'from_chat_id': from_chat_id,
       'message_id': message_id,
       'disable_notification': disable_notification,
@@ -229,18 +236,16 @@ class Telegram {
   ///
   /// https://core.telegram.org/bots/api#copyMessage
   Future<MessageId> copyMessage(
-    dynamic chat_id,
-    int from_chat_id,
-    int message_id, {
-    String? caption,
-    String? parse_mode,
-    List<MessageEntity>? caption_entities,
-    bool? disable_notification,
-    bool? protect_content,
-    int? reply_to_message_id,
-    bool? allow_sending_without_reply,
-    ReplyMarkup? reply_markup,
-  }) async {
+      dynamic chat_id, int from_chat_id, int message_id,
+      {int? message_thread_id,
+      String? caption,
+      String? parse_mode,
+      List<MessageEntity>? caption_entities,
+      bool? disable_notification,
+      bool? protect_content,
+      int? reply_to_message_id,
+      bool? allow_sending_without_reply,
+      ReplyMarkup? reply_markup}) async {
     if (chat_id is! String && chat_id is! int) {
       return Future.error(TelegramException(
           'Attribute \'chat_id\' can only be either type of String or int'));
@@ -248,6 +253,7 @@ class Telegram {
     var requestUrl = _apiUri('copyMessage');
     var body = <String, dynamic>{
       'chat_id': chat_id,
+      'message_thread_id': message_thread_id,
       'from_chat_id': from_chat_id,
       'message_id': message_id,
       'caption': caption,
@@ -270,9 +276,11 @@ class Telegram {
   ///
   /// https://core.telegram.org/bots/api#sendphoto
   Future<Message> sendPhoto(dynamic chat_id, dynamic photo,
-      {String? caption,
+      {int? message_thread_id,
+      String? caption,
       String? parse_mode,
       List<MessageEntity>? caption_entities,
+      bool? has_spoiler,
       bool? disable_notification,
       bool? protect_content,
       int? reply_to_message_id,
@@ -285,10 +293,12 @@ class Telegram {
     var requestUrl = _apiUri('sendPhoto');
     var body = <String, dynamic>{
       'chat_id': chat_id,
+      'message_thread_id': message_thread_id,
       'caption': caption,
       'parse_mode': parse_mode,
       'caption_entities':
           caption_entities == null ? null : jsonEncode(caption_entities),
+      'has_spoiler': has_spoiler,
       'disable_notification': disable_notification,
       'protect_content': protect_content,
       'reply_to_message_id': reply_to_message_id,
@@ -325,7 +335,8 @@ class Telegram {
   ///
   /// https://core.telegram.org/bots/api#sendaudio
   Future<Message> sendAudio(dynamic chat_id, dynamic audio,
-      {String? caption,
+      {int? message_thread_id,
+      String? caption,
       String? parse_mode,
       List<MessageEntity>? caption_entities,
       int? duration,
@@ -344,6 +355,7 @@ class Telegram {
     var requestUrl = _apiUri('sendAudio');
     var body = <String, dynamic>{
       'chat_id': chat_id,
+      'message_thread_id': message_thread_id,
       'caption': caption,
       'parse_mode': parse_mode,
       'caption_entities':
@@ -396,7 +408,8 @@ class Telegram {
   ///
   /// https://core.telegram.org/bots/api#senddocument
   Future<Message> sendDocument(dynamic chat_id, dynamic document,
-      {dynamic thumb,
+      {int? message_thread_id,
+      dynamic thumb,
       String? caption,
       String? parse_mode,
       List<MessageEntity>? caption_entities,
@@ -413,6 +426,7 @@ class Telegram {
     var requestUrl = _apiUri('sendDocument');
     var body = <String, dynamic>{
       'chat_id': chat_id,
+      'message_thread_id': message_thread_id,
       'caption': caption,
       'parse_mode': parse_mode,
       'caption_entities':
@@ -465,13 +479,15 @@ class Telegram {
   ///
   /// [Document]: https://core.telegram.org/bots/api#document
   Future<Message> sendVideo(dynamic chat_id, dynamic video,
-      {int? duration,
+      {int? message_thread_id,
+      int? duration,
       int? width,
       int? height,
       dynamic thumb,
       String? caption,
       String? parse_mode,
       List<MessageEntity>? caption_entities,
+      bool? has_spoiler,
       bool? supports_streaming,
       bool? disable_notification,
       bool? protect_content,
@@ -485,6 +501,7 @@ class Telegram {
     var requestUrl = _apiUri('sendVideo');
     var body = <String, dynamic>{
       'chat_id': chat_id,
+      'message_thread_id': message_thread_id,
       'duration': duration,
       'width': width,
       'height': height,
@@ -492,6 +509,7 @@ class Telegram {
       'parse_mode': parse_mode,
       'caption_entities':
           caption_entities == null ? null : jsonEncode(caption_entities),
+      'has_spoiler': has_spoiler,
       'supports_streaming': supports_streaming,
       'disable_notification': disable_notification,
       'protect_content': protect_content,
@@ -537,13 +555,15 @@ class Telegram {
   ///
   /// https://core.telegram.org/bots/api#sendanimation
   Future<Message> sendAnimation(dynamic chat_id, dynamic animation,
-      {int? duration,
+      {int? message_thread_id,
+      int? duration,
       int? width,
       int? height,
       dynamic thumb,
       String? caption,
       String? parse_mode,
       List<MessageEntity>? caption_entities,
+      bool? has_spoiler,
       bool? disable_notification,
       bool? protect_content,
       int? reply_to_message_id,
@@ -556,6 +576,7 @@ class Telegram {
     var requestUrl = _apiUri('sendAnimation');
     var body = <String, dynamic>{
       'chat_id': chat_id,
+      'message_thread_id': message_thread_id,
       'duration': duration,
       'width': width,
       'height': height,
@@ -563,6 +584,7 @@ class Telegram {
       'parse_mode': parse_mode,
       'caption_entities':
           caption_entities == null ? null : jsonEncode(caption_entities),
+      'has_spoiler': has_spoiler,
       'disable_notification': disable_notification,
       'protect_content': protect_content,
       'reply_to_message_id': reply_to_message_id,
@@ -613,7 +635,8 @@ class Telegram {
   /// [Audio]: https://core.telegram.org/bots/api#audio
   /// [Document]: https://core.telegram.org/bots/api#document
   Future<Message> sendVoice(dynamic chat_id, dynamic voice,
-      {String? caption,
+      {int? message_thread_id,
+      String? caption,
       String? parse_mode,
       List<MessageEntity>? caption_entities,
       int? duration,
@@ -629,6 +652,7 @@ class Telegram {
     var requestUrl = _apiUri('sendVoice');
     var body = <String, dynamic>{
       'chat_id': chat_id,
+      'message_thread_id': message_thread_id,
       'caption': caption,
       'parse_mode': parse_mode,
       'caption_entities':
@@ -669,7 +693,8 @@ class Telegram {
   ///
   /// [v.4.0]: https://telegram.org/blog/video-messages-and-telescope
   Future<Message> sendVideoNote(dynamic chat_id, dynamic video_note,
-      {int? duration,
+      {int? message_thread_id,
+      int? duration,
       int? length,
       dynamic thumb,
       bool? disable_notification,
@@ -684,6 +709,7 @@ class Telegram {
     var requestUrl = _apiUri('sendVideoNote');
     var body = <String, dynamic>{
       'chat_id': chat_id,
+      'message_thread_id': message_thread_id,
       'duration': duration,
       'length': length,
       'disable_notification': disable_notification,
@@ -732,7 +758,8 @@ class Telegram {
   ///
   /// https://core.telegram.org/bots/api#sendmediagroup
   Future<List<Message>> sendMediaGroup(dynamic chat_id, List<InputMedia> media,
-      {bool? disable_notification,
+      {int? message_thread_id,
+      bool? disable_notification,
       bool? protect_content,
       int? reply_to_message_id,
       bool? allow_sending_without_reply}) async {
@@ -743,6 +770,7 @@ class Telegram {
     var requestUrl = _apiUri('sendMediaGroup');
     var body = <String, dynamic>{
       'chat_id': chat_id,
+      'message_thread_id': message_thread_id,
       'media': jsonEncode(media),
       'disable_notification': disable_notification,
       'protect_content': protect_content,
@@ -761,7 +789,8 @@ class Telegram {
   /// https://core.telegram.org/bots/api#sendlocation
   Future<Message> sendLocation(
       dynamic chat_id, double latitude, double longitude,
-      {double? horizontal_accuracy,
+      {int? message_thread_id,
+      double? horizontal_accuracy,
       int? live_period,
       int? heading,
       int? proximity_alert_radius,
@@ -777,6 +806,7 @@ class Telegram {
     var requestUrl = _apiUri('sendLocation');
     var body = <String, dynamic>{
       'chat_id': chat_id,
+      'message_thread_id': message_thread_id,
       'latitude': latitude,
       'longitude': longitude,
       'horizontal_accuracy': horizontal_accuracy,
@@ -873,7 +903,8 @@ class Telegram {
   /// https://core.telegram.org/bots/api#sendvenue
   Future<Message> sendVenue(dynamic chat_id, double latitude, double longitude,
       String title, String address,
-      {String? foursquare_id,
+      {int? message_thread_id,
+      String? foursquare_id,
       String? foursquare_type,
       String? google_place_id,
       String? google_place_type,
@@ -889,6 +920,7 @@ class Telegram {
     var requestUrl = _apiUri('sendVenue');
     var body = <String, dynamic>{
       'chat_id': chat_id,
+      'message_thread_id': message_thread_id,
       'latitude': latitude,
       'longitude': longitude,
       'title': title,
@@ -913,7 +945,8 @@ class Telegram {
   /// https://core.telegram.org/bots/api#sendcontact
   Future<Message> sendContact(
       dynamic chat_id, String phone_number, String first_name,
-      {String? last_name,
+      {int? message_thread_id,
+      String? last_name,
       String? vcard,
       bool? disable_notification,
       bool? protect_content,
@@ -927,6 +960,7 @@ class Telegram {
     var requestUrl = _apiUri('sendContact');
     var body = <String, dynamic>{
       'chat_id': chat_id,
+      'message_thread_id': message_thread_id,
       'phone_number': phone_number,
       'first_name': first_name,
       'last_name': last_name,
@@ -949,7 +983,8 @@ class Telegram {
   /// https://core.telegram.org/bots/api#sendpoll
   Future<Message> sendPoll(
       dynamic chat_id, String question, List<String> options,
-      {bool? is_anonymous,
+      {int? message_thread_id,
+      bool? is_anonymous,
       String? type,
       bool? allows_multiple_answers,
       int? correct_option_id,
@@ -971,6 +1006,7 @@ class Telegram {
     var requestUrl = _apiUri('sendPoll');
     var body = <String, dynamic>{
       'chat_id': chat_id,
+      'message_thread_id': message_thread_id,
       'question': question,
       'options': jsonEncode(options),
       'is_anonymous': is_anonymous,
@@ -998,7 +1034,8 @@ class Telegram {
   ///
   /// On success, the sent [Message] is returned.
   Future<Message> sendDice(dynamic chat_id,
-      {String emoji = Dice.DICE,
+      {int? message_thread_id,
+      String emoji = Dice.DICE,
       bool? disable_notification,
       bool? protect_content,
       int? reply_to_message_id,
@@ -1011,6 +1048,7 @@ class Telegram {
     var requestUrl = _apiUri('sendDice');
     var body = <String, dynamic>{
       'chat_id': chat_id,
+      'message_thread_id': message_thread_id,
       'emoji': emoji,
       'disable_notification': disable_notification,
       'protect_content': protect_content,
@@ -1038,13 +1076,18 @@ class Telegram {
   /// https://core.telegram.org/bots/api#sendchataction
   ///
   /// [ImageBot]: https://t.me/imagebot
-  Future<bool> sendChatAction(dynamic chat_id, String action) async {
+  Future<bool> sendChatAction(dynamic chat_id, String action,
+      {int? message_thread_id}) async {
     if (chat_id is! String && chat_id is! int) {
       return Future.error(TelegramException(
           'Attribute \'chat_id\' can only be either type of String or int'));
     }
     var requestUrl = _apiUri('sendChatAction');
-    var body = <String, dynamic>{'chat_id': chat_id, 'action': action};
+    var body = <String, dynamic>{
+      'chat_id': chat_id,
+      'message_thread_id': message_thread_id,
+      'action': action
+    };
     return await HttpClient.httpPost(requestUrl, body: body);
   }
 
@@ -1173,12 +1216,13 @@ class Telegram {
       bool? can_post_messages,
       bool? can_edit_messages,
       bool? can_delete_messages,
-      bool? can_manage_voice_chats,
+      bool? can_manage_video_chats,
       bool? can_restrict_members,
       bool? can_promote_members,
       bool? can_change_info,
       bool? can_invite_users,
-      bool? can_pin_messages}) async {
+      bool? can_pin_messages,
+      bool? can_manage_topics}) async {
     if (chat_id is! String && chat_id is! int) {
       return Future.error(TelegramException(
           'Attribute \'chat_id\' can only be either type of String or int'));
@@ -1192,12 +1236,13 @@ class Telegram {
       'can_post_messages': can_post_messages,
       'can_edit_messages': can_edit_messages,
       'can_delete_messages': can_delete_messages,
-      'can_manage_voice_chats': can_manage_voice_chats,
+      'can_manage_video_chats': can_manage_video_chats,
       'can_restrict_members': can_restrict_members,
       'can_promote_members': can_promote_members,
       'can_change_info': can_change_info,
       'can_invite_users': can_invite_users,
       'can_pin_messages': can_pin_messages,
+      'can_manage_topics': can_manage_topics,
     };
     return await HttpClient.httpPost(requestUrl, body: body);
   }
@@ -1710,6 +1755,249 @@ class Telegram {
     return await HttpClient.httpPost(requestUrl, body: body);
   }
 
+  ///Use this method to get custom emoji stickers, which can be used as a forum topic icon by any user.
+  ///
+  ///Requires no parameters.
+  ///
+  ///Returns an Array of [Sticker] objects.
+  ///
+  ///https://core.telegram.org/bots/api#getforumtopiciconstickers
+  Future<List<Sticker>> getForumTopicIconStickers() async {
+    var requestUrl = _apiUri('getForumTopicIconStickers');
+    return (await HttpClient.httpPost(requestUrl))
+        .map<Sticker>((sticker) => Sticker.fromJson(sticker))
+        .toList();
+  }
+
+  /// Use this method to create a topic in a forum supergroup chat.
+  ///
+  /// The bot must be an administrator in the chat for this to work and must have the can_manage_topics administrator rights.
+  ///
+  /// Returns information about the created topic as a [ForumTopic] object.
+  ///
+  /// https://core.telegram.org/bots/api#createforumtopic
+  Future<ForumTopic> createForumTopic(dynamic chat_id, String name,
+      {int? icon_color, String? icon_custom_emoji_id}) async {
+    if (chat_id is! String && chat_id is! int) {
+      return Future.error(TelegramException(
+          'Attribute \'chat_id\' can only be either type of String or int'));
+    }
+    var requestUrl = _apiUri('createForumTopic');
+    var body = <String, dynamic>{
+      'chat_id': chat_id,
+      'name': name,
+      'icon_color': icon_color,
+      'icon_custom_emoji_id': icon_custom_emoji_id,
+    };
+    return ForumTopic.fromJson(
+        await HttpClient.httpPost(requestUrl, body: body));
+  }
+
+  ///Use this method to edit name and icon of a topic in a forum supergroup chat.
+  ///
+  ///The bot must be an administrator in the chat for this to work and must have `can_manage_topics` administrator rights, unless it is the creator of the topic.
+  ///
+  ///Returns *True* on success.
+  ///
+  ///https://core.telegram.org/bots/api#editforumtopic
+  Future<bool> editForumTopic(dynamic chat_id, String message_thread_id,
+      String name, String icon_custom_emoji_id) async {
+    if (chat_id is! String && chat_id is! int) {
+      return Future.error(TelegramException(
+          'Attribute \'chat_id\' can only be either type of String or int'));
+    }
+    var requestUrl = _apiUri('editForumTopic');
+    var body = <String, dynamic>{
+      'chat_id': chat_id,
+      'message_thread_id': message_thread_id,
+      'name': name,
+      'icon_custom_emoji_id': icon_custom_emoji_id,
+    };
+    return await HttpClient.httpPost(requestUrl, body: body);
+  }
+
+  /// Use this method to close an open topic in a forum supergroup chat.
+  ///
+  /// The bot must be an administrator in the chat for this to work and must have the `can_manage_topics` administrator rights, unless it is the creator of the topic.
+  ///
+  /// Returns *True* on success.
+  ///
+  /// https://core.telegram.org/bots/api#closeforumtopic
+  Future<bool> closeForumTopic(
+      dynamic chat_id, String message_thread_id) async {
+    if (chat_id is! String && chat_id is! int) {
+      return Future.error(TelegramException(
+          'Attribute \'chat_id\' can only be either type of String or int'));
+    }
+    var requestUrl = _apiUri('closeForumTopic');
+    var body = <String, dynamic>{
+      'chat_id': chat_id,
+      'message_thread_id': message_thread_id,
+    };
+    return await HttpClient.httpPost(requestUrl, body: body);
+  }
+
+  /// Use this method to reopen a closed topic in a forum supergroup chat.
+  ///
+  /// The bot must be an administrator in the chat for this to work and must have the `can_manage_topics` administrator rights, unless it is the creator of the topic.
+  ///
+  /// Returns *True* on success.
+  ///
+  /// https://core.telegram.org/bots/api#reopenforumtopic
+  Future<bool> reopenForumTopic(
+      dynamic chat_id, String message_thread_id) async {
+    if (chat_id is! String && chat_id is! int) {
+      return Future.error(TelegramException(
+          'Attribute \'chat_id\' can only be either type of String or int'));
+    }
+    var requestUrl = _apiUri('reopenForumTopic');
+    var body = <String, dynamic>{
+      'chat_id': chat_id,
+      'message_thread_id': message_thread_id,
+    };
+    return await HttpClient.httpPost(requestUrl, body: body);
+  }
+
+  /// Use this method to delete a forum topic along with all its messages in a forum supergroup chat.
+  ///
+  /// The bot must be an administrator in the chat for this to work and must have the `can_delete_messages` administrator rights.
+  ///
+  /// Returns *True* on success.
+  ///
+  /// https://core.telegram.org/bots/api#deleteforumtopic
+  Future<bool> deleteForumTopic(
+      dynamic chat_id, String message_thread_id) async {
+    if (chat_id is! String && chat_id is! int) {
+      return Future.error(TelegramException(
+          'Attribute \'chat_id\' can only be either type of String or int'));
+    }
+    var requestUrl = _apiUri('deleteForumTopic');
+    var body = <String, dynamic>{
+      'chat_id': chat_id,
+      'message_thread_id': message_thread_id,
+    };
+    return await HttpClient.httpPost(requestUrl, body: body);
+  }
+
+  /// Use this method to clear the list of pinned messages in a forum topic.
+  ///
+  /// The bot must be an administrator in the chat for this to work and must have the `can_pin_messages` administrator right in the supergroup.
+  ///
+  /// Returns *True* on success.
+  ///
+  /// https://core.telegram.org/bots/api#unpinallforumtopicmessages
+  Future<bool> unpinAllForumTopicMessages(
+      dynamic chat_id, String message_thread_id) async {
+    if (chat_id is! String && chat_id is! int) {
+      return Future.error(TelegramException(
+          'Attribute \'chat_id\' can only be either type of String or int'));
+    }
+    var requestUrl = _apiUri('unpinAllForumTopicMessages');
+    var body = <String, dynamic>{
+      'chat_id': chat_id,
+      'message_thread_id': message_thread_id,
+    };
+    return await HttpClient.httpPost(requestUrl, body: body);
+  }
+
+  /// Use this method to edit the name of the 'General' topic in a forum supergroup chat.
+  ///
+  /// The bot must be an administrator in the chat for this to work and must have `can_manage_topics` administrator rights.
+  ///
+  /// Returns *True* on success.
+  ///
+  /// https://core.telegram.org/bots/api#editgeneralforumtopic
+  Future<bool> editGeneralForumTopic(dynamic chat_id, String name) async {
+    if (chat_id is! String && chat_id is! int) {
+      return Future.error(TelegramException(
+          'Attribute \'chat_id\' can only be either type of String or int'));
+    }
+    var requestUrl = _apiUri('editGeneralForumTopic');
+    var body = <String, dynamic>{
+      'chat_id': chat_id,
+      'name': name,
+    };
+    return await HttpClient.httpPost(requestUrl, body: body);
+  }
+
+  /// Use this method to close an open 'General' topic in a forum supergroup chat.
+  ///
+  /// The bot must be an administrator in the chat for this to work and must have the `can_manage_topics` administrator rights.
+  ///
+  /// Returns *True* on success.
+  ///
+  ///https://core.telegram.org/bots/api#closegeneralforumtopic
+  Future<bool> closeGeneralForumTopic(dynamic chat_id) async {
+    if (chat_id is! String && chat_id is! int) {
+      return Future.error(TelegramException(
+          'Attribute \'chat_id\' can only be either type of String or int'));
+    }
+    var requestUrl = _apiUri('closeGeneralForumTopic');
+    var body = <String, dynamic>{
+      'chat_id': chat_id,
+    };
+    return await HttpClient.httpPost(requestUrl, body: body);
+  }
+
+  /// Use this method to reopen a closed 'General' topic in a forum supergroup chat.
+  ///
+  /// The bot must be an administrator in the chat for this to work and must have the `can_manage_topics` administrator rights.
+  /// The topic will be automatically unhidden if it was hidden.
+  ///
+  /// Returns True on success.
+  ///
+  /// https://core.telegram.org/bots/api#reopengeneralforumtopic
+  Future<bool> reopenGeneralForumTopic(dynamic chat_id) async {
+    if (chat_id is! String && chat_id is! int) {
+      return Future.error(TelegramException(
+          'Attribute \'chat_id\' can only be either type of String or int'));
+    }
+    var requestUrl = _apiUri('reopenGeneralForumTopic');
+    var body = <String, dynamic>{
+      'chat_id': chat_id,
+    };
+    return await HttpClient.httpPost(requestUrl, body: body);
+  }
+
+  /// Use this method to hide the 'General' topic in a forum supergroup chat.
+  ///
+  /// The bot must be an administrator in the chat for this to work and must have the `can_manage_topics` administrator rights.
+  /// The topic will be automatically closed if it was open.
+  ///
+  /// Returns *True* on success.
+  ///
+  /// https://core.telegram.org/bots/api#hidegeneralforumtopic
+  Future<bool> hideGeneralForumTopic(dynamic chat_id) async {
+    if (chat_id is! String && chat_id is! int) {
+      return Future.error(TelegramException(
+          'Attribute \'chat_id\' can only be either type of String or int'));
+    }
+    var requestUrl = _apiUri('hideGeneralForumTopic');
+    var body = <String, dynamic>{
+      'chat_id': chat_id,
+    };
+    return await HttpClient.httpPost(requestUrl, body: body);
+  }
+
+  /// Use this method to unhide the 'General' topic in a forum supergroup chat.
+  ///
+  /// The bot must be an administrator in the chat for this to work and must have the `can_manage_topics` administrator rights
+  ///
+  /// Returns *True* on success.
+  ///
+  /// https://core.telegram.org/bots/api#unhidegeneralforumtopic
+  Future<bool> unhideGeneralForumTopic(dynamic chat_id) async {
+    if (chat_id is! String && chat_id is! int) {
+      return Future.error(TelegramException(
+          'Attribute \'chat_id\' can only be either type of String or int'));
+    }
+    var requestUrl = _apiUri('unhideGeneralForumTopic');
+    var body = <String, dynamic>{
+      'chat_id': chat_id,
+    };
+    return await HttpClient.httpPost(requestUrl, body: body);
+  }
+
   /// Use this method to send answers to callback queries sent from [inline keyboards]
   ///
   /// The answer will be displayed to the user as a notification at the top of the chat screen or as
@@ -1792,6 +2080,65 @@ class Telegram {
     return (await HttpClient.httpPost(requestUrl, body: body))
         .map<BotCommand>((botCommand) => BotCommand.fromJson(botCommand))
         .toList();
+  }
+
+  /// Use this method to change the bot's menu button in a private chat, or the default menu button.
+  ///
+  /// Returns *True* on success.
+  ///
+  /// https://core.telegram.org/bots/api#setchatmenubutton
+  Future<bool> setChatMenuButton(int? chat_id, MenuButton? menu_button) async {
+    var requestUrl = _apiUri('setChatMenuButton');
+    var body = <String, dynamic>{
+      'chat_id': chat_id,
+      'menu_button': jsonEncode(menu_button),
+    };
+    return await HttpClient.httpPost(requestUrl, body: body);
+  }
+
+  /// Use this method to get the current value of the bot's menu button in a private chat, or the default menu button.
+  ///
+  /// Returns [MenuButton] on success.
+  ///
+  /// https://core.telegram.org/bots/api#getchatmenubutton
+  Future<MenuButton> getChatMenuButton(int? chat_id) async {
+    var requestUrl = _apiUri('getChatMenuButton');
+    var body = <String, dynamic>{
+      'chat_id': chat_id,
+    };
+    return MenuButton.fromJson(
+        await HttpClient.httpPost(requestUrl, body: body));
+  }
+
+  /// Use this method to change the default administrator rights requested by the bot when it's added as an administrator to groups or channels.
+  /// These rights will be suggested to users, but they are are free to modify the list before adding the bot.
+  ///
+  /// Returns *True* on success.
+  ///
+  /// https://core.telegram.org/bots/api#setmydefaultadministratorrights
+  Future<bool> setMyDefaultAdministratorRights(
+      ChatAdministratorRights? rights, bool? for_channels) async {
+    var requestUrl = _apiUri('setMyDefaultAdministratorRights');
+    var body = <String, dynamic>{
+      'rights': rights == null ? null : jsonEncode(rights),
+      'for_channels': for_channels,
+    };
+    return await HttpClient.httpPost(requestUrl, body: body);
+  }
+
+  /// Use this method to get the current default administrator rights of the bot.
+  ///
+  /// Returns [ChatAdministratorRights] on success.
+  ///
+  /// https://core.telegram.org/bots/api#getmydefaultadministratorrights
+  Future<ChatAdministratorRights> getMyDefaultAdministratorRights(
+      bool? for_channels) async {
+    var requestUrl = _apiUri('getMyDefaultAdministratorRights');
+    var body = <String, dynamic>{
+      'for_channels': for_channels,
+    };
+    return ChatAdministratorRights.fromJson(
+        await HttpClient.httpPost(requestUrl, body: body));
   }
 
   /// Use this method to edit text and [Game] messages sent by the bot or via the bot
@@ -2013,7 +2360,8 @@ class Telegram {
   ///
   /// https://core.telegram.org/bots/api#sendsticker
   Future<Message> sendSticker(dynamic chat_id, dynamic sticker,
-      {bool? disable_notification,
+      {int? message_thread_id,
+      bool? disable_notification,
       bool? protect_content,
       int? reply_to_message_id,
       bool? allow_sending_without_reply,
@@ -2025,6 +2373,7 @@ class Telegram {
     var requestUrl = _apiUri('sendSticker');
     var body = <String, dynamic>{
       'chat_id': chat_id,
+      'message_thread_id': message_thread_id,
       'disable_notification': disable_notification,
       'protect_content': protect_content,
       'reply_to_message_id': reply_to_message_id,
@@ -2062,6 +2411,22 @@ class Telegram {
         await HttpClient.httpPost(requestUrl, body: body));
   }
 
+  /// Use this method to get information about custom emoji stickers by their identifiers.
+  ///
+  /// Returns an Array of [Sticker] objects.
+  ///
+  /// https://core.telegram.org/bots/api#getcustomemojistickers
+  Future<List<Sticker>> getCustomEmojiStickers(
+      List<String> custom_emoji_ids) async {
+    var requestUrl = _apiUri('getCustomEmojiStickers');
+    var body = <String, dynamic>{
+      'custom_emoji_ids': jsonEncode(custom_emoji_ids)
+    };
+    return (await HttpClient.httpPost(requestUrl, body: body))
+        .map<Sticker>((sticker) => Sticker.fromJson(sticker))
+        .toList();
+  }
+
   /// Use this method to upload a .png file with a sticker for later use in
   /// *createNewStickerSet* and *addStickerToSet* methods (can be used multiple times)
   ///
@@ -2094,7 +2459,7 @@ class Telegram {
       {dynamic png_sticker,
       io.File? tgs_sticker,
       io.File? webm_sticker,
-      bool? contains_masks,
+      String? sticker_type,
       MaskPosition? mask_position}) async {
     var requestUrl = _apiUri('createNewStickerSet');
     var botInfo = await getMe();
@@ -2103,7 +2468,7 @@ class Telegram {
       'name': '${name}_by_${botInfo.username}',
       'title': title,
       'emojis': emojis,
-      'contains_masks': contains_masks,
+      'sticker_type': sticker_type,
       'mask_position': mask_position == null ? null : jsonEncode(mask_position),
     };
 
@@ -2113,14 +2478,19 @@ class Telegram {
     } else if (png_sticker is String) {
       body.addAll({'png_sticker': png_sticker});
       return await HttpClient.httpPost(requestUrl, body: body);
-    } else if (png_sticker is io.File || tgs_sticker != null || webm_sticker != null ) {
+    } else if (png_sticker is io.File ||
+        tgs_sticker != null ||
+        webm_sticker != null) {
       var file = png_sticker ?? tgs_sticker ?? webm_sticker;
-      var fieldName = png_sticker != null ? 'png_sticker' : tgs_sticker != null ? 'tgs_sticker' : 'webm_sticker';
+      var fieldName = png_sticker != null
+          ? 'png_sticker'
+          : tgs_sticker != null
+              ? 'tgs_sticker'
+              : 'webm_sticker';
       // filename cannot be empty to post to Telegram server
       var files = List<MultipartFile>.filled(
           1,
-          MultipartFile(
-              fieldName, file.openRead(), file.lengthSync(),
+          MultipartFile(fieldName, file.openRead(), file.lengthSync(),
               filename: '${file.lengthSync()}'));
       return await HttpClient.httpMultipartPost(requestUrl, files, body: body);
     } else {
@@ -2158,14 +2528,19 @@ class Telegram {
     } else if (png_sticker is String) {
       body.addAll({'png_sticker': png_sticker});
       return await HttpClient.httpPost(requestUrl, body: body);
-    } else if (png_sticker is io.File || tgs_sticker != null || webm_sticker != null ) {
+    } else if (png_sticker is io.File ||
+        tgs_sticker != null ||
+        webm_sticker != null) {
       var file = png_sticker ?? tgs_sticker ?? webm_sticker;
-      var fieldName = png_sticker != null ? 'png_sticker' : tgs_sticker != null ? 'tgs_sticker' : 'webm_sticker';
+      var fieldName = png_sticker != null
+          ? 'png_sticker'
+          : tgs_sticker != null
+              ? 'tgs_sticker'
+              : 'webm_sticker';
       // filename cannot be empty to post to Telegram server
       var files = List<MultipartFile>.filled(
           1,
-          MultipartFile(
-              fieldName, file.openRead(), file.lengthSync(),
+          MultipartFile(fieldName, file.openRead(), file.lengthSync(),
               filename: '${file.lengthSync()}'));
       return await HttpClient.httpMultipartPost(requestUrl, files, body: body);
     } else {
@@ -2256,6 +2631,22 @@ class Telegram {
     return await HttpClient.httpPost(requestUrl, body: body);
   }
 
+  /// Use this method to set the result of an interaction with a [Web App] and send a corresponding
+  /// message on behalf of the user to the chat from which the query originated.
+  ///
+  /// On success, a [SentWebAppMessage] object is returned.
+  ///
+  /// https://core.telegram.org/bots/api#answerwebappquery
+  Future<SentWebAppMessage> answerWebAppQuery(
+      String web_app_query_id, InlineQueryResult result) async {
+    var requestUrl = _apiUri('answerWebAppQuery');
+    var body = <String, dynamic>{
+      'web_app_query_id': web_app_query_id,
+      'result': jsonEncode(result),
+    };
+    return await HttpClient.httpPost(requestUrl, body: body);
+  }
+
   /// Use this method to send invoices
   ///
   /// On success, the sent [Message] is returned.
@@ -2269,7 +2660,8 @@ class Telegram {
       String provider_token,
       String currency,
       List<LabeledPrice> prices,
-      {int? max_tip_amount,
+      {int? message_thread_id,
+      int? max_tip_amount,
       List<int>? suggested_tip_amounts,
       String? start_parameter,
       String? provider_data,
@@ -2296,6 +2688,7 @@ class Telegram {
     var requestUrl = _apiUri('sendInvoice');
     var body = <String, dynamic>{
       'chat_id': chat_id,
+      'message_thread_id': message_thread_id,
       'title': title,
       'description': description,
       'payload': payload,
@@ -2326,6 +2719,35 @@ class Telegram {
       'reply_markup': reply_markup == null ? null : jsonEncode(reply_markup),
     };
     return Message.fromJson(await HttpClient.httpPost(requestUrl, body: body));
+  }
+
+  /// Use this method to create a link for an invoice.
+  ///
+  /// Returns the created invoice link as *String* on success
+  Future<String> createInvoiceLink(
+      String title,
+      String description,
+      String payload,
+      String provider_token,
+      String currency,
+      List<LabeledPrice> prices,
+      {int? max_tip_amount,
+      List<int>? suggested_tip_amounts,
+      String? provider_data,
+      String? photo_url,
+      int? photo_size,
+      int? photo_width,
+      int? photo_height,
+      bool? need_name,
+      bool? need_phone_number,
+      bool? need_email,
+      bool? need_shipping_address,
+      bool? send_phone_number_to_provider,
+      bool? send_email_to_provider,
+      bool? is_flexible}) async {
+    var requestUrl = _apiUri('createInvoiceLink');
+    var body = <String, dynamic>{};
+    return await HttpClient.httpPost(requestUrl, body: body);
   }
 
   /// Use this method to reply to shipping queries.
@@ -2407,7 +2829,8 @@ class Telegram {
   ///
   /// https://core.telegram.org/bots/api#sendgame
   Future<Message> sendGame(dynamic chat_id, String game_short_name,
-      {bool? disable_notification,
+      {int? message_thread_id,
+      bool? disable_notification,
       bool? protect_content,
       int? reply_to_message_id,
       bool? allow_sending_without_reply,
@@ -2419,6 +2842,7 @@ class Telegram {
     var requestUrl = _apiUri('sendGame');
     var body = <String, dynamic>{
       'chat_id': chat_id,
+      'message_thread_id': message_thread_id,
       'game_short_name': game_short_name,
       'disable_notification': disable_notification,
       'protect_content': protect_content,

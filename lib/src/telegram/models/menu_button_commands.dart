@@ -1,6 +1,6 @@
 /*
  * TeleDart - Telegram Bot API for Dart
- * Copyright (C) 2019  Dino PH Leung
+ * Copyright (C) 2022  Dino PH Leung
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,28 +18,17 @@
 
 part of '../model.dart';
 
-/// This object represents a sticker set.
+/// Represents a menu button, which opens the bot's list of commands.
 ///
-/// https://core.telegram.org/bots/api#stickerset
+/// https://core.telegram.org/bots/api#menubuttoncommands
+
 @JsonSerializable()
-class StickerSet {
-  String name;
-  String title;
-  String sticker_type;
-  bool is_animated;
-  bool is_video;
-  List<Sticker> stickers;
-  PhotoSize? thumb;
-  StickerSet({
-    required this.name,
-    required this.title,
-    required this.sticker_type,
-    required this.is_animated,
-    required this.is_video,
-    required this.stickers,
-    this.thumb,
-  });
-  factory StickerSet.fromJson(Map<String, dynamic> json) =>
-      _$StickerSetFromJson(json);
-  Map<String, dynamic> toJson() => _$StickerSetToJson(this);
+class MenuButtonCommands implements MenuButton {
+  @override
+  String type;
+  MenuButtonCommands({this.type = MenuButton.COMMANDS});
+  factory MenuButtonCommands.fromJson(Map<String, dynamic> json) =>
+      _$MenuButtonCommandsFromJson(json);
+
+  Map<String, dynamic> toJson() => _$MenuButtonCommandsToJson(this);
 }

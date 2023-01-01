@@ -34,19 +34,29 @@ class Chat {
   String? username;
   String? first_name;
   String? last_name;
+  bool? is_forum;
   ChatPhoto? photo;
+  List<String>? active_usernames;
+  String? emoji_status_custom_emoji_id;
   String? bio;
   bool? has_private_forwards;
+  bool? has_restricted_voice_and_video_messages;
+  bool? join_to_send_messages;
+  bool? join_by_request;
   String? description;
   String? invite_link;
   Message? pinned_message;
   ChatPermissions? permissions;
   int? slow_mode_delay;
+  int? message_auto_delete_time;
+  bool? has_aggressive_anti_spam_enabled;
+  bool? has_hidden_members;
   bool? has_protected_content;
   String? sticker_set_name;
   bool? can_set_sticker_set;
   int? linked_chat_id;
   ChatLocation? location;
+
   Chat({
     required this.id,
     required this.type,
@@ -54,20 +64,30 @@ class Chat {
     this.username,
     this.first_name,
     this.last_name,
+    this.is_forum,
     this.photo,
+    this.active_usernames,
+    this.emoji_status_custom_emoji_id,
     this.bio,
     this.has_private_forwards,
+    this.has_restricted_voice_and_video_messages,
+    this.join_to_send_messages,
+    this.join_by_request,
     this.description,
     this.invite_link,
     this.pinned_message,
     this.permissions,
     this.slow_mode_delay,
+    this.message_auto_delete_time,
+    this.has_aggressive_anti_spam_enabled,
+    this.has_hidden_members,
     this.has_protected_content,
     this.sticker_set_name,
     this.can_set_sticker_set,
     this.linked_chat_id,
     this.location,
   });
+
   factory Chat.fromJson(Map<String, dynamic> json) => _$ChatFromJson(json);
   Map<String, dynamic> toJson() => _$ChatToJson(this);
 }
