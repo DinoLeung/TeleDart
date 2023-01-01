@@ -29,12 +29,14 @@ part of '../model.dart';
 @JsonSerializable()
 class ReplyKeyboardMarkup implements ReplyMarkup {
   List<List<KeyboardButton>> keyboard;
+  bool? is_persistent;
   bool? resize_keyboard;
   bool? one_time_keyboard;
   String? input_field_placeholder;
   bool? selective;
   ReplyKeyboardMarkup({
     required this.keyboard,
+    this.is_persistent,
     this.resize_keyboard,
     this.one_time_keyboard,
     this.input_field_placeholder,
