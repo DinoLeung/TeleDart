@@ -37,18 +37,19 @@ class InputMediaAnimation implements InputMedia {
   int? width;
   int? height;
   int? duration;
+  bool? has_spoiler;
 
-  InputMediaAnimation({
-    this.type = InputMedia.ANIMATION,
-    required this.media,
-    this.thumb,
-    this.caption,
-    this.parse_mode,
-    this.caption_entities,
-    this.width,
-    this.height,
-    this.duration,
-  });
+  InputMediaAnimation(
+      {this.type = InputMedia.ANIMATION,
+      required this.media,
+      this.thumb,
+      this.caption,
+      this.parse_mode,
+      this.caption_entities,
+      this.width,
+      this.height,
+      this.duration,
+      this.has_spoiler});
 
   @JsonKey(ignore: true)
   Duration? get duration_ =>

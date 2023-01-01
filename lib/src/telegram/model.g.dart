@@ -637,6 +637,11 @@ Chat _$ChatFromJson(Map<String, dynamic> json) => Chat(
       photo: json['photo'] == null
           ? null
           : ChatPhoto.fromJson(json['photo'] as Map<String, dynamic>),
+      active_usernames: (json['active_usernames'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+      emoji_status_custom_emoji_id:
+          json['emoji_status_custom_emoji_id'] as String?,
       bio: json['bio'] as String?,
       has_private_forwards: json['has_private_forwards'] as bool?,
       has_restricted_voice_and_video_messages:
@@ -680,6 +685,9 @@ Map<String, dynamic> _$ChatToJson(Chat instance) {
   writeNotNull('last_name', instance.last_name);
   writeNotNull('is_forum', instance.is_forum);
   writeNotNull('photo', instance.photo?.toJson());
+  writeNotNull('active_usernames', instance.active_usernames);
+  writeNotNull(
+      'emoji_status_custom_emoji_id', instance.emoji_status_custom_emoji_id);
   writeNotNull('bio', instance.bio);
   writeNotNull('has_private_forwards', instance.has_private_forwards);
   writeNotNull('has_restricted_voice_and_video_messages',
@@ -2257,6 +2265,7 @@ InputMediaAnimation _$InputMediaAnimationFromJson(Map<String, dynamic> json) =>
       width: json['width'] as int?,
       height: json['height'] as int?,
       duration: json['duration'] as int?,
+      has_spoiler: json['has_spoiler'] as bool?,
     );
 
 Map<String, dynamic> _$InputMediaAnimationToJson(InputMediaAnimation instance) {
@@ -2279,6 +2288,7 @@ Map<String, dynamic> _$InputMediaAnimationToJson(InputMediaAnimation instance) {
   writeNotNull('width', instance.width);
   writeNotNull('height', instance.height);
   writeNotNull('duration', instance.duration);
+  writeNotNull('has_spoiler', instance.has_spoiler);
   return val;
 }
 
@@ -2365,6 +2375,7 @@ InputMediaPhoto _$InputMediaPhotoFromJson(Map<String, dynamic> json) =>
       caption_entities: (json['caption_entities'] as List<dynamic>?)
           ?.map((e) => MessageEntity.fromJson(e as Map<String, dynamic>))
           .toList(),
+      has_spoiler: json['has_spoiler'] as bool?,
     );
 
 Map<String, dynamic> _$InputMediaPhotoToJson(InputMediaPhoto instance) {
@@ -2383,6 +2394,7 @@ Map<String, dynamic> _$InputMediaPhotoToJson(InputMediaPhoto instance) {
   writeNotNull('parse_mode', instance.parse_mode);
   writeNotNull('caption_entities',
       instance.caption_entities?.map((e) => e.toJson()).toList());
+  writeNotNull('has_spoiler', instance.has_spoiler);
   return val;
 }
 
@@ -2400,6 +2412,7 @@ InputMediaVideo _$InputMediaVideoFromJson(Map<String, dynamic> json) =>
       height: json['height'] as int?,
       duration: json['duration'] as int?,
       supports_streaming: json['supports_streaming'] as bool?,
+      has_spoiler: json['has_spoiler'] as bool?,
     );
 
 Map<String, dynamic> _$InputMediaVideoToJson(InputMediaVideo instance) {
@@ -2423,6 +2436,7 @@ Map<String, dynamic> _$InputMediaVideoToJson(InputMediaVideo instance) {
   writeNotNull('height', instance.height);
   writeNotNull('duration', instance.duration);
   writeNotNull('supports_streaming', instance.supports_streaming);
+  writeNotNull('has_spoiler', instance.has_spoiler);
   return val;
 }
 
@@ -3407,6 +3421,7 @@ ReplyKeyboardMarkup _$ReplyKeyboardMarkupFromJson(Map<String, dynamic> json) =>
               .map((e) => KeyboardButton.fromJson(e as Map<String, dynamic>))
               .toList())
           .toList(),
+      is_persistent: json['is_persistent'] as bool?,
       resize_keyboard: json['resize_keyboard'] as bool?,
       one_time_keyboard: json['one_time_keyboard'] as bool?,
       input_field_placeholder: json['input_field_placeholder'] as String?,
@@ -3426,6 +3441,7 @@ Map<String, dynamic> _$ReplyKeyboardMarkupToJson(ReplyKeyboardMarkup instance) {
     }
   }
 
+  writeNotNull('is_persistent', instance.is_persistent);
   writeNotNull('resize_keyboard', instance.resize_keyboard);
   writeNotNull('one_time_keyboard', instance.one_time_keyboard);
   writeNotNull('input_field_placeholder', instance.input_field_placeholder);

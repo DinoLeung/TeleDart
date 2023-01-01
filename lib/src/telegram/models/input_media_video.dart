@@ -38,6 +38,7 @@ class InputMediaVideo implements InputMedia {
   int? height;
   int? duration;
   bool? supports_streaming;
+  bool? has_spoiler;
 
   InputMediaVideo({
     this.type = InputMedia.VIDEO,
@@ -50,6 +51,7 @@ class InputMediaVideo implements InputMedia {
     this.height,
     this.duration,
     this.supports_streaming,
+    this.has_spoiler,
   });
 
   @JsonKey(ignore: true)
