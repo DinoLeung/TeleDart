@@ -48,6 +48,9 @@ class Chat {
   Message? pinned_message;
   ChatPermissions? permissions;
   int? slow_mode_delay;
+  int? message_auto_delete_time;
+  bool? has_aggressive_anti_spam_enabled;
+  bool? has_hidden_members;
   bool? has_protected_content;
   String? sticker_set_name;
   bool? can_set_sticker_set;
@@ -75,6 +78,9 @@ class Chat {
     this.pinned_message,
     this.permissions,
     this.slow_mode_delay,
+    this.message_auto_delete_time,
+    this.has_aggressive_anti_spam_enabled,
+    this.has_hidden_members,
     this.has_protected_content,
     this.sticker_set_name,
     this.can_set_sticker_set,

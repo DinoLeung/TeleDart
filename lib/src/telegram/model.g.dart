@@ -658,6 +658,10 @@ Chat _$ChatFromJson(Map<String, dynamic> json) => Chat(
           : ChatPermissions.fromJson(
               json['permissions'] as Map<String, dynamic>),
       slow_mode_delay: json['slow_mode_delay'] as int?,
+      message_auto_delete_time: json['message_auto_delete_time'] as int?,
+      has_aggressive_anti_spam_enabled:
+          json['has_aggressive_anti_spam_enabled'] as bool?,
+      has_hidden_members: json['has_hidden_members'] as bool?,
       has_protected_content: json['has_protected_content'] as bool?,
       sticker_set_name: json['sticker_set_name'] as String?,
       can_set_sticker_set: json['can_set_sticker_set'] as bool?,
@@ -699,6 +703,10 @@ Map<String, dynamic> _$ChatToJson(Chat instance) {
   writeNotNull('pinned_message', instance.pinned_message?.toJson());
   writeNotNull('permissions', instance.permissions?.toJson());
   writeNotNull('slow_mode_delay', instance.slow_mode_delay);
+  writeNotNull('message_auto_delete_time', instance.message_auto_delete_time);
+  writeNotNull('has_aggressive_anti_spam_enabled',
+      instance.has_aggressive_anti_spam_enabled);
+  writeNotNull('has_hidden_members', instance.has_hidden_members);
   writeNotNull('has_protected_content', instance.has_protected_content);
   writeNotNull('sticker_set_name', instance.sticker_set_name);
   writeNotNull('can_set_sticker_set', instance.can_set_sticker_set);
