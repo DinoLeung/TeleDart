@@ -24,51 +24,51 @@ part of '../model.dart';
 ///
 /// [file]: https://core.telegram.org/bots/api#document
 /// [sticker]: https://core.telegram.org/bots/api#sticker
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class Poll {
-  static const String REGULAR = 'regular';
-  static const String QUIZ = 'quiz';
+  static const String typeRegular = 'regular';
+  static const String typeQuiz = 'quiz';
 
   String id;
   String question;
   List<PollOption> options;
-  int total_voter_count;
-  bool is_closed;
-  bool is_anonymous;
+  int totalVoterCount;
+  bool isClosed;
+  bool isAnonymous;
   String type;
-  bool allows_multiple_answers;
-  int? correct_option_id;
+  bool allowsMultipleAnswers;
+  int? correctOptionId;
   String? explanation;
-  List<MessageEntity>? explanation_entities;
-  int? open_period;
-  int? close_date;
+  List<MessageEntity>? explanationEntities;
+  int? openPeriod;
+  int? closeDate;
   Poll({
     required this.id,
     required this.question,
     required this.options,
-    required this.total_voter_count,
-    required this.is_closed,
-    required this.is_anonymous,
+    required this.totalVoterCount,
+    required this.isClosed,
+    required this.isAnonymous,
     required this.type,
-    required this.allows_multiple_answers,
-    this.correct_option_id,
+    required this.allowsMultipleAnswers,
+    this.correctOptionId,
     this.explanation,
-    this.explanation_entities,
-    this.open_period,
-    this.close_date,
+    this.explanationEntities,
+    this.openPeriod,
+    this.closeDate,
   });
   factory Poll.fromJson(Map<String, dynamic> json) => _$PollFromJson(json);
   Map<String, dynamic> toJson() => _$PollToJson(this);
 
   @JsonKey(ignore: true)
-  Duration? get open_period_ =>
-      open_period == null ? null : TimeHelper.toDuration(open_period!);
-  set open_period_(Duration? duration) =>
-      open_period = duration == null ? null : TimeHelper.toSeconds(duration);
+  Duration? get openPeriod_ =>
+      openPeriod == null ? null : TimeHelper.toDuration(openPeriod!);
+  set openPeriod_(Duration? duration) =>
+      openPeriod = duration == null ? null : TimeHelper.toSeconds(duration);
 
   @JsonKey(ignore: true)
-  DateTime? get close_date_ =>
-      close_date == null ? null : TimeHelper.toDateTime(close_date!);
-  set close_date_(DateTime? dateTime) =>
-      close_date = dateTime == null ? null : TimeHelper.toUnixTime(dateTime);
+  DateTime? get closeDate_ =>
+      closeDate == null ? null : TimeHelper.toDateTime(closeDate!);
+  set closeDate_(DateTime? dateTime) =>
+      closeDate = dateTime == null ? null : TimeHelper.toUnixTime(dateTime);
 }

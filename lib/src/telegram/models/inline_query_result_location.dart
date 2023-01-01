@@ -21,13 +21,13 @@ part of '../model.dart';
 /// Represents a location on a map.
 /// By default, the location will be sent by the user.
 /// Alternatively,
-/// you can use *input_message_content* to send a message with the specified content instead of the location.
+/// you can use *inputMessageContent* to send a message with the specified content instead of the location.
 ///
 /// **Note:** This will only work in Telegram versions released after 9 April, 2016.
 /// Older clients will ignore them.
 ///
 /// https://core.telegram.org/bots/api#inlinequeryresultlocation
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class InlineQueryResultLocation implements InlineQueryResult {
   @override
   String id;
@@ -36,39 +36,39 @@ class InlineQueryResultLocation implements InlineQueryResult {
   double latitude;
   double longitude;
   String title;
-  double? horizontal_accuracy;
-  int? live_period;
+  double? horizontalAccuracy;
+  int? livePeriod;
   int? heading;
-  int? proximity_alert_radius;
+  int? proximityAlertRadius;
   @override
-  InlineKeyboardMarkup? reply_markup;
-  InputMessageContent? input_message_content;
-  String? thumb_url;
-  int? thumb_width;
-  int? thumb_height;
+  InlineKeyboardMarkup? replyMarkup;
+  InputMessageContent? inputMessageContent;
+  String? thumbUrl;
+  int? thumbWidth;
+  int? thumbHeight;
 
   InlineQueryResultLocation({
     required this.id,
-    this.type = InlineQueryResult.LOCATION,
+    this.type = InlineQueryResult.typeLocation,
     required this.latitude,
     required this.longitude,
     required this.title,
-    this.horizontal_accuracy,
-    this.live_period,
+    this.horizontalAccuracy,
+    this.livePeriod,
     this.heading,
-    this.proximity_alert_radius,
-    this.reply_markup,
-    this.input_message_content,
-    this.thumb_url,
-    this.thumb_width,
-    this.thumb_height,
+    this.proximityAlertRadius,
+    this.replyMarkup,
+    this.inputMessageContent,
+    this.thumbUrl,
+    this.thumbWidth,
+    this.thumbHeight,
   });
 
   @JsonKey(ignore: true)
-  Duration? get live_period_ =>
-      live_period == null ? null : TimeHelper.toDuration(live_period!);
-  set live_period_(Duration? duration) =>
-      live_period = duration == null ? null : TimeHelper.toSeconds(duration);
+  Duration? get livePeriod_ =>
+      livePeriod == null ? null : TimeHelper.toDuration(livePeriod!);
+  set livePeriod_(Duration? duration) =>
+      livePeriod = duration == null ? null : TimeHelper.toSeconds(duration);
 
   factory InlineQueryResultLocation.fromJson(Map<String, dynamic> json) =>
       _$InlineQueryResultLocationFromJson(json);

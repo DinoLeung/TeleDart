@@ -21,23 +21,23 @@ part of '../model.dart';
 /// This object represents a venue.
 ///
 /// https://core.telegram.org/bots/api#venue
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class Venue {
   Location location;
   String title;
   String address;
-  String? foursquare_id;
-  String? foursquare_type;
-  String? google_place_id;
-  String? google_place_type;
+  String? foursquareId;
+  String? foursquareType;
+  String? googlePlaceId;
+  String? googlePlaceType;
   Venue({
     required this.location,
     required this.title,
     required this.address,
-    this.foursquare_id,
-    this.foursquare_type,
-    this.google_place_id,
-    this.google_place_type,
+    this.foursquareId,
+    this.foursquareType,
+    this.googlePlaceId,
+    this.googlePlaceType,
   });
   factory Venue.fromJson(Map<String, dynamic> json) => _$VenueFromJson(json);
   Map<String, dynamic> toJson() => _$VenueToJson(this);

@@ -23,20 +23,20 @@ part of '../model.dart';
 /// Use BotFather to create and edit games, their short names will act as unique identifiers.
 ///
 /// https://core.telegram.org/bots/api#game
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class Game {
   String title;
   String description;
   List<PhotoSize> photo;
   String? text;
-  List<MessageEntity>? text_entities;
+  List<MessageEntity>? textEntities;
   Animation? animation;
   Game({
     required this.title,
     required this.description,
     required this.photo,
     this.text,
-    this.text_entities,
+    this.textEntities,
     this.animation,
   });
   factory Game.fromJson(Map<String, dynamic> json) => _$GameFromJson(json);

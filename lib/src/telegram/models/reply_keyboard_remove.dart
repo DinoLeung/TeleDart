@@ -29,12 +29,12 @@ part of '../model.dart';
 /// https://core.telegram.org/bots/api#replykeyboardremove
 ///
 /// [ReplyKeyboardMarkup]: https://core.telegram.org/bots/api#replykeyboardmarkup
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class ReplyKeyboardRemove implements ReplyMarkup {
-  bool remove_keyboard;
+  bool removeKeyboard;
   bool? selective;
   ReplyKeyboardRemove({
-    required this.remove_keyboard,
+    required this.removeKeyboard,
     this.selective,
   });
   factory ReplyKeyboardRemove.fromJson(Map<String, dynamic> json) =>

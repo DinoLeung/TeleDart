@@ -21,25 +21,25 @@ part of '../model.dart';
 /// This object represents one special entity in a text message. For example, hashtags, usernames, URLs, etc.
 ///
 /// https://core.telegram.org/bots/api#messageentity
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class MessageEntity {
-  static const String MENTION = 'mention';
-  static const String HASHTAG = 'hashtag';
-  static const String CASHTAG = 'cashtag';
-  static const String BOT_COMMAND = 'bot_command';
-  static const String URL = 'url';
-  static const String EMAIL = 'email';
-  static const String PHONE_NUMBER = 'phone_number';
-  static const String BOLD = 'bold';
-  static const String ITALIC = 'italic';
-  static const String UNDERLINE = 'underline';
-  static const String STRIKETHROUGH = 'strikethrough';
-  static const String SPOILER = 'spoiler';
-  static const String CODE = 'code';
-  static const String PRE = 'pre';
-  static const String TEXT_LINK = 'text_link';
-  static const String TEXT_MENTION = 'text_mention';
-  static const String CUSTOM_EMOJI = 'custom_emoji';
+  static const String typeMention = 'mention';
+  static const String typeHashtag = 'hashtag';
+  static const String typeCashtag = 'cashtag';
+  static const String typeBotCommand = 'botCommand';
+  static const String typeUrl = 'url';
+  static const String typeEmail = 'email';
+  static const String typePhoneNmber = 'phoneNumber';
+  static const String typeBold = 'bold';
+  static const String typeItalic = 'italic';
+  static const String typeUnderline = 'underline';
+  static const String typeStrikethrough = 'strikethrough';
+  static const String typeSpolier = 'spoiler';
+  static const String typeCode = 'code';
+  static const String typePre = 'pre';
+  static const String typeTextLink = 'textLink';
+  static const String typeTextMention = 'textMention';
+  static const String typeCustomEmoji = 'customEmoji';
 
   String type;
   int offset;
@@ -47,7 +47,7 @@ class MessageEntity {
   String? url;
   User? user;
   String? language;
-  String? custom_emoji_id;
+  String? customEmojiId;
   MessageEntity({
     required this.type,
     required this.offset,
@@ -55,7 +55,7 @@ class MessageEntity {
     this.url,
     this.user,
     this.language,
-    this.custom_emoji_id,
+    this.customEmojiId,
   });
   factory MessageEntity.fromJson(Map<String, dynamic> json) =>
       _$MessageEntityFromJson(json);

@@ -43,29 +43,29 @@ part of '../model.dart';
 /// * [InlineQueryResultVoice](https://core.telegram.org/bots/api#inlinequeryresultvoice)
 ///
 /// https://core.telegram.org/bots/api#inlinequeryresult
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class InlineQueryResult {
-  static const ARTICLE = 'article';
-  static const AUDIO = 'audio';
-  static const DOCUMENT = 'document';
-  static const GIF = 'gif';
-  static const MPEG4_GIF = 'mpeg4_gif';
-  static const PHOTO = 'photo';
-  static const STICKER = 'sticker';
-  static const VIDEO = 'video';
-  static const VOICE = 'voice';
-  static const CONTACT = 'contact';
-  static const GAME = 'game';
-  static const LOCATION = 'location';
-  static const VENUE = 'venue';
+  static const typeArticle = 'article';
+  static const typeAudio = 'audio';
+  static const typeDocument = 'document';
+  static const typeGif = 'gif';
+  static const typeMpeg4Gif = 'mpeg4Gif';
+  static const typePhoto = 'photo';
+  static const typeSticker = 'sticker';
+  static const typeVideo = 'video';
+  static const typeVoice = 'voice';
+  static const typeContact = 'contact';
+  static const typeGame = 'game';
+  static const typeLocation = 'location';
+  static const typeVenue = 'venue';
 
   String type;
   String id;
-  InlineKeyboardMarkup? reply_markup;
+  InlineKeyboardMarkup? replyMarkup;
   InlineQueryResult({
     required this.type,
     required this.id,
-    this.reply_markup,
+    this.replyMarkup,
   });
   factory InlineQueryResult.fromJson(Map<String, dynamic> json) =>
       _$InlineQueryResultFromJson(json);

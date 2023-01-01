@@ -22,33 +22,33 @@ part of '../model.dart';
 ///
 /// By default, this animated MPEG-4 file will be sent by the user with an optional caption.
 /// Alternatively,
-/// you can use *input_message_content* to send a message with the specified content instead of the animation.
+/// you can use *inputMessageContent* to send a message with the specified content instead of the animation.
 ///
 /// https://core.telegram.org/bots/api#inlinequeryresultmpeg4gif
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class InlineQueryResultCachedMpeg4Gif implements InlineQueryResult {
   @override
   String id;
   @override
   String type;
-  String mpeg4_file_id;
+  String mpeg4FileId;
   String? title;
   String? caption;
-  String? parse_mode;
-  List<MessageEntity>? caption_entities;
+  String? parseMode;
+  List<MessageEntity>? captionEntities;
   @override
-  InlineKeyboardMarkup? reply_markup;
-  InputMessageContent? input_message_content;
+  InlineKeyboardMarkup? replyMarkup;
+  InputMessageContent? inputMessageContent;
   InlineQueryResultCachedMpeg4Gif({
     required this.id,
-    this.type = InlineQueryResult.MPEG4_GIF,
-    required this.mpeg4_file_id,
+    this.type = InlineQueryResult.typeMpeg4Gif,
+    required this.mpeg4FileId,
     this.title,
     this.caption,
-    this.parse_mode,
-    this.caption_entities,
-    this.reply_markup,
-    this.input_message_content,
+    this.parseMode,
+    this.captionEntities,
+    this.replyMarkup,
+    this.inputMessageContent,
   });
   factory InlineQueryResultCachedMpeg4Gif.fromJson(Map<String, dynamic> json) =>
       _$InlineQueryResultCachedMpeg4GifFromJson(json);

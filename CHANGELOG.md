@@ -1,3 +1,8 @@
+## 0.5.0
+
+- Configured JSON serialiser to map properties from snake case to camel case
+- **Breaking** Fully convert all property names and parameter names into camel case, so it aligns with Dart styling guide
+
 ## 0.4.0
 
 - Fixed `TEXT_MENTION` bug when using regex

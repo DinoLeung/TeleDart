@@ -21,35 +21,35 @@ part of '../model.dart';
 /// Contains information about the current status of a webhook.
 ///
 /// https://core.telegram.org/bots/api#webhookinfo
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class WebhookInfo {
   String url;
-  bool has_custom_certificate;
-  int pending_update_count;
-  String? ip_address;
-  int? last_error_date;
-  String? last_error_message;
-  int? last_synchronization_error_date;
-  int? max_connections;
-  List<String>? allowed_updates;
+  bool hasCustomCertificate;
+  int pendingUpdateCount;
+  String? ipAddress;
+  int? lastErrorDate;
+  String? lastErrorMessage;
+  int? lastSynchronizationErrorDate;
+  int? maxConnections;
+  List<String>? allowedUpdates;
 
   WebhookInfo({
     required this.url,
-    required this.has_custom_certificate,
-    required this.pending_update_count,
-    this.ip_address,
-    this.last_error_date,
-    this.last_error_message,
-    this.last_synchronization_error_date,
-    this.max_connections,
-    this.allowed_updates,
+    required this.hasCustomCertificate,
+    required this.pendingUpdateCount,
+    this.ipAddress,
+    this.lastErrorDate,
+    this.lastErrorMessage,
+    this.lastSynchronizationErrorDate,
+    this.maxConnections,
+    this.allowedUpdates,
   });
 
   @JsonKey(ignore: true)
-  DateTime? get last_error_date_ =>
-      last_error_date == null ? null : TimeHelper.toDateTime(last_error_date!);
-  set last_error_date_(DateTime? dateTime) => last_error_date =
-      dateTime == null ? null : TimeHelper.toUnixTime(dateTime);
+  DateTime? get lastErrorDate_ =>
+      lastErrorDate == null ? null : TimeHelper.toDateTime(lastErrorDate!);
+  set lastErrorDate_(DateTime? dateTime) =>
+      lastErrorDate = dateTime == null ? null : TimeHelper.toUnixTime(dateTime);
 
   factory WebhookInfo.fromJson(Map<String, dynamic> json) =>
       _$WebhookInfoFromJson(json);

@@ -26,11 +26,11 @@ part of '../model.dart';
 /// https://core.telegram.org/bots/api#inlinekeyboardmarkup
 ///
 /// [inline keyboard]: https://core.telegram.org/bots#inline-keyboards-and-on-the-fly-updating
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class InlineKeyboardMarkup implements ReplyMarkup {
-  List<List<InlineKeyboardButton>> inline_keyboard;
+  List<List<InlineKeyboardButton>> inlineKeyboard;
   InlineKeyboardMarkup({
-    required this.inline_keyboard,
+    required this.inlineKeyboard,
   });
   factory InlineKeyboardMarkup.fromJson(Map<String, dynamic> json) =>
       _$InlineKeyboardMarkupFromJson(json);

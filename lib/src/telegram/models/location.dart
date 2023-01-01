@@ -21,21 +21,21 @@ part of '../model.dart';
 /// This object represents a point on the map.
 ///
 /// https://core.telegram.org/bots/api#location
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class Location {
   double longitude;
   double latitude;
-  double? horizontal_accuracy;
-  int? live_period;
+  double? horizontalAccuracy;
+  int? livePeriod;
   int? heading;
-  int? proximity_alert_radius;
+  int? proximityAlertRadius;
   Location({
     required this.longitude,
     required this.latitude,
-    this.horizontal_accuracy,
-    this.live_period,
+    this.horizontalAccuracy,
+    this.livePeriod,
     this.heading,
-    this.proximity_alert_radius,
+    this.proximityAlertRadius,
   });
   factory Location.fromJson(Map<String, dynamic> json) =>
       _$LocationFromJson(json);

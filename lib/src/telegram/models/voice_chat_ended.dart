@@ -21,7 +21,7 @@ part of '../model.dart';
 /// This object represents a service message about a voice chat ended in the chat.
 ///
 /// https://core.telegram.org/bots/api#voicechatended
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class VoiceChatEnded {
   int duration;
 

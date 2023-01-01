@@ -23,13 +23,13 @@ part of '../model.dart';
 /// https://core.telegram.org/bots/api#botcommandscopeallprivatechats
 ///
 /// [scope]: https://core.telegram.org/bots/api#botcommandscope
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class BotCommandScopeAllPrivateChats implements BotCommandScope {
   @override
   String type;
 
   BotCommandScopeAllPrivateChats(
-      {this.type = BotCommandScope.ALL_PRIVATE_CHATS});
+      {this.type = BotCommandScope.typeAllPrivateChats});
 
   factory BotCommandScopeAllPrivateChats.fromJson(Map<String, dynamic> json) =>
       _$BotCommandScopeAllPrivateChatsFromJson(json);

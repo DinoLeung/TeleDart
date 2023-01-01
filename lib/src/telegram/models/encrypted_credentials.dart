@@ -26,7 +26,7 @@ part of '../model.dart';
 ///
 /// [EncryptedPassportElement]: https://core.telegram.org/bots/api#encryptedpassportelement
 /// [Telegram Passport Documentation]: https://core.telegram.org/passport#receiving-information
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class EncryptedCredentials {
   String data;
   String hash;

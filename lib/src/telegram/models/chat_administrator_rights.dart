@@ -22,36 +22,36 @@ part of '../model.dart';
 ///
 /// https://core.telegram.org/bots/api#chatadministratorrights
 
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class ChatAdministratorRights {
-  bool is_anonymous;
-  bool can_manage_chat;
-  bool can_delete_messages;
-  bool can_manage_video_chats;
-  bool can_restrict_members;
-  bool can_promote_members;
-  bool can_change_info;
-  bool can_invite_users;
-  bool? can_post_messages;
-  bool? can_edit_messages;
-  bool? can_pin_messages;
-  bool? can_manage_topics;
+  bool isAnonymous;
+  bool canManageChat;
+  bool canDeleteMessages;
+  bool canManageVideoChats;
+  bool canRestrictMembers;
+  bool canPromoteMembers;
+  bool canChangeInfo;
+  bool canInviteUsers;
+  bool? canPostMessages;
+  bool? canEditMessages;
+  bool? canPinMessages;
+  bool? canManageTopics;
 
   ChatAdministratorRights({
-    this.is_anonymous = false,
-    this.can_manage_chat = false,
-    this.can_delete_messages = false,
-    this.can_manage_video_chats = false,
-    this.can_restrict_members = false,
-    this.can_promote_members = false,
-    this.can_change_info = false,
-    this.can_invite_users = false,
-    this.can_post_messages,
-    this.can_edit_messages,
-    this.can_pin_messages,
-    this.can_manage_topics,
+    this.isAnonymous = false,
+    this.canManageChat = false,
+    this.canDeleteMessages = false,
+    this.canManageVideoChats = false,
+    this.canRestrictMembers = false,
+    this.canPromoteMembers = false,
+    this.canChangeInfo = false,
+    this.canInviteUsers = false,
+    this.canPostMessages,
+    this.canEditMessages,
+    this.canPinMessages,
+    this.canManageTopics,
   });
-  
+
   factory ChatAdministratorRights.fromJson(Map<String, dynamic> json) =>
       _$ChatAdministratorRightsFromJson(json);
   Map<String, dynamic> toJson() => _$ChatAdministratorRightsToJson(this);

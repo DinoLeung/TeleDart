@@ -30,7 +30,7 @@ part of '../model.dart';
 ///
 /// https://core.telegram.org/bots/api#chatmember
 
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class ChatMember {
   String status;
   User user;

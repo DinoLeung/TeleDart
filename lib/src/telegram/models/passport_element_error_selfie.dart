@@ -23,7 +23,7 @@ part of '../model.dart';
 /// The error is considered resolved when the file with the selfie changes.
 ///
 /// https://core.telegram.org/bots/api#passportelementerrorselfie
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class PassportElementErrorSelfie implements PassportElementError {
   @override
   String source;
@@ -31,12 +31,12 @@ class PassportElementErrorSelfie implements PassportElementError {
   String type;
   @override
   String message;
-  String file_hash;
+  String fileHash;
   PassportElementErrorSelfie({
     required this.source,
     required this.type,
     required this.message,
-    required this.file_hash,
+    required this.fileHash,
   });
   factory PassportElementErrorSelfie.fromJson(Map<String, dynamic> json) =>
       _$PassportElementErrorSelfieFromJson(json);

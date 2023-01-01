@@ -21,11 +21,11 @@ part of '../model.dart';
 /// This object represents an animated emoji that displays a random value.
 ///
 /// https://core.telegram.org/bots/api#messageid
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class MessageId {
-  int message_id;
+  int messageId;
   MessageId({
-    required this.message_id,
+    required this.messageId,
   });
   factory MessageId.fromJson(Map<String, dynamic> json) =>
       _$MessageIdFromJson(json);

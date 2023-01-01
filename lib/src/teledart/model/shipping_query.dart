@@ -35,8 +35,8 @@ class TeleDartShippingQuery extends ShippingQuery {
       : super(
           id: shippingQuery.id,
           from: shippingQuery.from,
-          invoice_payload: shippingQuery.invoice_payload,
-          shipping_address: shippingQuery.shipping_address,
+          invoicePayload: shippingQuery.invoicePayload,
+          shippingAddress: shippingQuery.shippingAddress,
         );
 
   /// Answer the recieved shipping query
@@ -51,7 +51,7 @@ class TeleDartShippingQuery extends ShippingQuery {
   /// **Check [Telegram API documentation](https://core.telegram.org/bots/api#answershippingquery)
   /// for more information about those options.**
   Future<bool> answer(bool ok,
-          {List<ShippingOption>? shipping_options, String? error_message}) =>
+          {List<ShippingOption>? shippingOptions, String? errorMessage}) =>
       _teledart.answerShippingQuery(id, ok,
-          shipping_options: shipping_options, error_message: error_message);
+          shippingOptions: shippingOptions, errorMessage: errorMessage);
 }

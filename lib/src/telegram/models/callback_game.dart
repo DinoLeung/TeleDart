@@ -25,7 +25,7 @@ part of '../model.dart';
 /// https://core.telegram.org/bots/api#callbackgame
 ///
 /// [BotFather]: https://t.me/botfather
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class CallbackGame {
   CallbackGame();
   factory CallbackGame.fromJson(Map<String, dynamic> json) =>

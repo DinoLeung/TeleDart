@@ -21,21 +21,21 @@ part of '../model.dart';
 /// This object represents a sticker set.
 ///
 /// https://core.telegram.org/bots/api#stickerset
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class StickerSet {
   String name;
   String title;
-  String sticker_type;
-  bool is_animated;
-  bool is_video;
+  String stickerType;
+  bool isAnimated;
+  bool isVideo;
   List<Sticker> stickers;
   PhotoSize? thumb;
   StickerSet({
     required this.name,
     required this.title,
-    required this.sticker_type,
-    required this.is_animated,
-    required this.is_video,
+    required this.stickerType,
+    required this.isAnimated,
+    required this.isVideo,
     required this.stickers,
     this.thumb,
   });

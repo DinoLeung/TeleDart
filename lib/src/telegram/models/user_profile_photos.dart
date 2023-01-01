@@ -21,12 +21,12 @@ part of '../model.dart';
 /// This object represent a user's profile pictures.
 ///
 /// https://core.telegram.org/bots/api#userprofilephotos
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class UserProfilePhotos {
-  int total_count;
+  int totalCount;
   List<List<PhotoSize>> photos;
   UserProfilePhotos({
-    required this.total_count,
+    required this.totalCount,
     required this.photos,
   });
   factory UserProfilePhotos.fromJson(Map<String, dynamic> json) =>

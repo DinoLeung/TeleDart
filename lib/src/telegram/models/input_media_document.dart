@@ -21,7 +21,7 @@ part of '../model.dart';
 /// Represents a general file to be sent.
 ///
 /// https://core.telegram.org/bots/api#inputmediadocument
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class InputMediaDocument implements InputMedia {
   @override
   String type;
@@ -30,19 +30,19 @@ class InputMediaDocument implements InputMedia {
   @override
   String? caption;
   @override
-  String? parse_mode;
+  String? parseMode;
   @override
-  List<MessageEntity>? caption_entities;
+  List<MessageEntity>? captionEntities;
   dynamic thumb; // InputFile or String
-  bool? disable_content_type_detection;
+  bool? disableContentTypeDetection;
   InputMediaDocument({
-    this.type = InputMedia.DOCUMENT,
+    this.type = InputMedia.typeDocument,
     required this.media,
     this.thumb,
     this.caption,
-    this.parse_mode,
-    this.caption_entities,
-    this.disable_content_type_detection,
+    this.parseMode,
+    this.captionEntities,
+    this.disableContentTypeDetection,
   });
   factory InputMediaDocument.fromJson(Map<String, dynamic> json) =>
       _$InputMediaDocumentFromJson(json);

@@ -22,46 +22,46 @@ part of '../model.dart';
 ///
 /// By default, this voice recording will be sent by the user.
 /// Alternatively,
-/// you can use *input_message_content* to send a message with the specified content instead of the the voice message.
+/// you can use *inputMessageContent* to send a message with the specified content instead of the the voice message.
 ///
 /// **Note:** This will only work in Telegram versions released after 9 April, 2016.
 /// Older clients will ignore them.
 ///
 /// https://core.telegram.org/bots/api#inlinequeryresultvoice
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class InlineQueryResultVoice implements InlineQueryResult {
   @override
   String id;
   @override
   String type;
-  String voice_url;
+  String voiceUrl;
   String title;
   String? caption;
-  String? parse_mode;
-  int? voice_duration;
-  List<MessageEntity>? caption_entities;
+  String? parseMode;
+  int? voiceDuration;
+  List<MessageEntity>? captionEntities;
   @override
-  InlineKeyboardMarkup? reply_markup;
-  InputMessageContent? input_message_content;
+  InlineKeyboardMarkup? replyMarkup;
+  InputMessageContent? inputMessageContent;
 
   InlineQueryResultVoice({
     required this.id,
-    this.type = InlineQueryResult.VOICE,
-    required this.voice_url,
+    this.type = InlineQueryResult.typeVoice,
+    required this.voiceUrl,
     required this.title,
     this.caption,
-    this.parse_mode,
-    this.voice_duration,
-    this.caption_entities,
-    this.reply_markup,
-    this.input_message_content,
+    this.parseMode,
+    this.voiceDuration,
+    this.captionEntities,
+    this.replyMarkup,
+    this.inputMessageContent,
   });
 
   @JsonKey(ignore: true)
-  Duration? get voice_duration_ =>
-      voice_duration == null ? null : TimeHelper.toDuration(voice_duration!);
-  set voice_duration_(Duration? duration) =>
-      voice_duration = duration == null ? null : TimeHelper.toSeconds(duration);
+  Duration? get voiceDuration_ =>
+      voiceDuration == null ? null : TimeHelper.toDuration(voiceDuration!);
+  set voiceDuration_(Duration? duration) =>
+      voiceDuration = duration == null ? null : TimeHelper.toSeconds(duration);
 
   factory InlineQueryResultVoice.fromJson(Map<String, dynamic> json) =>
       _$InlineQueryResultVoiceFromJson(json);

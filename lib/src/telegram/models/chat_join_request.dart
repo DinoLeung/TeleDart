@@ -21,20 +21,20 @@ part of '../model.dart';
 /// Represents a join request sent to a chat.
 ///
 /// https://core.telegram.org/bots/api#chatjoinrequest
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class ChatJoinRequest {
   Chat chat;
   User from;
   int date;
   String? bio;
-  ChatInviteLink? invite_link;
+  ChatInviteLink? inviteLink;
 
   ChatJoinRequest({
     required this.chat,
     required this.from,
     required this.date,
     this.bio,
-    this.invite_link,
+    this.inviteLink,
   });
 
   @JsonKey(ignore: true)

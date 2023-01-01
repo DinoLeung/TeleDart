@@ -23,7 +23,7 @@ part of '../model.dart';
 /// The error is considered resolved when the field's value changes.
 ///
 /// https://core.telegram.org/bots/api#passportelementerrordatafield
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class PassportElementErrorDataField implements PassportElementError {
   @override
   String source;
@@ -31,14 +31,14 @@ class PassportElementErrorDataField implements PassportElementError {
   String type;
   @override
   String message;
-  String field_name;
-  String data_hash;
+  String fieldName;
+  String dataHash;
   PassportElementErrorDataField({
     required this.source,
     required this.type,
     required this.message,
-    required this.field_name,
-    required this.data_hash,
+    required this.fieldName,
+    required this.dataHash,
   });
   factory PassportElementErrorDataField.fromJson(Map<String, dynamic> json) =>
       _$PassportElementErrorDataFieldFromJson(json);

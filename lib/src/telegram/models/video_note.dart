@@ -24,22 +24,22 @@ part of '../model.dart';
 ///
 /// [video message]: https://telegram.org/blog/video-messages-and-telescope
 /// [v.4.0]: https://telegram.org/blog/video-messages-and-telescope
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class VideoNote {
-  String file_id;
-  String file_unique_id;
+  String fileId;
+  String fileUniqueId;
   int length;
   int duration;
   PhotoSize? thumb;
-  int? file_size;
+  int? fileSize;
 
   VideoNote({
-    required this.file_id,
-    required this.file_unique_id,
+    required this.fileId,
+    required this.fileUniqueId,
     required this.length,
     required this.duration,
     this.thumb,
-    this.file_size,
+    this.fileSize,
   });
 
   @JsonKey(ignore: true)

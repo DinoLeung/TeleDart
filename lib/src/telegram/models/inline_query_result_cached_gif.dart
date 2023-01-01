@@ -22,33 +22,33 @@ part of '../model.dart';
 ///
 /// By default, this animated GIF file will be sent by the user with an optional caption.
 /// Alternatively,
-/// you can use *input_message_content* to send a message with specified content instead of the animation.
+/// you can use *inputMessageContent* to send a message with specified content instead of the animation.
 ///
 /// https://core.telegram.org/bots/api#inlinequeryresultcachedgif
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class InlineQueryResultCachedGif implements InlineQueryResult {
   @override
   String id;
   @override
   String type;
-  String gif_file_id;
+  String gifFileId;
   String? title;
   String? caption;
-  String? parse_mode;
-  List<MessageEntity>? caption_entities;
+  String? parseMode;
+  List<MessageEntity>? captionEntities;
   @override
-  InlineKeyboardMarkup? reply_markup;
-  InputMessageContent? input_message_content;
+  InlineKeyboardMarkup? replyMarkup;
+  InputMessageContent? inputMessageContent;
   InlineQueryResultCachedGif({
     required this.id,
-    this.type = InlineQueryResult.GIF,
-    required this.gif_file_id,
+    this.type = InlineQueryResult.typeGif,
+    required this.gifFileId,
     this.title,
     this.caption,
-    this.parse_mode,
-    this.caption_entities,
-    this.reply_markup,
-    this.input_message_content,
+    this.parseMode,
+    this.captionEntities,
+    this.replyMarkup,
+    this.inputMessageContent,
   });
   factory InlineQueryResultCachedGif.fromJson(Map<String, dynamic> json) =>
       _$InlineQueryResultCachedGifFromJson(json);

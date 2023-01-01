@@ -21,16 +21,16 @@ part of '../model.dart';
 /// This object represents a service message about a voice chat scheduled in the chat.
 ///
 /// https://core.telegram.org/bots/api#voicechatscheduled
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class VoiceChatScheduled {
-  int start_date;
+  int startDate;
 
-  VoiceChatScheduled(this.start_date);
+  VoiceChatScheduled(this.startDate);
 
   @JsonKey(ignore: true)
-  DateTime get start_date_ => TimeHelper.toDateTime(start_date);
-  set start_date_(DateTime dateTime) =>
-      start_date = TimeHelper.toUnixTime(dateTime);
+  DateTime get startDate_ => TimeHelper.toDateTime(startDate);
+  set startDate_(DateTime dateTime) =>
+      startDate = TimeHelper.toUnixTime(dateTime);
 
   factory VoiceChatScheduled.fromJson(Map<String, dynamic> json) =>
       _$VoiceChatScheduledFromJson(json);

@@ -21,7 +21,7 @@ part of '../model.dart';
 /// This object represents type of a poll, which is allowed to be created and sent when the corresponding button is pressed.
 ///
 /// https://core.telegram.org/bots/api#keyboardbuttonpolltype
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class KeyboardButtonPollType {
   String? type;
   KeyboardButtonPollType({

@@ -23,24 +23,24 @@ part of '../model.dart';
 /// For simple text buttons [String] can be used instead of this object to specify text of the button.
 /// Optional fields are mutually exclusive.
 ///
-/// **Note:** request_contact and request_location options will only work in Telegram versions released after 9 April, 2016. Older clients will ignore them.
+/// **Note:** requestContact and requestLocation options will only work in Telegram versions released after 9 April, 2016. Older clients will ignore them.
 ///
-/// **Note:** request_poll option will only work in Telegram versions released after 23 January, 2020. Older clients will display unsupported message.
+/// **Note:** requestPoll option will only work in Telegram versions released after 23 January, 2020. Older clients will display unsupported message.
 ///
 /// https://core.telegram.org/bots/api#keyboardbutton
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class KeyboardButton {
   String text;
-  bool? request_contact;
-  bool? request_location;
-  KeyboardButtonPollType? request_poll;
-  WebAppInfo? web_app;
+  bool? requestContact;
+  bool? requestLocation;
+  KeyboardButtonPollType? requestPoll;
+  WebAppInfo? webApp;
   KeyboardButton({
     required this.text,
-    this.request_contact,
-    this.request_location,
-    this.request_poll,
-    this.web_app,
+    this.requestContact,
+    this.requestLocation,
+    this.requestPoll,
+    this.webApp,
   });
   factory KeyboardButton.fromJson(Map<String, dynamic> json) =>
       _$KeyboardButtonFromJson(json);

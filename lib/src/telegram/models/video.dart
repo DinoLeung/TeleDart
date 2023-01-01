@@ -21,28 +21,28 @@ part of '../model.dart';
 /// This object represents a video file.
 ///
 /// https://core.telegram.org/bots/api#video
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class Video {
-  String file_id;
-  String file_unique_id;
+  String fileId;
+  String fileUniqueId;
   int width;
   int height;
   int duration;
   PhotoSize? thumb;
-  String? file_name;
-  String? mime_type;
-  int? file_size;
+  String? fileName;
+  String? mimeType;
+  int? fileSize;
 
   Video({
-    required this.file_id,
-    required this.file_unique_id,
+    required this.fileId,
+    required this.fileUniqueId,
     required this.width,
     required this.height,
     required this.duration,
     this.thumb,
-    this.file_name,
-    this.mime_type,
-    this.file_size,
+    this.fileName,
+    this.mimeType,
+    this.fileSize,
   });
 
   @JsonKey(ignore: true)

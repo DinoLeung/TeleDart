@@ -22,38 +22,38 @@ part of '../model.dart';
 ///
 /// By default, this file will be sent by the user with an optional caption.
 /// Alternatively,
-/// you can use *input_message_content* to send a message with the specified content instead of the file.
+/// you can use *inputMessageContent* to send a message with the specified content instead of the file.
 ///
 /// **Note:** This will only work in Telegram versions released after 9 April, 2016.
 /// Older clients will ignore them.
 ///
 /// https://core.telegram.org/bots/api#inlinequeryresultcacheddocument
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class InlineQueryResultCachedDocument implements InlineQueryResult {
   @override
   String id;
   @override
   String type;
   String title;
-  String document_file_id;
+  String documentFileId;
   String? description;
   String? caption;
-  String? parse_mode;
-  List<MessageEntity>? caption_entities;
+  String? parseMode;
+  List<MessageEntity>? captionEntities;
   @override
-  InlineKeyboardMarkup? reply_markup;
-  InputMessageContent? input_message_content;
+  InlineKeyboardMarkup? replyMarkup;
+  InputMessageContent? inputMessageContent;
   InlineQueryResultCachedDocument({
     required this.id,
-    this.type = InlineQueryResult.DOCUMENT,
+    this.type = InlineQueryResult.typeDocument,
     required this.title,
-    required this.document_file_id,
+    required this.documentFileId,
     this.description,
     this.caption,
-    this.parse_mode,
-    this.caption_entities,
-    this.reply_markup,
-    this.input_message_content,
+    this.parseMode,
+    this.captionEntities,
+    this.replyMarkup,
+    this.inputMessageContent,
   });
   factory InlineQueryResultCachedDocument.fromJson(Map<String, dynamic> json) =>
       _$InlineQueryResultCachedDocumentFromJson(json);

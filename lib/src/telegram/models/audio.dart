@@ -21,27 +21,27 @@ part of '../model.dart';
 /// This object represents an audio file to be treated as music by the Telegram clients.
 ///
 /// https://core.telegram.org/bots/api#audio
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class Audio {
-  String file_id;
-  String file_unique_id;
+  String fileId;
+  String fileUniqueId;
   int duration;
   String? performer;
   String? title;
-  String? file_name;
-  String? mime_type;
-  int? file_size;
+  String? fileName;
+  String? mimeType;
+  int? fileSize;
   PhotoSize? thumb;
 
   Audio({
-    required this.file_id,
-    required this.file_unique_id,
+    required this.fileId,
+    required this.fileUniqueId,
     required this.duration,
     this.performer,
     this.title,
-    this.file_name,
-    this.mime_type,
-    this.file_size,
+    this.fileName,
+    this.mimeType,
+    this.fileSize,
     this.thumb,
   });
 

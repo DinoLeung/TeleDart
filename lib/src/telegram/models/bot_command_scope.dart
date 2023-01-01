@@ -30,15 +30,15 @@ part of '../model.dart';
 /// * [BotCommandScopeChatMember](https://core.telegram.org/bots/api#botcommandscopechatmember)
 ///
 /// https://core.telegram.org/bots/api#botcommandscope
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class BotCommandScope {
-  static const DEFAULT = 'default';
-  static const ALL_PRIVATE_CHATS = 'all_private_chats';
-  static const ALL_GROUP_CHATS = 'all_group_chats';
-  static const ALL_CHAT_ADMINISTRATORS = 'all_chat_administrators';
-  static const CHAT = 'chat';
-  static const CHAT_ADMINISTRATORS = 'chat_administrators';
-  static const CHAT_MEMBER = 'chat_member';
+  static const typeDefault = 'default';
+  static const typeAllPrivateChats = 'all_private_chats';
+  static const typeAllGroupChats = 'all_group_chats';
+  static const typeAllChatAdministrators = 'all_chat_administrators';
+  static const typeChat = 'chat';
+  static const typeChatAdministrators = 'chat_administrators';
+  static const typeChatMember = 'chat_member';
 
   String type;
 
