@@ -21,7 +21,7 @@ part of '../model.dart';
 /// Represents an animation file (GIF or H.264/MPEG-4 AVC video without sound) to be sent.
 ///
 /// https://core.telegram.org/bots/api#inputmediaanimation
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class InputMediaAnimation implements InputMedia {
   @override
   String type;
@@ -30,26 +30,26 @@ class InputMediaAnimation implements InputMedia {
   @override
   String? caption;
   @override
-  String? parse_mode;
+  String? parseMode;
   @override
-  List<MessageEntity>? caption_entities;
+  List<MessageEntity>? captionEntities;
   dynamic thumb; // InputFile or String
   int? width;
   int? height;
   int? duration;
-  bool? has_spoiler;
+  bool? hasSpoiler;
 
   InputMediaAnimation(
-      {this.type = InputMedia.ANIMATION,
+      {this.type = InputMedia.typeAnimation,
       required this.media,
       this.thumb,
       this.caption,
-      this.parse_mode,
-      this.caption_entities,
+      this.parseMode,
+      this.captionEntities,
       this.width,
       this.height,
       this.duration,
-      this.has_spoiler});
+      this.hasSpoiler});
 
   @JsonKey(ignore: true)
   Duration? get duration_ =>

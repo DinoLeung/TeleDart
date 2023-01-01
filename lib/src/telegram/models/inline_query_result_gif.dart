@@ -21,51 +21,51 @@ part of '../model.dart';
 /// Represents a link to an animated GIF file.
 /// By default, this animated GIF file will be sent by the user with optional caption.
 /// Alternatively,
-/// you can use *input_message_content* to send a message with the specified content instead of the animation.
+/// you can use *inputMessageContent* to send a message with the specified content instead of the animation.
 ///
 /// https://core.telegram.org/bots/api#inlinequeryresultgif
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class InlineQueryResultGif implements InlineQueryResult {
   @override
   String id;
   @override
   String type;
-  String gif_url;
-  int? gif_width;
-  int? gif_height;
-  int? gif_duration;
-  String thumb_url;
-  String? thumb_mime_type;
+  String gifUrl;
+  int? gifWidth;
+  int? gifHeight;
+  int? gifDuration;
+  String thumbUrl;
+  String? thumbMimeType;
   String? title;
   String? caption;
-  String? parse_mode;
-  List<MessageEntity>? caption_entities;
+  String? parseMode;
+  List<MessageEntity>? captionEntities;
   @override
-  InlineKeyboardMarkup? reply_markup;
-  InputMessageContent? input_message_content;
+  InlineKeyboardMarkup? replyMarkup;
+  InputMessageContent? inputMessageContent;
 
   InlineQueryResultGif({
     required this.id,
-    this.type = InlineQueryResult.GIF,
-    required this.gif_url,
-    this.gif_width,
-    this.gif_height,
-    this.gif_duration,
-    required this.thumb_url,
-    this.thumb_mime_type,
+    this.type = InlineQueryResult.typeGif,
+    required this.gifUrl,
+    this.gifWidth,
+    this.gifHeight,
+    this.gifDuration,
+    required this.thumbUrl,
+    this.thumbMimeType,
     this.title,
     this.caption,
-    this.parse_mode,
-    this.caption_entities,
-    this.reply_markup,
-    this.input_message_content,
+    this.parseMode,
+    this.captionEntities,
+    this.replyMarkup,
+    this.inputMessageContent,
   });
 
   @JsonKey(ignore: true)
-  Duration? get gif_duration_ =>
-      gif_duration == null ? null : TimeHelper.toDuration(gif_duration!);
-  set gif_duration_(Duration? duration) =>
-      gif_duration = duration == null ? null : TimeHelper.toSeconds(duration);
+  Duration? get gifDuration_ =>
+      gifDuration == null ? null : TimeHelper.toDuration(gifDuration!);
+  set gifDuration_(Duration? duration) =>
+      gifDuration = duration == null ? null : TimeHelper.toSeconds(duration);
 
   factory InlineQueryResultGif.fromJson(Map<String, dynamic> json) =>
       _$InlineQueryResultGifFromJson(json);

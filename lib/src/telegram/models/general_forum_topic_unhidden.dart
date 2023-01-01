@@ -23,7 +23,7 @@ part of '../model.dart';
 /// Currently holds no information.
 ///
 /// https://core.telegram.org/bots/api#generalforumtopicunhidden
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class GeneralForumTopicUnhidden {
   GeneralForumTopicUnhidden();
   factory GeneralForumTopicUnhidden.fromJson(Map<String, dynamic> json) =>

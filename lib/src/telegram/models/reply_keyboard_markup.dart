@@ -26,20 +26,20 @@ part of '../model.dart';
 ///
 /// [custom keyboard]: https://core.telegram.org/bots#keyboards
 /// [Introduction to bots]: https://core.telegram.org/bots#keyboards
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class ReplyKeyboardMarkup implements ReplyMarkup {
   List<List<KeyboardButton>> keyboard;
-  bool? is_persistent;
-  bool? resize_keyboard;
-  bool? one_time_keyboard;
-  String? input_field_placeholder;
+  bool? isPersistent;
+  bool? resizeKeyboard;
+  bool? oneTimeKeyboard;
+  String? inputFieldPlaceholder;
   bool? selective;
   ReplyKeyboardMarkup({
     required this.keyboard,
-    this.is_persistent,
-    this.resize_keyboard,
-    this.one_time_keyboard,
-    this.input_field_placeholder,
+    this.isPersistent,
+    this.resizeKeyboard,
+    this.oneTimeKeyboard,
+    this.inputFieldPlaceholder,
     this.selective,
   });
   factory ReplyKeyboardMarkup.fromJson(Map<String, dynamic> json) =>

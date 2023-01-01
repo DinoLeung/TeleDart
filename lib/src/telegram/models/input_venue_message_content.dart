@@ -23,25 +23,25 @@ part of '../model.dart';
 /// https://core.telegram.org/bots/api#inputvenuemessagecontent
 ///
 /// [content]: https://core.telegram.org/bots/api#inputmessagecontent
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class InputVenueMessageContent implements InputMessageContent {
   double latitude;
   double longitude;
   String title;
   String address;
-  String? foursquare_id;
-  String? foursquare_type;
-  String? google_place_id;
-  String? google_place_type;
+  String? foursquareId;
+  String? foursquareType;
+  String? googlePlaceId;
+  String? googlePlaceType;
   InputVenueMessageContent({
     required this.latitude,
     required this.longitude,
     required this.title,
     required this.address,
-    this.foursquare_id,
-    this.foursquare_type,
-    this.google_place_id,
-    this.google_place_type,
+    this.foursquareId,
+    this.foursquareType,
+    this.googlePlaceId,
+    this.googlePlaceType,
   });
   factory InputVenueMessageContent.fromJson(Map<String, dynamic> json) =>
       _$InputVenueMessageContentFromJson(json);

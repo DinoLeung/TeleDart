@@ -22,48 +22,48 @@ part of '../model.dart';
 ///
 /// By default, this audio file will be sent by the user.
 /// Alternatively,
-/// you can use *input_message_content* to send a message with the specified content instead of the audio.
+/// you can use *inputMessageContent* to send a message with the specified content instead of the audio.
 ///
 /// **Note:** This will only work in Telegram versions released after 9 April, 2016.
 /// Older clients will ignore them.
 ///
 /// https://core.telegram.org/bots/api#inlinequeryresultaudio
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class InlineQueryResultAudio implements InlineQueryResult {
   @override
   String id;
   @override
   String type;
-  String audio_url;
+  String audioUrl;
   String title;
   String? caption;
-  String? parse_mode;
+  String? parseMode;
   String? performer;
-  int? audio_duration;
-  List<MessageEntity>? caption_entities;
+  int? audioDuration;
+  List<MessageEntity>? captionEntities;
   @override
-  InlineKeyboardMarkup? reply_markup;
-  InputMessageContent? input_message_content;
+  InlineKeyboardMarkup? replyMarkup;
+  InputMessageContent? inputMessageContent;
 
   InlineQueryResultAudio({
     required this.id,
-    this.type = InlineQueryResult.AUDIO,
-    required this.audio_url,
+    this.type = InlineQueryResult.typeAudio,
+    required this.audioUrl,
     required this.title,
     this.caption,
-    this.parse_mode,
+    this.parseMode,
     this.performer,
-    this.audio_duration,
-    this.caption_entities,
-    this.reply_markup,
-    this.input_message_content,
+    this.audioDuration,
+    this.captionEntities,
+    this.replyMarkup,
+    this.inputMessageContent,
   });
 
   @JsonKey(ignore: true)
-  Duration? get audio_duration_ =>
-      audio_duration == null ? null : TimeHelper.toDuration(audio_duration!);
-  set audio_duration_(Duration? duration) =>
-      audio_duration = duration == null ? null : TimeHelper.toSeconds(duration);
+  Duration? get audioDuration_ =>
+      audioDuration == null ? null : TimeHelper.toDuration(audioDuration!);
+  set audioDuration_(Duration? duration) =>
+      audioDuration = duration == null ? null : TimeHelper.toSeconds(duration);
 
   factory InlineQueryResultAudio.fromJson(Map<String, dynamic> json) =>
       _$InlineQueryResultAudioFromJson(json);

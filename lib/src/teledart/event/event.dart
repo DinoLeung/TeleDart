@@ -69,32 +69,32 @@ class Event {
   void emitUpdate(Update update) {
     if (update.message != null) {
       _messageStreamController.add(update.message!);
-    } else if (update.edited_message != null) {
-      _editedMessageStreamController.add(update.edited_message!);
-    } else if (update.channel_post != null) {
-      _channelPostStreamController.add(update.channel_post!);
-    } else if (update.edited_channel_post != null) {
-      _editedChannelPostStreamController.add(update.edited_channel_post!);
-    } else if (update.inline_query != null) {
-      _inlineQueryStreamController.add(update.inline_query!);
-    } else if (update.chosen_inline_result != null) {
-      _chosenInlineResultStreamController.add(update.chosen_inline_result!);
-    } else if (update.callback_query != null) {
-      _callbackQueryStreamController.add(update.callback_query!);
-    } else if (update.shipping_query != null) {
-      _shippingQueryStreamController.add(update.shipping_query!);
-    } else if (update.pre_checkout_query != null) {
-      _preCheckoutQueryStreamController.add(update.pre_checkout_query!);
+    } else if (update.editedMessage != null) {
+      _editedMessageStreamController.add(update.editedMessage!);
+    } else if (update.channelPost != null) {
+      _channelPostStreamController.add(update.channelPost!);
+    } else if (update.editedChannelPost != null) {
+      _editedChannelPostStreamController.add(update.editedChannelPost!);
+    } else if (update.inlineQuery != null) {
+      _inlineQueryStreamController.add(update.inlineQuery!);
+    } else if (update.chosenInlineResult != null) {
+      _chosenInlineResultStreamController.add(update.chosenInlineResult!);
+    } else if (update.callbackQuery != null) {
+      _callbackQueryStreamController.add(update.callbackQuery!);
+    } else if (update.shippingQuery != null) {
+      _shippingQueryStreamController.add(update.shippingQuery!);
+    } else if (update.preCheckoutQuery != null) {
+      _preCheckoutQueryStreamController.add(update.preCheckoutQuery!);
     } else if (update.poll != null) {
       _pollStreamController.add(update.poll!);
-    } else if (update.poll_answer != null) {
-      _pollAnswerStreamController.add(update.poll_answer!);
-    } else if (update.my_chat_member != null) {
-      _myChatMemberStreamController.add(update.my_chat_member!);
-    } else if (update.chat_member != null) {
-      _chatMemberStreamController.add(update.chat_member!);
-    } else if (update.chat_join_request != null) {
-      _chatJoinRequestStreamController.add(update.chat_join_request!);
+    } else if (update.pollAnswer != null) {
+      _pollAnswerStreamController.add(update.pollAnswer!);
+    } else if (update.myChatMember != null) {
+      _myChatMemberStreamController.add(update.myChatMember!);
+    } else if (update.chatMember != null) {
+      _chatMemberStreamController.add(update.chatMember!);
+    } else if (update.chatJoinRequest != null) {
+      _chatJoinRequestStreamController.add(update.chatJoinRequest!);
     } else {
       throw TeleDartEventException('Receieved unrecognised update');
     }
@@ -108,7 +108,7 @@ class Event {
         if (keyword == null) {
           if (entityType == null) {
             // no keyword and entityType
-            return (message.entities ?? message.caption_entities) == null;
+            return (message.entities ?? message.captionEntities) == null;
           } else {
             // no keyword but entityType
             return entityType == '*' || message.entityOf(entityType) != null;
@@ -118,13 +118,13 @@ class Event {
             throw TeleDartEventException(
                 'Attribute \'keyword\' accepts type of String or RegExp');
           } else if (entityType == null) {
-            return (message.entities ?? message.caption_entities) == null &&
+            return (message.entities ?? message.captionEntities) == null &&
                 (message.text ?? message.caption ?? '').contains(keyword);
           } else if (message.entityOf(entityType) == null) {
             return false;
-          } else if (entityType == MessageEntity.TEXT_MENTION) {
+          } else if (entityType == MessageEntity.typeTextMention) {
             var userId = message.entityOf(entityType)?.user?.id;
-            var firstName = message.entityOf(entityType)?.user?.first_name;
+            var firstName = message.entityOf(entityType)?.user?.firstName;
             if (keyword is RegExp) {
               var matchFirstName =
                   firstName != null ? keyword.hasMatch(firstName) : false;
@@ -141,38 +141,36 @@ class Event {
               case '*': // Any entityType
                 entityText = (message.text ?? message.caption ?? '');
                 break;
-              case MessageEntity.MENTION: // '\@${keyword}'
-              case MessageEntity.CASHTAG: // '\$${keyword}'
-              case MessageEntity.HASHTAG: // '\#${keyword}'
+              case MessageEntity.typeMention: // '\@${keyword}'
+              case MessageEntity.typeCashtag: // '\$${keyword}'
+              case MessageEntity.typeHashtag: // '\#${keyword}'
                 entityText = message.getEntity(entityType)?.substring(1) ?? '';
                 break;
               case MessageEntity
-                  .BOT_COMMAND: // '\/${keyword}' or '\/${keyword}\@${me.username}'
+                  .typeBotCommand: // '\/${keyword}' or '\/${keyword}\@${me.username}'
                 entityText = message
                         .getEntity(entityType)
                         ?.substring(1)
                         .replaceAll('@$username', '') ??
                     '';
                 break;
-              case MessageEntity.URL:
-              case MessageEntity.EMAIL:
-              case MessageEntity.PHONE_NUMBER:
-              case MessageEntity.BOLD:
-              case MessageEntity.ITALIC:
-              case MessageEntity.SPOILER:
-              case MessageEntity.CODE:
+              case MessageEntity.typeUrl:
+              case MessageEntity.typeEmail:
+              case MessageEntity.typePhoneNmber:
+              case MessageEntity.typeItalic:
+              case MessageEntity.typeSpolier:
+              case MessageEntity.typeCode:
               case MessageEntity
-                  .PRE: // TODO: need to return language prop somehow
-              case MessageEntity.UNDERLINE:
-              case MessageEntity.STRIKETHROUGH:
+                  .typePre: // TODO: need to return language prop somehow
+              case MessageEntity.typeUnderline:
+              case MessageEntity.typeStrikethrough:
                 entityText = message.getEntity(entityType) ?? '';
                 break;
-              case MessageEntity.TEXT_LINK:
+              case MessageEntity.typeTextLink:
                 entityText = message.entityOf(entityType)?.url ?? '';
                 break;
-              case MessageEntity.CUSTOM_EMOJI:
-                entityText =
-                    message.entityOf(entityType)?.custom_emoji_id ?? '';
+              case MessageEntity.typeCustomEmoji:
+                entityText = message.entityOf(entityType)?.customEmojiId ?? '';
                 break;
               default: // Dynamically listen to message types.
                 entityText = message.getEntity(entityType) ?? '';

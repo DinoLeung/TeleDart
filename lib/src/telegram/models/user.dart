@@ -21,31 +21,31 @@ part of '../model.dart';
 /// This object represents a Telegram user or bot.
 ///
 /// https://core.telegram.org/bots/api#user
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class User {
   int id;
-  bool is_bot;
-  String first_name;
-  String? last_name;
+  bool isBot;
+  String firstName;
+  String? lastName;
   String? username;
-  String? language_code;
-  bool? is_premium;
-  bool? added_to_attachment_menu;
-  bool? can_join_groups;
-  bool? can_read_all_group_messages;
-  bool? supports_inline_queries;
+  String? languageCode;
+  bool? isPremium;
+  bool? addedToAttachmentMenu;
+  bool? canJoinGroups;
+  bool? canReadAllGroupMessages;
+  bool? supportsInlineQueries;
   User({
     required this.id,
-    required this.is_bot,
-    required this.first_name,
-    this.last_name,
+    required this.isBot,
+    required this.firstName,
+    this.lastName,
     this.username,
-    this.language_code,
-    this.is_premium,
-    this.added_to_attachment_menu,
-    this.can_join_groups,
-    this.can_read_all_group_messages,
-    this.supports_inline_queries,
+    this.languageCode,
+    this.isPremium,
+    this.addedToAttachmentMenu,
+    this.canJoinGroups,
+    this.canReadAllGroupMessages,
+    this.supportsInlineQueries,
   });
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
   Map<String, dynamic> toJson() => _$UserToJson(this);

@@ -21,13 +21,13 @@ part of '../model.dart';
 /// This object represents a service message about an edited forum topic.
 ///
 /// https://core.telegram.org/bots/api#forumtopicedited
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class ForumTopicEdited {
   String? name;
-  String? icon_custom_emoji_id;
+  String? iconCustomEmojiId;
   ForumTopicEdited({
     this.name,
-    this.icon_custom_emoji_id,
+    this.iconCustomEmojiId,
   });
   factory ForumTopicEdited.fromJson(Map<String, dynamic> json) =>
       _$ForumTopicEditedFromJson(json);

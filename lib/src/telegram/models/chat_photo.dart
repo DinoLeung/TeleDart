@@ -21,17 +21,17 @@ part of '../model.dart';
 /// This object represents a chat photo.
 ///
 /// https://core.telegram.org/bots/api#chatphoto
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class ChatPhoto {
-  String small_file_id;
-  String small_file_unique_id;
-  String big_file_id;
-  String big_file_unique_id;
+  String smallFileId;
+  String smallFileUniqueId;
+  String bigFileId;
+  String bigFileUniqueId;
   ChatPhoto({
-    required this.small_file_id,
-    required this.small_file_unique_id,
-    required this.big_file_id,
-    required this.big_file_unique_id,
+    required this.smallFileId,
+    required this.smallFileUniqueId,
+    required this.bigFileId,
+    required this.bigFileUniqueId,
   });
   factory ChatPhoto.fromJson(Map<String, dynamic> json) =>
       _$ChatPhotoFromJson(json);

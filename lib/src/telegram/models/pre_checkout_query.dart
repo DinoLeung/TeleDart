@@ -21,23 +21,23 @@ part of '../model.dart';
 /// This object contains information about an incoming pre-checkout query.
 ///
 /// https://core.telegram.org/bots/api#precheckoutquery
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class PreCheckoutQuery {
   String id;
   User from;
   String currency;
-  int total_amount;
-  String invoice_payload;
-  String? shipping_option_id;
-  OrderInfo? order_info;
+  int totalAmount;
+  String invoicePayload;
+  String? shippingOptionId;
+  OrderInfo? orderInfo;
   PreCheckoutQuery({
     required this.id,
     required this.from,
     required this.currency,
-    required this.total_amount,
-    required this.invoice_payload,
-    this.shipping_option_id,
-    this.order_info,
+    required this.totalAmount,
+    required this.invoicePayload,
+    this.shippingOptionId,
+    this.orderInfo,
   });
   factory PreCheckoutQuery.fromJson(Map<String, dynamic> json) =>
       _$PreCheckoutQueryFromJson(json);

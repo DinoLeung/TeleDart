@@ -37,10 +37,10 @@ class TeleDartCallbackQuery extends CallbackQuery {
           id: callbackQuery.id,
           from: callbackQuery.from,
           message: callbackQuery.message,
-          inline_message_id: callbackQuery.inline_message_id,
-          chat_instance: callbackQuery.chat_instance,
+          inlineMessageId: callbackQuery.inlineMessageId,
+          chatInstance: callbackQuery.chatInstance,
           data: callbackQuery.data,
-          game_short_name: callbackQuery.game_short_name,
+          gameShortName: callbackQuery.gameShortName,
         );
 
   TeleDartMessage? get teledartMessage =>

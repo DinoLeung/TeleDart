@@ -21,21 +21,21 @@ part of '../model.dart';
 /// Contains information about why a request was unsuccessful.
 ///
 /// https://core.telegram.org/bots/api#responseparameters
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class ResponseParameters {
-  int? migrate_to_chat_id;
-  int? retry_after;
+  int? migrateToChatId;
+  int? retryAfter;
 
   ResponseParameters({
-    this.migrate_to_chat_id,
-    this.retry_after,
+    this.migrateToChatId,
+    this.retryAfter,
   });
 
   @JsonKey(ignore: true)
-  Duration? get retry_after_ =>
-      retry_after == null ? null : TimeHelper.toDuration(retry_after!);
-  set retry_after_(Duration? duration) =>
-      retry_after = duration == null ? null : TimeHelper.toSeconds(duration);
+  Duration? get retryAfter_ =>
+      retryAfter == null ? null : TimeHelper.toDuration(retryAfter!);
+  set retryAfter_(Duration? duration) =>
+      retryAfter = duration == null ? null : TimeHelper.toSeconds(duration);
 
   factory ResponseParameters.fromJson(Map<String, dynamic> json) =>
       _$ResponseParametersFromJson(json);

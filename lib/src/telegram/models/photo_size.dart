@@ -24,19 +24,19 @@ part of '../model.dart';
 ///
 /// [file]: https://core.telegram.org/bots/api#document
 /// [sticker]: https://core.telegram.org/bots/api#sticker
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class PhotoSize {
-  String file_id;
-  String file_unique_id;
+  String fileId;
+  String fileUniqueId;
   int width;
   int height;
-  int? file_size;
+  int? fileSize;
   PhotoSize({
-    required this.file_id,
-    required this.file_unique_id,
+    required this.fileId,
+    required this.fileUniqueId,
     required this.width,
     required this.height,
-    this.file_size,
+    this.fileSize,
   });
   factory PhotoSize.fromJson(Map<String, dynamic> json) =>
       _$PhotoSizeFromJson(json);

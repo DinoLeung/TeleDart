@@ -21,7 +21,7 @@ part of '../model.dart';
 /// Represents a video to be sent.
 ///
 /// https://core.telegram.org/bots/api#inputmediavideo
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class InputMediaVideo implements InputMedia {
   @override
   String type;
@@ -30,28 +30,28 @@ class InputMediaVideo implements InputMedia {
   @override
   String? caption;
   @override
-  String? parse_mode;
+  String? parseMode;
   @override
-  List<MessageEntity>? caption_entities;
+  List<MessageEntity>? captionEntities;
   dynamic thumb; // InputFile or String
   int? width;
   int? height;
   int? duration;
-  bool? supports_streaming;
-  bool? has_spoiler;
+  bool? supportsStreaming;
+  bool? hasSpoiler;
 
   InputMediaVideo({
-    this.type = InputMedia.VIDEO,
+    this.type = InputMedia.typeVideo,
     required this.media,
     this.caption,
-    this.parse_mode,
-    this.caption_entities,
+    this.parseMode,
+    this.captionEntities,
     this.thumb,
     this.width,
     this.height,
     this.duration,
-    this.supports_streaming,
-    this.has_spoiler,
+    this.supportsStreaming,
+    this.hasSpoiler,
   });
 
   @JsonKey(ignore: true)

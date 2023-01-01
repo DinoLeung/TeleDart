@@ -24,13 +24,13 @@ part of '../model.dart';
 ///
 /// [file]: https://core.telegram.org/bots/api#document
 /// [sticker]: https://core.telegram.org/bots/api#sticker
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class PollOption {
   String text;
-  int voter_count;
+  int voterCount;
   PollOption({
     required this.text,
-    required this.voter_count,
+    required this.voterCount,
   });
   factory PollOption.fromJson(Map<String, dynamic> json) =>
       _$PollOptionFromJson(json);

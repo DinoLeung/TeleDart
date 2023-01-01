@@ -21,20 +21,20 @@ part of '../model.dart';
 ///This object represents a voice note.
 ///
 /// https://core.telegram.org/bots/api#voice
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class Voice {
-  String file_id;
-  String file_unique_id;
+  String fileId;
+  String fileUniqueId;
   int duration;
-  String? mime_type;
-  int? file_size;
+  String? mimeType;
+  int? fileSize;
 
   Voice({
-    required this.file_id,
-    required this.file_unique_id,
+    required this.fileId,
+    required this.fileUniqueId,
     required this.duration,
-    this.mime_type,
-    this.file_size,
+    this.mimeType,
+    this.fileSize,
   });
 
   @JsonKey(ignore: true)

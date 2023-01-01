@@ -21,7 +21,7 @@ part of '../model.dart';
 /// This object represents one row of the high scores table for a game.
 ///
 /// https://core.telegram.org/bots/api#gamehighscore
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class GameHighScore {
   int position;
   User user;

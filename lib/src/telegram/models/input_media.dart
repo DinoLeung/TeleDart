@@ -28,26 +28,26 @@ part of '../model.dart';
 /// * [InputMediaVideo](https://core.telegram.org/bots/api#inputmediavideo)
 ///
 /// https://core.telegram.org/bots/api#inputmedia
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class InputMedia {
-  static const ANIMATION = 'animation';
-  static const AUDIO = 'audio';
-  static const DOCUMENT = 'document';
-  static const PHOTO = 'photo';
-  static const VIDEO = 'video';
+  static const typeAnimation = 'animation';
+  static const typeAudio = 'audio';
+  static const typeDocument = 'document';
+  static const typePhoto = 'photo';
+  static const typeVideo = 'video';
 
   String type;
   String media;
   String? caption;
-  String? parse_mode;
-  List<MessageEntity>? caption_entities;
+  String? parseMode;
+  List<MessageEntity>? captionEntities;
 
   InputMedia({
     required this.type,
     required this.media,
     this.caption,
-    this.parse_mode,
-    this.caption_entities,
+    this.parseMode,
+    this.captionEntities,
   });
 
   factory InputMedia.fromJson(Map<String, dynamic> json) =>

@@ -21,14 +21,14 @@ part of '../model.dart';
 /// This object represents an animated emoji that displays a random value.
 ///
 /// https://core.telegram.org/bots/api#dice
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class Dice {
-  static const String DICE = '🎲';
-  static const String DART = '🎯';
-  static const String BOWLING = '🎳';
-  static const String BASKETBALL = '🏀';
-  static const String FOOTBALL = '⚽';
-  static const String SLOT_MACHINE = '🎰';
+  static const String emojiDice = '🎲';
+  static const String emojiDart = '🎯';
+  static const String emojiBowling = '🎳';
+  static const String emojiBasketball = '🏀';
+  static const String emojiFootball = '⚽';
+  static const String emojiSlotMachine = '🎰';
 
   int value;
   String emoji;

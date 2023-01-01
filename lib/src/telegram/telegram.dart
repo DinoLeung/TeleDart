@@ -1035,7 +1035,7 @@ class Telegram {
   /// On success, the sent [Message] is returned.
   Future<Message> sendDice(dynamic chat_id,
       {int? message_thread_id,
-      String emoji = Dice.DICE,
+      String emoji = Dice.emojiDice,
       bool? disable_notification,
       bool? protect_content,
       int? reply_to_message_id,

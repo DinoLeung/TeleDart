@@ -21,35 +21,35 @@ part of '../model.dart';
 /// Represents an invite link for a chat.
 ///
 /// https://core.telegram.org/bots/api#chatinvitelink
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class ChatInviteLink {
-  String invite_link;
+  String inviteLink;
   User creator;
-  bool creates_join_request;
-  bool is_primary;
-  bool is_revoked;
+  bool createsJoinRequest;
+  bool isPrimary;
+  bool isRevoked;
   String? name;
-  int? expire_date;
-  int? member_limit;
-  int? pending_join_request_count;
+  int? expireDate;
+  int? memberLimit;
+  int? pendingJoinRequestCount;
 
   ChatInviteLink({
-    required this.invite_link,
+    required this.inviteLink,
     required this.creator,
-    required this.creates_join_request,
-    required this.is_primary,
-    required this.is_revoked,
+    required this.createsJoinRequest,
+    required this.isPrimary,
+    required this.isRevoked,
     this.name,
-    this.expire_date,
-    this.member_limit,
-    this.pending_join_request_count,
+    this.expireDate,
+    this.memberLimit,
+    this.pendingJoinRequestCount,
   });
 
   @JsonKey(ignore: true)
-  DateTime? get expire_date_ =>
-      expire_date == null ? null : TimeHelper.toDateTime(expire_date!);
-  set expire_date_(DateTime? dateTime) =>
-      expire_date = dateTime == null ? null : TimeHelper.toUnixTime(dateTime);
+  DateTime? get expireDate_ =>
+      expireDate == null ? null : TimeHelper.toDateTime(expireDate!);
+  set expireDate_(DateTime? dateTime) =>
+      expireDate = dateTime == null ? null : TimeHelper.toUnixTime(dateTime);
 
   factory ChatInviteLink.fromJson(Map<String, dynamic> json) =>
       _$ChatInviteLinkFromJson(json);

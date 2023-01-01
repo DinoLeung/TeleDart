@@ -37,7 +37,7 @@ class TeleDartInlineQuery extends InlineQuery {
           from: inlineQuery.from,
           query: inlineQuery.query,
           offset: inlineQuery.offset,
-          chat_type: inlineQuery.chat_type,
+          chatType: inlineQuery.chatType,
           location: inlineQuery.location,
         );
 

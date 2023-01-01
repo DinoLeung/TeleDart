@@ -26,20 +26,20 @@ part of '../model.dart';
 /// https://core.telegram.org/bots/api#inlinequeryresultgame
 ///
 /// [Game]: https://core.telegram.org/bots/api#games
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class InlineQueryResultGame implements InlineQueryResult {
   @override
   String id;
   @override
   String type;
-  String game_short_name;
+  String gameShortName;
   @override
-  InlineKeyboardMarkup? reply_markup;
+  InlineKeyboardMarkup? replyMarkup;
   InlineQueryResultGame({
     required this.id,
-    this.type = InlineQueryResult.GAME,
-    required this.game_short_name,
-    this.reply_markup,
+    this.type = InlineQueryResult.typeGame,
+    required this.gameShortName,
+    this.replyMarkup,
   });
   factory InlineQueryResultGame.fromJson(Map<String, dynamic> json) =>
       _$InlineQueryResultGameFromJson(json);

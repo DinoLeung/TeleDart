@@ -21,7 +21,7 @@ part of '../model.dart';
 /// Represents a location to which a chat is connected.
 ///
 /// https://core.telegram.org/bots/api#chatlocation
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class ChatLocation {
   Location location;
   String address;

@@ -21,21 +21,21 @@ part of '../model.dart';
 /// This object represents changes in the status of a chat member.
 ///
 /// https://core.telegram.org/bots/api#chatmemberupdated
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class ChatMemberUpdated {
   Chat? chat;
   User? from;
   int? date;
-  ChatMember? old_chat_member;
-  ChatMember? new_chat_member;
-  ChatInviteLink? invite_link;
+  ChatMember? oldChatMember;
+  ChatMember? newChatMember;
+  ChatInviteLink? inviteLink;
 
   ChatMemberUpdated({
     this.chat,
     this.from,
-    this.old_chat_member,
-    this.new_chat_member,
-    this.invite_link,
+    this.oldChatMember,
+    this.newChatMember,
+    this.inviteLink,
   });
 
   @JsonKey(ignore: true)

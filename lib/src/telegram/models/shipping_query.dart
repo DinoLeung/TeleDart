@@ -21,17 +21,17 @@ part of '../model.dart';
 /// This object contains information about an incoming shipping query.
 ///
 /// https://core.telegram.org/bots/api#shippingquery
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class ShippingQuery {
   String id;
   User from;
-  String invoice_payload;
-  ShippingAddress shipping_address;
+  String invoicePayload;
+  ShippingAddress shippingAddress;
   ShippingQuery({
     required this.id,
     required this.from,
-    required this.invoice_payload,
-    required this.shipping_address,
+    required this.invoicePayload,
+    required this.shippingAddress,
   });
   factory ShippingQuery.fromJson(Map<String, dynamic> json) =>
       _$ShippingQueryFromJson(json);

@@ -24,20 +24,20 @@ part of '../model.dart';
 /// your bot could return some default or trending results.
 ///
 /// https://core.telegram.org/bots/api#inlinequery
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class InlineQuery {
   String id;
   User from;
   String query;
   String offset;
-  String? chat_type;
+  String? chatType;
   Location? location;
   InlineQuery({
     required this.id,
     required this.from,
     required this.query,
     required this.offset,
-    this.chat_type,
+    this.chatType,
     this.location,
   });
   factory InlineQuery.fromJson(Map<String, dynamic> json) =>

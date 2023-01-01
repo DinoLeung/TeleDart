@@ -32,14 +32,14 @@ part of '../model.dart';
 /// * [PassportElementErrorUnspecified](https://core.telegram.org/bots/api#passportelementerrorunspecified)
 ///
 /// https://core.telegram.org/bots/api#passportelementerror
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class PassportElementError {
-  static const String PERSONAL_DETAILS = 'personal_details';
-  static const String PASSPORT = 'passport';
-  static const String DRIVER_LICENSE = 'driver_license';
-  static const String IDENTITY_CARD = 'identity_card';
-  static const String INTERNAL_PASSPORT = 'internal_passport';
-  static const String ADDRESS = 'address';
+  static const String typePersonalDetails = 'personal_details';
+  static const String typePassport = 'passport';
+  static const String typeDriverLicense = 'driver_license';
+  static const String typeIdentityCard = 'identity_card';
+  static const String typeInternalPassport = 'internal_passport';
+  static const String typeAddress = 'address';
 
   String source;
   String type;

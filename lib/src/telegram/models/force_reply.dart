@@ -45,14 +45,14 @@ part of '../model.dart';
 /// [privacy mode]: https://core.telegram.org/bots#privacy-mode
 /// [poll bot]: https://t.me/PollBot
 /// [ForceReply]: https://core.telegram.org/bots/api#forcereply
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class ForceReply implements ReplyMarkup {
-  bool force_reply = true;
-  String? input_field_placeholder;
+  bool forceReply = true;
+  String? inputFieldPlaceholder;
   bool? selective;
   ForceReply({
-    required this.force_reply,
-    this.input_field_placeholder,
+    required this.forceReply,
+    this.inputFieldPlaceholder,
     this.selective,
   });
   factory ForceReply.fromJson(Map<String, dynamic> json) =>

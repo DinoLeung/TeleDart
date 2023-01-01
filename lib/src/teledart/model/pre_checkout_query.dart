@@ -36,10 +36,10 @@ class TeleDartPreCheckoutQuery extends PreCheckoutQuery {
           id: preCheckoutQuery.id,
           from: preCheckoutQuery.from,
           currency: preCheckoutQuery.currency,
-          total_amount: preCheckoutQuery.total_amount,
-          invoice_payload: preCheckoutQuery.invoice_payload,
-          shipping_option_id: preCheckoutQuery.shipping_option_id,
-          order_info: preCheckoutQuery.order_info,
+          totalAmount: preCheckoutQuery.totalAmount,
+          invoicePayload: preCheckoutQuery.invoicePayload,
+          shippingOptionId: preCheckoutQuery.shippingOptionId,
+          orderInfo: preCheckoutQuery.orderInfo,
         );
 
   /// Answer the recieved pre-checkout query

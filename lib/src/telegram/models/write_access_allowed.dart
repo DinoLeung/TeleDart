@@ -23,7 +23,7 @@ part of '../model.dart';
 /// Currently holds no information.
 ///
 /// https://core.telegram.org/bots/api#writeaccessallowed
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class WriteAccessAllowed {
   WriteAccessAllowed();
   factory WriteAccessAllowed.fromJson(Map<String, dynamic> json) =>

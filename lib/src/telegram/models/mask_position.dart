@@ -21,16 +21,16 @@ part of '../model.dart';
 /// This object describes the position on faces where a mask should be placed by default.
 ///
 /// https://core.telegram.org/bots/api#maskposition
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class MaskPosition {
   String point;
-  double x_shift;
-  double y_shift;
+  double xShift;
+  double yShift;
   double scale;
   MaskPosition({
     required this.point,
-    required this.x_shift,
-    required this.y_shift,
+    required this.xShift,
+    required this.yShift,
     required this.scale,
   });
   factory MaskPosition.fromJson(Map<String, dynamic> json) =>

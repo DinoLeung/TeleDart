@@ -35,8 +35,8 @@ class TeleDartShippingQuery extends ShippingQuery {
       : super(
           id: shippingQuery.id,
           from: shippingQuery.from,
-          invoice_payload: shippingQuery.invoice_payload,
-          shipping_address: shippingQuery.shipping_address,
+          invoicePayload: shippingQuery.invoicePayload,
+          shippingAddress: shippingQuery.shippingAddress,
         );
 
   /// Answer the recieved shipping query

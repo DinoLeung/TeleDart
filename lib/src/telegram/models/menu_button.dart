@@ -28,14 +28,15 @@ part of '../model.dart';
 ///
 /// https://core.telegram.org/bots/api#menubutton
 
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class MenuButton {
-  static const String COMMANDS = 'commands';
-  static const String WEB_APP = 'web_app';
-  static const String DEFAULT = 'default';
+  static const String typeCommands = 'commands';
+  static const String typeWebApp = 'web_app';
+  static const String typeDefault = 'default';
 
   String type;
-  MenuButton ({required this.type});
-  factory MenuButton.fromJson(Map<String, dynamic> json) => _$MenuButtonFromJson(json);
+  MenuButton({required this.type});
+  factory MenuButton.fromJson(Map<String, dynamic> json) =>
+      _$MenuButtonFromJson(json);
   Map<String, dynamic> toJson() => _$MenuButtonToJson(this);
 }

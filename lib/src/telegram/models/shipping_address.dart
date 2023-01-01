@@ -21,21 +21,21 @@ part of '../model.dart';
 /// This object represents a shipping address.
 ///
 /// https://core.telegram.org/bots/api#shippingaddress
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class ShippingAddress {
-  String country_code;
+  String countryCode;
   String state;
   String city;
-  String street_line1;
-  String street_line2;
-  String post_code;
+  String streetLine1;
+  String streetLine2;
+  String postCode;
   ShippingAddress({
-    required this.country_code,
+    required this.countryCode,
     required this.state,
     required this.city,
-    required this.street_line1,
-    required this.street_line2,
-    required this.post_code,
+    required this.streetLine1,
+    required this.streetLine2,
+    required this.postCode,
   });
   factory ShippingAddress.fromJson(Map<String, dynamic> json) =>
       _$ShippingAddressFromJson(json);

@@ -21,7 +21,7 @@ part of '../model.dart';
 /// This object represents a portion of the price for goods or services.
 ///
 /// https://core.telegram.org/bots/api#labeledprice
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class LabeledPrice {
   String label;
   int amount;

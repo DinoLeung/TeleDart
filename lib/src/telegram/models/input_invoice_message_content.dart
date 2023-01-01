@@ -23,49 +23,49 @@ part of '../model.dart';
 /// https://core.telegram.org/bots/api#inputinvoicemessagecontent
 ///
 /// [content]: https://core.telegram.org/bots/api#inputmessagecontent
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class InputInvoiceMessageContent implements InputMessageContent {
   String title;
   String description;
   String payload;
-  String provider_token;
+  String providerToken;
   String currency;
   List<LabeledPrice> prices;
-  int? max_tip_amount;
-  List<int>? suggested_tip_amounts;
-  String? provider_data;
-  String? photo_url;
-  int? photo_size;
-  int? photo_width;
-  int? photo_height;
-  bool? need_name;
-  bool? need_phone_number;
-  bool? need_email;
-  bool? need_shipping_address;
-  bool? send_phone_number_to_provider;
-  bool? send_email_to_provider;
-  bool? is_flexible;
+  int? maxTipAmount;
+  List<int>? suggestedTipAmounts;
+  String? providerData;
+  String? photoUrl;
+  int? photoSize;
+  int? photoWidth;
+  int? photoHeight;
+  bool? needName;
+  bool? needPhoneNumber;
+  bool? needEmail;
+  bool? needShippingAddress;
+  bool? sendPhoneNumberToProvider;
+  bool? sendEmailToProvider;
+  bool? isFlexible;
 
   InputInvoiceMessageContent({
     required this.title,
     required this.description,
     required this.payload,
-    required this.provider_token,
+    required this.providerToken,
     required this.currency,
     required this.prices,
-    this.max_tip_amount,
-    this.suggested_tip_amounts,
-    this.provider_data,
-    this.photo_size,
-    this.photo_width,
-    this.photo_height,
-    this.need_name,
-    this.need_phone_number,
-    this.need_email,
-    this.need_shipping_address,
-    this.send_phone_number_to_provider,
-    this.send_email_to_provider,
-    this.is_flexible,
+    this.maxTipAmount,
+    this.suggestedTipAmounts,
+    this.providerData,
+    this.photoSize,
+    this.photoWidth,
+    this.photoHeight,
+    this.needName,
+    this.needPhoneNumber,
+    this.needEmail,
+    this.needShippingAddress,
+    this.sendPhoneNumberToProvider,
+    this.sendEmailToProvider,
+    this.isFlexible,
   });
 
   factory InputInvoiceMessageContent.fromJson(Map<String, dynamic> json) =>

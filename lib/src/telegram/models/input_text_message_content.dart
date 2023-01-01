@@ -23,16 +23,16 @@ part of '../model.dart';
 /// https://core.telegram.org/bots/api#inputtextmessagecontent
 ///
 /// [content]: https://core.telegram.org/bots/api#inputmessagecontent
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class InputTextMessageContent implements InputMessageContent {
-  String message_text;
-  String? parse_mode;
+  String messageText;
+  String? parseMode;
   List<MessageEntity>? entities;
-  bool? disable_web_page_preview;
+  bool? disableWebPagePreview;
   InputTextMessageContent({
-    required this.message_text,
-    this.parse_mode,
-    this.disable_web_page_preview,
+    required this.messageText,
+    this.parseMode,
+    this.disableWebPagePreview,
   });
   factory InputTextMessageContent.fromJson(Map<String, dynamic> json) =>
       _$InputTextMessageContentFromJson(json);

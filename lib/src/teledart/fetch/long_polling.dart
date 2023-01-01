@@ -94,7 +94,7 @@ class LongPolling extends AbstractUpdateFetcher {
         if (updates.isNotEmpty) {
           for (var update in updates) {
             emitUpdate(update);
-            offset = update.update_id + 1;
+            offset = update.updateId + 1;
           }
         }
         _resetRetryDelay();

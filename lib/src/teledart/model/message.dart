@@ -35,26 +35,26 @@ class TeleDartMessage extends Message {
 
   TeleDartMessage(this._teledart, Message message)
       : super(
-          message_id: message.message_id,
-          message_thread_id: message.message_thread_id,
+          messageId: message.messageId,
+          messageThreadId: message.messageThreadId,
           from: message.from,
           date: message.date,
-          sender_chat: message.sender_chat,
+          senderChat: message.senderChat,
           chat: message.chat,
-          forward_from: message.forward_from,
-          forward_from_chat: message.forward_from_chat,
-          forward_from_message_id: message.forward_from_message_id,
-          forward_signature: message.forward_signature,
-          forward_sender_name: message.forward_sender_name,
-          forward_date: message.forward_date,
-          is_topic_message: message.is_topic_message,
-          is_automatic_forward: message.is_automatic_forward,
-          reply_to_message: message.reply_to_message,
-          via_bot: message.via_bot,
-          edit_date: message.edit_date,
-          has_protected_content: message.has_protected_content,
-          media_group_id: message.media_group_id,
-          author_signature: message.author_signature,
+          forwardFrom: message.forwardFrom,
+          forwardFromChat: message.forwardFromChat,
+          forwardFromMessageId: message.forwardFromMessageId,
+          forwardSignature: message.forwardSignature,
+          forwardSenderName: message.forwardSenderName,
+          forwardDate: message.forwardDate,
+          isTopicMessage: message.isTopicMessage,
+          isAutomaticForward: message.isAutomaticForward,
+          replyToMessage: message.replyToMessage,
+          viaBot: message.viaBot,
+          editDate: message.editDate,
+          hasProtectedContent: message.hasProtectedContent,
+          mediaGroupId: message.mediaGroupId,
+          authorSignature: message.authorSignature,
           text: message.text,
           entities: message.entities,
           animation: message.animation,
@@ -63,49 +63,47 @@ class TeleDartMessage extends Message {
           photo: message.photo,
           sticker: message.sticker,
           video: message.video,
-          video_note: message.video_note,
+          videoNote: message.videoNote,
           voice: message.voice,
           caption: message.caption,
-          caption_entities: message.caption_entities,
-          has_media_spoiler: message.has_media_spoiler,
+          captionEntities: message.captionEntities,
+          hasMediaSpoiler: message.hasMediaSpoiler,
           contact: message.contact,
           dice: message.dice,
           game: message.game,
           poll: message.poll,
           venue: message.venue,
           location: message.location,
-          new_chat_members: message.new_chat_members,
-          left_chat_member: message.left_chat_member,
-          new_chat_title: message.new_chat_title,
-          new_chat_photo: message.new_chat_photo,
-          delete_chat_photo: message.delete_chat_photo,
-          group_chat_created: message.group_chat_created,
-          supergroup_chat_created: message.supergroup_chat_created,
-          channel_chat_created: message.channel_chat_created,
-          message_auto_delete_timer_changed:
-              message.message_auto_delete_timer_changed,
-          migrate_to_chat_id: message.migrate_to_chat_id,
-          migrate_from_chat_id: message.migrate_from_chat_id,
-          pinned_message: message.pinned_message,
+          newChatMembers: message.newChatMembers,
+          leftChatMember: message.leftChatMember,
+          newChatTitle: message.newChatTitle,
+          newChatPhoto: message.newChatPhoto,
+          deleteChatPhoto: message.deleteChatPhoto,
+          groupChatCreated: message.groupChatCreated,
+          supergroupChatCreated: message.supergroupChatCreated,
+          channelChatCreated: message.channelChatCreated,
+          messageAutoDeleteTimerChanged: message.messageAutoDeleteTimerChanged,
+          migrateToChatId: message.migrateToChatId,
+          migrateFromChatId: message.migrateFromChatId,
+          pinnedMessage: message.pinnedMessage,
           invoice: message.invoice,
-          successful_payment: message.successful_payment,
-          connected_website: message.connected_website,
-          write_access_allowed: message.write_access_allowed,
-          passport_data: message.passport_data,
-          proximity_alert_triggered: message.proximity_alert_triggered,
-          forum_topic_created: message.forum_topic_created,
-          forum_topic_edited: message.forum_topic_edited,
-          forum_topic_closed: message.forum_topic_closed,
-          forum_topic_reopened: message.forum_topic_reopened,
-          general_forum_topic_hidden: message.general_forum_topic_hidden,
-          general_forum_topic_unhidden: message.general_forum_topic_unhidden,
-          video_chat_scheduled: message.video_chat_scheduled,
-          video_chat_started: message.video_chat_started,
-          video_chat_ended: message.video_chat_ended,
-          video_chat_participants_invited:
-              message.video_chat_participants_invited,
-          web_app_data: message.web_app_data,
-          reply_markup: message.reply_markup,
+          successfulPayment: message.successfulPayment,
+          connectedWebsite: message.connectedWebsite,
+          writeAccessAllowed: message.writeAccessAllowed,
+          passportData: message.passportData,
+          proximityAlertTriggered: message.proximityAlertTriggered,
+          forumTopicCreated: message.forumTopicCreated,
+          forumTopicEdited: message.forumTopicEdited,
+          forumTopicClosed: message.forumTopicClosed,
+          forumTopicReopened: message.forumTopicReopened,
+          generalForumTopicHidden: message.generalForumTopicHidden,
+          generalForumTopicUnhidden: message.generalForumTopicUnhidden,
+          videoChatScheduled: message.videoChatScheduled,
+          videoChatStarted: message.videoChatStarted,
+          videoChatEnded: message.videoChatEnded,
+          videoChatParticipantsInvited: message.videoChatParticipantsInvited,
+          webAppData: message.webAppData,
+          replyMarkup: message.replyMarkup,
         );
 
   /// Reply to the recieved message with text
@@ -121,24 +119,24 @@ class TeleDartMessage extends Message {
   /// for more information about those options.**
   Future<Message> reply(
     String text, {
-    int? message_thread_id,
+    int? messageThreadId,
     bool withQuote = false,
-    String? parse_mode,
+    String? parseMode,
     List<MessageEntity>? entities,
-    bool? disable_web_page_preview,
-    bool? disable_notification,
-    bool? allow_sending_without_reply,
-    ReplyMarkup? reply_markup,
+    bool? disableWebPagePreview,
+    bool? disableNotification,
+    bool? allowSendingWithoutReply,
+    ReplyMarkup? replyMarkup,
   }) =>
       _teledart.sendMessage(chat.id, text,
-          message_thread_id: message_thread_id ?? this.message_thread_id,
-          parse_mode: parse_mode,
+          message_thread_id: messageThreadId ?? this.messageThreadId,
+          parse_mode: parseMode,
           entities: entities,
-          disable_web_page_preview: disable_web_page_preview,
-          disable_notification: disable_notification,
-          reply_to_message_id: withQuote ? message_id : null,
-          allow_sending_without_reply: allow_sending_without_reply,
-          reply_markup: reply_markup);
+          disable_web_page_preview: disableWebPagePreview,
+          disable_notification: disableNotification,
+          reply_to_message_id: withQuote ? messageId : null,
+          allow_sending_without_reply: allowSendingWithoutReply,
+          reply_markup: replyMarkup);
 
   /// Reply to the recieved message with an image
   ///
@@ -164,13 +162,13 @@ class TeleDartMessage extends Message {
     ReplyMarkup? reply_markup,
   }) =>
       _teledart.sendPhoto(chat.id, photo,
-          message_thread_id: message_thread_id ?? this.message_thread_id,
+          message_thread_id: message_thread_id ?? this.messageThreadId,
           caption: caption,
           parse_mode: parse_mode,
           caption_entities: caption_entities,
           has_spoiler: has_spoiler,
           disable_notification: disable_notification,
-          reply_to_message_id: withQuote ? message_id : null,
+          reply_to_message_id: withQuote ? messageId : null,
           allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
@@ -201,7 +199,7 @@ class TeleDartMessage extends Message {
     ReplyMarkup? reply_markup,
   }) =>
       _teledart.sendAudio(chat.id, audio,
-          message_thread_id: message_thread_id ?? this.message_thread_id,
+          message_thread_id: message_thread_id ?? this.messageThreadId,
           caption: caption,
           parse_mode: parse_mode,
           caption_entities: caption_entities,
@@ -210,7 +208,7 @@ class TeleDartMessage extends Message {
           title: title,
           thumb: thumb,
           disable_notification: disable_notification,
-          reply_to_message_id: withQuote ? message_id : null,
+          reply_to_message_id: withQuote ? messageId : null,
           allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
@@ -238,13 +236,13 @@ class TeleDartMessage extends Message {
     ReplyMarkup? reply_markup,
   }) =>
       _teledart.sendDocument(chat.id, document,
-          message_thread_id: message_thread_id ?? this.message_thread_id,
+          message_thread_id: message_thread_id ?? this.messageThreadId,
           thumb: thumb,
           caption: caption,
           parse_mode: parse_mode,
           caption_entities: caption_entities,
           disable_notification: disable_notification,
-          reply_to_message_id: withQuote ? message_id : null,
+          reply_to_message_id: withQuote ? messageId : null,
           allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
@@ -277,7 +275,7 @@ class TeleDartMessage extends Message {
     ReplyMarkup? reply_markup,
   }) =>
       _teledart.sendVideo(chat.id, video,
-          message_thread_id: message_thread_id ?? this.message_thread_id,
+          message_thread_id: message_thread_id ?? this.messageThreadId,
           duration: duration,
           width: width,
           height: height,
@@ -288,7 +286,7 @@ class TeleDartMessage extends Message {
           has_spoiler: has_spoiler,
           supports_streaming: supports_streaming,
           disable_notification: disable_notification,
-          reply_to_message_id: withQuote ? message_id : null,
+          reply_to_message_id: withQuote ? messageId : null,
           allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
@@ -320,7 +318,7 @@ class TeleDartMessage extends Message {
     ReplyMarkup? reply_markup,
   }) =>
       _teledart.sendAnimation(chat.id, animation,
-          message_thread_id: message_thread_id ?? this.message_thread_id,
+          message_thread_id: message_thread_id ?? this.messageThreadId,
           duration: duration,
           width: width,
           height: height,
@@ -330,7 +328,7 @@ class TeleDartMessage extends Message {
           caption_entities: caption_entities,
           has_spoiler: has_spoiler,
           disable_notification: disable_notification,
-          reply_to_message_id: withQuote ? message_id : null,
+          reply_to_message_id: withQuote ? messageId : null,
           allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
@@ -357,12 +355,12 @@ class TeleDartMessage extends Message {
     ReplyMarkup? reply_markup,
   }) =>
       _teledart.sendVoice(chat.id, voice,
-          message_thread_id: message_thread_id ?? this.message_thread_id,
+          message_thread_id: message_thread_id ?? this.messageThreadId,
           caption: caption,
           parse_mode: parse_mode,
           caption_entities: caption_entities,
           disable_notification: disable_notification,
-          reply_to_message_id: withQuote ? message_id : null,
+          reply_to_message_id: withQuote ? messageId : null,
           allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
@@ -389,12 +387,12 @@ class TeleDartMessage extends Message {
     ReplyMarkup? reply_markup,
   }) =>
       _teledart.sendVideoNote(chat.id, video_note,
-          message_thread_id: message_thread_id ?? this.message_thread_id,
+          message_thread_id: message_thread_id ?? this.messageThreadId,
           duration: duration,
           length: length,
           thumb: thumb,
           disable_notification: disable_notification,
-          reply_to_message_id: withQuote ? message_id : null,
+          reply_to_message_id: withQuote ? messageId : null,
           allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
@@ -417,9 +415,9 @@ class TeleDartMessage extends Message {
     bool? allow_sending_without_reply,
   }) =>
       _teledart.sendMediaGroup(chat.id, media,
-          message_thread_id: message_thread_id ?? this.message_thread_id,
+          message_thread_id: message_thread_id ?? this.messageThreadId,
           disable_notification: disable_notification,
-          reply_to_message_id: withQuote ? message_id : null,
+          reply_to_message_id: withQuote ? messageId : null,
           allow_sending_without_reply: allow_sending_without_reply);
 
   /// Reply to the recieved message with a location
@@ -447,13 +445,13 @@ class TeleDartMessage extends Message {
     ReplyMarkup? reply_markup,
   }) =>
       _teledart.sendLocation(chat.id, latitude, longitude,
-          message_thread_id: message_thread_id ?? this.message_thread_id,
+          message_thread_id: message_thread_id ?? this.messageThreadId,
           horizontal_accuracy: horizontal_accuracy,
           live_period: live_period,
           heading: heading,
           proximity_alert_radius: proximity_alert_radius,
           disable_notification: disable_notification,
-          reply_to_message_id: withQuote ? message_id : null,
+          reply_to_message_id: withQuote ? messageId : null,
           allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
@@ -490,7 +488,7 @@ class TeleDartMessage extends Message {
           google_place_id: google_place_id,
           google_place_type: google_place_type,
           disable_notification: disable_notification,
-          reply_to_message_id: withQuote ? message_id : null,
+          reply_to_message_id: withQuote ? messageId : null,
           allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
@@ -517,11 +515,11 @@ class TeleDartMessage extends Message {
     ReplyMarkup? reply_markup,
   }) =>
       _teledart.sendContact(chat.id, phone_number, first_name,
-          message_thread_id: message_thread_id ?? this.message_thread_id,
+          message_thread_id: message_thread_id ?? this.messageThreadId,
           last_name: last_name,
           vcard: vcard,
           disable_notification: disable_notification,
-          reply_to_message_id: withQuote ? message_id : null,
+          reply_to_message_id: withQuote ? messageId : null,
           allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
@@ -556,7 +554,7 @@ class TeleDartMessage extends Message {
     ReplyMarkup? reply_markup,
   }) =>
       _teledart.sendPoll(chat.id, question, options,
-          message_thread_id: message_thread_id ?? this.message_thread_id,
+          message_thread_id: message_thread_id ?? this.messageThreadId,
           is_anonymous: is_anonymous,
           type: type,
           allows_multiple_answers: allows_multiple_answers,
@@ -568,7 +566,7 @@ class TeleDartMessage extends Message {
           close_date: close_date,
           is_closed: is_closed,
           disable_notification: disable_notification,
-          reply_to_message_id: withQuote ? message_id : null,
+          reply_to_message_id: withQuote ? messageId : null,
           allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
@@ -585,16 +583,16 @@ class TeleDartMessage extends Message {
   Future<Message> replyDice({
     int? message_thread_id,
     bool withQuote = false,
-    String emoji = Dice.DICE,
+    String emoji = Dice.emojiDice,
     bool? disable_notification,
     bool? allow_sending_without_reply,
     ReplyMarkup? reply_markup,
   }) =>
       _teledart.sendDice(chat.id,
-          message_thread_id: message_thread_id ?? this.message_thread_id,
+          message_thread_id: message_thread_id ?? this.messageThreadId,
           emoji: emoji,
           disable_notification: disable_notification,
-          reply_to_message_id: withQuote ? message_id : null,
+          reply_to_message_id: withQuote ? messageId : null,
           allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
@@ -639,7 +637,7 @@ class TeleDartMessage extends Message {
   }) =>
       _teledart.sendInvoice(chat.id, title, description, payload,
           provider_token, currency, prices,
-          message_thread_id: message_thread_id ?? this.message_thread_id,
+          message_thread_id: message_thread_id ?? this.messageThreadId,
           max_tip_amount: max_tip_amount,
           suggested_tip_amounts: suggested_tip_amounts,
           start_parameter: start_parameter,
@@ -657,7 +655,7 @@ class TeleDartMessage extends Message {
           is_flexible: is_flexible,
           disable_notification: disable_notification,
           protect_content: protect_content,
-          reply_to_message_id: withQuote ? message_id : null,
+          reply_to_message_id: withQuote ? messageId : null,
           allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
@@ -680,10 +678,10 @@ class TeleDartMessage extends Message {
     InlineKeyboardMarkup? reply_markup,
   }) =>
       _teledart.sendGame(chat.id, game_short_name,
-          message_thread_id: message_thread_id ?? this.message_thread_id,
+          message_thread_id: message_thread_id ?? this.messageThreadId,
           disable_notification: disable_notification,
           protect_content: protect_content,
-          reply_to_message_id: withQuote ? message_id : null,
+          reply_to_message_id: withQuote ? messageId : null,
           allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
@@ -707,9 +705,9 @@ class TeleDartMessage extends Message {
     ReplyMarkup? reply_markup,
   }) =>
       _teledart.sendSticker(chat.id, sticker,
-          message_thread_id: message_thread_id ?? this.message_thread_id,
+          message_thread_id: message_thread_id ?? this.messageThreadId,
           disable_notification: disable_notification,
-          reply_to_message_id: withQuote ? message_id : null,
+          reply_to_message_id: withQuote ? messageId : null,
           allow_sending_without_reply: allow_sending_without_reply,
           reply_markup: reply_markup);
 
@@ -735,7 +733,7 @@ class TeleDartMessage extends Message {
     bool? allow_sending_without_reply,
     ReplyMarkup? reply_markup,
   }) =>
-      _teledart.copyMessage(chat_id, chat.id, message_id,
+      _teledart.copyMessage(chat_id, chat.id, messageId,
           message_thread_id: message_thread_id,
           caption: caption,
           parse_mode: parse_mode,
@@ -762,7 +760,7 @@ class TeleDartMessage extends Message {
     bool? disable_notification,
     bool? protect_content,
   }) =>
-      _teledart.forwardMessage(chat_id, chat.id, message_id,
+      _teledart.forwardMessage(chat_id, chat.id, messageId,
           message_thread_id: message_thread_id,
           disable_notification: disable_notification,
           protect_content: protect_content);

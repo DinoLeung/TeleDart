@@ -22,36 +22,36 @@ part of '../model.dart';
 ///
 /// By default, this voice message will be sent by the user.
 /// Alternatively,
-/// you can use *input_message_content* to send a message with the specified content instead of the voice message.
+/// you can use *inputMessageContent* to send a message with the specified content instead of the voice message.
 ///
 /// **Note:** This will only work in Telegram versions released after 9 April, 2016.
 /// Older clients will ignore them
 ///
 /// https://core.telegram.org/bots/api#inlinequeryresultcachedvoice
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class InlineQueryResultCachedVoice implements InlineQueryResult {
   @override
   String id;
   @override
   String type;
-  String voice_file_id;
+  String voiceFileId;
   String title;
   String? caption;
-  String? parse_mode;
-  List<MessageEntity>? caption_entities;
+  String? parseMode;
+  List<MessageEntity>? captionEntities;
   @override
-  InlineKeyboardMarkup? reply_markup;
-  InputMessageContent? input_message_content;
+  InlineKeyboardMarkup? replyMarkup;
+  InputMessageContent? inputMessageContent;
   InlineQueryResultCachedVoice({
     required this.id,
-    this.type = InlineQueryResult.VOICE,
-    required this.voice_file_id,
+    this.type = InlineQueryResult.typeVoice,
+    required this.voiceFileId,
     required this.title,
     this.caption,
-    this.parse_mode,
-    this.caption_entities,
-    this.reply_markup,
-    this.input_message_content,
+    this.parseMode,
+    this.captionEntities,
+    this.replyMarkup,
+    this.inputMessageContent,
   });
   factory InlineQueryResultCachedVoice.fromJson(Map<String, dynamic> json) =>
       _$InlineQueryResultCachedVoiceFromJson(json);

@@ -23,7 +23,7 @@ part of '../model.dart';
 /// sent whenever a user in the chat triggers a proximity alert set by another user.
 ///
 /// https://core.telegram.org/bots/api#proximityalerttriggered
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class ProximityAlertTriggered {
   User traveler;
   User watcher;

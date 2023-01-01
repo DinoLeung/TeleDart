@@ -21,34 +21,34 @@ part of '../model.dart';
 /// Represents a link to an article or web page.
 ///
 /// https://core.telegram.org/bots/api#inlinequeryresultarticle
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class InlineQueryResultArticle implements InlineQueryResult {
   @override
   String id;
   @override
   String type;
   String title;
-  InputMessageContent input_message_content;
+  InputMessageContent inputMessageContent;
   @override
-  InlineKeyboardMarkup? reply_markup;
+  InlineKeyboardMarkup? replyMarkup;
   String? url;
-  bool? hide_url;
+  bool? hideUrl;
   String? description;
-  String? thumb_url;
-  String? thumb_width;
-  String? thumb_height;
+  String? thumbUrl;
+  String? thumbWidth;
+  String? thumbHeight;
   InlineQueryResultArticle({
     required this.id,
-    this.type = InlineQueryResult.ARTICLE,
+    this.type = InlineQueryResult.typeArticle,
     required this.title,
-    required this.input_message_content,
-    this.reply_markup,
+    required this.inputMessageContent,
+    this.replyMarkup,
     this.url,
-    this.hide_url,
+    this.hideUrl,
     this.description,
-    this.thumb_url,
-    this.thumb_width,
-    this.thumb_height,
+    this.thumbUrl,
+    this.thumbWidth,
+    this.thumbHeight,
   });
   factory InlineQueryResultArticle.fromJson(Map<String, dynamic> json) =>
       _$InlineQueryResultArticleFromJson(json);

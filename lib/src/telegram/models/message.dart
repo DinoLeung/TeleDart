@@ -21,28 +21,28 @@ part of '../model.dart';
 /// This object represents a message.
 ///
 /// https://core.telegram.org/bots/api#message
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class Message {
-  int message_id;
-  int? message_thread_id;
+  int messageId;
+  int? messageThreadId;
   User? from;
-  Chat? sender_chat;
+  Chat? senderChat;
   int date;
   Chat chat;
-  User? forward_from;
-  Chat? forward_from_chat;
-  int? forward_from_message_id;
-  String? forward_signature;
-  String? forward_sender_name;
-  int? forward_date;
-  bool? is_topic_message;
-  bool? is_automatic_forward;
-  Message? reply_to_message;
-  User? via_bot;
-  int? edit_date;
-  bool? has_protected_content;
-  String? media_group_id;
-  String? author_signature;
+  User? forwardFrom;
+  Chat? forwardFromChat;
+  int? forwardFromMessageId;
+  String? forwardSignature;
+  String? forwardSenderName;
+  int? forwardDate;
+  bool? isTopicMessage;
+  bool? isAutomaticForward;
+  Message? replyToMessage;
+  User? viaBot;
+  int? editDate;
+  bool? hasProtectedContent;
+  String? mediaGroupId;
+  String? authorSignature;
   String? text;
   List<MessageEntity>? entities;
   Animation? animation;
@@ -51,69 +51,69 @@ class Message {
   List<PhotoSize>? photo;
   Sticker? sticker;
   Video? video;
-  VideoNote? video_note;
+  VideoNote? videoNote;
   Voice? voice;
   String? caption;
-  List<MessageEntity>? caption_entities;
-  bool? has_media_spoiler;
+  List<MessageEntity>? captionEntities;
+  bool? hasMediaSpoiler;
   Contact? contact;
   Dice? dice;
   Game? game;
   Poll? poll;
   Venue? venue;
   Location? location;
-  List<User>? new_chat_members;
-  User? left_chat_member;
-  String? new_chat_title;
-  List<PhotoSize>? new_chat_photo;
-  bool? delete_chat_photo;
-  bool? group_chat_created;
-  bool? supergroup_chat_created;
-  bool? channel_chat_created;
-  MessageAutoDeleteTimerChanged? message_auto_delete_timer_changed;
-  int? migrate_to_chat_id;
-  int? migrate_from_chat_id;
-  Message? pinned_message;
+  List<User>? newChatMembers;
+  User? leftChatMember;
+  String? newChatTitle;
+  List<PhotoSize>? newChatPhoto;
+  bool? deleteChatPhoto;
+  bool? groupChatCreated;
+  bool? supergroupChatCreated;
+  bool? channelChatCreated;
+  MessageAutoDeleteTimerChanged? messageAutoDeleteTimerChanged;
+  int? migrateToChatId;
+  int? migrateFromChatId;
+  Message? pinnedMessage;
   Invoice? invoice;
-  SuccessfulPayment? successful_payment;
-  String? connected_website;
-  WriteAccessAllowed? write_access_allowed;
-  PassportData? passport_data;
-  ProximityAlertTriggered? proximity_alert_triggered;
-  ForumTopicCreated? forum_topic_created;
-  ForumTopicEdited? forum_topic_edited;
-  ForumTopicClosed? forum_topic_closed;
-  ForumTopicReopened? forum_topic_reopened;
-  GeneralForumTopicHidden? general_forum_topic_hidden;
-  GeneralForumTopicUnhidden? general_forum_topic_unhidden;
-  VoiceChatScheduled? video_chat_scheduled;
-  VoiceChatStarted? video_chat_started;
-  VoiceChatEnded? video_chat_ended;
-  VoiceChatParticipantsInvited? video_chat_participants_invited;
-  WebAppData? web_app_data;
-  InlineKeyboardMarkup? reply_markup;
+  SuccessfulPayment? successfulPayment;
+  String? connectedWebsite;
+  WriteAccessAllowed? writeAccessAllowed;
+  PassportData? passportData;
+  ProximityAlertTriggered? proximityAlertTriggered;
+  ForumTopicCreated? forumTopicCreated;
+  ForumTopicEdited? forumTopicEdited;
+  ForumTopicClosed? forumTopicClosed;
+  ForumTopicReopened? forumTopicReopened;
+  GeneralForumTopicHidden? generalForumTopicHidden;
+  GeneralForumTopicUnhidden? generalForumTopicUnhidden;
+  VoiceChatScheduled? videoChatScheduled;
+  VoiceChatStarted? videoChatStarted;
+  VoiceChatEnded? videoChatEnded;
+  VoiceChatParticipantsInvited? videoChatParticipantsInvited;
+  WebAppData? webAppData;
+  InlineKeyboardMarkup? replyMarkup;
 
   Message({
-    required this.message_id,
-    this.message_thread_id,
+    required this.messageId,
+    this.messageThreadId,
     this.from,
-    this.sender_chat,
+    this.senderChat,
     required this.date,
     required this.chat,
-    this.forward_from,
-    this.forward_from_chat,
-    this.forward_from_message_id,
-    this.forward_signature,
-    this.forward_sender_name,
-    this.forward_date,
-    this.is_topic_message,
-    this.is_automatic_forward,
-    this.reply_to_message,
-    this.via_bot,
-    this.edit_date,
-    this.has_protected_content,
-    this.media_group_id,
-    this.author_signature,
+    this.forwardFrom,
+    this.forwardFromChat,
+    this.forwardFromMessageId,
+    this.forwardSignature,
+    this.forwardSenderName,
+    this.forwardDate,
+    this.isTopicMessage,
+    this.isAutomaticForward,
+    this.replyToMessage,
+    this.viaBot,
+    this.editDate,
+    this.hasProtectedContent,
+    this.mediaGroupId,
+    this.authorSignature,
     this.text,
     this.entities,
     this.animation,
@@ -122,47 +122,47 @@ class Message {
     this.photo,
     this.sticker,
     this.video,
-    this.video_note,
+    this.videoNote,
     this.voice,
     this.caption,
-    this.caption_entities,
-    this.has_media_spoiler,
+    this.captionEntities,
+    this.hasMediaSpoiler,
     this.contact,
     this.dice,
     this.game,
     this.poll,
     this.venue,
     this.location,
-    this.new_chat_members,
-    this.left_chat_member,
-    this.new_chat_title,
-    this.new_chat_photo,
-    this.delete_chat_photo,
-    this.group_chat_created,
-    this.supergroup_chat_created,
-    this.channel_chat_created,
-    this.message_auto_delete_timer_changed,
-    this.migrate_to_chat_id,
-    this.migrate_from_chat_id,
-    this.pinned_message,
+    this.newChatMembers,
+    this.leftChatMember,
+    this.newChatTitle,
+    this.newChatPhoto,
+    this.deleteChatPhoto,
+    this.groupChatCreated,
+    this.supergroupChatCreated,
+    this.channelChatCreated,
+    this.messageAutoDeleteTimerChanged,
+    this.migrateToChatId,
+    this.migrateFromChatId,
+    this.pinnedMessage,
     this.invoice,
-    this.successful_payment,
-    this.connected_website,
-    this.write_access_allowed,
-    this.passport_data,
-    this.proximity_alert_triggered,
-    this.forum_topic_created,
-    this.forum_topic_edited,
-    this.forum_topic_closed,
-    this.forum_topic_reopened,
-    this.general_forum_topic_hidden,
-    this.general_forum_topic_unhidden,
-    this.video_chat_scheduled,
-    this.video_chat_started,
-    this.video_chat_ended,
-    this.video_chat_participants_invited,
-    this.web_app_data,
-    this.reply_markup,
+    this.successfulPayment,
+    this.connectedWebsite,
+    this.writeAccessAllowed,
+    this.passportData,
+    this.proximityAlertTriggered,
+    this.forumTopicCreated,
+    this.forumTopicEdited,
+    this.forumTopicClosed,
+    this.forumTopicReopened,
+    this.generalForumTopicHidden,
+    this.generalForumTopicUnhidden,
+    this.videoChatScheduled,
+    this.videoChatStarted,
+    this.videoChatEnded,
+    this.videoChatParticipantsInvited,
+    this.webAppData,
+    this.replyMarkup,
   });
 
   @JsonKey(ignore: true)
@@ -170,23 +170,23 @@ class Message {
   set date_(DateTime dateTime) => date = TimeHelper.toUnixTime(dateTime);
 
   @JsonKey(ignore: true)
-  DateTime? get forward_date_ =>
-      forward_date == null ? null : TimeHelper.toDateTime(forward_date!);
-  set forward_date_(DateTime? dateTime) =>
-      forward_date = dateTime == null ? null : TimeHelper.toUnixTime(dateTime);
+  DateTime? get forwardDate_ =>
+      forwardDate == null ? null : TimeHelper.toDateTime(forwardDate!);
+  set forwardDate_(DateTime? dateTime) =>
+      forwardDate = dateTime == null ? null : TimeHelper.toUnixTime(dateTime);
 
   @JsonKey(ignore: true)
-  DateTime? get edit_date_ =>
-      edit_date == null ? null : TimeHelper.toDateTime(edit_date!);
-  set edit_date_(DateTime? dateTime) =>
-      edit_date = dateTime == null ? null : TimeHelper.toUnixTime(dateTime);
+  DateTime? get editDate_ =>
+      editDate == null ? null : TimeHelper.toDateTime(editDate!);
+  set editDate_(DateTime? dateTime) =>
+      editDate = dateTime == null ? null : TimeHelper.toUnixTime(dateTime);
 
   factory Message.fromJson(Map<String, dynamic> json) =>
       _$MessageFromJson(json);
   Map<String, dynamic> toJson() => _$MessageToJson(this);
 
   int indexOfEntity(String? type) {
-    var etts = entities ?? caption_entities;
+    var etts = entities ?? captionEntities;
     if (etts != null) {
       for (var ett in etts) {
         if (ett.type == type) return etts.indexOf(ett);
@@ -198,7 +198,7 @@ class Message {
   MessageEntity? entityOf(String? type) {
     var i = indexOfEntity(type);
     if (i >= 0) {
-      return (entities ?? caption_entities)![i];
+      return (entities ?? captionEntities)![i];
     } else {
       return null;
     }

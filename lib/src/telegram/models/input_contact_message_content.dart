@@ -23,16 +23,16 @@ part of '../model.dart';
 /// https://core.telegram.org/bots/api#inputcontactmessagecontent
 ///
 /// [content]: https://core.telegram.org/bots/api#inputmessagecontent
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class InputContactMessageContent implements InputMessageContent {
-  String phone_number;
-  String first_name;
-  String? last_name;
+  String phoneNumber;
+  String firstName;
+  String? lastName;
   String? vcard;
   InputContactMessageContent({
-    required this.phone_number,
-    required this.first_name,
-    this.last_name,
+    required this.phoneNumber,
+    required this.firstName,
+    this.lastName,
     this.vcard,
   });
   factory InputContactMessageContent.fromJson(Map<String, dynamic> json) =>

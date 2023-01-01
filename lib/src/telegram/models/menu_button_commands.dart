@@ -22,13 +22,13 @@ part of '../model.dart';
 ///
 /// https://core.telegram.org/bots/api#menubuttoncommands
 
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class MenuButtonCommands implements MenuButton {
   @override
   String type;
-  MenuButtonCommands({this.type = MenuButton.COMMANDS});
+  MenuButtonCommands({this.type = MenuButton.typeCommands});
   factory MenuButtonCommands.fromJson(Map<String, dynamic> json) =>
       _$MenuButtonCommandsFromJson(json);
-
+  @override
   Map<String, dynamic> toJson() => _$MenuButtonCommandsToJson(this);
 }

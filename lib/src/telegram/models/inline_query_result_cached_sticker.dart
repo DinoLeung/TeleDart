@@ -22,28 +22,28 @@ part of '../model.dart';
 ///
 /// By default, this sticker will be sent by the user.
 /// Alternatively,
-/// you can use *input_message_content* to send a message with the specified content instead of the sticker.
+/// you can use *inputMessageContent* to send a message with the specified content instead of the sticker.
 ///
 /// **Note:** This will only work in Telegram versions released after 9 April, 2016.
 /// Older clients will ignore them.
 ///
 /// https://core.telegram.org/bots/api#inlinequeryresultcachedsticker
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class InlineQueryResultCachedSticker implements InlineQueryResult {
   @override
   String id;
   @override
   String type;
-  String? sticker_file_id;
+  String? stickerFileId;
   @override
-  InlineKeyboardMarkup? reply_markup;
-  InputMessageContent? input_message_content;
+  InlineKeyboardMarkup? replyMarkup;
+  InputMessageContent? inputMessageContent;
   InlineQueryResultCachedSticker({
     required this.id,
-    this.type = InlineQueryResult.STICKER,
-    required this.sticker_file_id,
-    this.reply_markup,
-    this.input_message_content,
+    this.type = InlineQueryResult.typeSticker,
+    required this.stickerFileId,
+    this.replyMarkup,
+    this.inputMessageContent,
   });
   factory InlineQueryResultCachedSticker.fromJson(Map<String, dynamic> json) =>
       _$InlineQueryResultCachedStickerFromJson(json);

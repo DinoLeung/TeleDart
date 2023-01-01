@@ -28,7 +28,7 @@ part of '../model.dart';
 /// * [InputInvoiceMessageContent](https://core.telegram.org/bots/api#inputinvoicemessagecontent)
 ///
 /// https://core.telegram.org/bots/api#inputmessagecontent
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 // abstract class InputMessageContent {
 class InputMessageContent {
   InputMessageContent();

@@ -22,41 +22,41 @@ part of '../model.dart';
 ///
 /// By default, this photo will be sent by the user with optional caption.
 /// Alternatively,
-/// you can use *input_message_content* to send a message with the specified content instead of the photo.
+/// you can use *inputMessageContent* to send a message with the specified content instead of the photo.
 ///
 /// https://core.telegram.org/bots/api#inlinequeryresultphoto
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class InlineQueryResultPhoto implements InlineQueryResult {
   @override
   String id;
   @override
   String type;
-  String photo_url;
-  String thumb_url;
-  int? photo_width;
-  int? photo_height;
+  String photoUrl;
+  String thumbUrl;
+  int? photoWidth;
+  int? photoHeight;
   String? title;
   String? description;
   String? caption;
-  String? parse_mode;
-  List<MessageEntity>? caption_entities;
+  String? parseMode;
+  List<MessageEntity>? captionEntities;
   @override
-  InlineKeyboardMarkup? reply_markup;
-  InputMessageContent? input_message_content;
+  InlineKeyboardMarkup? replyMarkup;
+  InputMessageContent? inputMessageContent;
   InlineQueryResultPhoto({
     required this.id,
-    this.type = InlineQueryResult.PHOTO,
-    required this.photo_url,
-    required this.thumb_url,
-    this.photo_width,
-    this.photo_height,
+    this.type = InlineQueryResult.typePhoto,
+    required this.photoUrl,
+    required this.thumbUrl,
+    this.photoWidth,
+    this.photoHeight,
     this.title,
     this.description,
     this.caption,
-    this.parse_mode,
-    this.caption_entities,
-    this.reply_markup,
-    this.input_message_content,
+    this.parseMode,
+    this.captionEntities,
+    this.replyMarkup,
+    this.inputMessageContent,
   });
   factory InlineQueryResultPhoto.fromJson(Map<String, dynamic> json) =>
       _$InlineQueryResultPhotoFromJson(json);

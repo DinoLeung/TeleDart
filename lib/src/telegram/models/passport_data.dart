@@ -21,7 +21,7 @@ part of '../model.dart';
 /// Contains information about Telegram Passport data shared with the bot by the user.
 ///
 /// https://core.telegram.org/bots/api#passportdata
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class PassportData {
   List<EncryptedPassportElement> data;
   EncryptedCredentials credentials;

@@ -22,35 +22,35 @@ part of '../model.dart';
 ///
 /// By default, this video file will be sent by the user with an optional caption.
 /// Alternatively,
-/// you can use *input_message_content* to send a message with the specified content instead of the video.
+/// you can use *inputMessageContent* to send a message with the specified content instead of the video.
 ///
 /// https://core.telegram.org/bots/api#inlinequeryresultcachedvideo
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class InlineQueryResultCachedVideo implements InlineQueryResult {
   @override
   String id;
   @override
   String type;
-  String video_file_id;
+  String videoFileId;
   String title;
   String? description;
   String? caption;
-  String? parse_mode;
-  List<MessageEntity>? caption_entities;
+  String? parseMode;
+  List<MessageEntity>? captionEntities;
   @override
-  InlineKeyboardMarkup? reply_markup;
-  InputMessageContent? input_message_content;
+  InlineKeyboardMarkup? replyMarkup;
+  InputMessageContent? inputMessageContent;
   InlineQueryResultCachedVideo({
     required this.id,
-    this.type = InlineQueryResult.VIDEO,
-    required this.video_file_id,
+    this.type = InlineQueryResult.typeVideo,
+    required this.videoFileId,
     required this.title,
     this.description,
     this.caption,
-    this.parse_mode,
-    this.caption_entities,
-    this.reply_markup,
-    this.input_message_content,
+    this.parseMode,
+    this.captionEntities,
+    this.replyMarkup,
+    this.inputMessageContent,
   });
   factory InlineQueryResultCachedVideo.fromJson(Map<String, dynamic> json) =>
       _$InlineQueryResultCachedVideoFromJson(json);

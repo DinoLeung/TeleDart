@@ -22,35 +22,35 @@ part of '../model.dart';
 ///
 /// By default, this photo will be sent by the user with an optional caption.
 /// Alternatively,
-/// you can use *input_message_content* to send a message with the specified content instead of the photo.
+/// you can use *inputMessageContent* to send a message with the specified content instead of the photo.
 ///
 /// https://core.telegram.org/bots/api#inlinequeryresultcachedphoto
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class InlineQueryResultCachedPhoto implements InlineQueryResult {
   @override
   String id;
   @override
   String type;
-  String photo_file_id;
+  String photoFileId;
   String? title;
   String? description;
   String? caption;
-  String? parse_mode;
-  List<MessageEntity>? caption_entities;
+  String? parseMode;
+  List<MessageEntity>? captionEntities;
   @override
-  InlineKeyboardMarkup? reply_markup;
-  InputMessageContent? input_message_content;
+  InlineKeyboardMarkup? replyMarkup;
+  InputMessageContent? inputMessageContent;
   InlineQueryResultCachedPhoto({
     required this.id,
-    this.type = InlineQueryResult.PHOTO,
-    required this.photo_file_id,
+    this.type = InlineQueryResult.typePhoto,
+    required this.photoFileId,
     this.title,
     this.description,
     this.caption,
-    this.parse_mode,
-    this.caption_entities,
-    this.reply_markup,
-    this.input_message_content,
+    this.parseMode,
+    this.captionEntities,
+    this.replyMarkup,
+    this.inputMessageContent,
   });
   factory InlineQueryResultCachedPhoto.fromJson(Map<String, dynamic> json) =>
       _$InlineQueryResultCachedPhotoFromJson(json);
