@@ -5,7 +5,7 @@ A clean implementation of [Telegram bot API](https://core.telegram.org/bots/api)
 ![TeleDart](https://raw.githubusercontent.com/DinoLeung/TeleDart/master/example/dash_paper_plane.svg?sanitize=true)
 
 [![Bot API Version](https://img.shields.io/badge/Bot%20API-6.4-blue.svg?style=flat-square)](https://core.telegram.org/bots/api)
-[![Dart Version](https://img.shields.io/badge/Dart-2.14-blue.svg?style=flat-square)](https://dart.dev)
+[![Dart Version](https://img.shields.io/badge/Dart-2.18-blue.svg?style=flat-square)](https://dart.dev)
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg?style=flat-square)](https://www.gnu.org/licenses/gpl-3.0)
 
 [![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=DinoLeung&repo=TeleDart)](https://github.com/DinoLeung/TeleDart)
@@ -69,13 +69,13 @@ teledart.onInlineQuery().listen((inlineQuery) => inlineQuery.answer([
       InlineQueryResultArticle(
           id: 'ping',
           title: 'ping',
-          input_message_content: InputTextMessageContent(
-              message_text: '*pong*', parse_mode: 'MarkdownV2')),
+          inputMessageContent: InputTextMessageContent(
+              messageText: '*pong*', parseMode: 'MarkdownV2')),
       InlineQueryResultArticle(
           id: 'ding',
           title: 'ding',
-          input_message_content: InputTextMessageContent(
-              message_text: '*_dong_*', parse_mode: 'MarkdownV2')),
+          inputMessageContent: InputTextMessageContent(
+              messageText: '*_dong_*', parseMode: 'MarkdownV2')),
     ]));
 ```
 

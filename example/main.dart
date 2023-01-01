@@ -19,7 +19,7 @@ Future<void> main() async {
   //     io.File(envVars['CERT_PATH']!),
   //     io.File(envVars['KEY_PATH']!),
   //     port: int.parse(envVars['BOT_PORT']!),
-  //     secret_token: envVars['SECRET_TOKEN']!);
+  //     secretToken: envVars['SECRET_TOKEN']!);
   // var teledart = TeleDart(envVars['BOT_TOKEN']!, Event(username!), fetcher: webhook);
 
   teledart.start();
