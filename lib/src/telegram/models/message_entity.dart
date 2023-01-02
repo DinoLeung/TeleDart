@@ -26,10 +26,10 @@ class MessageEntity {
   static const String typeMention = 'mention';
   static const String typeHashtag = 'hashtag';
   static const String typeCashtag = 'cashtag';
-  static const String typeBotCommand = 'botCommand';
+  static const String typeBotCommand = 'bot_command';
   static const String typeUrl = 'url';
   static const String typeEmail = 'email';
-  static const String typePhoneNmber = 'phoneNumber';
+  static const String typePhoneNmber = 'phone_number';
   static const String typeBold = 'bold';
   static const String typeItalic = 'italic';
   static const String typeUnderline = 'underline';
@@ -37,9 +37,9 @@ class MessageEntity {
   static const String typeSpolier = 'spoiler';
   static const String typeCode = 'code';
   static const String typePre = 'pre';
-  static const String typeTextLink = 'textLink';
-  static const String typeTextMention = 'textMention';
-  static const String typeCustomEmoji = 'customEmoji';
+  static const String typeTextLink = 'text_link';
+  static const String typeTextMention = 'text_mention';
+  static const String typeCustomEmoji = 'custom_emoji';
 
   String type;
   int offset;

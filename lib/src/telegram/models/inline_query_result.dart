@@ -44,12 +44,12 @@ part of '../model.dart';
 ///
 /// https://core.telegram.org/bots/api#inlinequeryresult
 @JsonSerializable(fieldRename: FieldRename.snake)
-abstract class InlineQueryResult {
+class InlineQueryResult {
   static const typeArticle = 'article';
   static const typeAudio = 'audio';
   static const typeDocument = 'document';
   static const typeGif = 'gif';
-  static const typeMpeg4Gif = 'mpeg4Gif';
+  static const typeMpeg4Gif = 'mpeg4_gif';
   static const typePhoto = 'photo';
   static const typeSticker = 'sticker';
   static const typeVideo = 'video';
@@ -67,9 +67,7 @@ abstract class InlineQueryResult {
     required this.id,
     this.replyMarkup,
   });
-
   factory InlineQueryResult.fromJson(Map<String, dynamic> json) =>
       _$InlineQueryResultFromJson(json);
-
-  Map<String, dynamic> toJson();
+  Map<String, dynamic> toJson() => _$InlineQueryResultToJson(this);
 }
