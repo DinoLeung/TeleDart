@@ -1,3 +1,7 @@
+## 0.5.1
+
+- Made classes like `chat_member`, `input_media` and other abstract.
+
 ## 0.5.0
 
 - Configured JSON serialiser to map properties from snake case to camel case
