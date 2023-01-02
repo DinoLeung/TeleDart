@@ -23,18 +23,18 @@ part of '../model.dart';
 /// https://core.telegram.org/bots/api#encryptedpassportelement
 @JsonSerializable(fieldRename: FieldRename.snake)
 class EncryptedPassportElement {
-  static const typePersonalDetails = 'personalDetails';
+  static const typePersonalDetails = 'personal_details';
   static const typePassport = 'passport';
-  static const typeDriverLicense = 'driverLicense';
-  static const typeIdentityCard = 'identityCard';
-  static const typeInternalPassport = 'internalPassport';
+  static const typeDriverLicense = 'driver_license';
+  static const typeIdentityCard = 'identity_card';
+  static const typeInternalPassport = 'internal_passport';
   static const typeAddress = 'address';
-  static const typeUtilityBill = 'utilityBill';
-  static const typeBankStatement = 'bankStatement';
-  static const typeRentalAgreement = 'rentalAgreement';
-  static const typePassportRegistration = 'passportRegistration';
-  static const typeTemporaryRegistration = 'temporaryRegistration';
-  static const typePhoneNumber = 'phoneNumber';
+  static const typeUtilityBill = 'utility_bill';
+  static const typeBankStatement = 'bank_statement';
+  static const typeRentalAgreement = 'rental_agreement';
+  static const typePassportRegistration = 'passport_registration';
+  static const typeTemporaryRegistration = 'temporary_registration';
+  static const typePhoneNumber = 'phone_number';
   static const typeEmail = 'email';
 
   String type;

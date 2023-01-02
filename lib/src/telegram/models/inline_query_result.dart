@@ -49,7 +49,7 @@ abstract class InlineQueryResult {
   static const typeAudio = 'audio';
   static const typeDocument = 'document';
   static const typeGif = 'gif';
-  static const typeMpeg4Gif = 'mpeg4Gif';
+  static const typeMpeg4Gif = 'mpeg4_gif';
   static const typePhoto = 'photo';
   static const typeSticker = 'sticker';
   static const typeVideo = 'video';
