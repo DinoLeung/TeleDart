@@ -1,3 +1,8 @@
+## 0.5.2
+
+- Fixed typos in static constants
+- roll back 0.5.1 as abstract classes cannot be used with json_serializable
+
 ## 0.5.1
 
 - Made classes like `chat_member`, `input_media` and other abstract.
