@@ -31,7 +31,7 @@ part of '../model.dart';
 /// https://core.telegram.org/bots/api#chatmember
 
 @JsonSerializable(fieldRename: FieldRename.snake)
-class ChatMember {
+abstract class ChatMember {
   String status;
   User user;
 
@@ -42,5 +42,6 @@ class ChatMember {
 
   factory ChatMember.fromJson(Map<String, dynamic> json) =>
       _$ChatMemberFromJson(json);
-  Map<String, dynamic> toJson() => _$ChatMemberToJson(this);
+
+  Map<String, dynamic> toJson();
 }

@@ -31,7 +31,7 @@ part of '../model.dart';
 ///
 /// https://core.telegram.org/bots/api#botcommandscope
 @JsonSerializable(fieldRename: FieldRename.snake)
-class BotCommandScope {
+abstract class BotCommandScope {
   static const typeDefault = 'default';
   static const typeAllPrivateChats = 'all_private_chats';
   static const typeAllGroupChats = 'all_group_chats';
@@ -46,5 +46,6 @@ class BotCommandScope {
 
   factory BotCommandScope.fromJson(Map<String, dynamic> json) =>
       _$BotCommandScopeFromJson(json);
-  Map<String, dynamic> toJson() => _$BotCommandScopeToJson(this);
+
+  Map<String, dynamic> toJson();
 }
