@@ -27,18 +27,16 @@ part of '../model.dart';
 /// By default, the menu button opens the list of bot commands
 ///
 /// https://core.telegram.org/bots/api#menubutton
+
 @JsonSerializable(fieldRename: FieldRename.snake)
-abstract class MenuButton {
+class MenuButton {
   static const String typeCommands = 'commands';
   static const String typeWebApp = 'web_app';
   static const String typeDefault = 'default';
 
   String type;
-
   MenuButton({required this.type});
-
   factory MenuButton.fromJson(Map<String, dynamic> json) =>
       _$MenuButtonFromJson(json);
-
-  Map<String, dynamic> toJson();
+  Map<String, dynamic> toJson() => _$MenuButtonToJson(this);
 }

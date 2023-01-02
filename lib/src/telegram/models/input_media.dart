@@ -29,7 +29,7 @@ part of '../model.dart';
 ///
 /// https://core.telegram.org/bots/api#inputmedia
 @JsonSerializable(fieldRename: FieldRename.snake)
-abstract class InputMedia {
+class InputMedia {
   static const typeAnimation = 'animation';
   static const typeAudio = 'audio';
   static const typeDocument = 'document';
@@ -52,6 +52,5 @@ abstract class InputMedia {
 
   factory InputMedia.fromJson(Map<String, dynamic> json) =>
       _$InputMediaFromJson(json);
-
-  Map<String, dynamic> toJson();
+  Map<String, dynamic> toJson() => _$InputMediaToJson(this);
 }

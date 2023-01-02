@@ -33,7 +33,7 @@ part of '../model.dart';
 ///
 /// https://core.telegram.org/bots/api#passportelementerror
 @JsonSerializable(fieldRename: FieldRename.snake)
-abstract class PassportElementError {
+class PassportElementError {
   static const String typePersonalDetails = 'personal_details';
   static const String typePassport = 'passport';
   static const String typeDriverLicense = 'driver_license';
@@ -44,15 +44,12 @@ abstract class PassportElementError {
   String source;
   String type;
   String message;
-
   PassportElementError({
     required this.source,
     required this.type,
     required this.message,
   });
-
   factory PassportElementError.fromJson(Map<String, dynamic> json) =>
       _$PassportElementErrorFromJson(json);
-
-  Map<String, dynamic> toJson();
+  Map<String, dynamic> toJson() => _$PassportElementErrorToJson(this);
 }

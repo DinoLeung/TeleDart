@@ -29,9 +29,10 @@ part of '../model.dart';
 ///
 /// https://core.telegram.org/bots/api#inputmessagecontent
 @JsonSerializable(fieldRename: FieldRename.snake)
-abstract class InputMessageContent {
+// abstract class InputMessageContent {
+class InputMessageContent {
   InputMessageContent();
   factory InputMessageContent.fromJson(Map<String, dynamic> json) =>
       _$InputMessageContentFromJson(json);
-  Map<String, dynamic> toJson();
+  Map<String, dynamic> toJson() => _$InputMessageContentToJson(this);
 }
