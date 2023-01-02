@@ -23,23 +23,23 @@ part of '../model.dart';
 /// https://core.telegram.org/bots/api#messageentity
 @JsonSerializable(fieldRename: FieldRename.snake)
 class MessageEntity {
-  static const String typeMention = 'mention';
-  static const String typeHashtag = 'hashtag';
-  static const String typeCashtag = 'cashtag';
-  static const String typeBotCommand = 'bot_command';
-  static const String typeUrl = 'url';
-  static const String typeEmail = 'email';
-  static const String typePhoneNmber = 'phone_number';
-  static const String typeBold = 'bold';
-  static const String typeItalic = 'italic';
-  static const String typeUnderline = 'underline';
-  static const String typeStrikethrough = 'strikethrough';
-  static const String typeSpolier = 'spoiler';
-  static const String typeCode = 'code';
-  static const String typePre = 'pre';
-  static const String typeTextLink = 'text_link';
-  static const String typeTextMention = 'text_mention';
-  static const String typeCustomEmoji = 'custom_emoji';
+  static const typeMention = 'mention';
+  static const typeHashtag = 'hashtag';
+  static const typeCashtag = 'cashtag';
+  static const typeBotCommand = 'bot_command';
+  static const typeUrl = 'url';
+  static const typeEmail = 'email';
+  static const typePhoneNmber = 'phone_number';
+  static const typeBold = 'bold';
+  static const typeItalic = 'italic';
+  static const typeUnderline = 'underline';
+  static const typeStrikethrough = 'strikethrough';
+  static const typeSpolier = 'spoiler';
+  static const typeCode = 'code';
+  static const typePre = 'pre';
+  static const typeTextLink = 'text_link';
+  static const typeTextMention = 'text_mention';
+  static const typeCustomEmoji = 'custom_emoji';
 
   String type;
   int offset;

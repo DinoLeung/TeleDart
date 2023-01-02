@@ -26,8 +26,8 @@ part of '../model.dart';
 /// [sticker]: https://core.telegram.org/bots/api#sticker
 @JsonSerializable(fieldRename: FieldRename.snake)
 class Poll {
-  static const String typeRegular = 'regular';
-  static const String typeQuiz = 'quiz';
+  static const typeRegular = 'regular';
+  static const typeQuiz = 'quiz';
 
   String id;
   String question;

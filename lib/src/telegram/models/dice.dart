@@ -23,12 +23,12 @@ part of '../model.dart';
 /// https://core.telegram.org/bots/api#dice
 @JsonSerializable(fieldRename: FieldRename.snake)
 class Dice {
-  static const String emojiDice = '🎲';
-  static const String emojiDart = '🎯';
-  static const String emojiBowling = '🎳';
-  static const String emojiBasketball = '🏀';
-  static const String emojiFootball = '⚽';
-  static const String emojiSlotMachine = '🎰';
+  static const emojiDice = '🎲';
+  static const emojiDart = '🎯';
+  static const emojiBowling = '🎳';
+  static const emojiBasketball = '🏀';
+  static const emojiFootball = '⚽';
+  static const emojiSlotMachine = '🎰';
 
   int value;
   String emoji;

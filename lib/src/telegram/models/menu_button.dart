@@ -30,9 +30,9 @@ part of '../model.dart';
 
 @JsonSerializable(fieldRename: FieldRename.snake)
 class MenuButton {
-  static const String typeCommands = 'commands';
-  static const String typeWebApp = 'web_app';
-  static const String typeDefault = 'default';
+  static const typeCommands = 'commands';
+  static const typeWebApp = 'web_app';
+  static const typeDefault = 'default';
 
   String type;
   MenuButton({required this.type});
