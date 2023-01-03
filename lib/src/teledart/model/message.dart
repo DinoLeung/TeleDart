@@ -524,7 +524,7 @@ class TeleDartMessage extends Message {
   /// for more information about those options.**
   Future<Message> replyPoll(
     String question,
-    List<String> options,
+    List<String> options, {
     bool withQuote = false,
     bool? isAnonymous,
     String? type,
