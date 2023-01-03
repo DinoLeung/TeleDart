@@ -1,5 +1,9 @@
 ## 0.5.2
 
+- Fixed reply in topic bug
+
+## 0.5.2
+
 - Fixed typos in static constants
 - roll back 0.5.1 as abstract classes cannot be used with json_serializable
 

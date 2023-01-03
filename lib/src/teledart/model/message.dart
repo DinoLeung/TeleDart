@@ -119,7 +119,6 @@ class TeleDartMessage extends Message {
   /// for more information about those options.**
   Future<Message> reply(
     String text, {
-    int? messageThreadId,
     bool withQuote = false,
     String? parseMode,
     List<MessageEntity>? entities,
@@ -129,7 +128,7 @@ class TeleDartMessage extends Message {
     ReplyMarkup? replyMarkup,
   }) =>
       _teledart.sendMessage(chat.id, text,
-          messageThreadId: messageThreadId ?? this.messageThreadId,
+          messageThreadId: messageThreadId,
           parseMode: parseMode,
           entities: entities,
           disableWebPagePreview: disableWebPagePreview,
@@ -151,7 +150,6 @@ class TeleDartMessage extends Message {
   /// for more information about those options.**
   Future<Message> replyPhoto(
     dynamic photo, {
-    int? messageThreadId,
     bool withQuote = false,
     String? caption,
     String? parseMode,
@@ -162,7 +160,7 @@ class TeleDartMessage extends Message {
     ReplyMarkup? replyMarkup,
   }) =>
       _teledart.sendPhoto(chat.id, photo,
-          messageThreadId: messageThreadId ?? this.messageThreadId,
+          messageThreadId: messageThreadId,
           caption: caption,
           parseMode: parseMode,
           captionEntities: captionEntities,
@@ -185,7 +183,6 @@ class TeleDartMessage extends Message {
   /// for more information about those options.**
   Future<Message> replyAudio(
     dynamic audio, {
-    int? messageThreadId,
     bool withQuote = false,
     String? caption,
     String? parseMode,
@@ -199,7 +196,7 @@ class TeleDartMessage extends Message {
     ReplyMarkup? replyMarkup,
   }) =>
       _teledart.sendAudio(chat.id, audio,
-          messageThreadId: messageThreadId ?? this.messageThreadId,
+          messageThreadId: messageThreadId,
           caption: caption,
           parseMode: parseMode,
           captionEntities: captionEntities,
@@ -225,7 +222,6 @@ class TeleDartMessage extends Message {
   /// for more information about those options.**
   Future<Message> replyDocument(
     dynamic document, {
-    int? messageThreadId,
     bool withQuote = false,
     dynamic thumb,
     String? caption,
@@ -236,7 +232,7 @@ class TeleDartMessage extends Message {
     ReplyMarkup? replyMarkup,
   }) =>
       _teledart.sendDocument(chat.id, document,
-          messageThreadId: messageThreadId ?? this.messageThreadId,
+          messageThreadId: messageThreadId,
           thumb: thumb,
           caption: caption,
           parseMode: parseMode,
@@ -259,7 +255,6 @@ class TeleDartMessage extends Message {
   /// for more information about those options.**
   Future<Message> replyVideo(
     dynamic video, {
-    int? messageThreadId,
     bool withQuote = false,
     int? duration,
     int? width,
@@ -275,7 +270,7 @@ class TeleDartMessage extends Message {
     ReplyMarkup? replyMarkup,
   }) =>
       _teledart.sendVideo(chat.id, video,
-          messageThreadId: messageThreadId ?? this.messageThreadId,
+          messageThreadId: messageThreadId,
           duration: duration,
           width: width,
           height: height,
@@ -303,7 +298,6 @@ class TeleDartMessage extends Message {
   /// for more information about those options.**
   Future<Message> replyAnimation(
     dynamic animation, {
-    int? messageThreadId,
     bool withQuote = false,
     int? duration,
     int? width,
@@ -318,7 +312,7 @@ class TeleDartMessage extends Message {
     ReplyMarkup? replyMarkup,
   }) =>
       _teledart.sendAnimation(chat.id, animation,
-          messageThreadId: messageThreadId ?? this.messageThreadId,
+          messageThreadId: messageThreadId,
           duration: duration,
           width: width,
           height: height,
@@ -345,7 +339,6 @@ class TeleDartMessage extends Message {
   /// for more information about those options.**
   Future<Message> replyVoice(
     dynamic voice, {
-    int? messageThreadId,
     bool withQuote = false,
     String? caption,
     String? parseMode,
@@ -355,7 +348,7 @@ class TeleDartMessage extends Message {
     ReplyMarkup? replyMarkup,
   }) =>
       _teledart.sendVoice(chat.id, voice,
-          messageThreadId: messageThreadId ?? this.messageThreadId,
+          messageThreadId: messageThreadId,
           caption: caption,
           parseMode: parseMode,
           captionEntities: captionEntities,
@@ -377,7 +370,6 @@ class TeleDartMessage extends Message {
   /// for more information about those options.**
   Future<Message> replyVideoNote(
     dynamic videoNote, {
-    int? messageThreadId,
     bool withQuote = false,
     int? duration,
     int? length,
@@ -387,7 +379,7 @@ class TeleDartMessage extends Message {
     ReplyMarkup? replyMarkup,
   }) =>
       _teledart.sendVideoNote(chat.id, videoNote,
-          messageThreadId: messageThreadId ?? this.messageThreadId,
+          messageThreadId: messageThreadId,
           duration: duration,
           length: length,
           thumb: thumb,
@@ -409,13 +401,12 @@ class TeleDartMessage extends Message {
   /// for more information about those options.**
   Future<List<Message>> replyMediaGroup(
     List<InputMedia> media, {
-    int? messageThreadId,
     bool withQuote = false,
     bool? disableNotification,
     bool? allowSendingWithoutReply,
   }) =>
       _teledart.sendMediaGroup(chat.id, media,
-          messageThreadId: messageThreadId ?? this.messageThreadId,
+          messageThreadId: messageThreadId,
           disableNotification: disableNotification,
           replyToMessageId: withQuote ? messageId : null,
           allowSendingWithoutReply: allowSendingWithoutReply);
@@ -434,7 +425,6 @@ class TeleDartMessage extends Message {
   Future<Message> replyLocation(
     double latitude,
     double longitude, {
-    int? messageThreadId,
     bool withQuote = false,
     double? horizontalAccuracy,
     int? livePeriod,
@@ -445,7 +435,7 @@ class TeleDartMessage extends Message {
     ReplyMarkup? replyMarkup,
   }) =>
       _teledart.sendLocation(chat.id, latitude, longitude,
-          messageThreadId: messageThreadId ?? this.messageThreadId,
+          messageThreadId: messageThreadId,
           horizontalAccuracy: horizontalAccuracy,
           livePeriod: livePeriod,
           heading: heading,
@@ -471,7 +461,6 @@ class TeleDartMessage extends Message {
     double longitude,
     String title,
     String address, {
-    int? messageThreadId,
     bool withQuote = false,
     String? foursquareId,
     String? foursquareType,
@@ -482,7 +471,7 @@ class TeleDartMessage extends Message {
     ReplyMarkup? replyMarkup,
   }) =>
       _teledart.sendVenue(chat.id, latitude, longitude, title, address,
-          messageThreadId: messageThreadId ?? this.messageThreadId,
+          messageThreadId: messageThreadId,
           foursquareId: foursquareId,
           foursquareType: foursquareType,
           googlePlaceId: googlePlaceId,
@@ -506,7 +495,6 @@ class TeleDartMessage extends Message {
   Future<Message> replyContact(
     String phoneNumber,
     String firstName, {
-    int? messageThreadId,
     bool withQuote = false,
     String? lastName,
     String? vcard,
@@ -515,7 +503,7 @@ class TeleDartMessage extends Message {
     ReplyMarkup? replyMarkup,
   }) =>
       _teledart.sendContact(chat.id, phoneNumber, firstName,
-          messageThreadId: messageThreadId ?? this.messageThreadId,
+          messageThreadId: messageThreadId,
           lastName: lastName,
           vcard: vcard,
           disableNotification: disableNotification,
@@ -536,8 +524,7 @@ class TeleDartMessage extends Message {
   /// for more information about those options.**
   Future<Message> replyPoll(
     String question,
-    List<String> options, {
-    int? messageThreadId,
+    List<String> options,
     bool withQuote = false,
     bool? isAnonymous,
     String? type,
@@ -554,7 +541,7 @@ class TeleDartMessage extends Message {
     ReplyMarkup? replyMarkup,
   }) =>
       _teledart.sendPoll(chat.id, question, options,
-          messageThreadId: messageThreadId ?? this.messageThreadId,
+          messageThreadId: messageThreadId,
           isAnonymous: isAnonymous,
           type: type,
           allowsMultipleAnswers: allowsMultipleAnswers,
@@ -613,7 +600,6 @@ class TeleDartMessage extends Message {
     String providerToken,
     String currency,
     List<LabeledPrice> prices, {
-    int? messageThreadId,
     bool withQuote = false,
     int? maxTipAmount,
     List<int>? suggestedTipAmounts,
@@ -637,7 +623,7 @@ class TeleDartMessage extends Message {
   }) =>
       _teledart.sendInvoice(
           chat.id, title, description, payload, providerToken, currency, prices,
-          messageThreadId: messageThreadId ?? this.messageThreadId,
+          messageThreadId: messageThreadId,
           maxTipAmount: maxTipAmount,
           suggestedTipAmounts: suggestedTipAmounts,
           startParameter: startParameter,
@@ -670,7 +656,6 @@ class TeleDartMessage extends Message {
   /// for more information about those options.**
   Future<Message> replyGame(
     String gameShortName, {
-    int? messageThreadId,
     bool withQuote = false,
     bool? disableNotification,
     bool? protectContent,
@@ -678,7 +663,7 @@ class TeleDartMessage extends Message {
     InlineKeyboardMarkup? replyMarkup,
   }) =>
       _teledart.sendGame(chat.id, gameShortName,
-          messageThreadId: messageThreadId ?? this.messageThreadId,
+          messageThreadId: messageThreadId,
           disableNotification: disableNotification,
           protectContent: protectContent,
           replyToMessageId: withQuote ? messageId : null,
@@ -698,14 +683,13 @@ class TeleDartMessage extends Message {
   /// for more information about those options.**
   Future<Message> replySticker(
     dynamic sticker, {
-    int? messageThreadId,
     bool withQuote = false,
     bool? disableNotification,
     bool? allowSendingWithoutReply,
     ReplyMarkup? replyMarkup,
   }) =>
       _teledart.sendSticker(chat.id, sticker,
-          messageThreadId: messageThreadId ?? this.messageThreadId,
+          messageThreadId: messageThreadId,
           disableNotification: disableNotification,
           replyToMessageId: withQuote ? messageId : null,
           allowSendingWithoutReply: allowSendingWithoutReply,
