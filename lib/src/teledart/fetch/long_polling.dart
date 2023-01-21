@@ -107,7 +107,7 @@ class LongPolling extends AbstractUpdateFetcher {
     return Future.value();
   }
 
-  void _onRecursivePollingHttpError(HttpClientException error) async {
+  Future<void> _onRecursivePollingHttpError(HttpClientException error) async {
     if (error.code != 429 && error.isHttpClientError()) {
       _isPolling = false;
       throw LongPollingException(error.toString());
