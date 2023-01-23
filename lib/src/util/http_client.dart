@@ -38,8 +38,8 @@ class HttpClient {
         if (responseBody['ok']) {
           return responseBody['result'];
         } else {
-          return Future.error(HttpClientException(
-              responseBody['error_code'], responseBody['description']));
+          return Future.error(HttpClientException(responseBody['error_code'],
+              responseBody['description'], response.headers));
         }
       }).catchError((error) => Future.error(error));
 
@@ -55,8 +55,8 @@ class HttpClient {
       if (responseBody['ok']) {
         return responseBody['result'];
       } else {
-        return Future.error(HttpClientException(
-            responseBody['error_code'], responseBody['description']));
+        return Future.error(HttpClientException(responseBody['error_code'],
+            responseBody['description'], response.headers));
       }
     }).catchError((error) => Future.error(error));
   }
@@ -81,8 +81,8 @@ class HttpClient {
       if (responseBody['ok']) {
         return responseBody['result'];
       } else {
-        return Future.error(HttpClientException(
-            responseBody['error_code'], responseBody['description']));
+        return Future.error(HttpClientException(responseBody['error_code'],
+            responseBody['description'], response.headers));
       }
     }).catchError((error) => Future.error(error));
   }
@@ -91,7 +91,8 @@ class HttpClient {
 class HttpClientException implements Exception {
   int code;
   String description;
-  HttpClientException(this.code, this.description);
+  Map<String, String> headers;
+  HttpClientException(this.code, this.description, this.headers);
   bool isHttpClientError() => code >= 400 && code < 500;
   @override
   String toString() => 'HttpClientException: $code $description';

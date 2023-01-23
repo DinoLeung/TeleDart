@@ -114,11 +114,49 @@ class LongPolling extends AbstractUpdateFetcher {
     } else {
       // Too many requests (awaiting 5 seconds)
       if (error.code == 429) {
-        await Future.delayed(const Duration(seconds: 5));
+        await _onTooManyRequestHttpError(error);
       }
 
       _onRecursivePollingError(error);
     }
+  }
+
+  Future<void> _onTooManyRequestHttpError(HttpClientException error) async {
+    // https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429
+    // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Retry-After
+
+    final defaultWait = const Duration(milliseconds: 2500);
+    final matchingHeaders = error.headers.entries
+        .where((item) => item.key.toLowerCase().trim() == 'retry-after');
+
+    // [1]: No retry-after header (Default wait to 2500 ms)
+    if (matchingHeaders.isEmpty) {
+      return Future.delayed(defaultWait);
+    }
+
+    final retryAfter = matchingHeaders.first.value;
+
+    // [2]: Datetime mode
+    final retryAfterDatetime = DateTime.tryParse(retryAfter);
+    if (retryAfterDatetime != null) {
+      final diff = retryAfterDatetime.difference(DateTime.now());
+
+      // No need to wait
+      if (diff.isNegative) {
+        return;
+      }
+
+      return Future.delayed(diff);
+    }
+
+    // [3]: Seconds mode
+    final retryAfterSeconds = int.tryParse(retryAfter);
+    if (retryAfterSeconds != null) {
+      return Future.delayed(Duration(seconds: retryAfterSeconds));
+    }
+
+    // [4]: Bad retry-after value
+    return Future.delayed(defaultWait);
   }
 
   void _onRecursivePollingError(Object error) {
