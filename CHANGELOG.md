@@ -1,3 +1,8 @@
+## unreleased
+
+- Implemented Telegram bot API response object
+- Update long_polling.dart to respect `retry_after` in error response.
+
 ## 0.5.3
 
 - Fixed reply in topic bug
