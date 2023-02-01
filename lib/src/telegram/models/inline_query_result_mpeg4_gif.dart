@@ -62,7 +62,7 @@ class InlineQueryResultMpeg4Gif implements InlineQueryResult {
     this.inputMessageContent,
   });
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: true)
   Duration? get mpeg4Duration_ =>
       mpeg4Duration == null ? null : TimeHelper.toDuration(mpeg4Duration!);
   set mpeg4Duration_(Duration? duration) =>

@@ -165,17 +165,17 @@ class Message {
     this.replyMarkup,
   });
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: true)
   DateTime get date_ => TimeHelper.toDateTime(date);
   set date_(DateTime dateTime) => date = TimeHelper.toUnixTime(dateTime);
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: true)
   DateTime? get forwardDate_ =>
       forwardDate == null ? null : TimeHelper.toDateTime(forwardDate!);
   set forwardDate_(DateTime? dateTime) =>
       forwardDate = dateTime == null ? null : TimeHelper.toUnixTime(dateTime);
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: true)
   DateTime? get editDate_ =>
       editDate == null ? null : TimeHelper.toDateTime(editDate!);
   set editDate_(DateTime? dateTime) =>

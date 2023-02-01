@@ -38,7 +38,7 @@ class ChatMemberBanned implements ChatMember {
     required this.untilDate,
   });
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: true)
   DateTime get untilDate_ => TimeHelper.toDateTime(untilDate);
   set untilDate_(DateTime dateTime) =>
       untilDate = TimeHelper.toUnixTime(dateTime);

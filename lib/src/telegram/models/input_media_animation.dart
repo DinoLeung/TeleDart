@@ -51,7 +51,7 @@ class InputMediaAnimation implements InputMedia {
       this.duration,
       this.hasSpoiler});
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: true)
   Duration? get duration_ =>
       duration == null ? null : TimeHelper.toDuration(duration!);
   set duration_(Duration? duration) =>

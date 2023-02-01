@@ -67,7 +67,7 @@ class InlineQueryResultVideo implements InlineQueryResult {
     this.inputMessageContent,
   });
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: true)
   Duration? get videoDuration_ =>
       videoDuration == null ? null : TimeHelper.toDuration(videoDuration!);
   set videoDuration_(Duration? duration) =>

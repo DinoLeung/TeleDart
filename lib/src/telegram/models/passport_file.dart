@@ -37,7 +37,7 @@ class PassportFile {
     required this.fileDate,
   });
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: true)
   DateTime get fileDate_ => TimeHelper.toDateTime(fileDate);
   set fileDate_(DateTime dateTime) =>
       fileDate = TimeHelper.toUnixTime(dateTime);

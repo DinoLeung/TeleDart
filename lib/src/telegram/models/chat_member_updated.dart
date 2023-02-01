@@ -38,7 +38,7 @@ class ChatMemberUpdated {
     this.inviteLink,
   });
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: true)
   DateTime? get date_ => date == null ? null : TimeHelper.toDateTime(date!);
   set date_(DateTime? dateTime) =>
       date = dateTime == null ? null : TimeHelper.toUnixTime(dateTime);

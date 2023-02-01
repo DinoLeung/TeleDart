@@ -41,7 +41,7 @@ class InputLocationMessageContent implements InputMessageContent {
     this.proximityAlertRadius,
   });
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: true)
   Duration? get livePeriod_ =>
       livePeriod == null ? null : TimeHelper.toDuration(livePeriod!);
   set livePeriod_(Duration? duration) =>

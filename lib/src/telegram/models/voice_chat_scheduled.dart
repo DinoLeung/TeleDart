@@ -27,7 +27,7 @@ class VoiceChatScheduled {
 
   VoiceChatScheduled(this.startDate);
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: true)
   DateTime get startDate_ => TimeHelper.toDateTime(startDate);
   set startDate_(DateTime dateTime) =>
       startDate = TimeHelper.toUnixTime(dateTime);
