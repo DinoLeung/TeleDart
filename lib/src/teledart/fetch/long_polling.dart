@@ -122,7 +122,7 @@ class LongPolling extends AbstractUpdateFetcher {
   void _onRecursivePollingError(HttpClientException error) {
     retryDelay = error.parameters?.retryAfter_ ?? retryDelay;
     print('${DateTime.now()} $error');
-    print('Retrying in ${retryDelay.inMinutes} minute(s)...');
+    print('Retrying in ${retryDelay.inSeconds} second(s)...');
     _delayRetry();
     _doubleRetryDelay();
     _recursivePolling();

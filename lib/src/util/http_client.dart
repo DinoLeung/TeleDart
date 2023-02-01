@@ -38,7 +38,7 @@ class HttpClient {
     Map<String, dynamic> jsonBody = jsonDecode(response.body);
     Response responseBody = Response.fromJson(jsonBody);
     if (responseBody.ok) {
-      return SuccessResponse.fromJson(jsonBody).result;
+      return Future.value(SuccessResponse.fromJson(jsonBody).result);
     } else {
       ErrorResponse errorResponse = ErrorResponse.fromJson(jsonBody);
       return Future.error(HttpClientException(errorResponse.errorCode,
