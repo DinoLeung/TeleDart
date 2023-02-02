@@ -110,6 +110,7 @@ class LongPolling extends AbstractUpdateFetcher {
 
   void _onRecursivePollingHttpError(HttpClientException error) {
     if (error.isTooManyRequests()) {
+      retryDelay = error.parameters?.retryAfter_ ?? retryDelay;
       _onRecursivePollingError(error);
     } else if (error.isHttpClientError()) {
       _isPolling = false;
@@ -119,8 +120,8 @@ class LongPolling extends AbstractUpdateFetcher {
     }
   }
 
-  void _onRecursivePollingError(HttpClientException error) {
-    retryDelay = error.parameters?.retryAfter_ ?? retryDelay;
+  void _onRecursivePollingError(Object error) {
+    // `error` should be `Error` or `Exception` type
     print('${DateTime.now()} $error');
     print('Retrying in ${retryDelay.inSeconds} second(s)...');
     _delayRetry();
