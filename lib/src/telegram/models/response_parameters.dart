@@ -31,7 +31,7 @@ class ResponseParameters {
     this.retryAfter,
   });
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   Duration? get retryAfter_ =>
       retryAfter == null ? null : TimeHelper.toDuration(retryAfter!);
   set retryAfter_(Duration? duration) =>

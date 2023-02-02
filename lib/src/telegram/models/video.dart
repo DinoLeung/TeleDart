@@ -45,7 +45,7 @@ class Video {
     this.fileSize,
   });
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   Duration get duration_ => TimeHelper.toDuration(duration);
   set duration_(Duration duration) =>
       this.duration = TimeHelper.toSeconds(duration);

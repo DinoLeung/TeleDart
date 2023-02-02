@@ -60,13 +60,13 @@ class Poll {
   factory Poll.fromJson(Map<String, dynamic> json) => _$PollFromJson(json);
   Map<String, dynamic> toJson() => _$PollToJson(this);
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   Duration? get openPeriod_ =>
       openPeriod == null ? null : TimeHelper.toDuration(openPeriod!);
   set openPeriod_(Duration? duration) =>
       openPeriod = duration == null ? null : TimeHelper.toSeconds(duration);
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   DateTime? get closeDate_ =>
       closeDate == null ? null : TimeHelper.toDateTime(closeDate!);
   set closeDate_(DateTime? dateTime) =>

@@ -57,7 +57,7 @@ class InlineQueryResultVoice implements InlineQueryResult {
     this.inputMessageContent,
   });
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   Duration? get voiceDuration_ =>
       voiceDuration == null ? null : TimeHelper.toDuration(voiceDuration!);
   set voiceDuration_(Duration? duration) =>

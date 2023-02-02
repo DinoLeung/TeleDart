@@ -1,3 +1,9 @@
+## 0.5.4
+
+- Implemented Telegram bot API response object
+- Updated long_polling.dart to respect `retry_after` in error response
+- Fixed json_serializable deprecation
+
 ## 0.5.3
 
 - Fixed reply in topic bug
@@ -5,7 +11,7 @@
 ## 0.5.2
 
 - Fixed typos in static constants
-- roll back 0.5.1 as abstract classes cannot be used with json_serializable
+- Rolled back 0.5.1 as abstract classes cannot be used with json_serializable
 
 ## 0.5.1
 

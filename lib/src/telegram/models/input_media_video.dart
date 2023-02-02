@@ -54,7 +54,7 @@ class InputMediaVideo implements InputMedia {
     this.hasSpoiler,
   });
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   Duration? get duration_ =>
       duration == null ? null : TimeHelper.toDuration(duration!);
   set duration_(Duration? duration) =>

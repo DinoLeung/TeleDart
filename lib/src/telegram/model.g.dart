@@ -3540,6 +3540,52 @@ Map<String, dynamic> _$ResponseParametersToJson(ResponseParameters instance) {
   return val;
 }
 
+Response _$ResponseFromJson(Map<String, dynamic> json) => Response(
+      ok: json['ok'] as bool,
+    );
+
+Map<String, dynamic> _$ResponseToJson(Response instance) => <String, dynamic>{
+      'ok': instance.ok,
+    };
+
+SuccessResponse _$SuccessResponseFromJson(Map<String, dynamic> json) =>
+    SuccessResponse(
+      ok: json['ok'] as bool,
+      result: json['result'],
+    );
+
+Map<String, dynamic> _$SuccessResponseToJson(SuccessResponse instance) {
+  final val = <String, dynamic>{
+    'ok': instance.ok,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('result', instance.result);
+  return val;
+}
+
+ErrorResponse _$ErrorResponseFromJson(Map<String, dynamic> json) =>
+    ErrorResponse(
+      ok: json['ok'] as bool,
+      description: json['description'] as String,
+      errorCode: json['error_code'] as int,
+      parameters: ResponseParameters.fromJson(
+          json['parameters'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$ErrorResponseToJson(ErrorResponse instance) =>
+    <String, dynamic>{
+      'ok': instance.ok,
+      'description': instance.description,
+      'error_code': instance.errorCode,
+      'parameters': instance.parameters.toJson(),
+    };
+
 SentWebAppMessage _$SentWebAppMessageFromJson(Map<String, dynamic> json) =>
     SentWebAppMessage(
       inlineMessageId: json['inline_message_id'] as String?,

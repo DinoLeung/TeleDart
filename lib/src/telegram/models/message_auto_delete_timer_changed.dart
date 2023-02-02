@@ -27,7 +27,7 @@ class MessageAutoDeleteTimerChanged {
 
   MessageAutoDeleteTimerChanged({required this.messageAutoDeleteTime});
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   Duration get messageAutoDeleteTime_ =>
       TimeHelper.toDuration(messageAutoDeleteTime);
   set messageAutoDeleteTime_(Duration duration) =>

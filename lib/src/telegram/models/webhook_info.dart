@@ -45,7 +45,7 @@ class WebhookInfo {
     this.allowedUpdates,
   });
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   DateTime? get lastErrorDate_ =>
       lastErrorDate == null ? null : TimeHelper.toDateTime(lastErrorDate!);
   set lastErrorDate_(DateTime? dateTime) =>
