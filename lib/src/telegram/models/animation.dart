@@ -45,7 +45,7 @@ class Animation {
     this.fileSize,
   });
 
-  @JsonKey(includeFromJson: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   Duration get duration_ => TimeHelper.toDuration(duration);
   set duration_(Duration duration) =>
       this.duration = TimeHelper.toSeconds(duration);

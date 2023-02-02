@@ -64,7 +64,7 @@ class InlineQueryResultLocation implements InlineQueryResult {
     this.thumbHeight,
   });
 
-  @JsonKey(includeFromJson: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   Duration? get livePeriod_ =>
       livePeriod == null ? null : TimeHelper.toDuration(livePeriod!);
   set livePeriod_(Duration? duration) =>

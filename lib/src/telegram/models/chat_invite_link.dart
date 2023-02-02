@@ -45,7 +45,7 @@ class ChatInviteLink {
     this.pendingJoinRequestCount,
   });
 
-  @JsonKey(includeFromJson: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   DateTime? get expireDate_ =>
       expireDate == null ? null : TimeHelper.toDateTime(expireDate!);
   set expireDate_(DateTime? dateTime) =>

@@ -61,7 +61,7 @@ class InlineQueryResultGif implements InlineQueryResult {
     this.inputMessageContent,
   });
 
-  @JsonKey(includeFromJson: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   Duration? get gifDuration_ =>
       gifDuration == null ? null : TimeHelper.toDuration(gifDuration!);
   set gifDuration_(Duration? duration) =>
