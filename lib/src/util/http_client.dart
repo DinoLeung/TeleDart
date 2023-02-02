@@ -22,6 +22,8 @@ import 'dart:io' as io;
 
 import 'package:http/http.dart' as http;
 
+import '../../model.dart';
+
 /// An internal helper class for easier http request management
 class HttpClient {
   static bool _nullFilter(_, value) => value == null;
@@ -30,18 +32,26 @@ class HttpClient {
       http.MultipartFile(fieldName, file.openRead(), file.lengthSync(),
           filename: file.path.split(io.Platform.pathSeparator).last);
 
+  /// Parse http response
+  /// [response] - http response
+  static Future<dynamic> _parseResponse(http.Response response) {
+    Map<String, dynamic> jsonBody = jsonDecode(response.body);
+    Response responseBody = Response.fromJson(jsonBody);
+    if (responseBody.ok) {
+      return Future.value(SuccessResponse.fromJson(jsonBody).result);
+    } else {
+      ErrorResponse errorResponse = ErrorResponse.fromJson(jsonBody);
+      return Future.error(HttpClientException(errorResponse.errorCode,
+          errorResponse.description, errorResponse.parameters));
+    }
+  }
+
   /// HTTP get method
   /// [url] request url with query string (required)
-  static Future<dynamic> httpGet(Uri url) async =>
-      http.get(url).then((response) {
-        Map<String, dynamic> responseBody = jsonDecode(response.body);
-        if (responseBody['ok']) {
-          return responseBody['result'];
-        } else {
-          return Future.error(HttpClientException(
-              responseBody['error_code'], responseBody['description']));
-        }
-      }).catchError((error) => Future.error(error));
+  static Future<dynamic> httpGet(Uri url) async => http
+      .get(url)
+      .then(_parseResponse)
+      .catchError((error) => Future.error(error));
 
   /// HTTP post method (x-www-form-urlencoded)
   /// [url] - request url (required)
@@ -50,15 +60,8 @@ class HttpClient {
     body?.removeWhere(_nullFilter);
     return http
         .post(url, body: body?.map((k, v) => MapEntry(k, '$v')))
-        .then((response) {
-      Map<String, dynamic> responseBody = jsonDecode(response.body);
-      if (responseBody['ok']) {
-        return responseBody['result'];
-      } else {
-        return Future.error(HttpClientException(
-            responseBody['error_code'], responseBody['description']));
-      }
-    }).catchError((error) => Future.error(error));
+        .then(_parseResponse)
+        .catchError((error) => Future.error(error));
   }
 
   /// HTTP post method (multipart/form-data)
@@ -76,23 +79,18 @@ class HttpClient {
     return request
         .send()
         .then((response) => http.Response.fromStream(response))
-        .then((response) {
-      Map<String, dynamic> responseBody = jsonDecode(response.body);
-      if (responseBody['ok']) {
-        return responseBody['result'];
-      } else {
-        return Future.error(HttpClientException(
-            responseBody['error_code'], responseBody['description']));
-      }
-    }).catchError((error) => Future.error(error));
+        .then(_parseResponse)
+        .catchError((error) => Future.error(error));
   }
 }
 
 class HttpClientException implements Exception {
   int code;
   String description;
-  HttpClientException(this.code, this.description);
+  ResponseParameters? parameters;
+  HttpClientException(this.code, this.description, this.parameters);
   bool isHttpClientError() => code >= 400 && code < 500;
+  bool isTooManyRequests() => code == 429;
   @override
   String toString() => 'HttpClientException: $code $description';
 }

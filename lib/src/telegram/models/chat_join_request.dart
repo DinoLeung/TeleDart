@@ -37,7 +37,7 @@ class ChatJoinRequest {
     this.inviteLink,
   });
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   DateTime get date_ => TimeHelper.toDateTime(date);
   set date_(DateTime dateTime) => date = TimeHelper.toUnixTime(dateTime);
 

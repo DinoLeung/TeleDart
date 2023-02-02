@@ -31,6 +31,7 @@ class LongPolling extends AbstractUpdateFetcher {
   final Telegram telegram;
 
   final maxTimeout = 50;
+  final defaultRetryDelay = Duration(seconds: 5);
 
   int offset;
   int limit;
@@ -40,7 +41,7 @@ class LongPolling extends AbstractUpdateFetcher {
   bool _isPolling = false;
   bool get isPolling => _isPolling;
 
-  Duration retryDelay = Duration(minutes: 1);
+  Duration retryDelay = Duration(seconds: 5);
 
   /// Setup long polling
   ///
@@ -108,7 +109,10 @@ class LongPolling extends AbstractUpdateFetcher {
   }
 
   void _onRecursivePollingHttpError(HttpClientException error) {
-    if (error.isHttpClientError()) {
+    if (error.isTooManyRequests()) {
+      retryDelay = error.parameters?.retryAfter_ ?? retryDelay;
+      _onRecursivePollingError(error);
+    } else if (error.isHttpClientError()) {
       _isPolling = false;
       throw LongPollingException(error.toString());
     } else {
@@ -117,14 +121,15 @@ class LongPolling extends AbstractUpdateFetcher {
   }
 
   void _onRecursivePollingError(Object error) {
+    // `error` should be `Error` or `Exception` type
     print('${DateTime.now()} $error');
-    print('Retrying in ${retryDelay.inMinutes} minute(s)...');
+    print('Retrying in ${retryDelay.inSeconds} second(s)...');
     _delayRetry();
     _doubleRetryDelay();
     _recursivePolling();
   }
 
-  void _resetRetryDelay() => retryDelay = Duration(minutes: 1);
+  void _resetRetryDelay() => retryDelay = defaultRetryDelay;
   void _doubleRetryDelay() => retryDelay *= 2;
   void _delayRetry() => sleep(retryDelay);
 }
