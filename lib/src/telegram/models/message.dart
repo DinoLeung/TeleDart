@@ -212,4 +212,13 @@ class Message {
       return null;
     }
   }
+
+  @override
+  bool operator ==(Object other) =>
+      other is Message &&
+      chat.id == other.chat.id &&
+      messageId == other.messageId;
+
+  @override
+  int get hashCode => '${chat.id}$messageId'.hashCode;
 }
