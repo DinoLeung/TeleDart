@@ -65,7 +65,7 @@ class ErrorResponse {
   bool ok;
   String description;
   int errorCode;
-  ResponseParameters parameters;
+  ResponseParameters? parameters;
 
   ErrorResponse({
     required this.ok,

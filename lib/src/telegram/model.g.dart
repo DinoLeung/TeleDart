@@ -3574,8 +3574,10 @@ ErrorResponse _$ErrorResponseFromJson(Map<String, dynamic> json) =>
       ok: json['ok'] as bool,
       description: json['description'] as String,
       errorCode: json['error_code'] as int,
-      parameters: ResponseParameters.fromJson(
-          json['parameters'] as Map<String, dynamic>),
+      parameters: json['parameters'] == null
+          ? null
+          : ResponseParameters.fromJson(
+              json['parameters'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$ErrorResponseToJson(ErrorResponse instance) =>
@@ -3583,7 +3585,7 @@ Map<String, dynamic> _$ErrorResponseToJson(ErrorResponse instance) =>
       'ok': instance.ok,
       'description': instance.description,
       'error_code': instance.errorCode,
-      'parameters': instance.parameters.toJson(),
+      'parameters': instance.parameters?.toJson(),
     };
 
 SentWebAppMessage _$SentWebAppMessageFromJson(Map<String, dynamic> json) =>
