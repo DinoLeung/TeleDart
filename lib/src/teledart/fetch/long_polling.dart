@@ -108,9 +108,17 @@ class LongPolling extends AbstractUpdateFetcher {
     return Future.value();
   }
 
-  void _onRecursivePollingHttpError(HttpClientException error) {
+  Future<void> _onRecursivePollingHttpError(HttpClientException error) async {
     if (error.isTooManyRequests()) {
       retryDelay = error.parameters?.retryAfter_ ?? retryDelay;
+      _onRecursivePollingError(error);
+    } else if (error.code == 409) {
+      print(
+          'Teledart -- _onRecursivePollingHttpError() -- 409 error -- $error');
+
+      // 5 seconds delay
+      await Future.delayed(const Duration(seconds: 5));
+
       _onRecursivePollingError(error);
     } else if (error.isHttpClientError()) {
       _isPolling = false;
