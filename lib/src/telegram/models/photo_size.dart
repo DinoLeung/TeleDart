@@ -41,4 +41,14 @@ class PhotoSize {
   factory PhotoSize.fromJson(Map<String, dynamic> json) =>
       _$PhotoSizeFromJson(json);
   Map<String, dynamic> toJson() => _$PhotoSizeToJson(this);
+
+  @override
+  String toString() => '''PhotoSize
+
+fileId: $fileId
+fileUniqueId: $fileUniqueId
+width: $width
+height: $height
+fileSize: $fileSize
+''';
 }

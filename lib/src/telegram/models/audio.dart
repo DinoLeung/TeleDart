@@ -52,4 +52,18 @@ class Audio {
 
   factory Audio.fromJson(Map<String, dynamic> json) => _$AudioFromJson(json);
   Map<String, dynamic> toJson() => _$AudioToJson(this);
+
+  @override
+  String toString() => '''Audio
+
+fileId: $fileId
+fileUniqueId: $fileUniqueId
+duration: $duration
+performer: $performer
+title: $title
+fileName: $fileName
+mimeType: $mimeType
+fileSize: $fileSize
+thumb: $thumb
+''';
 }
