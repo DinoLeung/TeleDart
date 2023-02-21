@@ -48,4 +48,13 @@ class File {
 
   factory File.fromJson(Map<String, dynamic> json) => _$FileFromJson(json);
   Map<String, dynamic> toJson() => _$FileToJson(this);
+
+  @override
+  String toString() => '''Voice
+
+fileId: $fileId
+fileUniqueId: $fileUniqueId
+fileSize: $fileSize
+filePath: $filePath
+''';
 }
