@@ -38,4 +38,14 @@ class Contact {
   factory Contact.fromJson(Map<String, dynamic> json) =>
       _$ContactFromJson(json);
   Map<String, dynamic> toJson() => _$ContactToJson(this);
+
+  @override
+  String toString() => '''Contact
+
+phoneNumber: $phoneNumber
+firstName: $firstName
+lastName: $lastName
+userId: $userId
+vcard: $vcard
+''';
 }

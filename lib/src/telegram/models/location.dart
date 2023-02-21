@@ -40,4 +40,15 @@ class Location {
   factory Location.fromJson(Map<String, dynamic> json) =>
       _$LocationFromJson(json);
   Map<String, dynamic> toJson() => _$LocationToJson(this);
+
+  @override
+  String toString() => '''Location
+
+longitude: $longitude
+latitude: $latitude
+horizontalAccuracy: $horizontalAccuracy
+livePeriod: $livePeriod
+heading: $heading
+proximityAlertRadius: $proximityAlertRadius
+''';
 }

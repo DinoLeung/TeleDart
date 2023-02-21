@@ -44,4 +44,14 @@ class Voice {
 
   factory Voice.fromJson(Map<String, dynamic> json) => _$VoiceFromJson(json);
   Map<String, dynamic> toJson() => _$VoiceToJson(this);
+
+  @override
+  String toString() => '''Voice
+
+fileId: $fileId
+fileUniqueId: $fileUniqueId
+duration: $duration
+mimeType: $mimeType
+fileSize: $fileSize
+''';
 }
