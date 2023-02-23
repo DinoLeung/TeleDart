@@ -31,3 +31,4 @@ export 'src/teledart/event/event.dart';
 export 'src/teledart/fetch/abstract_update_fetcher.dart';
 export 'src/teledart/fetch/long_polling.dart';
 export 'src/teledart/fetch/webhook.dart';
+export 'src/util/http_client.dart';
