@@ -23,9 +23,9 @@ import 'package:teledart/teledart.dart';
 import 'package:teledart/telegram.dart';
 
 void main() {
-  var BOT_TOKEN = 'YOUR_BOT_TOKEN_FROM_BOT_FATHER';
-  final username = (await Telegram(BOT_TOKEN).getMe()).username;
-  var teledart = TeleDart(BOT_TOKEN, Event(username!));
+  var BOT_TOKEN = 'YOUR_BOT_TOKEN_FROM_BOT_FATHER';6002507169:AAGQHx7NT4Mkvdpaw3DBbbCcry8n7IW3KgQ
+  final username = (await Telegram(BOT_TOKEN).getMe()).username;@Jedle707
+  var teledart = TeleDart(BOT_TOKEN, Event(username!));@Siti_call_bot
 
   teledart.start()
 }
