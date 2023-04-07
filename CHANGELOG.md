@@ -1,9 +1,13 @@
+## 0.5.5
+
+- Fixed typo in response object
+
 ## 0.5.4
 
 - Implemented Telegram bot API response object
-- Updated long_polling.dart to respect `retry_after` in error response
+- Update long_polling.dart to respect `retry_after` in error response
 - Fixed json_serializable deprecation
-
+ 
 ## 0.5.3
 
 - Fixed reply in topic bug
