@@ -1,3 +1,7 @@
+## 0.5.6
+
+- Export util classes, so users can catch http client exceptions
+
 ## 0.5.5
 
 - Fixed typo in response object
