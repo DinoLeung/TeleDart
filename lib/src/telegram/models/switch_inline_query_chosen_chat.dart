@@ -1,3 +1,5 @@
+part of '../model.dart';
+
 /*
  * TeleDart - Telegram Bot API for Dart
  * Copyright (C) 2023  Dino PH Leung
@@ -16,19 +18,31 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-part of '../model.dart';
-
-/// This object represents a service message about General forum topic unhidden in the chat.
+/// This object represents an inline button that switches the current user to inline mode in a chosen chat, with an optional default inline query.
 ///
-/// https://core.telegram.org/bots/api#writeaccessallowed
+/// https://core.telegram.org/bots/api#inlinequeryresultsbutton
 @JsonSerializable(fieldRename: FieldRename.snake)
-class WriteAccessAllowed {
-  final String? webAppName;
+class SwitchInlineQueryChosenChat {
+  final String? query;
 
-  WriteAccessAllowed({
-    this.webAppName,
+  final bool? allowUserChats;
+
+  final bool? allowBotChats;
+
+  final bool? allowGroupChats;
+
+  final bool? allowChannelChats;
+
+  const SwitchInlineQueryChosenChat({
+    this.query,
+    this.allowUserChats,
+    this.allowBotChats,
+    this.allowGroupChats,
+    this.allowChannelChats,
   });
-  factory WriteAccessAllowed.fromJson(Map<String, dynamic> json) =>
-      _$WriteAccessAllowedFromJson(json);
-  Map<String, dynamic> toJson() => _$WriteAccessAllowedToJson(this);
+
+  factory SwitchInlineQueryChosenChat.fromJson(Map<String, dynamic> json) =>
+      _$SwitchInlineQueryChosenChatFromJson(json);
+
+  Map<String, dynamic> toJson() => _$SwitchInlineQueryChosenChatToJson(this);
 }
