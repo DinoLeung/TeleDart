@@ -1184,8 +1184,9 @@ class Telegram {
   ///
   /// This method now takes the new user permissions in a single argument of the type *ChatPermissions*.
   /// The old way of passing parameters will keep working for a while for backward compatibility.
-  Future<bool> restrictChatMember(dynamic chatId, int userId,
-      {ChatPermissions? permissions, int? untilDate}) async {
+  Future<bool> restrictChatMember(
+      dynamic chatId, int userId, ChatPermissions permissions,
+      {bool? useIndependentChatPermissions, int? untilDate}) async {
     if (chatId is! String && chatId is! int) {
       return Future.error(TelegramException(
           'Attribute \'chatId\' can only be either type of String or int'));
@@ -1194,7 +1195,8 @@ class Telegram {
     var body = <String, dynamic>{
       'chat_id': chatId,
       'user_id': userId,
-      'permissions': permissions == null ? null : jsonEncode(permissions),
+      'permissions': jsonEncode(permissions),
+      'use_independent_chat_permissions': useIndependentChatPermissions,
       'until_date': untilDate,
     };
     return await HttpClient.httpPost(requestUrl, body: body);
@@ -1311,7 +1313,7 @@ class Telegram {
   ///
   /// https://core.telegram.org/bots/api#setchatpermissions
   Future<bool> setChatPermissions(
-      dynamic chatId, ChatPermissions permissions) async {
+      dynamic chatId, ChatPermissions permissions, {bool? useIndependentChatPermissions}) async {
     if (chatId is! String && chatId is! int) {
       return Future.error(TelegramException(
           'Attribute \'chatId\' can only be either type of String or int'));
@@ -1320,6 +1322,7 @@ class Telegram {
     var body = <String, dynamic>{
       'chat_id': chatId,
       'permissions': jsonEncode(permissions),
+      'use_independent_chat_permissions': useIndependentChatPermissions,
     };
     return await HttpClient.httpPost(requestUrl, body: body);
   }
