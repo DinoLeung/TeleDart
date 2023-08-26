@@ -88,6 +88,8 @@ class TeleDartMessage extends Message {
           pinnedMessage: message.pinnedMessage,
           invoice: message.invoice,
           successfulPayment: message.successfulPayment,
+          userShared: message.userShared,
+          chatShared: message.chatShared,
           connectedWebsite: message.connectedWebsite,
           writeAccessAllowed: message.writeAccessAllowed,
           passportData: message.passportData,

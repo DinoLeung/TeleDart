@@ -624,6 +624,17 @@ Map<String, dynamic> _$ChatPhotoToJson(ChatPhoto instance) => <String, dynamic>{
       'big_file_unique_id': instance.bigFileUniqueId,
     };
 
+ChatShared _$ChatSharedFromJson(Map<String, dynamic> json) => ChatShared(
+      requestId: json['request_id'] as int,
+      userId: json['user_id'] as int,
+    );
+
+Map<String, dynamic> _$ChatSharedToJson(ChatShared instance) =>
+    <String, dynamic>{
+      'request_id': instance.requestId,
+      'user_id': instance.userId,
+    };
+
 Chat _$ChatFromJson(Map<String, dynamic> json) => Chat(
       id: json['id'] as int,
       type: json['type'] as String,
@@ -2996,6 +3007,12 @@ Message _$MessageFromJson(Map<String, dynamic> json) => Message(
           ? null
           : SuccessfulPayment.fromJson(
               json['successful_payment'] as Map<String, dynamic>),
+      userShared: json['user_shared'] == null
+          ? null
+          : UserShared.fromJson(json['user_shared'] as Map<String, dynamic>),
+      chatShared: json['chat_shared'] == null
+          ? null
+          : ChatShared.fromJson(json['chat_shared'] as Map<String, dynamic>),
       connectedWebsite: json['connected_website'] as String?,
       writeAccessAllowed: json['write_access_allowed'] == null
           ? null
@@ -3126,6 +3143,8 @@ Map<String, dynamic> _$MessageToJson(Message instance) {
   writeNotNull('pinned_message', instance.pinnedMessage?.toJson());
   writeNotNull('invoice', instance.invoice?.toJson());
   writeNotNull('successful_payment', instance.successfulPayment?.toJson());
+  writeNotNull('user_shared', instance.userShared?.toJson());
+  writeNotNull('chat_shared', instance.chatShared?.toJson());
   writeNotNull('connected_website', instance.connectedWebsite);
   writeNotNull('write_access_allowed', instance.writeAccessAllowed?.toJson());
   writeNotNull('passport_data', instance.passportData?.toJson());
@@ -3959,6 +3978,17 @@ Map<String, dynamic> _$UserProfilePhotosToJson(UserProfilePhotos instance) =>
       'photos': instance.photos
           .map((e) => e.map((e) => e.toJson()).toList())
           .toList(),
+    };
+
+UserShared _$UserSharedFromJson(Map<String, dynamic> json) => UserShared(
+      requestId: json['request_id'] as int,
+      userId: json['user_id'] as int,
+    );
+
+Map<String, dynamic> _$UserSharedToJson(UserShared instance) =>
+    <String, dynamic>{
+      'request_id': instance.requestId,
+      'user_id': instance.userId,
     };
 
 User _$UserFromJson(Map<String, dynamic> json) => User(

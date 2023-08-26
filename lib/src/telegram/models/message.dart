@@ -76,6 +76,8 @@ class Message {
   Message? pinnedMessage;
   Invoice? invoice;
   SuccessfulPayment? successfulPayment;
+  UserShared? userShared;
+  ChatShared? chatShared;
   String? connectedWebsite;
   WriteAccessAllowed? writeAccessAllowed;
   PassportData? passportData;
@@ -147,6 +149,8 @@ class Message {
     this.pinnedMessage,
     this.invoice,
     this.successfulPayment,
+    this.userShared,
+    this.chatShared,
     this.connectedWebsite,
     this.writeAccessAllowed,
     this.passportData,
