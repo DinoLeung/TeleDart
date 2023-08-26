@@ -216,6 +216,35 @@ Map<String, dynamic> _$BotCommandToJson(BotCommand instance) =>
       'description': instance.description,
     };
 
+BotName _$BotNameFromJson(Map<String, dynamic> json) => BotName(
+      name: json['name'] as String,
+    );
+
+Map<String, dynamic> _$BotNameToJson(BotName instance) => <String, dynamic>{
+      'name': instance.name,
+    };
+
+BotDescription _$BotDescriptionFromJson(Map<String, dynamic> json) =>
+    BotDescription(
+      description: json['description'] as String,
+    );
+
+Map<String, dynamic> _$BotDescriptionToJson(BotDescription instance) =>
+    <String, dynamic>{
+      'description': instance.description,
+    };
+
+BotShortDescription _$BotShortDescriptionFromJson(Map<String, dynamic> json) =>
+    BotShortDescription(
+      shortDescription: json['short_description'] as String,
+    );
+
+Map<String, dynamic> _$BotShortDescriptionToJson(
+        BotShortDescription instance) =>
+    <String, dynamic>{
+      'short_description': instance.shortDescription,
+    };
+
 CallbackGame _$CallbackGameFromJson(Map<String, dynamic> json) =>
     CallbackGame();
 

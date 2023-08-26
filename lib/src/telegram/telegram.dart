@@ -2077,6 +2077,87 @@ class Telegram {
         .toList();
   }
 
+  /// Use this method to change the bot's name.
+  /// 
+  /// Returns *True* on success.
+  /// 
+  /// https://core.telegram.org/bots/api#setmyname
+  Future<bool> setMyName(String name, String languageCode) async {
+    var requestUrl = _apiUri('setMyName');
+    var body = <String, dynamic>{
+      'name': name,
+      'language_code': languageCode,
+    };
+    return await HttpClient.httpPost(requestUrl, body: body);
+  }
+
+  /// Use this method to get the current bot name for the given user language.
+  /// 
+  /// Returns [BotName] on success.
+  /// 
+  /// https://core.telegram.org/bots/api#getmyname
+  Future<BotName> getMyName(String languageCode) async {
+    var requestUrl = _apiUri('getMyName');
+    var body = <String, dynamic>{
+      'language_code': languageCode,
+    };
+    return BotName.fromJson(await HttpClient.httpPost(requestUrl, body: body));
+  }
+
+  /// Use this method to change the bot's description, which is shown in the chat with the bot if the chat is empty.
+  /// 
+  /// Returns *True* on success.
+  /// 
+  /// https://core.telegram.org/bots/api#setmydescription
+  Future<bool> setMyDescription(String description, String languageCode) async {
+    var requestUrl = _apiUri('setMyDescription');
+    var body = <String, dynamic>{
+      'description': description,
+      'language_code': languageCode,
+    };
+    return await HttpClient.httpPost(requestUrl, body: body);
+  }
+
+  /// Use this method to get the current bot description for the given user language.
+  /// 
+  /// Returns [BotDescription] on success.
+  /// 
+  /// https://core.telegram.org/bots/api#getmydescription
+  Future<BotDescription> getMyDescription(String languageCode) async {
+    var requestUrl = _apiUri('getMyDescription');
+    var body = <String, dynamic>{
+      'language_code': languageCode,
+    };
+    return BotDescription.fromJson(await HttpClient.httpPost(requestUrl, body: body));
+  }
+
+  /// Use this method to change the bot's short description, which is shown on the bot's profile page and is sent together with the link when users share the bot.
+  /// 
+  /// Returns *True* on success.
+  /// 
+  /// https://core.telegram.org/bots/api#setmyshortdescription
+  Future<bool> setMyShortDescription(String shortDescription, String languageCode) async {
+    var requestUrl = _apiUri('setMyShortDescription');
+    var body = <String, dynamic>{
+      'short_description': shortDescription,
+      'language_code': languageCode,
+    };
+    return await HttpClient.httpPost(requestUrl, body: body);
+  }
+
+  /// Use this method to get the current bot short description for the given user language.
+  /// 
+  /// Returns [BotShortDescription] on success.
+  /// 
+  /// https://core.telegram.org/bots/api#getmyshortdescription
+  Future<BotShortDescription> getMyShortDescription(String languageCode) async {
+    var requestUrl = _apiUri('getMyShortDescription');
+    var body = <String, dynamic>{
+      'language_code': languageCode,
+    };
+    return BotShortDescription.fromJson(await HttpClient.httpPost(requestUrl, body: body));
+  }
+
   /// Use this method to change the bot's menu button in a private chat, or the default menu button.
   ///
   /// Returns *True* on success.
