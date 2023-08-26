@@ -25,6 +25,7 @@ part of '../model.dart';
 class ChatJoinRequest {
   Chat chat;
   User from;
+  int userChatId;
   int date;
   String? bio;
   ChatInviteLink? inviteLink;
@@ -32,6 +33,7 @@ class ChatJoinRequest {
   ChatJoinRequest({
     required this.chat,
     required this.from,
+    required this.userChatId,
     required this.date,
     this.bio,
     this.inviteLink,

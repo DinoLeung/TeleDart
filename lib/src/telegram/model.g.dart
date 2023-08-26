@@ -337,6 +337,7 @@ ChatJoinRequest _$ChatJoinRequestFromJson(Map<String, dynamic> json) =>
     ChatJoinRequest(
       chat: Chat.fromJson(json['chat'] as Map<String, dynamic>),
       from: User.fromJson(json['from'] as Map<String, dynamic>),
+      userChatId: json['user_chat_id'] as int,
       date: json['date'] as int,
       bio: json['bio'] as String?,
       inviteLink: json['invite_link'] == null
@@ -349,6 +350,7 @@ Map<String, dynamic> _$ChatJoinRequestToJson(ChatJoinRequest instance) {
   final val = <String, dynamic>{
     'chat': instance.chat.toJson(),
     'from': instance.from.toJson(),
+    'user_chat_id': instance.userChatId,
     'date': instance.date,
   };
 
