@@ -104,6 +104,8 @@ part 'models/input_text_message_content.dart';
 part 'models/input_venue_message_content.dart';
 part 'models/invoice.dart';
 part 'models/keyboard_button_poll_type.dart';
+part 'models/keyboard_button_request_chat.dart';
+part 'models/keyboard_button_request_user.dart';
 part 'models/keyboard_button.dart';
 part 'models/labeled_price.dart';
 part 'models/location.dart';

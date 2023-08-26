@@ -2597,9 +2597,81 @@ Map<String, dynamic> _$KeyboardButtonPollTypeToJson(
   return val;
 }
 
+KeyboardButtonRequestChat _$KeyboardButtonRequestChatFromJson(
+        Map<String, dynamic> json) =>
+    KeyboardButtonRequestChat(
+      requestId: json['request_id'] as int,
+      chatIsChannel: json['chat_is_channel'] as bool,
+      charIsForum: json['char_is_forum'] as bool?,
+      chatHasUsername: json['chat_has_username'] as bool?,
+      chatIsCreated: json['chat_is_created'] as bool?,
+      userAdministratorRights: json['user_administrator_rights'] == null
+          ? null
+          : ChatAdministratorRights.fromJson(
+              json['user_administrator_rights'] as Map<String, dynamic>),
+      botAdministratorRights: json['bot_administrator_rights'] == null
+          ? null
+          : ChatAdministratorRights.fromJson(
+              json['bot_administrator_rights'] as Map<String, dynamic>),
+      botIsMember: json['bot_is_member'] as bool?,
+    );
+
+Map<String, dynamic> _$KeyboardButtonRequestChatToJson(
+    KeyboardButtonRequestChat instance) {
+  final val = <String, dynamic>{
+    'request_id': instance.requestId,
+    'chat_is_channel': instance.chatIsChannel,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('char_is_forum', instance.charIsForum);
+  writeNotNull('chat_has_username', instance.chatHasUsername);
+  writeNotNull('chat_is_created', instance.chatIsCreated);
+  writeNotNull(
+      'user_administrator_rights', instance.userAdministratorRights?.toJson());
+  writeNotNull(
+      'bot_administrator_rights', instance.botAdministratorRights?.toJson());
+  writeNotNull('bot_is_member', instance.botIsMember);
+  return val;
+}
+
+KeyboardButtonRequestUser _$KeyboardButtonRequestUserFromJson(
+        Map<String, dynamic> json) =>
+    KeyboardButtonRequestUser(
+      requestId: json['request_id'] as int,
+      userIsBot: json['user_is_bot'] as bool?,
+      userIsPremium: json['user_is_premium'] as bool?,
+    );
+
+Map<String, dynamic> _$KeyboardButtonRequestUserToJson(
+    KeyboardButtonRequestUser instance) {
+  final val = <String, dynamic>{
+    'request_id': instance.requestId,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('user_is_bot', instance.userIsBot);
+  writeNotNull('user_is_premium', instance.userIsPremium);
+  return val;
+}
+
 KeyboardButton _$KeyboardButtonFromJson(Map<String, dynamic> json) =>
     KeyboardButton(
       text: json['text'] as String,
+      requestUser: json['request_user'] == null
+          ? null
+          : KeyboardButtonRequestUser.fromJson(
+              json['request_user'] as Map<String, dynamic>),
       requestContact: json['request_contact'] as bool?,
       requestLocation: json['request_location'] as bool?,
       requestPoll: json['request_poll'] == null
@@ -2609,7 +2681,10 @@ KeyboardButton _$KeyboardButtonFromJson(Map<String, dynamic> json) =>
       webApp: json['web_app'] == null
           ? null
           : WebAppInfo.fromJson(json['web_app'] as Map<String, dynamic>),
-    );
+    )..requestChat = json['request_chat'] == null
+        ? null
+        : KeyboardButtonRequestChat.fromJson(
+            json['request_chat'] as Map<String, dynamic>);
 
 Map<String, dynamic> _$KeyboardButtonToJson(KeyboardButton instance) {
   final val = <String, dynamic>{
@@ -2622,6 +2697,8 @@ Map<String, dynamic> _$KeyboardButtonToJson(KeyboardButton instance) {
     }
   }
 
+  writeNotNull('request_user', instance.requestUser?.toJson());
+  writeNotNull('request_chat', instance.requestChat?.toJson());
   writeNotNull('request_contact', instance.requestContact);
   writeNotNull('request_location', instance.requestLocation);
   writeNotNull('request_poll', instance.requestPoll?.toJson());
