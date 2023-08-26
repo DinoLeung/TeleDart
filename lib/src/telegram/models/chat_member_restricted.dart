@@ -36,7 +36,12 @@ class ChatMemberRestricted implements ChatMember {
   bool canPinMessages;
   bool canManageTopics;
   bool canSendMessages;
-  bool canSendMediaMessages;
+  bool? canSendAudios;
+  bool? canSendDocuments;
+  bool? canSendPhotos;
+  bool? canSendVideos;
+  bool? canSendVideoNotes;
+  bool? canSendVoiceNotes;
   bool canSendPolls;
   bool canSendOtherMessages;
   bool canAddWebPagePreviews;
@@ -51,7 +56,12 @@ class ChatMemberRestricted implements ChatMember {
     this.canPinMessages = false,
     this.canManageTopics = false,
     this.canSendMessages = false,
-    this.canSendMediaMessages = false,
+    this.canSendAudios = false,
+    this.canSendDocuments = false,
+    this.canSendPhotos = false,
+    this.canSendVideos = false,
+    this.canSendVideoNotes = false,
+    this.canSendVoiceNotes = false,
     this.canSendPolls = false,
     this.canSendOtherMessages = false,
     this.canAddWebPagePreviews = false,

@@ -499,7 +499,12 @@ ChatMemberRestricted _$ChatMemberRestrictedFromJson(
       canPinMessages: json['can_pin_messages'] as bool? ?? false,
       canManageTopics: json['can_manage_topics'] as bool? ?? false,
       canSendMessages: json['can_send_messages'] as bool? ?? false,
-      canSendMediaMessages: json['can_send_media_messages'] as bool? ?? false,
+      canSendAudios: json['can_send_audios'] as bool? ?? false,
+      canSendDocuments: json['can_send_documents'] as bool? ?? false,
+      canSendPhotos: json['can_send_photos'] as bool? ?? false,
+      canSendVideos: json['can_send_videos'] as bool? ?? false,
+      canSendVideoNotes: json['can_send_video_notes'] as bool? ?? false,
+      canSendVoiceNotes: json['can_send_voice_notes'] as bool? ?? false,
       canSendPolls: json['can_send_polls'] as bool? ?? false,
       canSendOtherMessages: json['can_send_other_messages'] as bool? ?? false,
       canAddWebPagePreviews:
@@ -508,22 +513,36 @@ ChatMemberRestricted _$ChatMemberRestrictedFromJson(
     );
 
 Map<String, dynamic> _$ChatMemberRestrictedToJson(
-        ChatMemberRestricted instance) =>
-    <String, dynamic>{
-      'status': instance.status,
-      'user': instance.user.toJson(),
-      'is_member': instance.isMember,
-      'can_change_info': instance.canChangeInfo,
-      'can_invite_users': instance.canInviteUsers,
-      'can_pin_messages': instance.canPinMessages,
-      'can_manage_topics': instance.canManageTopics,
-      'can_send_messages': instance.canSendMessages,
-      'can_send_media_messages': instance.canSendMediaMessages,
-      'can_send_polls': instance.canSendPolls,
-      'can_send_other_messages': instance.canSendOtherMessages,
-      'can_add_web_page_previews': instance.canAddWebPagePreviews,
-      'until_date': instance.untilDate,
-    };
+    ChatMemberRestricted instance) {
+  final val = <String, dynamic>{
+    'status': instance.status,
+    'user': instance.user.toJson(),
+    'is_member': instance.isMember,
+    'can_change_info': instance.canChangeInfo,
+    'can_invite_users': instance.canInviteUsers,
+    'can_pin_messages': instance.canPinMessages,
+    'can_manage_topics': instance.canManageTopics,
+    'can_send_messages': instance.canSendMessages,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('can_send_audios', instance.canSendAudios);
+  writeNotNull('can_send_documents', instance.canSendDocuments);
+  writeNotNull('can_send_photos', instance.canSendPhotos);
+  writeNotNull('can_send_videos', instance.canSendVideos);
+  writeNotNull('can_send_video_notes', instance.canSendVideoNotes);
+  writeNotNull('can_send_voice_notes', instance.canSendVoiceNotes);
+  val['can_send_polls'] = instance.canSendPolls;
+  val['can_send_other_messages'] = instance.canSendOtherMessages;
+  val['can_add_web_page_previews'] = instance.canAddWebPagePreviews;
+  val['until_date'] = instance.untilDate;
+  return val;
+}
 
 ChatMemberUpdated _$ChatMemberUpdatedFromJson(Map<String, dynamic> json) =>
     ChatMemberUpdated(
@@ -579,7 +598,12 @@ Map<String, dynamic> _$ChatMemberToJson(ChatMember instance) =>
 ChatPermissions _$ChatPermissionsFromJson(Map<String, dynamic> json) =>
     ChatPermissions(
       canSendMessages: json['can_send_messages'] as bool?,
-      canSendMediaMessages: json['can_send_media_messages'] as bool?,
+      canSendAudios: json['can_send_audios'] as bool?,
+      canSendDocuments: json['can_send_documents'] as bool?,
+      canSendPhotos: json['can_send_photos'] as bool?,
+      canSendVideos: json['can_send_videos'] as bool?,
+      canSendVideoNotes: json['can_send_video_notes'] as bool?,
+      canSendVoiceNotes: json['can_send_voice_notes'] as bool?,
       canSendPolls: json['can_send_polls'] as bool?,
       canSendOtherMessages: json['can_send_other_messages'] as bool?,
       canAddWebPagePreviews: json['can_add_web_page_previews'] as bool?,
@@ -599,7 +623,12 @@ Map<String, dynamic> _$ChatPermissionsToJson(ChatPermissions instance) {
   }
 
   writeNotNull('can_send_messages', instance.canSendMessages);
-  writeNotNull('can_send_media_messages', instance.canSendMediaMessages);
+  writeNotNull('can_send_audios', instance.canSendAudios);
+  writeNotNull('can_send_documents', instance.canSendDocuments);
+  writeNotNull('can_send_photos', instance.canSendPhotos);
+  writeNotNull('can_send_videos', instance.canSendVideos);
+  writeNotNull('can_send_video_notes', instance.canSendVideoNotes);
+  writeNotNull('can_send_voice_notes', instance.canSendVoiceNotes);
   writeNotNull('can_send_polls', instance.canSendPolls);
   writeNotNull('can_send_other_messages', instance.canSendOtherMessages);
   writeNotNull('can_add_web_page_previews', instance.canAddWebPagePreviews);
