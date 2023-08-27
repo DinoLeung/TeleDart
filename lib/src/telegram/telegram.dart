@@ -2724,12 +2724,13 @@ class Telegram {
   ///
   /// https://core.telegram.org/bots/api#answerinlinequery
   Future<bool> answerInlineQuery(
-      String inlineQueryId, List<InlineQueryResult> results,
-      {int? cacheTime,
-      bool? isPersonal,
-      String? nextOffset,
-      String? switchPmText,
-      String? switchPmParameter}) async {
+    String inlineQueryId,
+    List<InlineQueryResult> results, {
+    int? cacheTime,
+    bool? isPersonal,
+    String? nextOffset,
+    InlineQueryResultsButton? button,
+  }) async {
     var requestUrl = _apiUri('answerInlineQuery');
     var body = <String, dynamic>{
       'inline_query_id': inlineQueryId,
@@ -2737,8 +2738,7 @@ class Telegram {
       'cache_time': cacheTime,
       'is_personal': isPersonal,
       'next_offset': nextOffset,
-      'switch_pm_text': switchPmText,
-      'switch_pm_parameter': switchPmParameter,
+      'button': button == null ? null : jsonEncode(button),
     };
     return await HttpClient.httpPost(requestUrl, body: body);
   }
@@ -3030,6 +3030,25 @@ class Telegram {
         .map<GameHighScore>(
             (gameHighScore) => GameHighScore.fromJson(gameHighScore))
         .toList();
+  }
+
+  /// Use this method to change the bot's name. Returns True on success.
+  Future<bool> setMyName({String? name, String? languageCode}) async {
+    var requestUrl = _apiUri('setMyName');
+    var body = <String, dynamic>{
+      'name': name,
+      'language_code': languageCode,
+    };
+    return await HttpClient.httpPost(requestUrl, body: body);
+  }
+
+  /// Use this method to get the current bot name for the given user language. Returns BotName on success.
+  Future<BotName> getMyName({String? languageCode}) async {
+    var requestUrl = _apiUri('getMyName');
+    var body = <String, dynamic>{
+      'language_code': languageCode,
+    };
+    return BotName.fromJson(await HttpClient.httpPost(requestUrl, body: body));
   }
 }
 

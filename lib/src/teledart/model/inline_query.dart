@@ -57,13 +57,14 @@ class TeleDartInlineQuery extends InlineQuery {
     int? cacheTime,
     bool? isPersonal,
     String? nextOffset,
-    String? switchPmText,
-    String? switchPmParameter,
+    InlineQueryResultsButton? button,
   }) =>
-      _teledart.answerInlineQuery(id, results,
-          cacheTime: cacheTime,
-          isPersonal: isPersonal,
-          nextOffset: nextOffset,
-          switchPmText: switchPmText,
-          switchPmParameter: switchPmParameter);
+      _teledart.answerInlineQuery(
+        id,
+        results,
+        cacheTime: cacheTime,
+        isPersonal: isPersonal,
+        nextOffset: nextOffset,
+        button: button,
+      );
 }

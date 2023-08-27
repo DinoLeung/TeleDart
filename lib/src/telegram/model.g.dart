@@ -216,14 +216,6 @@ Map<String, dynamic> _$BotCommandToJson(BotCommand instance) =>
       'description': instance.description,
     };
 
-BotName _$BotNameFromJson(Map<String, dynamic> json) => BotName(
-      name: json['name'] as String,
-    );
-
-Map<String, dynamic> _$BotNameToJson(BotName instance) => <String, dynamic>{
-      'name': instance.name,
-    };
-
 BotDescription _$BotDescriptionFromJson(Map<String, dynamic> json) =>
     BotDescription(
       description: json['description'] as String,
@@ -232,6 +224,14 @@ BotDescription _$BotDescriptionFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$BotDescriptionToJson(BotDescription instance) =>
     <String, dynamic>{
       'description': instance.description,
+    };
+
+BotName _$BotNameFromJson(Map<String, dynamic> json) => BotName(
+      name: json['name'] as String,
+    );
+
+Map<String, dynamic> _$BotNameToJson(BotName instance) => <String, dynamic>{
+      'name': instance.name,
     };
 
 BotShortDescription _$BotShortDescriptionFromJson(Map<String, dynamic> json) =>
@@ -595,7 +595,9 @@ ChatMemberUpdated _$ChatMemberUpdatedFromJson(Map<String, dynamic> json) =>
           ? null
           : ChatInviteLink.fromJson(
               json['invite_link'] as Map<String, dynamic>),
-    )..date = json['date'] as int?;
+      viaChatFolderInviteLink: json['via_chat_folder_invite_link'] as bool?,
+      date: json['date'] as int?,
+    );
 
 Map<String, dynamic> _$ChatMemberUpdatedToJson(ChatMemberUpdated instance) {
   final val = <String, dynamic>{};
@@ -612,6 +614,7 @@ Map<String, dynamic> _$ChatMemberUpdatedToJson(ChatMemberUpdated instance) {
   writeNotNull('old_chat_member', instance.oldChatMember?.toJson());
   writeNotNull('new_chat_member', instance.newChatMember?.toJson());
   writeNotNull('invite_link', instance.inviteLink?.toJson());
+  writeNotNull('via_chat_folder_invite_link', instance.viaChatFolderInviteLink);
   return val;
 }
 
@@ -1154,6 +1157,11 @@ InlineKeyboardButton _$InlineKeyboardButtonFromJson(
           : CallbackGame.fromJson(
               json['callback_game'] as Map<String, dynamic>),
       pay: json['pay'] as bool?,
+      switchInlineQueryChosenChat: json['switch_inline_query_chosen_chat'] ==
+              null
+          ? null
+          : SwitchInlineQueryChosenChat.fromJson(
+              json['switch_inline_query_chosen_chat'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$InlineKeyboardButtonToJson(
@@ -1177,6 +1185,8 @@ Map<String, dynamic> _$InlineKeyboardButtonToJson(
       instance.switchInlineQueryCurrentChat);
   writeNotNull('callback_game', instance.callbackGame?.toJson());
   writeNotNull('pay', instance.pay);
+  writeNotNull('switch_inline_query_chosen_chat',
+      instance.switchInlineQueryChosenChat?.toJson());
   return val;
 }
 
@@ -2191,6 +2201,33 @@ Map<String, dynamic> _$InlineQueryResultToJson(InlineQueryResult instance) {
   }
 
   writeNotNull('reply_markup', instance.replyMarkup?.toJson());
+  return val;
+}
+
+InlineQueryResultsButton _$InlineQueryResultsButtonFromJson(
+        Map<String, dynamic> json) =>
+    InlineQueryResultsButton(
+      text: json['text'] as String,
+      webApp: json['web_app'] == null
+          ? null
+          : WebAppInfo.fromJson(json['web_app'] as Map<String, dynamic>),
+      startParameter: json['start_parameter'] as String?,
+    );
+
+Map<String, dynamic> _$InlineQueryResultsButtonToJson(
+    InlineQueryResultsButton instance) {
+  final val = <String, dynamic>{
+    'text': instance.text,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('web_app', instance.webApp?.toJson());
+  writeNotNull('start_parameter', instance.startParameter);
   return val;
 }
 
@@ -3972,6 +4009,34 @@ Map<String, dynamic> _$SuccessfulPaymentToJson(SuccessfulPayment instance) {
   return val;
 }
 
+SwitchInlineQueryChosenChat _$SwitchInlineQueryChosenChatFromJson(
+        Map<String, dynamic> json) =>
+    SwitchInlineQueryChosenChat(
+      query: json['query'] as String?,
+      allowUserChats: json['allow_user_chats'] as bool?,
+      allowBotChats: json['allow_bot_chats'] as bool?,
+      allowGroupChats: json['allow_group_chats'] as bool?,
+      allowChannelChats: json['allow_channel_chats'] as bool?,
+    );
+
+Map<String, dynamic> _$SwitchInlineQueryChosenChatToJson(
+    SwitchInlineQueryChosenChat instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('query', instance.query);
+  writeNotNull('allow_user_chats', instance.allowUserChats);
+  writeNotNull('allow_bot_chats', instance.allowBotChats);
+  writeNotNull('allow_group_chats', instance.allowGroupChats);
+  writeNotNull('allow_channel_chats', instance.allowChannelChats);
+  return val;
+}
+
 Update _$UpdateFromJson(Map<String, dynamic> json) => Update(
       updateId: json['update_id'] as int,
       message: json['message'] == null
@@ -4350,7 +4415,19 @@ Map<String, dynamic> _$WebhookInfoToJson(WebhookInfo instance) {
 }
 
 WriteAccessAllowed _$WriteAccessAllowedFromJson(Map<String, dynamic> json) =>
-    WriteAccessAllowed();
+    WriteAccessAllowed(
+      webAppName: json['web_app_name'] as String?,
+    );
 
-Map<String, dynamic> _$WriteAccessAllowedToJson(WriteAccessAllowed instance) =>
-    <String, dynamic>{};
+Map<String, dynamic> _$WriteAccessAllowedToJson(WriteAccessAllowed instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('web_app_name', instance.webAppName);
+  return val;
+}
