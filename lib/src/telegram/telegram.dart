@@ -2437,6 +2437,7 @@ class Telegram {
   /// https://core.telegram.org/bots/api#sendsticker
   Future<Message> sendSticker(dynamic chatId, dynamic sticker,
       {int? messageThreadId,
+      String? emoji,
       bool? disableNotification,
       bool? protectContent,
       int? replyToMessageId,
@@ -2450,6 +2451,7 @@ class Telegram {
     var body = <String, dynamic>{
       'chat_id': chatId,
       'message_thread_id': messageThreadId,
+      'emoji': emoji,
       'disable_notification': disableNotification,
       'protect_content': protectContent,
       'reply_to_message_id': replyToMessageId,
