@@ -1,6 +1,6 @@
 /*
  * TeleDart - Telegram Bot API for Dart
- * Copyright (C) 2019  Dino PH Leung
+ * Copyright (C) 2023  Dino PH Leung
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -41,6 +41,9 @@ class InputMediaWithThumbnail implements InputMedia {
   List<MessageEntity>? captionEntities;
   String? thumbnail;
 
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  MultipartFile? mediaFile;
   @JsonKey(includeFromJson: false, includeToJson: false)
   MultipartFile? thumbnailFile;
 
@@ -51,7 +54,6 @@ class InputMediaWithThumbnail implements InputMedia {
     this.caption,
     this.parseMode,
     this.captionEntities,
-    this.thumbnailFile,
   });
 
   factory InputMediaWithThumbnail.fromJson(Map<String, dynamic> json) =>

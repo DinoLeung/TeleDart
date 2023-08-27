@@ -775,14 +775,16 @@ class Telegram {
       'reply_to_message_id': replyToMessageId,
       'allow_sending_without_reply': allowSendingWithoutReply,
     };
-
-    var response = media is List<InputMediaWithThumbnail>
-        ? await HttpClient.httpMultipartPost(
-            requestUrl,
-            media
-                .map((it) => it.thumbnailFile)
-                .whereType<MultipartFile>()
-                .toList(),
+    var multiPartFiles =
+        media.map((it) => it.mediaFile).whereType<MultipartFile>().toList();
+    if (media is List<InputMediaWithThumbnail>) {
+      multiPartFiles.addAll(media
+          .map((it) => it.thumbnailFile)
+          .whereType<MultipartFile>()
+          .toList());
+    }
+    var response = multiPartFiles.isNotEmpty
+        ? await HttpClient.httpMultipartPost(requestUrl, multiPartFiles,
             body: body)
         : await HttpClient.httpPost(requestUrl, body: body);
 

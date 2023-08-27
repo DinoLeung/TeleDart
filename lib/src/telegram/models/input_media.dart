@@ -1,6 +1,6 @@
 /*
  * TeleDart - Telegram Bot API for Dart
- * Copyright (C) 2019  Dino PH Leung
+ * Copyright (C) 2023  Dino PH Leung
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -42,12 +42,16 @@ class InputMedia {
   String? parseMode;
   List<MessageEntity>? captionEntities;
 
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  MultipartFile? mediaFile;
+
   InputMedia({
     required this.type,
     required this.media,
     this.caption,
     this.parseMode,
     this.captionEntities,
+    this.mediaFile,
   });
 
   factory InputMedia.fromJson(Map<String, dynamic> json) =>
