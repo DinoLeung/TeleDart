@@ -1993,6 +1993,24 @@ class Telegram {
     return await HttpClient.httpPost(requestUrl, body: body);
   }
 
+  /// Use this method to clear the list of pinned messages in a General forum topic.
+  /// The bot must be an administrator in the chat for this to work and must have the can_pin_messages administrator right in the supergroup.
+  /// 
+  /// Returns True on success.
+  /// 
+  /// https://core.telegram.org/bots/api#unpinallgeneralforumtopicmessages
+  Future<bool> unpinAllGeneralForumTopicMessages(dynamic chatId) async {
+    if (chatId is! String && chatId is! int) {
+      return Future.error(
+          TelegramException('Attribute \'chatId\' can only be either type of String or int'));
+    }
+    var requestUrl = _apiUri('unpinAllGeneralForumTopicMessages');
+    var body = <String, dynamic>{
+      'chat_id': chatId,
+    };
+    return await HttpClient.httpPost(requestUrl, body: body);
+  }
+
   /// Use this method to send answers to callback queries sent from [inline keyboards]
   ///
   /// The answer will be displayed to the user as a notification at the top of the chat screen or as
