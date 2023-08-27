@@ -44,9 +44,9 @@ class InlineQueryResultDocument implements InlineQueryResult {
   @override
   InlineKeyboardMarkup? replyMarkup;
   InputMessageContent? inputMessageContent;
-  String? thumbUrl;
-  int? thumbWidth;
-  int? thumbHeight;
+  String? thumbnailUrl;
+  int? thumbnailWidth;
+  int? thumbnailHeight;
   InlineQueryResultDocument({
     required this.id,
     this.type = InlineQueryResult.typeDocument,
@@ -59,9 +59,9 @@ class InlineQueryResultDocument implements InlineQueryResult {
     this.description,
     this.replyMarkup,
     this.inputMessageContent,
-    this.thumbUrl,
-    this.thumbWidth,
-    this.thumbHeight,
+    this.thumbnailUrl,
+    this.thumbnailWidth,
+    this.thumbnailHeight,
   });
   factory InlineQueryResultDocument.fromJson(Map<String, dynamic> json) =>
       _$InlineQueryResultDocumentFromJson(json);

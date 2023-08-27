@@ -1214,9 +1214,9 @@ InlineQueryResultArticle _$InlineQueryResultArticleFromJson(
       url: json['url'] as String?,
       hideUrl: json['hide_url'] as bool?,
       description: json['description'] as String?,
-      thumbUrl: json['thumb_url'] as String?,
-      thumbWidth: json['thumb_width'] as String?,
-      thumbHeight: json['thumb_height'] as String?,
+      thumbnailUrl: json['thumbnail_url'] as String?,
+      thumbnailWidth: json['thumbnail_width'] as String?,
+      thumbnailHeight: json['thumbnail_height'] as String?,
     );
 
 Map<String, dynamic> _$InlineQueryResultArticleToJson(
@@ -1238,9 +1238,9 @@ Map<String, dynamic> _$InlineQueryResultArticleToJson(
   writeNotNull('url', instance.url);
   writeNotNull('hide_url', instance.hideUrl);
   writeNotNull('description', instance.description);
-  writeNotNull('thumb_url', instance.thumbUrl);
-  writeNotNull('thumb_width', instance.thumbWidth);
-  writeNotNull('thumb_height', instance.thumbHeight);
+  writeNotNull('thumbnail_url', instance.thumbnailUrl);
+  writeNotNull('thumbnail_width', instance.thumbnailWidth);
+  writeNotNull('thumbnail_height', instance.thumbnailHeight);
   return val;
 }
 
@@ -1672,9 +1672,9 @@ InlineQueryResultContact _$InlineQueryResultContactFromJson(
           ? null
           : InputMessageContent.fromJson(
               json['input_message_content'] as Map<String, dynamic>),
-      thumbUrl: json['thumb_url'] as String?,
-      thumbWidth: json['thumb_width'] as int?,
-      thumbHeight: json['thumb_height'] as int?,
+      thumbnailUrl: json['thumbnail_url'] as String?,
+      thumbnailWidth: json['thumbnail_width'] as int?,
+      thumbnailHeight: json['thumbnail_height'] as int?,
     );
 
 Map<String, dynamic> _$InlineQueryResultContactToJson(
@@ -1696,9 +1696,9 @@ Map<String, dynamic> _$InlineQueryResultContactToJson(
   writeNotNull('vcard', instance.vcard);
   writeNotNull('reply_markup', instance.replyMarkup?.toJson());
   writeNotNull('input_message_content', instance.inputMessageContent?.toJson());
-  writeNotNull('thumb_url', instance.thumbUrl);
-  writeNotNull('thumb_width', instance.thumbWidth);
-  writeNotNull('thumb_height', instance.thumbHeight);
+  writeNotNull('thumbnail_url', instance.thumbnailUrl);
+  writeNotNull('thumbnail_width', instance.thumbnailWidth);
+  writeNotNull('thumbnail_height', instance.thumbnailHeight);
   return val;
 }
 
@@ -1724,9 +1724,9 @@ InlineQueryResultDocument _$InlineQueryResultDocumentFromJson(
           ? null
           : InputMessageContent.fromJson(
               json['input_message_content'] as Map<String, dynamic>),
-      thumbUrl: json['thumb_url'] as String?,
-      thumbWidth: json['thumb_width'] as int?,
-      thumbHeight: json['thumb_height'] as int?,
+      thumbnailUrl: json['thumbnail_url'] as String?,
+      thumbnailWidth: json['thumbnail_width'] as int?,
+      thumbnailHeight: json['thumbnail_height'] as int?,
     );
 
 Map<String, dynamic> _$InlineQueryResultDocumentToJson(
@@ -1752,9 +1752,9 @@ Map<String, dynamic> _$InlineQueryResultDocumentToJson(
   writeNotNull('description', instance.description);
   writeNotNull('reply_markup', instance.replyMarkup?.toJson());
   writeNotNull('input_message_content', instance.inputMessageContent?.toJson());
-  writeNotNull('thumb_url', instance.thumbUrl);
-  writeNotNull('thumb_width', instance.thumbWidth);
-  writeNotNull('thumb_height', instance.thumbHeight);
+  writeNotNull('thumbnail_url', instance.thumbnailUrl);
+  writeNotNull('thumbnail_width', instance.thumbnailWidth);
+  writeNotNull('thumbnail_height', instance.thumbnailHeight);
   return val;
 }
 
@@ -1797,8 +1797,8 @@ InlineQueryResultGif _$InlineQueryResultGifFromJson(
       gifWidth: json['gif_width'] as int?,
       gifHeight: json['gif_height'] as int?,
       gifDuration: json['gif_duration'] as int?,
-      thumbUrl: json['thumb_url'] as String,
-      thumbMimeType: json['thumb_mime_type'] as String?,
+      thumbnailUrl: json['thumbnail_url'] as String,
+      thumbnailMimeType: json['thumbnail_mime_type'] as String?,
       title: json['title'] as String?,
       caption: json['caption'] as String?,
       parseMode: json['parse_mode'] as String?,
@@ -1832,8 +1832,8 @@ Map<String, dynamic> _$InlineQueryResultGifToJson(
   writeNotNull('gif_width', instance.gifWidth);
   writeNotNull('gif_height', instance.gifHeight);
   writeNotNull('gif_duration', instance.gifDuration);
-  val['thumb_url'] = instance.thumbUrl;
-  writeNotNull('thumb_mime_type', instance.thumbMimeType);
+  val['thumbnail_url'] = instance.thumbnailUrl;
+  writeNotNull('thumbnail_mime_type', instance.thumbnailMimeType);
   writeNotNull('title', instance.title);
   writeNotNull('caption', instance.caption);
   writeNotNull('parse_mode', instance.parseMode);
@@ -1864,9 +1864,9 @@ InlineQueryResultLocation _$InlineQueryResultLocationFromJson(
           ? null
           : InputMessageContent.fromJson(
               json['input_message_content'] as Map<String, dynamic>),
-      thumbUrl: json['thumb_url'] as String?,
-      thumbWidth: json['thumb_width'] as int?,
-      thumbHeight: json['thumb_height'] as int?,
+      thumbnailUrl: json['thumbnail_url'] as String?,
+      thumbnailWidth: json['thumbnail_width'] as int?,
+      thumbnailHeight: json['thumbnail_height'] as int?,
     );
 
 Map<String, dynamic> _$InlineQueryResultLocationToJson(
@@ -1891,9 +1891,9 @@ Map<String, dynamic> _$InlineQueryResultLocationToJson(
   writeNotNull('proximity_alert_radius', instance.proximityAlertRadius);
   writeNotNull('reply_markup', instance.replyMarkup?.toJson());
   writeNotNull('input_message_content', instance.inputMessageContent?.toJson());
-  writeNotNull('thumb_url', instance.thumbUrl);
-  writeNotNull('thumb_width', instance.thumbWidth);
-  writeNotNull('thumb_height', instance.thumbHeight);
+  writeNotNull('thumbnail_url', instance.thumbnailUrl);
+  writeNotNull('thumbnail_width', instance.thumbnailWidth);
+  writeNotNull('thumbnail_height', instance.thumbnailHeight);
   return val;
 }
 
@@ -1906,8 +1906,8 @@ InlineQueryResultMpeg4Gif _$InlineQueryResultMpeg4GifFromJson(
       mpeg4Width: json['mpeg4_width'] as int?,
       mpeg4Height: json['mpeg4_height'] as int?,
       mpeg4Duration: json['mpeg4_duration'] as int?,
-      thumbUrl: json['thumb_url'] as String,
-      thumbMimeType: json['thumb_mime_type'] as String?,
+      thumbnailUrl: json['thumbnail_url'] as String,
+      thumbnailMimeType: json['thumbnail_mime_type'] as String?,
       title: json['title'] as String?,
       caption: json['caption'] as String?,
       parseMode: json['parse_mode'] as String?,
@@ -1941,8 +1941,8 @@ Map<String, dynamic> _$InlineQueryResultMpeg4GifToJson(
   writeNotNull('mpeg4_width', instance.mpeg4Width);
   writeNotNull('mpeg4_height', instance.mpeg4Height);
   writeNotNull('mpeg4_duration', instance.mpeg4Duration);
-  val['thumb_url'] = instance.thumbUrl;
-  writeNotNull('thumb_mime_type', instance.thumbMimeType);
+  val['thumbnail_url'] = instance.thumbnailUrl;
+  writeNotNull('thumbnail_mime_type', instance.thumbnailMimeType);
   writeNotNull('title', instance.title);
   writeNotNull('caption', instance.caption);
   writeNotNull('parse_mode', instance.parseMode);
@@ -1959,7 +1959,7 @@ InlineQueryResultPhoto _$InlineQueryResultPhotoFromJson(
       id: json['id'] as String,
       type: json['type'] as String? ?? InlineQueryResult.typePhoto,
       photoUrl: json['photo_url'] as String,
-      thumbUrl: json['thumb_url'] as String,
+      thumbnailUrl: json['thumbnail_url'] as String,
       photoWidth: json['photo_width'] as int?,
       photoHeight: json['photo_height'] as int?,
       title: json['title'] as String?,
@@ -1985,7 +1985,7 @@ Map<String, dynamic> _$InlineQueryResultPhotoToJson(
     'id': instance.id,
     'type': instance.type,
     'photo_url': instance.photoUrl,
-    'thumb_url': instance.thumbUrl,
+    'thumbnail_url': instance.thumbnailUrl,
   };
 
   void writeNotNull(String key, dynamic value) {
@@ -2028,9 +2028,9 @@ InlineQueryResultVenue _$InlineQueryResultVenueFromJson(
           ? null
           : InputMessageContent.fromJson(
               json['input_message_content'] as Map<String, dynamic>),
-      thumbUrl: json['thumb_url'] as String?,
-      thumbWidth: json['thumb_width'] as int?,
-      thumbHeight: json['thumb_height'] as int?,
+      thumbnailUrl: json['thumbnail_url'] as String?,
+      thumbnailWidth: json['thumbnail_width'] as int?,
+      thumbnailHeight: json['thumbnail_height'] as int?,
     );
 
 Map<String, dynamic> _$InlineQueryResultVenueToJson(
@@ -2056,9 +2056,9 @@ Map<String, dynamic> _$InlineQueryResultVenueToJson(
   writeNotNull('google_place_type', instance.googlePlaceType);
   writeNotNull('reply_markup', instance.replyMarkup?.toJson());
   writeNotNull('input_message_content', instance.inputMessageContent?.toJson());
-  writeNotNull('thumb_url', instance.thumbUrl);
-  writeNotNull('thumb_width', instance.thumbWidth);
-  writeNotNull('thumb_height', instance.thumbHeight);
+  writeNotNull('thumbnail_url', instance.thumbnailUrl);
+  writeNotNull('thumbnail_width', instance.thumbnailWidth);
+  writeNotNull('thumbnail_height', instance.thumbnailHeight);
   return val;
 }
 
@@ -2069,7 +2069,7 @@ InlineQueryResultVideo _$InlineQueryResultVideoFromJson(
       type: json['type'] as String? ?? InlineQueryResult.typeVideo,
       videoUrl: json['video_url'] as String,
       mimeType: json['mime_type'] as String,
-      thumbUrl: json['thumb_url'] as String,
+      thumbnailUrl: json['thumbnail_url'] as String,
       title: json['title'] as String,
       caption: json['caption'] as String?,
       parseMode: json['parse_mode'] as String?,
@@ -2097,7 +2097,7 @@ Map<String, dynamic> _$InlineQueryResultVideoToJson(
     'type': instance.type,
     'video_url': instance.videoUrl,
     'mime_type': instance.mimeType,
-    'thumb_url': instance.thumbUrl,
+    'thumbnail_url': instance.thumbnailUrl,
     'title': instance.title,
   };
 

@@ -43,9 +43,9 @@ class InlineQueryResultLocation implements InlineQueryResult {
   @override
   InlineKeyboardMarkup? replyMarkup;
   InputMessageContent? inputMessageContent;
-  String? thumbUrl;
-  int? thumbWidth;
-  int? thumbHeight;
+  String? thumbnailUrl;
+  int? thumbnailWidth;
+  int? thumbnailHeight;
 
   InlineQueryResultLocation({
     required this.id,
@@ -59,9 +59,9 @@ class InlineQueryResultLocation implements InlineQueryResult {
     this.proximityAlertRadius,
     this.replyMarkup,
     this.inputMessageContent,
-    this.thumbUrl,
-    this.thumbWidth,
-    this.thumbHeight,
+    this.thumbnailUrl,
+    this.thumbnailWidth,
+    this.thumbnailHeight,
   });
 
   @JsonKey(includeFromJson: false, includeToJson: false)
