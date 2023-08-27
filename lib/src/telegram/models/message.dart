@@ -50,6 +50,7 @@ class Message {
   Document? document;
   List<PhotoSize>? photo;
   Sticker? sticker;
+  Story? story;
   Video? video;
   VideoNote? videoNote;
   Voice? voice;
@@ -123,6 +124,7 @@ class Message {
     this.document,
     this.photo,
     this.sticker,
+    this.story,
     this.video,
     this.videoNote,
     this.voice,

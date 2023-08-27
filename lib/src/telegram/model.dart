@@ -155,6 +155,7 @@ part 'models/shipping_option.dart';
 part 'models/shipping_query.dart';
 part 'models/sticker_set.dart';
 part 'models/sticker.dart';
+part 'models/story.dart';
 part 'models/successful_payment.dart';
 part 'models/switch_inline_query_chosen_chat.dart';
 part 'models/update.dart';

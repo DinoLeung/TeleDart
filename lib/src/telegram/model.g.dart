@@ -3070,6 +3070,9 @@ Message _$MessageFromJson(Map<String, dynamic> json) => Message(
       sticker: json['sticker'] == null
           ? null
           : Sticker.fromJson(json['sticker'] as Map<String, dynamic>),
+      story: json['story'] == null
+          ? null
+          : Story.fromJson(json['story'] as Map<String, dynamic>),
       video: json['video'] == null
           ? null
           : Video.fromJson(json['video'] as Map<String, dynamic>),
@@ -3240,6 +3243,7 @@ Map<String, dynamic> _$MessageToJson(Message instance) {
   writeNotNull('document', instance.document?.toJson());
   writeNotNull('photo', instance.photo?.map((e) => e.toJson()).toList());
   writeNotNull('sticker', instance.sticker?.toJson());
+  writeNotNull('story', instance.story?.toJson());
   writeNotNull('video', instance.video?.toJson());
   writeNotNull('video_note', instance.videoNote?.toJson());
   writeNotNull('voice', instance.voice?.toJson());
@@ -3975,6 +3979,10 @@ Map<String, dynamic> _$StickerToJson(Sticker instance) {
   writeNotNull('file_size', instance.fileSize);
   return val;
 }
+
+Story _$StoryFromJson(Map<String, dynamic> json) => Story();
+
+Map<String, dynamic> _$StoryToJson(Story instance) => <String, dynamic>{};
 
 SuccessfulPayment _$SuccessfulPaymentFromJson(Map<String, dynamic> json) =>
     SuccessfulPayment(
