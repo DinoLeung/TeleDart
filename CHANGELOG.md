@@ -1,3 +1,17 @@
+## 0.6.0
+
+- Support API 6.5, 6.6, 6.7, 6.8
+- Updated method `sendMediaGroup` to dynamically upload media with multipart post
+- Added factory `InputMedia.fromFile` which accepts parameter `media` in type `io.File`
+- Added class `InputMediaWithThumbnail` what implements `InputMedia` and factories `withThumbnailFile` and `fromFileWithThumbnailFile`
+- **Breaking** Replaced the fields `can_send_media_messages` in the classes [ChatMemberRestricted] and [ChatPermissions] with separate fields `can_send_audios`, `can_send_documents`, `can_send_photos`, `can_send_videos`, `can_send_video_notes`, and `can_send_voice_notes` for different media types
+- **Breaking** Renamed the field `thumb` in the classes [Animation], [Audio], [Document], [Sticker], [Video], [VideoNote], [InputMediaAnimation], [InputMediaAudio], [InputMediaDocument], [InputMediaVideo], [StickerSet] to `thumbnail`
+- **Breaking** Renamed the parameter `thumb` in the methods [sendAnimation], [sendAudio], [sendDocument], [sendVideo], [sendVideoNote] to `thumbnail`
+- **Breaking** Renamed the method `setStickerSetThumb` to `setStickerSetThumbnail` and its parameter `thumb` to `thumbnail`
+- **Breaking** Renamed the fields `thumb_url`, `thumb_width`, and `thumb_height` in the classes [InlineQueryResultArticle], [InlineQueryResultContact], [InlineQueryResultDocument], [InlineQueryResultLocation], and [InlineQueryResultVenue] to `thumbnail_url`, `thumbnail_width`, and `thumbnail_height` respectively
+- **Breaking** Renamed the field `thumb_url` in the classes [InlineQueryResultPhoto] and [InlineQueryResultVideo] to `thumbnail_url`
+- **Breaking** Renamed the fields `thumb_url` and `thumb_mime_type` in the classes [InlineQueryResultGif], and [InlineQueryResultMpeg4Gif] to `thumbnail_url` and `thumbnail_mime_type` respectively.
+
 ## 0.5.6
 
 - Export util classes, so users can catch http client exceptions
