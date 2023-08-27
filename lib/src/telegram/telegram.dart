@@ -340,7 +340,7 @@ class Telegram {
       int? duration,
       String? performer,
       String? title,
-      dynamic thumb,
+      dynamic thumbnail,
       bool? disableNotification,
       bool? protectContent,
       int? replyToMessageId,
@@ -379,14 +379,14 @@ class Telegram {
           'Attribute \'audio\' can only be either io.File or String (Telegram fileId or image url)'));
     }
 
-    if (thumb != null) {
-      if (thumb is io.File) {
-        multiPartFiles.add(HttpClient.toMultiPartFile(thumb, 'thumb'));
-      } else if (thumb is String) {
-        body.addAll({'thumb': thumb});
+    if (thumbnail != null) {
+      if (thumbnail is io.File) {
+        multiPartFiles.add(HttpClient.toMultiPartFile(thumbnail, 'thumbnail'));
+      } else if (thumbnail is String) {
+        body.addAll({'thumbnail': thumbnail});
       } else {
         return Future.error(TelegramException(
-            'Attribute \'thumb\' can only be either io.File or String (Telegram fileId or image url)'));
+            'Attribute \'thumbnail\' can only be either io.File or String (Telegram fileId or image url)'));
       }
     }
 
@@ -407,7 +407,7 @@ class Telegram {
   /// https://core.telegram.org/bots/api#senddocument
   Future<Message> sendDocument(dynamic chatId, dynamic document,
       {int? messageThreadId,
-      dynamic thumb,
+      dynamic thumbnail,
       String? caption,
       String? parseMode,
       List<MessageEntity>? captionEntities,
@@ -448,14 +448,14 @@ class Telegram {
           'Attribute \'document\' can only be either io.File or String (Telegram fileId or image url)'));
     }
 
-    if (thumb != null) {
-      if (thumb is io.File) {
-        multiPartFiles.add(HttpClient.toMultiPartFile(thumb, 'thumb'));
-      } else if (thumb is String) {
-        body.addAll({'thumb': thumb});
+    if (thumbnail != null) {
+      if (thumbnail is io.File) {
+        multiPartFiles.add(HttpClient.toMultiPartFile(thumbnail, 'thumbnail'));
+      } else if (thumbnail is String) {
+        body.addAll({'thumbnail': thumbnail});
       } else {
         return Future.error(TelegramException(
-            'Attribute \'thumb\' can only be either io.File or String (Telegram fileId or image url)'));
+            'Attribute \'thumbnail\' can only be either io.File or String (Telegram fileId or image url)'));
       }
     }
 
@@ -481,7 +481,7 @@ class Telegram {
       int? duration,
       int? width,
       int? height,
-      dynamic thumb,
+      dynamic thumbnail,
       String? caption,
       String? parseMode,
       List<MessageEntity>? captionEntities,
@@ -527,14 +527,14 @@ class Telegram {
           'Attribute \'video\' can only be either io.File or String (Telegram fileId or image url)'));
     }
 
-    if (thumb != null) {
-      if (thumb is io.File) {
-        multiPartFiles.add(HttpClient.toMultiPartFile(thumb, 'thumb'));
-      } else if (thumb is String) {
-        body.addAll({'thumb': thumb});
+    if (thumbnail != null) {
+      if (thumbnail is io.File) {
+        multiPartFiles.add(HttpClient.toMultiPartFile(thumbnail, 'thumbnail'));
+      } else if (thumbnail is String) {
+        body.addAll({'thumbnail': thumbnail});
       } else {
         return Future.error(TelegramException(
-            'Attribute \'thumb\' can only be either io.File or String (Telegram fileId or image url)'));
+            'Attribute \'thumbnail\' can only be either io.File or String (Telegram fileId or image url)'));
       }
     }
 
@@ -557,7 +557,7 @@ class Telegram {
       int? duration,
       int? width,
       int? height,
-      dynamic thumb,
+      dynamic thumbnail,
       String? caption,
       String? parseMode,
       List<MessageEntity>? captionEntities,
@@ -601,14 +601,14 @@ class Telegram {
           'Attribute \'animation\' can only be either io.File or String (Telegram fileId or image url)'));
     }
 
-    if (thumb != null) {
-      if (thumb is io.File) {
-        multiPartFiles.add(HttpClient.toMultiPartFile(thumb, 'thumb'));
-      } else if (thumb is String) {
-        body.addAll({'thumb': thumb});
+    if (thumbnail != null) {
+      if (thumbnail is io.File) {
+        multiPartFiles.add(HttpClient.toMultiPartFile(thumbnail, 'thumbnail'));
+      } else if (thumbnail is String) {
+        body.addAll({'thumbnail': thumbnail});
       } else {
         return Future.error(TelegramException(
-            'Attribute \'thumb\' can only be either io.File or String (Telegram fileId or image url)'));
+            'Attribute \'thumbnail\' can only be either io.File or String (Telegram fileId or image url)'));
       }
     }
 
@@ -694,7 +694,7 @@ class Telegram {
       {int? messageThreadId,
       int? duration,
       int? length,
-      dynamic thumb,
+      dynamic thumbnail,
       bool? disableNotification,
       bool? protectContent,
       int? replyToMessageId,
@@ -728,14 +728,14 @@ class Telegram {
           'Attribute \'videoNote\' can only be either io.File or String (Telegram fileId or image url)'));
     }
 
-    if (thumb != null) {
-      if (thumb is io.File) {
-        multiPartFiles.add(HttpClient.toMultiPartFile(thumb, 'thumb'));
-      } else if (thumb is String) {
-        body.addAll({'thumb': thumb});
+    if (thumbnail != null) {
+      if (thumbnail is io.File) {
+        multiPartFiles.add(HttpClient.toMultiPartFile(thumbnail, 'thumbnail'));
+      } else if (thumbnail is String) {
+        body.addAll({'thumbnail': thumbnail});
       } else {
         return Future.error(TelegramException(
-            'Attribute \'thumb\' can only be either io.File or String (Telegram fileId or image url)'));
+            'Attribute \'thumbnail\' can only be either io.File or String (Telegram fileId or image url)'));
       }
     }
 
@@ -2629,13 +2629,12 @@ class Telegram {
     return await HttpClient.httpPost(requestUrl, body: body);
   }
 
-  /// Use this method to change the [mask position] of a mask sticker.
+  /// Use this method to change the [MaskPosition] of a mask sticker.
   /// The sticker must belong to a sticker set that was created by the bot.
   ///
   /// Returns *True* on success.
   ///
   /// https://core.telegram.org/bots/api#setstickermaskposition
-  /// [mask position](https://core.telegram.org/bots/api#maskposition)
   Future<bool> setStickerMaskPosition(String sticker, MaskPosition? maskPosition) async {
     var requestUrl = _apiUri('setStickerMaskPosition');
     var body = <String, dynamic>{
@@ -2667,27 +2666,27 @@ class Telegram {
   ///
   /// https://core.telegram.org/bots/api#setstickersetthumbnail
   Future<bool> setStickerSetThumbnail(String name, int userId,
-      {dynamic thumb}) async {
+      {dynamic thumbnail}) async {
     var requestUrl = _apiUri('setStickerSetThumbnail');
     var body = <String, dynamic>{
       'name': name,
       'user_id': userId,
     };
-    if (thumb == null) {
+    if (thumbnail == null) {
       return await HttpClient.httpPost(requestUrl, body: body);
-    } else if (thumb is io.File) {
+    } else if (thumbnail is io.File) {
       // filename cannot be empty to post to Telegram server
       var files = List<MultipartFile>.filled(
           1,
-          MultipartFile('thumb', thumb.openRead(), thumb.lengthSync(),
-              filename: '${thumb.lengthSync()}'));
+          MultipartFile('thumbnail', thumbnail.openRead(), thumbnail.lengthSync(),
+              filename: '${thumbnail.lengthSync()}'));
       return await HttpClient.httpMultipartPost(requestUrl, files, body: body);
-    } else if (thumb is String) {
-      body.addAll({'thumb': thumb});
+    } else if (thumbnail is String) {
+      body.addAll({'thumbnail': thumbnail});
       return await HttpClient.httpPost(requestUrl, body: body);
     } else {
       return Future.error(TelegramException(
-          'Attribute \'thumb\' can only be either io.File or String (Telegram fileId or image url)'));
+          'Attribute \'thumbnail\' can only be either io.File or String (Telegram fileId or image url)'));
     }
   }
 

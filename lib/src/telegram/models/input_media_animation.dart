@@ -33,7 +33,7 @@ class InputMediaAnimation implements InputMedia {
   String? parseMode;
   @override
   List<MessageEntity>? captionEntities;
-  dynamic thumb; // InputFile or String
+  dynamic thumbnail; // InputFile or String
   int? width;
   int? height;
   int? duration;
@@ -42,7 +42,7 @@ class InputMediaAnimation implements InputMedia {
   InputMediaAnimation(
       {this.type = InputMedia.typeAnimation,
       required this.media,
-      this.thumb,
+      this.thumbnail,
       this.caption,
       this.parseMode,
       this.captionEntities,

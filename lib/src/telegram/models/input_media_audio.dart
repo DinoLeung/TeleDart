@@ -33,7 +33,7 @@ class InputMediaAudio implements InputMedia {
   String? parseMode;
   @override
   List<MessageEntity>? captionEntities;
-  dynamic thumb; // InputFile or String
+  dynamic thumbnail; // InputFile or String
   int? duration;
   String? performer;
   String? title;
@@ -41,7 +41,7 @@ class InputMediaAudio implements InputMedia {
   InputMediaAudio({
     this.type = InputMedia.typeAudio,
     required this.media,
-    this.thumb,
+    this.thumbnail,
     this.caption,
     this.parseMode,
     this.captionEntities,

@@ -29,7 +29,7 @@ class Sticker {
   int height;
   bool isAnimated;
   bool isVideo;
-  PhotoSize? thumb;
+  PhotoSize? thumbnail;
   String? emoji;
   String? setName;
   File? premiumAnimation;
@@ -44,7 +44,7 @@ class Sticker {
     required this.height,
     required this.isAnimated,
     required this.isVideo,
-    this.thumb,
+    this.thumbnail,
     this.emoji,
     this.setName,
     this.premiumAnimation,

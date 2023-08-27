@@ -30,7 +30,7 @@ class VideoNote {
   String fileUniqueId;
   int length;
   int duration;
-  PhotoSize? thumb;
+  PhotoSize? thumbnail;
   int? fileSize;
 
   VideoNote({
@@ -38,7 +38,7 @@ class VideoNote {
     required this.fileUniqueId,
     required this.length,
     required this.duration,
-    this.thumb,
+    this.thumbnail,
     this.fileSize,
   });
 

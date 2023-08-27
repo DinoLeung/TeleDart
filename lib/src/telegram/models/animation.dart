@@ -28,7 +28,7 @@ class Animation {
   int width;
   int height;
   int duration;
-  PhotoSize? thumb;
+  PhotoSize? thumbnail;
   String? fileName;
   String? mimeType;
   int? fileSize;
@@ -39,7 +39,7 @@ class Animation {
     required this.width,
     required this.height,
     required this.duration,
-    this.thumb,
+    this.thumbnail,
     this.fileName,
     this.mimeType,
     this.fileSize,

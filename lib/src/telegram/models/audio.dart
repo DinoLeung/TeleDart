@@ -31,7 +31,7 @@ class Audio {
   String? fileName;
   String? mimeType;
   int? fileSize;
-  PhotoSize? thumb;
+  PhotoSize? thumbnail;
 
   Audio({
     required this.fileId,
@@ -42,7 +42,7 @@ class Audio {
     this.fileName,
     this.mimeType,
     this.fileSize,
-    this.thumb,
+    this.thumbnail,
   });
 
   @JsonKey(includeFromJson: false, includeToJson: false)

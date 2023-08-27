@@ -33,12 +33,12 @@ class InputMediaDocument implements InputMedia {
   String? parseMode;
   @override
   List<MessageEntity>? captionEntities;
-  dynamic thumb; // InputFile or String
+  dynamic thumbnail; // InputFile or String
   bool? disableContentTypeDetection;
   InputMediaDocument({
     this.type = InputMedia.typeDocument,
     required this.media,
-    this.thumb,
+    this.thumbnail,
     this.caption,
     this.parseMode,
     this.captionEntities,

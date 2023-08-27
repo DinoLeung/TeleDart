@@ -29,14 +29,14 @@ part of '../model.dart';
 class Document {
   String fileId;
   String fileUniqueId;
-  PhotoSize? thumb;
+  PhotoSize? thumbnail;
   String? fileName;
   String? mimeType;
   int? fileSize;
   Document({
     required this.fileId,
     required this.fileUniqueId,
-    this.thumb,
+    this.thumbnail,
     this.fileName,
     this.mimeType,
     this.fileSize,
