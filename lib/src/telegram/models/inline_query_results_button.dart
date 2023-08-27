@@ -1,3 +1,5 @@
+part of '../model.dart';
+
 /*
  * TeleDart - Telegram Bot API for Dart
  * Copyright (C) 2023  Dino PH Leung
@@ -16,19 +18,23 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-part of '../model.dart';
-
-/// This object represents a service message about General forum topic unhidden in the chat.
-///
-/// https://core.telegram.org/bots/api#writeaccessallowed
+/// This object represents a button to be shown above inline query results. You must use exactly one of the optional fields.
 @JsonSerializable(fieldRename: FieldRename.snake)
-class WriteAccessAllowed {
-  final String? webAppName;
+class InlineQueryResultsButton {
+  final String text;
 
-  WriteAccessAllowed({
-    this.webAppName,
+  final WebAppInfo? webApp;
+
+  final String? startParameter;
+
+  InlineQueryResultsButton({
+    required this.text,
+    this.webApp,
+    this.startParameter,
   });
-  factory WriteAccessAllowed.fromJson(Map<String, dynamic> json) =>
-      _$WriteAccessAllowedFromJson(json);
-  Map<String, dynamic> toJson() => _$WriteAccessAllowedToJson(this);
+
+  factory InlineQueryResultsButton.fromJson(Map<String, dynamic> json) =>
+      _$InlineQueryResultsButtonFromJson(json);
+
+  Map<String, dynamic> toJson() => _$InlineQueryResultsButtonToJson(this);
 }

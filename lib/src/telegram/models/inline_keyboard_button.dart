@@ -34,6 +34,7 @@ class InlineKeyboardButton {
   String? switchInlineQueryCurrentChat;
   CallbackGame? callbackGame;
   bool? pay;
+  SwitchInlineQueryChosenChat? switchInlineQueryChosenChat;
   InlineKeyboardButton({
     required this.text,
     this.url,
@@ -44,6 +45,7 @@ class InlineKeyboardButton {
     this.switchInlineQueryCurrentChat,
     this.callbackGame,
     this.pay,
+    this.switchInlineQueryChosenChat,
   });
   factory InlineKeyboardButton.fromJson(Map<String, dynamic> json) =>
       _$InlineKeyboardButtonFromJson(json);

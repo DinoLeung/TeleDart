@@ -29,6 +29,7 @@ class ChatMemberUpdated {
   ChatMember? oldChatMember;
   ChatMember? newChatMember;
   ChatInviteLink? inviteLink;
+  bool? viaChatFolderInviteLink;
 
   ChatMemberUpdated({
     this.chat,
@@ -36,6 +37,8 @@ class ChatMemberUpdated {
     this.oldChatMember,
     this.newChatMember,
     this.inviteLink,
+    this.viaChatFolderInviteLink,
+    this.date,
   });
 
   @JsonKey(includeFromJson: false, includeToJson: false)

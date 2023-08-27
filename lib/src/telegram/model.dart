@@ -163,3 +163,6 @@ part 'models/web_app_data.dart';
 part 'models/web_app_info.dart';
 part 'models/webhook_info.dart';
 part 'models/write_access_allowed.dart';
+part 'models/inline_query_results_button.dart';
+part 'models/switch_inline_query_chosen_chat.dart';
+part 'models/bot_name.dart';
