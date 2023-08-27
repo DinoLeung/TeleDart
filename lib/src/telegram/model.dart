@@ -16,8 +16,10 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+import 'package:http/http.dart';
 import 'package:json_annotation/json_annotation.dart';
 import '../util/time_helper.dart';
+import 'dart:io' as io;
 
 part 'model.g.dart';
 

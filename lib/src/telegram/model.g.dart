@@ -2611,7 +2611,7 @@ Map<String, dynamic> _$InputMessageContentToJson(
     <String, dynamic>{};
 
 InputSticker _$InputStickerFromJson(Map<String, dynamic> json) => InputSticker(
-      sticker: json['sticker'],
+      sticker: json['sticker'] as String,
       emojiList: (json['emoji_list'] as List<dynamic>)
           .map((e) => e as String)
           .toList(),
@@ -2625,7 +2625,10 @@ InputSticker _$InputStickerFromJson(Map<String, dynamic> json) => InputSticker(
     );
 
 Map<String, dynamic> _$InputStickerToJson(InputSticker instance) {
-  final val = <String, dynamic>{};
+  final val = <String, dynamic>{
+    'sticker': instance.sticker,
+    'emoji_list': instance.emojiList,
+  };
 
   void writeNotNull(String key, dynamic value) {
     if (value != null) {
@@ -2633,8 +2636,6 @@ Map<String, dynamic> _$InputStickerToJson(InputSticker instance) {
     }
   }
 
-  writeNotNull('sticker', instance.sticker);
-  val['emoji_list'] = instance.emojiList;
   writeNotNull('mask_position', instance.maskPosition?.toJson());
   writeNotNull('keywords', instance.keywords);
   return val;

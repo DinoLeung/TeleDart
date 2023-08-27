@@ -1995,14 +1995,14 @@ class Telegram {
 
   /// Use this method to clear the list of pinned messages in a General forum topic.
   /// The bot must be an administrator in the chat for this to work and must have the can_pin_messages administrator right in the supergroup.
-  /// 
+  ///
   /// Returns True on success.
-  /// 
+  ///
   /// https://core.telegram.org/bots/api#unpinallgeneralforumtopicmessages
   Future<bool> unpinAllGeneralForumTopicMessages(dynamic chatId) async {
     if (chatId is! String && chatId is! int) {
-      return Future.error(
-          TelegramException('Attribute \'chatId\' can only be either type of String or int'));
+      return Future.error(TelegramException(
+          'Attribute \'chatId\' can only be either type of String or int'));
     }
     var requestUrl = _apiUri('unpinAllGeneralForumTopicMessages');
     var body = <String, dynamic>{
@@ -2533,14 +2533,20 @@ class Telegram {
   ///
   /// https://core.telegram.org/bots/api#uploadstickerfile
   Future<File> uploadStickerFile(
-      int userId, InputSticker sticker, String stickerFormat) async {
+      int userId, io.File sticker, String stickerFormat) async {
     var requestUrl = _apiUri('uploadStickerFile');
     var body = <String, dynamic>{
       'user_id': userId,
-      'sticker': sticker,
       'sticker_format': stickerFormat,
     };
-    return File.fromJson(await HttpClient.httpPost(requestUrl, body: body));
+
+    var files = List<MultipartFile>.from([
+      MultipartFile('sticker', sticker.openRead(), sticker.lengthSync(),
+          filename: '${sticker.lengthSync()}')
+    ]);
+    
+    return File.fromJson(
+        await HttpClient.httpMultipartPost(requestUrl, files, body: body));
   }
 
   /// Use this method to create sticker set owned by a user
@@ -2566,7 +2572,17 @@ class Telegram {
       'needs_repainting': needsRepainting,
     };
 
-    return await HttpClient.httpPost(requestUrl, body: body);
+    List<MultipartFile> stickerFiles = stickers
+        .map((it) => it.stickerFile)
+        .whereType<MultipartFile>()
+        .toList();
+
+    if (stickerFiles.isNotEmpty) {
+      return await HttpClient.httpMultipartPost(
+          requestUrl, stickerFiles, body: body);
+    } else {
+      return await HttpClient.httpPost(requestUrl, body: body);
+    }
   }
 
   /// Use this method to add a new sticker to a set created by the bot
@@ -2588,7 +2604,13 @@ class Telegram {
       'stickers': jsonEncode(sticker),
     };
 
-    return await HttpClient.httpPost(requestUrl, body: body);
+    if (sticker.stickerFile != null) {
+      return await HttpClient.httpMultipartPost(
+          requestUrl, List.from([sticker.stickerFile]),
+          body: body);
+    } else {
+      return await HttpClient.httpPost(requestUrl, body: body);
+    }
   }
 
   /// Use this method to move a sticker in a set created by the bot to a specific position
@@ -2638,7 +2660,8 @@ class Telegram {
   /// Returns *True* on success.
   ///
   /// https://core.telegram.org/bots/api#setstickerkeywords
-  Future<bool> setStickerKeywords(String sticker, List<String>? keywords) async {
+  Future<bool> setStickerKeywords(
+      String sticker, List<String>? keywords) async {
     var requestUrl = _apiUri('setStickerKeywords');
     var body = <String, dynamic>{
       'sticker': sticker,
@@ -2653,7 +2676,8 @@ class Telegram {
   /// Returns *True* on success.
   ///
   /// https://core.telegram.org/bots/api#setstickermaskposition
-  Future<bool> setStickerMaskPosition(String sticker, MaskPosition? maskPosition) async {
+  Future<bool> setStickerMaskPosition(
+      String sticker, MaskPosition? maskPosition) async {
     var requestUrl = _apiUri('setStickerMaskPosition');
     var body = <String, dynamic>{
       'sticker': sticker,
@@ -2663,9 +2687,9 @@ class Telegram {
   }
 
   /// Use this method to set the title of a created sticker set.
-  /// 
+  ///
   /// Returns *True* on success.
-  /// 
+  ///
   /// https://core.telegram.org/bots/api#setstickersettitle
   Future<bool> setStickerSetTitle(String name, String title) async {
     var requestUrl = _apiUri('setStickerSetTitle');
@@ -2696,7 +2720,8 @@ class Telegram {
       // filename cannot be empty to post to Telegram server
       var files = List<MultipartFile>.filled(
           1,
-          MultipartFile('thumbnail', thumbnail.openRead(), thumbnail.lengthSync(),
+          MultipartFile(
+              'thumbnail', thumbnail.openRead(), thumbnail.lengthSync(),
               filename: '${thumbnail.lengthSync()}'));
       return await HttpClient.httpMultipartPost(requestUrl, files, body: body);
     } else if (thumbnail is String) {
@@ -2724,9 +2749,9 @@ class Telegram {
   }
 
   /// Use this method to delete a sticker set that was created by the bot.
-  /// 
+  ///
   /// Returns *True* on success.
-  /// 
+  ///
   /// https://core.telegram.org/bots/api#deletestickerset
   Future<bool> deleteStickerSet(String name) async {
     var requestUrl = _apiUri('deleteStickerSet');

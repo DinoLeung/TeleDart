@@ -23,28 +23,40 @@ part of '../model.dart';
 /// https://core.telegram.org/bots/api#inputsticker
 @JsonSerializable(fieldRename: FieldRename.snake)
 class InputSticker {
-  dynamic sticker; // InputFile or String
+  String sticker; // InputFile or String
   List<String> emojiList;
   MaskPosition? maskPosition;
   List<String>? keywords;
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  MultipartFile? stickerFile;
 
   InputSticker({
     required this.sticker,
     required this.emojiList,
     this.maskPosition,
     this.keywords,
+    this.stickerFile,
   });
+
+  // Factory to create InputSticker from file
+  factory InputSticker.file({
+    required io.File sticker,
+    required List<String> emojiList,
+    MaskPosition? maskPosition,
+    List<String>? keywords,
+  }) =>
+      InputSticker(
+        sticker: 'attach://${sticker.path}',
+        stickerFile: MultipartFile(
+            sticker.path, sticker.openRead(), sticker.lengthSync(),
+            filename: sticker.path.split('/').last),
+        emojiList: emojiList,
+        maskPosition: maskPosition,
+        keywords: keywords,
+      );
 
   factory InputSticker.fromJson(Map<String, dynamic> json) =>
       _$InputStickerFromJson(json);
   Map<String, dynamic> toJson() => _$InputStickerToJson(this);
 }
-
-// TODO: The added sticker. Pass a file_id as a String to send a file that already exists on the Telegram servers, pass an HTTP URL as a String for Telegram to get a file from the Internet, upload a new one using multipart/form-data, or pass “attach://<file_attach_name>” to upload a new one using multipart/form-data under <file_attach_name> name. Animated and video stickers can't be uploaded via HTTP URL.
-// Need to update files uploading for InputMedia type
-// filename cannot be empty when posting to Telegram server
-// var files = List<MultipartFile>.filled(
-//         1,
-//         MultipartFile(
-//             'png_sticker', pngSticker.openRead(), pngSticker.lengthSync(),
-//             filename: '${pngSticker.lengthSync()}'));
