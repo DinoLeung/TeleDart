@@ -713,6 +713,8 @@ Chat _$ChatFromJson(Map<String, dynamic> json) => Chat(
           ?.map((e) => e as String)
           .toList(),
       emojiStatusCustomEmojiId: json['emoji_status_custom_emoji_id'] as String?,
+      emojiStatusExpirationDate:
+          json['emoji_status_expiration_date'] as String?,
       bio: json['bio'] as String?,
       hasPrivateForwards: json['has_private_forwards'] as bool?,
       hasRestrictedVoiceAndVideoMessages:
@@ -763,6 +765,8 @@ Map<String, dynamic> _$ChatToJson(Chat instance) {
   writeNotNull('active_usernames', instance.activeUsernames);
   writeNotNull(
       'emoji_status_custom_emoji_id', instance.emojiStatusCustomEmojiId);
+  writeNotNull(
+      'emoji_status_expiration_date', instance.emojiStatusExpirationDate);
   writeNotNull('bio', instance.bio);
   writeNotNull('has_private_forwards', instance.hasPrivateForwards);
   writeNotNull('has_restricted_voice_and_video_messages',
@@ -3567,17 +3571,32 @@ Map<String, dynamic> _$PhotoSizeToJson(PhotoSize instance) {
 
 PollAnswer _$PollAnswerFromJson(Map<String, dynamic> json) => PollAnswer(
       pollId: json['poll_id'] as String,
-      user: User.fromJson(json['user'] as Map<String, dynamic>),
+      voterChat: json['voter_chat'] == null
+          ? null
+          : Chat.fromJson(json['voter_chat'] as Map<String, dynamic>),
+      user: json['user'] == null
+          ? null
+          : User.fromJson(json['user'] as Map<String, dynamic>),
       optionIds:
           (json['option_ids'] as List<dynamic>).map((e) => e as int).toList(),
     );
 
-Map<String, dynamic> _$PollAnswerToJson(PollAnswer instance) =>
-    <String, dynamic>{
-      'poll_id': instance.pollId,
-      'user': instance.user.toJson(),
-      'option_ids': instance.optionIds,
-    };
+Map<String, dynamic> _$PollAnswerToJson(PollAnswer instance) {
+  final val = <String, dynamic>{
+    'poll_id': instance.pollId,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('voter_chat', instance.voterChat?.toJson());
+  writeNotNull('user', instance.user?.toJson());
+  val['option_ids'] = instance.optionIds;
+  return val;
+}
 
 PollOption _$PollOptionFromJson(Map<String, dynamic> json) => PollOption(
       text: json['text'] as String,
