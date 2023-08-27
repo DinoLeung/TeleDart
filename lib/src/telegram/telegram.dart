@@ -3031,25 +3031,6 @@ class Telegram {
             (gameHighScore) => GameHighScore.fromJson(gameHighScore))
         .toList();
   }
-
-  /// Use this method to change the bot's name. Returns True on success.
-  Future<bool> setMyName({String? name, String? languageCode}) async {
-    var requestUrl = _apiUri('setMyName');
-    var body = <String, dynamic>{
-      'name': name,
-      'language_code': languageCode,
-    };
-    return await HttpClient.httpPost(requestUrl, body: body);
-  }
-
-  /// Use this method to get the current bot name for the given user language. Returns BotName on success.
-  Future<BotName> getMyName({String? languageCode}) async {
-    var requestUrl = _apiUri('getMyName');
-    var body = <String, dynamic>{
-      'language_code': languageCode,
-    };
-    return BotName.fromJson(await HttpClient.httpPost(requestUrl, body: body));
-  }
 }
 
 class TelegramException implements Exception {
