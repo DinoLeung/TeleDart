@@ -1312,8 +1312,8 @@ class Telegram {
   /// Returns *True* on success.
   ///
   /// https://core.telegram.org/bots/api#setchatpermissions
-  Future<bool> setChatPermissions(
-      dynamic chatId, ChatPermissions permissions, {bool? useIndependentChatPermissions}) async {
+  Future<bool> setChatPermissions(dynamic chatId, ChatPermissions permissions,
+      {bool? useIndependentChatPermissions}) async {
     if (chatId is! String && chatId is! int) {
       return Future.error(TelegramException(
           'Attribute \'chatId\' can only be either type of String or int'));
@@ -2078,9 +2078,9 @@ class Telegram {
   }
 
   /// Use this method to change the bot's name.
-  /// 
+  ///
   /// Returns *True* on success.
-  /// 
+  ///
   /// https://core.telegram.org/bots/api#setmyname
   Future<bool> setMyName(String name, String languageCode) async {
     var requestUrl = _apiUri('setMyName');
@@ -2092,9 +2092,9 @@ class Telegram {
   }
 
   /// Use this method to get the current bot name for the given user language.
-  /// 
+  ///
   /// Returns [BotName] on success.
-  /// 
+  ///
   /// https://core.telegram.org/bots/api#getmyname
   Future<BotName> getMyName(String languageCode) async {
     var requestUrl = _apiUri('getMyName');
@@ -2105,9 +2105,9 @@ class Telegram {
   }
 
   /// Use this method to change the bot's description, which is shown in the chat with the bot if the chat is empty.
-  /// 
+  ///
   /// Returns *True* on success.
-  /// 
+  ///
   /// https://core.telegram.org/bots/api#setmydescription
   Future<bool> setMyDescription(String description, String languageCode) async {
     var requestUrl = _apiUri('setMyDescription');
@@ -2119,24 +2119,26 @@ class Telegram {
   }
 
   /// Use this method to get the current bot description for the given user language.
-  /// 
+  ///
   /// Returns [BotDescription] on success.
-  /// 
+  ///
   /// https://core.telegram.org/bots/api#getmydescription
   Future<BotDescription> getMyDescription(String languageCode) async {
     var requestUrl = _apiUri('getMyDescription');
     var body = <String, dynamic>{
       'language_code': languageCode,
     };
-    return BotDescription.fromJson(await HttpClient.httpPost(requestUrl, body: body));
+    return BotDescription.fromJson(
+        await HttpClient.httpPost(requestUrl, body: body));
   }
 
   /// Use this method to change the bot's short description, which is shown on the bot's profile page and is sent together with the link when users share the bot.
-  /// 
+  ///
   /// Returns *True* on success.
-  /// 
+  ///
   /// https://core.telegram.org/bots/api#setmyshortdescription
-  Future<bool> setMyShortDescription(String shortDescription, String languageCode) async {
+  Future<bool> setMyShortDescription(
+      String shortDescription, String languageCode) async {
     var requestUrl = _apiUri('setMyShortDescription');
     var body = <String, dynamic>{
       'short_description': shortDescription,
@@ -2146,16 +2148,17 @@ class Telegram {
   }
 
   /// Use this method to get the current bot short description for the given user language.
-  /// 
+  ///
   /// Returns [BotShortDescription] on success.
-  /// 
+  ///
   /// https://core.telegram.org/bots/api#getmyshortdescription
   Future<BotShortDescription> getMyShortDescription(String languageCode) async {
     var requestUrl = _apiUri('getMyShortDescription');
     var body = <String, dynamic>{
       'language_code': languageCode,
     };
-    return BotShortDescription.fromJson(await HttpClient.httpPost(requestUrl, body: body));
+    return BotShortDescription.fromJson(
+        await HttpClient.httpPost(requestUrl, body: body));
   }
 
   /// Use this method to change the bot's menu button in a private chat, or the default menu button.
@@ -2511,17 +2514,15 @@ class Telegram {
   /// Returns the uploaded [File] on success.
   ///
   /// https://core.telegram.org/bots/api#uploadstickerfile
-  Future<File> uploadStickerFile(int userId, io.File pngSticker) async {
+  Future<File> uploadStickerFile(
+      int userId, InputSticker sticker, String stickerFormat) async {
     var requestUrl = _apiUri('uploadStickerFile');
-    var body = <String, dynamic>{'user_id': userId};
-    // filename cannot be empty to post to Telegram server
-    var files = List<MultipartFile>.filled(
-        1,
-        MultipartFile(
-            'png_sticker', pngSticker.openRead(), pngSticker.lengthSync(),
-            filename: '${pngSticker.lengthSync()}'));
-    return File.fromJson(
-        await HttpClient.httpMultipartPost(requestUrl, files, body: body));
+    var body = <String, dynamic>{
+      'user_id': userId,
+      'sticker': sticker,
+      'sticker_format': stickerFormat,
+    };
+    return File.fromJson(await HttpClient.httpPost(requestUrl, body: body));
   }
 
   /// Use this method to create sticker set owned by a user
@@ -2532,49 +2533,22 @@ class Telegram {
   /// Returns *True* on success.
   ///
   /// https://core.telegram.org/bots/api#createnewstickerset
-  Future<bool> createNewStickerSet(
-      int userId, String name, String title, String emojis,
-      {dynamic pngSticker,
-      io.File? tgsSticker,
-      io.File? webmSticker,
-      String? stickerType,
-      MaskPosition? maskPosition}) async {
+  Future<bool> createNewStickerSet(int userId, String name, String title,
+      List<InputSticker> stickers, String stickerFormat,
+      {String? stickerType, bool? needsRepainting}) async {
     var requestUrl = _apiUri('createNewStickerSet');
     var botInfo = await getMe();
     var body = <String, dynamic>{
       'user_id': userId,
       'name': '${name}_by_${botInfo.username}',
       'title': title,
-      'emojis': emojis,
+      'stickers': jsonEncode(stickers),
+      'sticker_format': stickerFormat,
       'sticker_type': stickerType,
-      'mask_position': maskPosition == null ? null : jsonEncode(maskPosition),
+      'needs_repainting': needsRepainting,
     };
 
-    if (pngSticker == null && tgsSticker == null && webmSticker == null) {
-      return Future.error(TelegramException(
-          'You must use exactly one of the fields `pngSticker`, `tgsSticker` or `webmSticker`.'));
-    } else if (pngSticker is String) {
-      body.addAll({'png_sticker': pngSticker});
-      return await HttpClient.httpPost(requestUrl, body: body);
-    } else if (pngSticker is io.File ||
-        tgsSticker != null ||
-        webmSticker != null) {
-      var file = pngSticker ?? tgsSticker ?? webmSticker;
-      var fieldName = pngSticker != null
-          ? 'png_sticker'
-          : tgsSticker != null
-              ? 'tgs_sticker'
-              : 'webm_sticker';
-      // filename cannot be empty to post to Telegram server
-      var files = List<MultipartFile>.filled(
-          1,
-          MultipartFile(fieldName, file.openRead(), file.lengthSync(),
-              filename: '${file.lengthSync()}'));
-      return await HttpClient.httpMultipartPost(requestUrl, files, body: body);
-    } else {
-      return Future.error(TelegramException(
-          'Attribute \'pngSticker\' can only be either io.File or String (Telegram fileId or image url)'));
-    }
+    return await HttpClient.httpPost(requestUrl, body: body);
   }
 
   /// Use this method to add a new sticker to a set created by the bot
@@ -2587,44 +2561,16 @@ class Telegram {
   /// Returns *True* on success.
   ///
   /// https://core.telegram.org/bots/api#addstickertoset
-  Future<bool> addStickerToSet(int userId, String name, String emojis,
-      {dynamic pngSticker,
-      io.File? tgsSticker,
-      io.File? webmSticker,
-      MaskPosition? maskPosition}) async {
+  Future<bool> addStickerToSet(
+      int userId, String name, InputSticker sticker) async {
     var requestUrl = _apiUri('addStickerToSet');
     var body = <String, dynamic>{
       'user_id': userId,
       'name': name,
-      'emojis': emojis,
-      'mask_position': maskPosition == null ? null : jsonEncode(maskPosition),
+      'stickers': jsonEncode(sticker),
     };
 
-    if (pngSticker == null && tgsSticker == null && webmSticker == null) {
-      return Future.error(TelegramException(
-          'You must use exactly one of the fields `pngSticker`, `tgsSticker` or `webmSticker`.'));
-    } else if (pngSticker is String) {
-      body.addAll({'png_sticker': pngSticker});
-      return await HttpClient.httpPost(requestUrl, body: body);
-    } else if (pngSticker is io.File ||
-        tgsSticker != null ||
-        webmSticker != null) {
-      var file = pngSticker ?? tgsSticker ?? webmSticker;
-      var fieldName = pngSticker != null
-          ? 'png_sticker'
-          : tgsSticker != null
-              ? 'tgs_sticker'
-              : 'webm_sticker';
-      // filename cannot be empty to post to Telegram server
-      var files = List<MultipartFile>.filled(
-          1,
-          MultipartFile(fieldName, file.openRead(), file.lengthSync(),
-              filename: '${file.lengthSync()}'));
-      return await HttpClient.httpMultipartPost(requestUrl, files, body: body);
-    } else {
-      return Future.error(TelegramException(
-          'Attribute \'pngSticker\' can only be either io.File or String (Telegram fileId or image url)'));
-    }
+    return await HttpClient.httpPost(requestUrl, body: body);
   }
 
   /// Use this method to move a sticker in a set created by the bot to a specific position
@@ -2652,14 +2598,77 @@ class Telegram {
     return await HttpClient.httpPost(requestUrl, body: body);
   }
 
+  /// Use this method to change the list of emoji assigned to a regular or custom emoji sticker.
+  /// The sticker must belong to a sticker set created by the bot.
+  ///
+  /// Returns *True* on success.
+  ///
+  /// https://core.telegram.org/bots/api#setstickeremojilist
+  Future<bool> setStickerEmojiList(
+      String sticker, List<String> emojiList) async {
+    var requestUrl = _apiUri('setStickerEmojiList');
+    var body = <String, dynamic>{
+      'sticker': sticker,
+      'emoji_list': jsonEncode(emojiList),
+    };
+    return await HttpClient.httpPost(requestUrl, body: body);
+  }
+
+  /// Use this method to change search keywords assigned to a regular or custom emoji sticker.
+  /// The sticker must belong to a sticker set created by the bot.
+  ///
+  /// Returns *True* on success.
+  ///
+  /// https://core.telegram.org/bots/api#setstickerkeywords
+  Future<bool> setStickerKeywords(String sticker, List<String>? keywords) async {
+    var requestUrl = _apiUri('setStickerKeywords');
+    var body = <String, dynamic>{
+      'sticker': sticker,
+      'keywords': keywords == null ? null : jsonEncode(keywords),
+    };
+    return await HttpClient.httpPost(requestUrl, body: body);
+  }
+
+  /// Use this method to change the [mask position] of a mask sticker.
+  /// The sticker must belong to a sticker set that was created by the bot.
+  ///
+  /// Returns *True* on success.
+  ///
+  /// https://core.telegram.org/bots/api#setstickermaskposition
+  /// [mask position](https://core.telegram.org/bots/api#maskposition)
+  Future<bool> setStickerMaskPosition(String sticker, MaskPosition? maskPosition) async {
+    var requestUrl = _apiUri('setStickerMaskPosition');
+    var body = <String, dynamic>{
+      'sticker': sticker,
+      'mask_position': maskPosition == null ? null : jsonEncode(maskPosition),
+    };
+    return await HttpClient.httpPost(requestUrl, body: body);
+  }
+
+  /// Use this method to set the title of a created sticker set.
+  /// 
+  /// Returns *True* on success.
+  /// 
+  /// https://core.telegram.org/bots/api#setstickersettitle
+  Future<bool> setStickerSetTitle(String name, String title) async {
+    var requestUrl = _apiUri('setStickerSetTitle');
+    var body = <String, dynamic>{
+      'name': name,
+      'title': title,
+    };
+    return await HttpClient.httpPost(requestUrl, body: body);
+  }
+
   /// Use this method to set the thumbnail of a sticker set
   ///
   /// Animated thumbnails can be set for animated sticker sets only.
   ///
   /// Returns *True* on success.
-  Future<bool> setStickerSetThumb(String name, int userId,
+  ///
+  /// https://core.telegram.org/bots/api#setstickersetthumbnail
+  Future<bool> setStickerSetThumbnail(String name, int userId,
       {dynamic thumb}) async {
-    var requestUrl = _apiUri('setStickerSetThumb');
+    var requestUrl = _apiUri('setStickerSetThumbnail');
     var body = <String, dynamic>{
       'name': name,
       'user_id': userId,
@@ -2680,6 +2689,32 @@ class Telegram {
       return Future.error(TelegramException(
           'Attribute \'thumb\' can only be either io.File or String (Telegram fileId or image url)'));
     }
+  }
+
+  /// Use this method to set the thumbnail of a custom emoji sticker set.
+  ///
+  /// Returns *True* on success.
+  ///
+  /// https://core.telegram.org/bots/api#setcustomemojistickersetthumbnail
+  Future<bool> setCustomEmojiStickerSetThumbnail(String name,
+      {String? customEmojiId}) async {
+    var requestUrl = _apiUri('setCustomEmojiStickerSetThumbnail');
+    var body = <String, dynamic>{
+      'name': name,
+      'custom_emoji_id': customEmojiId,
+    };
+    return await HttpClient.httpPost(requestUrl, body: body);
+  }
+
+  /// Use this method to delete a sticker set that was created by the bot.
+  /// 
+  /// Returns *True* on success.
+  /// 
+  /// https://core.telegram.org/bots/api#deletestickerset
+  Future<bool> deleteStickerSet(String name) async {
+    var requestUrl = _apiUri('deleteStickerSet');
+    var body = <String, dynamic>{'name': name};
+    return await HttpClient.httpPost(requestUrl, body: body);
   }
 
   /// Use this method to send answers to an inline query

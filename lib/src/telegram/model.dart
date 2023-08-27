@@ -104,6 +104,7 @@ part 'models/input_media_photo.dart';
 part 'models/input_media_video.dart';
 part 'models/input_media.dart';
 part 'models/input_message_content.dart';
+part 'models/input_sticker.dart';
 part 'models/input_text_message_content.dart';
 part 'models/input_venue_message_content.dart';
 part 'models/invoice.dart';

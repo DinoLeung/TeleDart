@@ -18,7 +18,7 @@
 
 part of '../model.dart';
 
-///This object represents a voice note.
+/// This object represents a voice note.
 ///
 /// https://core.telegram.org/bots/api#voice
 @JsonSerializable(fieldRename: FieldRename.snake)

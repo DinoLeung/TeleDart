@@ -2569,6 +2569,36 @@ Map<String, dynamic> _$InputMessageContentToJson(
         InputMessageContent instance) =>
     <String, dynamic>{};
 
+InputSticker _$InputStickerFromJson(Map<String, dynamic> json) => InputSticker(
+      sticker: json['sticker'],
+      emojiList: (json['emoji_list'] as List<dynamic>)
+          .map((e) => e as String)
+          .toList(),
+      maskPosition: json['mask_position'] == null
+          ? null
+          : MaskPosition.fromJson(
+              json['mask_position'] as Map<String, dynamic>),
+      keywords: (json['keywords'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+    );
+
+Map<String, dynamic> _$InputStickerToJson(InputSticker instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('sticker', instance.sticker);
+  val['emoji_list'] = instance.emojiList;
+  writeNotNull('mask_position', instance.maskPosition?.toJson());
+  writeNotNull('keywords', instance.keywords);
+  return val;
+}
+
 InputTextMessageContent _$InputTextMessageContentFromJson(
         Map<String, dynamic> json) =>
     InputTextMessageContent(
@@ -3878,6 +3908,7 @@ Sticker _$StickerFromJson(Map<String, dynamic> json) => Sticker(
           : MaskPosition.fromJson(
               json['mask_position'] as Map<String, dynamic>),
       customEmojiId: json['custom_emoji_id'] as String?,
+      needsRepainting: json['needs_repainting'] as bool?,
       fileSize: json['file_size'] as int?,
     );
 
@@ -3903,6 +3934,7 @@ Map<String, dynamic> _$StickerToJson(Sticker instance) {
   writeNotNull('premium_animation', instance.premiumAnimation?.toJson());
   writeNotNull('mask_position', instance.maskPosition?.toJson());
   writeNotNull('custom_emoji_id', instance.customEmojiId);
+  writeNotNull('needs_repainting', instance.needsRepainting);
   writeNotNull('file_size', instance.fileSize);
   return val;
 }

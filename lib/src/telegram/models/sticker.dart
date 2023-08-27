@@ -35,6 +35,7 @@ class Sticker {
   File? premiumAnimation;
   MaskPosition? maskPosition;
   String? customEmojiId;
+  bool? needsRepainting;
   int? fileSize;
   Sticker({
     required this.fileId,
@@ -49,6 +50,7 @@ class Sticker {
     this.premiumAnimation,
     this.maskPosition,
     this.customEmojiId,
+    this.needsRepainting,
     this.fileSize,
   });
   factory Sticker.fromJson(Map<String, dynamic> json) =>
