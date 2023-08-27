@@ -23,7 +23,7 @@ part of '../model.dart';
 /// https://core.telegram.org/bots/api#inputsticker
 @JsonSerializable(fieldRename: FieldRename.snake)
 class InputSticker {
-  String sticker; // InputFile or String
+  String sticker;
   List<String> emojiList;
   MaskPosition? maskPosition;
   List<String>? keywords;

@@ -22,7 +22,7 @@ part of '../model.dart';
 ///
 /// https://core.telegram.org/bots/api#inputmediaaudio
 @JsonSerializable(fieldRename: FieldRename.snake)
-class InputMediaAudio implements InputMedia {
+class InputMediaAudio implements InputMediaWithThumbnail {
   @override
   String type;
   @override
@@ -33,10 +33,15 @@ class InputMediaAudio implements InputMedia {
   String? parseMode;
   @override
   List<MessageEntity>? captionEntities;
-  dynamic thumbnail; // InputFile or String
+  @override
+  String? thumbnail;
   int? duration;
   String? performer;
   String? title;
+
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  MultipartFile? thumbnailFile;
 
   InputMediaAudio({
     this.type = InputMedia.typeAudio,
@@ -48,7 +53,34 @@ class InputMediaAudio implements InputMedia {
     this.duration,
     this.performer,
     this.title,
+    this.thumbnailFile,
   });
+
+  // Factory to create InputMediaAudio with thumbnail file
+  factory InputMediaAudio.withThumbnailFile({
+    required io.File thumbnail,
+    required String media,
+    String? caption,
+    String? parseMode,
+    List<MessageEntity>? captionEntities,
+    int? duration,
+    String? performer,
+    String? title,
+  }) =>
+      InputMediaAudio(
+        type: InputMedia.typeAudio,
+        media: media,
+        thumbnail: 'attach://${thumbnail.path}',
+        thumbnailFile: MultipartFile(
+            thumbnail.path, thumbnail.openRead(), thumbnail.lengthSync(),
+            filename: thumbnail.path.split('/').last),
+        caption: caption,
+        parseMode: parseMode,
+        captionEntities: captionEntities,
+        duration: duration,
+        performer: performer,
+        title: title,
+      );
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   Duration? get duration_ =>

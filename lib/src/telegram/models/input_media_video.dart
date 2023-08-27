@@ -22,7 +22,7 @@ part of '../model.dart';
 ///
 /// https://core.telegram.org/bots/api#inputmediavideo
 @JsonSerializable(fieldRename: FieldRename.snake)
-class InputMediaVideo implements InputMedia {
+class InputMediaVideo implements InputMediaWithThumbnail {
   @override
   String type;
   @override
@@ -33,12 +33,17 @@ class InputMediaVideo implements InputMedia {
   String? parseMode;
   @override
   List<MessageEntity>? captionEntities;
-  dynamic thumbnail; // InputFile or String
+  @override
+  String? thumbnail;
   int? width;
   int? height;
   int? duration;
   bool? supportsStreaming;
   bool? hasSpoiler;
+
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  MultipartFile? thumbnailFile;
 
   InputMediaVideo({
     this.type = InputMedia.typeVideo,
@@ -52,7 +57,38 @@ class InputMediaVideo implements InputMedia {
     this.duration,
     this.supportsStreaming,
     this.hasSpoiler,
+    this.thumbnailFile,
   });
+
+  // Factory to create InputMediaVideo with thumbnail file
+  factory InputMediaVideo.withThumbnailFile({
+    required io.File thumbnail,
+    required String media,
+    String? caption,
+    String? parseMode,
+    List<MessageEntity>? captionEntities,
+    int? width,
+    int? height,
+    int? duration,
+    bool? supportsStreaming,
+    bool? hasSpoiler,
+  }) =>
+      InputMediaVideo(
+        type: InputMedia.typeVideo,
+        media: media,
+        thumbnail: 'attach://${thumbnail.path}',
+        thumbnailFile: MultipartFile(
+            thumbnail.path, thumbnail.openRead(), thumbnail.lengthSync(),
+            filename: thumbnail.path.split('/').last),
+        caption: caption,
+        parseMode: parseMode,
+        captionEntities: captionEntities,
+        width: width,
+        height: height,
+        duration: duration,
+        supportsStreaming: supportsStreaming,
+        hasSpoiler: hasSpoiler,
+      );
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   Duration? get duration_ =>

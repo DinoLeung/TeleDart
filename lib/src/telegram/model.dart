@@ -105,6 +105,7 @@ part 'models/input_media_audio.dart';
 part 'models/input_media_document.dart';
 part 'models/input_media_photo.dart';
 part 'models/input_media_video.dart';
+part 'models/input_media_with_thumbnail.dart';
 part 'models/input_media.dart';
 part 'models/input_message_content.dart';
 part 'models/input_sticker.dart';

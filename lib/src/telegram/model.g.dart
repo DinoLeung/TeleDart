@@ -2390,7 +2390,7 @@ InputMediaAnimation _$InputMediaAnimationFromJson(Map<String, dynamic> json) =>
     InputMediaAnimation(
       type: json['type'] as String? ?? InputMedia.typeAnimation,
       media: json['media'] as String,
-      thumbnail: json['thumbnail'],
+      thumbnail: json['thumbnail'] as String?,
       caption: json['caption'] as String?,
       parseMode: json['parse_mode'] as String?,
       captionEntities: (json['caption_entities'] as List<dynamic>?)
@@ -2430,7 +2430,7 @@ InputMediaAudio _$InputMediaAudioFromJson(Map<String, dynamic> json) =>
     InputMediaAudio(
       type: json['type'] as String? ?? InputMedia.typeAudio,
       media: json['media'] as String,
-      thumbnail: json['thumbnail'],
+      thumbnail: json['thumbnail'] as String?,
       caption: json['caption'] as String?,
       parseMode: json['parse_mode'] as String?,
       captionEntities: (json['caption_entities'] as List<dynamic>?)
@@ -2468,7 +2468,7 @@ InputMediaDocument _$InputMediaDocumentFromJson(Map<String, dynamic> json) =>
     InputMediaDocument(
       type: json['type'] as String? ?? InputMedia.typeDocument,
       media: json['media'] as String,
-      thumbnail: json['thumbnail'],
+      thumbnail: json['thumbnail'] as String?,
       caption: json['caption'] as String?,
       parseMode: json['parse_mode'] as String?,
       captionEntities: (json['caption_entities'] as List<dynamic>?)
@@ -2541,7 +2541,7 @@ InputMediaVideo _$InputMediaVideoFromJson(Map<String, dynamic> json) =>
       captionEntities: (json['caption_entities'] as List<dynamic>?)
           ?.map((e) => MessageEntity.fromJson(e as Map<String, dynamic>))
           .toList(),
-      thumbnail: json['thumbnail'],
+      thumbnail: json['thumbnail'] as String?,
       width: json['width'] as int?,
       height: json['height'] as int?,
       duration: json['duration'] as int?,
@@ -2571,6 +2571,40 @@ Map<String, dynamic> _$InputMediaVideoToJson(InputMediaVideo instance) {
   writeNotNull('duration', instance.duration);
   writeNotNull('supports_streaming', instance.supportsStreaming);
   writeNotNull('has_spoiler', instance.hasSpoiler);
+  return val;
+}
+
+InputMediaWithThumbnail _$InputMediaWithThumbnailFromJson(
+        Map<String, dynamic> json) =>
+    InputMediaWithThumbnail(
+      type: json['type'] as String,
+      media: json['media'] as String,
+      thumbnail: json['thumbnail'] as String?,
+      caption: json['caption'] as String?,
+      parseMode: json['parse_mode'] as String?,
+      captionEntities: (json['caption_entities'] as List<dynamic>?)
+          ?.map((e) => MessageEntity.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$InputMediaWithThumbnailToJson(
+    InputMediaWithThumbnail instance) {
+  final val = <String, dynamic>{
+    'type': instance.type,
+    'media': instance.media,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('caption', instance.caption);
+  writeNotNull('parse_mode', instance.parseMode);
+  writeNotNull('caption_entities',
+      instance.captionEntities?.map((e) => e.toJson()).toList());
+  writeNotNull('thumbnail', instance.thumbnail);
   return val;
 }
 

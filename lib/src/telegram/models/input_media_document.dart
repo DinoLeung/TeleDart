@@ -22,7 +22,7 @@ part of '../model.dart';
 ///
 /// https://core.telegram.org/bots/api#inputmediadocument
 @JsonSerializable(fieldRename: FieldRename.snake)
-class InputMediaDocument implements InputMedia {
+class InputMediaDocument implements InputMediaWithThumbnail {
   @override
   String type;
   @override
@@ -33,8 +33,14 @@ class InputMediaDocument implements InputMedia {
   String? parseMode;
   @override
   List<MessageEntity>? captionEntities;
-  dynamic thumbnail; // InputFile or String
+  @override
+  String? thumbnail;
   bool? disableContentTypeDetection;
+
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  MultipartFile? thumbnailFile;
+
   InputMediaDocument({
     this.type = InputMedia.typeDocument,
     required this.media,
@@ -43,7 +49,31 @@ class InputMediaDocument implements InputMedia {
     this.parseMode,
     this.captionEntities,
     this.disableContentTypeDetection,
+    this.thumbnailFile,
   });
+
+  // Factory to create InputMediaDocument with thumbnail file
+  factory InputMediaDocument.withThumbnailFile({
+    required io.File thumbnail,
+    required String media,
+    String? caption,
+    String? parseMode,
+    List<MessageEntity>? captionEntities,
+    bool? disableContentTypeDetection,
+  }) =>
+      InputMediaDocument(
+        type: InputMedia.typeDocument,
+        media: media,
+        thumbnail: 'attach://${thumbnail.path}',
+        thumbnailFile: MultipartFile(
+            thumbnail.path, thumbnail.openRead(), thumbnail.lengthSync(),
+            filename: thumbnail.path.split('/').last),
+        caption: caption,
+        parseMode: parseMode,
+        captionEntities: captionEntities,
+        disableContentTypeDetection: disableContentTypeDetection,
+      );
+
   factory InputMediaDocument.fromJson(Map<String, dynamic> json) =>
       _$InputMediaDocumentFromJson(json);
   @override
