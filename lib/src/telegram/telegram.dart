@@ -2371,7 +2371,19 @@ class Telegram {
       'parse_mode': parseMode,
       'reply_markup': replyMarkup == null ? null : jsonEncode(replyMarkup),
     };
-    var res = await HttpClient.httpPost(requestUrl, body: body);
+
+    List<MultipartFile> multiPartFiles = media == null
+        ? []
+        : [
+            media.mediaFile,
+            media is InputMediaWithThumbnail ? media.thumbnailFile : null
+          ].whereType<MultipartFile>().toList();
+
+    var res = multiPartFiles.isEmpty
+        ? await HttpClient.httpPost(requestUrl, body: body)
+        : await HttpClient.httpMultipartPost(requestUrl, multiPartFiles,
+            body: body);
+
     if (res == true) {
       return Future.error(
           TelegramException('Edited message is NOT sent by the bot'));
@@ -2557,7 +2569,7 @@ class Telegram {
       MultipartFile('sticker', sticker.openRead(), sticker.lengthSync(),
           filename: '${sticker.lengthSync()}')
     ]);
-    
+
     return File.fromJson(
         await HttpClient.httpMultipartPost(requestUrl, files, body: body));
   }
@@ -2591,8 +2603,8 @@ class Telegram {
         .toList();
 
     if (stickerFiles.isNotEmpty) {
-      return await HttpClient.httpMultipartPost(
-          requestUrl, stickerFiles, body: body);
+      return await HttpClient.httpMultipartPost(requestUrl, stickerFiles,
+          body: body);
     } else {
       return await HttpClient.httpPost(requestUrl, body: body);
     }
