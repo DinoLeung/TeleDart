@@ -1,3 +1,8 @@
+## 0.6.1
+
+- Fixed Dart doc generation errors
+- Fixed Dart formatter errors
+
 ## 0.6.0
 
 - Support API 6.5, 6.6, 6.7, 6.8
