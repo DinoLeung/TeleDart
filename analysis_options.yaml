@@ -10,7 +10,6 @@ linter:
     - always_declare_return_types
     - cancel_subscriptions
     - hash_and_equals
-    - iterable_contains_unrelated_type
-    - list_remove_unrelated_type
+    - collection_methods_unrelated_type
     - prefer_expression_function_bodies
     - test_types_in_equals
