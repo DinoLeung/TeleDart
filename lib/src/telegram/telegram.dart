@@ -2817,6 +2817,8 @@ class Telegram {
   /// On success, a [SentWebAppMessage] object is returned.
   ///
   /// https://core.telegram.org/bots/api#answerwebappquery
+  /// 
+  /// [Web App]: (https://core.telegram.org/bots/webapps)
   Future<SentWebAppMessage> answerWebAppQuery(
       String webAppQueryId, InlineQueryResult result) async {
     var requestUrl = _apiUri('answerWebAppQuery');

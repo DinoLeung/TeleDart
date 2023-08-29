@@ -48,9 +48,6 @@ import 'model/shipping_query.dart';
 ///
 /// Here the `message` variable will be an instance of [TeleDartMessage],
 /// since the onMessage method returns a [Stream<TeleDartMessage>].
-///
-/// In case you want to use methods of the [Telegram] class, you can do so
-/// by calling them through [TeleDart.telegram]
 class TeleDart extends Telegram {
   final Event _event;
 

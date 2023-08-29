@@ -18,7 +18,7 @@
 
 /// Util classes for TeleDart
 
-library telegram;
+library util;
 
 export 'src/util/http_client.dart';
 export 'src/util/time_helper.dart';

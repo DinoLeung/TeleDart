@@ -111,7 +111,7 @@ class TeleDartMessage extends Message {
 
   /// Reply to the recieved message with text
   ///
-  /// A wrapper around [TeleDart.replyMessage].
+  /// A wrapper around [TeleDart.sendMessage].
   /// On success, returns the sent [Message].
   ///
   /// Apart from a [String] to reply with, it can
@@ -142,7 +142,7 @@ class TeleDartMessage extends Message {
 
   /// Reply to the recieved message with an image
   ///
-  /// A wrapper around [TeleDart.replyPhoto].
+  /// A wrapper around [TeleDart.sendPhoto].
   /// On success, returns the sent [Message].
   ///
   /// Apart from a [photo] to reply with, it can
@@ -175,7 +175,7 @@ class TeleDartMessage extends Message {
 
   /// Reply to the recieved message with an audio
   ///
-  /// A wrapper around [TeleDart.replyAudio].
+  /// A wrapper around [TeleDart.sendAudio].
   /// On success, returns the sent [Message].
   ///
   /// Apart from an [audio] to reply with, it can
@@ -214,7 +214,7 @@ class TeleDartMessage extends Message {
 
   /// Reply to the recieved message with a document
   ///
-  /// A wrapper around [TeleDart.replyDocument].
+  /// A wrapper around [TeleDart.sendDocument].
   /// On success, returns the sent [Message].
   ///
   /// Apart from a [document] to reply with, it can
@@ -247,7 +247,7 @@ class TeleDartMessage extends Message {
 
   /// Reply to the recieved message with a video
   ///
-  /// A wrapper around [TeleDart.replyVideo].
+  /// A wrapper around [TeleDart.sendVideo].
   /// On success, returns the sent [Message].
   ///
   /// Apart from a [video] to reply with, it can
@@ -290,7 +290,7 @@ class TeleDartMessage extends Message {
 
   /// Reply to the recieved message with an animation (GIF or H.264/MPEG-4 AVC video without sound)
   ///
-  /// A wrapper around [TeleDart.replyAnimation].
+  /// A wrapper around [TeleDart.sendAnimation].
   /// On success, returns the sent [Message].
   ///
   /// Apart from an [animation] to reply with, it can
@@ -331,7 +331,7 @@ class TeleDartMessage extends Message {
 
   /// Reply to the recieved message with a voice message
   ///
-  /// A wrapper around [TeleDart.replyVoice].
+  /// A wrapper around [TeleDart.sendVoice].
   /// On success, returns the sent [Message].
   ///
   /// Apart from a [voice] to reply with, it can
@@ -362,7 +362,7 @@ class TeleDartMessage extends Message {
 
   /// Reply to the recieved message with a video note
   ///
-  /// A wrapper around [TeleDart.replyVideoNote].
+  /// A wrapper around [TeleDart.sendVideoNote].
   /// On success, returns the sent [Message].
   ///
   /// Apart from a [videoNote] to reply with, it can
@@ -393,7 +393,7 @@ class TeleDartMessage extends Message {
 
   /// Reply to the recieved message with a media group message (multiple media files)
   ///
-  /// A wrapper around [TeleDart.replyMediaGroup].
+  /// A wrapper around [TeleDart.sendMediaGroup].
   /// On success, returns the sent [Message].
   ///
   /// Apart from a [List<InputMedia>] to reply with, it can
@@ -416,7 +416,7 @@ class TeleDartMessage extends Message {
 
   /// Reply to the recieved message with a location
   ///
-  /// A wrapper around [TeleDart.replyLocation].
+  /// A wrapper around [TeleDart.sendLocation].
   /// On success, returns the sent [Message].
   ///
   /// Apart from a [latitude] and a [longitude], it can
@@ -450,7 +450,7 @@ class TeleDartMessage extends Message {
 
   /// Reply to the recieved message with a venue message
   ///
-  /// A wrapper around [TeleDart.replyVenue].
+  /// A wrapper around [TeleDart.sendVenue].
   /// On success, returns the sent [Message].
   ///
   /// Apart from a [latitude] and a [longitude] a [title] and an [address],
@@ -486,7 +486,7 @@ class TeleDartMessage extends Message {
 
   /// Reply to the recieved message with a location
   ///
-  /// A wrapper around [TeleDart.replyContact].
+  /// A wrapper around [TeleDart.sendContact].
   /// On success, returns the sent [Message].
   ///
   /// Apart from a [phoneNumber] and a [firstName], it can
@@ -516,7 +516,7 @@ class TeleDartMessage extends Message {
 
   /// Reply to the recieved message with a poll
   ///
-  /// A wrapper around [TeleDart.replyPoll].
+  /// A wrapper around [TeleDart.sendPoll].
   /// On success, returns the sent [Message].
   ///
   /// Apart from a [question] and a [List<String>] of [options], it can
@@ -562,7 +562,7 @@ class TeleDartMessage extends Message {
 
   /// Reply to the recieved message with a dice message
   ///
-  /// A wrapper around [TeleDart.replyDice].
+  /// A wrapper around [TeleDart.sendDice].
   /// On success, returns the sent [Message].
   ///
   /// It can take some options that control the message
@@ -588,7 +588,7 @@ class TeleDartMessage extends Message {
 
   /// Reply to the recieved message with an invoice
   ///
-  /// A wrapper around [TeleDart.replyInvoice].
+  /// A wrapper around [TeleDart.sendInvoice].
   /// On success, returns the sent [Message].
   ///
   /// Apart from a [title], a [description], a [payload], a [providerToken] and a list of [prices],
@@ -650,7 +650,7 @@ class TeleDartMessage extends Message {
 
   /// Reply to the recieved message with a game
   ///
-  /// A wrapper around [TeleDart.replyGame].
+  /// A wrapper around [TeleDart.sendGame].
   /// On success, returns the sent [Message].
   ///
   /// Apart from a [gameShortName], it can also take some options that control the message appearance and behavior.
@@ -675,7 +675,7 @@ class TeleDartMessage extends Message {
 
   /// Reply to the recieved message with an image
   ///
-  /// A wrapper around [TeleDart.replySticker].
+  /// A wrapper around [TeleDart.sendSticker].
   /// On success, returns the sent [Message].
   ///
   /// Apart from a [sticker] to reply with, it can
