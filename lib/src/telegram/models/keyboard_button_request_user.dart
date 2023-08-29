@@ -18,17 +18,22 @@
 
 part of '../model.dart';
 
-/// This object represents a service message about General forum topic unhidden in the chat.
+/// This object defines the criteria used to request a suitable user.
+/// The identifier of the selected user will be shared with the bot when
+/// the corresponding button is pressed.
 ///
-/// https://core.telegram.org/bots/api#writeaccessallowed
+/// https://core.telegram.org/bots/api#keyboardbuttonrequestuser
 @JsonSerializable(fieldRename: FieldRename.snake)
-class WriteAccessAllowed {
-  String? webAppName;
-
-  WriteAccessAllowed({
-    this.webAppName,
+class KeyboardButtonRequestUser {
+  int requestId;
+  bool? userIsBot;
+  bool? userIsPremium;
+  KeyboardButtonRequestUser({
+    required this.requestId,
+    this.userIsBot,
+    this.userIsPremium,
   });
-  factory WriteAccessAllowed.fromJson(Map<String, dynamic> json) =>
-      _$WriteAccessAllowedFromJson(json);
-  Map<String, dynamic> toJson() => _$WriteAccessAllowedToJson(this);
+  factory KeyboardButtonRequestUser.fromJson(Map<String, dynamic> json) =>
+      _$KeyboardButtonRequestUserFromJson(json);
+  Map<String, dynamic> toJson() => _$KeyboardButtonRequestUserToJson(this);
 }

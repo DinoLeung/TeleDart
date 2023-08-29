@@ -34,9 +34,9 @@ class InlineQueryResultArticle implements InlineQueryResult {
   String? url;
   bool? hideUrl;
   String? description;
-  String? thumbUrl;
-  String? thumbWidth;
-  String? thumbHeight;
+  String? thumbnailUrl;
+  String? thumbnailWidth;
+  String? thumbnailHeight;
   InlineQueryResultArticle({
     required this.id,
     this.type = InlineQueryResult.typeArticle,
@@ -46,9 +46,9 @@ class InlineQueryResultArticle implements InlineQueryResult {
     this.url,
     this.hideUrl,
     this.description,
-    this.thumbUrl,
-    this.thumbWidth,
-    this.thumbHeight,
+    this.thumbnailUrl,
+    this.thumbnailWidth,
+    this.thumbnailHeight,
   });
   factory InlineQueryResultArticle.fromJson(Map<String, dynamic> json) =>
       _$InlineQueryResultArticleFromJson(json);

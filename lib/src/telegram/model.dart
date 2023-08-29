@@ -16,8 +16,10 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+import 'package:http/http.dart';
 import 'package:json_annotation/json_annotation.dart';
 import '../util/time_helper.dart';
+import 'dart:io' as io;
 
 part 'model.g.dart';
 
@@ -32,6 +34,9 @@ part 'models/bot_command_scope_chat.dart';
 part 'models/bot_command_scope_default.dart';
 part 'models/bot_command_scope.dart';
 part 'models/bot_command.dart';
+part 'models/bot_description.dart';
+part 'models/bot_name.dart';
+part 'models/bot_short_description.dart';
 part 'models/callback_game.dart';
 part 'models/callback_query.dart';
 part 'models/chat_administrator_rights.dart';
@@ -48,6 +53,7 @@ part 'models/chat_member_updated.dart';
 part 'models/chat_member.dart';
 part 'models/chat_permissions.dart';
 part 'models/chat_photo.dart';
+part 'models/chat_shared.dart';
 part 'models/chat.dart';
 part 'models/chosen_inline_result.dart';
 part 'models/contact.dart';
@@ -89,6 +95,7 @@ part 'models/inline_query_result_venue.dart';
 part 'models/inline_query_result_video.dart';
 part 'models/inline_query_result_voice.dart';
 part 'models/inline_query_result.dart';
+part 'models/inline_query_results_button.dart';
 part 'models/inline_query.dart';
 part 'models/input_contact_message_content.dart';
 part 'models/input_invoice_message_content.dart';
@@ -98,12 +105,16 @@ part 'models/input_media_audio.dart';
 part 'models/input_media_document.dart';
 part 'models/input_media_photo.dart';
 part 'models/input_media_video.dart';
+part 'models/input_media_with_thumbnail.dart';
 part 'models/input_media.dart';
 part 'models/input_message_content.dart';
+part 'models/input_sticker.dart';
 part 'models/input_text_message_content.dart';
 part 'models/input_venue_message_content.dart';
 part 'models/invoice.dart';
 part 'models/keyboard_button_poll_type.dart';
+part 'models/keyboard_button_request_chat.dart';
+part 'models/keyboard_button_request_user.dart';
 part 'models/keyboard_button.dart';
 part 'models/labeled_price.dart';
 part 'models/location.dart';
@@ -147,9 +158,12 @@ part 'models/shipping_option.dart';
 part 'models/shipping_query.dart';
 part 'models/sticker_set.dart';
 part 'models/sticker.dart';
+part 'models/story.dart';
 part 'models/successful_payment.dart';
+part 'models/switch_inline_query_chosen_chat.dart';
 part 'models/update.dart';
 part 'models/user_profile_photos.dart';
+part 'models/user_shared.dart';
 part 'models/user.dart';
 part 'models/venue.dart';
 part 'models/video_note.dart';

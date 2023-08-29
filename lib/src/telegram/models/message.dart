@@ -50,6 +50,7 @@ class Message {
   Document? document;
   List<PhotoSize>? photo;
   Sticker? sticker;
+  Story? story;
   Video? video;
   VideoNote? videoNote;
   Voice? voice;
@@ -76,6 +77,8 @@ class Message {
   Message? pinnedMessage;
   Invoice? invoice;
   SuccessfulPayment? successfulPayment;
+  UserShared? userShared;
+  ChatShared? chatShared;
   String? connectedWebsite;
   WriteAccessAllowed? writeAccessAllowed;
   PassportData? passportData;
@@ -121,6 +124,7 @@ class Message {
     this.document,
     this.photo,
     this.sticker,
+    this.story,
     this.video,
     this.videoNote,
     this.voice,
@@ -147,6 +151,8 @@ class Message {
     this.pinnedMessage,
     this.invoice,
     this.successfulPayment,
+    this.userShared,
+    this.chatShared,
     this.connectedWebsite,
     this.writeAccessAllowed,
     this.passportData,

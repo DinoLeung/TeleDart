@@ -36,7 +36,7 @@ class InlineQueryResultVideo implements InlineQueryResult {
   String type;
   String videoUrl;
   String mimeType;
-  String thumbUrl;
+  String thumbnailUrl;
   String title;
   String? caption;
   String? parseMode;
@@ -54,7 +54,7 @@ class InlineQueryResultVideo implements InlineQueryResult {
     this.type = InlineQueryResult.typeVideo,
     required this.videoUrl,
     required this.mimeType,
-    required this.thumbUrl,
+    required this.thumbnailUrl,
     required this.title,
     this.caption,
     this.parseMode,

@@ -24,11 +24,13 @@ part of '../model.dart';
 @JsonSerializable(fieldRename: FieldRename.snake)
 class PollAnswer {
   String pollId;
-  User user;
+  Chat? voterChat;
+  User? user;
   List<int> optionIds;
   PollAnswer({
     required this.pollId,
-    required this.user,
+    this.voterChat,
+    this.user,
     required this.optionIds,
   });
   factory PollAnswer.fromJson(Map<String, dynamic> json) =>

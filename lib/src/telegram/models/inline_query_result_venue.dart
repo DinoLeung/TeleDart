@@ -45,9 +45,9 @@ class InlineQueryResultVenue implements InlineQueryResult {
   @override
   InlineKeyboardMarkup? replyMarkup;
   InputMessageContent? inputMessageContent;
-  String? thumbUrl;
-  int? thumbWidth;
-  int? thumbHeight;
+  String? thumbnailUrl;
+  int? thumbnailWidth;
+  int? thumbnailHeight;
   InlineQueryResultVenue({
     required this.id,
     this.type = InlineQueryResult.typeVenue,
@@ -61,9 +61,9 @@ class InlineQueryResultVenue implements InlineQueryResult {
     this.googlePlaceType,
     this.replyMarkup,
     this.inputMessageContent,
-    this.thumbUrl,
-    this.thumbWidth,
-    this.thumbHeight,
+    this.thumbnailUrl,
+    this.thumbnailWidth,
+    this.thumbnailHeight,
   });
   factory InlineQueryResultVenue.fromJson(Map<String, dynamic> json) =>
       _$InlineQueryResultVenueFromJson(json);

@@ -29,12 +29,13 @@ class Sticker {
   int height;
   bool isAnimated;
   bool isVideo;
-  PhotoSize? thumb;
+  PhotoSize? thumbnail;
   String? emoji;
   String? setName;
   File? premiumAnimation;
   MaskPosition? maskPosition;
   String? customEmojiId;
+  bool? needsRepainting;
   int? fileSize;
   Sticker({
     required this.fileId,
@@ -43,12 +44,13 @@ class Sticker {
     required this.height,
     required this.isAnimated,
     required this.isVideo,
-    this.thumb,
+    this.thumbnail,
     this.emoji,
     this.setName,
     this.premiumAnimation,
     this.maskPosition,
     this.customEmojiId,
+    this.needsRepainting,
     this.fileSize,
   });
   factory Sticker.fromJson(Map<String, dynamic> json) =>

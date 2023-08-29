@@ -38,6 +38,7 @@ class Chat {
   ChatPhoto? photo;
   List<String>? activeUsernames;
   String? emojiStatusCustomEmojiId;
+  String? emojiStatusExpirationDate;
   String? bio;
   bool? hasPrivateForwards;
   bool? hasRestrictedVoiceAndVideoMessages;
@@ -68,6 +69,7 @@ class Chat {
     this.photo,
     this.activeUsernames,
     this.emojiStatusCustomEmojiId,
+    this.emojiStatusExpirationDate,
     this.bio,
     this.hasPrivateForwards,
     this.hasRestrictedVoiceAndVideoMessages,

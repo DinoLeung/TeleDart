@@ -340,7 +340,7 @@ class Telegram {
       int? duration,
       String? performer,
       String? title,
-      dynamic thumb,
+      dynamic thumbnail,
       bool? disableNotification,
       bool? protectContent,
       int? replyToMessageId,
@@ -379,14 +379,14 @@ class Telegram {
           'Attribute \'audio\' can only be either io.File or String (Telegram fileId or image url)'));
     }
 
-    if (thumb != null) {
-      if (thumb is io.File) {
-        multiPartFiles.add(HttpClient.toMultiPartFile(thumb, 'thumb'));
-      } else if (thumb is String) {
-        body.addAll({'thumb': thumb});
+    if (thumbnail != null) {
+      if (thumbnail is io.File) {
+        multiPartFiles.add(HttpClient.toMultiPartFile(thumbnail, 'thumbnail'));
+      } else if (thumbnail is String) {
+        body.addAll({'thumbnail': thumbnail});
       } else {
         return Future.error(TelegramException(
-            'Attribute \'thumb\' can only be either io.File or String (Telegram fileId or image url)'));
+            'Attribute \'thumbnail\' can only be either io.File or String (Telegram fileId or image url)'));
       }
     }
 
@@ -407,7 +407,7 @@ class Telegram {
   /// https://core.telegram.org/bots/api#senddocument
   Future<Message> sendDocument(dynamic chatId, dynamic document,
       {int? messageThreadId,
-      dynamic thumb,
+      dynamic thumbnail,
       String? caption,
       String? parseMode,
       List<MessageEntity>? captionEntities,
@@ -448,14 +448,14 @@ class Telegram {
           'Attribute \'document\' can only be either io.File or String (Telegram fileId or image url)'));
     }
 
-    if (thumb != null) {
-      if (thumb is io.File) {
-        multiPartFiles.add(HttpClient.toMultiPartFile(thumb, 'thumb'));
-      } else if (thumb is String) {
-        body.addAll({'thumb': thumb});
+    if (thumbnail != null) {
+      if (thumbnail is io.File) {
+        multiPartFiles.add(HttpClient.toMultiPartFile(thumbnail, 'thumbnail'));
+      } else if (thumbnail is String) {
+        body.addAll({'thumbnail': thumbnail});
       } else {
         return Future.error(TelegramException(
-            'Attribute \'thumb\' can only be either io.File or String (Telegram fileId or image url)'));
+            'Attribute \'thumbnail\' can only be either io.File or String (Telegram fileId or image url)'));
       }
     }
 
@@ -481,7 +481,7 @@ class Telegram {
       int? duration,
       int? width,
       int? height,
-      dynamic thumb,
+      dynamic thumbnail,
       String? caption,
       String? parseMode,
       List<MessageEntity>? captionEntities,
@@ -527,14 +527,14 @@ class Telegram {
           'Attribute \'video\' can only be either io.File or String (Telegram fileId or image url)'));
     }
 
-    if (thumb != null) {
-      if (thumb is io.File) {
-        multiPartFiles.add(HttpClient.toMultiPartFile(thumb, 'thumb'));
-      } else if (thumb is String) {
-        body.addAll({'thumb': thumb});
+    if (thumbnail != null) {
+      if (thumbnail is io.File) {
+        multiPartFiles.add(HttpClient.toMultiPartFile(thumbnail, 'thumbnail'));
+      } else if (thumbnail is String) {
+        body.addAll({'thumbnail': thumbnail});
       } else {
         return Future.error(TelegramException(
-            'Attribute \'thumb\' can only be either io.File or String (Telegram fileId or image url)'));
+            'Attribute \'thumbnail\' can only be either io.File or String (Telegram fileId or image url)'));
       }
     }
 
@@ -557,7 +557,7 @@ class Telegram {
       int? duration,
       int? width,
       int? height,
-      dynamic thumb,
+      dynamic thumbnail,
       String? caption,
       String? parseMode,
       List<MessageEntity>? captionEntities,
@@ -601,14 +601,14 @@ class Telegram {
           'Attribute \'animation\' can only be either io.File or String (Telegram fileId or image url)'));
     }
 
-    if (thumb != null) {
-      if (thumb is io.File) {
-        multiPartFiles.add(HttpClient.toMultiPartFile(thumb, 'thumb'));
-      } else if (thumb is String) {
-        body.addAll({'thumb': thumb});
+    if (thumbnail != null) {
+      if (thumbnail is io.File) {
+        multiPartFiles.add(HttpClient.toMultiPartFile(thumbnail, 'thumbnail'));
+      } else if (thumbnail is String) {
+        body.addAll({'thumbnail': thumbnail});
       } else {
         return Future.error(TelegramException(
-            'Attribute \'thumb\' can only be either io.File or String (Telegram fileId or image url)'));
+            'Attribute \'thumbnail\' can only be either io.File or String (Telegram fileId or image url)'));
       }
     }
 
@@ -694,7 +694,7 @@ class Telegram {
       {int? messageThreadId,
       int? duration,
       int? length,
-      dynamic thumb,
+      dynamic thumbnail,
       bool? disableNotification,
       bool? protectContent,
       int? replyToMessageId,
@@ -728,14 +728,14 @@ class Telegram {
           'Attribute \'videoNote\' can only be either io.File or String (Telegram fileId or image url)'));
     }
 
-    if (thumb != null) {
-      if (thumb is io.File) {
-        multiPartFiles.add(HttpClient.toMultiPartFile(thumb, 'thumb'));
-      } else if (thumb is String) {
-        body.addAll({'thumb': thumb});
+    if (thumbnail != null) {
+      if (thumbnail is io.File) {
+        multiPartFiles.add(HttpClient.toMultiPartFile(thumbnail, 'thumbnail'));
+      } else if (thumbnail is String) {
+        body.addAll({'thumbnail': thumbnail});
       } else {
         return Future.error(TelegramException(
-            'Attribute \'thumb\' can only be either io.File or String (Telegram fileId or image url)'));
+            'Attribute \'thumbnail\' can only be either io.File or String (Telegram fileId or image url)'));
       }
     }
 
@@ -775,7 +775,20 @@ class Telegram {
       'reply_to_message_id': replyToMessageId,
       'allow_sending_without_reply': allowSendingWithoutReply,
     };
-    return (await HttpClient.httpPost(requestUrl, body: body))
+    var multiPartFiles =
+        media.map((it) => it.mediaFile).whereType<MultipartFile>().toList();
+    if (media is List<InputMediaWithThumbnail>) {
+      multiPartFiles.addAll(media
+          .map((it) => it.thumbnailFile)
+          .whereType<MultipartFile>()
+          .toList());
+    }
+    var response = multiPartFiles.isNotEmpty
+        ? await HttpClient.httpMultipartPost(requestUrl, multiPartFiles,
+            body: body)
+        : await HttpClient.httpPost(requestUrl, body: body);
+
+    return response
         .map<Message>((message) => Message.fromJson(message))
         .toList();
   }
@@ -1184,8 +1197,9 @@ class Telegram {
   ///
   /// This method now takes the new user permissions in a single argument of the type *ChatPermissions*.
   /// The old way of passing parameters will keep working for a while for backward compatibility.
-  Future<bool> restrictChatMember(dynamic chatId, int userId,
-      {ChatPermissions? permissions, int? untilDate}) async {
+  Future<bool> restrictChatMember(
+      dynamic chatId, int userId, ChatPermissions permissions,
+      {bool? useIndependentChatPermissions, int? untilDate}) async {
     if (chatId is! String && chatId is! int) {
       return Future.error(TelegramException(
           'Attribute \'chatId\' can only be either type of String or int'));
@@ -1194,7 +1208,8 @@ class Telegram {
     var body = <String, dynamic>{
       'chat_id': chatId,
       'user_id': userId,
-      'permissions': permissions == null ? null : jsonEncode(permissions),
+      'permissions': jsonEncode(permissions),
+      'use_independent_chat_permissions': useIndependentChatPermissions,
       'until_date': untilDate,
     };
     return await HttpClient.httpPost(requestUrl, body: body);
@@ -1310,8 +1325,8 @@ class Telegram {
   /// Returns *True* on success.
   ///
   /// https://core.telegram.org/bots/api#setchatpermissions
-  Future<bool> setChatPermissions(
-      dynamic chatId, ChatPermissions permissions) async {
+  Future<bool> setChatPermissions(dynamic chatId, ChatPermissions permissions,
+      {bool? useIndependentChatPermissions}) async {
     if (chatId is! String && chatId is! int) {
       return Future.error(TelegramException(
           'Attribute \'chatId\' can only be either type of String or int'));
@@ -1320,6 +1335,7 @@ class Telegram {
     var body = <String, dynamic>{
       'chat_id': chatId,
       'permissions': jsonEncode(permissions),
+      'use_independent_chat_permissions': useIndependentChatPermissions,
     };
     return await HttpClient.httpPost(requestUrl, body: body);
   }
@@ -1990,6 +2006,24 @@ class Telegram {
     return await HttpClient.httpPost(requestUrl, body: body);
   }
 
+  /// Use this method to clear the list of pinned messages in a General forum topic.
+  /// The bot must be an administrator in the chat for this to work and must have the can_pin_messages administrator right in the supergroup.
+  ///
+  /// Returns True on success.
+  ///
+  /// https://core.telegram.org/bots/api#unpinallgeneralforumtopicmessages
+  Future<bool> unpinAllGeneralForumTopicMessages(dynamic chatId) async {
+    if (chatId is! String && chatId is! int) {
+      return Future.error(TelegramException(
+          'Attribute \'chatId\' can only be either type of String or int'));
+    }
+    var requestUrl = _apiUri('unpinAllGeneralForumTopicMessages');
+    var body = <String, dynamic>{
+      'chat_id': chatId,
+    };
+    return await HttpClient.httpPost(requestUrl, body: body);
+  }
+
   /// Use this method to send answers to callback queries sent from [inline keyboards]
   ///
   /// The answer will be displayed to the user as a notification at the top of the chat screen or as
@@ -2072,6 +2106,90 @@ class Telegram {
     return (await HttpClient.httpPost(requestUrl, body: body))
         .map<BotCommand>((botCommand) => BotCommand.fromJson(botCommand))
         .toList();
+  }
+
+  /// Use this method to change the bot's name.
+  ///
+  /// Returns *True* on success.
+  ///
+  /// https://core.telegram.org/bots/api#setmyname
+  Future<bool> setMyName(String name, String languageCode) async {
+    var requestUrl = _apiUri('setMyName');
+    var body = <String, dynamic>{
+      'name': name,
+      'language_code': languageCode,
+    };
+    return await HttpClient.httpPost(requestUrl, body: body);
+  }
+
+  /// Use this method to get the current bot name for the given user language.
+  ///
+  /// Returns [BotName] on success.
+  ///
+  /// https://core.telegram.org/bots/api#getmyname
+  Future<BotName> getMyName(String languageCode) async {
+    var requestUrl = _apiUri('getMyName');
+    var body = <String, dynamic>{
+      'language_code': languageCode,
+    };
+    return BotName.fromJson(await HttpClient.httpPost(requestUrl, body: body));
+  }
+
+  /// Use this method to change the bot's description, which is shown in the chat with the bot if the chat is empty.
+  ///
+  /// Returns *True* on success.
+  ///
+  /// https://core.telegram.org/bots/api#setmydescription
+  Future<bool> setMyDescription(String description, String languageCode) async {
+    var requestUrl = _apiUri('setMyDescription');
+    var body = <String, dynamic>{
+      'description': description,
+      'language_code': languageCode,
+    };
+    return await HttpClient.httpPost(requestUrl, body: body);
+  }
+
+  /// Use this method to get the current bot description for the given user language.
+  ///
+  /// Returns [BotDescription] on success.
+  ///
+  /// https://core.telegram.org/bots/api#getmydescription
+  Future<BotDescription> getMyDescription(String languageCode) async {
+    var requestUrl = _apiUri('getMyDescription');
+    var body = <String, dynamic>{
+      'language_code': languageCode,
+    };
+    return BotDescription.fromJson(
+        await HttpClient.httpPost(requestUrl, body: body));
+  }
+
+  /// Use this method to change the bot's short description, which is shown on the bot's profile page and is sent together with the link when users share the bot.
+  ///
+  /// Returns *True* on success.
+  ///
+  /// https://core.telegram.org/bots/api#setmyshortdescription
+  Future<bool> setMyShortDescription(
+      String shortDescription, String languageCode) async {
+    var requestUrl = _apiUri('setMyShortDescription');
+    var body = <String, dynamic>{
+      'short_description': shortDescription,
+      'language_code': languageCode,
+    };
+    return await HttpClient.httpPost(requestUrl, body: body);
+  }
+
+  /// Use this method to get the current bot short description for the given user language.
+  ///
+  /// Returns [BotShortDescription] on success.
+  ///
+  /// https://core.telegram.org/bots/api#getmyshortdescription
+  Future<BotShortDescription> getMyShortDescription(String languageCode) async {
+    var requestUrl = _apiUri('getMyShortDescription');
+    var body = <String, dynamic>{
+      'language_code': languageCode,
+    };
+    return BotShortDescription.fromJson(
+        await HttpClient.httpPost(requestUrl, body: body));
   }
 
   /// Use this method to change the bot's menu button in a private chat, or the default menu button.
@@ -2253,7 +2371,19 @@ class Telegram {
       'parse_mode': parseMode,
       'reply_markup': replyMarkup == null ? null : jsonEncode(replyMarkup),
     };
-    var res = await HttpClient.httpPost(requestUrl, body: body);
+
+    List<MultipartFile> multiPartFiles = media == null
+        ? []
+        : [
+            media.mediaFile,
+            media is InputMediaWithThumbnail ? media.thumbnailFile : null
+          ].whereType<MultipartFile>().toList();
+
+    var res = multiPartFiles.isEmpty
+        ? await HttpClient.httpPost(requestUrl, body: body)
+        : await HttpClient.httpMultipartPost(requestUrl, multiPartFiles,
+            body: body);
+
     if (res == true) {
       return Future.error(
           TelegramException('Edited message is NOT sent by the bot'));
@@ -2353,6 +2483,7 @@ class Telegram {
   /// https://core.telegram.org/bots/api#sendsticker
   Future<Message> sendSticker(dynamic chatId, dynamic sticker,
       {int? messageThreadId,
+      String? emoji,
       bool? disableNotification,
       bool? protectContent,
       int? replyToMessageId,
@@ -2366,6 +2497,7 @@ class Telegram {
     var body = <String, dynamic>{
       'chat_id': chatId,
       'message_thread_id': messageThreadId,
+      'emoji': emoji,
       'disable_notification': disableNotification,
       'protect_content': protectContent,
       'reply_to_message_id': replyToMessageId,
@@ -2425,15 +2557,19 @@ class Telegram {
   /// Returns the uploaded [File] on success.
   ///
   /// https://core.telegram.org/bots/api#uploadstickerfile
-  Future<File> uploadStickerFile(int userId, io.File pngSticker) async {
+  Future<File> uploadStickerFile(
+      int userId, io.File sticker, String stickerFormat) async {
     var requestUrl = _apiUri('uploadStickerFile');
-    var body = <String, dynamic>{'user_id': userId};
-    // filename cannot be empty to post to Telegram server
-    var files = List<MultipartFile>.filled(
-        1,
-        MultipartFile(
-            'png_sticker', pngSticker.openRead(), pngSticker.lengthSync(),
-            filename: '${pngSticker.lengthSync()}'));
+    var body = <String, dynamic>{
+      'user_id': userId,
+      'sticker_format': stickerFormat,
+    };
+
+    var files = List<MultipartFile>.from([
+      MultipartFile('sticker', sticker.openRead(), sticker.lengthSync(),
+          filename: '${sticker.lengthSync()}')
+    ]);
+
     return File.fromJson(
         await HttpClient.httpMultipartPost(requestUrl, files, body: body));
   }
@@ -2446,48 +2582,31 @@ class Telegram {
   /// Returns *True* on success.
   ///
   /// https://core.telegram.org/bots/api#createnewstickerset
-  Future<bool> createNewStickerSet(
-      int userId, String name, String title, String emojis,
-      {dynamic pngSticker,
-      io.File? tgsSticker,
-      io.File? webmSticker,
-      String? stickerType,
-      MaskPosition? maskPosition}) async {
+  Future<bool> createNewStickerSet(int userId, String name, String title,
+      List<InputSticker> stickers, String stickerFormat,
+      {String? stickerType, bool? needsRepainting}) async {
     var requestUrl = _apiUri('createNewStickerSet');
     var botInfo = await getMe();
     var body = <String, dynamic>{
       'user_id': userId,
       'name': '${name}_by_${botInfo.username}',
       'title': title,
-      'emojis': emojis,
+      'stickers': jsonEncode(stickers),
+      'sticker_format': stickerFormat,
       'sticker_type': stickerType,
-      'mask_position': maskPosition == null ? null : jsonEncode(maskPosition),
+      'needs_repainting': needsRepainting,
     };
 
-    if (pngSticker == null && tgsSticker == null && webmSticker == null) {
-      return Future.error(TelegramException(
-          'You must use exactly one of the fields `pngSticker`, `tgsSticker` or `webmSticker`.'));
-    } else if (pngSticker is String) {
-      body.addAll({'png_sticker': pngSticker});
-      return await HttpClient.httpPost(requestUrl, body: body);
-    } else if (pngSticker is io.File ||
-        tgsSticker != null ||
-        webmSticker != null) {
-      var file = pngSticker ?? tgsSticker ?? webmSticker;
-      var fieldName = pngSticker != null
-          ? 'png_sticker'
-          : tgsSticker != null
-              ? 'tgs_sticker'
-              : 'webm_sticker';
-      // filename cannot be empty to post to Telegram server
-      var files = List<MultipartFile>.filled(
-          1,
-          MultipartFile(fieldName, file.openRead(), file.lengthSync(),
-              filename: '${file.lengthSync()}'));
-      return await HttpClient.httpMultipartPost(requestUrl, files, body: body);
+    List<MultipartFile> stickerFiles = stickers
+        .map((it) => it.stickerFile)
+        .whereType<MultipartFile>()
+        .toList();
+
+    if (stickerFiles.isNotEmpty) {
+      return await HttpClient.httpMultipartPost(requestUrl, stickerFiles,
+          body: body);
     } else {
-      return Future.error(TelegramException(
-          'Attribute \'pngSticker\' can only be either io.File or String (Telegram fileId or image url)'));
+      return await HttpClient.httpPost(requestUrl, body: body);
     }
   }
 
@@ -2501,43 +2620,21 @@ class Telegram {
   /// Returns *True* on success.
   ///
   /// https://core.telegram.org/bots/api#addstickertoset
-  Future<bool> addStickerToSet(int userId, String name, String emojis,
-      {dynamic pngSticker,
-      io.File? tgsSticker,
-      io.File? webmSticker,
-      MaskPosition? maskPosition}) async {
+  Future<bool> addStickerToSet(
+      int userId, String name, InputSticker sticker) async {
     var requestUrl = _apiUri('addStickerToSet');
     var body = <String, dynamic>{
       'user_id': userId,
       'name': name,
-      'emojis': emojis,
-      'mask_position': maskPosition == null ? null : jsonEncode(maskPosition),
+      'stickers': jsonEncode(sticker),
     };
 
-    if (pngSticker == null && tgsSticker == null && webmSticker == null) {
-      return Future.error(TelegramException(
-          'You must use exactly one of the fields `pngSticker`, `tgsSticker` or `webmSticker`.'));
-    } else if (pngSticker is String) {
-      body.addAll({'png_sticker': pngSticker});
-      return await HttpClient.httpPost(requestUrl, body: body);
-    } else if (pngSticker is io.File ||
-        tgsSticker != null ||
-        webmSticker != null) {
-      var file = pngSticker ?? tgsSticker ?? webmSticker;
-      var fieldName = pngSticker != null
-          ? 'png_sticker'
-          : tgsSticker != null
-              ? 'tgs_sticker'
-              : 'webm_sticker';
-      // filename cannot be empty to post to Telegram server
-      var files = List<MultipartFile>.filled(
-          1,
-          MultipartFile(fieldName, file.openRead(), file.lengthSync(),
-              filename: '${file.lengthSync()}'));
-      return await HttpClient.httpMultipartPost(requestUrl, files, body: body);
+    if (sticker.stickerFile != null) {
+      return await HttpClient.httpMultipartPost(
+          requestUrl, List.from([sticker.stickerFile]),
+          body: body);
     } else {
-      return Future.error(TelegramException(
-          'Attribute \'pngSticker\' can only be either io.File or String (Telegram fileId or image url)'));
+      return await HttpClient.httpPost(requestUrl, body: body);
     }
   }
 
@@ -2566,34 +2663,125 @@ class Telegram {
     return await HttpClient.httpPost(requestUrl, body: body);
   }
 
+  /// Use this method to change the list of emoji assigned to a regular or custom emoji sticker.
+  /// The sticker must belong to a sticker set created by the bot.
+  ///
+  /// Returns *True* on success.
+  ///
+  /// https://core.telegram.org/bots/api#setstickeremojilist
+  Future<bool> setStickerEmojiList(
+      String sticker, List<String> emojiList) async {
+    var requestUrl = _apiUri('setStickerEmojiList');
+    var body = <String, dynamic>{
+      'sticker': sticker,
+      'emoji_list': jsonEncode(emojiList),
+    };
+    return await HttpClient.httpPost(requestUrl, body: body);
+  }
+
+  /// Use this method to change search keywords assigned to a regular or custom emoji sticker.
+  /// The sticker must belong to a sticker set created by the bot.
+  ///
+  /// Returns *True* on success.
+  ///
+  /// https://core.telegram.org/bots/api#setstickerkeywords
+  Future<bool> setStickerKeywords(
+      String sticker, List<String>? keywords) async {
+    var requestUrl = _apiUri('setStickerKeywords');
+    var body = <String, dynamic>{
+      'sticker': sticker,
+      'keywords': keywords == null ? null : jsonEncode(keywords),
+    };
+    return await HttpClient.httpPost(requestUrl, body: body);
+  }
+
+  /// Use this method to change the [MaskPosition] of a mask sticker.
+  /// The sticker must belong to a sticker set that was created by the bot.
+  ///
+  /// Returns *True* on success.
+  ///
+  /// https://core.telegram.org/bots/api#setstickermaskposition
+  Future<bool> setStickerMaskPosition(
+      String sticker, MaskPosition? maskPosition) async {
+    var requestUrl = _apiUri('setStickerMaskPosition');
+    var body = <String, dynamic>{
+      'sticker': sticker,
+      'mask_position': maskPosition == null ? null : jsonEncode(maskPosition),
+    };
+    return await HttpClient.httpPost(requestUrl, body: body);
+  }
+
+  /// Use this method to set the title of a created sticker set.
+  ///
+  /// Returns *True* on success.
+  ///
+  /// https://core.telegram.org/bots/api#setstickersettitle
+  Future<bool> setStickerSetTitle(String name, String title) async {
+    var requestUrl = _apiUri('setStickerSetTitle');
+    var body = <String, dynamic>{
+      'name': name,
+      'title': title,
+    };
+    return await HttpClient.httpPost(requestUrl, body: body);
+  }
+
   /// Use this method to set the thumbnail of a sticker set
   ///
   /// Animated thumbnails can be set for animated sticker sets only.
   ///
   /// Returns *True* on success.
-  Future<bool> setStickerSetThumb(String name, int userId,
-      {dynamic thumb}) async {
-    var requestUrl = _apiUri('setStickerSetThumb');
+  ///
+  /// https://core.telegram.org/bots/api#setstickersetthumbnail
+  Future<bool> setStickerSetThumbnail(String name, int userId,
+      {dynamic thumbnail}) async {
+    var requestUrl = _apiUri('setStickerSetThumbnail');
     var body = <String, dynamic>{
       'name': name,
       'user_id': userId,
     };
-    if (thumb == null) {
+    if (thumbnail == null) {
       return await HttpClient.httpPost(requestUrl, body: body);
-    } else if (thumb is io.File) {
+    } else if (thumbnail is io.File) {
       // filename cannot be empty to post to Telegram server
       var files = List<MultipartFile>.filled(
           1,
-          MultipartFile('thumb', thumb.openRead(), thumb.lengthSync(),
-              filename: '${thumb.lengthSync()}'));
+          MultipartFile(
+              'thumbnail', thumbnail.openRead(), thumbnail.lengthSync(),
+              filename: '${thumbnail.lengthSync()}'));
       return await HttpClient.httpMultipartPost(requestUrl, files, body: body);
-    } else if (thumb is String) {
-      body.addAll({'thumb': thumb});
+    } else if (thumbnail is String) {
+      body.addAll({'thumbnail': thumbnail});
       return await HttpClient.httpPost(requestUrl, body: body);
     } else {
       return Future.error(TelegramException(
-          'Attribute \'thumb\' can only be either io.File or String (Telegram fileId or image url)'));
+          'Attribute \'thumbnail\' can only be either io.File or String (Telegram fileId or image url)'));
     }
+  }
+
+  /// Use this method to set the thumbnail of a custom emoji sticker set.
+  ///
+  /// Returns *True* on success.
+  ///
+  /// https://core.telegram.org/bots/api#setcustomemojistickersetthumbnail
+  Future<bool> setCustomEmojiStickerSetThumbnail(String name,
+      {String? customEmojiId}) async {
+    var requestUrl = _apiUri('setCustomEmojiStickerSetThumbnail');
+    var body = <String, dynamic>{
+      'name': name,
+      'custom_emoji_id': customEmojiId,
+    };
+    return await HttpClient.httpPost(requestUrl, body: body);
+  }
+
+  /// Use this method to delete a sticker set that was created by the bot.
+  ///
+  /// Returns *True* on success.
+  ///
+  /// https://core.telegram.org/bots/api#deletestickerset
+  Future<bool> deleteStickerSet(String name) async {
+    var requestUrl = _apiUri('deleteStickerSet');
+    var body = <String, dynamic>{'name': name};
+    return await HttpClient.httpPost(requestUrl, body: body);
   }
 
   /// Use this method to send answers to an inline query
@@ -2604,12 +2792,13 @@ class Telegram {
   ///
   /// https://core.telegram.org/bots/api#answerinlinequery
   Future<bool> answerInlineQuery(
-      String inlineQueryId, List<InlineQueryResult> results,
-      {int? cacheTime,
-      bool? isPersonal,
-      String? nextOffset,
-      String? switchPmText,
-      String? switchPmParameter}) async {
+    String inlineQueryId,
+    List<InlineQueryResult> results, {
+    int? cacheTime,
+    bool? isPersonal,
+    String? nextOffset,
+    InlineQueryResultsButton? button,
+  }) async {
     var requestUrl = _apiUri('answerInlineQuery');
     var body = <String, dynamic>{
       'inline_query_id': inlineQueryId,
@@ -2617,8 +2806,7 @@ class Telegram {
       'cache_time': cacheTime,
       'is_personal': isPersonal,
       'next_offset': nextOffset,
-      'switch_pm_text': switchPmText,
-      'switch_pm_parameter': switchPmParameter,
+      'button': button == null ? null : jsonEncode(button),
     };
     return await HttpClient.httpPost(requestUrl, body: body);
   }

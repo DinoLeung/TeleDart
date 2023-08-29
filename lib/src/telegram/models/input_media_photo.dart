@@ -1,6 +1,6 @@
 /*
  * TeleDart - Telegram Bot API for Dart
- * Copyright (C) 2019  Dino PH Leung
+ * Copyright (C) 2023  Dino PH Leung
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -34,6 +34,11 @@ class InputMediaPhoto implements InputMedia {
   @override
   List<MessageEntity>? captionEntities;
   bool? hasSpoiler;
+
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  MultipartFile? mediaFile;
+
   InputMediaPhoto({
     this.type = InputMedia.typePhoto,
     required this.media,
@@ -42,6 +47,24 @@ class InputMediaPhoto implements InputMedia {
     this.captionEntities,
     this.hasSpoiler,
   });
+
+  // Factory to create InputMediaPhoto from file
+  factory InputMediaPhoto.fromFile(
+          {required io.File media,
+          String? caption,
+          String? parseMode,
+          List<MessageEntity>? captionEntities,
+          bool? hasSpoiler}) =>
+      InputMediaPhoto(
+        media: 'attach://${media.path}',
+        caption: caption,
+        parseMode: parseMode,
+        captionEntities: captionEntities,
+        hasSpoiler: hasSpoiler,
+      )..mediaFile = MultipartFile(
+          media.path, media.openRead(), media.lengthSync(),
+          filename: media.path.split('/').last);
+
   factory InputMediaPhoto.fromJson(Map<String, dynamic> json) =>
       _$InputMediaPhotoFromJson(json);
   @override

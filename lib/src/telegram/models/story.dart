@@ -22,13 +22,10 @@ part of '../model.dart';
 ///
 /// https://core.telegram.org/bots/api#writeaccessallowed
 @JsonSerializable(fieldRename: FieldRename.snake)
-class WriteAccessAllowed {
-  String? webAppName;
+class Story {
 
-  WriteAccessAllowed({
-    this.webAppName,
-  });
-  factory WriteAccessAllowed.fromJson(Map<String, dynamic> json) =>
-      _$WriteAccessAllowedFromJson(json);
-  Map<String, dynamic> toJson() => _$WriteAccessAllowedToJson(this);
+  Story();
+  factory Story.fromJson(Map<String, dynamic> json) =>
+      _$StoryFromJson(json);
+  Map<String, dynamic> toJson() => _$StoryToJson(this);
 }

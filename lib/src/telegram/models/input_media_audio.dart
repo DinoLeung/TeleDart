@@ -1,6 +1,6 @@
 /*
  * TeleDart - Telegram Bot API for Dart
- * Copyright (C) 2019  Dino PH Leung
+ * Copyright (C) 2023  Dino PH Leung
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,7 +22,7 @@ part of '../model.dart';
 ///
 /// https://core.telegram.org/bots/api#inputmediaaudio
 @JsonSerializable(fieldRename: FieldRename.snake)
-class InputMediaAudio implements InputMedia {
+class InputMediaAudio implements InputMediaWithThumbnail {
   @override
   String type;
   @override
@@ -33,15 +33,23 @@ class InputMediaAudio implements InputMedia {
   String? parseMode;
   @override
   List<MessageEntity>? captionEntities;
-  dynamic thumb; // InputFile or String
+  @override
+  String? thumbnail;
   int? duration;
   String? performer;
   String? title;
 
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  MultipartFile? mediaFile;
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  MultipartFile? thumbnailFile;
+
   InputMediaAudio({
     this.type = InputMedia.typeAudio,
     required this.media,
-    this.thumb,
+    this.thumbnail,
     this.caption,
     this.parseMode,
     this.captionEntities,
@@ -49,6 +57,81 @@ class InputMediaAudio implements InputMedia {
     this.performer,
     this.title,
   });
+
+  // Factory to create InputMediaAudio from file
+  factory InputMediaAudio.fromFile(
+          {required io.File media,
+          String? thumbnail,
+          String? caption,
+          String? parseMode,
+          List<MessageEntity>? captionEntities,
+          int? duration,
+          String? performer,
+          String? title}) =>
+      InputMediaAudio(
+        media: 'attach://${media.path}',
+        thumbnail: thumbnail,
+        caption: caption,
+        parseMode: parseMode,
+        captionEntities: captionEntities,
+        duration: duration,
+        performer: performer,
+        title: title,
+      )..mediaFile = MultipartFile(
+          media.path, media.openRead(), media.lengthSync(),
+          filename: media.path.split('/').last);
+
+  // Factory to create InputMediaAudio with thumbnail file
+  factory InputMediaAudio.withThumbnailFile({
+    required io.File thumbnail,
+    required String media,
+    String? caption,
+    String? parseMode,
+    List<MessageEntity>? captionEntities,
+    int? duration,
+    String? performer,
+    String? title,
+  }) =>
+      InputMediaAudio(
+        media: media,
+        thumbnail: 'attach://${thumbnail.path}',
+        caption: caption,
+        parseMode: parseMode,
+        captionEntities: captionEntities,
+        duration: duration,
+        performer: performer,
+        title: title,
+      )..thumbnailFile = MultipartFile(
+          thumbnail.path, thumbnail.openRead(), thumbnail.lengthSync(),
+          filename: thumbnail.path.split('/').last);
+
+  // Factory to create InputMediaAudio from file and with thumbnail file
+  factory InputMediaAudio.fromFileWithThumbnailFile({
+    required io.File media,
+    required io.File thumbnail,
+    String? caption,
+    String? parseMode,
+    List<MessageEntity>? captionEntities,
+    int? duration,
+    String? performer,
+    String? title,
+  }) =>
+      InputMediaAudio(
+        media: 'attach://${media.path}',
+        thumbnail: 'attach://${thumbnail.path}',
+        caption: caption,
+        parseMode: parseMode,
+        captionEntities: captionEntities,
+        duration: duration,
+        performer: performer,
+        title: title,
+      )
+        ..mediaFile = MultipartFile(
+            media.path, media.openRead(), media.lengthSync(),
+            filename: media.path.split('/').last)
+        ..thumbnailFile = MultipartFile(
+            thumbnail.path, thumbnail.openRead(), thumbnail.lengthSync(),
+            filename: thumbnail.path.split('/').last);
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   Duration? get duration_ =>

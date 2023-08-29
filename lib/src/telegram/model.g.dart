@@ -12,9 +12,9 @@ Animation _$AnimationFromJson(Map<String, dynamic> json) => Animation(
       width: json['width'] as int,
       height: json['height'] as int,
       duration: json['duration'] as int,
-      thumb: json['thumb'] == null
+      thumbnail: json['thumbnail'] == null
           ? null
-          : PhotoSize.fromJson(json['thumb'] as Map<String, dynamic>),
+          : PhotoSize.fromJson(json['thumbnail'] as Map<String, dynamic>),
       fileName: json['file_name'] as String?,
       mimeType: json['mime_type'] as String?,
       fileSize: json['file_size'] as int?,
@@ -35,7 +35,7 @@ Map<String, dynamic> _$AnimationToJson(Animation instance) {
     }
   }
 
-  writeNotNull('thumb', instance.thumb?.toJson());
+  writeNotNull('thumbnail', instance.thumbnail?.toJson());
   writeNotNull('file_name', instance.fileName);
   writeNotNull('mime_type', instance.mimeType);
   writeNotNull('file_size', instance.fileSize);
@@ -51,9 +51,9 @@ Audio _$AudioFromJson(Map<String, dynamic> json) => Audio(
       fileName: json['file_name'] as String?,
       mimeType: json['mime_type'] as String?,
       fileSize: json['file_size'] as int?,
-      thumb: json['thumb'] == null
+      thumbnail: json['thumbnail'] == null
           ? null
-          : PhotoSize.fromJson(json['thumb'] as Map<String, dynamic>),
+          : PhotoSize.fromJson(json['thumbnail'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$AudioToJson(Audio instance) {
@@ -74,7 +74,7 @@ Map<String, dynamic> _$AudioToJson(Audio instance) {
   writeNotNull('file_name', instance.fileName);
   writeNotNull('mime_type', instance.mimeType);
   writeNotNull('file_size', instance.fileSize);
-  writeNotNull('thumb', instance.thumb?.toJson());
+  writeNotNull('thumbnail', instance.thumbnail?.toJson());
   return val;
 }
 
@@ -216,6 +216,35 @@ Map<String, dynamic> _$BotCommandToJson(BotCommand instance) =>
       'description': instance.description,
     };
 
+BotDescription _$BotDescriptionFromJson(Map<String, dynamic> json) =>
+    BotDescription(
+      description: json['description'] as String,
+    );
+
+Map<String, dynamic> _$BotDescriptionToJson(BotDescription instance) =>
+    <String, dynamic>{
+      'description': instance.description,
+    };
+
+BotName _$BotNameFromJson(Map<String, dynamic> json) => BotName(
+      name: json['name'] as String,
+    );
+
+Map<String, dynamic> _$BotNameToJson(BotName instance) => <String, dynamic>{
+      'name': instance.name,
+    };
+
+BotShortDescription _$BotShortDescriptionFromJson(Map<String, dynamic> json) =>
+    BotShortDescription(
+      shortDescription: json['short_description'] as String,
+    );
+
+Map<String, dynamic> _$BotShortDescriptionToJson(
+        BotShortDescription instance) =>
+    <String, dynamic>{
+      'short_description': instance.shortDescription,
+    };
+
 CallbackGame _$CallbackGameFromJson(Map<String, dynamic> json) =>
     CallbackGame();
 
@@ -337,6 +366,7 @@ ChatJoinRequest _$ChatJoinRequestFromJson(Map<String, dynamic> json) =>
     ChatJoinRequest(
       chat: Chat.fromJson(json['chat'] as Map<String, dynamic>),
       from: User.fromJson(json['from'] as Map<String, dynamic>),
+      userChatId: json['user_chat_id'] as int,
       date: json['date'] as int,
       bio: json['bio'] as String?,
       inviteLink: json['invite_link'] == null
@@ -349,6 +379,7 @@ Map<String, dynamic> _$ChatJoinRequestToJson(ChatJoinRequest instance) {
   final val = <String, dynamic>{
     'chat': instance.chat.toJson(),
     'from': instance.from.toJson(),
+    'user_chat_id': instance.userChatId,
     'date': instance.date,
   };
 
@@ -499,7 +530,12 @@ ChatMemberRestricted _$ChatMemberRestrictedFromJson(
       canPinMessages: json['can_pin_messages'] as bool? ?? false,
       canManageTopics: json['can_manage_topics'] as bool? ?? false,
       canSendMessages: json['can_send_messages'] as bool? ?? false,
-      canSendMediaMessages: json['can_send_media_messages'] as bool? ?? false,
+      canSendAudios: json['can_send_audios'] as bool? ?? false,
+      canSendDocuments: json['can_send_documents'] as bool? ?? false,
+      canSendPhotos: json['can_send_photos'] as bool? ?? false,
+      canSendVideos: json['can_send_videos'] as bool? ?? false,
+      canSendVideoNotes: json['can_send_video_notes'] as bool? ?? false,
+      canSendVoiceNotes: json['can_send_voice_notes'] as bool? ?? false,
       canSendPolls: json['can_send_polls'] as bool? ?? false,
       canSendOtherMessages: json['can_send_other_messages'] as bool? ?? false,
       canAddWebPagePreviews:
@@ -508,22 +544,36 @@ ChatMemberRestricted _$ChatMemberRestrictedFromJson(
     );
 
 Map<String, dynamic> _$ChatMemberRestrictedToJson(
-        ChatMemberRestricted instance) =>
-    <String, dynamic>{
-      'status': instance.status,
-      'user': instance.user.toJson(),
-      'is_member': instance.isMember,
-      'can_change_info': instance.canChangeInfo,
-      'can_invite_users': instance.canInviteUsers,
-      'can_pin_messages': instance.canPinMessages,
-      'can_manage_topics': instance.canManageTopics,
-      'can_send_messages': instance.canSendMessages,
-      'can_send_media_messages': instance.canSendMediaMessages,
-      'can_send_polls': instance.canSendPolls,
-      'can_send_other_messages': instance.canSendOtherMessages,
-      'can_add_web_page_previews': instance.canAddWebPagePreviews,
-      'until_date': instance.untilDate,
-    };
+    ChatMemberRestricted instance) {
+  final val = <String, dynamic>{
+    'status': instance.status,
+    'user': instance.user.toJson(),
+    'is_member': instance.isMember,
+    'can_change_info': instance.canChangeInfo,
+    'can_invite_users': instance.canInviteUsers,
+    'can_pin_messages': instance.canPinMessages,
+    'can_manage_topics': instance.canManageTopics,
+    'can_send_messages': instance.canSendMessages,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('can_send_audios', instance.canSendAudios);
+  writeNotNull('can_send_documents', instance.canSendDocuments);
+  writeNotNull('can_send_photos', instance.canSendPhotos);
+  writeNotNull('can_send_videos', instance.canSendVideos);
+  writeNotNull('can_send_video_notes', instance.canSendVideoNotes);
+  writeNotNull('can_send_voice_notes', instance.canSendVoiceNotes);
+  val['can_send_polls'] = instance.canSendPolls;
+  val['can_send_other_messages'] = instance.canSendOtherMessages;
+  val['can_add_web_page_previews'] = instance.canAddWebPagePreviews;
+  val['until_date'] = instance.untilDate;
+  return val;
+}
 
 ChatMemberUpdated _$ChatMemberUpdatedFromJson(Map<String, dynamic> json) =>
     ChatMemberUpdated(
@@ -545,7 +595,9 @@ ChatMemberUpdated _$ChatMemberUpdatedFromJson(Map<String, dynamic> json) =>
           ? null
           : ChatInviteLink.fromJson(
               json['invite_link'] as Map<String, dynamic>),
-    )..date = json['date'] as int?;
+      viaChatFolderInviteLink: json['via_chat_folder_invite_link'] as bool?,
+      date: json['date'] as int?,
+    );
 
 Map<String, dynamic> _$ChatMemberUpdatedToJson(ChatMemberUpdated instance) {
   final val = <String, dynamic>{};
@@ -562,6 +614,7 @@ Map<String, dynamic> _$ChatMemberUpdatedToJson(ChatMemberUpdated instance) {
   writeNotNull('old_chat_member', instance.oldChatMember?.toJson());
   writeNotNull('new_chat_member', instance.newChatMember?.toJson());
   writeNotNull('invite_link', instance.inviteLink?.toJson());
+  writeNotNull('via_chat_folder_invite_link', instance.viaChatFolderInviteLink);
   return val;
 }
 
@@ -579,7 +632,12 @@ Map<String, dynamic> _$ChatMemberToJson(ChatMember instance) =>
 ChatPermissions _$ChatPermissionsFromJson(Map<String, dynamic> json) =>
     ChatPermissions(
       canSendMessages: json['can_send_messages'] as bool?,
-      canSendMediaMessages: json['can_send_media_messages'] as bool?,
+      canSendAudios: json['can_send_audios'] as bool?,
+      canSendDocuments: json['can_send_documents'] as bool?,
+      canSendPhotos: json['can_send_photos'] as bool?,
+      canSendVideos: json['can_send_videos'] as bool?,
+      canSendVideoNotes: json['can_send_video_notes'] as bool?,
+      canSendVoiceNotes: json['can_send_voice_notes'] as bool?,
       canSendPolls: json['can_send_polls'] as bool?,
       canSendOtherMessages: json['can_send_other_messages'] as bool?,
       canAddWebPagePreviews: json['can_add_web_page_previews'] as bool?,
@@ -599,7 +657,12 @@ Map<String, dynamic> _$ChatPermissionsToJson(ChatPermissions instance) {
   }
 
   writeNotNull('can_send_messages', instance.canSendMessages);
-  writeNotNull('can_send_media_messages', instance.canSendMediaMessages);
+  writeNotNull('can_send_audios', instance.canSendAudios);
+  writeNotNull('can_send_documents', instance.canSendDocuments);
+  writeNotNull('can_send_photos', instance.canSendPhotos);
+  writeNotNull('can_send_videos', instance.canSendVideos);
+  writeNotNull('can_send_video_notes', instance.canSendVideoNotes);
+  writeNotNull('can_send_voice_notes', instance.canSendVoiceNotes);
   writeNotNull('can_send_polls', instance.canSendPolls);
   writeNotNull('can_send_other_messages', instance.canSendOtherMessages);
   writeNotNull('can_add_web_page_previews', instance.canAddWebPagePreviews);
@@ -624,6 +687,17 @@ Map<String, dynamic> _$ChatPhotoToJson(ChatPhoto instance) => <String, dynamic>{
       'big_file_unique_id': instance.bigFileUniqueId,
     };
 
+ChatShared _$ChatSharedFromJson(Map<String, dynamic> json) => ChatShared(
+      requestId: json['request_id'] as int,
+      userId: json['user_id'] as int,
+    );
+
+Map<String, dynamic> _$ChatSharedToJson(ChatShared instance) =>
+    <String, dynamic>{
+      'request_id': instance.requestId,
+      'user_id': instance.userId,
+    };
+
 Chat _$ChatFromJson(Map<String, dynamic> json) => Chat(
       id: json['id'] as int,
       type: json['type'] as String,
@@ -639,6 +713,8 @@ Chat _$ChatFromJson(Map<String, dynamic> json) => Chat(
           ?.map((e) => e as String)
           .toList(),
       emojiStatusCustomEmojiId: json['emoji_status_custom_emoji_id'] as String?,
+      emojiStatusExpirationDate:
+          json['emoji_status_expiration_date'] as String?,
       bio: json['bio'] as String?,
       hasPrivateForwards: json['has_private_forwards'] as bool?,
       hasRestrictedVoiceAndVideoMessages:
@@ -689,6 +765,8 @@ Map<String, dynamic> _$ChatToJson(Chat instance) {
   writeNotNull('active_usernames', instance.activeUsernames);
   writeNotNull(
       'emoji_status_custom_emoji_id', instance.emojiStatusCustomEmojiId);
+  writeNotNull(
+      'emoji_status_expiration_date', instance.emojiStatusExpirationDate);
   writeNotNull('bio', instance.bio);
   writeNotNull('has_private_forwards', instance.hasPrivateForwards);
   writeNotNull('has_restricted_voice_and_video_messages',
@@ -780,9 +858,9 @@ Map<String, dynamic> _$DiceToJson(Dice instance) => <String, dynamic>{
 Document _$DocumentFromJson(Map<String, dynamic> json) => Document(
       fileId: json['file_id'] as String,
       fileUniqueId: json['file_unique_id'] as String,
-      thumb: json['thumb'] == null
+      thumbnail: json['thumbnail'] == null
           ? null
-          : PhotoSize.fromJson(json['thumb'] as Map<String, dynamic>),
+          : PhotoSize.fromJson(json['thumbnail'] as Map<String, dynamic>),
       fileName: json['file_name'] as String?,
       mimeType: json['mime_type'] as String?,
       fileSize: json['file_size'] as int?,
@@ -800,7 +878,7 @@ Map<String, dynamic> _$DocumentToJson(Document instance) {
     }
   }
 
-  writeNotNull('thumb', instance.thumb?.toJson());
+  writeNotNull('thumbnail', instance.thumbnail?.toJson());
   writeNotNull('file_name', instance.fileName);
   writeNotNull('mime_type', instance.mimeType);
   writeNotNull('file_size', instance.fileSize);
@@ -1083,6 +1161,11 @@ InlineKeyboardButton _$InlineKeyboardButtonFromJson(
           : CallbackGame.fromJson(
               json['callback_game'] as Map<String, dynamic>),
       pay: json['pay'] as bool?,
+      switchInlineQueryChosenChat: json['switch_inline_query_chosen_chat'] ==
+              null
+          ? null
+          : SwitchInlineQueryChosenChat.fromJson(
+              json['switch_inline_query_chosen_chat'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$InlineKeyboardButtonToJson(
@@ -1106,6 +1189,8 @@ Map<String, dynamic> _$InlineKeyboardButtonToJson(
       instance.switchInlineQueryCurrentChat);
   writeNotNull('callback_game', instance.callbackGame?.toJson());
   writeNotNull('pay', instance.pay);
+  writeNotNull('switch_inline_query_chosen_chat',
+      instance.switchInlineQueryChosenChat?.toJson());
   return val;
 }
 
@@ -1143,9 +1228,9 @@ InlineQueryResultArticle _$InlineQueryResultArticleFromJson(
       url: json['url'] as String?,
       hideUrl: json['hide_url'] as bool?,
       description: json['description'] as String?,
-      thumbUrl: json['thumb_url'] as String?,
-      thumbWidth: json['thumb_width'] as String?,
-      thumbHeight: json['thumb_height'] as String?,
+      thumbnailUrl: json['thumbnail_url'] as String?,
+      thumbnailWidth: json['thumbnail_width'] as String?,
+      thumbnailHeight: json['thumbnail_height'] as String?,
     );
 
 Map<String, dynamic> _$InlineQueryResultArticleToJson(
@@ -1167,9 +1252,9 @@ Map<String, dynamic> _$InlineQueryResultArticleToJson(
   writeNotNull('url', instance.url);
   writeNotNull('hide_url', instance.hideUrl);
   writeNotNull('description', instance.description);
-  writeNotNull('thumb_url', instance.thumbUrl);
-  writeNotNull('thumb_width', instance.thumbWidth);
-  writeNotNull('thumb_height', instance.thumbHeight);
+  writeNotNull('thumbnail_url', instance.thumbnailUrl);
+  writeNotNull('thumbnail_width', instance.thumbnailWidth);
+  writeNotNull('thumbnail_height', instance.thumbnailHeight);
   return val;
 }
 
@@ -1601,9 +1686,9 @@ InlineQueryResultContact _$InlineQueryResultContactFromJson(
           ? null
           : InputMessageContent.fromJson(
               json['input_message_content'] as Map<String, dynamic>),
-      thumbUrl: json['thumb_url'] as String?,
-      thumbWidth: json['thumb_width'] as int?,
-      thumbHeight: json['thumb_height'] as int?,
+      thumbnailUrl: json['thumbnail_url'] as String?,
+      thumbnailWidth: json['thumbnail_width'] as int?,
+      thumbnailHeight: json['thumbnail_height'] as int?,
     );
 
 Map<String, dynamic> _$InlineQueryResultContactToJson(
@@ -1625,9 +1710,9 @@ Map<String, dynamic> _$InlineQueryResultContactToJson(
   writeNotNull('vcard', instance.vcard);
   writeNotNull('reply_markup', instance.replyMarkup?.toJson());
   writeNotNull('input_message_content', instance.inputMessageContent?.toJson());
-  writeNotNull('thumb_url', instance.thumbUrl);
-  writeNotNull('thumb_width', instance.thumbWidth);
-  writeNotNull('thumb_height', instance.thumbHeight);
+  writeNotNull('thumbnail_url', instance.thumbnailUrl);
+  writeNotNull('thumbnail_width', instance.thumbnailWidth);
+  writeNotNull('thumbnail_height', instance.thumbnailHeight);
   return val;
 }
 
@@ -1653,9 +1738,9 @@ InlineQueryResultDocument _$InlineQueryResultDocumentFromJson(
           ? null
           : InputMessageContent.fromJson(
               json['input_message_content'] as Map<String, dynamic>),
-      thumbUrl: json['thumb_url'] as String?,
-      thumbWidth: json['thumb_width'] as int?,
-      thumbHeight: json['thumb_height'] as int?,
+      thumbnailUrl: json['thumbnail_url'] as String?,
+      thumbnailWidth: json['thumbnail_width'] as int?,
+      thumbnailHeight: json['thumbnail_height'] as int?,
     );
 
 Map<String, dynamic> _$InlineQueryResultDocumentToJson(
@@ -1681,9 +1766,9 @@ Map<String, dynamic> _$InlineQueryResultDocumentToJson(
   writeNotNull('description', instance.description);
   writeNotNull('reply_markup', instance.replyMarkup?.toJson());
   writeNotNull('input_message_content', instance.inputMessageContent?.toJson());
-  writeNotNull('thumb_url', instance.thumbUrl);
-  writeNotNull('thumb_width', instance.thumbWidth);
-  writeNotNull('thumb_height', instance.thumbHeight);
+  writeNotNull('thumbnail_url', instance.thumbnailUrl);
+  writeNotNull('thumbnail_width', instance.thumbnailWidth);
+  writeNotNull('thumbnail_height', instance.thumbnailHeight);
   return val;
 }
 
@@ -1726,8 +1811,8 @@ InlineQueryResultGif _$InlineQueryResultGifFromJson(
       gifWidth: json['gif_width'] as int?,
       gifHeight: json['gif_height'] as int?,
       gifDuration: json['gif_duration'] as int?,
-      thumbUrl: json['thumb_url'] as String,
-      thumbMimeType: json['thumb_mime_type'] as String?,
+      thumbnailUrl: json['thumbnail_url'] as String,
+      thumbnailMimeType: json['thumbnail_mime_type'] as String?,
       title: json['title'] as String?,
       caption: json['caption'] as String?,
       parseMode: json['parse_mode'] as String?,
@@ -1761,8 +1846,8 @@ Map<String, dynamic> _$InlineQueryResultGifToJson(
   writeNotNull('gif_width', instance.gifWidth);
   writeNotNull('gif_height', instance.gifHeight);
   writeNotNull('gif_duration', instance.gifDuration);
-  val['thumb_url'] = instance.thumbUrl;
-  writeNotNull('thumb_mime_type', instance.thumbMimeType);
+  val['thumbnail_url'] = instance.thumbnailUrl;
+  writeNotNull('thumbnail_mime_type', instance.thumbnailMimeType);
   writeNotNull('title', instance.title);
   writeNotNull('caption', instance.caption);
   writeNotNull('parse_mode', instance.parseMode);
@@ -1793,9 +1878,9 @@ InlineQueryResultLocation _$InlineQueryResultLocationFromJson(
           ? null
           : InputMessageContent.fromJson(
               json['input_message_content'] as Map<String, dynamic>),
-      thumbUrl: json['thumb_url'] as String?,
-      thumbWidth: json['thumb_width'] as int?,
-      thumbHeight: json['thumb_height'] as int?,
+      thumbnailUrl: json['thumbnail_url'] as String?,
+      thumbnailWidth: json['thumbnail_width'] as int?,
+      thumbnailHeight: json['thumbnail_height'] as int?,
     );
 
 Map<String, dynamic> _$InlineQueryResultLocationToJson(
@@ -1820,9 +1905,9 @@ Map<String, dynamic> _$InlineQueryResultLocationToJson(
   writeNotNull('proximity_alert_radius', instance.proximityAlertRadius);
   writeNotNull('reply_markup', instance.replyMarkup?.toJson());
   writeNotNull('input_message_content', instance.inputMessageContent?.toJson());
-  writeNotNull('thumb_url', instance.thumbUrl);
-  writeNotNull('thumb_width', instance.thumbWidth);
-  writeNotNull('thumb_height', instance.thumbHeight);
+  writeNotNull('thumbnail_url', instance.thumbnailUrl);
+  writeNotNull('thumbnail_width', instance.thumbnailWidth);
+  writeNotNull('thumbnail_height', instance.thumbnailHeight);
   return val;
 }
 
@@ -1835,8 +1920,8 @@ InlineQueryResultMpeg4Gif _$InlineQueryResultMpeg4GifFromJson(
       mpeg4Width: json['mpeg4_width'] as int?,
       mpeg4Height: json['mpeg4_height'] as int?,
       mpeg4Duration: json['mpeg4_duration'] as int?,
-      thumbUrl: json['thumb_url'] as String,
-      thumbMimeType: json['thumb_mime_type'] as String?,
+      thumbnailUrl: json['thumbnail_url'] as String,
+      thumbnailMimeType: json['thumbnail_mime_type'] as String?,
       title: json['title'] as String?,
       caption: json['caption'] as String?,
       parseMode: json['parse_mode'] as String?,
@@ -1870,8 +1955,8 @@ Map<String, dynamic> _$InlineQueryResultMpeg4GifToJson(
   writeNotNull('mpeg4_width', instance.mpeg4Width);
   writeNotNull('mpeg4_height', instance.mpeg4Height);
   writeNotNull('mpeg4_duration', instance.mpeg4Duration);
-  val['thumb_url'] = instance.thumbUrl;
-  writeNotNull('thumb_mime_type', instance.thumbMimeType);
+  val['thumbnail_url'] = instance.thumbnailUrl;
+  writeNotNull('thumbnail_mime_type', instance.thumbnailMimeType);
   writeNotNull('title', instance.title);
   writeNotNull('caption', instance.caption);
   writeNotNull('parse_mode', instance.parseMode);
@@ -1888,7 +1973,7 @@ InlineQueryResultPhoto _$InlineQueryResultPhotoFromJson(
       id: json['id'] as String,
       type: json['type'] as String? ?? InlineQueryResult.typePhoto,
       photoUrl: json['photo_url'] as String,
-      thumbUrl: json['thumb_url'] as String,
+      thumbnailUrl: json['thumbnail_url'] as String,
       photoWidth: json['photo_width'] as int?,
       photoHeight: json['photo_height'] as int?,
       title: json['title'] as String?,
@@ -1914,7 +1999,7 @@ Map<String, dynamic> _$InlineQueryResultPhotoToJson(
     'id': instance.id,
     'type': instance.type,
     'photo_url': instance.photoUrl,
-    'thumb_url': instance.thumbUrl,
+    'thumbnail_url': instance.thumbnailUrl,
   };
 
   void writeNotNull(String key, dynamic value) {
@@ -1957,9 +2042,9 @@ InlineQueryResultVenue _$InlineQueryResultVenueFromJson(
           ? null
           : InputMessageContent.fromJson(
               json['input_message_content'] as Map<String, dynamic>),
-      thumbUrl: json['thumb_url'] as String?,
-      thumbWidth: json['thumb_width'] as int?,
-      thumbHeight: json['thumb_height'] as int?,
+      thumbnailUrl: json['thumbnail_url'] as String?,
+      thumbnailWidth: json['thumbnail_width'] as int?,
+      thumbnailHeight: json['thumbnail_height'] as int?,
     );
 
 Map<String, dynamic> _$InlineQueryResultVenueToJson(
@@ -1985,9 +2070,9 @@ Map<String, dynamic> _$InlineQueryResultVenueToJson(
   writeNotNull('google_place_type', instance.googlePlaceType);
   writeNotNull('reply_markup', instance.replyMarkup?.toJson());
   writeNotNull('input_message_content', instance.inputMessageContent?.toJson());
-  writeNotNull('thumb_url', instance.thumbUrl);
-  writeNotNull('thumb_width', instance.thumbWidth);
-  writeNotNull('thumb_height', instance.thumbHeight);
+  writeNotNull('thumbnail_url', instance.thumbnailUrl);
+  writeNotNull('thumbnail_width', instance.thumbnailWidth);
+  writeNotNull('thumbnail_height', instance.thumbnailHeight);
   return val;
 }
 
@@ -1998,7 +2083,7 @@ InlineQueryResultVideo _$InlineQueryResultVideoFromJson(
       type: json['type'] as String? ?? InlineQueryResult.typeVideo,
       videoUrl: json['video_url'] as String,
       mimeType: json['mime_type'] as String,
-      thumbUrl: json['thumb_url'] as String,
+      thumbnailUrl: json['thumbnail_url'] as String,
       title: json['title'] as String,
       caption: json['caption'] as String?,
       parseMode: json['parse_mode'] as String?,
@@ -2026,7 +2111,7 @@ Map<String, dynamic> _$InlineQueryResultVideoToJson(
     'type': instance.type,
     'video_url': instance.videoUrl,
     'mime_type': instance.mimeType,
-    'thumb_url': instance.thumbUrl,
+    'thumbnail_url': instance.thumbnailUrl,
     'title': instance.title,
   };
 
@@ -2120,6 +2205,33 @@ Map<String, dynamic> _$InlineQueryResultToJson(InlineQueryResult instance) {
   }
 
   writeNotNull('reply_markup', instance.replyMarkup?.toJson());
+  return val;
+}
+
+InlineQueryResultsButton _$InlineQueryResultsButtonFromJson(
+        Map<String, dynamic> json) =>
+    InlineQueryResultsButton(
+      text: json['text'] as String,
+      webApp: json['web_app'] == null
+          ? null
+          : WebAppInfo.fromJson(json['web_app'] as Map<String, dynamic>),
+      startParameter: json['start_parameter'] as String?,
+    );
+
+Map<String, dynamic> _$InlineQueryResultsButtonToJson(
+    InlineQueryResultsButton instance) {
+  final val = <String, dynamic>{
+    'text': instance.text,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('web_app', instance.webApp?.toJson());
+  writeNotNull('start_parameter', instance.startParameter);
   return val;
 }
 
@@ -2278,7 +2390,7 @@ InputMediaAnimation _$InputMediaAnimationFromJson(Map<String, dynamic> json) =>
     InputMediaAnimation(
       type: json['type'] as String? ?? InputMedia.typeAnimation,
       media: json['media'] as String,
-      thumb: json['thumb'],
+      thumbnail: json['thumbnail'] as String?,
       caption: json['caption'] as String?,
       parseMode: json['parse_mode'] as String?,
       captionEntities: (json['caption_entities'] as List<dynamic>?)
@@ -2306,7 +2418,7 @@ Map<String, dynamic> _$InputMediaAnimationToJson(InputMediaAnimation instance) {
   writeNotNull('parse_mode', instance.parseMode);
   writeNotNull('caption_entities',
       instance.captionEntities?.map((e) => e.toJson()).toList());
-  writeNotNull('thumb', instance.thumb);
+  writeNotNull('thumbnail', instance.thumbnail);
   writeNotNull('width', instance.width);
   writeNotNull('height', instance.height);
   writeNotNull('duration', instance.duration);
@@ -2318,7 +2430,7 @@ InputMediaAudio _$InputMediaAudioFromJson(Map<String, dynamic> json) =>
     InputMediaAudio(
       type: json['type'] as String? ?? InputMedia.typeAudio,
       media: json['media'] as String,
-      thumb: json['thumb'],
+      thumbnail: json['thumbnail'] as String?,
       caption: json['caption'] as String?,
       parseMode: json['parse_mode'] as String?,
       captionEntities: (json['caption_entities'] as List<dynamic>?)
@@ -2345,7 +2457,7 @@ Map<String, dynamic> _$InputMediaAudioToJson(InputMediaAudio instance) {
   writeNotNull('parse_mode', instance.parseMode);
   writeNotNull('caption_entities',
       instance.captionEntities?.map((e) => e.toJson()).toList());
-  writeNotNull('thumb', instance.thumb);
+  writeNotNull('thumbnail', instance.thumbnail);
   writeNotNull('duration', instance.duration);
   writeNotNull('performer', instance.performer);
   writeNotNull('title', instance.title);
@@ -2356,7 +2468,7 @@ InputMediaDocument _$InputMediaDocumentFromJson(Map<String, dynamic> json) =>
     InputMediaDocument(
       type: json['type'] as String? ?? InputMedia.typeDocument,
       media: json['media'] as String,
-      thumb: json['thumb'],
+      thumbnail: json['thumbnail'] as String?,
       caption: json['caption'] as String?,
       parseMode: json['parse_mode'] as String?,
       captionEntities: (json['caption_entities'] as List<dynamic>?)
@@ -2382,7 +2494,7 @@ Map<String, dynamic> _$InputMediaDocumentToJson(InputMediaDocument instance) {
   writeNotNull('parse_mode', instance.parseMode);
   writeNotNull('caption_entities',
       instance.captionEntities?.map((e) => e.toJson()).toList());
-  writeNotNull('thumb', instance.thumb);
+  writeNotNull('thumbnail', instance.thumbnail);
   writeNotNull(
       'disable_content_type_detection', instance.disableContentTypeDetection);
   return val;
@@ -2429,7 +2541,7 @@ InputMediaVideo _$InputMediaVideoFromJson(Map<String, dynamic> json) =>
       captionEntities: (json['caption_entities'] as List<dynamic>?)
           ?.map((e) => MessageEntity.fromJson(e as Map<String, dynamic>))
           .toList(),
-      thumb: json['thumb'],
+      thumbnail: json['thumbnail'] as String?,
       width: json['width'] as int?,
       height: json['height'] as int?,
       duration: json['duration'] as int?,
@@ -2453,12 +2565,46 @@ Map<String, dynamic> _$InputMediaVideoToJson(InputMediaVideo instance) {
   writeNotNull('parse_mode', instance.parseMode);
   writeNotNull('caption_entities',
       instance.captionEntities?.map((e) => e.toJson()).toList());
-  writeNotNull('thumb', instance.thumb);
+  writeNotNull('thumbnail', instance.thumbnail);
   writeNotNull('width', instance.width);
   writeNotNull('height', instance.height);
   writeNotNull('duration', instance.duration);
   writeNotNull('supports_streaming', instance.supportsStreaming);
   writeNotNull('has_spoiler', instance.hasSpoiler);
+  return val;
+}
+
+InputMediaWithThumbnail _$InputMediaWithThumbnailFromJson(
+        Map<String, dynamic> json) =>
+    InputMediaWithThumbnail(
+      type: json['type'] as String,
+      media: json['media'] as String,
+      thumbnail: json['thumbnail'] as String?,
+      caption: json['caption'] as String?,
+      parseMode: json['parse_mode'] as String?,
+      captionEntities: (json['caption_entities'] as List<dynamic>?)
+          ?.map((e) => MessageEntity.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$InputMediaWithThumbnailToJson(
+    InputMediaWithThumbnail instance) {
+  final val = <String, dynamic>{
+    'type': instance.type,
+    'media': instance.media,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('caption', instance.caption);
+  writeNotNull('parse_mode', instance.parseMode);
+  writeNotNull('caption_entities',
+      instance.captionEntities?.map((e) => e.toJson()).toList());
+  writeNotNull('thumbnail', instance.thumbnail);
   return val;
 }
 
@@ -2497,6 +2643,37 @@ InputMessageContent _$InputMessageContentFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$InputMessageContentToJson(
         InputMessageContent instance) =>
     <String, dynamic>{};
+
+InputSticker _$InputStickerFromJson(Map<String, dynamic> json) => InputSticker(
+      sticker: json['sticker'] as String,
+      emojiList: (json['emoji_list'] as List<dynamic>)
+          .map((e) => e as String)
+          .toList(),
+      maskPosition: json['mask_position'] == null
+          ? null
+          : MaskPosition.fromJson(
+              json['mask_position'] as Map<String, dynamic>),
+      keywords: (json['keywords'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+    );
+
+Map<String, dynamic> _$InputStickerToJson(InputSticker instance) {
+  final val = <String, dynamic>{
+    'sticker': instance.sticker,
+    'emoji_list': instance.emojiList,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('mask_position', instance.maskPosition?.toJson());
+  writeNotNull('keywords', instance.keywords);
+  return val;
+}
 
 InputTextMessageContent _$InputTextMessageContentFromJson(
         Map<String, dynamic> json) =>
@@ -2597,9 +2774,81 @@ Map<String, dynamic> _$KeyboardButtonPollTypeToJson(
   return val;
 }
 
+KeyboardButtonRequestChat _$KeyboardButtonRequestChatFromJson(
+        Map<String, dynamic> json) =>
+    KeyboardButtonRequestChat(
+      requestId: json['request_id'] as int,
+      chatIsChannel: json['chat_is_channel'] as bool,
+      charIsForum: json['char_is_forum'] as bool?,
+      chatHasUsername: json['chat_has_username'] as bool?,
+      chatIsCreated: json['chat_is_created'] as bool?,
+      userAdministratorRights: json['user_administrator_rights'] == null
+          ? null
+          : ChatAdministratorRights.fromJson(
+              json['user_administrator_rights'] as Map<String, dynamic>),
+      botAdministratorRights: json['bot_administrator_rights'] == null
+          ? null
+          : ChatAdministratorRights.fromJson(
+              json['bot_administrator_rights'] as Map<String, dynamic>),
+      botIsMember: json['bot_is_member'] as bool?,
+    );
+
+Map<String, dynamic> _$KeyboardButtonRequestChatToJson(
+    KeyboardButtonRequestChat instance) {
+  final val = <String, dynamic>{
+    'request_id': instance.requestId,
+    'chat_is_channel': instance.chatIsChannel,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('char_is_forum', instance.charIsForum);
+  writeNotNull('chat_has_username', instance.chatHasUsername);
+  writeNotNull('chat_is_created', instance.chatIsCreated);
+  writeNotNull(
+      'user_administrator_rights', instance.userAdministratorRights?.toJson());
+  writeNotNull(
+      'bot_administrator_rights', instance.botAdministratorRights?.toJson());
+  writeNotNull('bot_is_member', instance.botIsMember);
+  return val;
+}
+
+KeyboardButtonRequestUser _$KeyboardButtonRequestUserFromJson(
+        Map<String, dynamic> json) =>
+    KeyboardButtonRequestUser(
+      requestId: json['request_id'] as int,
+      userIsBot: json['user_is_bot'] as bool?,
+      userIsPremium: json['user_is_premium'] as bool?,
+    );
+
+Map<String, dynamic> _$KeyboardButtonRequestUserToJson(
+    KeyboardButtonRequestUser instance) {
+  final val = <String, dynamic>{
+    'request_id': instance.requestId,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('user_is_bot', instance.userIsBot);
+  writeNotNull('user_is_premium', instance.userIsPremium);
+  return val;
+}
+
 KeyboardButton _$KeyboardButtonFromJson(Map<String, dynamic> json) =>
     KeyboardButton(
       text: json['text'] as String,
+      requestUser: json['request_user'] == null
+          ? null
+          : KeyboardButtonRequestUser.fromJson(
+              json['request_user'] as Map<String, dynamic>),
       requestContact: json['request_contact'] as bool?,
       requestLocation: json['request_location'] as bool?,
       requestPoll: json['request_poll'] == null
@@ -2609,7 +2858,10 @@ KeyboardButton _$KeyboardButtonFromJson(Map<String, dynamic> json) =>
       webApp: json['web_app'] == null
           ? null
           : WebAppInfo.fromJson(json['web_app'] as Map<String, dynamic>),
-    );
+    )..requestChat = json['request_chat'] == null
+        ? null
+        : KeyboardButtonRequestChat.fromJson(
+            json['request_chat'] as Map<String, dynamic>);
 
 Map<String, dynamic> _$KeyboardButtonToJson(KeyboardButton instance) {
   final val = <String, dynamic>{
@@ -2622,6 +2874,8 @@ Map<String, dynamic> _$KeyboardButtonToJson(KeyboardButton instance) {
     }
   }
 
+  writeNotNull('request_user', instance.requestUser?.toJson());
+  writeNotNull('request_chat', instance.requestChat?.toJson());
   writeNotNull('request_contact', instance.requestContact);
   writeNotNull('request_location', instance.requestLocation);
   writeNotNull('request_poll', instance.requestPoll?.toJson());
@@ -2855,6 +3109,9 @@ Message _$MessageFromJson(Map<String, dynamic> json) => Message(
       sticker: json['sticker'] == null
           ? null
           : Sticker.fromJson(json['sticker'] as Map<String, dynamic>),
+      story: json['story'] == null
+          ? null
+          : Story.fromJson(json['story'] as Map<String, dynamic>),
       video: json['video'] == null
           ? null
           : Video.fromJson(json['video'] as Map<String, dynamic>),
@@ -2919,6 +3176,12 @@ Message _$MessageFromJson(Map<String, dynamic> json) => Message(
           ? null
           : SuccessfulPayment.fromJson(
               json['successful_payment'] as Map<String, dynamic>),
+      userShared: json['user_shared'] == null
+          ? null
+          : UserShared.fromJson(json['user_shared'] as Map<String, dynamic>),
+      chatShared: json['chat_shared'] == null
+          ? null
+          : ChatShared.fromJson(json['chat_shared'] as Map<String, dynamic>),
       connectedWebsite: json['connected_website'] as String?,
       writeAccessAllowed: json['write_access_allowed'] == null
           ? null
@@ -3019,6 +3282,7 @@ Map<String, dynamic> _$MessageToJson(Message instance) {
   writeNotNull('document', instance.document?.toJson());
   writeNotNull('photo', instance.photo?.map((e) => e.toJson()).toList());
   writeNotNull('sticker', instance.sticker?.toJson());
+  writeNotNull('story', instance.story?.toJson());
   writeNotNull('video', instance.video?.toJson());
   writeNotNull('video_note', instance.videoNote?.toJson());
   writeNotNull('voice', instance.voice?.toJson());
@@ -3049,6 +3313,8 @@ Map<String, dynamic> _$MessageToJson(Message instance) {
   writeNotNull('pinned_message', instance.pinnedMessage?.toJson());
   writeNotNull('invoice', instance.invoice?.toJson());
   writeNotNull('successful_payment', instance.successfulPayment?.toJson());
+  writeNotNull('user_shared', instance.userShared?.toJson());
+  writeNotNull('chat_shared', instance.chatShared?.toJson());
   writeNotNull('connected_website', instance.connectedWebsite);
   writeNotNull('write_access_allowed', instance.writeAccessAllowed?.toJson());
   writeNotNull('passport_data', instance.passportData?.toJson());
@@ -3340,17 +3606,32 @@ Map<String, dynamic> _$PhotoSizeToJson(PhotoSize instance) {
 
 PollAnswer _$PollAnswerFromJson(Map<String, dynamic> json) => PollAnswer(
       pollId: json['poll_id'] as String,
-      user: User.fromJson(json['user'] as Map<String, dynamic>),
+      voterChat: json['voter_chat'] == null
+          ? null
+          : Chat.fromJson(json['voter_chat'] as Map<String, dynamic>),
+      user: json['user'] == null
+          ? null
+          : User.fromJson(json['user'] as Map<String, dynamic>),
       optionIds:
           (json['option_ids'] as List<dynamic>).map((e) => e as int).toList(),
     );
 
-Map<String, dynamic> _$PollAnswerToJson(PollAnswer instance) =>
-    <String, dynamic>{
-      'poll_id': instance.pollId,
-      'user': instance.user.toJson(),
-      'option_ids': instance.optionIds,
-    };
+Map<String, dynamic> _$PollAnswerToJson(PollAnswer instance) {
+  final val = <String, dynamic>{
+    'poll_id': instance.pollId,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('voter_chat', instance.voterChat?.toJson());
+  writeNotNull('user', instance.user?.toJson());
+  val['option_ids'] = instance.optionIds;
+  return val;
+}
 
 PollOption _$PollOptionFromJson(Map<String, dynamic> json) => PollOption(
       text: json['text'] as String,
@@ -3677,9 +3958,9 @@ StickerSet _$StickerSetFromJson(Map<String, dynamic> json) => StickerSet(
       stickers: (json['stickers'] as List<dynamic>)
           .map((e) => Sticker.fromJson(e as Map<String, dynamic>))
           .toList(),
-      thumb: json['thumb'] == null
+      thumbnail: json['thumbnail'] == null
           ? null
-          : PhotoSize.fromJson(json['thumb'] as Map<String, dynamic>),
+          : PhotoSize.fromJson(json['thumbnail'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$StickerSetToJson(StickerSet instance) {
@@ -3698,7 +3979,7 @@ Map<String, dynamic> _$StickerSetToJson(StickerSet instance) {
     }
   }
 
-  writeNotNull('thumb', instance.thumb?.toJson());
+  writeNotNull('thumbnail', instance.thumbnail?.toJson());
   return val;
 }
 
@@ -3709,9 +3990,9 @@ Sticker _$StickerFromJson(Map<String, dynamic> json) => Sticker(
       height: json['height'] as int,
       isAnimated: json['is_animated'] as bool,
       isVideo: json['is_video'] as bool,
-      thumb: json['thumb'] == null
+      thumbnail: json['thumbnail'] == null
           ? null
-          : PhotoSize.fromJson(json['thumb'] as Map<String, dynamic>),
+          : PhotoSize.fromJson(json['thumbnail'] as Map<String, dynamic>),
       emoji: json['emoji'] as String?,
       setName: json['set_name'] as String?,
       premiumAnimation: json['premium_animation'] == null
@@ -3722,6 +4003,7 @@ Sticker _$StickerFromJson(Map<String, dynamic> json) => Sticker(
           : MaskPosition.fromJson(
               json['mask_position'] as Map<String, dynamic>),
       customEmojiId: json['custom_emoji_id'] as String?,
+      needsRepainting: json['needs_repainting'] as bool?,
       fileSize: json['file_size'] as int?,
     );
 
@@ -3741,15 +4023,20 @@ Map<String, dynamic> _$StickerToJson(Sticker instance) {
     }
   }
 
-  writeNotNull('thumb', instance.thumb?.toJson());
+  writeNotNull('thumbnail', instance.thumbnail?.toJson());
   writeNotNull('emoji', instance.emoji);
   writeNotNull('set_name', instance.setName);
   writeNotNull('premium_animation', instance.premiumAnimation?.toJson());
   writeNotNull('mask_position', instance.maskPosition?.toJson());
   writeNotNull('custom_emoji_id', instance.customEmojiId);
+  writeNotNull('needs_repainting', instance.needsRepainting);
   writeNotNull('file_size', instance.fileSize);
   return val;
 }
+
+Story _$StoryFromJson(Map<String, dynamic> json) => Story();
+
+Map<String, dynamic> _$StoryToJson(Story instance) => <String, dynamic>{};
 
 SuccessfulPayment _$SuccessfulPaymentFromJson(Map<String, dynamic> json) =>
     SuccessfulPayment(
@@ -3781,6 +4068,34 @@ Map<String, dynamic> _$SuccessfulPaymentToJson(SuccessfulPayment instance) {
   writeNotNull('order_info', instance.orderInfo?.toJson());
   val['telegram_payment_charge_id'] = instance.telegramPaymentChargeId;
   val['provider_payment_charge_id'] = instance.providerPaymentChargeId;
+  return val;
+}
+
+SwitchInlineQueryChosenChat _$SwitchInlineQueryChosenChatFromJson(
+        Map<String, dynamic> json) =>
+    SwitchInlineQueryChosenChat(
+      query: json['query'] as String?,
+      allowUserChats: json['allow_user_chats'] as bool?,
+      allowBotChats: json['allow_bot_chats'] as bool?,
+      allowGroupChats: json['allow_group_chats'] as bool?,
+      allowChannelChats: json['allow_channel_chats'] as bool?,
+    );
+
+Map<String, dynamic> _$SwitchInlineQueryChosenChatToJson(
+    SwitchInlineQueryChosenChat instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('query', instance.query);
+  writeNotNull('allow_user_chats', instance.allowUserChats);
+  writeNotNull('allow_bot_chats', instance.allowBotChats);
+  writeNotNull('allow_group_chats', instance.allowGroupChats);
+  writeNotNull('allow_channel_chats', instance.allowChannelChats);
   return val;
 }
 
@@ -3884,6 +4199,17 @@ Map<String, dynamic> _$UserProfilePhotosToJson(UserProfilePhotos instance) =>
           .toList(),
     };
 
+UserShared _$UserSharedFromJson(Map<String, dynamic> json) => UserShared(
+      requestId: json['request_id'] as int,
+      userId: json['user_id'] as int,
+    );
+
+Map<String, dynamic> _$UserSharedToJson(UserShared instance) =>
+    <String, dynamic>{
+      'request_id': instance.requestId,
+      'user_id': instance.userId,
+    };
+
 User _$UserFromJson(Map<String, dynamic> json) => User(
       id: json['id'] as int,
       isBot: json['is_bot'] as bool,
@@ -3957,9 +4283,9 @@ VideoNote _$VideoNoteFromJson(Map<String, dynamic> json) => VideoNote(
       fileUniqueId: json['file_unique_id'] as String,
       length: json['length'] as int,
       duration: json['duration'] as int,
-      thumb: json['thumb'] == null
+      thumbnail: json['thumbnail'] == null
           ? null
-          : PhotoSize.fromJson(json['thumb'] as Map<String, dynamic>),
+          : PhotoSize.fromJson(json['thumbnail'] as Map<String, dynamic>),
       fileSize: json['file_size'] as int?,
     );
 
@@ -3977,7 +4303,7 @@ Map<String, dynamic> _$VideoNoteToJson(VideoNote instance) {
     }
   }
 
-  writeNotNull('thumb', instance.thumb?.toJson());
+  writeNotNull('thumbnail', instance.thumbnail?.toJson());
   writeNotNull('file_size', instance.fileSize);
   return val;
 }
@@ -3988,9 +4314,9 @@ Video _$VideoFromJson(Map<String, dynamic> json) => Video(
       width: json['width'] as int,
       height: json['height'] as int,
       duration: json['duration'] as int,
-      thumb: json['thumb'] == null
+      thumbnail: json['thumbnail'] == null
           ? null
-          : PhotoSize.fromJson(json['thumb'] as Map<String, dynamic>),
+          : PhotoSize.fromJson(json['thumbnail'] as Map<String, dynamic>),
       fileName: json['file_name'] as String?,
       mimeType: json['mime_type'] as String?,
       fileSize: json['file_size'] as int?,
@@ -4011,7 +4337,7 @@ Map<String, dynamic> _$VideoToJson(Video instance) {
     }
   }
 
-  writeNotNull('thumb', instance.thumb?.toJson());
+  writeNotNull('thumbnail', instance.thumbnail?.toJson());
   writeNotNull('file_name', instance.fileName);
   writeNotNull('mime_type', instance.mimeType);
   writeNotNull('file_size', instance.fileSize);
@@ -4151,7 +4477,19 @@ Map<String, dynamic> _$WebhookInfoToJson(WebhookInfo instance) {
 }
 
 WriteAccessAllowed _$WriteAccessAllowedFromJson(Map<String, dynamic> json) =>
-    WriteAccessAllowed();
+    WriteAccessAllowed(
+      webAppName: json['web_app_name'] as String?,
+    );
 
-Map<String, dynamic> _$WriteAccessAllowedToJson(WriteAccessAllowed instance) =>
-    <String, dynamic>{};
+Map<String, dynamic> _$WriteAccessAllowedToJson(WriteAccessAllowed instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('web_app_name', instance.webAppName);
+  return val;
+}
