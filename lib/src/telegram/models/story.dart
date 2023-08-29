@@ -23,9 +23,7 @@ part of '../model.dart';
 /// https://core.telegram.org/bots/api#writeaccessallowed
 @JsonSerializable(fieldRename: FieldRename.snake)
 class Story {
-
   Story();
-  factory Story.fromJson(Map<String, dynamic> json) =>
-      _$StoryFromJson(json);
+  factory Story.fromJson(Map<String, dynamic> json) => _$StoryFromJson(json);
   Map<String, dynamic> toJson() => _$StoryToJson(this);
 }

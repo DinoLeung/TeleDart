@@ -147,7 +147,7 @@ class Event {
                 entityText = message.getEntity(entityType)?.substring(1) ?? '';
                 break;
               case MessageEntity
-                  .typeBotCommand: // '\/${keyword}' or '\/${keyword}\@${me.username}'
+                    .typeBotCommand: // '\/${keyword}' or '\/${keyword}\@${me.username}'
                 entityText = message
                         .getEntity(entityType)
                         ?.substring(1)
@@ -161,7 +161,7 @@ class Event {
               case MessageEntity.typeSpolier:
               case MessageEntity.typeCode:
               case MessageEntity
-                  .typePre: // TODO: need to return language prop somehow
+                    .typePre: // TODO: need to return language prop somehow
               case MessageEntity.typeUnderline:
               case MessageEntity.typeStrikethrough:
                 entityText = message.getEntity(entityType) ?? '';
