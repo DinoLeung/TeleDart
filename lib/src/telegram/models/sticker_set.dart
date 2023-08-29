@@ -29,7 +29,7 @@ class StickerSet {
   bool isAnimated;
   bool isVideo;
   List<Sticker> stickers;
-  PhotoSize? thumb;
+  PhotoSize? thumbnail;
   StickerSet({
     required this.name,
     required this.title,
@@ -37,7 +37,7 @@ class StickerSet {
     required this.isAnimated,
     required this.isVideo,
     required this.stickers,
-    this.thumb,
+    this.thumbnail,
   });
   factory StickerSet.fromJson(Map<String, dynamic> json) =>
       _$StickerSetFromJson(json);

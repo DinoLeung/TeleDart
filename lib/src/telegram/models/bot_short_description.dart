@@ -18,17 +18,16 @@
 
 part of '../model.dart';
 
-/// This object represents a service message about General forum topic unhidden in the chat.
+/// This object represents the bot's description.
 ///
-/// https://core.telegram.org/bots/api#writeaccessallowed
+/// https://core.telegram.org/bots/api#botshortdescription
 @JsonSerializable(fieldRename: FieldRename.snake)
-class WriteAccessAllowed {
-  String? webAppName;
-
-  WriteAccessAllowed({
-    this.webAppName,
+class BotShortDescription {
+  String shortDescription;
+  BotShortDescription({
+    required this.shortDescription,
   });
-  factory WriteAccessAllowed.fromJson(Map<String, dynamic> json) =>
-      _$WriteAccessAllowedFromJson(json);
-  Map<String, dynamic> toJson() => _$WriteAccessAllowedToJson(this);
+  factory BotShortDescription.fromJson(Map<String, dynamic> json) =>
+      _$BotShortDescriptionFromJson(json);
+  Map<String, dynamic> toJson() => _$BotShortDescriptionToJson(this);
 }

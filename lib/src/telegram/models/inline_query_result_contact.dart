@@ -41,9 +41,9 @@ class InlineQueryResultContact implements InlineQueryResult {
   @override
   InlineKeyboardMarkup? replyMarkup;
   InputMessageContent? inputMessageContent;
-  String? thumbUrl;
-  int? thumbWidth;
-  int? thumbHeight;
+  String? thumbnailUrl;
+  int? thumbnailWidth;
+  int? thumbnailHeight;
   InlineQueryResultContact({
     required this.id,
     this.type = InlineQueryResult.typeContact,
@@ -53,9 +53,9 @@ class InlineQueryResultContact implements InlineQueryResult {
     this.vcard,
     this.replyMarkup,
     this.inputMessageContent,
-    this.thumbUrl,
-    this.thumbWidth,
-    this.thumbHeight,
+    this.thumbnailUrl,
+    this.thumbnailWidth,
+    this.thumbnailHeight,
   });
   factory InlineQueryResultContact.fromJson(Map<String, dynamic> json) =>
       _$InlineQueryResultContactFromJson(json);

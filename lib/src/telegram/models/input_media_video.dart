@@ -1,6 +1,6 @@
 /*
  * TeleDart - Telegram Bot API for Dart
- * Copyright (C) 2019  Dino PH Leung
+ * Copyright (C) 2023  Dino PH Leung
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,7 +22,7 @@ part of '../model.dart';
 ///
 /// https://core.telegram.org/bots/api#inputmediavideo
 @JsonSerializable(fieldRename: FieldRename.snake)
-class InputMediaVideo implements InputMedia {
+class InputMediaVideo implements InputMediaWithThumbnail {
   @override
   String type;
   @override
@@ -33,12 +33,20 @@ class InputMediaVideo implements InputMedia {
   String? parseMode;
   @override
   List<MessageEntity>? captionEntities;
-  dynamic thumb; // InputFile or String
+  @override
+  String? thumbnail;
   int? width;
   int? height;
   int? duration;
   bool? supportsStreaming;
   bool? hasSpoiler;
+
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  MultipartFile? mediaFile;
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  MultipartFile? thumbnailFile;
 
   InputMediaVideo({
     this.type = InputMedia.typeVideo,
@@ -46,13 +54,101 @@ class InputMediaVideo implements InputMedia {
     this.caption,
     this.parseMode,
     this.captionEntities,
-    this.thumb,
+    this.thumbnail,
     this.width,
     this.height,
     this.duration,
     this.supportsStreaming,
     this.hasSpoiler,
   });
+
+  // Factory to create InputMediaVideo from file
+  factory InputMediaVideo.fromFile({
+    required io.File media,
+    String? caption,
+    String? parseMode,
+    List<MessageEntity>? captionEntities,
+    String? thumbnail,
+    int? width,
+    int? height,
+    int? duration,
+    bool? supportsStreaming,
+    bool? hasSpoiler,
+  }) =>
+      InputMediaVideo(
+        media: 'attach://${media.path}',
+        caption: caption,
+        parseMode: parseMode,
+        captionEntities: captionEntities,
+        thumbnail: thumbnail,
+        width: width,
+        height: height,
+        duration: duration,
+        supportsStreaming: supportsStreaming,
+        hasSpoiler: hasSpoiler,
+      )..mediaFile = MultipartFile(
+          media.path, media.openRead(), media.lengthSync(),
+          filename: media.path.split('/').last);
+
+  // Factory to create InputMediaVideo with thumbnail file
+  factory InputMediaVideo.withThumbnailFile({
+    required String media,
+    required io.File thumbnail,
+    String? caption,
+    String? parseMode,
+    List<MessageEntity>? captionEntities,
+    int? width,
+    int? height,
+    int? duration,
+    bool? supportsStreaming,
+    bool? hasSpoiler,
+  }) =>
+      InputMediaVideo(
+        media: media,
+        thumbnail: 'attach://${thumbnail.path}',
+        caption: caption,
+        parseMode: parseMode,
+        captionEntities: captionEntities,
+        width: width,
+        height: height,
+        duration: duration,
+        supportsStreaming: supportsStreaming,
+        hasSpoiler: hasSpoiler,
+      )..thumbnailFile = MultipartFile(
+          thumbnail.path, thumbnail.openRead(), thumbnail.lengthSync(),
+          filename: thumbnail.path.split('/').last);
+
+  // Factory to create InputMediaVideo from file and with thumbnail file
+  factory InputMediaVideo.fromFileWithThumbnailFile({
+    required io.File media,
+    required io.File thumbnail,
+    String? caption,
+    String? parseMode,
+    List<MessageEntity>? captionEntities,
+    int? width,
+    int? height,
+    int? duration,
+    bool? supportsStreaming,
+    bool? hasSpoiler,
+  }) =>
+      InputMediaVideo(
+        media: 'attach://${media.path}',
+        thumbnail: 'attach://${thumbnail.path}',
+        caption: caption,
+        parseMode: parseMode,
+        captionEntities: captionEntities,
+        width: width,
+        height: height,
+        duration: duration,
+        supportsStreaming: supportsStreaming,
+        hasSpoiler: hasSpoiler,
+      )
+        ..mediaFile = MultipartFile(
+            media.path, media.openRead(), media.lengthSync(),
+            filename: media.path.split('/').last)
+        ..thumbnailFile = MultipartFile(
+            thumbnail.path, thumbnail.openRead(), thumbnail.lengthSync(),
+            filename: thumbnail.path.split('/').last);
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   Duration? get duration_ =>

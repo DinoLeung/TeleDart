@@ -18,17 +18,19 @@
 
 part of '../model.dart';
 
-/// This object represents a service message about General forum topic unhidden in the chat.
+/// This object contains information about the chat whose identifier was
+/// shared with the bot using a [KeyboardButtonRequestChat] button.
 ///
-/// https://core.telegram.org/bots/api#writeaccessallowed
+/// https://core.telegram.org/bots/api#chatshared
 @JsonSerializable(fieldRename: FieldRename.snake)
-class WriteAccessAllowed {
-  String? webAppName;
-
-  WriteAccessAllowed({
-    this.webAppName,
+class ChatShared {
+  int requestId;
+  int userId;
+  ChatShared({
+    required this.requestId,
+    required this.userId,
   });
-  factory WriteAccessAllowed.fromJson(Map<String, dynamic> json) =>
-      _$WriteAccessAllowedFromJson(json);
-  Map<String, dynamic> toJson() => _$WriteAccessAllowedToJson(this);
+  factory ChatShared.fromJson(Map<String, dynamic> json) =>
+      _$ChatSharedFromJson(json);
+  Map<String, dynamic> toJson() => _$ChatSharedToJson(this);
 }

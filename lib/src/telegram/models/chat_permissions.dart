@@ -16,6 +16,8 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+// can_send_audios, can_send_documents, can_send_photos, can_send_videos, can_send_video_notes, and can_send_voice_notes
+
 part of '../model.dart';
 
 /// Describes actions that a non-administrator user is allowed to take in a chat.
@@ -24,7 +26,12 @@ part of '../model.dart';
 @JsonSerializable(fieldRename: FieldRename.snake)
 class ChatPermissions {
   bool? canSendMessages;
-  bool? canSendMediaMessages;
+  bool? canSendAudios;
+  bool? canSendDocuments;
+  bool? canSendPhotos;
+  bool? canSendVideos;
+  bool? canSendVideoNotes;
+  bool? canSendVoiceNotes;
   bool? canSendPolls;
   bool? canSendOtherMessages;
   bool? canAddWebPagePreviews;
@@ -35,7 +42,12 @@ class ChatPermissions {
 
   ChatPermissions({
     this.canSendMessages,
-    this.canSendMediaMessages,
+    this.canSendAudios,
+    this.canSendDocuments,
+    this.canSendPhotos,
+    this.canSendVideos,
+    this.canSendVideoNotes,
+    this.canSendVoiceNotes,
     this.canSendPolls,
     this.canSendOtherMessages,
     this.canAddWebPagePreviews,

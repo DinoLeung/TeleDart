@@ -31,12 +31,15 @@ part of '../model.dart';
 @JsonSerializable(fieldRename: FieldRename.snake)
 class KeyboardButton {
   String text;
+  KeyboardButtonRequestUser? requestUser;
+  KeyboardButtonRequestChat? requestChat;
   bool? requestContact;
   bool? requestLocation;
   KeyboardButtonPollType? requestPoll;
   WebAppInfo? webApp;
   KeyboardButton({
     required this.text,
+    this.requestUser,
     this.requestContact,
     this.requestLocation,
     this.requestPoll,

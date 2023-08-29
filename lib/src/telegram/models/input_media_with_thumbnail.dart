@@ -18,43 +18,46 @@
 
 part of '../model.dart';
 
-/// This object represents the content of a media message to be sent.
+/// This object represents the content of a media message to be sent which contains thumbnail.
 ///
 /// It should be one of
 /// * [InputMediaAnimation](https://core.telegram.org/bots/api#inputmediaanimation)
 /// * [InputMediaDocument](https://core.telegram.org/bots/api#inputmediadocument)
 /// * [InputMediaAudio](https://core.telegram.org/bots/api#inputmediaaudio)
-/// * [InputMediaPhoto](https://core.telegram.org/bots/api#inputmediaphoto)
 /// * [InputMediaVideo](https://core.telegram.org/bots/api#inputmediavideo)
 ///
 /// https://core.telegram.org/bots/api#inputmedia
 @JsonSerializable(fieldRename: FieldRename.snake)
-class InputMedia {
-  static const typeAnimation = 'animation';
-  static const typeAudio = 'audio';
-  static const typeDocument = 'document';
-  static const typePhoto = 'photo';
-  static const typeVideo = 'video';
-
+class InputMediaWithThumbnail implements InputMedia {
+  @override
   String type;
+  @override
   String media;
+  @override
   String? caption;
+  @override
   String? parseMode;
+  @override
   List<MessageEntity>? captionEntities;
+  String? thumbnail;
 
+  @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   MultipartFile? mediaFile;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  MultipartFile? thumbnailFile;
 
-  InputMedia({
+  InputMediaWithThumbnail({
     required this.type,
     required this.media,
+    this.thumbnail,
     this.caption,
     this.parseMode,
     this.captionEntities,
-    this.mediaFile,
   });
 
-  factory InputMedia.fromJson(Map<String, dynamic> json) =>
-      _$InputMediaFromJson(json);
-  Map<String, dynamic> toJson() => _$InputMediaToJson(this);
+  factory InputMediaWithThumbnail.fromJson(Map<String, dynamic> json) =>
+      _$InputMediaWithThumbnailFromJson(json);
+  @override
+  Map<String, dynamic> toJson() => _$InputMediaWithThumbnailToJson(this);
 }
