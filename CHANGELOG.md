@@ -1,7 +1,7 @@
 ## 0.6.0
 
 - Support API 6.5, 6.6, 6.7, 6.8
-- Updated method `sendMediaGroup` to dynamically upload media with multipart post
+- Updated method `sendMediaGroup` and `editMessageMedia` to dynamically upload media with multipart post
 - Added factory `InputMedia.fromFile` which accepts parameter `media` in type `io.File`
 - Added class `InputMediaWithThumbnail` what implements `InputMedia` and factories `withThumbnailFile` and `fromFileWithThumbnailFile`
 - **Breaking** Replaced the fields `can_send_media_messages` in the classes [ChatMemberRestricted] and [ChatPermissions] with separate fields `can_send_audios`, `can_send_documents`, `can_send_photos`, `can_send_videos`, `can_send_video_notes`, and `can_send_voice_notes` for different media types
