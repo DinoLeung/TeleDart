@@ -1,0 +1,19 @@
+name: Publish to pub.dev
+
+on:
+  push:
+    tags:
+    - 'v[0-9]+.[0-9]+.[0-9]+*'
+
+
+jobs:
+  analyse:
+    uses: DinoLeung/TeleDart/.github/workflows/package_analyzer.yml@master
+  verify_dot_g:
+    uses: DinoLeung/TeleDart/.github/workflows/verify_dot_g.yml@master
+  publish:
+    needs: [analyse, verify_dot_g]
+    permissions:
+      id-token: write # Required for authentication using OIDC
+    # Publish using the reusable workflow from dart-lang.
+    uses: dart-lang/setup-dart/.github/workflows/publish.yml@v1
