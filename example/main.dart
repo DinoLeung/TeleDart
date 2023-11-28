@@ -47,17 +47,4 @@ Future<void> main() async {
           'https://raw.githubusercontent.com/DinoLeung/TeleDart/master/example/dash_paper_plane.png',
           caption: 'This is how Dash found the paper plane'));
 
-  // Inline mode.
-  teledart.onInlineQuery().listen((inlineQuery) => inlineQuery.answer([
-        InlineQueryResultArticle(
-            id: 'ping',
-            title: 'ping',
-            inputMessageContent: InputTextMessageContent(
-                messageText: '*pong*', parseMode: 'MarkdownV2')),
-        InlineQueryResultArticle(
-            id: 'ding',
-            title: 'ding',
-            inputMessageContent: InputTextMessageContent(
-                messageText: '*_dong_*', parseMode: 'MarkdownV2')),
-      ]));
-}
+
