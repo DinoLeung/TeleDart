@@ -2423,7 +2423,10 @@ class Telegram {
   ///
   /// https://core.telegram.org/bots/api#stoppoll
   Future<Poll> stopPoll(
-      dynamic chatId, int messageId, InlineKeyboardMarkup replyMarkup) async {
+    dynamic chatId,
+    int messageId, {
+    InlineKeyboardMarkup? replyMarkup,
+  }) async {
     if (chatId is! String && chatId is! int) {
       return Future.error(TelegramException(
           'Attribute \'chatId\' can only be either type of String or int'));
@@ -2432,7 +2435,7 @@ class Telegram {
     var body = <String, dynamic>{
       'chat_id': chatId,
       'message_id': messageId,
-      'reply_markup': replyMarkup,
+      'reply_markup': replyMarkup != null ? jsonEncode(replyMarkup) : null,
     };
     return Poll.fromJson(await HttpClient.httpPost(requestUrl, body: body));
   }
