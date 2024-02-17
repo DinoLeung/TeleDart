@@ -844,7 +844,7 @@ class Telegram {
   /// https://core.telegram.org/bots/api#editmessagelivelocation
   ///
   /// [inline bots]: https://core.telegram.org/bots/api#inline-mode
-  Future<Message> editMessageLiveLocation(double latitude, double longitude,
+  Future<dynamic> editMessageLiveLocation(double latitude, double longitude,
       {dynamic chatId,
       int? messageId,
       String? inlineMessageId,
@@ -872,7 +872,10 @@ class Telegram {
       'proximity_alert_radius': proximityAlertRadius,
       'reply_markup': replyMarkup == null ? null : jsonEncode(replyMarkup),
     };
-    return Message.fromJson(await HttpClient.httpPost(requestUrl, body: body));
+
+    final res = await HttpClient.httpPost(requestUrl, body: body);
+
+    return res is bool ? res : Message.fromJson(res);
   }
 
   /// Use this method to stop updating a live location message sent by the bot or via the bot
@@ -884,7 +887,7 @@ class Telegram {
   /// https://core.telegram.org/bots/api#stopmessagelivelocation
   ///
   /// [inline bots]: https://core.telegram.org/bots/api#inline-mode
-  Future<Message> stopMessageLiveLocation(
+  Future<dynamic> stopMessageLiveLocation(
       {dynamic chatId,
       int? messageId,
       String? inlineMessageId,
@@ -904,7 +907,10 @@ class Telegram {
       'inline_message_id': inlineMessageId,
       'reply_markup': replyMarkup == null ? null : jsonEncode(replyMarkup),
     };
-    return Message.fromJson(await HttpClient.httpPost(requestUrl, body: body));
+
+    final res = await HttpClient.httpPost(requestUrl, body: body);
+
+    return res is bool ? res : Message.fromJson(res);
   }
 
   /// Use this method to send information about a venue
@@ -2260,7 +2266,7 @@ class Telegram {
   /// https://core.telegram.org/bots/api#editmessagetext
   ///
   /// [inline bots]: https://core.telegram.org/bots/api#inline-mode
-  Future<Message> editMessageText(String text,
+  Future<dynamic> editMessageText(String text,
       {dynamic chatId,
       int? messageId,
       String? inlineMessageId,
@@ -2286,12 +2292,7 @@ class Telegram {
       'reply_markup': replyMarkup == null ? null : jsonEncode(replyMarkup),
     };
     var res = await HttpClient.httpPost(requestUrl, body: body);
-    if (res == true) {
-      return Future.error(
-          TelegramException('Edited message is NOT sent by the bot'));
-    } else {
-      return Message.fromJson(res);
-    }
+    return res == true ? res : Message.fromJson(res);
   }
 
   /// Use this method to edit captions of messages sent by the bot or via the bot
@@ -2303,7 +2304,7 @@ class Telegram {
   /// https://core.telegram.org/bots/api#editmessagecaption
   ///
   /// [inline bots]: https://core.telegram.org/bots/api#inline-mode
-  Future<Message> editMessageCaption(
+  Future<dynamic> editMessageCaption(
       {dynamic chatId,
       int? messageId,
       String? inlineMessageId,
@@ -2328,12 +2329,7 @@ class Telegram {
       'reply_markup': replyMarkup == null ? null : jsonEncode(replyMarkup),
     };
     var res = await HttpClient.httpPost(requestUrl, body: body);
-    if (res == true) {
-      return Future.error(
-          TelegramException('Edited message is NOT sent by the bot'));
-    } else {
-      return Message.fromJson(res);
-    }
+    return res == true ? res : Message.fromJson(res);
   }
 
   /// Use this method to edit audio, document, photo, or video messages
@@ -2347,7 +2343,7 @@ class Telegram {
   /// otherwise *True* is returned.
   ///
   /// https://core.telegram.org/bots/api#editMessageMedia
-  Future<Message> editMessageMedia(
+  Future<dynamic> editMessageMedia(
       {dynamic chatId,
       int? messageId,
       String? inlineMessageId,
@@ -2384,12 +2380,7 @@ class Telegram {
         : await HttpClient.httpMultipartPost(requestUrl, multiPartFiles,
             body: body);
 
-    if (res == true) {
-      return Future.error(
-          TelegramException('Edited message is NOT sent by the bot'));
-    } else {
-      return Message.fromJson(res);
-    }
+    return res == true ? res : Message.fromJson(res);
   }
 
   /// Use this method to edit only the reply markup of messages sent by the bot or via the bot
@@ -2401,7 +2392,7 @@ class Telegram {
   /// https://core.telegram.org/bots/api#editmessagereplymarkup
   ///
   /// [inline bots]: https://core.telegram.org/bots/api#inline-mode
-  Future<Message> editMessageReplyMarkup(
+  Future<dynamic> editMessageReplyMarkup(
       {dynamic chatId,
       int? messageId,
       String? inlineMessageId,
@@ -2422,12 +2413,8 @@ class Telegram {
       'reply_markup': replyMarkup == null ? null : jsonEncode(replyMarkup),
     };
     var res = await HttpClient.httpPost(requestUrl, body: body);
-    if (res == true) {
-      return Future.error(
-          TelegramException('Edited message is NOT sent by the bot'));
-    } else {
-      return Message.fromJson(res);
-    }
+
+    return res == true ? res : Message.fromJson(res);
   }
 
   /// Use this method to stop a poll which was sent by the bot
@@ -2436,7 +2423,10 @@ class Telegram {
   ///
   /// https://core.telegram.org/bots/api#stoppoll
   Future<Poll> stopPoll(
-      dynamic chatId, int messageId, InlineKeyboardMarkup replyMarkup) async {
+    dynamic chatId,
+    int messageId, {
+    InlineKeyboardMarkup? replyMarkup,
+  }) async {
     if (chatId is! String && chatId is! int) {
       return Future.error(TelegramException(
           'Attribute \'chatId\' can only be either type of String or int'));
@@ -2445,7 +2435,7 @@ class Telegram {
     var body = <String, dynamic>{
       'chat_id': chatId,
       'message_id': messageId,
-      'reply_markup': replyMarkup,
+      'reply_markup': replyMarkup != null ? jsonEncode(replyMarkup) : null,
     };
     return Poll.fromJson(await HttpClient.httpPost(requestUrl, body: body));
   }
@@ -2817,7 +2807,7 @@ class Telegram {
   /// On success, a [SentWebAppMessage] object is returned.
   ///
   /// https://core.telegram.org/bots/api#answerwebappquery
-  /// 
+  ///
   /// [Web App]: (https://core.telegram.org/bots/webapps)
   Future<SentWebAppMessage> answerWebAppQuery(
       String webAppQueryId, InlineQueryResult result) async {
